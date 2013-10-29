@@ -1,0 +1,350 @@
+2013-10-29 20:22:18,002 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:18,003 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:18,015 - ResourceManager : found om/java/cbean/BsConditionQuery.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,016 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,025 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,025 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,026 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,027 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,028 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,028 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,028 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,028 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,040 - ResourceManager : found om/java/cbean/NestSelectSetupper.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,043 - org.apache.velocity.runtime.exception.ReferenceException: reference : template = om/ControlGenerateJava.vm [line 1,column 1] : ${glPackageExtendedDao} is not a valid reference.
+2013-10-29 20:22:18,043 - org.apache.velocity.runtime.exception.ReferenceException: reference : template = om/ControlGenerateJava.vm [line 1,column 1] : ${glPackageBaseDao} is not a valid reference.
+2013-10-29 20:22:18,059 - ResourceManager : found om/java/bsbhv/BaseBhv.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,077 - ResourceManager : found om/java/bsentity/BaseEntity.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,088 - ResourceManager : found om/java/bsentity/dbmeta/DBMetaImpl.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,100 - ResourceManager : found om/java/cbean/BsConditionBean.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,121 - ResourceManager : found om/java/cbean/AbstractBsConditionQuery.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,122 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:18,126 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:18,127 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:18,141 - ResourceManager : found om/java/cbean/BsConditionInlineQuery.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,142 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:18,143 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:18,143 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:18,153 - ResourceManager : found om/java/cbean/BsConditionQuery.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,154 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,155 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,155 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,162 - ResourceManager : found om/java/cbean/NestSelectSetupper.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,166 - org.apache.velocity.runtime.exception.ReferenceException: reference : template = om/ControlGenerateJava.vm [line 1,column 1] : ${glPackageExtendedDao} is not a valid reference.
+2013-10-29 20:22:18,166 - org.apache.velocity.runtime.exception.ReferenceException: reference : template = om/ControlGenerateJava.vm [line 1,column 1] : ${glPackageBaseDao} is not a valid reference.
+2013-10-29 20:22:18,177 - ResourceManager : found om/java/bsbhv/BaseBhv.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,192 - ResourceManager : found om/java/bsentity/BaseEntity.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,203 - ResourceManager : found om/java/bsentity/dbmeta/DBMetaImpl.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,219 - ResourceManager : found om/java/cbean/BsConditionBean.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,243 - ResourceManager : found om/java/cbean/AbstractBsConditionQuery.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,246 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:18,248 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:18,250 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:18,251 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:18,252 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:18,253 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:18,253 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:18,254 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:18,265 - ResourceManager : found om/java/cbean/BsConditionInlineQuery.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,266 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:18,266 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:18,266 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:18,266 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:18,266 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:18,266 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:18,266 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:18,266 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:18,275 - ResourceManager : found om/java/cbean/BsConditionQuery.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,277 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,277 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,277 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,277 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,277 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,277 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,277 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,278 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,282 - ResourceManager : found om/java/cbean/NestSelectSetupper.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,286 - org.apache.velocity.runtime.exception.ReferenceException: reference : template = om/ControlGenerateJava.vm [line 1,column 1] : ${glPackageExtendedDao} is not a valid reference.
+2013-10-29 20:22:18,286 - org.apache.velocity.runtime.exception.ReferenceException: reference : template = om/ControlGenerateJava.vm [line 1,column 1] : ${glPackageBaseDao} is not a valid reference.
+2013-10-29 20:22:18,298 - ResourceManager : found om/java/bsbhv/BaseBhv.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,317 - ResourceManager : found om/java/bsentity/BaseEntity.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,331 - ResourceManager : found om/java/bsentity/dbmeta/DBMetaImpl.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,347 - ResourceManager : found om/java/cbean/BsConditionBean.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,365 - ResourceManager : found om/java/cbean/AbstractBsConditionQuery.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,368 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:18,372 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:18,372 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:18,375 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:18,376 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:18,377 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:18,384 - ResourceManager : found om/java/cbean/BsConditionInlineQuery.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,385 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:18,386 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:18,386 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:18,386 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:18,386 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:18,386 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:18,395 - ResourceManager : found om/java/cbean/BsConditionQuery.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,396 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,397 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,397 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,397 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,397 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,397 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,403 - ResourceManager : found om/java/cbean/NestSelectSetupper.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,406 - org.apache.velocity.runtime.exception.ReferenceException: reference : template = om/ControlGenerateJava.vm [line 1,column 1] : ${glPackageExtendedDao} is not a valid reference.
+2013-10-29 20:22:18,407 - org.apache.velocity.runtime.exception.ReferenceException: reference : template = om/ControlGenerateJava.vm [line 1,column 1] : ${glPackageBaseDao} is not a valid reference.
+2013-10-29 20:22:18,415 - ResourceManager : found om/java/bsbhv/BaseBhv.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,438 - ResourceManager : found om/java/bsentity/BaseEntity.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,453 - ResourceManager : found om/java/bsentity/dbmeta/DBMetaImpl.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,466 - ResourceManager : found om/java/cbean/BsConditionBean.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,485 - ResourceManager : found om/java/cbean/AbstractBsConditionQuery.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,486 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:18,494 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:18,495 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:18,496 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:18,503 - ResourceManager : found om/java/cbean/BsConditionInlineQuery.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,503 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:18,506 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:18,506 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:18,506 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:18,514 - ResourceManager : found om/java/cbean/BsConditionQuery.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,515 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,518 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,519 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,519 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,520 - ResourceManager : found om/java/cbean/NestSelectSetupper.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,523 - org.apache.velocity.runtime.exception.ReferenceException: reference : template = om/ControlGenerateJava.vm [line 1,column 1] : ${glPackageExtendedDao} is not a valid reference.
+2013-10-29 20:22:18,523 - org.apache.velocity.runtime.exception.ReferenceException: reference : template = om/ControlGenerateJava.vm [line 1,column 1] : ${glPackageBaseDao} is not a valid reference.
+2013-10-29 20:22:18,531 - ResourceManager : found om/java/bsbhv/BaseBhv.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,544 - ResourceManager : found om/java/bsentity/BaseEntity.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,556 - ResourceManager : found om/java/bsentity/dbmeta/DBMetaImpl.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,567 - ResourceManager : found om/java/cbean/BsConditionBean.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,583 - ResourceManager : found om/java/cbean/AbstractBsConditionQuery.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,594 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:18,596 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:18,597 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:18,597 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:18,599 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:18,601 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:18,613 - ResourceManager : found om/java/cbean/BsConditionInlineQuery.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,616 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:18,616 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:18,616 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:18,616 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:18,616 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:18,616 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:18,629 - ResourceManager : found om/java/cbean/BsConditionQuery.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,630 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,631 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,631 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,631 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,631 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,631 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,639 - ResourceManager : found om/java/cbean/NestSelectSetupper.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,642 - org.apache.velocity.runtime.exception.ReferenceException: reference : template = om/ControlGenerateJava.vm [line 1,column 1] : ${glPackageExtendedDao} is not a valid reference.
+2013-10-29 20:22:18,642 - org.apache.velocity.runtime.exception.ReferenceException: reference : template = om/ControlGenerateJava.vm [line 1,column 1] : ${glPackageBaseDao} is not a valid reference.
+2013-10-29 20:22:18,651 - ResourceManager : found om/java/bsbhv/BaseBhv.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,668 - ResourceManager : found om/java/bsentity/BaseEntity.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,682 - ResourceManager : found om/java/bsentity/dbmeta/DBMetaImpl.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,695 - ResourceManager : found om/java/cbean/BsConditionBean.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,714 - ResourceManager : found om/java/cbean/AbstractBsConditionQuery.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,715 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:18,720 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:18,722 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:18,726 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:18,727 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:18,727 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:18,728 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:18,729 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:18,729 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:18,737 - ResourceManager : found om/java/cbean/BsConditionInlineQuery.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,738 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:18,739 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:18,740 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:18,741 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:18,741 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:18,741 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:18,741 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:18,741 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:18,741 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:18,747 - ResourceManager : found om/java/cbean/BsConditionQuery.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,748 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,750 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,750 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,751 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,751 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,751 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,751 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,751 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,751 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,758 - ResourceManager : found om/java/cbean/NestSelectSetupper.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,761 - org.apache.velocity.runtime.exception.ReferenceException: reference : template = om/ControlGenerateJava.vm [line 1,column 1] : ${glPackageExtendedDao} is not a valid reference.
+2013-10-29 20:22:18,761 - org.apache.velocity.runtime.exception.ReferenceException: reference : template = om/ControlGenerateJava.vm [line 1,column 1] : ${glPackageBaseDao} is not a valid reference.
+2013-10-29 20:22:18,769 - ResourceManager : found om/java/bsbhv/BaseBhv.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,785 - ResourceManager : found om/java/bsentity/BaseEntity.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,794 - ResourceManager : found om/java/bsentity/dbmeta/DBMetaImpl.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,803 - ResourceManager : found om/java/cbean/BsConditionBean.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,819 - ResourceManager : found om/java/cbean/AbstractBsConditionQuery.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,819 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:18,827 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:18,834 - ResourceManager : found om/java/cbean/BsConditionInlineQuery.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,834 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:18,837 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:18,845 - ResourceManager : found om/java/cbean/BsConditionQuery.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,845 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,848 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,852 - ResourceManager : found om/java/cbean/NestSelectSetupper.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,854 - org.apache.velocity.runtime.exception.ReferenceException: reference : template = om/ControlGenerateJava.vm [line 1,column 1] : ${glPackageExtendedDao} is not a valid reference.
+2013-10-29 20:22:18,854 - org.apache.velocity.runtime.exception.ReferenceException: reference : template = om/ControlGenerateJava.vm [line 1,column 1] : ${glPackageBaseDao} is not a valid reference.
+2013-10-29 20:22:18,863 - ResourceManager : found om/java/bsbhv/BaseBhv.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,875 - ResourceManager : found om/java/bsentity/BaseEntity.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,880 - ResourceManager : found om/java/bsentity/dbmeta/DBMetaImpl.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,886 - ResourceManager : found om/java/cbean/BsConditionBean.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,897 - ResourceManager : found om/java/cbean/AbstractBsConditionQuery.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,898 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:18,903 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:18,908 - ResourceManager : found om/java/cbean/BsConditionInlineQuery.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,908 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:18,910 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:18,917 - ResourceManager : found om/java/cbean/BsConditionQuery.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,918 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,920 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:18,922 - ResourceManager : found om/java/cbean/NestSelectSetupper.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,924 - org.apache.velocity.runtime.exception.ReferenceException: reference : template = om/ControlGenerateJava.vm [line 1,column 1] : ${glPackageExtendedDao} is not a valid reference.
+2013-10-29 20:22:18,924 - org.apache.velocity.runtime.exception.ReferenceException: reference : template = om/ControlGenerateJava.vm [line 1,column 1] : ${glPackageBaseDao} is not a valid reference.
+2013-10-29 20:22:18,932 - ResourceManager : found om/java/bsbhv/BaseBhv.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,948 - ResourceManager : found om/java/bsentity/BaseEntity.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,960 - ResourceManager : found om/java/bsentity/dbmeta/DBMetaImpl.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,974 - ResourceManager : found om/java/cbean/BsConditionBean.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,989 - ResourceManager : found om/java/cbean/AbstractBsConditionQuery.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:18,990 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:18,994 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:18,995 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:18,996 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:18,997 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:18,998 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:18,998 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:19,000 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:19,000 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:19,002 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:19,011 - ResourceManager : found om/java/cbean/BsConditionInlineQuery.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:19,011 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:19,013 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:19,013 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:19,013 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:19,013 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:19,013 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:19,013 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:19,013 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:19,013 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:19,014 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:19,023 - ResourceManager : found om/java/cbean/BsConditionQuery.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:19,024 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:19,025 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:19,025 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:19,025 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:19,025 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:19,025 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:19,025 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:19,025 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:19,025 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:19,026 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:19,029 - ResourceManager : found om/java/cbean/NestSelectSetupper.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:19,032 - org.apache.velocity.runtime.exception.ReferenceException: reference : template = om/ControlGenerateJava.vm [line 1,column 1] : ${glPackageExtendedDao} is not a valid reference.
+2013-10-29 20:22:19,032 - org.apache.velocity.runtime.exception.ReferenceException: reference : template = om/ControlGenerateJava.vm [line 1,column 1] : ${glPackageBaseDao} is not a valid reference.
+2013-10-29 20:22:19,042 - ResourceManager : found om/java/bsbhv/BaseBhv.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:19,055 - ResourceManager : found om/java/bsentity/BaseEntity.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:19,062 - ResourceManager : found om/java/bsentity/dbmeta/DBMetaImpl.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:19,072 - ResourceManager : found om/java/cbean/BsConditionBean.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:19,090 - ResourceManager : found om/java/cbean/AbstractBsConditionQuery.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:19,090 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:19,095 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:19,103 - ResourceManager : found om/java/cbean/BsConditionInlineQuery.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:19,104 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:19,106 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:19,114 - ResourceManager : found om/java/cbean/BsConditionQuery.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:19,114 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:19,116 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:19,118 - ResourceManager : found om/java/cbean/NestSelectSetupper.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:19,119 - org.apache.velocity.runtime.exception.ReferenceException: reference : template = om/ControlGenerateJava.vm [line 1,column 1] : ${glPackageExtendedDao} is not a valid reference.
+2013-10-29 20:22:19,119 - org.apache.velocity.runtime.exception.ReferenceException: reference : template = om/ControlGenerateJava.vm [line 1,column 1] : ${glPackageBaseDao} is not a valid reference.
+2013-10-29 20:22:19,127 - ResourceManager : found om/java/bsbhv/BaseBhv.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:19,139 - ResourceManager : found om/java/bsentity/BaseEntity.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:19,145 - ResourceManager : found om/java/bsentity/dbmeta/DBMetaImpl.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:19,153 - ResourceManager : found om/java/cbean/BsConditionBean.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:19,164 - ResourceManager : found om/java/cbean/AbstractBsConditionQuery.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:19,164 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:19,168 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:19,169 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:19,170 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:19,170 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:19,171 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:19,176 - ResourceManager : found om/java/cbean/BsConditionInlineQuery.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:19,176 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:19,178 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:19,178 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:19,178 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:19,178 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:19,178 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:19,185 - ResourceManager : found om/java/cbean/BsConditionQuery.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:19,185 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:19,187 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:19,187 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:19,187 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:19,187 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:19,187 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:19,188 - ResourceManager : found om/java/cbean/NestSelectSetupper.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:19,190 - org.apache.velocity.runtime.exception.ReferenceException: reference : template = om/ControlGenerateJava.vm [line 1,column 1] : ${glPackageExtendedDao} is not a valid reference.
+2013-10-29 20:22:19,190 - org.apache.velocity.runtime.exception.ReferenceException: reference : template = om/ControlGenerateJava.vm [line 1,column 1] : ${glPackageBaseDao} is not a valid reference.
+2013-10-29 20:22:19,198 - ResourceManager : found om/java/bsbhv/BaseBhv.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:19,210 - ResourceManager : found om/java/bsentity/BaseEntity.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:19,215 - ResourceManager : found om/java/bsentity/dbmeta/DBMetaImpl.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:19,221 - ResourceManager : found om/java/cbean/BsConditionBean.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:19,232 - ResourceManager : found om/java/cbean/AbstractBsConditionQuery.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:19,233 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:19,237 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:19,238 - RHS of #set statement is null. Context will not be modified. om/java/cbean/AbstractBsConditionQuery.vm [line 66, column 1]
+2013-10-29 20:22:19,247 - ResourceManager : found om/java/cbean/BsConditionInlineQuery.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:19,247 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:19,249 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:19,249 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionInlineQuery.vm [line 92, column 1]
+2013-10-29 20:22:19,255 - ResourceManager : found om/java/cbean/BsConditionQuery.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:19,256 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:19,258 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:19,259 - RHS of #set statement is null. Context will not be modified. om/java/cbean/BsConditionQuery.vm [line 93, column 1]
+2013-10-29 20:22:19,260 - ResourceManager : found om/java/cbean/NestSelectSetupper.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:21,001 - 
+2013-10-29 20:22:21,012 - DfFlutistLog4JLogSystem initialized using logfile './log/velocity.log'
+2013-10-29 20:22:21,012 - ************************************************************** 
+2013-10-29 20:22:21,012 - Starting Jakarta Velocity v1.3.1
+2013-10-29 20:22:21,012 - RuntimeInstance initializing.
+2013-10-29 20:22:21,012 - Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
+2013-10-29 20:22:21,012 - Trying to use logger class org.seasar.dbflute.friends.velocity.DfFlutistLog4JLogSystem
+2013-10-29 20:22:21,012 - Using logger class org.seasar.dbflute.friends.velocity.DfFlutistLog4JLogSystem
+2013-10-29 20:22:21,014 - Default ResourceManager initializing. (class org.apache.velocity.runtime.resource.ResourceManagerImpl)
+2013-10-29 20:22:21,017 - Resource Loader Instantiated: org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2013-10-29 20:22:21,017 - FileResourceLoader : initialization starting.
+2013-10-29 20:22:21,017 - FileResourceLoader : adding path 'C:\projects\study\workspace\hands-on\dbflute-hands-on\mydbflute\dbflute-1.0.5A\templates'
+2013-10-29 20:22:21,017 - FileResourceLoader : initialization complete.
+2013-10-29 20:22:21,019 - ResourceCache : initialized. (class org.apache.velocity.runtime.resource.ResourceCacheImpl)
+2013-10-29 20:22:21,019 - Default ResourceManager initialization complete.
+2013-10-29 20:22:21,020 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
+2013-10-29 20:22:21,021 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
+2013-10-29 20:22:21,022 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
+2013-10-29 20:22:21,025 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
+2013-10-29 20:22:21,026 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
+2013-10-29 20:22:21,048 - Created: 20 parsers.
+2013-10-29 20:22:21,048 - Velocimacro : initialization starting.
+2013-10-29 20:22:21,048 - Velocimacro : adding VMs from VM library template : VM_global_library.vm
+2013-10-29 20:22:21,051 - ResourceManager : unable to find resource 'VM_global_library.vm' in any resource loader.
+2013-10-29 20:22:21,051 - Velocimacro : error using  VM library template VM_global_library.vm : org.apache.velocity.exception.ResourceNotFoundException: Unable to find resource 'VM_global_library.vm'
+2013-10-29 20:22:21,051 - Velocimacro :  VM library template macro registration complete.
+2013-10-29 20:22:21,051 - Velocimacro : allowInline = true : VMs can be defined inline in templates
+2013-10-29 20:22:21,051 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
+2013-10-29 20:22:21,051 - Velocimacro : allowInlineLocal = false : VMs defined inline will be  global in scope if allowed.
+2013-10-29 20:22:21,051 - Velocimacro : messages on  : VM system will output logging messages
+2013-10-29 20:22:21,051 - Velocimacro : autoload off  : VM system will not automatically reload global library macros
+2013-10-29 20:22:21,051 - Velocimacro : initialization complete.
+2013-10-29 20:22:21,051 - Velocity successfully started.
+2013-10-29 20:22:21,125 - ResourceManager : found om/ControlSql2EntityJava.vm with loader org.apache.velocity.runtime.resource.loader.FileResourceLoader
