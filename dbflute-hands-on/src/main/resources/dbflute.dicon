@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
+    "http://www.seasar.org/dtd/components21.dtd">
+
+<components namespace="dbflute">
+    <include path="j2ee.dicon"/>
+
+    <!-- The components of DBFlute Runtime. -->
+    <component name="introduction" class="org.dbflute.handson.dbflute.allcommon.DBFluteInitializer"/>
+    <component name="invokerAssistant" class="org.dbflute.handson.dbflute.allcommon.ImplementedInvokerAssistant"/>
+    <component name="commonColumnAutoSetupper" class="org.dbflute.handson.dbflute.allcommon.ImplementedCommonColumnAutoSetupper"/>
+    <component name="behaviorSelector" class="org.dbflute.handson.dbflute.allcommon.ImplementedBehaviorSelector"/>
+    <component name="behaviorCommandInvoker" class="org.seasar.dbflute.bhv.core.BehaviorCommandInvoker"/>
+
+    <!-- The components of Behavior. -->
+    <component name="memberBhv" class="org.dbflute.handson.dbflute.exbhv.MemberBhv"/>
+    <component name="memberAddressBhv" class="org.dbflute.handson.dbflute.exbhv.MemberAddressBhv"/>
+    <component name="memberLoginBhv" class="org.dbflute.handson.dbflute.exbhv.MemberLoginBhv"/>
+    <component name="memberSecurityBhv" class="org.dbflute.handson.dbflute.exbhv.MemberSecurityBhv"/>
+    <component name="memberServiceBhv" class="org.dbflute.handson.dbflute.exbhv.MemberServiceBhv"/>
+    <component name="memberStatusBhv" class="org.dbflute.handson.dbflute.exbhv.MemberStatusBhv"/>
+    <component name="memberWithdrawalBhv" class="org.dbflute.handson.dbflute.exbhv.MemberWithdrawalBhv"/>
+    <component name="productBhv" class="org.dbflute.handson.dbflute.exbhv.ProductBhv"/>
+    <component name="productCategoryBhv" class="org.dbflute.handson.dbflute.exbhv.ProductCategoryBhv"/>
+    <component name="productStatusBhv" class="org.dbflute.handson.dbflute.exbhv.ProductStatusBhv"/>
+    <component name="purchaseBhv" class="org.dbflute.handson.dbflute.exbhv.PurchaseBhv"/>
+    <component name="regionBhv" class="org.dbflute.handson.dbflute.exbhv.RegionBhv"/>
+    <component name="serviceRankBhv" class="org.dbflute.handson.dbflute.exbhv.ServiceRankBhv"/>
+    <component name="withdrawalReasonBhv" class="org.dbflute.handson.dbflute.exbhv.WithdrawalReasonBhv"/>
+</components>
