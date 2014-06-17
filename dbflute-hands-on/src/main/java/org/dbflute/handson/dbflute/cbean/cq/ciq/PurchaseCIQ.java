@@ -70,6 +70,20 @@ public class PurchaseCIQ extends AbstractBsPurchaseCQ {
     //                                                                Override about Query
     //                                                                ====================
     protected ConditionValue getCValuePurchaseId() { return _myCQ.getPurchaseId(); }
+    public String keepPurchaseId_ExistsReferrer_PurchasePaymentList(PurchasePaymentCQ sq)
+    { throwIICBOE("ExistsReferrer"); return null; }
+    public String keepPurchaseId_NotExistsReferrer_PurchasePaymentList(PurchasePaymentCQ sq)
+    { throwIICBOE("NotExistsReferrer"); return null; }
+    public String keepPurchaseId_InScopeRelation_PurchasePaymentList(PurchasePaymentCQ sq)
+    { return _myCQ.keepPurchaseId_InScopeRelation_PurchasePaymentList(sq); }
+    public String keepPurchaseId_NotInScopeRelation_PurchasePaymentList(PurchasePaymentCQ sq)
+    { return _myCQ.keepPurchaseId_NotInScopeRelation_PurchasePaymentList(sq); }
+    public String keepPurchaseId_SpecifyDerivedReferrer_PurchasePaymentList(PurchasePaymentCQ sq)
+    { throwIICBOE("(Specify)DerivedReferrer"); return null; }
+    public String keepPurchaseId_QueryDerivedReferrer_PurchasePaymentList(PurchasePaymentCQ sq)
+    { throwIICBOE("(Query)DerivedReferrer"); return null; }
+    public String keepPurchaseId_QueryDerivedReferrer_PurchasePaymentListParameter(Object vl)
+    { throwIICBOE("(Query)DerivedReferrer"); return null; }
     protected ConditionValue getCValueMemberId() { return _myCQ.getMemberId(); }
     public String keepMemberId_InScopeRelation_Member(MemberCQ sq)
     { return _myCQ.keepMemberId_InScopeRelation_Member(sq); }

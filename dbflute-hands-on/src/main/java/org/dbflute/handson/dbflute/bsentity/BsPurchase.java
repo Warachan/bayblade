@@ -34,13 +34,13 @@ import org.dbflute.handson.dbflute.exentity.*;
  *     member, product
  * 
  * [referrer table]
- *     
+ *     purchase_payment
  * 
  * [foreign property]
  *     member, product
  * 
  * [referrer property]
- *     
+ *     purchasePaymentList
  * 
  * [get/set template]
  * /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
@@ -213,6 +213,26 @@ public abstract class BsPurchase implements Entity, Serializable, Cloneable {
     // ===================================================================================
     //                                                                   Referrer Property
     //                                                                   =================
+    /** purchase_payment by PURCHASE_ID, named 'purchasePaymentList'. */
+    protected List<PurchasePayment> _purchasePaymentList;
+
+    /**
+     * purchase_payment by PURCHASE_ID, named 'purchasePaymentList'.
+     * @return The entity list of referrer property 'purchasePaymentList'. (NotNull: even if no loading, returns empty list)
+     */
+    public List<PurchasePayment> getPurchasePaymentList() {
+        if (_purchasePaymentList == null) { _purchasePaymentList = newReferrerList(); }
+        return _purchasePaymentList;
+    }
+
+    /**
+     * purchase_payment by PURCHASE_ID, named 'purchasePaymentList'.
+     * @param purchasePaymentList The entity list of referrer property 'purchasePaymentList'. (NullAllowed)
+     */
+    public void setPurchasePaymentList(List<PurchasePayment> purchasePaymentList) {
+        _purchasePaymentList = purchasePaymentList;
+    }
+
     protected <ELEMENT> List<ELEMENT> newReferrerList() {
         return new ArrayList<ELEMENT>();
     }
@@ -321,6 +341,8 @@ public abstract class BsPurchase implements Entity, Serializable, Cloneable {
         { sb.append(l).append(xbRDS(_member, "member")); }
         if (_product != null)
         { sb.append(l).append(xbRDS(_product, "product")); }
+        if (_purchasePaymentList != null) { for (Entity e : _purchasePaymentList)
+        { if (e != null) { sb.append(l).append(xbRDS(e, "purchasePaymentList")); } } }
         return sb.toString();
     }
     protected String xbRDS(Entity e, String name) { // buildRelationDisplayString()
@@ -364,6 +386,8 @@ public abstract class BsPurchase implements Entity, Serializable, Cloneable {
         String c = ",";
         if (_member != null) { sb.append(c).append("member"); }
         if (_product != null) { sb.append(c).append("product"); }
+        if (_purchasePaymentList != null && !_purchasePaymentList.isEmpty())
+        { sb.append(c).append("purchasePaymentList"); }
         if (sb.length() > c.length()) {
             sb.delete(0, c.length()).insert(0, "(").append(")");
         }
