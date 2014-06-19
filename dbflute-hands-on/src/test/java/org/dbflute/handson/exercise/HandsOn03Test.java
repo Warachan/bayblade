@@ -2,7 +2,6 @@ package org.dbflute.handson.exercise;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -124,6 +123,9 @@ public class HandsOn03Test extends UnitContainerTestCase {
 
         // ## Act ##
         ListResultBean<Member> memberList = memberBhv.selectList(cb);
+        // ************EntityのリストからPK/ユニークで一致するカラムを取得する。（こういうやり方もある）*************************
+        // List<Integer> memberIdList = memberBhv.extractMemberIdList(memberList);
+        //**********************************************************************************************
 
         // ## Assert ##
         assertHasAnyElement(memberList);
@@ -131,40 +133,42 @@ public class HandsOn03Test extends UnitContainerTestCase {
         // 何ができないかではなく、何ができなければならないのかをまず考えなければ正解を見出しにくい。
         // topdown, buttomup どっちもできるようにすること
         List<Integer> memberIDList = new ArrayList<Integer>();
+        for (Member member : memberList) {
+            Integer memberId = member.getMemberId();
+            memberIDList.add(memberId);
+        }
         MemberSecurityCB securityCB = new MemberSecurityCB();
-        //        for (Member member : memberList) {
-        //            Integer memberId = member.getMemberId();
-        //            memberIDList.add(memberId);
-        //        }
-        // EntityのリストからPK/ユニークで一致するカラムを取得する。（こういうやり方もある）
-        // List<Integer> memberIdList = memberBhv.extractMemberIdList(memberList);
         securityCB.query().setMemberId_InScope(memberIDList);
         ListResultBean<MemberSecurity> securityList = memberSecurityBhv.selectList(securityCB);
-        HashMap<Integer, MemberSecurity> securityMap = new HashMap<Integer, MemberSecurity>();
-        for (MemberSecurity security : securityList) {
-            securityMap.put(security.getMemberId(), security);
-        }
-        //for (Member member : memberList) {
-        // String memberName = member.getMemberName();
-        //            MemberSecurity securityKey = securityMap.get(security.getMemberId());
-        //            log(memberName, securityKey);
-        //        }
 
-        //        for (Member member : memberList) {
-        //            for (MemberSecurity security : securityList) {
-        //                if (member.getMemberId().equals(security.getMemberId())) {
-        //                    String question = member.getMemberSecurityAsOne().getReminderQuestion();
-        //                    log(member.getMemberName(), question);
-        //                    assertTrue(question.contains("2"));
-        //                    break;
-        //                }
-        //            }
+        for (Member member : memberList) {
+            for (MemberSecurity security : securityList) {
+                if (member.getMemberId().equals(security.getMemberId())) {
+                    String question = security.getReminderQuestion();
+                    log(member.getMemberId(), member.getMemberName(), question);
+                    assertTrue(question.contains("2"));
+                    break;
+                }
+            }
+        }
+        //  ***************************** Mapを使った場合。************************************************
+        //        MemberSecurityCB securityCB = new MemberSecurityCB();
+        //        securityCB.query().setMemberId_InScope(memberIDList);
+        //        ListResultBean<MemberSecurity> securityList = memberSecurityBhv.selectList(securityCB);
+        //        HashMap<Integer, MemberSecurity> securityMap = new HashMap<Integer, MemberSecurity>();
+        //        for (MemberSecurity security : securityList) {
+        //            securityMap.put(security.getMemberId(), security);
         //        }
+        //        for (Member member : memberList) {
+        //            Integer memberId = member.getMemberId();
+        //            MemberSecurity security = securityMap.get(memberId);
+        //            log(member.getMemberName(), security.getReminderQuestion());
+        //        }
+        //*********************************************************************************************
     }
 
     //　【思い出 setupSelectをしてないからできない。】
     // String question = member.getMemberSecurityAsOne().getReminderQuestion();
-
     // 【思い出 memberSecurityテーブルのデータを丸々持ってきてしまった。】
     //        // ## Arrange ##
     //        MemberSecurityCB cb = new MemberSecurityCB();
