@@ -1,6 +1,9 @@
 package org.dbflute.handson.exercise;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -124,31 +127,43 @@ public class HandsOn03Test extends UnitContainerTestCase {
 
         // ## Assert ##
         assertHasAnyElement(memberList);
-        // 四苦八苦。これでは意味ない・・・
-        // MemberSecurityCB securityCB = new MemberSecurityCB();
-        // securityCB.query().setReminderQuestion_LikeSearch("2", new LikeSearchOption().likeContain());
-        // ListResultBean<MemberSecurity> security = memberSecurityBhv.selectList(securityCB);
-        // log(member.getMemberName());
-        // assertTrue(question.contains("2"));
-
-        for (Member member : memberList) {
-            MemberSecurityCB securityCB = new MemberSecurityCB();
-            securityCB.query().setMemberId_Equal(member.getMemberId());
-            MemberSecurity security = memberSecurityBhv.selectEntityWithDeletedCheck(securityCB);
-            String question = security.getReminderQuestion();
-            log(member.getMemberName(), question);
-            assertTrue(question.contains("2"));
-            // TODO mayuko.sakaba  SQLの発行回数を一回にしてみる。
-
-            //　【思い出 setupSelectをしてないからできない。】
-            // String question = member.getMemberSecurityAsOne().getReminderQuestion();
-            // 【思い出2 あれこれやってみた。】
-            // MemberSecurity security = member.getMemberSecurityAsOne();
-            // boolean result = security.getReminderQuestion().contains("2");
-            // log(result);
-
+        //　→　メンバーに対応するセキュリティーを一度で取得できなければならない。
+        // 何ができないかではなく、何ができなければならないのかをまず考えなければ正解を見出しにくい。
+        // topdown, buttomup どっちもできるようにすること
+        List<Integer> memberIDList = new ArrayList<Integer>();
+        MemberSecurityCB securityCB = new MemberSecurityCB();
+        //        for (Member member : memberList) {
+        //            Integer memberId = member.getMemberId();
+        //            memberIDList.add(memberId);
+        //        }
+        // EntityのリストからPK/ユニークで一致するカラムを取得する。（こういうやり方もある）
+        // List<Integer> memberIdList = memberBhv.extractMemberIdList(memberList);
+        securityCB.query().setMemberId_InScope(memberIDList);
+        ListResultBean<MemberSecurity> securityList = memberSecurityBhv.selectList(securityCB);
+        HashMap<Integer, MemberSecurity> securityMap = new HashMap<Integer, MemberSecurity>();
+        for (MemberSecurity security : securityList) {
+            securityMap.put(security.getMemberId(), security);
         }
+        //for (Member member : memberList) {
+        // String memberName = member.getMemberName();
+        //            MemberSecurity securityKey = securityMap.get(security.getMemberId());
+        //            log(memberName, securityKey);
+        //        }
+
+        //        for (Member member : memberList) {
+        //            for (MemberSecurity security : securityList) {
+        //                if (member.getMemberId().equals(security.getMemberId())) {
+        //                    String question = member.getMemberSecurityAsOne().getReminderQuestion();
+        //                    log(member.getMemberName(), question);
+        //                    assertTrue(question.contains("2"));
+        //                    break;
+        //                }
+        //            }
+        //        }
     }
+
+    //　【思い出 setupSelectをしてないからできない。】
+    // String question = member.getMemberSecurityAsOne().getReminderQuestion();
 
     // 【思い出 memberSecurityテーブルのデータを丸々持ってきてしまった。】
     //        // ## Arrange ##

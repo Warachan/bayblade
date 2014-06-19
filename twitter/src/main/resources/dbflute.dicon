@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//SEASAR2.1//DTD S2Container//EN"
+    "http://www.seasar.org/dtd/components21.dtd">
+
+<components namespace="dbflute">
+    <include path="j2ee.dicon"/>
+
+    <!-- The components of DBFlute Runtime. -->
+    <component name="introduction" class="jp.bizreach.twitter.dbflute.allcommon.DBFluteInitializer"/>
+    <component name="invokerAssistant" class="jp.bizreach.twitter.dbflute.allcommon.ImplementedInvokerAssistant"/>
+    <component name="commonColumnAutoSetupper" class="jp.bizreach.twitter.dbflute.allcommon.ImplementedCommonColumnAutoSetupper"/>
+    <component name="behaviorSelector" class="jp.bizreach.twitter.dbflute.allcommon.ImplementedBehaviorSelector"/>
+    <component name="behaviorCommandInvoker" class="org.seasar.dbflute.bhv.core.BehaviorCommandInvoker"/>
+
+    <!-- The components of Behavior. -->
+    <component name="blackCompanyBhv" class="jp.bizreach.twitter.dbflute.exbhv.BlackCompanyBhv"/>
+    <component name="clsBlackCompanyStatusBhv" class="jp.bizreach.twitter.dbflute.exbhv.ClsBlackCompanyStatusBhv"/>
+</components>
