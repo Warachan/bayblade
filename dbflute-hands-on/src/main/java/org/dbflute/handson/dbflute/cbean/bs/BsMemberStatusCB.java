@@ -77,10 +77,24 @@ public class BsMemberStatusCB extends AbstractConditionBean {
     // ===================================================================================
     //                                                                 PrimaryKey Handling
     //                                                                 ===================
+    /**
+     * Accept the query condition of primary key as equal.
+     * @param memberStatusCode : PK, NotNull, CHAR(3). (NotNull)
+     */
     public void acceptPrimaryKey(String memberStatusCode) {
         assertObjectNotNull("memberStatusCode", memberStatusCode);
         BsMemberStatusCB cb = this;
-        cb.query().setMemberStatusCode_Equal(memberStatusCode);
+        cb.query().setMemberStatusCode_Equal(memberStatusCode);;
+    }
+
+    /**
+     * Accept the query condition of unique key as equal.
+     * @param displayOrder : UQ, NotNull, INT(10). (NotNull)
+     */
+    public void acceptUniqueOf(Integer displayOrder) {
+        assertObjectNotNull("displayOrder", displayOrder);
+        BsMemberStatusCB cb = this;
+        cb.query().setDisplayOrder_Equal(displayOrder);;
     }
 
     public ConditionBean addOrderBy_PK_Asc() {
@@ -244,7 +258,6 @@ public class BsMemberStatusCB extends AbstractConditionBean {
     // ===================================================================================
     //                                                                         SetupSelect
     //                                                                         ===========
-
     // [DBFlute-0.7.4]
     // ===================================================================================
     //                                                                             Specify
@@ -443,6 +456,11 @@ public class BsMemberStatusCB extends AbstractConditionBean {
      */
     public void orScopeQuery(OrQuery<MemberStatusCB> orQuery) {
         xorSQ((MemberStatusCB)this, orQuery);
+    }
+
+    @Override
+    protected HpCBPurpose xhandleOrSQPurposeChange() {
+        return null; // means no check
     }
 
     /**

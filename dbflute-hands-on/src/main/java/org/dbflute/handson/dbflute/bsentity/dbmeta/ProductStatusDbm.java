@@ -33,13 +33,14 @@ public class ProductStatusDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                    Property Gateway
     //                                                                    ================
+    // -----------------------------------------------------
+    //                                       Column Property
+    //                                       ---------------
     protected final Map<String, PropertyGateway> _epgMap = newHashMap();
     {
         setupEpg(_epgMap, new EpgProductStatusCode(), "productStatusCode");
         setupEpg(_epgMap, new EpgProductStatusName(), "productStatusName");
     }
-    public PropertyGateway findPropertyGateway(String propertyName)
-    { return doFindEpg(_epgMap, propertyName); }
     public static class EpgProductStatusCode implements PropertyGateway {
         public Object read(Entity et) { return ((ProductStatus)et).getProductStatusCode(); }
         public void write(Entity et, Object vl) { ((ProductStatus)et).setProductStatusCode((String)vl); }
@@ -48,6 +49,8 @@ public class ProductStatusDbm extends AbstractDBMeta {
         public Object read(Entity et) { return ((ProductStatus)et).getProductStatusName(); }
         public void write(Entity et, Object vl) { ((ProductStatus)et).setProductStatusName((String)vl); }
     }
+    public PropertyGateway findPropertyGateway(String prop)
+    { return doFindEpg(_epgMap, prop); }
 
     // ===================================================================================
     //                                                                          Table Info
@@ -63,8 +66,8 @@ public class ProductStatusDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnProductStatusCode = cci("PRODUCT_STATUS_CODE", "PRODUCT_STATUS_CODE", null, null, true, "productStatusCode", String.class, true, false, "CHAR", 3, 0, null, false, null, null, null, "productList", null);
-    protected final ColumnInfo _columnProductStatusName = cci("PRODUCT_STATUS_NAME", "PRODUCT_STATUS_NAME", null, null, true, "productStatusName", String.class, false, false, "VARCHAR", 50, 0, null, false, null, null, null, null, null);
+    protected final ColumnInfo _columnProductStatusCode = cci("PRODUCT_STATUS_CODE", "PRODUCT_STATUS_CODE", null, null, String.class, "productStatusCode", null, true, false, true, "CHAR", 3, 0, null, false, null, null, null, "productList", null);
+    protected final ColumnInfo _columnProductStatusName = cci("PRODUCT_STATUS_NAME", "PRODUCT_STATUS_NAME", null, null, String.class, "productStatusName", null, false, false, true, "VARCHAR", 50, 0, null, false, null, null, null, null, null);
 
     /**
      * PRODUCT_STATUS_CODE: {PK, NotNull, CHAR(3)}
@@ -99,6 +102,8 @@ public class ProductStatusDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                       Relation Info
     //                                                                       =============
+    // cannot cache because it uses related DB meta instance while booting
+    // (instead, cached by super's collection)
     // -----------------------------------------------------
     //                                      Foreign Property
     //                                      ----------------

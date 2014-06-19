@@ -77,10 +77,14 @@ public class BsRegionCB extends AbstractConditionBean {
     // ===================================================================================
     //                                                                 PrimaryKey Handling
     //                                                                 ===================
+    /**
+     * Accept the query condition of primary key as equal.
+     * @param regionId : PK, NotNull, INT(10). (NotNull)
+     */
     public void acceptPrimaryKey(Integer regionId) {
         assertObjectNotNull("regionId", regionId);
         BsRegionCB cb = this;
-        cb.query().setRegionId_Equal(regionId);
+        cb.query().setRegionId_Equal(regionId);;
     }
 
     public ConditionBean addOrderBy_PK_Asc() {
@@ -244,7 +248,6 @@ public class BsRegionCB extends AbstractConditionBean {
     // ===================================================================================
     //                                                                         SetupSelect
     //                                                                         ===========
-
     // [DBFlute-0.7.4]
     // ===================================================================================
     //                                                                             Specify
@@ -413,6 +416,11 @@ public class BsRegionCB extends AbstractConditionBean {
      */
     public void orScopeQuery(OrQuery<RegionCB> orQuery) {
         xorSQ((RegionCB)this, orQuery);
+    }
+
+    @Override
+    protected HpCBPurpose xhandleOrSQPurposeChange() {
+        return null; // means no check
     }
 
     /**

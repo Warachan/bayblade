@@ -78,10 +78,25 @@ public class BsMemberAddressCB extends AbstractConditionBean {
     // ===================================================================================
     //                                                                 PrimaryKey Handling
     //                                                                 ===================
+    /**
+     * Accept the query condition of primary key as equal.
+     * @param memberAddressId : PK, ID, NotNull, INT(10). (NotNull)
+     */
     public void acceptPrimaryKey(Integer memberAddressId) {
         assertObjectNotNull("memberAddressId", memberAddressId);
         BsMemberAddressCB cb = this;
-        cb.query().setMemberAddressId_Equal(memberAddressId);
+        cb.query().setMemberAddressId_Equal(memberAddressId);;
+    }
+
+    /**
+     * Accept the query condition of unique key as equal.
+     * @param memberId : UQ+, NotNull, INT(10), FK to member. (NotNull)
+     * @param validBeginDate : +UQ, NotNull, DATE(10). (NotNull)
+     */
+    public void acceptUniqueOf(Integer memberId, java.util.Date validBeginDate) {
+        assertObjectNotNull("memberId", memberId);assertObjectNotNull("validBeginDate", validBeginDate);
+        BsMemberAddressCB cb = this;
+        cb.query().setMemberId_Equal(memberId);;cb.query().setValidBeginDate_Equal(validBeginDate);;
     }
 
     public ConditionBean addOrderBy_PK_Asc() {
@@ -272,11 +287,7 @@ public class BsMemberAddressCB extends AbstractConditionBean {
         { _nssMember = new MemberNss(query().queryMember()); }
         return _nssMember;
     }
-    protected RegionNss _nssRegion;
-    public RegionNss getNssRegion() {
-        if (_nssRegion == null) { _nssRegion = new RegionNss(null); }
-        return _nssRegion;
-    }
+
     /**
      * Set up relation columns to select clause. <br />
      * region by my REGION_ID, named 'region'.
@@ -287,17 +298,13 @@ public class BsMemberAddressCB extends AbstractConditionBean {
      * MemberAddress memberAddress = memberAddressBhv.selectEntityWithDeletedCheck(cb);
      * ... = memberAddress.<span style="color: #DD4747">getRegion()</span>; <span style="color: #3F7E5E">// you can get by using SetupSelect</span>
      * </pre>
-     * @return The set-upper of nested relation. {setupSelect...().with[nested-relation]} (NotNull)
      */
-    public RegionNss setupSelect_Region() {
+    public void setupSelect_Region() {
         assertSetupSelectPurpose("region");
         if (hasSpecifiedColumn()) { // if reverse call
             specify().columnRegionId();
         }
         doSetupSelect(new SsCall() { public ConditionQuery qf() { return query().queryRegion(); } });
-        if (_nssRegion == null || !_nssRegion.hasConditionQuery())
-        { _nssRegion = new RegionNss(query().queryRegion()); }
-        return _nssRegion;
     }
 
     // [DBFlute-0.7.4]
@@ -353,12 +360,12 @@ public class BsMemberAddressCB extends AbstractConditionBean {
          */
         public HpSpecifiedColumn columnMemberAddressId() { return doColumn("MEMBER_ADDRESS_ID"); }
         /**
-         * MEMBER_ID: {UQ, NotNull, INT(10), FK to member}
+         * MEMBER_ID: {UQ+, NotNull, INT(10), FK to member}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnMemberId() { return doColumn("MEMBER_ID"); }
         /**
-         * VALID_BEGIN_DATE: {UQ+, NotNull, DATE(10)}
+         * VALID_BEGIN_DATE: {+UQ, NotNull, DATE(10)}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnValidBeginDate() { return doColumn("VALID_BEGIN_DATE"); }
@@ -545,6 +552,11 @@ public class BsMemberAddressCB extends AbstractConditionBean {
      */
     public void orScopeQuery(OrQuery<MemberAddressCB> orQuery) {
         xorSQ((MemberAddressCB)this, orQuery);
+    }
+
+    @Override
+    protected HpCBPurpose xhandleOrSQPurposeChange() {
+        return null; // means no check
     }
 
     /**

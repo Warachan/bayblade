@@ -77,10 +77,24 @@ public class BsWithdrawalReasonCB extends AbstractConditionBean {
     // ===================================================================================
     //                                                                 PrimaryKey Handling
     //                                                                 ===================
+    /**
+     * Accept the query condition of primary key as equal.
+     * @param withdrawalReasonCode : PK, NotNull, CHAR(3). (NotNull)
+     */
     public void acceptPrimaryKey(String withdrawalReasonCode) {
         assertObjectNotNull("withdrawalReasonCode", withdrawalReasonCode);
         BsWithdrawalReasonCB cb = this;
-        cb.query().setWithdrawalReasonCode_Equal(withdrawalReasonCode);
+        cb.query().setWithdrawalReasonCode_Equal(withdrawalReasonCode);;
+    }
+
+    /**
+     * Accept the query condition of unique key as equal.
+     * @param displayOrder : UQ, NotNull, INT(10). (NotNull)
+     */
+    public void acceptUniqueOf(Integer displayOrder) {
+        assertObjectNotNull("displayOrder", displayOrder);
+        BsWithdrawalReasonCB cb = this;
+        cb.query().setDisplayOrder_Equal(displayOrder);;
     }
 
     public ConditionBean addOrderBy_PK_Asc() {
@@ -244,7 +258,6 @@ public class BsWithdrawalReasonCB extends AbstractConditionBean {
     // ===================================================================================
     //                                                                         SetupSelect
     //                                                                         ===========
-
     // [DBFlute-0.7.4]
     // ===================================================================================
     //                                                                             Specify
@@ -418,6 +431,11 @@ public class BsWithdrawalReasonCB extends AbstractConditionBean {
      */
     public void orScopeQuery(OrQuery<WithdrawalReasonCB> orQuery) {
         xorSQ((WithdrawalReasonCB)this, orQuery);
+    }
+
+    @Override
+    protected HpCBPurpose xhandleOrSQPurposeChange() {
+        return null; // means no check
     }
 
     /**

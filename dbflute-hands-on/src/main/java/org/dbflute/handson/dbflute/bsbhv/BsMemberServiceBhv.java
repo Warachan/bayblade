@@ -7,7 +7,7 @@ import org.seasar.dbflute.bhv.*;
 import org.seasar.dbflute.cbean.*;
 import org.seasar.dbflute.dbmeta.DBMeta;
 import org.seasar.dbflute.exception.*;
-import org.seasar.dbflute.optional.*;
+import org.seasar.dbflute.optional.OptionalEntity;
 import org.seasar.dbflute.outsidesql.executor.*;
 import org.dbflute.handson.dbflute.exbhv.*;
 import org.dbflute.handson.dbflute.exentity.*;
@@ -169,7 +169,7 @@ public abstract class BsMemberServiceBhv extends AbstractBehaviorWritable {
      * </pre>
      * @param cb The condition-bean of MemberService. (NotNull)
      * @return The entity selected by the condition. (NotNull: if no data, throws exception)
-     * @exception EntityAlreadyDeletedException When the entity has already been deleted. (point is not found)
+     * @exception EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @exception EntityDuplicatedException When the entity has been duplicated.
      * @exception SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
@@ -190,39 +190,42 @@ public abstract class BsMemberServiceBhv extends AbstractBehaviorWritable {
 
     /**
      * Select the entity by the primary-key value.
-     * @param memberId The one of primary key. (NotNull)
+     * @param memberId : PK, NotNull, INT(10), FK to member. (NotNull)
      * @return The entity selected by the PK. (NullAllowed: if no data, it returns null)
      * @exception EntityDuplicatedException When the entity has been duplicated.
      * @exception SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
     public MemberService selectByPKValue(Integer memberId) {
-        return doSelectByPKValue(memberId, MemberService.class);
+        return doSelectByPK(memberId, MemberService.class);
     }
 
-    protected <ENTITY extends MemberService> ENTITY doSelectByPKValue(Integer memberId, Class<ENTITY> entityType) {
-        return doSelectEntity(buildPKCB(memberId), entityType);
+    protected <ENTITY extends MemberService> ENTITY doSelectByPK(Integer memberId, Class<ENTITY> entityType) {
+        return doSelectEntity(xprepareCBAsPK(memberId), entityType);
+    }
+
+    protected <ENTITY extends MemberService> OptionalEntity<ENTITY> doSelectOptionalByPK(Integer memberId, Class<ENTITY> entityType) {
+        return createOptionalEntity(doSelectByPK(memberId, entityType), memberId);
     }
 
     /**
      * Select the entity by the primary-key value with deleted check.
-     * @param memberId The one of primary key. (NotNull)
+     * @param memberId : PK, NotNull, INT(10), FK to member. (NotNull)
      * @return The entity selected by the PK. (NotNull: if no data, throws exception)
      * @exception EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @exception EntityDuplicatedException When the entity has been duplicated.
      * @exception SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
     public MemberService selectByPKValueWithDeletedCheck(Integer memberId) {
-        return doSelectByPKValueWithDeletedCheck(memberId, MemberService.class);
+        return doSelectByPKWithDeletedCheck(memberId, MemberService.class);
     }
 
-    protected <ENTITY extends MemberService> ENTITY doSelectByPKValueWithDeletedCheck(Integer memberId, Class<ENTITY> entityType) {
-        return doSelectEntityWithDeletedCheck(buildPKCB(memberId), entityType);
+    protected <ENTITY extends MemberService> ENTITY doSelectByPKWithDeletedCheck(Integer memberId, Class<ENTITY> entityType) {
+        return doSelectEntityWithDeletedCheck(xprepareCBAsPK(memberId), entityType);
     }
 
-    private MemberServiceCB buildPKCB(Integer memberId) {
+    protected MemberServiceCB xprepareCBAsPK(Integer memberId) {
         assertObjectNotNull("memberId", memberId);
-        MemberServiceCB cb = newMyConditionBean();
-        cb.query().setMemberId_Equal(memberId);
+        MemberServiceCB cb = newMyConditionBean(); cb.acceptPrimaryKey(memberId);
         return cb;
     }
 
@@ -387,7 +390,8 @@ public abstract class BsMemberServiceBhv extends AbstractBehaviorWritable {
      */
     public List<Member> pulloutMember(List<MemberService> memberServiceList) {
         return helpPulloutInternally(memberServiceList, new InternalPulloutCallback<MemberService, Member>() {
-            public Member getFr(MemberService et) { return et.getMember(); }
+            public Member getFr(MemberService et)
+            { return et.getMember(); }
             public boolean hasRf() { return true; }
             public void setRfLs(Member et, List<MemberService> ls)
             { if (!ls.isEmpty()) { et.setMemberServiceAsOne(ls.get(0)); } }
@@ -400,7 +404,8 @@ public abstract class BsMemberServiceBhv extends AbstractBehaviorWritable {
      */
     public List<ServiceRank> pulloutServiceRank(List<MemberService> memberServiceList) {
         return helpPulloutInternally(memberServiceList, new InternalPulloutCallback<MemberService, ServiceRank>() {
-            public ServiceRank getFr(MemberService et) { return et.getServiceRank(); }
+            public ServiceRank getFr(MemberService et)
+            { return et.getServiceRank(); }
             public boolean hasRf() { return true; }
             public void setRfLs(ServiceRank et, List<MemberService> ls)
             { et.setMemberServiceList(ls); }

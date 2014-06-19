@@ -78,10 +78,14 @@ public class BsMemberWithdrawalCB extends AbstractConditionBean {
     // ===================================================================================
     //                                                                 PrimaryKey Handling
     //                                                                 ===================
+    /**
+     * Accept the query condition of primary key as equal.
+     * @param memberId : PK, NotNull, INT(10), FK to member. (NotNull)
+     */
     public void acceptPrimaryKey(Integer memberId) {
         assertObjectNotNull("memberId", memberId);
         BsMemberWithdrawalCB cb = this;
-        cb.query().setMemberId_Equal(memberId);
+        cb.query().setMemberId_Equal(memberId);;
     }
 
     public ConditionBean addOrderBy_PK_Asc() {
@@ -269,11 +273,7 @@ public class BsMemberWithdrawalCB extends AbstractConditionBean {
         { _nssMember = new MemberNss(query().queryMember()); }
         return _nssMember;
     }
-    protected WithdrawalReasonNss _nssWithdrawalReason;
-    public WithdrawalReasonNss getNssWithdrawalReason() {
-        if (_nssWithdrawalReason == null) { _nssWithdrawalReason = new WithdrawalReasonNss(null); }
-        return _nssWithdrawalReason;
-    }
+
     /**
      * Set up relation columns to select clause. <br />
      * withdrawal_reason by my WITHDRAWAL_REASON_CODE, named 'withdrawalReason'.
@@ -284,17 +284,13 @@ public class BsMemberWithdrawalCB extends AbstractConditionBean {
      * MemberWithdrawal memberWithdrawal = memberWithdrawalBhv.selectEntityWithDeletedCheck(cb);
      * ... = memberWithdrawal.<span style="color: #DD4747">getWithdrawalReason()</span>; <span style="color: #3F7E5E">// you can get by using SetupSelect</span>
      * </pre>
-     * @return The set-upper of nested relation. {setupSelect...().with[nested-relation]} (NotNull)
      */
-    public WithdrawalReasonNss setupSelect_WithdrawalReason() {
+    public void setupSelect_WithdrawalReason() {
         assertSetupSelectPurpose("withdrawalReason");
         if (hasSpecifiedColumn()) { // if reverse call
             specify().columnWithdrawalReasonCode();
         }
         doSetupSelect(new SsCall() { public ConditionQuery qf() { return query().queryWithdrawalReason(); } });
-        if (_nssWithdrawalReason == null || !_nssWithdrawalReason.hasConditionQuery())
-        { _nssWithdrawalReason = new WithdrawalReasonNss(query().queryWithdrawalReason()); }
-        return _nssWithdrawalReason;
     }
 
     // [DBFlute-0.7.4]
@@ -523,6 +519,11 @@ public class BsMemberWithdrawalCB extends AbstractConditionBean {
      */
     public void orScopeQuery(OrQuery<MemberWithdrawalCB> orQuery) {
         xorSQ((MemberWithdrawalCB)this, orQuery);
+    }
+
+    @Override
+    protected HpCBPurpose xhandleOrSQPurposeChange() {
+        return null; // means no check
     }
 
     /**

@@ -33,14 +33,15 @@ public class ProductCategoryDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                    Property Gateway
     //                                                                    ================
+    // -----------------------------------------------------
+    //                                       Column Property
+    //                                       ---------------
     protected final Map<String, PropertyGateway> _epgMap = newHashMap();
     {
         setupEpg(_epgMap, new EpgProductCategoryCode(), "productCategoryCode");
         setupEpg(_epgMap, new EpgProductCategoryName(), "productCategoryName");
         setupEpg(_epgMap, new EpgParentCategoryCode(), "parentCategoryCode");
     }
-    public PropertyGateway findPropertyGateway(String propertyName)
-    { return doFindEpg(_epgMap, propertyName); }
     public static class EpgProductCategoryCode implements PropertyGateway {
         public Object read(Entity et) { return ((ProductCategory)et).getProductCategoryCode(); }
         public void write(Entity et, Object vl) { ((ProductCategory)et).setProductCategoryCode((String)vl); }
@@ -53,6 +54,22 @@ public class ProductCategoryDbm extends AbstractDBMeta {
         public Object read(Entity et) { return ((ProductCategory)et).getParentCategoryCode(); }
         public void write(Entity et, Object vl) { ((ProductCategory)et).setParentCategoryCode((String)vl); }
     }
+    public PropertyGateway findPropertyGateway(String prop)
+    { return doFindEpg(_epgMap, prop); }
+
+    // -----------------------------------------------------
+    //                                      Foreign Property
+    //                                      ----------------
+    protected final Map<String, PropertyGateway> _efpgMap = newHashMap();
+    {
+        setupEfpg(_efpgMap, new EfpgProductCategorySelf(), "productCategorySelf");
+    }
+    public class EfpgProductCategorySelf implements PropertyGateway {
+        public Object read(Entity et) { return ((ProductCategory)et).getProductCategorySelf(); }
+        public void write(Entity et, Object vl) { ((ProductCategory)et).setProductCategorySelf((ProductCategory)vl); }
+    }
+    public PropertyGateway findForeignPropertyGateway(String prop)
+    { return doFindEfpg(_efpgMap, prop); }
 
     // ===================================================================================
     //                                                                          Table Info
@@ -68,9 +85,9 @@ public class ProductCategoryDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnProductCategoryCode = cci("PRODUCT_CATEGORY_CODE", "PRODUCT_CATEGORY_CODE", null, null, true, "productCategoryCode", String.class, true, false, "CHAR", 3, 0, null, false, null, null, null, "productList,productCategorySelfList", null);
-    protected final ColumnInfo _columnProductCategoryName = cci("PRODUCT_CATEGORY_NAME", "PRODUCT_CATEGORY_NAME", null, null, true, "productCategoryName", String.class, false, false, "VARCHAR", 50, 0, null, false, null, null, null, null, null);
-    protected final ColumnInfo _columnParentCategoryCode = cci("PARENT_CATEGORY_CODE", "PARENT_CATEGORY_CODE", null, null, false, "parentCategoryCode", String.class, false, false, "CHAR", 3, 0, null, false, null, null, "productCategorySelf", null, null);
+    protected final ColumnInfo _columnProductCategoryCode = cci("PRODUCT_CATEGORY_CODE", "PRODUCT_CATEGORY_CODE", null, null, String.class, "productCategoryCode", null, true, false, true, "CHAR", 3, 0, null, false, null, null, null, "productList,productCategorySelfList", null);
+    protected final ColumnInfo _columnProductCategoryName = cci("PRODUCT_CATEGORY_NAME", "PRODUCT_CATEGORY_NAME", null, null, String.class, "productCategoryName", null, false, false, true, "VARCHAR", 50, 0, null, false, null, null, null, null, null);
+    protected final ColumnInfo _columnParentCategoryCode = cci("PARENT_CATEGORY_CODE", "PARENT_CATEGORY_CODE", null, null, String.class, "parentCategoryCode", null, false, false, false, "CHAR", 3, 0, null, false, null, null, "productCategorySelf", null, null);
 
     /**
      * PRODUCT_CATEGORY_CODE: {PK, NotNull, CHAR(3)}
@@ -111,6 +128,8 @@ public class ProductCategoryDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                       Relation Info
     //                                                                       =============
+    // cannot cache because it uses related DB meta instance while booting
+    // (instead, cached by super's collection)
     // -----------------------------------------------------
     //                                      Foreign Property
     //                                      ----------------
@@ -120,7 +139,7 @@ public class ProductCategoryDbm extends AbstractDBMeta {
      */
     public ForeignInfo foreignProductCategorySelf() {
         Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnParentCategoryCode(), ProductCategoryDbm.getInstance().columnProductCategoryCode());
-        return cfi("FK_PRODUCT_CATEGORY_PARENT", "productCategorySelf", this, ProductCategoryDbm.getInstance(), mp, 0, false, false, false, false, null, null, false, "productCategorySelfList");
+        return cfi("FK_PRODUCT_CATEGORY_PARENT", "productCategorySelf", this, ProductCategoryDbm.getInstance(), mp, 0, null, false, false, false, false, null, null, false, "productCategorySelfList");
     }
 
     // -----------------------------------------------------

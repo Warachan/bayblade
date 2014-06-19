@@ -3,6 +3,8 @@ package org.dbflute.handson.dbflute.cbean.cq.bs;
 import java.util.Map;
 
 import org.seasar.dbflute.cbean.*;
+import org.seasar.dbflute.cbean.chelper.*;
+import org.seasar.dbflute.cbean.coption.*;
 import org.seasar.dbflute.cbean.cvalue.ConditionValue;
 import org.seasar.dbflute.cbean.sqlclause.SqlClause;
 import org.seasar.dbflute.exception.IllegalConditionBeanOperationException;
@@ -24,8 +26,8 @@ public class BsMemberAddressCQ extends AbstractBsMemberAddressCQ {
     // ===================================================================================
     //                                                                         Constructor
     //                                                                         ===========
-    public BsMemberAddressCQ(ConditionQuery childQuery, SqlClause sqlClause, String aliasName, int nestLevel) {
-        super(childQuery, sqlClause, aliasName, nestLevel);
+    public BsMemberAddressCQ(ConditionQuery referrerQuery, SqlClause sqlClause, String aliasName, int nestLevel) {
+        super(referrerQuery, sqlClause, aliasName, nestLevel);
     }
 
     // ===================================================================================
@@ -71,7 +73,6 @@ public class BsMemberAddressCQ extends AbstractBsMemberAddressCQ {
     // ===================================================================================
     //                                                                               Query
     //                                                                               =====
-
     protected ConditionValue _memberAddressId;
     public ConditionValue getMemberAddressId() {
         if (_memberAddressId == null) { _memberAddressId = nCV(); }
@@ -118,14 +119,14 @@ public class BsMemberAddressCQ extends AbstractBsMemberAddressCQ {
 
     /** 
      * Add order-by as ascend. <br />
-     * MEMBER_ID: {UQ, NotNull, INT(10), FK to member}
+     * MEMBER_ID: {UQ+, NotNull, INT(10), FK to member}
      * @return this. (NotNull)
      */
     public BsMemberAddressCQ addOrderBy_MemberId_Asc() { regOBA("MEMBER_ID"); return this; }
 
     /**
      * Add order-by as descend. <br />
-     * MEMBER_ID: {UQ, NotNull, INT(10), FK to member}
+     * MEMBER_ID: {UQ+, NotNull, INT(10), FK to member}
      * @return this. (NotNull)
      */
     public BsMemberAddressCQ addOrderBy_MemberId_Desc() { regOBD("MEMBER_ID"); return this; }
@@ -139,14 +140,14 @@ public class BsMemberAddressCQ extends AbstractBsMemberAddressCQ {
 
     /** 
      * Add order-by as ascend. <br />
-     * VALID_BEGIN_DATE: {UQ+, NotNull, DATE(10)}
+     * VALID_BEGIN_DATE: {+UQ, NotNull, DATE(10)}
      * @return this. (NotNull)
      */
     public BsMemberAddressCQ addOrderBy_ValidBeginDate_Asc() { regOBA("VALID_BEGIN_DATE"); return this; }
 
     /**
      * Add order-by as descend. <br />
-     * VALID_BEGIN_DATE: {UQ+, NotNull, DATE(10)}
+     * VALID_BEGIN_DATE: {+UQ, NotNull, DATE(10)}
      * @return this. (NotNull)
      */
     public BsMemberAddressCQ addOrderBy_ValidBeginDate_Desc() { regOBD("VALID_BEGIN_DATE"); return this; }
@@ -375,7 +376,7 @@ public class BsMemberAddressCQ extends AbstractBsMemberAddressCQ {
     // ===================================================================================
     //                                                                         Union Query
     //                                                                         ===========
-    protected void reflectRelationOnUnionQuery(ConditionQuery bqs, ConditionQuery uqs) {
+    public void reflectRelationOnUnionQuery(ConditionQuery bqs, ConditionQuery uqs) {
         MemberAddressCQ bq = (MemberAddressCQ)bqs;
         MemberAddressCQ uq = (MemberAddressCQ)uqs;
         if (bq.hasConditionQueryMember()) {
@@ -526,5 +527,7 @@ public class BsMemberAddressCQ extends AbstractBsMemberAddressCQ {
     // very internal (for suppressing warn about 'Not Use Import')
     protected String xCB() { return MemberAddressCB.class.getName(); }
     protected String xCQ() { return MemberAddressCQ.class.getName(); }
+    protected String xCHp() { return HpCalculator.class.getName(); }
+    protected String xCOp() { return ConditionOption.class.getName(); }
     protected String xMap() { return Map.class.getName(); }
 }

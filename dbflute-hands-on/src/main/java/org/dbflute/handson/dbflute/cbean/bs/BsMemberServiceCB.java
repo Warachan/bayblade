@@ -78,10 +78,14 @@ public class BsMemberServiceCB extends AbstractConditionBean {
     // ===================================================================================
     //                                                                 PrimaryKey Handling
     //                                                                 ===================
+    /**
+     * Accept the query condition of primary key as equal.
+     * @param memberId : PK, NotNull, INT(10), FK to member. (NotNull)
+     */
     public void acceptPrimaryKey(Integer memberId) {
         assertObjectNotNull("memberId", memberId);
         BsMemberServiceCB cb = this;
-        cb.query().setMemberId_Equal(memberId);
+        cb.query().setMemberId_Equal(memberId);;
     }
 
     public ConditionBean addOrderBy_PK_Asc() {
@@ -269,11 +273,7 @@ public class BsMemberServiceCB extends AbstractConditionBean {
         { _nssMember = new MemberNss(query().queryMember()); }
         return _nssMember;
     }
-    protected ServiceRankNss _nssServiceRank;
-    public ServiceRankNss getNssServiceRank() {
-        if (_nssServiceRank == null) { _nssServiceRank = new ServiceRankNss(null); }
-        return _nssServiceRank;
-    }
+
     /**
      * Set up relation columns to select clause. <br />
      * service_rank by my SERVICE_RANK_CODE, named 'serviceRank'.
@@ -284,17 +284,13 @@ public class BsMemberServiceCB extends AbstractConditionBean {
      * MemberService memberService = memberServiceBhv.selectEntityWithDeletedCheck(cb);
      * ... = memberService.<span style="color: #DD4747">getServiceRank()</span>; <span style="color: #3F7E5E">// you can get by using SetupSelect</span>
      * </pre>
-     * @return The set-upper of nested relation. {setupSelect...().with[nested-relation]} (NotNull)
      */
-    public ServiceRankNss setupSelect_ServiceRank() {
+    public void setupSelect_ServiceRank() {
         assertSetupSelectPurpose("serviceRank");
         if (hasSpecifiedColumn()) { // if reverse call
             specify().columnServiceRankCode();
         }
         doSetupSelect(new SsCall() { public ConditionQuery qf() { return query().queryServiceRank(); } });
-        if (_nssServiceRank == null || !_nssServiceRank.hasConditionQuery())
-        { _nssServiceRank = new ServiceRankNss(query().queryServiceRank()); }
-        return _nssServiceRank;
     }
 
     // [DBFlute-0.7.4]
@@ -523,6 +519,11 @@ public class BsMemberServiceCB extends AbstractConditionBean {
      */
     public void orScopeQuery(OrQuery<MemberServiceCB> orQuery) {
         xorSQ((MemberServiceCB)this, orQuery);
+    }
+
+    @Override
+    protected HpCBPurpose xhandleOrSQPurposeChange() {
+        return null; // means no check
     }
 
     /**

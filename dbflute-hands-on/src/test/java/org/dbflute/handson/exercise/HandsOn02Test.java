@@ -78,7 +78,7 @@ public class HandsOn02Test extends UnitContainerTestCase {
         cb.query().setMemberId_Equal(1);
         // ## Act ##
         Member member = memberBhv.selectEntityWithDeletedCheck(cb);
-        // 必ずあるのか、それともない可能性があるのか、ないことがありえるなら、ないことを想定したプログラムをかかなければならない
+        // 必ずデータがあるのか、それともない可能性があるのか、ないことがありえるなら、ないことを想定したプログラムをかかなければならない
         // ## Assert ##
         String memberName = member.getMemberName();
         Integer memberId = member.getMemberId();
@@ -124,6 +124,7 @@ public class HandsOn02Test extends UnitContainerTestCase {
             // もしこのデータが必ず生年月日が全員にあるとどうなる？
             // 空リストを帰ってくる
             // 空リストが帰ってきた場合、素通りになる
+            // それを防ぐために
         }
     }
 }

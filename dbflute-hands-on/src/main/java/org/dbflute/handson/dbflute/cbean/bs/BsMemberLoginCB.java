@@ -78,10 +78,25 @@ public class BsMemberLoginCB extends AbstractConditionBean {
     // ===================================================================================
     //                                                                 PrimaryKey Handling
     //                                                                 ===================
+    /**
+     * Accept the query condition of primary key as equal.
+     * @param memberLoginId : PK, ID, NotNull, BIGINT(19). (NotNull)
+     */
     public void acceptPrimaryKey(Long memberLoginId) {
         assertObjectNotNull("memberLoginId", memberLoginId);
         BsMemberLoginCB cb = this;
-        cb.query().setMemberLoginId_Equal(memberLoginId);
+        cb.query().setMemberLoginId_Equal(memberLoginId);;
+    }
+
+    /**
+     * Accept the query condition of unique key as equal.
+     * @param memberId : UQ+, NotNull, INT(10), FK to member. (NotNull)
+     * @param loginDatetime : +UQ, IX, NotNull, DATETIME(19). (NotNull)
+     */
+    public void acceptUniqueOf(Integer memberId, java.sql.Timestamp loginDatetime) {
+        assertObjectNotNull("memberId", memberId);assertObjectNotNull("loginDatetime", loginDatetime);
+        BsMemberLoginCB cb = this;
+        cb.query().setMemberId_Equal(memberId);;cb.query().setLoginDatetime_Equal(loginDatetime);;
     }
 
     public ConditionBean addOrderBy_PK_Asc() {
@@ -245,11 +260,6 @@ public class BsMemberLoginCB extends AbstractConditionBean {
     // ===================================================================================
     //                                                                         SetupSelect
     //                                                                         ===========
-    protected MemberStatusNss _nssMemberStatus;
-    public MemberStatusNss getNssMemberStatus() {
-        if (_nssMemberStatus == null) { _nssMemberStatus = new MemberStatusNss(null); }
-        return _nssMemberStatus;
-    }
     /**
      * Set up relation columns to select clause. <br />
      * member_status by my LOGIN_MEMBER_STATUS_CODE, named 'memberStatus'.
@@ -260,18 +270,15 @@ public class BsMemberLoginCB extends AbstractConditionBean {
      * MemberLogin memberLogin = memberLoginBhv.selectEntityWithDeletedCheck(cb);
      * ... = memberLogin.<span style="color: #DD4747">getMemberStatus()</span>; <span style="color: #3F7E5E">// you can get by using SetupSelect</span>
      * </pre>
-     * @return The set-upper of nested relation. {setupSelect...().with[nested-relation]} (NotNull)
      */
-    public MemberStatusNss setupSelect_MemberStatus() {
+    public void setupSelect_MemberStatus() {
         assertSetupSelectPurpose("memberStatus");
         if (hasSpecifiedColumn()) { // if reverse call
             specify().columnLoginMemberStatusCode();
         }
         doSetupSelect(new SsCall() { public ConditionQuery qf() { return query().queryMemberStatus(); } });
-        if (_nssMemberStatus == null || !_nssMemberStatus.hasConditionQuery())
-        { _nssMemberStatus = new MemberStatusNss(query().queryMemberStatus()); }
-        return _nssMemberStatus;
     }
+
     protected MemberNss _nssMember;
     public MemberNss getNssMember() {
         if (_nssMember == null) { _nssMember = new MemberNss(null); }
@@ -353,12 +360,12 @@ public class BsMemberLoginCB extends AbstractConditionBean {
          */
         public HpSpecifiedColumn columnMemberLoginId() { return doColumn("MEMBER_LOGIN_ID"); }
         /**
-         * MEMBER_ID: {UQ, NotNull, INT(10), FK to member}
+         * MEMBER_ID: {UQ+, NotNull, INT(10), FK to member}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnMemberId() { return doColumn("MEMBER_ID"); }
         /**
-         * LOGIN_DATETIME: {UQ+, IX, NotNull, DATETIME(19)}
+         * LOGIN_DATETIME: {+UQ, IX, NotNull, DATETIME(19)}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnLoginDatetime() { return doColumn("LOGIN_DATETIME"); }
@@ -515,6 +522,11 @@ public class BsMemberLoginCB extends AbstractConditionBean {
      */
     public void orScopeQuery(OrQuery<MemberLoginCB> orQuery) {
         xorSQ((MemberLoginCB)this, orQuery);
+    }
+
+    @Override
+    protected HpCBPurpose xhandleOrSQPurposeChange() {
+        return null; // means no check
     }
 
     /**

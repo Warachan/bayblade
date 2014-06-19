@@ -33,13 +33,14 @@ public class RegionDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                    Property Gateway
     //                                                                    ================
+    // -----------------------------------------------------
+    //                                       Column Property
+    //                                       ---------------
     protected final Map<String, PropertyGateway> _epgMap = newHashMap();
     {
         setupEpg(_epgMap, new EpgRegionId(), "regionId");
         setupEpg(_epgMap, new EpgRegionName(), "regionName");
     }
-    public PropertyGateway findPropertyGateway(String propertyName)
-    { return doFindEpg(_epgMap, propertyName); }
     public static class EpgRegionId implements PropertyGateway {
         public Object read(Entity et) { return ((Region)et).getRegionId(); }
         public void write(Entity et, Object vl) { ((Region)et).setRegionId(cti(vl)); }
@@ -48,6 +49,8 @@ public class RegionDbm extends AbstractDBMeta {
         public Object read(Entity et) { return ((Region)et).getRegionName(); }
         public void write(Entity et, Object vl) { ((Region)et).setRegionName((String)vl); }
     }
+    public PropertyGateway findPropertyGateway(String prop)
+    { return doFindEpg(_epgMap, prop); }
 
     // ===================================================================================
     //                                                                          Table Info
@@ -63,8 +66,8 @@ public class RegionDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnRegionId = cci("REGION_ID", "REGION_ID", null, null, true, "regionId", Integer.class, true, false, "INT", 10, 0, null, false, null, null, null, "memberAddressList", null);
-    protected final ColumnInfo _columnRegionName = cci("REGION_NAME", "REGION_NAME", null, null, true, "regionName", String.class, false, false, "VARCHAR", 50, 0, null, false, null, null, null, null, null);
+    protected final ColumnInfo _columnRegionId = cci("REGION_ID", "REGION_ID", null, null, Integer.class, "regionId", null, true, false, true, "INT", 10, 0, null, false, null, null, null, "memberAddressList", null);
+    protected final ColumnInfo _columnRegionName = cci("REGION_NAME", "REGION_NAME", null, null, String.class, "regionName", null, false, false, true, "VARCHAR", 50, 0, null, false, null, null, null, null, null);
 
     /**
      * REGION_ID: {PK, NotNull, INT(10)}
@@ -99,6 +102,8 @@ public class RegionDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                       Relation Info
     //                                                                       =============
+    // cannot cache because it uses related DB meta instance while booting
+    // (instead, cached by super's collection)
     // -----------------------------------------------------
     //                                      Foreign Property
     //                                      ----------------

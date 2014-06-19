@@ -78,10 +78,24 @@ public class BsProductCB extends AbstractConditionBean {
     // ===================================================================================
     //                                                                 PrimaryKey Handling
     //                                                                 ===================
+    /**
+     * Accept the query condition of primary key as equal.
+     * @param productId : PK, ID, NotNull, INT(10). (NotNull)
+     */
     public void acceptPrimaryKey(Integer productId) {
         assertObjectNotNull("productId", productId);
         BsProductCB cb = this;
-        cb.query().setProductId_Equal(productId);
+        cb.query().setProductId_Equal(productId);;
+    }
+
+    /**
+     * Accept the query condition of unique key as equal.
+     * @param productHandleCode : UQ, NotNull, VARCHAR(100). (NotNull)
+     */
+    public void acceptUniqueOf(String productHandleCode) {
+        assertObjectNotNull("productHandleCode", productHandleCode);
+        BsProductCB cb = this;
+        cb.query().setProductHandleCode_Equal(productHandleCode);;
     }
 
     public ConditionBean addOrderBy_PK_Asc() {
@@ -272,11 +286,7 @@ public class BsProductCB extends AbstractConditionBean {
         { _nssProductCategory = new ProductCategoryNss(query().queryProductCategory()); }
         return _nssProductCategory;
     }
-    protected ProductStatusNss _nssProductStatus;
-    public ProductStatusNss getNssProductStatus() {
-        if (_nssProductStatus == null) { _nssProductStatus = new ProductStatusNss(null); }
-        return _nssProductStatus;
-    }
+
     /**
      * Set up relation columns to select clause. <br />
      * product_status by my PRODUCT_STATUS_CODE, named 'productStatus'.
@@ -287,17 +297,13 @@ public class BsProductCB extends AbstractConditionBean {
      * Product product = productBhv.selectEntityWithDeletedCheck(cb);
      * ... = product.<span style="color: #DD4747">getProductStatus()</span>; <span style="color: #3F7E5E">// you can get by using SetupSelect</span>
      * </pre>
-     * @return The set-upper of nested relation. {setupSelect...().with[nested-relation]} (NotNull)
      */
-    public ProductStatusNss setupSelect_ProductStatus() {
+    public void setupSelect_ProductStatus() {
         assertSetupSelectPurpose("productStatus");
         if (hasSpecifiedColumn()) { // if reverse call
             specify().columnProductStatusCode();
         }
         doSetupSelect(new SsCall() { public ConditionQuery qf() { return query().queryProductStatus(); } });
-        if (_nssProductStatus == null || !_nssProductStatus.hasConditionQuery())
-        { _nssProductStatus = new ProductStatusNss(query().queryProductStatus()); }
-        return _nssProductStatus;
     }
 
     // [DBFlute-0.7.4]
@@ -565,6 +571,11 @@ public class BsProductCB extends AbstractConditionBean {
      */
     public void orScopeQuery(OrQuery<ProductCB> orQuery) {
         xorSQ((ProductCB)this, orQuery);
+    }
+
+    @Override
+    protected HpCBPurpose xhandleOrSQPurposeChange() {
+        return null; // means no check
     }
 
     /**
