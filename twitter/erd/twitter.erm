@@ -102,7 +102,7 @@
 			<id></id>
 			<height>-1</height>
 			<width>-1</width>
-				<font_name>Lucida Grande</font_name>
+				<font_name>メイリオ</font_name>
 				<font_size>9</font_size>
 			<x>50</x>
 			<y>50</y>
@@ -115,7 +115,7 @@
 			</connections>
 			<display>false</display>
 			<creation_date>2012-11-22 11:49:18</creation_date>
-			<updated_date>2014-04-02 16:09:01</updated_date>
+			<updated_date>2014-06-20 16:45:47</updated_date>
 			<model_property>
 				<name>プロジェクト名</name>
 				<value></value>
@@ -392,6 +392,74 @@
 	<contents>
 		<table>
 			<id>0</id>
+			<height>75</height>
+			<width>477</width>
+				<font_name>Lucida Grande</font_name>
+				<font_size>9</font_size>
+			<x>496</x>
+			<y>46</y>
+			<color>
+				<r>128</r>
+				<g>128</g>
+				<b>192</b>
+			</color>
+			<connections>
+			</connections>
+			<physical_name>CLS_BLACK_COMPANY_STATUS</physical_name>
+			<logical_name>[区分値]ブラック企業ステータス</logical_name>
+			<description></description>
+			<constraint></constraint>
+			<primary_key_name></primary_key_name>
+			<option></option>
+			<columns>
+				<normal_column>
+					<word_id>5</word_id>
+					<id>11</id>
+					<description></description>
+					<unique_key_name></unique_key_name>
+					<logical_name></logical_name>
+					<physical_name></physical_name>
+					<type>character(n)</type>
+					<constraint></constraint>
+					<default_value></default_value>
+					<auto_increment>false</auto_increment>
+					<foreign_key>false</foreign_key>
+					<not_null>true</not_null>
+					<primary_key>true</primary_key>
+					<unique_key>false</unique_key>
+					<character_set></character_set>
+					<collation></collation>
+					<sequence>
+						<name></name>
+						<schema></schema>
+						<increment></increment>
+						<min_value></min_value>
+						<max_value></max_value>
+						<start></start>
+						<cache></cache>
+						<cycle>false</cycle>
+						<order>false</order>
+						<description></description>
+						<data_type></data_type>
+						<decimal_size>0</decimal_size>
+					</sequence>
+				</normal_column>
+				<column_group>2</column_group>
+			</columns>
+			<indexes>
+			</indexes>
+			<complex_unique_key_list>
+			</complex_unique_key_list>
+			<table_properties>
+				<schema></schema>
+				<character_set></character_set>
+				<collation></collation>
+				<storage_engine></storage_engine>
+				<primary_key_length_of_text>null</primary_key_length_of_text>
+			</table_properties>
+		</table>
+		<table>
+			<id>1</id>
 			<height>180</height>
 			<width>383</width>
 				<font_name>Lucida Grande</font_name>
@@ -406,8 +474,8 @@
 			<connections>
 				<relation>
 					<id>0</id>
-					<source>1</source>
-					<target>0</target>
+					<source>0</source>
+					<target>1</target>
 					<child_cardinality>0..n</child_cardinality>
 					<parent_cardinality>1</parent_cardinality>
 					<reference_for_pk>true</reference_for_pk>
@@ -431,7 +499,7 @@
 			<columns>
 				<normal_column>
 					<word_id>3</word_id>
-					<id>11</id>
+					<id>12</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -463,7 +531,7 @@
 				</normal_column>
 				<normal_column>
 					<word_id>4</word_id>
-					<id>12</id>
+					<id>13</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -495,7 +563,7 @@
 				</normal_column>
 				<normal_column>
 					<word_id>2</word_id>
-					<id>13</id>
+					<id>14</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -527,38 +595,6 @@
 				</normal_column>
 				<normal_column>
 					<word_id>17</word_id>
-					<id>14</id>
-					<description></description>
-					<unique_key_name></unique_key_name>
-					<logical_name></logical_name>
-					<physical_name></physical_name>
-					<type>varchar(n)</type>
-					<constraint></constraint>
-					<default_value></default_value>
-					<auto_increment>false</auto_increment>
-					<foreign_key>false</foreign_key>
-					<not_null>true</not_null>
-					<primary_key>false</primary_key>
-					<unique_key>false</unique_key>
-					<character_set></character_set>
-					<collation></collation>
-					<sequence>
-						<name></name>
-						<schema></schema>
-						<increment></increment>
-						<min_value></min_value>
-						<max_value></max_value>
-						<start></start>
-						<cache></cache>
-						<cycle>false</cycle>
-						<order>false</order>
-						<description></description>
-						<data_type></data_type>
-						<decimal_size>0</decimal_size>
-					</sequence>
-				</normal_column>
-				<normal_column>
-					<word_id>0</word_id>
 					<id>15</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -590,8 +626,40 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>1</word_id>
+					<word_id>0</word_id>
 					<id>16</id>
+					<description></description>
+					<unique_key_name></unique_key_name>
+					<logical_name></logical_name>
+					<physical_name></physical_name>
+					<type>varchar(n)</type>
+					<constraint></constraint>
+					<default_value></default_value>
+					<auto_increment>false</auto_increment>
+					<foreign_key>false</foreign_key>
+					<not_null>true</not_null>
+					<primary_key>false</primary_key>
+					<unique_key>false</unique_key>
+					<character_set></character_set>
+					<collation></collation>
+					<sequence>
+						<name></name>
+						<schema></schema>
+						<increment></increment>
+						<min_value></min_value>
+						<max_value></max_value>
+						<start></start>
+						<cache></cache>
+						<cycle>false</cycle>
+						<order>false</order>
+						<description></description>
+						<data_type></data_type>
+						<decimal_size>0</decimal_size>
+					</sequence>
+				</normal_column>
+				<normal_column>
+					<word_id>1</word_id>
+					<id>17</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -622,8 +690,8 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<id>17</id>
-					<referenced_column>18</referenced_column>
+					<id>18</id>
+					<referenced_column>11</referenced_column>
 					<relation>0</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -656,74 +724,6 @@
 				</normal_column>
 				<column_group>0</column_group>
 				<column_group>3</column_group>
-			</columns>
-			<indexes>
-			</indexes>
-			<complex_unique_key_list>
-			</complex_unique_key_list>
-			<table_properties>
-				<schema></schema>
-				<character_set></character_set>
-				<collation></collation>
-				<storage_engine></storage_engine>
-				<primary_key_length_of_text>null</primary_key_length_of_text>
-			</table_properties>
-		</table>
-		<table>
-			<id>1</id>
-			<height>75</height>
-			<width>477</width>
-				<font_name>Lucida Grande</font_name>
-				<font_size>9</font_size>
-			<x>496</x>
-			<y>46</y>
-			<color>
-				<r>128</r>
-				<g>128</g>
-				<b>192</b>
-			</color>
-			<connections>
-			</connections>
-			<physical_name>CLS_BLACK_COMPANY_STATUS</physical_name>
-			<logical_name>[区分値]ブラック企業ステータス</logical_name>
-			<description></description>
-			<constraint></constraint>
-			<primary_key_name></primary_key_name>
-			<option></option>
-			<columns>
-				<normal_column>
-					<word_id>5</word_id>
-					<id>18</id>
-					<description></description>
-					<unique_key_name></unique_key_name>
-					<logical_name></logical_name>
-					<physical_name></physical_name>
-					<type>character(n)</type>
-					<constraint></constraint>
-					<default_value></default_value>
-					<auto_increment>false</auto_increment>
-					<foreign_key>false</foreign_key>
-					<not_null>true</not_null>
-					<primary_key>true</primary_key>
-					<unique_key>false</unique_key>
-					<character_set></character_set>
-					<collation></collation>
-					<sequence>
-						<name></name>
-						<schema></schema>
-						<increment></increment>
-						<min_value></min_value>
-						<max_value></max_value>
-						<start></start>
-						<cache></cache>
-						<cycle>false</cycle>
-						<order>false</order>
-						<description></description>
-						<data_type></data_type>
-						<decimal_size>0</decimal_size>
-					</sequence>
-				</normal_column>
-				<column_group>2</column_group>
 			</columns>
 			<indexes>
 			</indexes>

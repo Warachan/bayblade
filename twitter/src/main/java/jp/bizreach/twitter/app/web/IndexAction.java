@@ -20,8 +20,8 @@ import org.seasar.struts.annotation.Execute;
 /**
  * @author you?
  */
-public class IndexAction {
 
+public class IndexAction {
     @Execute(validator = false)
     public String index() {
         return "index.jsp";

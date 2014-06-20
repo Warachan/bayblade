@@ -6,19 +6,17 @@
 	<include path="jdbc-extension.dicon"/>
 
 	<!-- for MySQL -->
-	<!--
 	<component name="xaDataSource"
 		class="org.seasar.extension.dbcp.impl.XADataSourceImpl">
 		<property name="driverClassName">
 			"com.mysql.jdbc.Driver"
 		</property>
 		<property name="URL">
-			"jdbc:mysql://localhost:3306/xxx"
+			"jdbc:mysql://localhost:3306/twitter"
 		</property>
-		<property name="user">"xxx"</property>
-		<property name="password">"xxx"</property>
+		<property name="user">"twitter"</property>
+		<property name="password">"twitter"</property>
 	</component>
-	-->
 
 	<!-- for PostgreSQL -->
 	<!--
