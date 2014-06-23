@@ -8,7 +8,6 @@ import org.seasar.struts.annotation.Required;
 
 public class IndexForm {
     @Required
-    // これで必須項目にすることができる→アクションの@Executeをtrueにしなければならない）
     public String name;
 
     @Override

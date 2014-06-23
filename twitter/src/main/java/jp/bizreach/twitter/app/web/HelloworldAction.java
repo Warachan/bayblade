@@ -13,45 +13,46 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package jp.bizreach.twitter.app.web;
+//package jp.bizreach.twitter.app.web;
+//
+//import javax.annotation.Resource;
+//
+//import jp.bizreach.twitter.dbflute.cbean.BlackCompanyCB;
+//import jp.bizreach.twitter.dbflute.exbhv.BlackCompanyBhv;
+//import jp.bizreach.twitter.dbflute.exentity.BlackCompany;
+//
+//import org.apache.commons.logging.Log;
+//import org.apache.commons.logging.LogFactory;
+//import org.seasar.struts.annotation.ActionForm;
+//import org.seasar.struts.annotation.Execute;
+//
+///**
+// * @mayuko.sakaba
+// */
+//public class HelloworldAction {
+//
+//    private static final Log LOG = LogFactory.getLog(HelloworldAction.class);
 
-import javax.annotation.Resource;
+//    // お決まり。DIするけどただのDIじゃない！「お前はアクションフォームだ！」という
+//    @ActionForm
+//    @Resource
+//    protected HelloworldForm helloWorldForm;
 
-import jp.bizreach.twitter.dbflute.cbean.BlackCompanyCB;
-import jp.bizreach.twitter.dbflute.exbhv.BlackCompanyBhv;
-import jp.bizreach.twitter.dbflute.exentity.BlackCompany;
+//    public String abc;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.seasar.struts.annotation.ActionForm;
-import org.seasar.struts.annotation.Execute;
-
-/**
- * @mayuko.sakaba
- */
-public class HelloworldAction {
-
-    private static final Log LOG = LogFactory.getLog(HelloworldAction.class);
-
-    // お決まり。DIするけどただのDIじゃない！「お前はアクションフォームだ！」という
-    @ActionForm
-    @Resource
-    protected HelloworldForm helloWorldForm;
-
-    public String abc;
-
-    @Resource
-    protected BlackCompanyBhv blackCompanyBhv;
-
-    @Execute(validator = true, input = "../insert.jsp")
-    public String helloworld() {
-        LOG.debug("***:" + helloWorldForm);
-        if (helloWorldForm.name != null) {
-            BlackCompanyCB cb = new BlackCompanyCB();
-            cb.query().setBlackCompanyId_IsNotNull();
-            BlackCompany blackCompany = blackCompanyBhv.selectEntity(cb);
-            abc = blackCompany != null ? blackCompany.getBlackCompanyName() : "てきとー";
-        }
-        return "../helloWorld.jsp";
-    }
-}
+//    @Resource
+//    protected BlackCompanyBhv blackCompanyBhv;
+//
+//    @Execute(validator = true, input = "../insert.jsp")
+//    public String helloworld() {
+//        LOG.debug("***:" + helloWorldForm);
+//        if (helloWorldForm.name != null) {
+//            BlackCompanyCB cb = new BlackCompanyCB();
+//            cb.query().setBlackCompanyId_IsNotNull();
+//            BlackCompany blackCompany = blackCompanyBhv.selectEntity(cb);
+//            abc = blackCompany != null ? blackCompany.getBlackCompanyName() : "てきとー";
+//        }
+//        return "../helloWorld.jsp";
+// return "/mypage/?redirect=true"; // リダイレクトのやり方ridirect=true;を最後に書く。　getparameterがあるなら、  ?getparameter&redirect=true;\
+//    }
+//}

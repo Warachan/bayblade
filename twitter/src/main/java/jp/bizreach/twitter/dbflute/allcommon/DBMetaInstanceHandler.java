@@ -31,8 +31,11 @@ public class DBMetaInstanceHandler implements DBMetaProvider {
     protected static final Map<String, String> _tableDbNameClassNameMap;
     static {
         final Map<String, String> tmpMap = newHashMap();
-        tmpMap.put("black_company", "jp.bizreach.twitter.dbflute.bsentity.dbmeta.BlackCompanyDbm");
-        tmpMap.put("cls_black_company_status", "jp.bizreach.twitter.dbflute.bsentity.dbmeta.ClsBlackCompanyStatusDbm");
+        tmpMap.put("login", "jp.bizreach.twitter.dbflute.bsentity.dbmeta.LoginDbm");
+        tmpMap.put("member", "jp.bizreach.twitter.dbflute.bsentity.dbmeta.MemberDbm");
+        tmpMap.put("member_security", "jp.bizreach.twitter.dbflute.bsentity.dbmeta.MemberSecurityDbm");
+        tmpMap.put("member_withdraw", "jp.bizreach.twitter.dbflute.bsentity.dbmeta.MemberWithdrawDbm");
+        tmpMap.put("tweet", "jp.bizreach.twitter.dbflute.bsentity.dbmeta.TweetDbm");
         _tableDbNameClassNameMap = Collections.unmodifiableMap(tmpMap);
     }
 

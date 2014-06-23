@@ -57,7 +57,7 @@ public class ActionTraceInterceptor extends AbstractInterceptor {
         final String actionExp = classPureName + "." + methodName + "()";
         final String beginning = buildBeginning(type);
         final String title = buildTitle(type);
-        LOG.debug(beginning + title + ": " + actionExp);
+        LOG.debug("#flow " + beginning + "#" + title + ": " + actionExp);
         try {
             ret = invocation.proceed();
         } catch (Throwable t) {

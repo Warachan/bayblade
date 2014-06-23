@@ -13,6 +13,9 @@
     <component name="behaviorCommandInvoker" class="org.seasar.dbflute.bhv.core.BehaviorCommandInvoker"/>
 
     <!-- The components of Behavior. -->
-    <component name="blackCompanyBhv" class="jp.bizreach.twitter.dbflute.exbhv.BlackCompanyBhv"/>
-    <component name="clsBlackCompanyStatusBhv" class="jp.bizreach.twitter.dbflute.exbhv.ClsBlackCompanyStatusBhv"/>
+    <component name="loginBhv" class="jp.bizreach.twitter.dbflute.exbhv.LoginBhv"/>
+    <component name="memberBhv" class="jp.bizreach.twitter.dbflute.exbhv.MemberBhv"/>
+    <component name="memberSecurityBhv" class="jp.bizreach.twitter.dbflute.exbhv.MemberSecurityBhv"/>
+    <component name="memberWithdrawBhv" class="jp.bizreach.twitter.dbflute.exbhv.MemberWithdrawBhv"/>
+    <component name="tweetBhv" class="jp.bizreach.twitter.dbflute.exbhv.TweetBhv"/>
 </components>

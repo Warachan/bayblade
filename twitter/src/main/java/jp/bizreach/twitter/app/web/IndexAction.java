@@ -15,15 +15,28 @@
  */
 package jp.bizreach.twitter.app.web;
 
+import javax.annotation.Resource;
+
+import jp.bizreach.twitter.dbflute.exbhv.MemberBhv;
+
+import org.seasar.struts.annotation.ActionForm;
 import org.seasar.struts.annotation.Execute;
 
 /**
- * @author you?
+ * @author mayuko.sakaba
  */
 
 public class IndexAction {
-    @Execute(validator = false)
+    // private static final Log LOG = LogFactory.getLog(IndexAction.class);
+
+    @ActionForm
+    @Resource
+    protected MemberBhv memberBhv;
+    protected IndexForm indexForm;
+    public String poke;
+
+    @Execute(validator = true, input = "index.jsp")
     public String index() {
-        return "index.jsp";
+        return "/signup/?redirect=true";
     }
 }
