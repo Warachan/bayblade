@@ -43,9 +43,11 @@ public class HandsOn03Test extends UnitContainerTestCase {
      * 「以前」の解釈は日付によってしっかり確認すること
      * @throws Exception
      */
+    // TODO warachan sectionのまちがいかな？ by jflute
     public void test_secssion3_first() throws Exception {
         // ## Arrange ##
         MemberCB cb = new MemberCB();
+        // TODO warachan 基準の日付、対象の日付的なニュアンスの変数名がほしいかな、targetDateとか by jflute
         Date date = new HandyDate("1968/1/1").getDate();
         cb.setupSelect_MemberStatus();
         cb.query().setMemberName_PrefixSearch("S");
@@ -61,7 +63,9 @@ public class HandsOn03Test extends UnitContainerTestCase {
             Date birthdate = member.getBirthdate();
             log(status, birthdate);
             // Q.コレだとdateを変えるとそのまま適応されてしまうのでは？
+            // TODO warachan "dateを変える" とは？？？ by jflute
             assertTrue(birthdate.before(date) || birthdate.equals(date));
+            // TODO warachan すらすらコメント微調整、// の後ろに空白を一つ入れる、二つ入ってるのもあるよ by jflute
             // そのほかのやり方
             assertFalse(birthdate.after(date)); //コレだと含まない選択肢があっても、未来ではない、といっているのだから以前を考えなくていい。
             assertTrue(birthdate.compareTo(date) <= 0); // このメソッドはintegerを返してくる
@@ -91,6 +95,16 @@ public class HandsOn03Test extends UnitContainerTestCase {
             String status = member.getMemberStatus().getMemberStatusName();
             String security = member.getMemberSecurityAsOne().getRegisterUser();
             Date birthdate = member.getBirthdate();
+            // TODO warachan "(両方同時にnull) というわけではない" というassertだと、片方nullのケースが検出できない by jflute
+            // assertFalse(status == null && security == null);
+            //  -> "(両方同時にnull) というわけではない" つまり 片方は null でも大丈夫になっちゃう
+            // なので、
+            // assertTrue(status != null && security != null);
+            // という感じで "両方ともnullではない" ならOK。
+            // というか、assertNotNull(status); assertNotNull(security); でOK。
+            // ちなみに、assertNotNullの第一引数はメッセージを入れるところなので、assertNotNull(status, security);は間違い
+            // TODO warachan と、ここまで書いたけど、そもそもチェックしたいのは、getMemberStatusName()とgetRegisterUser()ではない by jflute
+            // setupSelectをしたかどうかを証明するなら、getMemberStatus(), getMemberSecurityAsOne()の方をチェックすべし
             assertFalse(status == null && security == null);
             assertNotNull(status, security);
             // statusがなぜ必ずデータが存在するといえるか。→notNull制約・FK制約のカラムだから必すsetupSelectが存在するといえる。many to oneなので、物理的制約がある。
@@ -151,6 +165,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
                 }
             }
         }
+        // TODO warachan HashMapをnewしたときの変数の型は、Mapインターフェースで。メモだけどしっかり直しておこう by jflute
         //  ***************************** Mapを使った場合。************************************************
         //        MemberSecurityCB securityCB = new MemberSecurityCB();
         //        securityCB.query().setMemberId_InScope(memberIDList);
@@ -203,6 +218,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
 
         // ## Assert ##
         for (Member member : memberList) {
+            // TODO warachan IDがmemberIdにするのであれば、NAMEはmemberNameかな by jflute
             String name = member.getMemberName();
             Integer memberId = member.getMemberId();
             MemberStatus status = member.getMemberStatus();
@@ -239,12 +255,14 @@ public class HandsOn03Test extends UnitContainerTestCase {
         assertHasAnyElement(purchaseList);
         for (Purchase purchase : purchaseList) {
             Integer price = purchase.getPurchasePrice();
+            // TODO warachan getMember()が三回呼ばれているので、ctrl + 1 で助けてあげてくださいs by jflute
             String statusName = purchase.getMember().getMemberStatus().getMemberStatusName();
             String name = purchase.getMember().getMemberName();
             Date birthdate = purchase.getMember().getBirthdate();
             assertNotNull(birthdate);
             log(price, statusName, name, birthdate);
             // TODO mayuko.sakaba ログに普通に出力されているだけだけどいいのか？
+            // TODO warachan うん！ログ出力せよと言われたら、目視で確認でOK by jflute
         }
     }
 
