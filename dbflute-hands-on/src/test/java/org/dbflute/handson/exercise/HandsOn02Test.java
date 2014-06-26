@@ -75,6 +75,7 @@ public class HandsOn02Test extends UnitContainerTestCase {
      */
     public void test_IDisOne() throws Exception {
         // TODO warachan 他のエクササイズでは、Act や Assert の上に空行を入れているので、ここでも空けよう (全体的に統一ね) by jflute
+
         // ## Arrange ##
         MemberCB cb = new MemberCB();
         cb.query().setMemberId_Equal(1);
@@ -108,25 +109,25 @@ public class HandsOn02Test extends UnitContainerTestCase {
         // ## Act ##
         // TODO warachan テーブル名 + List という名前を心がけよう、e.g. memberList by jflute
         // 直すときは、変数を選択して ctrl + 1 -> enter で rename できるよ
-        ListResultBean<Member> selectList = memberBhv.selectList(cb);
+        ListResultBean<Member> memberList = memberBhv.selectList(cb);
 
         // ## Assert ##
         // assertすることをアサートすること入れる。三種類。全て同じ役割だけど、一番上が望ましい。
-        assertHasAnyElement(selectList);
-        assertFalse(selectList.isEmpty());
-        if (selectList.isEmpty()) {
+        assertHasAnyElement(memberList);
+        assertFalse(memberList.isEmpty());
+        if (memberList.isEmpty()) {
             fail();
         }
 
-        for (Member member : selectList) {
+        for (Member member : memberList) {
             // TODO warachan 変数名のポリシーがバラバラなので統一しよう by jflute
             // name -> memberName, timestamp -> formalizedDatetime
             // カラム名を意識した名前にするか、型を意識した名前にするか、ケースバイケースではあるけど、
             // ここではカラム名を意識した方がいいかな
-            String name = member.getMemberName();
-            Timestamp timestamp = member.getFormalizedDatetime();
+            String memberName = member.getMemberName();
+            Timestamp formalizedDatetime = member.getFormalizedDatetime();
             Date birthdate = member.getBirthdate();
-            log(name, timestamp, birthdate);
+            log(memberName, formalizedDatetime, birthdate);
             assertNull(birthdate);
             assertTrue(member.getBirthdate() == null);
             // もしこのデータが必ず生年月日が全員にあるとどうなる？

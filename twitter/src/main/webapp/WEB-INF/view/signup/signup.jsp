@@ -6,7 +6,7 @@
 <s:form action="/signup/regester/">
 			<h4>Email</h4>
 			<html:text property ="newEmail"/><br>
-				${overlapserror}
+				${overlapsError}
 			<h4>Username</h4>
 			<html:text property="username"/><br>
 				${userError}

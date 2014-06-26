@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.Set;
 import java.util.Date;
 
-import org.seasar.dbflute.dbmeta.DBMeta;
 import org.seasar.dbflute.Entity;
+import org.seasar.dbflute.dbmeta.DBMeta;
 import org.dbflute.handson.dbflute.allcommon.DBMetaInstanceHandler;
 import org.dbflute.handson.dbflute.exentity.*;
 
@@ -199,7 +199,7 @@ public abstract class BsMemberAddress implements Entity, Serializable, Cloneable
     protected Member _member;
 
     /**
-     * member by my MEMBER_ID, named 'member'.
+     * [get] member by my MEMBER_ID, named 'member'.
      * @return The entity of foreign property 'member'. (NullAllowed: when e.g. null FK column, no setupSelect)
      */
     public Member getMember() {
@@ -207,7 +207,7 @@ public abstract class BsMemberAddress implements Entity, Serializable, Cloneable
     }
 
     /**
-     * member by my MEMBER_ID, named 'member'.
+     * [set] member by my MEMBER_ID, named 'member'.
      * @param member The entity of foreign property 'member'. (NullAllowed)
      */
     public void setMember(Member member) {
@@ -218,7 +218,7 @@ public abstract class BsMemberAddress implements Entity, Serializable, Cloneable
     protected Region _region;
 
     /**
-     * region by my REGION_ID, named 'region'.
+     * [get] region by my REGION_ID, named 'region'.
      * @return The entity of foreign property 'region'. (NullAllowed: when e.g. null FK column, no setupSelect)
      */
     public Region getRegion() {
@@ -226,7 +226,7 @@ public abstract class BsMemberAddress implements Entity, Serializable, Cloneable
     }
 
     /**
-     * region by my REGION_ID, named 'region'.
+     * [set] region by my REGION_ID, named 'region'.
      * @param region The entity of foreign property 'region'. (NullAllowed)
      */
     public void setRegion(Region region) {
@@ -431,7 +431,7 @@ public abstract class BsMemberAddress implements Entity, Serializable, Cloneable
      */
     public void setMemberAddressId(Integer memberAddressId) {
         __modifiedProperties.addPropertyName("memberAddressId");
-        this._memberAddressId = memberAddressId;
+        _memberAddressId = memberAddressId;
     }
 
     /**
@@ -452,7 +452,7 @@ public abstract class BsMemberAddress implements Entity, Serializable, Cloneable
      */
     public void setMemberId(Integer memberId) {
         __modifiedProperties.addPropertyName("memberId");
-        this._memberId = memberId;
+        _memberId = memberId;
     }
 
     /**
@@ -473,7 +473,7 @@ public abstract class BsMemberAddress implements Entity, Serializable, Cloneable
      */
     public void setValidBeginDate(java.util.Date validBeginDate) {
         __modifiedProperties.addPropertyName("validBeginDate");
-        this._validBeginDate = validBeginDate;
+        _validBeginDate = validBeginDate;
     }
 
     /**
@@ -496,7 +496,7 @@ public abstract class BsMemberAddress implements Entity, Serializable, Cloneable
      */
     public void setValidEndDate(java.util.Date validEndDate) {
         __modifiedProperties.addPropertyName("validEndDate");
-        this._validEndDate = validEndDate;
+        _validEndDate = validEndDate;
     }
 
     /**
@@ -515,7 +515,7 @@ public abstract class BsMemberAddress implements Entity, Serializable, Cloneable
      */
     public void setAddress(String address) {
         __modifiedProperties.addPropertyName("address");
-        this._address = address;
+        _address = address;
     }
 
     /**
@@ -536,7 +536,7 @@ public abstract class BsMemberAddress implements Entity, Serializable, Cloneable
      */
     public void setRegionId(Integer regionId) {
         __modifiedProperties.addPropertyName("regionId");
-        this._regionId = regionId;
+        _regionId = regionId;
     }
 
     /**
@@ -553,7 +553,7 @@ public abstract class BsMemberAddress implements Entity, Serializable, Cloneable
      */
     public void setRegisterDatetime(java.sql.Timestamp registerDatetime) {
         __modifiedProperties.addPropertyName("registerDatetime");
-        this._registerDatetime = registerDatetime;
+        _registerDatetime = registerDatetime;
     }
 
     /**
@@ -570,7 +570,7 @@ public abstract class BsMemberAddress implements Entity, Serializable, Cloneable
      */
     public void setRegisterUser(String registerUser) {
         __modifiedProperties.addPropertyName("registerUser");
-        this._registerUser = registerUser;
+        _registerUser = registerUser;
     }
 
     /**
@@ -587,7 +587,7 @@ public abstract class BsMemberAddress implements Entity, Serializable, Cloneable
      */
     public void setUpdateDatetime(java.sql.Timestamp updateDatetime) {
         __modifiedProperties.addPropertyName("updateDatetime");
-        this._updateDatetime = updateDatetime;
+        _updateDatetime = updateDatetime;
     }
 
     /**
@@ -604,7 +604,7 @@ public abstract class BsMemberAddress implements Entity, Serializable, Cloneable
      */
     public void setUpdateUser(String updateUser) {
         __modifiedProperties.addPropertyName("updateUser");
-        this._updateUser = updateUser;
+        _updateUser = updateUser;
     }
 
     /**
@@ -621,6 +621,6 @@ public abstract class BsMemberAddress implements Entity, Serializable, Cloneable
      */
     public void setVersionNo(Long versionNo) {
         __modifiedProperties.addPropertyName("versionNo");
-        this._versionNo = versionNo;
+        _versionNo = versionNo;
     }
 }

@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Set;
 
-import org.seasar.dbflute.dbmeta.DBMeta;
 import org.seasar.dbflute.Entity;
+import org.seasar.dbflute.dbmeta.DBMeta;
 import org.dbflute.handson.dbflute.allcommon.DBMetaInstanceHandler;
 import org.dbflute.handson.dbflute.exentity.*;
 
@@ -174,7 +174,7 @@ public abstract class BsMemberSecurity implements Entity, Serializable, Cloneabl
     protected Member _member;
 
     /**
-     * member by my MEMBER_ID, named 'member'.
+     * [get] member by my MEMBER_ID, named 'member'.
      * @return The entity of foreign property 'member'. (NullAllowed: when e.g. null FK column, no setupSelect)
      */
     public Member getMember() {
@@ -182,7 +182,7 @@ public abstract class BsMemberSecurity implements Entity, Serializable, Cloneabl
     }
 
     /**
-     * member by my MEMBER_ID, named 'member'.
+     * [set] member by my MEMBER_ID, named 'member'.
      * @param member The entity of foreign property 'member'. (NullAllowed)
      */
     public void setMember(Member member) {
@@ -374,7 +374,7 @@ public abstract class BsMemberSecurity implements Entity, Serializable, Cloneabl
      */
     public void setMemberId(Integer memberId) {
         __modifiedProperties.addPropertyName("memberId");
-        this._memberId = memberId;
+        _memberId = memberId;
     }
 
     /**
@@ -395,7 +395,7 @@ public abstract class BsMemberSecurity implements Entity, Serializable, Cloneabl
      */
     public void setLoginPassword(String loginPassword) {
         __modifiedProperties.addPropertyName("loginPassword");
-        this._loginPassword = loginPassword;
+        _loginPassword = loginPassword;
     }
 
     /**
@@ -414,7 +414,7 @@ public abstract class BsMemberSecurity implements Entity, Serializable, Cloneabl
      */
     public void setReminderQuestion(String reminderQuestion) {
         __modifiedProperties.addPropertyName("reminderQuestion");
-        this._reminderQuestion = reminderQuestion;
+        _reminderQuestion = reminderQuestion;
     }
 
     /**
@@ -433,7 +433,7 @@ public abstract class BsMemberSecurity implements Entity, Serializable, Cloneabl
      */
     public void setReminderAnswer(String reminderAnswer) {
         __modifiedProperties.addPropertyName("reminderAnswer");
-        this._reminderAnswer = reminderAnswer;
+        _reminderAnswer = reminderAnswer;
     }
 
     /**
@@ -450,7 +450,7 @@ public abstract class BsMemberSecurity implements Entity, Serializable, Cloneabl
      */
     public void setRegisterDatetime(java.sql.Timestamp registerDatetime) {
         __modifiedProperties.addPropertyName("registerDatetime");
-        this._registerDatetime = registerDatetime;
+        _registerDatetime = registerDatetime;
     }
 
     /**
@@ -467,7 +467,7 @@ public abstract class BsMemberSecurity implements Entity, Serializable, Cloneabl
      */
     public void setRegisterUser(String registerUser) {
         __modifiedProperties.addPropertyName("registerUser");
-        this._registerUser = registerUser;
+        _registerUser = registerUser;
     }
 
     /**
@@ -484,7 +484,7 @@ public abstract class BsMemberSecurity implements Entity, Serializable, Cloneabl
      */
     public void setUpdateDatetime(java.sql.Timestamp updateDatetime) {
         __modifiedProperties.addPropertyName("updateDatetime");
-        this._updateDatetime = updateDatetime;
+        _updateDatetime = updateDatetime;
     }
 
     /**
@@ -501,7 +501,7 @@ public abstract class BsMemberSecurity implements Entity, Serializable, Cloneabl
      */
     public void setUpdateUser(String updateUser) {
         __modifiedProperties.addPropertyName("updateUser");
-        this._updateUser = updateUser;
+        _updateUser = updateUser;
     }
 
     /**
@@ -518,6 +518,6 @@ public abstract class BsMemberSecurity implements Entity, Serializable, Cloneabl
      */
     public void setVersionNo(Long versionNo) {
         __modifiedProperties.addPropertyName("versionNo");
-        this._versionNo = versionNo;
+        _versionNo = versionNo;
     }
 }

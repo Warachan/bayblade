@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Set;
 
-import org.seasar.dbflute.dbmeta.DBMeta;
 import org.seasar.dbflute.Entity;
+import org.seasar.dbflute.dbmeta.DBMeta;
 import org.dbflute.handson.dbflute.allcommon.DBMetaInstanceHandler;
 import org.dbflute.handson.dbflute.exentity.*;
 
@@ -175,7 +175,7 @@ public abstract class BsPurchasePayment implements Entity, Serializable, Cloneab
     protected Purchase _purchase;
 
     /**
-     * purchase by my PURCHASE_ID, named 'purchase'.
+     * [get] purchase by my PURCHASE_ID, named 'purchase'.
      * @return The entity of foreign property 'purchase'. (NullAllowed: when e.g. null FK column, no setupSelect)
      */
     public Purchase getPurchase() {
@@ -183,7 +183,7 @@ public abstract class BsPurchasePayment implements Entity, Serializable, Cloneab
     }
 
     /**
-     * purchase by my PURCHASE_ID, named 'purchase'.
+     * [set] purchase by my PURCHASE_ID, named 'purchase'.
      * @param purchase The entity of foreign property 'purchase'. (NullAllowed)
      */
     public void setPurchase(Purchase purchase) {
@@ -375,7 +375,7 @@ public abstract class BsPurchasePayment implements Entity, Serializable, Cloneab
      */
     public void setPurchasePaymentId(Long purchasePaymentId) {
         __modifiedProperties.addPropertyName("purchasePaymentId");
-        this._purchasePaymentId = purchasePaymentId;
+        _purchasePaymentId = purchasePaymentId;
     }
 
     /**
@@ -394,7 +394,7 @@ public abstract class BsPurchasePayment implements Entity, Serializable, Cloneab
      */
     public void setPurchaseId(Long purchaseId) {
         __modifiedProperties.addPropertyName("purchaseId");
-        this._purchaseId = purchaseId;
+        _purchaseId = purchaseId;
     }
 
     /**
@@ -413,7 +413,7 @@ public abstract class BsPurchasePayment implements Entity, Serializable, Cloneab
      */
     public void setPaymentAmount(java.math.BigDecimal paymentAmount) {
         __modifiedProperties.addPropertyName("paymentAmount");
-        this._paymentAmount = paymentAmount;
+        _paymentAmount = paymentAmount;
     }
 
     /**
@@ -432,7 +432,7 @@ public abstract class BsPurchasePayment implements Entity, Serializable, Cloneab
      */
     public void setPaymentDatetime(java.sql.Timestamp paymentDatetime) {
         __modifiedProperties.addPropertyName("paymentDatetime");
-        this._paymentDatetime = paymentDatetime;
+        _paymentDatetime = paymentDatetime;
     }
 
     /**
@@ -451,7 +451,7 @@ public abstract class BsPurchasePayment implements Entity, Serializable, Cloneab
      */
     public void setPaymentMethodCode(String paymentMethodCode) {
         __modifiedProperties.addPropertyName("paymentMethodCode");
-        this._paymentMethodCode = paymentMethodCode;
+        _paymentMethodCode = paymentMethodCode;
     }
 
     /**
@@ -468,7 +468,7 @@ public abstract class BsPurchasePayment implements Entity, Serializable, Cloneab
      */
     public void setRegisterDatetime(java.sql.Timestamp registerDatetime) {
         __modifiedProperties.addPropertyName("registerDatetime");
-        this._registerDatetime = registerDatetime;
+        _registerDatetime = registerDatetime;
     }
 
     /**
@@ -485,7 +485,7 @@ public abstract class BsPurchasePayment implements Entity, Serializable, Cloneab
      */
     public void setRegisterUser(String registerUser) {
         __modifiedProperties.addPropertyName("registerUser");
-        this._registerUser = registerUser;
+        _registerUser = registerUser;
     }
 
     /**
@@ -502,7 +502,7 @@ public abstract class BsPurchasePayment implements Entity, Serializable, Cloneab
      */
     public void setUpdateDatetime(java.sql.Timestamp updateDatetime) {
         __modifiedProperties.addPropertyName("updateDatetime");
-        this._updateDatetime = updateDatetime;
+        _updateDatetime = updateDatetime;
     }
 
     /**
@@ -519,6 +519,6 @@ public abstract class BsPurchasePayment implements Entity, Serializable, Cloneab
      */
     public void setUpdateUser(String updateUser) {
         __modifiedProperties.addPropertyName("updateUser");
-        this._updateUser = updateUser;
+        _updateUser = updateUser;
     }
 }

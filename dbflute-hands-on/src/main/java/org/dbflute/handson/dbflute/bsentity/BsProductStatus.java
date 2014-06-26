@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Set;
 
-import org.seasar.dbflute.dbmeta.DBMeta;
 import org.seasar.dbflute.Entity;
+import org.seasar.dbflute.dbmeta.DBMeta;
 import org.dbflute.handson.dbflute.allcommon.DBMetaInstanceHandler;
 import org.dbflute.handson.dbflute.exentity.*;
 
@@ -142,7 +142,7 @@ public abstract class BsProductStatus implements Entity, Serializable, Cloneable
     protected List<Product> _productList;
 
     /**
-     * product by PRODUCT_STATUS_CODE, named 'productList'.
+     * [get] product by PRODUCT_STATUS_CODE, named 'productList'.
      * @return The entity list of referrer property 'productList'. (NotNull: even if no loading, returns empty list)
      */
     public List<Product> getProductList() {
@@ -151,7 +151,7 @@ public abstract class BsProductStatus implements Entity, Serializable, Cloneable
     }
 
     /**
-     * product by PRODUCT_STATUS_CODE, named 'productList'.
+     * [set] product by PRODUCT_STATUS_CODE, named 'productList'.
      * @param productList The entity list of referrer property 'productList'. (NullAllowed)
      */
     public void setProductList(List<Product> productList) {
@@ -334,7 +334,7 @@ public abstract class BsProductStatus implements Entity, Serializable, Cloneable
      */
     public void setProductStatusCode(String productStatusCode) {
         __modifiedProperties.addPropertyName("productStatusCode");
-        this._productStatusCode = productStatusCode;
+        _productStatusCode = productStatusCode;
     }
 
     /**
@@ -353,6 +353,6 @@ public abstract class BsProductStatus implements Entity, Serializable, Cloneable
      */
     public void setProductStatusName(String productStatusName) {
         __modifiedProperties.addPropertyName("productStatusName");
-        this._productStatusName = productStatusName;
+        _productStatusName = productStatusName;
     }
 }

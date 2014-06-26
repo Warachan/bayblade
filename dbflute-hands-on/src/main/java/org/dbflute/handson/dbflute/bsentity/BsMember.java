@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.Set;
 import java.util.Date;
 
-import org.seasar.dbflute.dbmeta.DBMeta;
 import org.seasar.dbflute.Entity;
+import org.seasar.dbflute.dbmeta.DBMeta;
 import org.dbflute.handson.dbflute.allcommon.DBMetaInstanceHandler;
 import org.dbflute.handson.dbflute.exentity.*;
 
@@ -197,7 +197,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     protected MemberStatus _memberStatus;
 
     /**
-     * member_status by my MEMBER_STATUS_CODE, named 'memberStatus'.
+     * [get] member_status by my MEMBER_STATUS_CODE, named 'memberStatus'.
      * @return The entity of foreign property 'memberStatus'. (NullAllowed: when e.g. null FK column, no setupSelect)
      */
     public MemberStatus getMemberStatus() {
@@ -205,7 +205,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * member_status by my MEMBER_STATUS_CODE, named 'memberStatus'.
+     * [set] member_status by my MEMBER_STATUS_CODE, named 'memberStatus'.
      * @param memberStatus The entity of foreign property 'memberStatus'. (NullAllowed)
      */
     public void setMemberStatus(MemberStatus memberStatus) {
@@ -216,7 +216,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     protected MemberSecurity _memberSecurityAsOne;
 
     /**
-     * member_security by MEMBER_ID, named 'memberSecurityAsOne'.
+     * [get] member_security by MEMBER_ID, named 'memberSecurityAsOne'.
      * @return the entity of foreign property(referrer-as-one) 'memberSecurityAsOne'. (NullAllowed: when e.g. no data, no setupSelect)
      */
     public MemberSecurity getMemberSecurityAsOne() {
@@ -224,7 +224,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * member_security by MEMBER_ID, named 'memberSecurityAsOne'.
+     * [set] member_security by MEMBER_ID, named 'memberSecurityAsOne'.
      * @param memberSecurityAsOne The entity of foreign property(referrer-as-one) 'memberSecurityAsOne'. (NullAllowed)
      */
     public void setMemberSecurityAsOne(MemberSecurity memberSecurityAsOne) {
@@ -235,7 +235,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     protected MemberService _memberServiceAsOne;
 
     /**
-     * member_service by MEMBER_ID, named 'memberServiceAsOne'.
+     * [get] member_service by MEMBER_ID, named 'memberServiceAsOne'.
      * @return the entity of foreign property(referrer-as-one) 'memberServiceAsOne'. (NullAllowed: when e.g. no data, no setupSelect)
      */
     public MemberService getMemberServiceAsOne() {
@@ -243,7 +243,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * member_service by MEMBER_ID, named 'memberServiceAsOne'.
+     * [set] member_service by MEMBER_ID, named 'memberServiceAsOne'.
      * @param memberServiceAsOne The entity of foreign property(referrer-as-one) 'memberServiceAsOne'. (NullAllowed)
      */
     public void setMemberServiceAsOne(MemberService memberServiceAsOne) {
@@ -254,7 +254,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     protected MemberWithdrawal _memberWithdrawalAsOne;
 
     /**
-     * member_withdrawal by MEMBER_ID, named 'memberWithdrawalAsOne'.
+     * [get] member_withdrawal by MEMBER_ID, named 'memberWithdrawalAsOne'.
      * @return the entity of foreign property(referrer-as-one) 'memberWithdrawalAsOne'. (NullAllowed: when e.g. no data, no setupSelect)
      */
     public MemberWithdrawal getMemberWithdrawalAsOne() {
@@ -262,7 +262,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * member_withdrawal by MEMBER_ID, named 'memberWithdrawalAsOne'.
+     * [set] member_withdrawal by MEMBER_ID, named 'memberWithdrawalAsOne'.
      * @param memberWithdrawalAsOne The entity of foreign property(referrer-as-one) 'memberWithdrawalAsOne'. (NullAllowed)
      */
     public void setMemberWithdrawalAsOne(MemberWithdrawal memberWithdrawalAsOne) {
@@ -276,7 +276,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     protected List<MemberAddress> _memberAddressList;
 
     /**
-     * member_address by MEMBER_ID, named 'memberAddressList'.
+     * [get] member_address by MEMBER_ID, named 'memberAddressList'.
      * @return The entity list of referrer property 'memberAddressList'. (NotNull: even if no loading, returns empty list)
      */
     public List<MemberAddress> getMemberAddressList() {
@@ -285,7 +285,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * member_address by MEMBER_ID, named 'memberAddressList'.
+     * [set] member_address by MEMBER_ID, named 'memberAddressList'.
      * @param memberAddressList The entity list of referrer property 'memberAddressList'. (NullAllowed)
      */
     public void setMemberAddressList(List<MemberAddress> memberAddressList) {
@@ -296,7 +296,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     protected List<MemberLogin> _memberLoginList;
 
     /**
-     * member_login by MEMBER_ID, named 'memberLoginList'.
+     * [get] member_login by MEMBER_ID, named 'memberLoginList'.
      * @return The entity list of referrer property 'memberLoginList'. (NotNull: even if no loading, returns empty list)
      */
     public List<MemberLogin> getMemberLoginList() {
@@ -305,7 +305,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * member_login by MEMBER_ID, named 'memberLoginList'.
+     * [set] member_login by MEMBER_ID, named 'memberLoginList'.
      * @param memberLoginList The entity list of referrer property 'memberLoginList'. (NullAllowed)
      */
     public void setMemberLoginList(List<MemberLogin> memberLoginList) {
@@ -316,7 +316,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     protected List<Purchase> _purchaseList;
 
     /**
-     * purchase by MEMBER_ID, named 'purchaseList'.
+     * [get] purchase by MEMBER_ID, named 'purchaseList'.
      * @return The entity list of referrer property 'purchaseList'. (NotNull: even if no loading, returns empty list)
      */
     public List<Purchase> getPurchaseList() {
@@ -325,7 +325,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * purchase by MEMBER_ID, named 'purchaseList'.
+     * [set] purchase by MEMBER_ID, named 'purchaseList'.
      * @param purchaseList The entity list of referrer property 'purchaseList'. (NullAllowed)
      */
     public void setPurchaseList(List<Purchase> purchaseList) {
@@ -545,7 +545,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
      */
     public void setMemberId(Integer memberId) {
         __modifiedProperties.addPropertyName("memberId");
-        this._memberId = memberId;
+        _memberId = memberId;
     }
 
     /**
@@ -564,7 +564,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
      */
     public void setMemberName(String memberName) {
         __modifiedProperties.addPropertyName("memberName");
-        this._memberName = memberName;
+        _memberName = memberName;
     }
 
     /**
@@ -583,7 +583,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
      */
     public void setMemberAccount(String memberAccount) {
         __modifiedProperties.addPropertyName("memberAccount");
-        this._memberAccount = memberAccount;
+        _memberAccount = memberAccount;
     }
 
     /**
@@ -602,7 +602,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
      */
     public void setMemberStatusCode(String memberStatusCode) {
         __modifiedProperties.addPropertyName("memberStatusCode");
-        this._memberStatusCode = memberStatusCode;
+        _memberStatusCode = memberStatusCode;
     }
 
     /**
@@ -623,7 +623,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
      */
     public void setFormalizedDatetime(java.sql.Timestamp formalizedDatetime) {
         __modifiedProperties.addPropertyName("formalizedDatetime");
-        this._formalizedDatetime = formalizedDatetime;
+        _formalizedDatetime = formalizedDatetime;
     }
 
     /**
@@ -642,7 +642,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
      */
     public void setBirthdate(java.util.Date birthdate) {
         __modifiedProperties.addPropertyName("birthdate");
-        this._birthdate = birthdate;
+        _birthdate = birthdate;
     }
 
     /**
@@ -661,7 +661,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
      */
     public void setRegisterDatetime(java.sql.Timestamp registerDatetime) {
         __modifiedProperties.addPropertyName("registerDatetime");
-        this._registerDatetime = registerDatetime;
+        _registerDatetime = registerDatetime;
     }
 
     /**
@@ -680,7 +680,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
      */
     public void setRegisterUser(String registerUser) {
         __modifiedProperties.addPropertyName("registerUser");
-        this._registerUser = registerUser;
+        _registerUser = registerUser;
     }
 
     /**
@@ -699,7 +699,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
      */
     public void setUpdateDatetime(java.sql.Timestamp updateDatetime) {
         __modifiedProperties.addPropertyName("updateDatetime");
-        this._updateDatetime = updateDatetime;
+        _updateDatetime = updateDatetime;
     }
 
     /**
@@ -718,7 +718,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
      */
     public void setUpdateUser(String updateUser) {
         __modifiedProperties.addPropertyName("updateUser");
-        this._updateUser = updateUser;
+        _updateUser = updateUser;
     }
 
     /**
@@ -739,6 +739,6 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
      */
     public void setVersionNo(Long versionNo) {
         __modifiedProperties.addPropertyName("versionNo");
-        this._versionNo = versionNo;
+        _versionNo = versionNo;
     }
 }

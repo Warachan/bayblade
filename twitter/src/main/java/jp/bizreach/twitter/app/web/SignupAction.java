@@ -18,11 +18,34 @@ import org.apache.commons.logging.LogFactory;
 import org.seasar.struts.annotation.ActionForm;
 import org.seasar.struts.annotation.Execute;
 
+/**
+ * @author mayuko.sakaba
+ */
 public class SignupAction {
 
+    // ===================================================================================
+    //                                                                          Definition
+    //                                                                          ==========
+    private static final Log LOG = LogFactory.getLog(SignupAction.class);
+
+    // ===================================================================================
+    //                                                                           Attribute
+    //                                                                           =========
+    // -----------------------------------------------------
+    //                                          DI Component
+    //                                          ------------
     @ActionForm
     @Resource
     protected SignupForm signupForm;
+    @Resource
+    protected MemberBhv memberBhv;
+    @Resource
+    protected SessionDto sessionDto;
+    @Resource
+    protected MemberSecurityBhv memberSecurityBhv;
+    // -----------------------------------------------------
+    //                                          Display Data
+    //                                          ------------
     public String newEmail;
     public String username;
     public String newPassword;
@@ -33,18 +56,11 @@ public class SignupAction {
     public String userError;
     public String missingError;
 
-    @Resource
-    protected MemberBhv memberBhv;
-    @Resource
-    protected SessionDto sessionDto;
-    @Resource
-    protected MemberSecurityBhv memberSecurityBhv;
-
-    private static final Log LOG = LogFactory.getLog(SignupAction.class);
-
     // TODO mayuko.sakaba signup.jspにて、なぜゲッターメソッドがなかったのにValue=""をいれたら直ったか調べること。
     // TODO mayuko.sakaba indexActionForm に対する定義が見つかりません →　これなに？
-
+    // ===================================================================================
+    //                                                                             Execute
+    //                                                                             =======
     @Execute(validator = false)
     public String index() {
         return "/signup/signup.jsp";
@@ -57,61 +73,87 @@ public class SignupAction {
         newPassword = signupForm.newPassword;
         confirmPass = signupForm.confirmPass;
         username = signupForm.username;
-        String emailPtn = "[\\w\\.\\-]+@(?:[\\w\\-]+\\.)+[\\w\\-]+";
-        Pattern ptn = Pattern.compile(emailPtn);
-        Matcher mc = ptn.matcher(newEmail);
+        Matcher emailMatcher = emailMatch();
+        Matcher pswdMatcher = pswdMatch();
 
-        String pswdPtn = "[\\w]+";
-        Pattern ptn2 = Pattern.compile(pswdPtn);
-        Matcher pswd = ptn2.matcher(newPassword);
         if (newEmail == "" || newPassword == "" || username == "") {
             missingError = "*全ての欄は必須項目です。";
             return "/signup/signup.jsp";
-        } else {
-            if (mc.matches() && pswd.matches()) {
-                MemberCB cb = new MemberCB();
-                cb.query().setEmailAddress_Equal(newEmail);
-                Member memberbhv = memberBhv.selectEntity(cb);
-                if (memberbhv == null) {
-                    Date date = new Date();
-                    Timestamp timestamp = new Timestamp(date.getTime());
-                    sessionDto.email = newEmail;
-                    Member member = new Member();
-                    member.setEmailAddress(sessionDto.email);
-                    member.setRegesterDatetime(timestamp);
-
-                    MemberCB check = new MemberCB();
-                    check.query().setUserName_Equal(username);
-                    Member usernameCheck = memberBhv.selectEntity(check);
-                    if (usernameCheck == null) {
-                        member.setUserName(username);
-                    } else {
-                        userError = "そのユーザ名はすでに使われています。";
-                        return "/signup/signup.jsp";
-                    }
-                    memberBhv.insert(member);
-                    sessionDto.id = member.getMemberId();
-                    LOG.debug("***" + sessionDto.id);
-
-                    MemberSecurity memberSecurity = new MemberSecurity();
-                    if (newPassword.equals(confirmPass)) {
-                        memberSecurity.setMemberId(member.getMemberId());
-                        memberSecurity.setPassword(newPassword);
-                        memberSecurity.setPasswordRegesterationDatetime(timestamp);
-                        memberSecurityBhv.insert(memberSecurity);
-                        return "/home/twitter.jsp";
-                    } else {
-                        matchError = "パスワードが一致しません。";
-                        return "/signup/signup.jsp";
-                    }
-                } else {
-                    overlapsError = "このメールアドレスはすでに登録されています。";
-                    return "/signup/signup.jsp";
-                }
-            } else {
-                characterError = "指定以外の文字が含まれています。";
+        }
+        int nameCount = selectNameCount();
+        if (nameCount > 0) {
+            userError = "そのユーザ名はすでに使われています。";
+            return "/signup/signup.jsp";
+        }
+        if (emailMatcher.matches() && pswdMatcher.matches()) {
+            int count = selectEmailCount();
+            if (count > 0) {
+                overlapsError = "このメールアドレスはすでに登録されています。";
                 return "/signup/signup.jsp";
             }
+            Date date = new Date();
+            Timestamp timestamp = new Timestamp(date.getTime());
+            sessionDto.email = newEmail;
+            Member member = insertMember(timestamp);
+            sessionDto.id = member.getMemberId();
+            LOG.debug("***" + sessionDto.id);
+
+            if (newPassword.equals(confirmPass)) {
+                insertSecurity(timestamp, member);
+                return "/home/twitter.jsp";
+            } else {
+                matchError = "パスワードが一致しません。";
+                return "/signup/signup.jsp";
+            }
+        } else {
+            overlapsError = "このメールアドレスはすでに登録されています。";
+            return "/signup/signup.jsp";
         }
     }
+
+    private Matcher pswdMatch() {
+        String pswdPtn = "[\\w]+";
+        Pattern ptn2 = Pattern.compile(pswdPtn);
+        Matcher pswdMatcher = ptn2.matcher(newPassword);
+        return pswdMatcher;
+    }
+
+    private Matcher emailMatch() {
+        String emailPtn = "[\\w\\.\\-]+@(?:[\\w\\-]+\\.)+[\\w\\-]+";
+        Pattern ptn = Pattern.compile(emailPtn);
+        Matcher emailMatcher = ptn.matcher(newEmail);
+        return emailMatcher;
+    }
+
+    private Member insertMember(Timestamp timestamp) {
+        Member member = new Member();
+        member.setEmailAddress(sessionDto.email);
+        member.setRegesterDatetime(timestamp);
+        member.setUserName(username);
+        memberBhv.insert(member);
+        return member;
+    }
+
+    private int selectEmailCount() {
+        MemberCB cb = new MemberCB();
+        cb.query().setEmailAddress_Equal(newEmail);
+        int count = memberBhv.selectCount(cb);
+        return count;
+    }
+
+    private int selectNameCount() {
+        MemberCB check = new MemberCB();
+        check.query().setUserName_Equal(username);
+        int nameCount = memberBhv.selectCount(check);
+        return nameCount;
+    }
+
+    private void insertSecurity(Timestamp timestamp, Member member) {
+        MemberSecurity security = new MemberSecurity();
+        security.setMemberId(member.getMemberId());
+        security.setPassword(newPassword);
+        security.setPasswordRegesterationDatetime(timestamp);
+        memberSecurityBhv.insert(security);
+    }
+
 }
