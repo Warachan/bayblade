@@ -15,10 +15,19 @@
  */
 package jp.bizreach.twitter.app.web;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 import javax.annotation.Resource;
 
+import jp.bizreach.twitter.dbflute.cbean.MemberCB;
+import jp.bizreach.twitter.dbflute.exbhv.LoginBhv;
 import jp.bizreach.twitter.dbflute.exbhv.MemberBhv;
+import jp.bizreach.twitter.dbflute.exentity.Login;
+import jp.bizreach.twitter.dbflute.exentity.Member;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.seasar.struts.annotation.ActionForm;
 import org.seasar.struts.annotation.Execute;
 
@@ -27,16 +36,56 @@ import org.seasar.struts.annotation.Execute;
  */
 
 public class IndexAction {
-    // private static final Log LOG = LogFactory.getLog(IndexAction.class);
-
     @ActionForm
     @Resource
-    protected MemberBhv memberBhv;
     protected IndexForm indexForm;
-    public String poke;
+    @Resource
+    public SessionDto sessionDto;
+    @Resource
+    protected MemberBhv memberBhv;
+    @Resource
+    protected LoginBhv loginBhv;
 
-    @Execute(validator = true, input = "index.jsp")
+    private static final Log LOG = LogFactory.getLog(IndexAction.class);
+
+    public String error;
+    public String overlapsError;
+    public String regesterationError;
+
+    // TODO mayuko.sakaba  ユーザ名でログインできるようにする。
+    @Execute(validator = false)
     public String index() {
+        return "index.jsp";
+    }
+
+    @Execute(validator = false)
+    public String gotoLogin() {
+        LOG.debug("***" + indexForm);
+        String inputEmail = indexForm.loginEmail;
+        String inputPassword = indexForm.loginPassword;
+        if (inputEmail != "" && inputPassword != "") {
+            MemberCB cb = new MemberCB();
+            cb.query().queryMemberSecurityAsOne().setPassword_Equal(inputPassword);
+            cb.query().setEmailAddress_Equal(inputEmail);
+            Member member = memberBhv.selectEntity(cb);
+            Date date = new Date();
+            Timestamp timestamp = new Timestamp(date.getTime());
+            if (member != null) {
+                sessionDto.id = member.getMemberId();
+                sessionDto.email = inputEmail;
+                Login login = new Login();
+                login.setMemberId(member.getMemberId());
+                login.setLoginDatetime(timestamp);
+                loginBhv.insert(login);
+                return "/home/?redirect=true";
+            }
+        }
+        error = "正しいメールアドレスとパスワードを入力してください。";
+        return "index.jsp";
+    }
+
+    @Execute(validator = false)
+    public String gotoSignup() {
         return "/signup/?redirect=true";
     }
 }

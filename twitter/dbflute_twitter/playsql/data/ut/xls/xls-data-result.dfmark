@@ -1,0 +1,14 @@
+
+* * * * * * * * * *
+*                 *
+* Xls Data Result *
+*                 *
+* * * * * * * * * *
+data-directory: playsql/data/ut/xls
+
+[20-member.xls]
+  MEMBER (20)
+  LOGIN (30)
+  MEMBER_SECURITY (10)
+  TWEET (10)
+  MEMBER_WITHDRAW (4)

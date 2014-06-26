@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<title>twitter history</title>
+	<style type="text/css">
+* {
+	margin: 0;
+	padding: 0;
+}
+body {
+	font-family: Verdana, "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", Meiryo, "メイリオ", "MS P Gothic", "MS Pゴシック", sans-serif;
+	font-size: 80%;
+	margin: 1em 1.5em;
+	background-color: #ffffee;
+}
+
+/* heading */
+h1 {
+	font-size: 1.5em;
+	border-bottom: 2px solid #af0000;
+	border-top: 2px solid #af0000;
+}
+h2 {
+	margin-top: 2em;
+	border-bottom: 2px solid #af0000;
+	border-left: 10px solid #af0000;
+	text-indent: 1em;
+	font-size: 1.6em;
+}
+h3 {
+	width: 14em;
+	margin: 0.8em 0;
+	padding-left: 1.8em;
+	border-bottom: solid 1px #333;
+	color: #555;
+	font-size: 1.2em;
+}
+h4 {
+	margin: 1em 0em;
+	font-size: 1em;
+	font-weight: normal;
+	display: list-item;
+}
+h5 {
+	width: 11em;
+	font-size: 80%;
+	border-bottom: solid 1px #333;
+	text-indent: 0.3em;
+	color: #555;
+}
+
+/* total info */
+.updatedate {
+	text-align: right;
+}
+.mainschema {
+	text-align: right;
+}
+.navilinkarea {
+	text-align: right;
+}
+.sisterlink {
+	margin-top: 0.6em;
+	font-size: 110%;
+}
+.sistersublink {
+	margin-top: 0.6em;
+	font-size: 80%;
+}
+
+/* history info */
+.table-content {
+	margin: 0 6em;
+}
+.column-content {
+	margin: 0.5em 1em 0.5em 3em;
+	line-height: 1.4em;
+}
+
+div.change-table-content {
+	margin-left: 3em;
+}
+
+dl.column-content dt {
+	display: list-item;
+}
+dl.column-content dd {
+	margin: 0 4em;
+}
+dl.column-content dd span {
+	display: block;
+	float: left;
+	width: 6em;
+	margin-right: 1.5em;
+	border-right: dotted 2px #333;
+	font-weight: bold;
+	font-size: 80%;
+	color: #555;
+}
+
+span.dt {
+	font-size: 80%;
+}
+p.comment {
+	margin-left: 23em;
+}
+p.tablecount {
+	margin-left: 23em;
+}
+	</style>
+</head>
+
+<body>
+<h1>History for twitter (mysql)</h1>
+<div class="navilinkarea">
+<p class="sisterlink"><a href="./schema-twitter.html">to SchemaHTML</a></p>
+</div>
+
+<div class="section">
+	<h2><span class="dt">Diff Date: </span>2014/06/26 11:03:00</h2>
+
+	<h3>Change Table</h3>
+	<div class="table-content">
+		<h4><a href="./schema-twitter.html#member">member</a></h4>
+		<div class="change-table-content">
+			<h5>Add Column</h5>
+			<ul class="column-content">
+				<li>USER_NAME</li>
+			</ul>
+			<h5>Delete Column</h5>
+			<ul class="column-content">
+				<li>USERNAME</li>
+			</ul>
+			<h5>Add UQ</h5>
+			<ul class="column-content">
+				<li>USER_NAME</li>
+			</ul>
+			<h5>Delete UQ</h5>
+			<ul class="column-content">
+				<li>USERNAME</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="section">
+	<h2><span class="dt">Diff Date: </span>2014/06/26 10:20:20</h2>
+
+	<h3>Change Table</h3>
+	<div class="table-content">
+		<h4>member</h4>
+		<div class="change-table-content">
+			<h5>Add Column</h5>
+			<ul class="column-content">
+				<li>USERNAME</li>
+			</ul>
+			<h5>Delete Column</h5>
+			<ul class="column-content">
+				<li>USER_NAME</li>
+				<li>NAME</li>
+			</ul>
+			<h5>Add UQ</h5>
+			<ul class="column-content">
+				<li>USERNAME</li>
+			</ul>
+			<h5>Delete UQ</h5>
+			<ul class="column-content">
+				<li>USER_NAME</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="section">
+	<h2><span class="dt">Diff Date: </span>2014/06/25 14:34:24</h2>
+
+	<h3>Change Table</h3>
+	<div class="table-content">
+		<h4>follow</h4>
+		<div class="change-table-content">
+			<h5>Change Column</h5>
+			<dl class="column-content">
+				<dt>FOLLOW_ID</dt>
+				<dd><span>Identity</span>true&nbsp;-&gt;&nbsp;false</dd>
+			</dl>
+		</div>
+		<h4>followers</h4>
+		<div class="change-table-content">
+			<h5>Change Column</h5>
+			<dl class="column-content">
+				<dt>FOLLOWERSID</dt>
+				<dd><span>Identity</span>true&nbsp;-&gt;&nbsp;false</dd>
+			</dl>
+		</div>
+	</div>
+</div>
+<div class="section">
+	<h2><span class="dt">Diff Date: </span>2014/06/25 14:31:08</h2>
+	<p class="tablecount"><span class="dt">table count: </span>5&nbsp;-&gt;&nbsp;7</p>
+
+	<h3>Add Table</h3>
+	<ul class="table-content">
+		<li>follow</li>
+		<li>followers</li>
+	</ul>
+</div>
+<div class="section">
+	<h2><span class="dt">Diff Date: </span>2014/06/25 10:40:20</h2>
+
+	<h3>Change Table</h3>
+	<div class="table-content">
+		<h4>member</h4>
+		<div class="change-table-content">
+			<h5>Change Column</h5>
+			<dl class="column-content">
+				<dt>REGESTER_DATETIME</dt>
+				<dd><span>Type</span>DATE&nbsp;-&gt;&nbsp;DATETIME</dd>
+				<dd><span>Size</span>10&nbsp;-&gt;&nbsp;19</dd>
+			</dl>
+		</div>
+	</div>
+</div>
+<div class="section">
+	<h2><span class="dt">Diff Date: </span>2014/06/25 10:34:41</h2>
+
+	<h3>Change Table</h3>
+	<div class="table-content">
+		<h4>member</h4>
+		<div class="change-table-content">
+			<h5>Add Column</h5>
+			<ul class="column-content">
+				<li>REGESTER_DATETIME</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="section">
+	<h2><span class="dt">Diff Date: </span>2014/06/25 09:38:15</h2>
+
+	<h3>Change Table</h3>
+	<div class="table-content">
+		<h4>member</h4>
+		<div class="change-table-content">
+			<h5>Add UQ</h5>
+			<ul class="column-content">
+				<li>USER_NAME</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="section">
+	<h2><span class="dt">Diff Date: </span>2014/06/24 22:09:42</h2>
+
+	<h3>Change Table</h3>
+	<div class="table-content">
+		<h4>member</h4>
+		<div class="change-table-content">
+			<h5>Change Column</h5>
+			<dl class="column-content">
+				<dt>MEMBER_ID</dt>
+				<dd><span>Identity</span>false&nbsp;-&gt;&nbsp;true</dd>
+			</dl>
+		</div>
+		<h4>tweet</h4>
+		<div class="change-table-content">
+			<h5>Change Column</h5>
+			<dl class="column-content">
+				<dt>TWEET_ID</dt>
+				<dd><span>Identity</span>false&nbsp;-&gt;&nbsp;true</dd>
+			</dl>
+		</div>
+	</div>
+</div>
+<div class="section">
+	<h2><span class="dt">Diff Date: </span>2014/06/24 20:14:11</h2>
+
+	<h3>Change Table</h3>
+	<div class="table-content">
+		<h4>login</h4>
+		<div class="change-table-content">
+			<h5>Change Column</h5>
+			<dl class="column-content">
+				<dt>LOGIN_ID</dt>
+				<dd><span>Identity</span>false&nbsp;-&gt;&nbsp;true</dd>
+			</dl>
+		</div>
+	</div>
+</div>
+<div class="section">
+	<h2><span class="dt">Diff Date: </span>2014/06/24 17:54:29</h2>
+
+	<h3>Change Table</h3>
+	<div class="table-content">
+		<h4>member</h4>
+		<div class="change-table-content">
+			<h5>Add Column</h5>
+			<ul class="column-content">
+				<li>NAME</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="section">
+	<h2><span class="dt">Diff Date: </span>2014/06/23 16:54:32</h2>
+	<p class="tablecount"><span class="dt">table count: </span>2&nbsp;-&gt;&nbsp;5</p>
+
+	<h3>Add Table</h3>
+	<ul class="table-content">
+		<li>login</li>
+		<li>member</li>
+		<li>member_security</li>
+		<li>member_withdraw</li>
+		<li>tweet</li>
+	</ul>
+	<h3>Delete Table</h3>
+	<ul class="table-content">
+		<li>black_company</li>
+		<li>cls_black_company_status</li>
+	</ul>
+</div>
+
+</body>
+</html>
