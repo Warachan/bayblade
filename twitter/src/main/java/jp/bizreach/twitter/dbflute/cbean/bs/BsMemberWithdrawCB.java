@@ -333,15 +333,15 @@ public class BsMemberWithdrawCB extends AbstractConditionBean {
                              , HpCBPurpose purpose, DBMetaProvider dbmetaProvider)
         { super(baseCB, qyCall, purpose, dbmetaProvider); }
         /**
-         * WITHDRAWAL_REASON_ID: {INT(10)}
-         * @return The information object of specified column. (NotNull)
-         */
-        public HpSpecifiedColumn columnWithdrawalReasonId() { return doColumn("WITHDRAWAL_REASON_ID"); }
-        /**
          * MEMBER_ID: {PK, NotNull, INT(10), FK to member}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnMemberId() { return doColumn("MEMBER_ID"); }
+        /**
+         * WITHDRAWAL_REASON_ID: {INT(10)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public HpSpecifiedColumn columnWithdrawalReasonId() { return doColumn("WITHDRAWAL_REASON_ID"); }
         /**
          * WITHDRAWAL_REASON_INPUT_TEXT: {TEXT(65535)}
          * @return The information object of specified column. (NotNull)

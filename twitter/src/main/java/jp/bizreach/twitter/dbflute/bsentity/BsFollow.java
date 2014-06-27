@@ -18,13 +18,13 @@ import jp.bizreach.twitter.dbflute.exentity.*;
  *     FOLLOW_ID
  * 
  * [column]
- *     FOLLOW_ID, MEMBER_ID
+ *     FOLLOW_ID, YOU_ID, ME_ID, FOLLOW_DATETIME
  * 
  * [sequence]
  *     
  * 
  * [identity]
- *     
+ *     FOLLOW_ID
  * 
  * [version-no]
  *     
@@ -36,7 +36,7 @@ import jp.bizreach.twitter.dbflute.exentity.*;
  *     
  * 
  * [foreign property]
- *     member
+ *     memberByMeId, memberByYouId
  * 
  * [referrer property]
  *     
@@ -44,9 +44,13 @@ import jp.bizreach.twitter.dbflute.exentity.*;
  * [get/set template]
  * /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
  * Integer followId = entity.getFollowId();
- * Integer memberId = entity.getMemberId();
+ * Integer youId = entity.getYouId();
+ * Integer meId = entity.getMeId();
+ * java.sql.Timestamp followDatetime = entity.getFollowDatetime();
  * entity.setFollowId(followId);
- * entity.setMemberId(memberId);
+ * entity.setYouId(youId);
+ * entity.setMeId(meId);
+ * entity.setFollowDatetime(followDatetime);
  * = = = = = = = = = =/
  * </pre>
  * @author DBFlute(AutoGenerator)
@@ -65,11 +69,17 @@ public abstract class BsFollow implements Entity, Serializable, Cloneable {
     // -----------------------------------------------------
     //                                                Column
     //                                                ------
-    /** FOLLOW_ID: {PK, NotNull, INT(10)} */
+    /** FOLLOW_ID: {PK, ID, NotNull, INT(10)} */
     protected Integer _followId;
 
-    /** MEMBER_ID: {UQ, NotNull, INT(10), FK to member} */
-    protected Integer _memberId;
+    /** YOU_ID: {UQ, NotNull, INT(10), FK to member} */
+    protected Integer _youId;
+
+    /** ME_ID: {IX, NotNull, INT(10), FK to member} */
+    protected Integer _meId;
+
+    /** FOLLOW_DATETIME: {NotNull, DATETIME(19)} */
+    protected java.sql.Timestamp _followDatetime;
 
     // -----------------------------------------------------
     //                                              Internal
@@ -124,12 +134,12 @@ public abstract class BsFollow implements Entity, Serializable, Cloneable {
     /**
      * To be unique by the unique column. <br />
      * You can update the entity by the key when entity update (NOT batch update).
-     * @param memberId : UQ, NotNull, INT(10), FK to member. (NotNull)
+     * @param youId : UQ, NotNull, INT(10), FK to member. (NotNull)
      */
-    public void uniqueBy(Integer memberId) {
+    public void uniqueBy(Integer youId) {
         __uniqueDrivenProperties.clear();
-        __uniqueDrivenProperties.addPropertyName("memberId");
-        setMemberId(memberId);
+        __uniqueDrivenProperties.addPropertyName("youId");
+        setYouId(youId);
     }
 
     /**
@@ -146,23 +156,42 @@ public abstract class BsFollow implements Entity, Serializable, Cloneable {
     // ===================================================================================
     //                                                                    Foreign Property
     //                                                                    ================
-    /** member by my MEMBER_ID, named 'member'. */
-    protected Member _member;
+    /** member by my ME_ID, named 'memberByMeId'. */
+    protected Member _memberByMeId;
 
     /**
-     * [get] member by my MEMBER_ID, named 'member'.
-     * @return The entity of foreign property 'member'. (NullAllowed: when e.g. null FK column, no setupSelect)
+     * [get] member by my ME_ID, named 'memberByMeId'.
+     * @return The entity of foreign property 'memberByMeId'. (NullAllowed: when e.g. null FK column, no setupSelect)
      */
-    public Member getMember() {
-        return _member;
+    public Member getMemberByMeId() {
+        return _memberByMeId;
     }
 
     /**
-     * [set] member by my MEMBER_ID, named 'member'.
-     * @param member The entity of foreign property 'member'. (NullAllowed)
+     * [set] member by my ME_ID, named 'memberByMeId'.
+     * @param memberByMeId The entity of foreign property 'memberByMeId'. (NullAllowed)
      */
-    public void setMember(Member member) {
-        _member = member;
+    public void setMemberByMeId(Member memberByMeId) {
+        _memberByMeId = memberByMeId;
+    }
+
+    /** member by my YOU_ID, named 'memberByYouId'. */
+    protected Member _memberByYouId;
+
+    /**
+     * [get] member by my YOU_ID, named 'memberByYouId'.
+     * @return The entity of foreign property 'memberByYouId'. (NullAllowed: when e.g. null FK column, no setupSelect)
+     */
+    public Member getMemberByYouId() {
+        return _memberByYouId;
+    }
+
+    /**
+     * [set] member by my YOU_ID, named 'memberByYouId'.
+     * @param memberByYouId The entity of foreign property 'memberByYouId'. (NullAllowed)
+     */
+    public void setMemberByYouId(Member memberByYouId) {
+        _memberByYouId = memberByYouId;
     }
 
     // ===================================================================================
@@ -272,8 +301,10 @@ public abstract class BsFollow implements Entity, Serializable, Cloneable {
         StringBuilder sb = new StringBuilder();
         sb.append(toString());
         String li = "\n  ";
-        if (_member != null)
-        { sb.append(li).append(xbRDS(_member, "member")); }
+        if (_memberByMeId != null)
+        { sb.append(li).append(xbRDS(_memberByMeId, "memberByMeId")); }
+        if (_memberByYouId != null)
+        { sb.append(li).append(xbRDS(_memberByYouId, "memberByYouId")); }
         return sb.toString();
     }
     protected String xbRDS(Entity et, String name) { // buildRelationDisplayString()
@@ -295,7 +326,9 @@ public abstract class BsFollow implements Entity, Serializable, Cloneable {
         StringBuilder sb = new StringBuilder();
         String dm = ", ";
         sb.append(dm).append(getFollowId());
-        sb.append(dm).append(getMemberId());
+        sb.append(dm).append(getYouId());
+        sb.append(dm).append(getMeId());
+        sb.append(dm).append(getFollowDatetime());
         if (sb.length() > dm.length()) {
             sb.delete(0, dm.length());
         }
@@ -305,7 +338,8 @@ public abstract class BsFollow implements Entity, Serializable, Cloneable {
     protected String buildRelationString() {
         StringBuilder sb = new StringBuilder();
         String cm = ",";
-        if (_member != null) { sb.append(cm).append("member"); }
+        if (_memberByMeId != null) { sb.append(cm).append("memberByMeId"); }
+        if (_memberByYouId != null) { sb.append(cm).append("memberByYouId"); }
         if (sb.length() > cm.length()) {
             sb.delete(0, cm.length()).insert(0, "(").append(")");
         }
@@ -328,7 +362,7 @@ public abstract class BsFollow implements Entity, Serializable, Cloneable {
     //                                                                            Accessor
     //                                                                            ========
     /**
-     * [get] FOLLOW_ID: {PK, NotNull, INT(10)} <br />
+     * [get] FOLLOW_ID: {PK, ID, NotNull, INT(10)} <br />
      * フォローID
      * @return The value of the column 'FOLLOW_ID'. (basically NotNull if selected: for the constraint)
      */
@@ -337,7 +371,7 @@ public abstract class BsFollow implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [set] FOLLOW_ID: {PK, NotNull, INT(10)} <br />
+     * [set] FOLLOW_ID: {PK, ID, NotNull, INT(10)} <br />
      * フォローID
      * @param followId The value of the column 'FOLLOW_ID'. (basically NotNull if update: for the constraint)
      */
@@ -347,21 +381,59 @@ public abstract class BsFollow implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [get] MEMBER_ID: {UQ, NotNull, INT(10), FK to member} <br />
-     * 会員ID : 会員のID
-     * @return The value of the column 'MEMBER_ID'. (basically NotNull if selected: for the constraint)
+     * [get] YOU_ID: {UQ, NotNull, INT(10), FK to member} <br />
+     * フォローする人のID : 会員のID
+     * @return The value of the column 'YOU_ID'. (basically NotNull if selected: for the constraint)
      */
-    public Integer getMemberId() {
-        return _memberId;
+    public Integer getYouId() {
+        return _youId;
     }
 
     /**
-     * [set] MEMBER_ID: {UQ, NotNull, INT(10), FK to member} <br />
-     * 会員ID : 会員のID
-     * @param memberId The value of the column 'MEMBER_ID'. (basically NotNull if update: for the constraint)
+     * [set] YOU_ID: {UQ, NotNull, INT(10), FK to member} <br />
+     * フォローする人のID : 会員のID
+     * @param youId The value of the column 'YOU_ID'. (basically NotNull if update: for the constraint)
      */
-    public void setMemberId(Integer memberId) {
-        __modifiedProperties.addPropertyName("memberId");
-        _memberId = memberId;
+    public void setYouId(Integer youId) {
+        __modifiedProperties.addPropertyName("youId");
+        _youId = youId;
+    }
+
+    /**
+     * [get] ME_ID: {IX, NotNull, INT(10), FK to member} <br />
+     * フォローされる人のID : 会員のID
+     * @return The value of the column 'ME_ID'. (basically NotNull if selected: for the constraint)
+     */
+    public Integer getMeId() {
+        return _meId;
+    }
+
+    /**
+     * [set] ME_ID: {IX, NotNull, INT(10), FK to member} <br />
+     * フォローされる人のID : 会員のID
+     * @param meId The value of the column 'ME_ID'. (basically NotNull if update: for the constraint)
+     */
+    public void setMeId(Integer meId) {
+        __modifiedProperties.addPropertyName("meId");
+        _meId = meId;
+    }
+
+    /**
+     * [get] FOLLOW_DATETIME: {NotNull, DATETIME(19)} <br />
+     * follow_datetime
+     * @return The value of the column 'FOLLOW_DATETIME'. (basically NotNull if selected: for the constraint)
+     */
+    public java.sql.Timestamp getFollowDatetime() {
+        return _followDatetime;
+    }
+
+    /**
+     * [set] FOLLOW_DATETIME: {NotNull, DATETIME(19)} <br />
+     * follow_datetime
+     * @param followDatetime The value of the column 'FOLLOW_DATETIME'. (basically NotNull if update: for the constraint)
+     */
+    public void setFollowDatetime(java.sql.Timestamp followDatetime) {
+        __modifiedProperties.addPropertyName("followDatetime");
+        _followDatetime = followDatetime;
     }
 }

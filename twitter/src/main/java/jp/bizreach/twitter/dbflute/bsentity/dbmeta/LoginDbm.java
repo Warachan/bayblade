@@ -39,20 +39,20 @@ public class LoginDbm extends AbstractDBMeta {
     protected final Map<String, PropertyGateway> _epgMap = newHashMap();
     {
         setupEpg(_epgMap, new EpgLoginId(), "loginId");
-        setupEpg(_epgMap, new EpgLoginDatetime(), "loginDatetime");
         setupEpg(_epgMap, new EpgMemberId(), "memberId");
+        setupEpg(_epgMap, new EpgLoginDatetime(), "loginDatetime");
     }
     public static class EpgLoginId implements PropertyGateway {
         public Object read(Entity et) { return ((Login)et).getLoginId(); }
         public void write(Entity et, Object vl) { ((Login)et).setLoginId(cti(vl)); }
     }
-    public static class EpgLoginDatetime implements PropertyGateway {
-        public Object read(Entity et) { return ((Login)et).getLoginDatetime(); }
-        public void write(Entity et, Object vl) { ((Login)et).setLoginDatetime((java.sql.Timestamp)vl); }
-    }
     public static class EpgMemberId implements PropertyGateway {
         public Object read(Entity et) { return ((Login)et).getMemberId(); }
         public void write(Entity et, Object vl) { ((Login)et).setMemberId(cti(vl)); }
+    }
+    public static class EpgLoginDatetime implements PropertyGateway {
+        public Object read(Entity et) { return ((Login)et).getLoginDatetime(); }
+        public void write(Entity et, Object vl) { ((Login)et).setLoginDatetime((java.sql.Timestamp)vl); }
     }
     public PropertyGateway findPropertyGateway(String prop)
     { return doFindEpg(_epgMap, prop); }
@@ -86,8 +86,8 @@ public class LoginDbm extends AbstractDBMeta {
     //                                                                         Column Info
     //                                                                         ===========
     protected final ColumnInfo _columnLoginId = cci("LOGIN_ID", "LOGIN_ID", null, null, Integer.class, "loginId", null, true, true, true, "INT", 10, 0, null, false, null, null, null, null, null);
-    protected final ColumnInfo _columnLoginDatetime = cci("LOGIN_DATETIME", "LOGIN_DATETIME", null, null, java.sql.Timestamp.class, "loginDatetime", null, false, false, true, "DATETIME", 19, 0, null, false, null, null, null, null, null);
     protected final ColumnInfo _columnMemberId = cci("MEMBER_ID", "MEMBER_ID", null, null, Integer.class, "memberId", null, false, false, true, "INT", 10, 0, null, false, null, null, "member", null, null);
+    protected final ColumnInfo _columnLoginDatetime = cci("LOGIN_DATETIME", "LOGIN_DATETIME", null, null, java.sql.Timestamp.class, "loginDatetime", null, false, false, true, "DATETIME", 19, 0, null, false, null, null, null, null, null);
 
     /**
      * LOGIN_ID: {PK, ID, NotNull, INT(10)}
@@ -95,21 +95,21 @@ public class LoginDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnLoginId() { return _columnLoginId; }
     /**
-     * LOGIN_DATETIME: {NotNull, DATETIME(19)}
-     * @return The information object of specified column. (NotNull)
-     */
-    public ColumnInfo columnLoginDatetime() { return _columnLoginDatetime; }
-    /**
      * MEMBER_ID: {IX, NotNull, INT(10), FK to member}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnMemberId() { return _columnMemberId; }
+    /**
+     * LOGIN_DATETIME: {NotNull, DATETIME(19)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnLoginDatetime() { return _columnLoginDatetime; }
 
     protected List<ColumnInfo> ccil() {
         List<ColumnInfo> ls = newArrayList();
         ls.add(columnLoginId());
-        ls.add(columnLoginDatetime());
         ls.add(columnMemberId());
+        ls.add(columnLoginDatetime());
         return ls;
     }
 

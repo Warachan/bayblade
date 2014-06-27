@@ -47,7 +47,7 @@ public abstract class AbstractBsFollowCQ extends AbstractConditionQuery {
     
     /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br />
-     * FOLLOW_ID: {PK, NotNull, INT(10)}
+     * FOLLOW_ID: {PK, ID, NotNull, INT(10)}
      * @param followId The value of followId as equal. (NullAllowed: if null, no condition)
      */
     public void setFollowId_Equal(Integer followId) {
@@ -60,7 +60,7 @@ public abstract class AbstractBsFollowCQ extends AbstractConditionQuery {
 
     /**
      * NotEqual(&lt;&gt;). And NullIgnored, OnlyOnceRegistered. <br />
-     * FOLLOW_ID: {PK, NotNull, INT(10)}
+     * FOLLOW_ID: {PK, ID, NotNull, INT(10)}
      * @param followId The value of followId as notEqual. (NullAllowed: if null, no condition)
      */
     public void setFollowId_NotEqual(Integer followId) {
@@ -73,7 +73,7 @@ public abstract class AbstractBsFollowCQ extends AbstractConditionQuery {
 
     /**
      * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br />
-     * FOLLOW_ID: {PK, NotNull, INT(10)}
+     * FOLLOW_ID: {PK, ID, NotNull, INT(10)}
      * @param followId The value of followId as greaterThan. (NullAllowed: if null, no condition)
      */
     public void setFollowId_GreaterThan(Integer followId) {
@@ -82,7 +82,7 @@ public abstract class AbstractBsFollowCQ extends AbstractConditionQuery {
 
     /**
      * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br />
-     * FOLLOW_ID: {PK, NotNull, INT(10)}
+     * FOLLOW_ID: {PK, ID, NotNull, INT(10)}
      * @param followId The value of followId as lessThan. (NullAllowed: if null, no condition)
      */
     public void setFollowId_LessThan(Integer followId) {
@@ -91,7 +91,7 @@ public abstract class AbstractBsFollowCQ extends AbstractConditionQuery {
 
     /**
      * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br />
-     * FOLLOW_ID: {PK, NotNull, INT(10)}
+     * FOLLOW_ID: {PK, ID, NotNull, INT(10)}
      * @param followId The value of followId as greaterEqual. (NullAllowed: if null, no condition)
      */
     public void setFollowId_GreaterEqual(Integer followId) {
@@ -100,7 +100,7 @@ public abstract class AbstractBsFollowCQ extends AbstractConditionQuery {
 
     /**
      * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br />
-     * FOLLOW_ID: {PK, NotNull, INT(10)}
+     * FOLLOW_ID: {PK, ID, NotNull, INT(10)}
      * @param followId The value of followId as lessEqual. (NullAllowed: if null, no condition)
      */
     public void setFollowId_LessEqual(Integer followId) {
@@ -111,7 +111,7 @@ public abstract class AbstractBsFollowCQ extends AbstractConditionQuery {
      * RangeOf with various options. (versatile) <br />
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br />
      * And NullIgnored, OnlyOnceRegistered. <br />
-     * FOLLOW_ID: {PK, NotNull, INT(10)}
+     * FOLLOW_ID: {PK, ID, NotNull, INT(10)}
      * @param minNumber The min number of followId. (NullAllowed: if null, no from-condition)
      * @param maxNumber The max number of followId. (NullAllowed: if null, no to-condition)
      * @param rangeOfOption The option of range-of. (NotNull)
@@ -122,7 +122,7 @@ public abstract class AbstractBsFollowCQ extends AbstractConditionQuery {
 
     /**
      * InScope {in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br />
-     * FOLLOW_ID: {PK, NotNull, INT(10)}
+     * FOLLOW_ID: {PK, ID, NotNull, INT(10)}
      * @param followIdList The collection of followId as inScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setFollowId_InScope(Collection<Integer> followIdList) {
@@ -135,7 +135,7 @@ public abstract class AbstractBsFollowCQ extends AbstractConditionQuery {
 
     /**
      * NotInScope {not in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br />
-     * FOLLOW_ID: {PK, NotNull, INT(10)}
+     * FOLLOW_ID: {PK, ID, NotNull, INT(10)}
      * @param followIdList The collection of followId as notInScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setFollowId_NotInScope(Collection<Integer> followIdList) {
@@ -148,13 +148,13 @@ public abstract class AbstractBsFollowCQ extends AbstractConditionQuery {
 
     /**
      * IsNull {is null}. And OnlyOnceRegistered. <br />
-     * FOLLOW_ID: {PK, NotNull, INT(10)}
+     * FOLLOW_ID: {PK, ID, NotNull, INT(10)}
      */
     public void setFollowId_IsNull() { regFollowId(CK_ISN, DOBJ); }
 
     /**
      * IsNotNull {is not null}. And OnlyOnceRegistered. <br />
-     * FOLLOW_ID: {PK, NotNull, INT(10)}
+     * FOLLOW_ID: {PK, ID, NotNull, INT(10)}
      */
     public void setFollowId_IsNotNull() { regFollowId(CK_ISNN, DOBJ); }
 
@@ -163,137 +163,347 @@ public abstract class AbstractBsFollowCQ extends AbstractConditionQuery {
     
     /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br />
-     * MEMBER_ID: {UQ, NotNull, INT(10), FK to member}
-     * @param memberId The value of memberId as equal. (NullAllowed: if null, no condition)
+     * YOU_ID: {UQ, NotNull, INT(10), FK to member}
+     * @param youId The value of youId as equal. (NullAllowed: if null, no condition)
      */
-    public void setMemberId_Equal(Integer memberId) {
-        doSetMemberId_Equal(memberId);
+    public void setYouId_Equal(Integer youId) {
+        doSetYouId_Equal(youId);
     }
 
-    protected void doSetMemberId_Equal(Integer memberId) {
-        regMemberId(CK_EQ, memberId);
+    protected void doSetYouId_Equal(Integer youId) {
+        regYouId(CK_EQ, youId);
     }
 
     /**
      * NotEqual(&lt;&gt;). And NullIgnored, OnlyOnceRegistered. <br />
-     * MEMBER_ID: {UQ, NotNull, INT(10), FK to member}
-     * @param memberId The value of memberId as notEqual. (NullAllowed: if null, no condition)
+     * YOU_ID: {UQ, NotNull, INT(10), FK to member}
+     * @param youId The value of youId as notEqual. (NullAllowed: if null, no condition)
      */
-    public void setMemberId_NotEqual(Integer memberId) {
-        doSetMemberId_NotEqual(memberId);
+    public void setYouId_NotEqual(Integer youId) {
+        doSetYouId_NotEqual(youId);
     }
 
-    protected void doSetMemberId_NotEqual(Integer memberId) {
-        regMemberId(CK_NES, memberId);
+    protected void doSetYouId_NotEqual(Integer youId) {
+        regYouId(CK_NES, youId);
     }
 
     /**
      * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br />
-     * MEMBER_ID: {UQ, NotNull, INT(10), FK to member}
-     * @param memberId The value of memberId as greaterThan. (NullAllowed: if null, no condition)
+     * YOU_ID: {UQ, NotNull, INT(10), FK to member}
+     * @param youId The value of youId as greaterThan. (NullAllowed: if null, no condition)
      */
-    public void setMemberId_GreaterThan(Integer memberId) {
-        regMemberId(CK_GT, memberId);
+    public void setYouId_GreaterThan(Integer youId) {
+        regYouId(CK_GT, youId);
     }
 
     /**
      * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br />
-     * MEMBER_ID: {UQ, NotNull, INT(10), FK to member}
-     * @param memberId The value of memberId as lessThan. (NullAllowed: if null, no condition)
+     * YOU_ID: {UQ, NotNull, INT(10), FK to member}
+     * @param youId The value of youId as lessThan. (NullAllowed: if null, no condition)
      */
-    public void setMemberId_LessThan(Integer memberId) {
-        regMemberId(CK_LT, memberId);
+    public void setYouId_LessThan(Integer youId) {
+        regYouId(CK_LT, youId);
     }
 
     /**
      * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br />
-     * MEMBER_ID: {UQ, NotNull, INT(10), FK to member}
-     * @param memberId The value of memberId as greaterEqual. (NullAllowed: if null, no condition)
+     * YOU_ID: {UQ, NotNull, INT(10), FK to member}
+     * @param youId The value of youId as greaterEqual. (NullAllowed: if null, no condition)
      */
-    public void setMemberId_GreaterEqual(Integer memberId) {
-        regMemberId(CK_GE, memberId);
+    public void setYouId_GreaterEqual(Integer youId) {
+        regYouId(CK_GE, youId);
     }
 
     /**
      * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br />
-     * MEMBER_ID: {UQ, NotNull, INT(10), FK to member}
-     * @param memberId The value of memberId as lessEqual. (NullAllowed: if null, no condition)
+     * YOU_ID: {UQ, NotNull, INT(10), FK to member}
+     * @param youId The value of youId as lessEqual. (NullAllowed: if null, no condition)
      */
-    public void setMemberId_LessEqual(Integer memberId) {
-        regMemberId(CK_LE, memberId);
+    public void setYouId_LessEqual(Integer youId) {
+        regYouId(CK_LE, youId);
     }
 
     /**
      * RangeOf with various options. (versatile) <br />
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br />
      * And NullIgnored, OnlyOnceRegistered. <br />
-     * MEMBER_ID: {UQ, NotNull, INT(10), FK to member}
-     * @param minNumber The min number of memberId. (NullAllowed: if null, no from-condition)
-     * @param maxNumber The max number of memberId. (NullAllowed: if null, no to-condition)
+     * YOU_ID: {UQ, NotNull, INT(10), FK to member}
+     * @param minNumber The min number of youId. (NullAllowed: if null, no from-condition)
+     * @param maxNumber The max number of youId. (NullAllowed: if null, no to-condition)
      * @param rangeOfOption The option of range-of. (NotNull)
      */
-    public void setMemberId_RangeOf(Integer minNumber, Integer maxNumber, RangeOfOption rangeOfOption) {
-        regROO(minNumber, maxNumber, getCValueMemberId(), "MEMBER_ID", rangeOfOption);
+    public void setYouId_RangeOf(Integer minNumber, Integer maxNumber, RangeOfOption rangeOfOption) {
+        regROO(minNumber, maxNumber, getCValueYouId(), "YOU_ID", rangeOfOption);
     }
 
     /**
      * InScope {in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br />
-     * MEMBER_ID: {UQ, NotNull, INT(10), FK to member}
-     * @param memberIdList The collection of memberId as inScope. (NullAllowed: if null (or empty), no condition)
+     * YOU_ID: {UQ, NotNull, INT(10), FK to member}
+     * @param youIdList The collection of youId as inScope. (NullAllowed: if null (or empty), no condition)
      */
-    public void setMemberId_InScope(Collection<Integer> memberIdList) {
-        doSetMemberId_InScope(memberIdList);
+    public void setYouId_InScope(Collection<Integer> youIdList) {
+        doSetYouId_InScope(youIdList);
     }
 
-    protected void doSetMemberId_InScope(Collection<Integer> memberIdList) {
-        regINS(CK_INS, cTL(memberIdList), getCValueMemberId(), "MEMBER_ID");
+    protected void doSetYouId_InScope(Collection<Integer> youIdList) {
+        regINS(CK_INS, cTL(youIdList), getCValueYouId(), "YOU_ID");
     }
 
     /**
      * NotInScope {not in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br />
-     * MEMBER_ID: {UQ, NotNull, INT(10), FK to member}
-     * @param memberIdList The collection of memberId as notInScope. (NullAllowed: if null (or empty), no condition)
+     * YOU_ID: {UQ, NotNull, INT(10), FK to member}
+     * @param youIdList The collection of youId as notInScope. (NullAllowed: if null (or empty), no condition)
      */
-    public void setMemberId_NotInScope(Collection<Integer> memberIdList) {
-        doSetMemberId_NotInScope(memberIdList);
+    public void setYouId_NotInScope(Collection<Integer> youIdList) {
+        doSetYouId_NotInScope(youIdList);
     }
 
-    protected void doSetMemberId_NotInScope(Collection<Integer> memberIdList) {
-        regINS(CK_NINS, cTL(memberIdList), getCValueMemberId(), "MEMBER_ID");
+    protected void doSetYouId_NotInScope(Collection<Integer> youIdList) {
+        regINS(CK_NINS, cTL(youIdList), getCValueYouId(), "YOU_ID");
     }
 
     /**
      * Set up InScopeRelation (sub-query). <br />
-     * {in (select MEMBER_ID from member where ...)} <br />
-     * member by my MEMBER_ID, named 'member'.
-     * @param subQuery The sub-query of Member for 'in-scope'. (NotNull)
+     * {in (select YOU_ID from member where ...)} <br />
+     * member by my YOU_ID, named 'memberByYouId'.
+     * @param subQuery The sub-query of MemberByYouId for 'in-scope'. (NotNull)
      */
-    public void inScopeMember(SubQuery<MemberCB> subQuery) {
+    public void inScopeMemberByYouId(SubQuery<MemberCB> subQuery) {
         assertObjectNotNull("subQuery", subQuery);
         MemberCB cb = new MemberCB(); cb.xsetupForInScopeRelation(this);
         try { lock(); subQuery.query(cb); } finally { unlock(); }
-        String pp = keepMemberId_InScopeRelation_Member(cb.query());
-        registerInScopeRelation(cb.query(), "MEMBER_ID", "MEMBER_ID", pp, "member");
+        String pp = keepYouId_InScopeRelation_MemberByYouId(cb.query());
+        registerInScopeRelation(cb.query(), "YOU_ID", "MEMBER_ID", pp, "memberByYouId");
     }
-    public abstract String keepMemberId_InScopeRelation_Member(MemberCQ sq);
+    public abstract String keepYouId_InScopeRelation_MemberByYouId(MemberCQ sq);
 
     /**
      * Set up NotInScopeRelation (sub-query). <br />
-     * {not in (select MEMBER_ID from member where ...)} <br />
-     * member by my MEMBER_ID, named 'member'.
-     * @param subQuery The sub-query of Member for 'not in-scope'. (NotNull)
+     * {not in (select YOU_ID from member where ...)} <br />
+     * member by my YOU_ID, named 'memberByYouId'.
+     * @param subQuery The sub-query of MemberByYouId for 'not in-scope'. (NotNull)
      */
-    public void notInScopeMember(SubQuery<MemberCB> subQuery) {
+    public void notInScopeMemberByYouId(SubQuery<MemberCB> subQuery) {
         assertObjectNotNull("subQuery", subQuery);
         MemberCB cb = new MemberCB(); cb.xsetupForInScopeRelation(this);
         try { lock(); subQuery.query(cb); } finally { unlock(); }
-        String pp = keepMemberId_NotInScopeRelation_Member(cb.query());
-        registerNotInScopeRelation(cb.query(), "MEMBER_ID", "MEMBER_ID", pp, "member");
+        String pp = keepYouId_NotInScopeRelation_MemberByYouId(cb.query());
+        registerNotInScopeRelation(cb.query(), "YOU_ID", "MEMBER_ID", pp, "memberByYouId");
     }
-    public abstract String keepMemberId_NotInScopeRelation_Member(MemberCQ sq);
+    public abstract String keepYouId_NotInScopeRelation_MemberByYouId(MemberCQ sq);
 
-    protected void regMemberId(ConditionKey ky, Object vl) { regQ(ky, vl, getCValueMemberId(), "MEMBER_ID"); }
-    protected abstract ConditionValue getCValueMemberId();
+    protected void regYouId(ConditionKey ky, Object vl) { regQ(ky, vl, getCValueYouId(), "YOU_ID"); }
+    protected abstract ConditionValue getCValueYouId();
+    
+    /**
+     * Equal(=). And NullIgnored, OnlyOnceRegistered. <br />
+     * ME_ID: {IX, NotNull, INT(10), FK to member}
+     * @param meId The value of meId as equal. (NullAllowed: if null, no condition)
+     */
+    public void setMeId_Equal(Integer meId) {
+        doSetMeId_Equal(meId);
+    }
+
+    protected void doSetMeId_Equal(Integer meId) {
+        regMeId(CK_EQ, meId);
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). And NullIgnored, OnlyOnceRegistered. <br />
+     * ME_ID: {IX, NotNull, INT(10), FK to member}
+     * @param meId The value of meId as notEqual. (NullAllowed: if null, no condition)
+     */
+    public void setMeId_NotEqual(Integer meId) {
+        doSetMeId_NotEqual(meId);
+    }
+
+    protected void doSetMeId_NotEqual(Integer meId) {
+        regMeId(CK_NES, meId);
+    }
+
+    /**
+     * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br />
+     * ME_ID: {IX, NotNull, INT(10), FK to member}
+     * @param meId The value of meId as greaterThan. (NullAllowed: if null, no condition)
+     */
+    public void setMeId_GreaterThan(Integer meId) {
+        regMeId(CK_GT, meId);
+    }
+
+    /**
+     * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br />
+     * ME_ID: {IX, NotNull, INT(10), FK to member}
+     * @param meId The value of meId as lessThan. (NullAllowed: if null, no condition)
+     */
+    public void setMeId_LessThan(Integer meId) {
+        regMeId(CK_LT, meId);
+    }
+
+    /**
+     * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br />
+     * ME_ID: {IX, NotNull, INT(10), FK to member}
+     * @param meId The value of meId as greaterEqual. (NullAllowed: if null, no condition)
+     */
+    public void setMeId_GreaterEqual(Integer meId) {
+        regMeId(CK_GE, meId);
+    }
+
+    /**
+     * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br />
+     * ME_ID: {IX, NotNull, INT(10), FK to member}
+     * @param meId The value of meId as lessEqual. (NullAllowed: if null, no condition)
+     */
+    public void setMeId_LessEqual(Integer meId) {
+        regMeId(CK_LE, meId);
+    }
+
+    /**
+     * RangeOf with various options. (versatile) <br />
+     * {(default) minNumber &lt;= column &lt;= maxNumber} <br />
+     * And NullIgnored, OnlyOnceRegistered. <br />
+     * ME_ID: {IX, NotNull, INT(10), FK to member}
+     * @param minNumber The min number of meId. (NullAllowed: if null, no from-condition)
+     * @param maxNumber The max number of meId. (NullAllowed: if null, no to-condition)
+     * @param rangeOfOption The option of range-of. (NotNull)
+     */
+    public void setMeId_RangeOf(Integer minNumber, Integer maxNumber, RangeOfOption rangeOfOption) {
+        regROO(minNumber, maxNumber, getCValueMeId(), "ME_ID", rangeOfOption);
+    }
+
+    /**
+     * InScope {in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br />
+     * ME_ID: {IX, NotNull, INT(10), FK to member}
+     * @param meIdList The collection of meId as inScope. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setMeId_InScope(Collection<Integer> meIdList) {
+        doSetMeId_InScope(meIdList);
+    }
+
+    protected void doSetMeId_InScope(Collection<Integer> meIdList) {
+        regINS(CK_INS, cTL(meIdList), getCValueMeId(), "ME_ID");
+    }
+
+    /**
+     * NotInScope {not in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br />
+     * ME_ID: {IX, NotNull, INT(10), FK to member}
+     * @param meIdList The collection of meId as notInScope. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setMeId_NotInScope(Collection<Integer> meIdList) {
+        doSetMeId_NotInScope(meIdList);
+    }
+
+    protected void doSetMeId_NotInScope(Collection<Integer> meIdList) {
+        regINS(CK_NINS, cTL(meIdList), getCValueMeId(), "ME_ID");
+    }
+
+    /**
+     * Set up InScopeRelation (sub-query). <br />
+     * {in (select ME_ID from member where ...)} <br />
+     * member by my ME_ID, named 'memberByMeId'.
+     * @param subQuery The sub-query of MemberByMeId for 'in-scope'. (NotNull)
+     */
+    public void inScopeMemberByMeId(SubQuery<MemberCB> subQuery) {
+        assertObjectNotNull("subQuery", subQuery);
+        MemberCB cb = new MemberCB(); cb.xsetupForInScopeRelation(this);
+        try { lock(); subQuery.query(cb); } finally { unlock(); }
+        String pp = keepMeId_InScopeRelation_MemberByMeId(cb.query());
+        registerInScopeRelation(cb.query(), "ME_ID", "MEMBER_ID", pp, "memberByMeId");
+    }
+    public abstract String keepMeId_InScopeRelation_MemberByMeId(MemberCQ sq);
+
+    /**
+     * Set up NotInScopeRelation (sub-query). <br />
+     * {not in (select ME_ID from member where ...)} <br />
+     * member by my ME_ID, named 'memberByMeId'.
+     * @param subQuery The sub-query of MemberByMeId for 'not in-scope'. (NotNull)
+     */
+    public void notInScopeMemberByMeId(SubQuery<MemberCB> subQuery) {
+        assertObjectNotNull("subQuery", subQuery);
+        MemberCB cb = new MemberCB(); cb.xsetupForInScopeRelation(this);
+        try { lock(); subQuery.query(cb); } finally { unlock(); }
+        String pp = keepMeId_NotInScopeRelation_MemberByMeId(cb.query());
+        registerNotInScopeRelation(cb.query(), "ME_ID", "MEMBER_ID", pp, "memberByMeId");
+    }
+    public abstract String keepMeId_NotInScopeRelation_MemberByMeId(MemberCQ sq);
+
+    protected void regMeId(ConditionKey ky, Object vl) { regQ(ky, vl, getCValueMeId(), "ME_ID"); }
+    protected abstract ConditionValue getCValueMeId();
+
+    /**
+     * Equal(=). And NullIgnored, OnlyOnceRegistered. <br />
+     * FOLLOW_DATETIME: {NotNull, DATETIME(19)}
+     * @param followDatetime The value of followDatetime as equal. (NullAllowed: if null, no condition)
+     */
+    public void setFollowDatetime_Equal(java.sql.Timestamp followDatetime) {
+        regFollowDatetime(CK_EQ,  followDatetime);
+    }
+
+    /**
+     * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br />
+     * FOLLOW_DATETIME: {NotNull, DATETIME(19)}
+     * @param followDatetime The value of followDatetime as greaterThan. (NullAllowed: if null, no condition)
+     */
+    public void setFollowDatetime_GreaterThan(java.sql.Timestamp followDatetime) {
+        regFollowDatetime(CK_GT,  followDatetime);
+    }
+
+    /**
+     * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br />
+     * FOLLOW_DATETIME: {NotNull, DATETIME(19)}
+     * @param followDatetime The value of followDatetime as lessThan. (NullAllowed: if null, no condition)
+     */
+    public void setFollowDatetime_LessThan(java.sql.Timestamp followDatetime) {
+        regFollowDatetime(CK_LT,  followDatetime);
+    }
+
+    /**
+     * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br />
+     * FOLLOW_DATETIME: {NotNull, DATETIME(19)}
+     * @param followDatetime The value of followDatetime as greaterEqual. (NullAllowed: if null, no condition)
+     */
+    public void setFollowDatetime_GreaterEqual(java.sql.Timestamp followDatetime) {
+        regFollowDatetime(CK_GE,  followDatetime);
+    }
+
+    /**
+     * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br />
+     * FOLLOW_DATETIME: {NotNull, DATETIME(19)}
+     * @param followDatetime The value of followDatetime as lessEqual. (NullAllowed: if null, no condition)
+     */
+    public void setFollowDatetime_LessEqual(java.sql.Timestamp followDatetime) {
+        regFollowDatetime(CK_LE, followDatetime);
+    }
+
+    /**
+     * FromTo with various options. (versatile) {(default) fromDatetime &lt;= column &lt;= toDatetime} <br />
+     * And NullIgnored, OnlyOnceRegistered. <br />
+     * FOLLOW_DATETIME: {NotNull, DATETIME(19)}
+     * <pre>e.g. setFollowDatetime_FromTo(fromDate, toDate, new <span style="color: #DD4747">FromToOption</span>().compareAsDate());</pre>
+     * @param fromDatetime The from-datetime(yyyy/MM/dd HH:mm:ss.SSS) of followDatetime. (NullAllowed: if null, no from-condition)
+     * @param toDatetime The to-datetime(yyyy/MM/dd HH:mm:ss.SSS) of followDatetime. (NullAllowed: if null, no to-condition)
+     * @param fromToOption The option of from-to. (NotNull)
+     */
+    public void setFollowDatetime_FromTo(Date fromDatetime, Date toDatetime, FromToOption fromToOption) {
+        regFTQ((fromDatetime != null ? new java.sql.Timestamp(fromDatetime.getTime()) : null), (toDatetime != null ? new java.sql.Timestamp(toDatetime.getTime()) : null), getCValueFollowDatetime(), "FOLLOW_DATETIME", fromToOption);
+    }
+
+    /**
+     * DateFromTo. (Date means yyyy/MM/dd) {fromDate &lt;= column &lt; toDate + 1 day} <br />
+     * And NullIgnored, OnlyOnceRegistered. <br />
+     * FOLLOW_DATETIME: {NotNull, DATETIME(19)}
+     * <pre>
+     * e.g. from:{2007/04/10 08:24:53} to:{2007/04/16 14:36:29}
+     *  column &gt;= '2007/04/10 00:00:00' and column <span style="color: #DD4747">&lt; '2007/04/17 00:00:00'</span>
+     * </pre>
+     * @param fromDate The from-date(yyyy/MM/dd) of followDatetime. (NullAllowed: if null, no from-condition)
+     * @param toDate The to-date(yyyy/MM/dd) of followDatetime. (NullAllowed: if null, no to-condition)
+     */
+    public void setFollowDatetime_DateFromTo(Date fromDate, Date toDate) {
+        setFollowDatetime_FromTo(fromDate, toDate, new FromToOption().compareAsDate());
+    }
+
+    protected void regFollowDatetime(ConditionKey ky, Object vl) { regQ(ky, vl, getCValueFollowDatetime(), "FOLLOW_DATETIME"); }
+    protected abstract ConditionValue getCValueFollowDatetime();
 
     // ===================================================================================
     //                                                                     ScalarCondition

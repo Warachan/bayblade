@@ -148,47 +148,47 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * Set up ExistsReferrer (correlated sub-query). <br />
-     * {exists (select MEMBER_ID from follow where ...)} <br />
-     * follow by MEMBER_ID, named 'followAsOne'.
+     * {exists (select ME_ID from follow where ...)} <br />
+     * follow by ME_ID, named 'followByMeIdAsOne'.
      * <pre>
-     * cb.query().<span style="color: #DD4747">existsFollowAsOne</span>(new SubQuery&lt;FollowCB&gt;() {
+     * cb.query().<span style="color: #DD4747">existsFollowByMeIdList</span>(new SubQuery&lt;FollowCB&gt;() {
      *     public void query(FollowCB subCB) {
      *         subCB.query().setXxx...
      *     }
      * });
      * </pre>
-     * @param subQuery The sub-query of FollowAsOne for 'exists'. (NotNull)
+     * @param subQuery The sub-query of FollowByMeIdList for 'exists'. (NotNull)
      */
-    public void existsFollowAsOne(SubQuery<FollowCB> subQuery) {
+    public void existsFollowByMeIdList(SubQuery<FollowCB> subQuery) {
         assertObjectNotNull("subQuery", subQuery);
         FollowCB cb = new FollowCB(); cb.xsetupForExistsReferrer(this);
         try { lock(); subQuery.query(cb); } finally { unlock(); }
-        String pp = keepMemberId_ExistsReferrer_FollowAsOne(cb.query());
-        registerExistsReferrer(cb.query(), "MEMBER_ID", "MEMBER_ID", pp, "followAsOne");
+        String pp = keepMemberId_ExistsReferrer_FollowByMeIdList(cb.query());
+        registerExistsReferrer(cb.query(), "MEMBER_ID", "ME_ID", pp, "followByMeIdList");
     }
-    public abstract String keepMemberId_ExistsReferrer_FollowAsOne(FollowCQ sq);
+    public abstract String keepMemberId_ExistsReferrer_FollowByMeIdList(FollowCQ sq);
 
     /**
      * Set up ExistsReferrer (correlated sub-query). <br />
-     * {exists (select MEMBER_ID from followers where ...)} <br />
-     * followers by MEMBER_ID, named 'followersAsOne'.
+     * {exists (select YOU_ID from follow where ...)} <br />
+     * follow by YOU_ID, named 'followByYouIdAsOne'.
      * <pre>
-     * cb.query().<span style="color: #DD4747">existsFollowersAsOne</span>(new SubQuery&lt;FollowersCB&gt;() {
-     *     public void query(FollowersCB subCB) {
+     * cb.query().<span style="color: #DD4747">existsFollowByYouIdAsOne</span>(new SubQuery&lt;FollowCB&gt;() {
+     *     public void query(FollowCB subCB) {
      *         subCB.query().setXxx...
      *     }
      * });
      * </pre>
-     * @param subQuery The sub-query of FollowersAsOne for 'exists'. (NotNull)
+     * @param subQuery The sub-query of FollowByYouIdAsOne for 'exists'. (NotNull)
      */
-    public void existsFollowersAsOne(SubQuery<FollowersCB> subQuery) {
+    public void existsFollowByYouIdAsOne(SubQuery<FollowCB> subQuery) {
         assertObjectNotNull("subQuery", subQuery);
-        FollowersCB cb = new FollowersCB(); cb.xsetupForExistsReferrer(this);
+        FollowCB cb = new FollowCB(); cb.xsetupForExistsReferrer(this);
         try { lock(); subQuery.query(cb); } finally { unlock(); }
-        String pp = keepMemberId_ExistsReferrer_FollowersAsOne(cb.query());
-        registerExistsReferrer(cb.query(), "MEMBER_ID", "MEMBER_ID", pp, "followersAsOne");
+        String pp = keepMemberId_ExistsReferrer_FollowByYouIdAsOne(cb.query());
+        registerExistsReferrer(cb.query(), "MEMBER_ID", "YOU_ID", pp, "followByYouIdAsOne");
     }
-    public abstract String keepMemberId_ExistsReferrer_FollowersAsOne(FollowersCQ sq);
+    public abstract String keepMemberId_ExistsReferrer_FollowByYouIdAsOne(FollowCQ sq);
 
     /**
      * Set up ExistsReferrer (correlated sub-query). <br />
@@ -280,47 +280,47 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * Set up NotExistsReferrer (correlated sub-query). <br />
-     * {not exists (select MEMBER_ID from follow where ...)} <br />
-     * follow by MEMBER_ID, named 'followAsOne'.
+     * {not exists (select ME_ID from follow where ...)} <br />
+     * follow by ME_ID, named 'followByMeIdAsOne'.
      * <pre>
-     * cb.query().<span style="color: #DD4747">notExistsFollowAsOne</span>(new SubQuery&lt;FollowCB&gt;() {
+     * cb.query().<span style="color: #DD4747">notExistsFollowByMeIdList</span>(new SubQuery&lt;FollowCB&gt;() {
      *     public void query(FollowCB subCB) {
      *         subCB.query().setXxx...
      *     }
      * });
      * </pre>
-     * @param subQuery The sub-query of MemberId_NotExistsReferrer_FollowAsOne for 'not exists'. (NotNull)
+     * @param subQuery The sub-query of MemberId_NotExistsReferrer_FollowByMeIdList for 'not exists'. (NotNull)
      */
-    public void notExistsFollowAsOne(SubQuery<FollowCB> subQuery) {
+    public void notExistsFollowByMeIdList(SubQuery<FollowCB> subQuery) {
         assertObjectNotNull("subQuery", subQuery);
         FollowCB cb = new FollowCB(); cb.xsetupForExistsReferrer(this);
         try { lock(); subQuery.query(cb); } finally { unlock(); }
-        String pp = keepMemberId_NotExistsReferrer_FollowAsOne(cb.query());
-        registerNotExistsReferrer(cb.query(), "MEMBER_ID", "MEMBER_ID", pp, "followAsOne");
+        String pp = keepMemberId_NotExistsReferrer_FollowByMeIdList(cb.query());
+        registerNotExistsReferrer(cb.query(), "MEMBER_ID", "ME_ID", pp, "followByMeIdList");
     }
-    public abstract String keepMemberId_NotExistsReferrer_FollowAsOne(FollowCQ sq);
+    public abstract String keepMemberId_NotExistsReferrer_FollowByMeIdList(FollowCQ sq);
 
     /**
      * Set up NotExistsReferrer (correlated sub-query). <br />
-     * {not exists (select MEMBER_ID from followers where ...)} <br />
-     * followers by MEMBER_ID, named 'followersAsOne'.
+     * {not exists (select YOU_ID from follow where ...)} <br />
+     * follow by YOU_ID, named 'followByYouIdAsOne'.
      * <pre>
-     * cb.query().<span style="color: #DD4747">notExistsFollowersAsOne</span>(new SubQuery&lt;FollowersCB&gt;() {
-     *     public void query(FollowersCB subCB) {
+     * cb.query().<span style="color: #DD4747">notExistsFollowByYouIdAsOne</span>(new SubQuery&lt;FollowCB&gt;() {
+     *     public void query(FollowCB subCB) {
      *         subCB.query().setXxx...
      *     }
      * });
      * </pre>
-     * @param subQuery The sub-query of MemberId_NotExistsReferrer_FollowersAsOne for 'not exists'. (NotNull)
+     * @param subQuery The sub-query of MemberId_NotExistsReferrer_FollowByYouIdAsOne for 'not exists'. (NotNull)
      */
-    public void notExistsFollowersAsOne(SubQuery<FollowersCB> subQuery) {
+    public void notExistsFollowByYouIdAsOne(SubQuery<FollowCB> subQuery) {
         assertObjectNotNull("subQuery", subQuery);
-        FollowersCB cb = new FollowersCB(); cb.xsetupForExistsReferrer(this);
+        FollowCB cb = new FollowCB(); cb.xsetupForExistsReferrer(this);
         try { lock(); subQuery.query(cb); } finally { unlock(); }
-        String pp = keepMemberId_NotExistsReferrer_FollowersAsOne(cb.query());
-        registerNotExistsReferrer(cb.query(), "MEMBER_ID", "MEMBER_ID", pp, "followersAsOne");
+        String pp = keepMemberId_NotExistsReferrer_FollowByYouIdAsOne(cb.query());
+        registerNotExistsReferrer(cb.query(), "MEMBER_ID", "YOU_ID", pp, "followByYouIdAsOne");
     }
-    public abstract String keepMemberId_NotExistsReferrer_FollowersAsOne(FollowersCQ sq);
+    public abstract String keepMemberId_NotExistsReferrer_FollowByYouIdAsOne(FollowCQ sq);
 
     /**
      * Set up NotExistsReferrer (correlated sub-query). <br />
@@ -412,33 +412,33 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * Set up InScopeRelation (sub-query). <br />
-     * {in (select MEMBER_ID from follow where ...)} <br />
-     * follow by MEMBER_ID, named 'followAsOne'.
-     * @param subQuery The sub-query of FollowAsOne for 'in-scope'. (NotNull)
+     * {in (select ME_ID from follow where ...)} <br />
+     * follow by ME_ID, named 'followByMeIdAsOne'.
+     * @param subQuery The sub-query of FollowByMeIdList for 'in-scope'. (NotNull)
      */
-    public void inScopeFollowAsOne(SubQuery<FollowCB> subQuery) {
+    public void inScopeFollowByMeIdList(SubQuery<FollowCB> subQuery) {
         assertObjectNotNull("subQuery", subQuery);
         FollowCB cb = new FollowCB(); cb.xsetupForInScopeRelation(this);
         try { lock(); subQuery.query(cb); } finally { unlock(); }
-        String pp = keepMemberId_InScopeRelation_FollowAsOne(cb.query());
-        registerInScopeRelation(cb.query(), "MEMBER_ID", "MEMBER_ID", pp, "followAsOne");
+        String pp = keepMemberId_InScopeRelation_FollowByMeIdList(cb.query());
+        registerInScopeRelation(cb.query(), "MEMBER_ID", "ME_ID", pp, "followByMeIdList");
     }
-    public abstract String keepMemberId_InScopeRelation_FollowAsOne(FollowCQ sq);
+    public abstract String keepMemberId_InScopeRelation_FollowByMeIdList(FollowCQ sq);
 
     /**
      * Set up InScopeRelation (sub-query). <br />
-     * {in (select MEMBER_ID from followers where ...)} <br />
-     * followers by MEMBER_ID, named 'followersAsOne'.
-     * @param subQuery The sub-query of FollowersAsOne for 'in-scope'. (NotNull)
+     * {in (select YOU_ID from follow where ...)} <br />
+     * follow by YOU_ID, named 'followByYouIdAsOne'.
+     * @param subQuery The sub-query of FollowByYouIdAsOne for 'in-scope'. (NotNull)
      */
-    public void inScopeFollowersAsOne(SubQuery<FollowersCB> subQuery) {
+    public void inScopeFollowByYouIdAsOne(SubQuery<FollowCB> subQuery) {
         assertObjectNotNull("subQuery", subQuery);
-        FollowersCB cb = new FollowersCB(); cb.xsetupForInScopeRelation(this);
+        FollowCB cb = new FollowCB(); cb.xsetupForInScopeRelation(this);
         try { lock(); subQuery.query(cb); } finally { unlock(); }
-        String pp = keepMemberId_InScopeRelation_FollowersAsOne(cb.query());
-        registerInScopeRelation(cb.query(), "MEMBER_ID", "MEMBER_ID", pp, "followersAsOne");
+        String pp = keepMemberId_InScopeRelation_FollowByYouIdAsOne(cb.query());
+        registerInScopeRelation(cb.query(), "MEMBER_ID", "YOU_ID", pp, "followByYouIdAsOne");
     }
-    public abstract String keepMemberId_InScopeRelation_FollowersAsOne(FollowersCQ sq);
+    public abstract String keepMemberId_InScopeRelation_FollowByYouIdAsOne(FollowCQ sq);
 
     /**
      * Set up InScopeRelation (sub-query). <br />
@@ -502,33 +502,33 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * Set up NotInScopeRelation (sub-query). <br />
-     * {not in (select MEMBER_ID from follow where ...)} <br />
-     * follow by MEMBER_ID, named 'followAsOne'.
-     * @param subQuery The sub-query of FollowAsOne for 'not in-scope'. (NotNull)
+     * {not in (select ME_ID from follow where ...)} <br />
+     * follow by ME_ID, named 'followByMeIdAsOne'.
+     * @param subQuery The sub-query of FollowByMeIdList for 'not in-scope'. (NotNull)
      */
-    public void notInScopeFollowAsOne(SubQuery<FollowCB> subQuery) {
+    public void notInScopeFollowByMeIdList(SubQuery<FollowCB> subQuery) {
         assertObjectNotNull("subQuery", subQuery);
         FollowCB cb = new FollowCB(); cb.xsetupForInScopeRelation(this);
         try { lock(); subQuery.query(cb); } finally { unlock(); }
-        String pp = keepMemberId_NotInScopeRelation_FollowAsOne(cb.query());
-        registerNotInScopeRelation(cb.query(), "MEMBER_ID", "MEMBER_ID", pp, "followAsOne");
+        String pp = keepMemberId_NotInScopeRelation_FollowByMeIdList(cb.query());
+        registerNotInScopeRelation(cb.query(), "MEMBER_ID", "ME_ID", pp, "followByMeIdList");
     }
-    public abstract String keepMemberId_NotInScopeRelation_FollowAsOne(FollowCQ sq);
+    public abstract String keepMemberId_NotInScopeRelation_FollowByMeIdList(FollowCQ sq);
 
     /**
      * Set up NotInScopeRelation (sub-query). <br />
-     * {not in (select MEMBER_ID from followers where ...)} <br />
-     * followers by MEMBER_ID, named 'followersAsOne'.
-     * @param subQuery The sub-query of FollowersAsOne for 'not in-scope'. (NotNull)
+     * {not in (select YOU_ID from follow where ...)} <br />
+     * follow by YOU_ID, named 'followByYouIdAsOne'.
+     * @param subQuery The sub-query of FollowByYouIdAsOne for 'not in-scope'. (NotNull)
      */
-    public void notInScopeFollowersAsOne(SubQuery<FollowersCB> subQuery) {
+    public void notInScopeFollowByYouIdAsOne(SubQuery<FollowCB> subQuery) {
         assertObjectNotNull("subQuery", subQuery);
-        FollowersCB cb = new FollowersCB(); cb.xsetupForInScopeRelation(this);
+        FollowCB cb = new FollowCB(); cb.xsetupForInScopeRelation(this);
         try { lock(); subQuery.query(cb); } finally { unlock(); }
-        String pp = keepMemberId_NotInScopeRelation_FollowersAsOne(cb.query());
-        registerNotInScopeRelation(cb.query(), "MEMBER_ID", "MEMBER_ID", pp, "followersAsOne");
+        String pp = keepMemberId_NotInScopeRelation_FollowByYouIdAsOne(cb.query());
+        registerNotInScopeRelation(cb.query(), "MEMBER_ID", "YOU_ID", pp, "followByYouIdAsOne");
     }
-    public abstract String keepMemberId_NotInScopeRelation_FollowersAsOne(FollowersCQ sq);
+    public abstract String keepMemberId_NotInScopeRelation_FollowByYouIdAsOne(FollowCQ sq);
 
     /**
      * Set up NotInScopeRelation (sub-query). <br />
@@ -590,6 +590,15 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
     }
     public abstract String keepMemberId_NotInScopeRelation_TweetList(TweetCQ sq);
 
+    public void xsderiveFollowByMeIdList(String fn, SubQuery<FollowCB> sq, String al, DerivedReferrerOption op) {
+        assertObjectNotNull("subQuery", sq);
+        FollowCB cb = new FollowCB(); cb.xsetupForDerivedReferrer(this);
+        try { lock(); sq.query(cb); } finally { unlock(); }
+        String pp = keepMemberId_SpecifyDerivedReferrer_FollowByMeIdList(cb.query());
+        registerSpecifyDerivedReferrer(fn, cb.query(), "MEMBER_ID", "ME_ID", pp, "followByMeIdList", al, op);
+    }
+    public abstract String keepMemberId_SpecifyDerivedReferrer_FollowByMeIdList(FollowCQ sq);
+
     public void xsderiveLoginList(String fn, SubQuery<LoginCB> sq, String al, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
         LoginCB cb = new LoginCB(); cb.xsetupForDerivedReferrer(this);
@@ -607,6 +616,40 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
         registerSpecifyDerivedReferrer(fn, cb.query(), "MEMBER_ID", "MEMBER_ID", pp, "tweetList", al, op);
     }
     public abstract String keepMemberId_SpecifyDerivedReferrer_TweetList(TweetCQ sq);
+
+    /**
+     * Prepare for (Query)DerivedReferrer (correlated sub-query). <br />
+     * {FOO &lt;= (select max(BAR) from follow where ...)} <br />
+     * follow by ME_ID, named 'followByMeIdAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #DD4747">derivedFollowByMeIdList()</span>.<span style="color: #DD4747">max</span>(new SubQuery&lt;FollowCB&gt;() {
+     *     public void query(FollowCB subCB) {
+     *         subCB.specify().<span style="color: #DD4747">columnFoo...</span> <span style="color: #3F7E5E">// derived column by function</span>
+     *         subCB.query().setBar... <span style="color: #3F7E5E">// referrer condition</span>
+     *     }
+     * }).<span style="color: #DD4747">greaterEqual</span>(123); <span style="color: #3F7E5E">// condition to derived column</span>
+     * </pre>
+     * @return The object to set up a function for referrer table. (NotNull)
+     */
+    public HpQDRFunction<FollowCB> derivedFollowByMeIdList() {
+        return xcreateQDRFunctionFollowByMeIdList();
+    }
+    protected HpQDRFunction<FollowCB> xcreateQDRFunctionFollowByMeIdList() {
+        return new HpQDRFunction<FollowCB>(new HpQDRSetupper<FollowCB>() {
+            public void setup(String fn, SubQuery<FollowCB> sq, String rd, Object vl, DerivedReferrerOption op) {
+                xqderiveFollowByMeIdList(fn, sq, rd, vl, op);
+            }
+        });
+    }
+    public void xqderiveFollowByMeIdList(String fn, SubQuery<FollowCB> sq, String rd, Object vl, DerivedReferrerOption op) {
+        assertObjectNotNull("subQuery", sq);
+        FollowCB cb = new FollowCB(); cb.xsetupForDerivedReferrer(this);
+        try { lock(); sq.query(cb); } finally { unlock(); }
+        String sqpp = keepMemberId_QueryDerivedReferrer_FollowByMeIdList(cb.query()); String prpp = keepMemberId_QueryDerivedReferrer_FollowByMeIdListParameter(vl);
+        registerQueryDerivedReferrer(fn, cb.query(), "MEMBER_ID", "ME_ID", sqpp, "followByMeIdList", rd, vl, prpp, op);
+    }
+    public abstract String keepMemberId_QueryDerivedReferrer_FollowByMeIdList(FollowCQ sq);
+    public abstract String keepMemberId_QueryDerivedReferrer_FollowByMeIdListParameter(Object vl);
 
     /**
      * Prepare for (Query)DerivedReferrer (correlated sub-query). <br />
@@ -937,94 +980,6 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br />
-     * UPDATE_DATETIME: {DATETIME(19)}
-     * @param updateDatetime The value of updateDatetime as equal. (NullAllowed: if null, no condition)
-     */
-    public void setUpdateDatetime_Equal(java.sql.Timestamp updateDatetime) {
-        regUpdateDatetime(CK_EQ,  updateDatetime);
-    }
-
-    /**
-     * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br />
-     * UPDATE_DATETIME: {DATETIME(19)}
-     * @param updateDatetime The value of updateDatetime as greaterThan. (NullAllowed: if null, no condition)
-     */
-    public void setUpdateDatetime_GreaterThan(java.sql.Timestamp updateDatetime) {
-        regUpdateDatetime(CK_GT,  updateDatetime);
-    }
-
-    /**
-     * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br />
-     * UPDATE_DATETIME: {DATETIME(19)}
-     * @param updateDatetime The value of updateDatetime as lessThan. (NullAllowed: if null, no condition)
-     */
-    public void setUpdateDatetime_LessThan(java.sql.Timestamp updateDatetime) {
-        regUpdateDatetime(CK_LT,  updateDatetime);
-    }
-
-    /**
-     * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br />
-     * UPDATE_DATETIME: {DATETIME(19)}
-     * @param updateDatetime The value of updateDatetime as greaterEqual. (NullAllowed: if null, no condition)
-     */
-    public void setUpdateDatetime_GreaterEqual(java.sql.Timestamp updateDatetime) {
-        regUpdateDatetime(CK_GE,  updateDatetime);
-    }
-
-    /**
-     * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br />
-     * UPDATE_DATETIME: {DATETIME(19)}
-     * @param updateDatetime The value of updateDatetime as lessEqual. (NullAllowed: if null, no condition)
-     */
-    public void setUpdateDatetime_LessEqual(java.sql.Timestamp updateDatetime) {
-        regUpdateDatetime(CK_LE, updateDatetime);
-    }
-
-    /**
-     * FromTo with various options. (versatile) {(default) fromDatetime &lt;= column &lt;= toDatetime} <br />
-     * And NullIgnored, OnlyOnceRegistered. <br />
-     * UPDATE_DATETIME: {DATETIME(19)}
-     * <pre>e.g. setUpdateDatetime_FromTo(fromDate, toDate, new <span style="color: #DD4747">FromToOption</span>().compareAsDate());</pre>
-     * @param fromDatetime The from-datetime(yyyy/MM/dd HH:mm:ss.SSS) of updateDatetime. (NullAllowed: if null, no from-condition)
-     * @param toDatetime The to-datetime(yyyy/MM/dd HH:mm:ss.SSS) of updateDatetime. (NullAllowed: if null, no to-condition)
-     * @param fromToOption The option of from-to. (NotNull)
-     */
-    public void setUpdateDatetime_FromTo(Date fromDatetime, Date toDatetime, FromToOption fromToOption) {
-        regFTQ((fromDatetime != null ? new java.sql.Timestamp(fromDatetime.getTime()) : null), (toDatetime != null ? new java.sql.Timestamp(toDatetime.getTime()) : null), getCValueUpdateDatetime(), "UPDATE_DATETIME", fromToOption);
-    }
-
-    /**
-     * DateFromTo. (Date means yyyy/MM/dd) {fromDate &lt;= column &lt; toDate + 1 day} <br />
-     * And NullIgnored, OnlyOnceRegistered. <br />
-     * UPDATE_DATETIME: {DATETIME(19)}
-     * <pre>
-     * e.g. from:{2007/04/10 08:24:53} to:{2007/04/16 14:36:29}
-     *  column &gt;= '2007/04/10 00:00:00' and column <span style="color: #DD4747">&lt; '2007/04/17 00:00:00'</span>
-     * </pre>
-     * @param fromDate The from-date(yyyy/MM/dd) of updateDatetime. (NullAllowed: if null, no from-condition)
-     * @param toDate The to-date(yyyy/MM/dd) of updateDatetime. (NullAllowed: if null, no to-condition)
-     */
-    public void setUpdateDatetime_DateFromTo(Date fromDate, Date toDate) {
-        setUpdateDatetime_FromTo(fromDate, toDate, new FromToOption().compareAsDate());
-    }
-
-    /**
-     * IsNull {is null}. And OnlyOnceRegistered. <br />
-     * UPDATE_DATETIME: {DATETIME(19)}
-     */
-    public void setUpdateDatetime_IsNull() { regUpdateDatetime(CK_ISN, DOBJ); }
-
-    /**
-     * IsNotNull {is not null}. And OnlyOnceRegistered. <br />
-     * UPDATE_DATETIME: {DATETIME(19)}
-     */
-    public void setUpdateDatetime_IsNotNull() { regUpdateDatetime(CK_ISNN, DOBJ); }
-
-    protected void regUpdateDatetime(ConditionKey ky, Object vl) { regQ(ky, vl, getCValueUpdateDatetime(), "UPDATE_DATETIME"); }
-    protected abstract ConditionValue getCValueUpdateDatetime();
-
-    /**
-     * Equal(=). And NullIgnored, OnlyOnceRegistered. <br />
      * BIRTHDATE: {DATE(10)}
      * @param birthdate The value of birthdate as equal. (NullAllowed: if null, no condition)
      */
@@ -1326,6 +1281,94 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     protected void regRegesterDatetime(ConditionKey ky, Object vl) { regQ(ky, vl, getCValueRegesterDatetime(), "REGESTER_DATETIME"); }
     protected abstract ConditionValue getCValueRegesterDatetime();
+
+    /**
+     * Equal(=). And NullIgnored, OnlyOnceRegistered. <br />
+     * UPDATE_DATETIME: {DATETIME(19)}
+     * @param updateDatetime The value of updateDatetime as equal. (NullAllowed: if null, no condition)
+     */
+    public void setUpdateDatetime_Equal(java.sql.Timestamp updateDatetime) {
+        regUpdateDatetime(CK_EQ,  updateDatetime);
+    }
+
+    /**
+     * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br />
+     * UPDATE_DATETIME: {DATETIME(19)}
+     * @param updateDatetime The value of updateDatetime as greaterThan. (NullAllowed: if null, no condition)
+     */
+    public void setUpdateDatetime_GreaterThan(java.sql.Timestamp updateDatetime) {
+        regUpdateDatetime(CK_GT,  updateDatetime);
+    }
+
+    /**
+     * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br />
+     * UPDATE_DATETIME: {DATETIME(19)}
+     * @param updateDatetime The value of updateDatetime as lessThan. (NullAllowed: if null, no condition)
+     */
+    public void setUpdateDatetime_LessThan(java.sql.Timestamp updateDatetime) {
+        regUpdateDatetime(CK_LT,  updateDatetime);
+    }
+
+    /**
+     * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br />
+     * UPDATE_DATETIME: {DATETIME(19)}
+     * @param updateDatetime The value of updateDatetime as greaterEqual. (NullAllowed: if null, no condition)
+     */
+    public void setUpdateDatetime_GreaterEqual(java.sql.Timestamp updateDatetime) {
+        regUpdateDatetime(CK_GE,  updateDatetime);
+    }
+
+    /**
+     * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br />
+     * UPDATE_DATETIME: {DATETIME(19)}
+     * @param updateDatetime The value of updateDatetime as lessEqual. (NullAllowed: if null, no condition)
+     */
+    public void setUpdateDatetime_LessEqual(java.sql.Timestamp updateDatetime) {
+        regUpdateDatetime(CK_LE, updateDatetime);
+    }
+
+    /**
+     * FromTo with various options. (versatile) {(default) fromDatetime &lt;= column &lt;= toDatetime} <br />
+     * And NullIgnored, OnlyOnceRegistered. <br />
+     * UPDATE_DATETIME: {DATETIME(19)}
+     * <pre>e.g. setUpdateDatetime_FromTo(fromDate, toDate, new <span style="color: #DD4747">FromToOption</span>().compareAsDate());</pre>
+     * @param fromDatetime The from-datetime(yyyy/MM/dd HH:mm:ss.SSS) of updateDatetime. (NullAllowed: if null, no from-condition)
+     * @param toDatetime The to-datetime(yyyy/MM/dd HH:mm:ss.SSS) of updateDatetime. (NullAllowed: if null, no to-condition)
+     * @param fromToOption The option of from-to. (NotNull)
+     */
+    public void setUpdateDatetime_FromTo(Date fromDatetime, Date toDatetime, FromToOption fromToOption) {
+        regFTQ((fromDatetime != null ? new java.sql.Timestamp(fromDatetime.getTime()) : null), (toDatetime != null ? new java.sql.Timestamp(toDatetime.getTime()) : null), getCValueUpdateDatetime(), "UPDATE_DATETIME", fromToOption);
+    }
+
+    /**
+     * DateFromTo. (Date means yyyy/MM/dd) {fromDate &lt;= column &lt; toDate + 1 day} <br />
+     * And NullIgnored, OnlyOnceRegistered. <br />
+     * UPDATE_DATETIME: {DATETIME(19)}
+     * <pre>
+     * e.g. from:{2007/04/10 08:24:53} to:{2007/04/16 14:36:29}
+     *  column &gt;= '2007/04/10 00:00:00' and column <span style="color: #DD4747">&lt; '2007/04/17 00:00:00'</span>
+     * </pre>
+     * @param fromDate The from-date(yyyy/MM/dd) of updateDatetime. (NullAllowed: if null, no from-condition)
+     * @param toDate The to-date(yyyy/MM/dd) of updateDatetime. (NullAllowed: if null, no to-condition)
+     */
+    public void setUpdateDatetime_DateFromTo(Date fromDate, Date toDate) {
+        setUpdateDatetime_FromTo(fromDate, toDate, new FromToOption().compareAsDate());
+    }
+
+    /**
+     * IsNull {is null}. And OnlyOnceRegistered. <br />
+     * UPDATE_DATETIME: {DATETIME(19)}
+     */
+    public void setUpdateDatetime_IsNull() { regUpdateDatetime(CK_ISN, DOBJ); }
+
+    /**
+     * IsNotNull {is not null}. And OnlyOnceRegistered. <br />
+     * UPDATE_DATETIME: {DATETIME(19)}
+     */
+    public void setUpdateDatetime_IsNotNull() { regUpdateDatetime(CK_ISNN, DOBJ); }
+
+    protected void regUpdateDatetime(ConditionKey ky, Object vl) { regQ(ky, vl, getCValueUpdateDatetime(), "UPDATE_DATETIME"); }
+    protected abstract ConditionValue getCValueUpdateDatetime();
 
     // ===================================================================================
     //                                                                     ScalarCondition

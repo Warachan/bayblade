@@ -61,12 +61,12 @@ public class MemberWithdrawCIQ extends AbstractBsMemberWithdrawCQ {
     // ===================================================================================
     //                                                                Override about Query
     //                                                                ====================
-    protected ConditionValue getCValueWithdrawalReasonId() { return _myCQ.getWithdrawalReasonId(); }
     protected ConditionValue getCValueMemberId() { return _myCQ.getMemberId(); }
     public String keepMemberId_InScopeRelation_Member(MemberCQ sq)
     { return _myCQ.keepMemberId_InScopeRelation_Member(sq); }
     public String keepMemberId_NotInScopeRelation_Member(MemberCQ sq)
     { return _myCQ.keepMemberId_NotInScopeRelation_Member(sq); }
+    protected ConditionValue getCValueWithdrawalReasonId() { return _myCQ.getWithdrawalReasonId(); }
     protected ConditionValue getCValueWithdrawalReasonInputText() { return _myCQ.getWithdrawalReasonInputText(); }
     protected ConditionValue getCValueWithdrawalDatetime() { return _myCQ.getWithdrawalDatetime(); }
     protected Map<String, Object> xfindFixedConditionDynamicParameterMap(String pp) { return null; }

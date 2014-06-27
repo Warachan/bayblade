@@ -2,6 +2,7 @@ package jp.bizreach.twitter.app.web;
 
 import javax.annotation.Resource;
 
+import org.seasar.framework.aop.annotation.RemoveSession;
 import org.seasar.struts.annotation.Execute;
 
 public class LogoutAction {
@@ -10,8 +11,9 @@ public class LogoutAction {
 
     // TODO mayuko.sakaba インターセプターもしくはフィルタをつくること。
     @Execute(validator = false)
+    @RemoveSession(name = "sessionDto")
     public String index() {
-        sessionDto.id = null;
+        sessionDto.myId = null;
         sessionDto.email = null;
         return "/?redirect=true";
     }

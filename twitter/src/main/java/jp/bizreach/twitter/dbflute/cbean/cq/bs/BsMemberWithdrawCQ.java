@@ -73,26 +73,6 @@ public class BsMemberWithdrawCQ extends AbstractBsMemberWithdrawCQ {
     // ===================================================================================
     //                                                                               Query
     //                                                                               =====
-    protected ConditionValue _withdrawalReasonId;
-    public ConditionValue getWithdrawalReasonId()
-    { if (_withdrawalReasonId == null) { _withdrawalReasonId = nCV(); }
-      return _withdrawalReasonId; }
-    protected ConditionValue getCValueWithdrawalReasonId() { return getWithdrawalReasonId(); }
-
-    /** 
-     * Add order-by as ascend. <br />
-     * WITHDRAWAL_REASON_ID: {INT(10)}
-     * @return this. (NotNull)
-     */
-    public BsMemberWithdrawCQ addOrderBy_WithdrawalReasonId_Asc() { regOBA("WITHDRAWAL_REASON_ID"); return this; }
-
-    /**
-     * Add order-by as descend. <br />
-     * WITHDRAWAL_REASON_ID: {INT(10)}
-     * @return this. (NotNull)
-     */
-    public BsMemberWithdrawCQ addOrderBy_WithdrawalReasonId_Desc() { regOBD("WITHDRAWAL_REASON_ID"); return this; }
-
     protected ConditionValue _memberId;
     public ConditionValue getMemberId()
     { if (_memberId == null) { _memberId = nCV(); }
@@ -118,6 +98,26 @@ public class BsMemberWithdrawCQ extends AbstractBsMemberWithdrawCQ {
      * @return this. (NotNull)
      */
     public BsMemberWithdrawCQ addOrderBy_MemberId_Desc() { regOBD("MEMBER_ID"); return this; }
+
+    protected ConditionValue _withdrawalReasonId;
+    public ConditionValue getWithdrawalReasonId()
+    { if (_withdrawalReasonId == null) { _withdrawalReasonId = nCV(); }
+      return _withdrawalReasonId; }
+    protected ConditionValue getCValueWithdrawalReasonId() { return getWithdrawalReasonId(); }
+
+    /** 
+     * Add order-by as ascend. <br />
+     * WITHDRAWAL_REASON_ID: {INT(10)}
+     * @return this. (NotNull)
+     */
+    public BsMemberWithdrawCQ addOrderBy_WithdrawalReasonId_Asc() { regOBA("WITHDRAWAL_REASON_ID"); return this; }
+
+    /**
+     * Add order-by as descend. <br />
+     * WITHDRAWAL_REASON_ID: {INT(10)}
+     * @return this. (NotNull)
+     */
+    public BsMemberWithdrawCQ addOrderBy_WithdrawalReasonId_Desc() { regOBD("WITHDRAWAL_REASON_ID"); return this; }
 
     protected ConditionValue _withdrawalReasonInputText;
     public ConditionValue getWithdrawalReasonInputText()

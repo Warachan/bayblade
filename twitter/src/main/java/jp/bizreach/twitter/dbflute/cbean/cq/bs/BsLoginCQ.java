@@ -93,26 +93,6 @@ public class BsLoginCQ extends AbstractBsLoginCQ {
      */
     public BsLoginCQ addOrderBy_LoginId_Desc() { regOBD("LOGIN_ID"); return this; }
 
-    protected ConditionValue _loginDatetime;
-    public ConditionValue getLoginDatetime()
-    { if (_loginDatetime == null) { _loginDatetime = nCV(); }
-      return _loginDatetime; }
-    protected ConditionValue getCValueLoginDatetime() { return getLoginDatetime(); }
-
-    /** 
-     * Add order-by as ascend. <br />
-     * LOGIN_DATETIME: {NotNull, DATETIME(19)}
-     * @return this. (NotNull)
-     */
-    public BsLoginCQ addOrderBy_LoginDatetime_Asc() { regOBA("LOGIN_DATETIME"); return this; }
-
-    /**
-     * Add order-by as descend. <br />
-     * LOGIN_DATETIME: {NotNull, DATETIME(19)}
-     * @return this. (NotNull)
-     */
-    public BsLoginCQ addOrderBy_LoginDatetime_Desc() { regOBD("LOGIN_DATETIME"); return this; }
-
     protected ConditionValue _memberId;
     public ConditionValue getMemberId()
     { if (_memberId == null) { _memberId = nCV(); }
@@ -138,6 +118,26 @@ public class BsLoginCQ extends AbstractBsLoginCQ {
      * @return this. (NotNull)
      */
     public BsLoginCQ addOrderBy_MemberId_Desc() { regOBD("MEMBER_ID"); return this; }
+
+    protected ConditionValue _loginDatetime;
+    public ConditionValue getLoginDatetime()
+    { if (_loginDatetime == null) { _loginDatetime = nCV(); }
+      return _loginDatetime; }
+    protected ConditionValue getCValueLoginDatetime() { return getLoginDatetime(); }
+
+    /** 
+     * Add order-by as ascend. <br />
+     * LOGIN_DATETIME: {NotNull, DATETIME(19)}
+     * @return this. (NotNull)
+     */
+    public BsLoginCQ addOrderBy_LoginDatetime_Asc() { regOBA("LOGIN_DATETIME"); return this; }
+
+    /**
+     * Add order-by as descend. <br />
+     * LOGIN_DATETIME: {NotNull, DATETIME(19)}
+     * @return this. (NotNull)
+     */
+    public BsLoginCQ addOrderBy_LoginDatetime_Desc() { regOBD("LOGIN_DATETIME"); return this; }
 
     // ===================================================================================
     //                                                             SpecifiedDerivedOrderBy

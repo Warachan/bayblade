@@ -292,24 +292,15 @@ dl.procedurelist dd.column pre {
 	<tbody id="table-list-body">
 	<tr>
 		<td class="rownumcell">1</td>
-		<td><a href="#follow" title="type=TABLE, primaryKey={FOLLOW_ID}, nameLength=6, columnCount=2">follow</a></td>
+		<td><a href="#follow" title="type=TABLE, primaryKey={FOLLOW_ID}, nameLength=6, columnCount=4">follow</a></td>
 		<td class="typecell">TABLE</td>
-		<td class="relcell"><a href="#member" title="follow_ibfk_1">member</a></td>
+		<td class="relcell"><a href="#member" title="follow_ibfk_1">member</a>, <a href="#member" title="follow_ibfk_2">member</a></td>
 		<td class="relcell">&nbsp;</td>
 		<td class="commentcell"> フォロー</td>
 		<td class="subcell">Follow</td>
 	</tr>
 	<tr>
 		<td class="rownumcell">2</td>
-		<td><a href="#followers" title="type=TABLE, primaryKey={FOLLOWERSID}, nameLength=9, columnCount=2">followers</a></td>
-		<td class="typecell">TABLE</td>
-		<td class="relcell"><a href="#member" title="followers_ibfk_1">member</a></td>
-		<td class="relcell">&nbsp;</td>
-		<td class="commentcell"> フォロワー</td>
-		<td class="subcell">Followers</td>
-	</tr>
-	<tr>
-		<td class="rownumcell">3</td>
 		<td><a href="#login" title="type=TABLE, primaryKey={LOGIN_ID}, nameLength=5, columnCount=3">login</a></td>
 		<td class="typecell">TABLE</td>
 		<td class="relcell"><a href="#member" title="login_ibfk_1">member</a></td>
@@ -318,16 +309,16 @@ dl.procedurelist dd.column pre {
 		<td class="subcell">Login</td>
 	</tr>
 	<tr>
-		<td class="rownumcell">4</td>
+		<td class="rownumcell">3</td>
 		<td><a href="#member" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=6, columnCount=7">member</a></td>
 		<td class="typecell">TABLE</td>
 		<td class="relcell">&nbsp;</td>
-		<td class="relcell"><a href="#follow" title="follow_ibfk_1">follow</a>, <a href="#followers" title="followers_ibfk_1">followers</a>, <a href="#login" title="login_ibfk_1">login</a>, <a href="#member_security" title="member_security_ibfk_1">member_security</a>, <a href="#member_withdraw" title="member_withdraw_ibfk_1">member_withdraw</a>, <a href="#tweet" title="tweet_ibfk_1">tweet</a></td>
+		<td class="relcell"><a href="#follow" title="follow_ibfk_1">follow</a>, <a href="#follow" title="follow_ibfk_2">follow</a>, <a href="#login" title="login_ibfk_1">login</a>, <a href="#member_security" title="member_security_ibfk_1">member_security</a>, <a href="#member_withdraw" title="member_withdraw_ibfk_1">member_withdraw</a>, <a href="#tweet" title="tweet_ibfk_1">tweet</a></td>
 		<td class="commentcell"> 会員</td>
 		<td class="subcell">Member</td>
 	</tr>
 	<tr>
-		<td class="rownumcell">5</td>
+		<td class="rownumcell">4</td>
 		<td><a href="#member_security" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=15, columnCount=4">member_security</a></td>
 		<td class="typecell">TABLE</td>
 		<td class="relcell"><a href="#member" title="member_security_ibfk_1">member</a></td>
@@ -336,7 +327,7 @@ dl.procedurelist dd.column pre {
 		<td class="subcell">MemberSecurity</td>
 	</tr>
 	<tr>
-		<td class="rownumcell">6</td>
+		<td class="rownumcell">5</td>
 		<td><a href="#member_withdraw" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=15, columnCount=4">member_withdraw</a></td>
 		<td class="typecell">TABLE</td>
 		<td class="relcell"><a href="#member" title="member_withdraw_ibfk_1">member</a></td>
@@ -345,7 +336,7 @@ dl.procedurelist dd.column pre {
 		<td class="subcell">MemberWithdraw</td>
 	</tr>
 	<tr>
-		<td class="rownumcell">7</td>
+		<td class="rownumcell">6</td>
 		<td><a href="#tweet" title="type=TABLE, primaryKey={TWEET_ID}, nameLength=5, columnCount=4">tweet</a></td>
 		<td class="typecell">TABLE</td>
 		<td class="relcell"><a href="#member" title="tweet_ibfk_1">member</a></td>
@@ -356,7 +347,7 @@ dl.procedurelist dd.column pre {
 	</tbody>
 </table>
 
-  <h2 id="follow" title="type=TABLE, primaryKey={FOLLOW_ID}, nameLength=6, columnCount=2">
+  <h2 id="follow" title="type=TABLE, primaryKey={FOLLOW_ID}, nameLength=6, columnCount=4">
 follow
 </h2>
 <p class="tablecomment">フォロー</p>
@@ -383,7 +374,7 @@ follow
 	<tr>
 		<td class="rownumcell">1</td>
 		<td class="flgcell" title="PRIMARY">o</td>
-		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">o</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
@@ -401,77 +392,52 @@ follow
 		<td class="rownumcell">2</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell"> &nbsp;</td>
-		<td class="flgcell" title="MEMBER_ID(MEMBER_ID)">o</td>
+		<td class="flgcell" title="YOU_ID(YOU_ID)">o</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td id="follow_member_id">MEMBER_ID</td>
+		<td id="follow_you_id">YOU_ID</td>
+		<td class="typecell">INT</td>
+		<td class="sizecell"> 10 </td>
+		<td class="relcell"><a href="#member" title="follow_ibfk_2">member</a>&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> フォローする人のID&nbsp;:&nbsp;会員のID</td>
+		<td class="subcell">youId</td>
+		<td class="subcell">Integer</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">3</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell" title="ME_ID(ME_ID)">o</td>
+		<td class="flgcell">*</td>
+		<td id="follow_me_id">ME_ID</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
 		<td class="relcell"><a href="#member" title="follow_ibfk_1">member</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"> 会員ID&nbsp;:&nbsp;会員のID</td>
-		<td class="subcell">memberId</td>
+		<td class="commentcell"> フォローされる人のID&nbsp;:&nbsp;会員のID</td>
+		<td class="subcell">meId</td>
 		<td class="subcell">Integer</td>
 	</tr>
-</table>
-  <h2 id="followers" title="type=TABLE, primaryKey={FOLLOWERSID}, nameLength=9, columnCount=2">
-followers
-</h2>
-<p class="tablecomment">フォロワー</p>
-<table summary="Columns in followers">
-	<thead>
 	<tr>
-		<th class="rownumhead">No.</th>
-		<th>PK</th>
-		<th>ID</th>
-		<th>UQ</th>
-		<th>IX</th>
-		<th>Not<br />Null</th>
-		<th>Name</th>
-		<th>Type</th>
-		<th>Size</th>
-		<th>ForeignTable</th>
-		<th>ReferrerTable</th>
-		<th>Classification</th>
-		<th>ColumnComment</th>
-		<th>PropertyName</th>
-		<th>JavaType</th>
-	</tr>
-	</thead>
-	<tr>
-		<td class="rownumcell">1</td>
-		<td class="flgcell" title="PRIMARY">o</td>
+		<td class="rownumcell">4</td>
+		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell"> &nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td id="followers_followersid">FOLLOWERSID</td>
-		<td class="typecell">INT</td>
-		<td class="sizecell"> 10 </td>
+		<td id="follow_follow_datetime">FOLLOW_DATETIME</td>
+		<td class="typecell">DATETIME</td>
+		<td class="sizecell"> 19 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"> フォロワーID</td>
-		<td class="subcell">followersid</td>
-		<td class="subcell">Integer</td>
-	</tr>
-	<tr>
-		<td class="rownumcell">2</td>
-		<td class="flgcell">&nbsp;</td>
-		<td class="flgcell"> &nbsp;</td>
-		<td class="flgcell" title="MEMBER_ID(MEMBER_ID)">o</td>
-		<td class="flgcell">&nbsp;</td>
-		<td class="flgcell">*</td>
-		<td id="followers_member_id">MEMBER_ID</td>
-		<td class="typecell">INT</td>
-		<td class="sizecell"> 10 </td>
-		<td class="relcell"><a href="#member" title="followers_ibfk_1">member</a>&nbsp;</td>
-		<td class="relcell">&nbsp;</td>
-		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"> 会員ID&nbsp;:&nbsp;会員のID</td>
-		<td class="subcell">memberId</td>
-		<td class="subcell">Integer</td>
+		<td class="commentcell"> follow_datetime</td>
+		<td class="subcell">followDatetime</td>
+		<td class="subcell">Timestamp</td>
 	</tr>
 </table>
   <h2 id="login" title="type=TABLE, primaryKey={LOGIN_ID}, nameLength=5, columnCount=3">
@@ -520,23 +486,6 @@ login
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell"> &nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
-		<td class="flgcell">&nbsp;</td>
-		<td class="flgcell">*</td>
-		<td id="login_login_datetime">LOGIN_DATETIME</td>
-		<td class="typecell">DATETIME</td>
-		<td class="sizecell"> 19 </td>
-		<td class="relcell">&nbsp;&nbsp;</td>
-		<td class="relcell">&nbsp;</td>
-		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"> ログイン日時</td>
-		<td class="subcell">loginDatetime</td>
-		<td class="subcell">Timestamp</td>
-	</tr>
-	<tr>
-		<td class="rownumcell">3</td>
-		<td class="flgcell">&nbsp;</td>
-		<td class="flgcell"> &nbsp;</td>
-		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell" title="MEMBER_ID(MEMBER_ID)">o</td>
 		<td class="flgcell">*</td>
 		<td id="login_member_id">MEMBER_ID</td>
@@ -548,6 +497,23 @@ login
 		<td class="commentcell"> 会員ID&nbsp;:&nbsp;会員のID</td>
 		<td class="subcell">memberId</td>
 		<td class="subcell">Integer</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">3</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td id="login_login_datetime">LOGIN_DATETIME</td>
+		<td class="typecell">DATETIME</td>
+		<td class="sizecell"> 19 </td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> ログイン日時</td>
+		<td class="subcell">loginDatetime</td>
+		<td class="subcell">Timestamp</td>
 	</tr>
 </table>
   <h2 id="member" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=6, columnCount=7">
@@ -585,7 +551,7 @@ member
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
-		<td class="relcell"><a href="#follow" title="follow_ibfk_1">follow</a>,<br /><a href="#followers" title="followers_ibfk_1">followers</a>,<br /><a href="#login" title="login_ibfk_1">login</a>,<br /><a href="#member_security" title="member_security_ibfk_1">member_security</a>,<br /><a href="#member_withdraw" title="member_withdraw_ibfk_1">member_withdraw</a>,<br /><a href="#tweet" title="tweet_ibfk_1">tweet</a>&nbsp;</td>
+		<td class="relcell"><a href="#follow" title="follow_ibfk_1">follow</a>,<br /><a href="#follow" title="follow_ibfk_2">follow</a>,<br /><a href="#login" title="login_ibfk_1">login</a>,<br /><a href="#member_security" title="member_security_ibfk_1">member_security</a>,<br /><a href="#member_withdraw" title="member_withdraw_ibfk_1">member_withdraw</a>,<br /><a href="#tweet" title="tweet_ibfk_1">tweet</a>&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
 		<td class="commentcell"> 会員ID&nbsp;:&nbsp;会員のID</td>
 		<td class="subcell">memberId</td>
@@ -632,23 +598,6 @@ member
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell"> &nbsp;</td>
-		<td id="member_update_datetime">UPDATE_DATETIME</td>
-		<td class="typecell">DATETIME</td>
-		<td class="sizecell"> 19 </td>
-		<td class="relcell">&nbsp;&nbsp;</td>
-		<td class="relcell">&nbsp;</td>
-		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"> 更新日時</td>
-		<td class="subcell">updateDatetime</td>
-		<td class="subcell">Timestamp</td>
-	</tr>
-	<tr>
-		<td class="rownumcell">5</td>
-		<td class="flgcell">&nbsp;</td>
-		<td class="flgcell"> &nbsp;</td>
-		<td class="flgcell">&nbsp;</td>
-		<td class="flgcell">&nbsp;</td>
-		<td class="flgcell"> &nbsp;</td>
 		<td id="member_birthdate">BIRTHDATE</td>
 		<td class="typecell">DATE</td>
 		<td class="sizecell"> 10 </td>
@@ -660,7 +609,7 @@ member
 		<td class="subcell">Date</td>
 	</tr>
 	<tr>
-		<td class="rownumcell">6</td>
+		<td class="rownumcell">5</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell"> &nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
@@ -677,7 +626,7 @@ member
 		<td class="subcell">String</td>
 	</tr>
 	<tr>
-		<td class="rownumcell">7</td>
+		<td class="rownumcell">6</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell"> &nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
@@ -691,6 +640,23 @@ member
 		<td class="relcell"> &nbsp;</td>
 		<td class="commentcell"> 登録日時</td>
 		<td class="subcell">regesterDatetime</td>
+		<td class="subcell">Timestamp</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">7</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td id="member_update_datetime">UPDATE_DATETIME</td>
+		<td class="typecell">DATETIME</td>
+		<td class="sizecell"> 19 </td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> 更新日時</td>
+		<td class="subcell">updateDatetime</td>
 		<td class="subcell">Timestamp</td>
 	</tr>
 </table>
@@ -813,23 +779,6 @@ member_withdraw
 	</thead>
 	<tr>
 		<td class="rownumcell">1</td>
-		<td class="flgcell">&nbsp;</td>
-		<td class="flgcell"> &nbsp;</td>
-		<td class="flgcell">&nbsp;</td>
-		<td class="flgcell">&nbsp;</td>
-		<td class="flgcell"> &nbsp;</td>
-		<td id="member_withdraw_withdrawal_reason_id">WITHDRAWAL_REASON_ID</td>
-		<td class="typecell">INT</td>
-		<td class="sizecell"> 10 </td>
-		<td class="relcell">&nbsp;&nbsp;</td>
-		<td class="relcell">&nbsp;</td>
-		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"> 退会理由ID&nbsp;:&nbsp;会員の退会理由ID</td>
-		<td class="subcell">withdrawalReasonId</td>
-		<td class="subcell">Integer</td>
-	</tr>
-	<tr>
-		<td class="rownumcell">2</td>
 		<td class="flgcell" title="PRIMARY">o</td>
 		<td class="flgcell"> &nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
@@ -843,6 +792,23 @@ member_withdraw
 		<td class="relcell"> &nbsp;</td>
 		<td class="commentcell"> 会員ID&nbsp;:&nbsp;会員のID</td>
 		<td class="subcell">memberId</td>
+		<td class="subcell">Integer</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">2</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td id="member_withdraw_withdrawal_reason_id">WITHDRAWAL_REASON_ID</td>
+		<td class="typecell">INT</td>
+		<td class="sizecell"> 10 </td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> 退会理由ID&nbsp;:&nbsp;会員の退会理由ID</td>
+		<td class="subcell">withdrawalReasonId</td>
 		<td class="subcell">Integer</td>
 	</tr>
 	<tr>

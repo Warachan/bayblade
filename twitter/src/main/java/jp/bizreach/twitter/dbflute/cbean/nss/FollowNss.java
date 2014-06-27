@@ -21,11 +21,20 @@ public class FollowNss {
     //                                                                     ===============
     /**
      * With nested relation columns to select clause. <br />
-     * member by my MEMBER_ID, named 'member'.
+     * member by my ME_ID, named 'memberByMeId'.
      * @return The set-upper of more nested relation. {...with[nested-relation].with[more-nested-relation]} (NotNull)
      */
-    public MemberNss withMember() {
-        _query.doNss(new FollowCQ.NssCall() { public ConditionQuery qf() { return _query.queryMember(); }});
-        return new MemberNss(_query.queryMember());
+    public MemberNss withMemberByMeId() {
+        _query.doNss(new FollowCQ.NssCall() { public ConditionQuery qf() { return _query.queryMemberByMeId(); }});
+        return new MemberNss(_query.queryMemberByMeId());
+    }
+    /**
+     * With nested relation columns to select clause. <br />
+     * member by my YOU_ID, named 'memberByYouId'.
+     * @return The set-upper of more nested relation. {...with[nested-relation].with[more-nested-relation]} (NotNull)
+     */
+    public MemberNss withMemberByYouId() {
+        _query.doNss(new FollowCQ.NssCall() { public ConditionQuery qf() { return _query.queryMemberByYouId(); }});
+        return new MemberNss(_query.queryMemberByYouId());
     }
 }

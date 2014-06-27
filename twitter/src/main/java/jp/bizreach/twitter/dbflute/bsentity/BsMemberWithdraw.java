@@ -18,7 +18,7 @@ import jp.bizreach.twitter.dbflute.exentity.*;
  *     MEMBER_ID
  * 
  * [column]
- *     WITHDRAWAL_REASON_ID, MEMBER_ID, WITHDRAWAL_REASON_INPUT_TEXT, WITHDRAWAL_DATETIME
+ *     MEMBER_ID, WITHDRAWAL_REASON_ID, WITHDRAWAL_REASON_INPUT_TEXT, WITHDRAWAL_DATETIME
  * 
  * [sequence]
  *     
@@ -43,12 +43,12 @@ import jp.bizreach.twitter.dbflute.exentity.*;
  * 
  * [get/set template]
  * /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
- * Integer withdrawalReasonId = entity.getWithdrawalReasonId();
  * Integer memberId = entity.getMemberId();
+ * Integer withdrawalReasonId = entity.getWithdrawalReasonId();
  * String withdrawalReasonInputText = entity.getWithdrawalReasonInputText();
  * java.sql.Timestamp withdrawalDatetime = entity.getWithdrawalDatetime();
- * entity.setWithdrawalReasonId(withdrawalReasonId);
  * entity.setMemberId(memberId);
+ * entity.setWithdrawalReasonId(withdrawalReasonId);
  * entity.setWithdrawalReasonInputText(withdrawalReasonInputText);
  * entity.setWithdrawalDatetime(withdrawalDatetime);
  * = = = = = = = = = =/
@@ -69,11 +69,11 @@ public abstract class BsMemberWithdraw implements Entity, Serializable, Cloneabl
     // -----------------------------------------------------
     //                                                Column
     //                                                ------
-    /** WITHDRAWAL_REASON_ID: {INT(10)} */
-    protected Integer _withdrawalReasonId;
-
     /** MEMBER_ID: {PK, NotNull, INT(10), FK to member} */
     protected Integer _memberId;
+
+    /** WITHDRAWAL_REASON_ID: {INT(10)} */
+    protected Integer _withdrawalReasonId;
 
     /** WITHDRAWAL_REASON_INPUT_TEXT: {TEXT(65535)} */
     protected String _withdrawalReasonInputText;
@@ -293,8 +293,8 @@ public abstract class BsMemberWithdraw implements Entity, Serializable, Cloneabl
     protected String buildColumnString() {
         StringBuilder sb = new StringBuilder();
         String dm = ", ";
-        sb.append(dm).append(getWithdrawalReasonId());
         sb.append(dm).append(getMemberId());
+        sb.append(dm).append(getWithdrawalReasonId());
         sb.append(dm).append(getWithdrawalReasonInputText());
         sb.append(dm).append(getWithdrawalDatetime());
         if (sb.length() > dm.length()) {
@@ -329,25 +329,6 @@ public abstract class BsMemberWithdraw implements Entity, Serializable, Cloneabl
     //                                                                            Accessor
     //                                                                            ========
     /**
-     * [get] WITHDRAWAL_REASON_ID: {INT(10)} <br />
-     * 退会理由ID : 会員の退会理由ID
-     * @return The value of the column 'WITHDRAWAL_REASON_ID'. (NullAllowed even if selected: for no constraint)
-     */
-    public Integer getWithdrawalReasonId() {
-        return _withdrawalReasonId;
-    }
-
-    /**
-     * [set] WITHDRAWAL_REASON_ID: {INT(10)} <br />
-     * 退会理由ID : 会員の退会理由ID
-     * @param withdrawalReasonId The value of the column 'WITHDRAWAL_REASON_ID'. (NullAllowed: null update allowed for no constraint)
-     */
-    public void setWithdrawalReasonId(Integer withdrawalReasonId) {
-        __modifiedProperties.addPropertyName("withdrawalReasonId");
-        _withdrawalReasonId = withdrawalReasonId;
-    }
-
-    /**
      * [get] MEMBER_ID: {PK, NotNull, INT(10), FK to member} <br />
      * 会員ID : 会員のID
      * @return The value of the column 'MEMBER_ID'. (basically NotNull if selected: for the constraint)
@@ -364,6 +345,25 @@ public abstract class BsMemberWithdraw implements Entity, Serializable, Cloneabl
     public void setMemberId(Integer memberId) {
         __modifiedProperties.addPropertyName("memberId");
         _memberId = memberId;
+    }
+
+    /**
+     * [get] WITHDRAWAL_REASON_ID: {INT(10)} <br />
+     * 退会理由ID : 会員の退会理由ID
+     * @return The value of the column 'WITHDRAWAL_REASON_ID'. (NullAllowed even if selected: for no constraint)
+     */
+    public Integer getWithdrawalReasonId() {
+        return _withdrawalReasonId;
+    }
+
+    /**
+     * [set] WITHDRAWAL_REASON_ID: {INT(10)} <br />
+     * 退会理由ID : 会員の退会理由ID
+     * @param withdrawalReasonId The value of the column 'WITHDRAWAL_REASON_ID'. (NullAllowed: null update allowed for no constraint)
+     */
+    public void setWithdrawalReasonId(Integer withdrawalReasonId) {
+        __modifiedProperties.addPropertyName("withdrawalReasonId");
+        _withdrawalReasonId = withdrawalReasonId;
     }
 
     /**

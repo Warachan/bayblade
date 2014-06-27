@@ -285,52 +285,28 @@ public class BsMemberCB extends AbstractConditionBean {
     // ===================================================================================
     //                                                                         SetupSelect
     //                                                                         ===========
-    protected FollowNss _nssFollowAsOne;
-    public FollowNss getNssFollowAsOne() {
-        if (_nssFollowAsOne == null) { _nssFollowAsOne = new FollowNss(null); }
-        return _nssFollowAsOne;
+    protected FollowNss _nssFollowByYouIdAsOne;
+    public FollowNss getNssFollowByYouIdAsOne() {
+        if (_nssFollowByYouIdAsOne == null) { _nssFollowByYouIdAsOne = new FollowNss(null); }
+        return _nssFollowByYouIdAsOne;
     }
     /**
      * Set up relation columns to select clause. <br />
-     * follow by MEMBER_ID, named 'followAsOne'.
+     * follow by YOU_ID, named 'followByYouIdAsOne'.
      * <pre>
      * MemberCB cb = new MemberCB();
-     * cb.<span style="color: #DD4747">setupSelect_FollowAsOne()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
+     * cb.<span style="color: #DD4747">setupSelect_FollowByYouIdAsOne()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
      * cb.query().setFoo...(value);
      * Member member = memberBhv.selectEntityWithDeletedCheck(cb);
-     * ... = member.<span style="color: #DD4747">getFollowAsOne()</span>; <span style="color: #3F7E5E">// you can get by using SetupSelect</span>
+     * ... = member.<span style="color: #DD4747">getFollowByYouIdAsOne()</span>; <span style="color: #3F7E5E">// you can get by using SetupSelect</span>
      * </pre>
      * @return The set-upper of nested relation. {setupSelect...().with[nested-relation]} (NotNull)
      */
-    public FollowNss setupSelect_FollowAsOne() {
-        assertSetupSelectPurpose("followAsOne");
-        doSetupSelect(new SsCall() { public ConditionQuery qf() { return query().queryFollowAsOne(); } });
-        if (_nssFollowAsOne == null || !_nssFollowAsOne.hasConditionQuery()) { _nssFollowAsOne = new FollowNss(query().queryFollowAsOne()); }
-        return _nssFollowAsOne;
-    }
-
-    protected FollowersNss _nssFollowersAsOne;
-    public FollowersNss getNssFollowersAsOne() {
-        if (_nssFollowersAsOne == null) { _nssFollowersAsOne = new FollowersNss(null); }
-        return _nssFollowersAsOne;
-    }
-    /**
-     * Set up relation columns to select clause. <br />
-     * followers by MEMBER_ID, named 'followersAsOne'.
-     * <pre>
-     * MemberCB cb = new MemberCB();
-     * cb.<span style="color: #DD4747">setupSelect_FollowersAsOne()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
-     * cb.query().setFoo...(value);
-     * Member member = memberBhv.selectEntityWithDeletedCheck(cb);
-     * ... = member.<span style="color: #DD4747">getFollowersAsOne()</span>; <span style="color: #3F7E5E">// you can get by using SetupSelect</span>
-     * </pre>
-     * @return The set-upper of nested relation. {setupSelect...().with[nested-relation]} (NotNull)
-     */
-    public FollowersNss setupSelect_FollowersAsOne() {
-        assertSetupSelectPurpose("followersAsOne");
-        doSetupSelect(new SsCall() { public ConditionQuery qf() { return query().queryFollowersAsOne(); } });
-        if (_nssFollowersAsOne == null || !_nssFollowersAsOne.hasConditionQuery()) { _nssFollowersAsOne = new FollowersNss(query().queryFollowersAsOne()); }
-        return _nssFollowersAsOne;
+    public FollowNss setupSelect_FollowByYouIdAsOne() {
+        assertSetupSelectPurpose("followByYouIdAsOne");
+        doSetupSelect(new SsCall() { public ConditionQuery qf() { return query().queryFollowByYouIdAsOne(); } });
+        if (_nssFollowByYouIdAsOne == null || !_nssFollowByYouIdAsOne.hasConditionQuery()) { _nssFollowByYouIdAsOne = new FollowNss(query().queryFollowByYouIdAsOne()); }
+        return _nssFollowByYouIdAsOne;
     }
 
     protected MemberSecurityNss _nssMemberSecurityAsOne;
@@ -423,8 +399,7 @@ public class BsMemberCB extends AbstractConditionBean {
     }
 
     public static class HpSpecification extends HpAbstractSpecification<MemberCQ> {
-        protected FollowCB.HpSpecification _followAsOne;
-        protected FollowersCB.HpSpecification _followersAsOne;
+        protected FollowCB.HpSpecification _followByYouIdAsOne;
         protected MemberSecurityCB.HpSpecification _memberSecurityAsOne;
         protected MemberWithdrawCB.HpSpecification _memberWithdrawAsOne;
         public HpSpecification(ConditionBean baseCB, HpSpQyCall<MemberCQ> qyCall
@@ -446,11 +421,6 @@ public class BsMemberCB extends AbstractConditionBean {
          */
         public HpSpecifiedColumn columnUserName() { return doColumn("USER_NAME"); }
         /**
-         * UPDATE_DATETIME: {DATETIME(19)}
-         * @return The information object of specified column. (NotNull)
-         */
-        public HpSpecifiedColumn columnUpdateDatetime() { return doColumn("UPDATE_DATETIME"); }
-        /**
          * BIRTHDATE: {DATE(10)}
          * @return The information object of specified column. (NotNull)
          */
@@ -465,6 +435,11 @@ public class BsMemberCB extends AbstractConditionBean {
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnRegesterDatetime() { return doColumn("REGESTER_DATETIME"); }
+        /**
+         * UPDATE_DATETIME: {DATETIME(19)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public HpSpecifiedColumn columnUpdateDatetime() { return doColumn("UPDATE_DATETIME"); }
         public void everyColumn() { doEveryColumn(); }
         public void exceptRecordMetaColumn() { doExceptRecordMetaColumn(); }
         @Override
@@ -475,45 +450,24 @@ public class BsMemberCB extends AbstractConditionBean {
         protected String getTableDbName() { return "member"; }
         /**
          * Prepare to specify functions about relation table. <br />
-         * follow by MEMBER_ID, named 'followAsOne'.
+         * follow by YOU_ID, named 'followByYouIdAsOne'.
          * @return The instance for specification for relation table to specify. (NotNull)
          */
-        public FollowCB.HpSpecification specifyFollowAsOne() {
-            assertRelation("followAsOne");
-            if (_followAsOne == null) {
-                _followAsOne = new FollowCB.HpSpecification(_baseCB, new HpSpQyCall<FollowCQ>() {
-                    public boolean has() { return _qyCall.has() && _qyCall.qy().hasConditionQueryFollowAsOne(); }
-                    public FollowCQ qy() { return _qyCall.qy().queryFollowAsOne(); } }
+        public FollowCB.HpSpecification specifyFollowByYouIdAsOne() {
+            assertRelation("followByYouIdAsOne");
+            if (_followByYouIdAsOne == null) {
+                _followByYouIdAsOne = new FollowCB.HpSpecification(_baseCB, new HpSpQyCall<FollowCQ>() {
+                    public boolean has() { return _qyCall.has() && _qyCall.qy().hasConditionQueryFollowByYouIdAsOne(); }
+                    public FollowCQ qy() { return _qyCall.qy().queryFollowByYouIdAsOne(); } }
                     , _purpose, _dbmetaProvider);
                 if (xhasSyncQyCall()) { // inherits it
-                    _followAsOne.xsetSyncQyCall(new HpSpQyCall<FollowCQ>() {
-                        public boolean has() { return xsyncQyCall().has() && xsyncQyCall().qy().hasConditionQueryFollowAsOne(); }
-                        public FollowCQ qy() { return xsyncQyCall().qy().queryFollowAsOne(); }
+                    _followByYouIdAsOne.xsetSyncQyCall(new HpSpQyCall<FollowCQ>() {
+                        public boolean has() { return xsyncQyCall().has() && xsyncQyCall().qy().hasConditionQueryFollowByYouIdAsOne(); }
+                        public FollowCQ qy() { return xsyncQyCall().qy().queryFollowByYouIdAsOne(); }
                     });
                 }
             }
-            return _followAsOne;
-        }
-        /**
-         * Prepare to specify functions about relation table. <br />
-         * followers by MEMBER_ID, named 'followersAsOne'.
-         * @return The instance for specification for relation table to specify. (NotNull)
-         */
-        public FollowersCB.HpSpecification specifyFollowersAsOne() {
-            assertRelation("followersAsOne");
-            if (_followersAsOne == null) {
-                _followersAsOne = new FollowersCB.HpSpecification(_baseCB, new HpSpQyCall<FollowersCQ>() {
-                    public boolean has() { return _qyCall.has() && _qyCall.qy().hasConditionQueryFollowersAsOne(); }
-                    public FollowersCQ qy() { return _qyCall.qy().queryFollowersAsOne(); } }
-                    , _purpose, _dbmetaProvider);
-                if (xhasSyncQyCall()) { // inherits it
-                    _followersAsOne.xsetSyncQyCall(new HpSpQyCall<FollowersCQ>() {
-                        public boolean has() { return xsyncQyCall().has() && xsyncQyCall().qy().hasConditionQueryFollowersAsOne(); }
-                        public FollowersCQ qy() { return xsyncQyCall().qy().queryFollowersAsOne(); }
-                    });
-                }
-            }
-            return _followersAsOne;
+            return _followByYouIdAsOne;
         }
         /**
          * Prepare to specify functions about relation table. <br />
@@ -556,6 +510,26 @@ public class BsMemberCB extends AbstractConditionBean {
                 }
             }
             return _memberWithdrawAsOne;
+        }
+        /**
+         * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br />
+         * {select max(FOO) from follow where ...) as FOO_MAX} <br />
+         * follow by ME_ID, named 'followByMeIdList'.
+         * <pre>
+         * cb.specify().<span style="color: #DD4747">derivedFollowByMeIdList()</span>.<span style="color: #DD4747">max</span>(new SubQuery&lt;FollowCB&gt;() {
+         *     public void query(FollowCB subCB) {
+         *         subCB.specify().<span style="color: #DD4747">columnFoo...</span> <span style="color: #3F7E5E">// derived column by function</span>
+         *         subCB.query().setBar... <span style="color: #3F7E5E">// referrer condition</span>
+         *     }
+         * }, Follow.<span style="color: #DD4747">ALIAS_foo...</span>);
+         * </pre>
+         * @return The object to set up a function for referrer table. (NotNull)
+         */
+        public HpSDRFunction<FollowCB, MemberCQ> derivedFollowByMeIdList() {
+            assertDerived("followByMeIdList"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
+            return new HpSDRFunction<FollowCB, MemberCQ>(_baseCB, _qyCall.qy(), new HpSDRSetupper<FollowCB, MemberCQ>() {
+                public void setup(String fn, SubQuery<FollowCB> sq, MemberCQ cq, String al, DerivedReferrerOption op) {
+                    cq.xsderiveFollowByMeIdList(fn, sq, al, op); } }, _dbmetaProvider);
         }
         /**
          * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br />

@@ -24,7 +24,7 @@ import jp.bizreach.twitter.dbflute.cbean.*;
  *     LOGIN_ID
  *
  * [column]
- *     LOGIN_ID, LOGIN_DATETIME, MEMBER_ID
+ *     LOGIN_ID, MEMBER_ID, LOGIN_DATETIME
  *
  * [sequence]
  *     

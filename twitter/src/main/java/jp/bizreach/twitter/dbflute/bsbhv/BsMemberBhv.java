@@ -24,7 +24,7 @@ import jp.bizreach.twitter.dbflute.cbean.*;
  *     MEMBER_ID
  *
  * [column]
- *     MEMBER_ID, EMAIL_ADDRESS, USER_NAME, UPDATE_DATETIME, BIRTHDATE, PROFILE, REGESTER_DATETIME
+ *     MEMBER_ID, EMAIL_ADDRESS, USER_NAME, BIRTHDATE, PROFILE, REGESTER_DATETIME, UPDATE_DATETIME
  *
  * [sequence]
  *     
@@ -36,16 +36,16 @@ import jp.bizreach.twitter.dbflute.cbean.*;
  *     
  *
  * [foreign table]
- *     follow(AsOne), followers(AsOne), member_security(AsOne), member_withdraw(AsOne)
+ *     follow(AsOne), member_security(AsOne), member_withdraw(AsOne)
  *
  * [referrer table]
- *     login, tweet, follow, followers, member_security, member_withdraw
+ *     follow, login, tweet, member_security, member_withdraw
  *
  * [foreign property]
- *     followAsOne, followersAsOne, memberSecurityAsOne, memberWithdrawAsOne
+ *     followByYouIdAsOne, memberSecurityAsOne, memberWithdrawAsOne
  *
  * [referrer property]
- *     loginList, tweetList
+ *     followByMeIdList, loginList, tweetList
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
@@ -507,6 +507,98 @@ public abstract class BsMemberBhv extends AbstractBehaviorWritable {
     }
 
     /**
+     * Load referrer of followByMeIdList by the set-upper of referrer. <br />
+     * follow by ME_ID, named 'followByMeIdList'.
+     * <pre>
+     * memberBhv.<span style="color: #DD4747">loadFollowByMeIdList</span>(memberList, new ConditionBeanSetupper&lt;FollowCB&gt;() {
+     *     public void setup(FollowCB cb) {
+     *         cb.setupSelect...();
+     *         cb.query().setFoo...(value);
+     *         cb.query().addOrderBy_Bar...();
+     *     }
+     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
+     * <span style="color: #3F7E5E">//}).withNestedList(referrerList -&gt {</span>
+     * <span style="color: #3F7E5E">//    ...</span>
+     * <span style="color: #3F7E5E">//});</span>
+     * for (Member member : memberList) {
+     *     ... = member.<span style="color: #DD4747">getFollowByMeIdList()</span>;
+     * }
+     * </pre>
+     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br />
+     * The condition-bean, which the set-upper provides, has settings before callback as follows:
+     * <pre>
+     * cb.query().setMeId_InScope(pkList);
+     * cb.query().addOrderBy_MeId_Asc();
+     * </pre>
+     * @param memberList The entity list of member. (NotNull)
+     * @param setupper The callback to set up referrer condition-bean for loading referrer. (NotNull)
+     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
+     */
+    public NestedReferrerListGateway<Follow> loadFollowByMeIdList(List<Member> memberList, ConditionBeanSetupper<FollowCB> setupper) {
+        xassLRArg(memberList, setupper);
+        return doLoadFollowByMeIdList(memberList, new LoadReferrerOption<FollowCB, Follow>().xinit(setupper));
+    }
+
+    /**
+     * Load referrer of followByMeIdList by the set-upper of referrer. <br />
+     * follow by ME_ID, named 'followByMeIdList'.
+     * <pre>
+     * memberBhv.<span style="color: #DD4747">loadFollowByMeIdList</span>(memberList, new ConditionBeanSetupper&lt;FollowCB&gt;() {
+     *     public void setup(FollowCB cb) {
+     *         cb.setupSelect...();
+     *         cb.query().setFoo...(value);
+     *         cb.query().addOrderBy_Bar...();
+     *     }
+     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
+     * <span style="color: #3F7E5E">//}).withNestedList(referrerList -&gt {</span>
+     * <span style="color: #3F7E5E">//    ...</span>
+     * <span style="color: #3F7E5E">//});</span>
+     * ... = member.<span style="color: #DD4747">getFollowByMeIdList()</span>;
+     * </pre>
+     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br />
+     * The condition-bean, which the set-upper provides, has settings before callback as follows:
+     * <pre>
+     * cb.query().setMeId_InScope(pkList);
+     * cb.query().addOrderBy_MeId_Asc();
+     * </pre>
+     * @param member The entity of member. (NotNull)
+     * @param setupper The callback to set up referrer condition-bean for loading referrer. (NotNull)
+     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
+     */
+    public NestedReferrerListGateway<Follow> loadFollowByMeIdList(Member member, ConditionBeanSetupper<FollowCB> setupper) {
+        xassLRArg(member, setupper);
+        return doLoadFollowByMeIdList(xnewLRLs(member), new LoadReferrerOption<FollowCB, Follow>().xinit(setupper));
+    }
+
+    /**
+     * {Refer to overload method that has an argument of the list of entity.} #beforejava8
+     * @param member The entity of member. (NotNull)
+     * @param loadReferrerOption The option of load-referrer. (NotNull)
+     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
+     */
+    public NestedReferrerListGateway<Follow> loadFollowByMeIdList(Member member, LoadReferrerOption<FollowCB, Follow> loadReferrerOption) {
+        xassLRArg(member, loadReferrerOption);
+        return loadFollowByMeIdList(xnewLRLs(member), loadReferrerOption);
+    }
+
+    /**
+     * {Refer to overload method that has an argument of condition-bean setupper.} #beforejava8
+     * @param memberList The entity list of member. (NotNull)
+     * @param loadReferrerOption The option of load-referrer. (NotNull)
+     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
+     */
+    @SuppressWarnings("unchecked")
+    public NestedReferrerListGateway<Follow> loadFollowByMeIdList(List<Member> memberList, LoadReferrerOption<FollowCB, Follow> loadReferrerOption) {
+        xassLRArg(memberList, loadReferrerOption);
+        if (memberList.isEmpty()) { return (NestedReferrerListGateway<Follow>)EMPTY_NREF_LGWAY; }
+        return doLoadFollowByMeIdList(memberList, loadReferrerOption);
+    }
+
+    protected NestedReferrerListGateway<Follow> doLoadFollowByMeIdList(List<Member> memberList, LoadReferrerOption<FollowCB, Follow> option) {
+        return helpLoadReferrerInternally(memberList, option, "followByMeIdList");
+    }
+
+    /**
      * Load referrer of loginList by the set-upper of referrer. <br />
      * login by MEMBER_ID, named 'loginList'.
      * <pre>
@@ -698,16 +790,8 @@ public abstract class BsMemberBhv extends AbstractBehaviorWritable {
      * @param memberList The list of member. (NotNull, EmptyAllowed)
      * @return The list of referrer-as-one table. (NotNull, EmptyAllowed, NotNullElement)
      */
-    public List<Follow> pulloutFollowAsOne(List<Member> memberList)
-    { return helpPulloutInternally(memberList, "followAsOne"); }
-
-    /**
-     * Pull out the list of referrer-as-one table 'Followers'.
-     * @param memberList The list of member. (NotNull, EmptyAllowed)
-     * @return The list of referrer-as-one table. (NotNull, EmptyAllowed, NotNullElement)
-     */
-    public List<Followers> pulloutFollowersAsOne(List<Member> memberList)
-    { return helpPulloutInternally(memberList, "followersAsOne"); }
+    public List<Follow> pulloutFollowByYouIdAsOne(List<Member> memberList)
+    { return helpPulloutInternally(memberList, "followByYouIdAsOne"); }
 
     /**
      * Pull out the list of referrer-as-one table 'MemberSecurity'.

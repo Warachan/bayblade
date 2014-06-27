@@ -24,13 +24,13 @@ import jp.bizreach.twitter.dbflute.cbean.*;
  *     FOLLOW_ID
  *
  * [column]
- *     FOLLOW_ID, MEMBER_ID
+ *     FOLLOW_ID, YOU_ID, ME_ID, FOLLOW_DATETIME
  *
  * [sequence]
  *     
  *
  * [identity]
- *     
+ *     FOLLOW_ID
  *
  * [version-no]
  *     
@@ -42,7 +42,7 @@ import jp.bizreach.twitter.dbflute.cbean.*;
  *     
  *
  * [foreign property]
- *     member
+ *     memberByMeId, memberByYouId
  *
  * [referrer property]
  *     
@@ -193,7 +193,7 @@ public abstract class BsFollowBhv extends AbstractBehaviorWritable {
 
     /**
      * Select the entity by the primary-key value.
-     * @param followId : PK, NotNull, INT(10). (NotNull)
+     * @param followId : PK, ID, NotNull, INT(10). (NotNull)
      * @return The entity selected by the PK. (NullAllowed: if no data, it returns null)
      * @exception EntityDuplicatedException When the entity has been duplicated.
      * @exception SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
@@ -216,7 +216,7 @@ public abstract class BsFollowBhv extends AbstractBehaviorWritable {
 
     /**
      * Select the entity by the primary-key value with deleted check.
-     * @param followId : PK, NotNull, INT(10). (NotNull)
+     * @param followId : PK, ID, NotNull, INT(10). (NotNull)
      * @return The entity selected by the PK. (NotNull: if no data, throws exception)
      * @exception EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @exception EntityDuplicatedException When the entity has been duplicated.
@@ -237,27 +237,27 @@ public abstract class BsFollowBhv extends AbstractBehaviorWritable {
 
     /**
      * Select the entity by the unique-key value.
-     * @param memberId : UQ, NotNull, INT(10), FK to member. (NotNull)
+     * @param youId : UQ, NotNull, INT(10), FK to member. (NotNull)
      * @return The optional entity selected by the unique key. (NotNull: if no data, empty entity)
      * @exception EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @exception EntityDuplicatedException When the entity has been duplicated.
      * @exception SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
-    public OptionalEntity<Follow> selectByUniqueOf(Integer memberId) {
-        return facadeSelectByUniqueOf(memberId);
+    public OptionalEntity<Follow> selectByUniqueOf(Integer youId) {
+        return facadeSelectByUniqueOf(youId);
     }
 
-    protected OptionalEntity<Follow> facadeSelectByUniqueOf(Integer memberId) {
-        return doSelectByUniqueOf(memberId, typeOfSelectedEntity());
+    protected OptionalEntity<Follow> facadeSelectByUniqueOf(Integer youId) {
+        return doSelectByUniqueOf(youId, typeOfSelectedEntity());
     }
 
-    protected <ENTITY extends Follow> OptionalEntity<ENTITY> doSelectByUniqueOf(Integer memberId, Class<ENTITY> tp) {
-        return createOptionalEntity(doSelectEntity(xprepareCBAsUniqueOf(memberId), tp), memberId);
+    protected <ENTITY extends Follow> OptionalEntity<ENTITY> doSelectByUniqueOf(Integer youId, Class<ENTITY> tp) {
+        return createOptionalEntity(doSelectEntity(xprepareCBAsUniqueOf(youId), tp), youId);
     }
 
-    protected FollowCB xprepareCBAsUniqueOf(Integer memberId) {
-        assertObjectNotNull("memberId", memberId);
-        return newConditionBean().acceptUniqueOf(memberId);
+    protected FollowCB xprepareCBAsUniqueOf(Integer youId) {
+        assertObjectNotNull("youId", youId);
+        return newConditionBean().acceptUniqueOf(youId);
     }
 
     // ===================================================================================
@@ -489,8 +489,16 @@ public abstract class BsFollowBhv extends AbstractBehaviorWritable {
      * @param followList The list of follow. (NotNull, EmptyAllowed)
      * @return The list of foreign table. (NotNull, EmptyAllowed, NotNullElement)
      */
-    public List<Member> pulloutMember(List<Follow> followList)
-    { return helpPulloutInternally(followList, "member"); }
+    public List<Member> pulloutMemberByMeId(List<Follow> followList)
+    { return helpPulloutInternally(followList, "memberByMeId"); }
+
+    /**
+     * Pull out the list of foreign table 'Member'.
+     * @param followList The list of follow. (NotNull, EmptyAllowed)
+     * @return The list of foreign table. (NotNull, EmptyAllowed, NotNullElement)
+     */
+    public List<Member> pulloutMemberByYouId(List<Follow> followList)
+    { return helpPulloutInternally(followList, "memberByYouId"); }
 
     // ===================================================================================
     //                                                                      Extract Column
@@ -504,12 +512,12 @@ public abstract class BsFollowBhv extends AbstractBehaviorWritable {
     { return helpExtractListInternally(followList, "followId"); }
 
     /**
-     * Extract the value list of (single) unique key memberId.
+     * Extract the value list of (single) unique key youId.
      * @param followList The list of follow. (NotNull, EmptyAllowed)
      * @return The list of the column value. (NotNull, EmptyAllowed, NotNullElement)
      */
-    public List<Integer> extractMemberIdList(List<Follow> followList)
-    { return helpExtractListInternally(followList, "memberId"); }
+    public List<Integer> extractYouIdList(List<Follow> followList)
+    { return helpExtractListInternally(followList, "youId"); }
 
     // ===================================================================================
     //                                                                       Entity Update

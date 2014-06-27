@@ -118,11 +118,151 @@ p.tablecount {
 </div>
 
 <div class="section">
+	<h2><span class="dt">Diff Date: </span>2014/06/27 16:40:16</h2>
+
+	<h3>Change Table</h3>
+	<div class="table-content">
+		<h4><a href="./schema-twitter.html#follow">follow</a></h4>
+		<div class="change-table-content">
+			<h5>Add UQ</h5>
+			<ul class="column-content">
+				<li>YOU_ID</li>
+			</ul>
+			<h5>Delete Index</h5>
+			<ul class="column-content">
+				<li>YOU_ID</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="section">
+	<h2><span class="dt">Diff Date: </span>2014/06/27 16:35:28</h2>
+
+	<h3>Change Table</h3>
+	<div class="table-content">
+		<h4>follow</h4>
+		<div class="change-table-content">
+			<h5>Delete UQ</h5>
+			<ul class="column-content">
+				<li>ME_ID</li>
+				<li>YOU_ID</li>
+			</ul>
+			<h5>Add Index</h5>
+			<ul class="column-content">
+				<li>ME_ID</li>
+				<li>YOU_ID</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="section">
+	<h2><span class="dt">Diff Date: </span>2014/06/27 15:01:42</h2>
+
+	<h3>Change Table</h3>
+	<div class="table-content">
+		<h4>follow</h4>
+		<div class="change-table-content">
+			<h5>Add Column</h5>
+			<ul class="column-content">
+				<li>YOU_ID</li>
+				<li>ME_ID</li>
+			</ul>
+			<h5>Change Column</h5>
+			<dl class="column-content">
+				<dt>FOLLOW_ID</dt>
+				<dd><span>Not Null</span>false&nbsp;-&gt;&nbsp;true</dd>
+				<dd><span>Identity</span>false&nbsp;-&gt;&nbsp;true</dd>
+			</dl>
+			<h5>Delete Column</h5>
+			<ul class="column-content">
+				<li>MEMBER_ID</li>
+				<li>FOLLOWER_ID</li>
+			</ul>
+			<h5>Change PK</h5>
+			<dl class="column-content">
+				<dt>PRIMARY</dt>
+				<dd><span>Column</span>MEMBER_ID&nbsp;-&gt;&nbsp;FOLLOW_ID</dd>
+			</dl>
+			<h5>Add FK</h5>
+			<ul class="column-content">
+				<li>follow_ibfk_1(new)</li>
+				<li>follow_ibfk_2(new)</li>
+			</ul>
+			<h5>Delete FK</h5>
+			<ul class="column-content">
+				<li>follow_ibfk_1(old)</li>
+			</ul>
+			<h5>Add UQ</h5>
+			<ul class="column-content">
+				<li>ME_ID</li>
+				<li>YOU_ID</li>
+			</ul>
+			<h5>Delete UQ</h5>
+			<ul class="column-content">
+				<li>FOLLOWER_ID</li>
+				<li>FOLLOW_ID</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="section">
+	<h2><span class="dt">Diff Date: </span>2014/06/27 09:34:04</h2>
+
+	<h3>Change Table</h3>
+	<div class="table-content">
+		<h4>follow</h4>
+		<div class="change-table-content">
+			<h5>Add Column</h5>
+			<ul class="column-content">
+				<li>FOLLOW_DATETIME</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="section">
+	<h2><span class="dt">Diff Date: </span>2014/06/27 09:18:48</h2>
+	<p class="tablecount"><span class="dt">table count: </span>7&nbsp;-&gt;&nbsp;6</p>
+
+	<h3>Change Table</h3>
+	<div class="table-content">
+		<h4>follow</h4>
+		<div class="change-table-content">
+			<h5>Add Column</h5>
+			<ul class="column-content">
+				<li>FOLLOWER_ID</li>
+			</ul>
+			<h5>Change Column</h5>
+			<dl class="column-content">
+				<dt>FOLLOW_ID</dt>
+				<dd><span>Not Null</span>true&nbsp;-&gt;&nbsp;false</dd>
+			</dl>
+			<h5>Change PK</h5>
+			<dl class="column-content">
+				<dt>PRIMARY</dt>
+				<dd><span>Column</span>FOLLOW_ID&nbsp;-&gt;&nbsp;MEMBER_ID</dd>
+			</dl>
+			<h5>Add UQ</h5>
+			<ul class="column-content">
+				<li>FOLLOWER_ID</li>
+				<li>FOLLOW_ID</li>
+			</ul>
+			<h5>Delete UQ</h5>
+			<ul class="column-content">
+				<li>MEMBER_ID</li>
+			</ul>
+		</div>
+	</div>
+	<h3>Delete Table</h3>
+	<ul class="table-content">
+		<li>followers</li>
+	</ul>
+</div>
+<div class="section">
 	<h2><span class="dt">Diff Date: </span>2014/06/26 11:03:00</h2>
 
 	<h3>Change Table</h3>
 	<div class="table-content">
-		<h4><a href="./schema-twitter.html#member">member</a></h4>
+		<h4>member</h4>
 		<div class="change-table-content">
 			<h5>Add Column</h5>
 			<ul class="column-content">

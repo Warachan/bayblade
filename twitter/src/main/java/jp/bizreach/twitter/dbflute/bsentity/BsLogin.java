@@ -18,7 +18,7 @@ import jp.bizreach.twitter.dbflute.exentity.*;
  *     LOGIN_ID
  * 
  * [column]
- *     LOGIN_ID, LOGIN_DATETIME, MEMBER_ID
+ *     LOGIN_ID, MEMBER_ID, LOGIN_DATETIME
  * 
  * [sequence]
  *     
@@ -44,11 +44,11 @@ import jp.bizreach.twitter.dbflute.exentity.*;
  * [get/set template]
  * /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
  * Integer loginId = entity.getLoginId();
- * java.sql.Timestamp loginDatetime = entity.getLoginDatetime();
  * Integer memberId = entity.getMemberId();
+ * java.sql.Timestamp loginDatetime = entity.getLoginDatetime();
  * entity.setLoginId(loginId);
- * entity.setLoginDatetime(loginDatetime);
  * entity.setMemberId(memberId);
+ * entity.setLoginDatetime(loginDatetime);
  * = = = = = = = = = =/
  * </pre>
  * @author DBFlute(AutoGenerator)
@@ -70,11 +70,11 @@ public abstract class BsLogin implements Entity, Serializable, Cloneable {
     /** LOGIN_ID: {PK, ID, NotNull, INT(10)} */
     protected Integer _loginId;
 
-    /** LOGIN_DATETIME: {NotNull, DATETIME(19)} */
-    protected java.sql.Timestamp _loginDatetime;
-
     /** MEMBER_ID: {IX, NotNull, INT(10), FK to member} */
     protected Integer _memberId;
+
+    /** LOGIN_DATETIME: {NotNull, DATETIME(19)} */
+    protected java.sql.Timestamp _loginDatetime;
 
     // -----------------------------------------------------
     //                                              Internal
@@ -289,8 +289,8 @@ public abstract class BsLogin implements Entity, Serializable, Cloneable {
         StringBuilder sb = new StringBuilder();
         String dm = ", ";
         sb.append(dm).append(getLoginId());
-        sb.append(dm).append(getLoginDatetime());
         sb.append(dm).append(getMemberId());
+        sb.append(dm).append(getLoginDatetime());
         if (sb.length() > dm.length()) {
             sb.delete(0, dm.length());
         }
@@ -342,25 +342,6 @@ public abstract class BsLogin implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [get] LOGIN_DATETIME: {NotNull, DATETIME(19)} <br />
-     * ログイン日時
-     * @return The value of the column 'LOGIN_DATETIME'. (basically NotNull if selected: for the constraint)
-     */
-    public java.sql.Timestamp getLoginDatetime() {
-        return _loginDatetime;
-    }
-
-    /**
-     * [set] LOGIN_DATETIME: {NotNull, DATETIME(19)} <br />
-     * ログイン日時
-     * @param loginDatetime The value of the column 'LOGIN_DATETIME'. (basically NotNull if update: for the constraint)
-     */
-    public void setLoginDatetime(java.sql.Timestamp loginDatetime) {
-        __modifiedProperties.addPropertyName("loginDatetime");
-        _loginDatetime = loginDatetime;
-    }
-
-    /**
      * [get] MEMBER_ID: {IX, NotNull, INT(10), FK to member} <br />
      * 会員ID : 会員のID
      * @return The value of the column 'MEMBER_ID'. (basically NotNull if selected: for the constraint)
@@ -377,5 +358,24 @@ public abstract class BsLogin implements Entity, Serializable, Cloneable {
     public void setMemberId(Integer memberId) {
         __modifiedProperties.addPropertyName("memberId");
         _memberId = memberId;
+    }
+
+    /**
+     * [get] LOGIN_DATETIME: {NotNull, DATETIME(19)} <br />
+     * ログイン日時
+     * @return The value of the column 'LOGIN_DATETIME'. (basically NotNull if selected: for the constraint)
+     */
+    public java.sql.Timestamp getLoginDatetime() {
+        return _loginDatetime;
+    }
+
+    /**
+     * [set] LOGIN_DATETIME: {NotNull, DATETIME(19)} <br />
+     * ログイン日時
+     * @param loginDatetime The value of the column 'LOGIN_DATETIME'. (basically NotNull if update: for the constraint)
+     */
+    public void setLoginDatetime(java.sql.Timestamp loginDatetime) {
+        __modifiedProperties.addPropertyName("loginDatetime");
+        _loginDatetime = loginDatetime;
     }
 }

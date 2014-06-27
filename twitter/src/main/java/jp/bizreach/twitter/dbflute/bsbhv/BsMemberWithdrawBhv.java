@@ -24,7 +24,7 @@ import jp.bizreach.twitter.dbflute.cbean.*;
  *     MEMBER_ID
  *
  * [column]
- *     WITHDRAWAL_REASON_ID, MEMBER_ID, WITHDRAWAL_REASON_INPUT_TEXT, WITHDRAWAL_DATETIME
+ *     MEMBER_ID, WITHDRAWAL_REASON_ID, WITHDRAWAL_REASON_INPUT_TEXT, WITHDRAWAL_DATETIME
  *
  * [sequence]
  *     

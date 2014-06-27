@@ -47,122 +47,6 @@ public abstract class AbstractBsMemberWithdrawCQ extends AbstractConditionQuery 
     
     /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br />
-     * WITHDRAWAL_REASON_ID: {INT(10)}
-     * @param withdrawalReasonId The value of withdrawalReasonId as equal. (NullAllowed: if null, no condition)
-     */
-    public void setWithdrawalReasonId_Equal(Integer withdrawalReasonId) {
-        doSetWithdrawalReasonId_Equal(withdrawalReasonId);
-    }
-
-    protected void doSetWithdrawalReasonId_Equal(Integer withdrawalReasonId) {
-        regWithdrawalReasonId(CK_EQ, withdrawalReasonId);
-    }
-
-    /**
-     * NotEqual(&lt;&gt;). And NullIgnored, OnlyOnceRegistered. <br />
-     * WITHDRAWAL_REASON_ID: {INT(10)}
-     * @param withdrawalReasonId The value of withdrawalReasonId as notEqual. (NullAllowed: if null, no condition)
-     */
-    public void setWithdrawalReasonId_NotEqual(Integer withdrawalReasonId) {
-        doSetWithdrawalReasonId_NotEqual(withdrawalReasonId);
-    }
-
-    protected void doSetWithdrawalReasonId_NotEqual(Integer withdrawalReasonId) {
-        regWithdrawalReasonId(CK_NES, withdrawalReasonId);
-    }
-
-    /**
-     * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br />
-     * WITHDRAWAL_REASON_ID: {INT(10)}
-     * @param withdrawalReasonId The value of withdrawalReasonId as greaterThan. (NullAllowed: if null, no condition)
-     */
-    public void setWithdrawalReasonId_GreaterThan(Integer withdrawalReasonId) {
-        regWithdrawalReasonId(CK_GT, withdrawalReasonId);
-    }
-
-    /**
-     * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br />
-     * WITHDRAWAL_REASON_ID: {INT(10)}
-     * @param withdrawalReasonId The value of withdrawalReasonId as lessThan. (NullAllowed: if null, no condition)
-     */
-    public void setWithdrawalReasonId_LessThan(Integer withdrawalReasonId) {
-        regWithdrawalReasonId(CK_LT, withdrawalReasonId);
-    }
-
-    /**
-     * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br />
-     * WITHDRAWAL_REASON_ID: {INT(10)}
-     * @param withdrawalReasonId The value of withdrawalReasonId as greaterEqual. (NullAllowed: if null, no condition)
-     */
-    public void setWithdrawalReasonId_GreaterEqual(Integer withdrawalReasonId) {
-        regWithdrawalReasonId(CK_GE, withdrawalReasonId);
-    }
-
-    /**
-     * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br />
-     * WITHDRAWAL_REASON_ID: {INT(10)}
-     * @param withdrawalReasonId The value of withdrawalReasonId as lessEqual. (NullAllowed: if null, no condition)
-     */
-    public void setWithdrawalReasonId_LessEqual(Integer withdrawalReasonId) {
-        regWithdrawalReasonId(CK_LE, withdrawalReasonId);
-    }
-
-    /**
-     * RangeOf with various options. (versatile) <br />
-     * {(default) minNumber &lt;= column &lt;= maxNumber} <br />
-     * And NullIgnored, OnlyOnceRegistered. <br />
-     * WITHDRAWAL_REASON_ID: {INT(10)}
-     * @param minNumber The min number of withdrawalReasonId. (NullAllowed: if null, no from-condition)
-     * @param maxNumber The max number of withdrawalReasonId. (NullAllowed: if null, no to-condition)
-     * @param rangeOfOption The option of range-of. (NotNull)
-     */
-    public void setWithdrawalReasonId_RangeOf(Integer minNumber, Integer maxNumber, RangeOfOption rangeOfOption) {
-        regROO(minNumber, maxNumber, getCValueWithdrawalReasonId(), "WITHDRAWAL_REASON_ID", rangeOfOption);
-    }
-
-    /**
-     * InScope {in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br />
-     * WITHDRAWAL_REASON_ID: {INT(10)}
-     * @param withdrawalReasonIdList The collection of withdrawalReasonId as inScope. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setWithdrawalReasonId_InScope(Collection<Integer> withdrawalReasonIdList) {
-        doSetWithdrawalReasonId_InScope(withdrawalReasonIdList);
-    }
-
-    protected void doSetWithdrawalReasonId_InScope(Collection<Integer> withdrawalReasonIdList) {
-        regINS(CK_INS, cTL(withdrawalReasonIdList), getCValueWithdrawalReasonId(), "WITHDRAWAL_REASON_ID");
-    }
-
-    /**
-     * NotInScope {not in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br />
-     * WITHDRAWAL_REASON_ID: {INT(10)}
-     * @param withdrawalReasonIdList The collection of withdrawalReasonId as notInScope. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setWithdrawalReasonId_NotInScope(Collection<Integer> withdrawalReasonIdList) {
-        doSetWithdrawalReasonId_NotInScope(withdrawalReasonIdList);
-    }
-
-    protected void doSetWithdrawalReasonId_NotInScope(Collection<Integer> withdrawalReasonIdList) {
-        regINS(CK_NINS, cTL(withdrawalReasonIdList), getCValueWithdrawalReasonId(), "WITHDRAWAL_REASON_ID");
-    }
-
-    /**
-     * IsNull {is null}. And OnlyOnceRegistered. <br />
-     * WITHDRAWAL_REASON_ID: {INT(10)}
-     */
-    public void setWithdrawalReasonId_IsNull() { regWithdrawalReasonId(CK_ISN, DOBJ); }
-
-    /**
-     * IsNotNull {is not null}. And OnlyOnceRegistered. <br />
-     * WITHDRAWAL_REASON_ID: {INT(10)}
-     */
-    public void setWithdrawalReasonId_IsNotNull() { regWithdrawalReasonId(CK_ISNN, DOBJ); }
-
-    protected void regWithdrawalReasonId(ConditionKey ky, Object vl) { regQ(ky, vl, getCValueWithdrawalReasonId(), "WITHDRAWAL_REASON_ID"); }
-    protected abstract ConditionValue getCValueWithdrawalReasonId();
-    
-    /**
-     * Equal(=). And NullIgnored, OnlyOnceRegistered. <br />
      * MEMBER_ID: {PK, NotNull, INT(10), FK to member}
      * @param memberId The value of memberId as equal. (NullAllowed: if null, no condition)
      */
@@ -306,6 +190,122 @@ public abstract class AbstractBsMemberWithdrawCQ extends AbstractConditionQuery 
 
     protected void regMemberId(ConditionKey ky, Object vl) { regQ(ky, vl, getCValueMemberId(), "MEMBER_ID"); }
     protected abstract ConditionValue getCValueMemberId();
+    
+    /**
+     * Equal(=). And NullIgnored, OnlyOnceRegistered. <br />
+     * WITHDRAWAL_REASON_ID: {INT(10)}
+     * @param withdrawalReasonId The value of withdrawalReasonId as equal. (NullAllowed: if null, no condition)
+     */
+    public void setWithdrawalReasonId_Equal(Integer withdrawalReasonId) {
+        doSetWithdrawalReasonId_Equal(withdrawalReasonId);
+    }
+
+    protected void doSetWithdrawalReasonId_Equal(Integer withdrawalReasonId) {
+        regWithdrawalReasonId(CK_EQ, withdrawalReasonId);
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). And NullIgnored, OnlyOnceRegistered. <br />
+     * WITHDRAWAL_REASON_ID: {INT(10)}
+     * @param withdrawalReasonId The value of withdrawalReasonId as notEqual. (NullAllowed: if null, no condition)
+     */
+    public void setWithdrawalReasonId_NotEqual(Integer withdrawalReasonId) {
+        doSetWithdrawalReasonId_NotEqual(withdrawalReasonId);
+    }
+
+    protected void doSetWithdrawalReasonId_NotEqual(Integer withdrawalReasonId) {
+        regWithdrawalReasonId(CK_NES, withdrawalReasonId);
+    }
+
+    /**
+     * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br />
+     * WITHDRAWAL_REASON_ID: {INT(10)}
+     * @param withdrawalReasonId The value of withdrawalReasonId as greaterThan. (NullAllowed: if null, no condition)
+     */
+    public void setWithdrawalReasonId_GreaterThan(Integer withdrawalReasonId) {
+        regWithdrawalReasonId(CK_GT, withdrawalReasonId);
+    }
+
+    /**
+     * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br />
+     * WITHDRAWAL_REASON_ID: {INT(10)}
+     * @param withdrawalReasonId The value of withdrawalReasonId as lessThan. (NullAllowed: if null, no condition)
+     */
+    public void setWithdrawalReasonId_LessThan(Integer withdrawalReasonId) {
+        regWithdrawalReasonId(CK_LT, withdrawalReasonId);
+    }
+
+    /**
+     * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br />
+     * WITHDRAWAL_REASON_ID: {INT(10)}
+     * @param withdrawalReasonId The value of withdrawalReasonId as greaterEqual. (NullAllowed: if null, no condition)
+     */
+    public void setWithdrawalReasonId_GreaterEqual(Integer withdrawalReasonId) {
+        regWithdrawalReasonId(CK_GE, withdrawalReasonId);
+    }
+
+    /**
+     * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br />
+     * WITHDRAWAL_REASON_ID: {INT(10)}
+     * @param withdrawalReasonId The value of withdrawalReasonId as lessEqual. (NullAllowed: if null, no condition)
+     */
+    public void setWithdrawalReasonId_LessEqual(Integer withdrawalReasonId) {
+        regWithdrawalReasonId(CK_LE, withdrawalReasonId);
+    }
+
+    /**
+     * RangeOf with various options. (versatile) <br />
+     * {(default) minNumber &lt;= column &lt;= maxNumber} <br />
+     * And NullIgnored, OnlyOnceRegistered. <br />
+     * WITHDRAWAL_REASON_ID: {INT(10)}
+     * @param minNumber The min number of withdrawalReasonId. (NullAllowed: if null, no from-condition)
+     * @param maxNumber The max number of withdrawalReasonId. (NullAllowed: if null, no to-condition)
+     * @param rangeOfOption The option of range-of. (NotNull)
+     */
+    public void setWithdrawalReasonId_RangeOf(Integer minNumber, Integer maxNumber, RangeOfOption rangeOfOption) {
+        regROO(minNumber, maxNumber, getCValueWithdrawalReasonId(), "WITHDRAWAL_REASON_ID", rangeOfOption);
+    }
+
+    /**
+     * InScope {in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br />
+     * WITHDRAWAL_REASON_ID: {INT(10)}
+     * @param withdrawalReasonIdList The collection of withdrawalReasonId as inScope. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setWithdrawalReasonId_InScope(Collection<Integer> withdrawalReasonIdList) {
+        doSetWithdrawalReasonId_InScope(withdrawalReasonIdList);
+    }
+
+    protected void doSetWithdrawalReasonId_InScope(Collection<Integer> withdrawalReasonIdList) {
+        regINS(CK_INS, cTL(withdrawalReasonIdList), getCValueWithdrawalReasonId(), "WITHDRAWAL_REASON_ID");
+    }
+
+    /**
+     * NotInScope {not in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br />
+     * WITHDRAWAL_REASON_ID: {INT(10)}
+     * @param withdrawalReasonIdList The collection of withdrawalReasonId as notInScope. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setWithdrawalReasonId_NotInScope(Collection<Integer> withdrawalReasonIdList) {
+        doSetWithdrawalReasonId_NotInScope(withdrawalReasonIdList);
+    }
+
+    protected void doSetWithdrawalReasonId_NotInScope(Collection<Integer> withdrawalReasonIdList) {
+        regINS(CK_NINS, cTL(withdrawalReasonIdList), getCValueWithdrawalReasonId(), "WITHDRAWAL_REASON_ID");
+    }
+
+    /**
+     * IsNull {is null}. And OnlyOnceRegistered. <br />
+     * WITHDRAWAL_REASON_ID: {INT(10)}
+     */
+    public void setWithdrawalReasonId_IsNull() { regWithdrawalReasonId(CK_ISN, DOBJ); }
+
+    /**
+     * IsNotNull {is not null}. And OnlyOnceRegistered. <br />
+     * WITHDRAWAL_REASON_ID: {INT(10)}
+     */
+    public void setWithdrawalReasonId_IsNotNull() { regWithdrawalReasonId(CK_ISNN, DOBJ); }
+
+    protected void regWithdrawalReasonId(ConditionKey ky, Object vl) { regQ(ky, vl, getCValueWithdrawalReasonId(), "WITHDRAWAL_REASON_ID"); }
+    protected abstract ConditionValue getCValueWithdrawalReasonId();
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />

@@ -1,4 +1,205 @@
 map:{
+    ; 2014/06/27 16:40:16 = map:{
+        ; diffDate = 2014/06/27 16:40:16
+        ; tableDiff = map:{
+            ; follow = map:{
+                ; tableName = follow
+                ; diffType = CHANGE
+                ; uniqueKeyDiff = map:{
+                    ; YOU_ID = map:{
+                        ; constraintName = YOU_ID
+                        ; diffType = ADD
+                    }
+                }
+                ; indexDiff = map:{
+                    ; YOU_ID = map:{
+                        ; constraintName = YOU_ID
+                        ; diffType = DELETE
+                    }
+                }
+            }
+        }
+    }
+    ; 2014/06/27 16:35:28 = map:{
+        ; diffDate = 2014/06/27 16:35:28
+        ; tableDiff = map:{
+            ; follow = map:{
+                ; tableName = follow
+                ; diffType = CHANGE
+                ; uniqueKeyDiff = map:{
+                    ; ME_ID = map:{
+                        ; constraintName = ME_ID
+                        ; diffType = DELETE
+                    }
+                    ; YOU_ID = map:{
+                        ; constraintName = YOU_ID
+                        ; diffType = DELETE
+                    }
+                }
+                ; indexDiff = map:{
+                    ; ME_ID = map:{
+                        ; constraintName = ME_ID
+                        ; diffType = ADD
+                    }
+                    ; YOU_ID = map:{
+                        ; constraintName = YOU_ID
+                        ; diffType = ADD
+                    }
+                }
+            }
+        }
+    }
+    ; 2014/06/27 15:01:42 = map:{
+        ; diffDate = 2014/06/27 15:01:42
+        ; tableDiff = map:{
+            ; follow = map:{
+                ; tableName = follow
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; YOU_ID = map:{
+                        ; columnName = YOU_ID
+                        ; diffType = ADD
+                    }
+                    ; ME_ID = map:{
+                        ; columnName = ME_ID
+                        ; diffType = ADD
+                    }
+                    ; FOLLOW_ID = map:{
+                        ; columnName = FOLLOW_ID
+                        ; diffType = CHANGE
+                        ; notNullDiff = map:{
+                            ; next = true
+                            ; previous = false
+                        }
+                        ; autoIncrementDiff = map:{
+                            ; next = true
+                            ; previous = false
+                        }
+                    }
+                    ; MEMBER_ID = map:{
+                        ; columnName = MEMBER_ID
+                        ; diffType = DELETE
+                    }
+                    ; FOLLOWER_ID = map:{
+                        ; columnName = FOLLOWER_ID
+                        ; diffType = DELETE
+                    }
+                }
+                ; primaryKeyDiff = map:{
+                    ; PRIMARY = map:{
+                        ; constraintName = PRIMARY
+                        ; diffType = CHANGE
+                        ; columnDiff = map:{
+                            ; next = FOLLOW_ID
+                            ; previous = MEMBER_ID
+                        }
+                    }
+                }
+                ; foreignKeyDiff = map:{
+                    ; follow_ibfk_1(new) = map:{
+                        ; constraintName = follow_ibfk_1(new)
+                        ; diffType = ADD
+                    }
+                    ; follow_ibfk_2(new) = map:{
+                        ; constraintName = follow_ibfk_2(new)
+                        ; diffType = ADD
+                    }
+                    ; follow_ibfk_1(old) = map:{
+                        ; constraintName = follow_ibfk_1(old)
+                        ; diffType = DELETE
+                    }
+                }
+                ; uniqueKeyDiff = map:{
+                    ; ME_ID = map:{
+                        ; constraintName = ME_ID
+                        ; diffType = ADD
+                    }
+                    ; YOU_ID = map:{
+                        ; constraintName = YOU_ID
+                        ; diffType = ADD
+                    }
+                    ; FOLLOWER_ID = map:{
+                        ; constraintName = FOLLOWER_ID
+                        ; diffType = DELETE
+                    }
+                    ; FOLLOW_ID = map:{
+                        ; constraintName = FOLLOW_ID
+                        ; diffType = DELETE
+                    }
+                }
+            }
+        }
+    }
+    ; 2014/06/27 09:34:04 = map:{
+        ; diffDate = 2014/06/27 09:34:04
+        ; tableDiff = map:{
+            ; follow = map:{
+                ; tableName = follow
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; FOLLOW_DATETIME = map:{
+                        ; columnName = FOLLOW_DATETIME
+                        ; diffType = ADD
+                    }
+                }
+            }
+        }
+    }
+    ; 2014/06/27 09:18:48 = map:{
+        ; diffDate = 2014/06/27 09:18:48
+        ; tableCount = map:{
+            ; next = 6
+            ; previous = 7
+        }
+        ; tableDiff = map:{
+            ; follow = map:{
+                ; tableName = follow
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; FOLLOWER_ID = map:{
+                        ; columnName = FOLLOWER_ID
+                        ; diffType = ADD
+                    }
+                    ; FOLLOW_ID = map:{
+                        ; columnName = FOLLOW_ID
+                        ; diffType = CHANGE
+                        ; notNullDiff = map:{
+                            ; next = false
+                            ; previous = true
+                        }
+                    }
+                }
+                ; primaryKeyDiff = map:{
+                    ; PRIMARY = map:{
+                        ; constraintName = PRIMARY
+                        ; diffType = CHANGE
+                        ; columnDiff = map:{
+                            ; next = MEMBER_ID
+                            ; previous = FOLLOW_ID
+                        }
+                    }
+                }
+                ; uniqueKeyDiff = map:{
+                    ; FOLLOWER_ID = map:{
+                        ; constraintName = FOLLOWER_ID
+                        ; diffType = ADD
+                    }
+                    ; FOLLOW_ID = map:{
+                        ; constraintName = FOLLOW_ID
+                        ; diffType = ADD
+                    }
+                    ; MEMBER_ID = map:{
+                        ; constraintName = MEMBER_ID
+                        ; diffType = DELETE
+                    }
+                }
+            }
+            ; followers = map:{
+                ; tableName = followers
+                ; diffType = DELETE
+            }
+        }
+    }
     ; 2014/06/26 11:03:00 = map:{
         ; diffDate = 2014/06/26 11:03:00
         ; tableDiff = map:{

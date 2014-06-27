@@ -38,18 +38,18 @@ public class MemberWithdrawDbm extends AbstractDBMeta {
     //                                       ---------------
     protected final Map<String, PropertyGateway> _epgMap = newHashMap();
     {
-        setupEpg(_epgMap, new EpgWithdrawalReasonId(), "withdrawalReasonId");
         setupEpg(_epgMap, new EpgMemberId(), "memberId");
+        setupEpg(_epgMap, new EpgWithdrawalReasonId(), "withdrawalReasonId");
         setupEpg(_epgMap, new EpgWithdrawalReasonInputText(), "withdrawalReasonInputText");
         setupEpg(_epgMap, new EpgWithdrawalDatetime(), "withdrawalDatetime");
-    }
-    public static class EpgWithdrawalReasonId implements PropertyGateway {
-        public Object read(Entity et) { return ((MemberWithdraw)et).getWithdrawalReasonId(); }
-        public void write(Entity et, Object vl) { ((MemberWithdraw)et).setWithdrawalReasonId(cti(vl)); }
     }
     public static class EpgMemberId implements PropertyGateway {
         public Object read(Entity et) { return ((MemberWithdraw)et).getMemberId(); }
         public void write(Entity et, Object vl) { ((MemberWithdraw)et).setMemberId(cti(vl)); }
+    }
+    public static class EpgWithdrawalReasonId implements PropertyGateway {
+        public Object read(Entity et) { return ((MemberWithdraw)et).getWithdrawalReasonId(); }
+        public void write(Entity et, Object vl) { ((MemberWithdraw)et).setWithdrawalReasonId(cti(vl)); }
     }
     public static class EpgWithdrawalReasonInputText implements PropertyGateway {
         public Object read(Entity et) { return ((MemberWithdraw)et).getWithdrawalReasonInputText(); }
@@ -90,21 +90,21 @@ public class MemberWithdrawDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnWithdrawalReasonId = cci("WITHDRAWAL_REASON_ID", "WITHDRAWAL_REASON_ID", null, null, Integer.class, "withdrawalReasonId", null, false, false, false, "INT", 10, 0, null, false, null, null, null, null, null);
     protected final ColumnInfo _columnMemberId = cci("MEMBER_ID", "MEMBER_ID", null, null, Integer.class, "memberId", null, true, false, true, "INT", 10, 0, null, false, null, null, "member", null, null);
+    protected final ColumnInfo _columnWithdrawalReasonId = cci("WITHDRAWAL_REASON_ID", "WITHDRAWAL_REASON_ID", null, null, Integer.class, "withdrawalReasonId", null, false, false, false, "INT", 10, 0, null, false, null, null, null, null, null);
     protected final ColumnInfo _columnWithdrawalReasonInputText = cci("WITHDRAWAL_REASON_INPUT_TEXT", "WITHDRAWAL_REASON_INPUT_TEXT", null, null, String.class, "withdrawalReasonInputText", null, false, false, false, "TEXT", 65535, 0, null, false, null, null, null, null, null);
     protected final ColumnInfo _columnWithdrawalDatetime = cci("WITHDRAWAL_DATETIME", "WITHDRAWAL_DATETIME", null, null, java.sql.Timestamp.class, "withdrawalDatetime", null, false, false, true, "DATETIME", 19, 0, null, false, null, null, null, null, null);
 
-    /**
-     * WITHDRAWAL_REASON_ID: {INT(10)}
-     * @return The information object of specified column. (NotNull)
-     */
-    public ColumnInfo columnWithdrawalReasonId() { return _columnWithdrawalReasonId; }
     /**
      * MEMBER_ID: {PK, NotNull, INT(10), FK to member}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnMemberId() { return _columnMemberId; }
+    /**
+     * WITHDRAWAL_REASON_ID: {INT(10)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnWithdrawalReasonId() { return _columnWithdrawalReasonId; }
     /**
      * WITHDRAWAL_REASON_INPUT_TEXT: {TEXT(65535)}
      * @return The information object of specified column. (NotNull)
@@ -118,8 +118,8 @@ public class MemberWithdrawDbm extends AbstractDBMeta {
 
     protected List<ColumnInfo> ccil() {
         List<ColumnInfo> ls = newArrayList();
-        ls.add(columnWithdrawalReasonId());
         ls.add(columnMemberId());
+        ls.add(columnWithdrawalReasonId());
         ls.add(columnWithdrawalReasonInputText());
         ls.add(columnWithdrawalDatetime());
         return ls;

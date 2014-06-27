@@ -14,7 +14,6 @@
 
     <!-- The components of Behavior. -->
     <component name="followBhv" class="jp.bizreach.twitter.dbflute.exbhv.FollowBhv"/>
-    <component name="followersBhv" class="jp.bizreach.twitter.dbflute.exbhv.FollowersBhv"/>
     <component name="loginBhv" class="jp.bizreach.twitter.dbflute.exbhv.LoginBhv"/>
     <component name="memberBhv" class="jp.bizreach.twitter.dbflute.exbhv.MemberBhv"/>
     <component name="memberSecurityBhv" class="jp.bizreach.twitter.dbflute.exbhv.MemberSecurityBhv"/>

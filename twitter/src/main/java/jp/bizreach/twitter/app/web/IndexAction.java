@@ -30,6 +30,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.seasar.struts.annotation.ActionForm;
 import org.seasar.struts.annotation.Execute;
+import org.seasar.struts.util.RequestUtil;
 
 /**
  * @author mayuko.sakaba
@@ -55,6 +56,8 @@ public class IndexAction {
     // TODO mayuko.sakaba  ユーザ名でログインできるようにする。
     @Execute(validator = false)
     public String index() {
+        // セッション破棄
+        RequestUtil.getRequest().getSession().invalidate();
         return "index.jsp";
     }
 
@@ -71,8 +74,10 @@ public class IndexAction {
             Date date = new Date();
             Timestamp timestamp = new Timestamp(date.getTime());
             if (member != null) {
-                sessionDto.id = member.getMemberId();
-                sessionDto.email = inputEmail;
+                sessionDto.myId = member.getMemberId();
+                sessionDto.email = member.getEmailAddress();
+                sessionDto.username = member.getUserName();
+                LOG.debug("***" + sessionDto.username);
                 Login login = new Login();
                 login.setMemberId(member.getMemberId());
                 login.setLoginDatetime(timestamp);

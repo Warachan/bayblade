@@ -160,82 +160,6 @@ public abstract class AbstractBsLoginCQ extends AbstractConditionQuery {
 
     protected void regLoginId(ConditionKey ky, Object vl) { regQ(ky, vl, getCValueLoginId(), "LOGIN_ID"); }
     protected abstract ConditionValue getCValueLoginId();
-
-    /**
-     * Equal(=). And NullIgnored, OnlyOnceRegistered. <br />
-     * LOGIN_DATETIME: {NotNull, DATETIME(19)}
-     * @param loginDatetime The value of loginDatetime as equal. (NullAllowed: if null, no condition)
-     */
-    public void setLoginDatetime_Equal(java.sql.Timestamp loginDatetime) {
-        regLoginDatetime(CK_EQ,  loginDatetime);
-    }
-
-    /**
-     * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br />
-     * LOGIN_DATETIME: {NotNull, DATETIME(19)}
-     * @param loginDatetime The value of loginDatetime as greaterThan. (NullAllowed: if null, no condition)
-     */
-    public void setLoginDatetime_GreaterThan(java.sql.Timestamp loginDatetime) {
-        regLoginDatetime(CK_GT,  loginDatetime);
-    }
-
-    /**
-     * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br />
-     * LOGIN_DATETIME: {NotNull, DATETIME(19)}
-     * @param loginDatetime The value of loginDatetime as lessThan. (NullAllowed: if null, no condition)
-     */
-    public void setLoginDatetime_LessThan(java.sql.Timestamp loginDatetime) {
-        regLoginDatetime(CK_LT,  loginDatetime);
-    }
-
-    /**
-     * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br />
-     * LOGIN_DATETIME: {NotNull, DATETIME(19)}
-     * @param loginDatetime The value of loginDatetime as greaterEqual. (NullAllowed: if null, no condition)
-     */
-    public void setLoginDatetime_GreaterEqual(java.sql.Timestamp loginDatetime) {
-        regLoginDatetime(CK_GE,  loginDatetime);
-    }
-
-    /**
-     * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br />
-     * LOGIN_DATETIME: {NotNull, DATETIME(19)}
-     * @param loginDatetime The value of loginDatetime as lessEqual. (NullAllowed: if null, no condition)
-     */
-    public void setLoginDatetime_LessEqual(java.sql.Timestamp loginDatetime) {
-        regLoginDatetime(CK_LE, loginDatetime);
-    }
-
-    /**
-     * FromTo with various options. (versatile) {(default) fromDatetime &lt;= column &lt;= toDatetime} <br />
-     * And NullIgnored, OnlyOnceRegistered. <br />
-     * LOGIN_DATETIME: {NotNull, DATETIME(19)}
-     * <pre>e.g. setLoginDatetime_FromTo(fromDate, toDate, new <span style="color: #DD4747">FromToOption</span>().compareAsDate());</pre>
-     * @param fromDatetime The from-datetime(yyyy/MM/dd HH:mm:ss.SSS) of loginDatetime. (NullAllowed: if null, no from-condition)
-     * @param toDatetime The to-datetime(yyyy/MM/dd HH:mm:ss.SSS) of loginDatetime. (NullAllowed: if null, no to-condition)
-     * @param fromToOption The option of from-to. (NotNull)
-     */
-    public void setLoginDatetime_FromTo(Date fromDatetime, Date toDatetime, FromToOption fromToOption) {
-        regFTQ((fromDatetime != null ? new java.sql.Timestamp(fromDatetime.getTime()) : null), (toDatetime != null ? new java.sql.Timestamp(toDatetime.getTime()) : null), getCValueLoginDatetime(), "LOGIN_DATETIME", fromToOption);
-    }
-
-    /**
-     * DateFromTo. (Date means yyyy/MM/dd) {fromDate &lt;= column &lt; toDate + 1 day} <br />
-     * And NullIgnored, OnlyOnceRegistered. <br />
-     * LOGIN_DATETIME: {NotNull, DATETIME(19)}
-     * <pre>
-     * e.g. from:{2007/04/10 08:24:53} to:{2007/04/16 14:36:29}
-     *  column &gt;= '2007/04/10 00:00:00' and column <span style="color: #DD4747">&lt; '2007/04/17 00:00:00'</span>
-     * </pre>
-     * @param fromDate The from-date(yyyy/MM/dd) of loginDatetime. (NullAllowed: if null, no from-condition)
-     * @param toDate The to-date(yyyy/MM/dd) of loginDatetime. (NullAllowed: if null, no to-condition)
-     */
-    public void setLoginDatetime_DateFromTo(Date fromDate, Date toDate) {
-        setLoginDatetime_FromTo(fromDate, toDate, new FromToOption().compareAsDate());
-    }
-
-    protected void regLoginDatetime(ConditionKey ky, Object vl) { regQ(ky, vl, getCValueLoginDatetime(), "LOGIN_DATETIME"); }
-    protected abstract ConditionValue getCValueLoginDatetime();
     
     /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br />
@@ -370,6 +294,82 @@ public abstract class AbstractBsLoginCQ extends AbstractConditionQuery {
 
     protected void regMemberId(ConditionKey ky, Object vl) { regQ(ky, vl, getCValueMemberId(), "MEMBER_ID"); }
     protected abstract ConditionValue getCValueMemberId();
+
+    /**
+     * Equal(=). And NullIgnored, OnlyOnceRegistered. <br />
+     * LOGIN_DATETIME: {NotNull, DATETIME(19)}
+     * @param loginDatetime The value of loginDatetime as equal. (NullAllowed: if null, no condition)
+     */
+    public void setLoginDatetime_Equal(java.sql.Timestamp loginDatetime) {
+        regLoginDatetime(CK_EQ,  loginDatetime);
+    }
+
+    /**
+     * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br />
+     * LOGIN_DATETIME: {NotNull, DATETIME(19)}
+     * @param loginDatetime The value of loginDatetime as greaterThan. (NullAllowed: if null, no condition)
+     */
+    public void setLoginDatetime_GreaterThan(java.sql.Timestamp loginDatetime) {
+        regLoginDatetime(CK_GT,  loginDatetime);
+    }
+
+    /**
+     * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br />
+     * LOGIN_DATETIME: {NotNull, DATETIME(19)}
+     * @param loginDatetime The value of loginDatetime as lessThan. (NullAllowed: if null, no condition)
+     */
+    public void setLoginDatetime_LessThan(java.sql.Timestamp loginDatetime) {
+        regLoginDatetime(CK_LT,  loginDatetime);
+    }
+
+    /**
+     * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br />
+     * LOGIN_DATETIME: {NotNull, DATETIME(19)}
+     * @param loginDatetime The value of loginDatetime as greaterEqual. (NullAllowed: if null, no condition)
+     */
+    public void setLoginDatetime_GreaterEqual(java.sql.Timestamp loginDatetime) {
+        regLoginDatetime(CK_GE,  loginDatetime);
+    }
+
+    /**
+     * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br />
+     * LOGIN_DATETIME: {NotNull, DATETIME(19)}
+     * @param loginDatetime The value of loginDatetime as lessEqual. (NullAllowed: if null, no condition)
+     */
+    public void setLoginDatetime_LessEqual(java.sql.Timestamp loginDatetime) {
+        regLoginDatetime(CK_LE, loginDatetime);
+    }
+
+    /**
+     * FromTo with various options. (versatile) {(default) fromDatetime &lt;= column &lt;= toDatetime} <br />
+     * And NullIgnored, OnlyOnceRegistered. <br />
+     * LOGIN_DATETIME: {NotNull, DATETIME(19)}
+     * <pre>e.g. setLoginDatetime_FromTo(fromDate, toDate, new <span style="color: #DD4747">FromToOption</span>().compareAsDate());</pre>
+     * @param fromDatetime The from-datetime(yyyy/MM/dd HH:mm:ss.SSS) of loginDatetime. (NullAllowed: if null, no from-condition)
+     * @param toDatetime The to-datetime(yyyy/MM/dd HH:mm:ss.SSS) of loginDatetime. (NullAllowed: if null, no to-condition)
+     * @param fromToOption The option of from-to. (NotNull)
+     */
+    public void setLoginDatetime_FromTo(Date fromDatetime, Date toDatetime, FromToOption fromToOption) {
+        regFTQ((fromDatetime != null ? new java.sql.Timestamp(fromDatetime.getTime()) : null), (toDatetime != null ? new java.sql.Timestamp(toDatetime.getTime()) : null), getCValueLoginDatetime(), "LOGIN_DATETIME", fromToOption);
+    }
+
+    /**
+     * DateFromTo. (Date means yyyy/MM/dd) {fromDate &lt;= column &lt; toDate + 1 day} <br />
+     * And NullIgnored, OnlyOnceRegistered. <br />
+     * LOGIN_DATETIME: {NotNull, DATETIME(19)}
+     * <pre>
+     * e.g. from:{2007/04/10 08:24:53} to:{2007/04/16 14:36:29}
+     *  column &gt;= '2007/04/10 00:00:00' and column <span style="color: #DD4747">&lt; '2007/04/17 00:00:00'</span>
+     * </pre>
+     * @param fromDate The from-date(yyyy/MM/dd) of loginDatetime. (NullAllowed: if null, no from-condition)
+     * @param toDate The to-date(yyyy/MM/dd) of loginDatetime. (NullAllowed: if null, no to-condition)
+     */
+    public void setLoginDatetime_DateFromTo(Date fromDate, Date toDate) {
+        setLoginDatetime_FromTo(fromDate, toDate, new FromToOption().compareAsDate());
+    }
+
+    protected void regLoginDatetime(ConditionKey ky, Object vl) { regQ(ky, vl, getCValueLoginDatetime(), "LOGIN_DATETIME"); }
+    protected abstract ConditionValue getCValueLoginDatetime();
 
     // ===================================================================================
     //                                                                     ScalarCondition

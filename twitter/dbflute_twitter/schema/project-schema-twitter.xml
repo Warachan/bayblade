@@ -4,46 +4,41 @@
 <database name="">
     <table comment="フォロー" name="follow"
         schema="twitter.$$NoNameSchema$$" type="TABLE">
-        <column comment="フォローID" dbType="INT" javaType="Integer"
-            name="FOLLOW_ID" pkName="PRIMARY" primaryKey="true"
-            required="true" size="10" type="INTEGER"/>
-        <column comment="会員ID : 会員のID&#xa;" dbType="INT"
-            javaType="Integer" name="MEMBER_ID" required="true"
-            size="10" type="INTEGER"/>
+        <column autoIncrement="true" comment="フォローID" dbType="INT"
+            javaType="Integer" name="FOLLOW_ID" pkName="PRIMARY"
+            primaryKey="true" required="true" size="10" type="INTEGER"/>
+        <column comment="フォローする人のID : 会員のID&#xa;" dbType="INT"
+            javaType="Integer" name="YOU_ID" required="true" size="10" type="INTEGER"/>
+        <column comment="フォローされる人のID : 会員のID&#xa;" dbType="INT"
+            javaType="Integer" name="ME_ID" required="true" size="10" type="INTEGER"/>
+        <column comment="follow_datetime" dbType="DATETIME"
+            javaType="java.sql.Timestamp" name="FOLLOW_DATETIME"
+            required="true" size="19" type="TIMESTAMP"/>
         <foreign-key foreignSchema="twitter.$$NoNameSchema$$"
             foreignTable="member" name="follow_ibfk_1">
-            <reference foreign="MEMBER_ID" local="MEMBER_ID"/>
+            <reference foreign="MEMBER_ID" local="ME_ID"/>
         </foreign-key>
-        <unique name="MEMBER_ID">
-            <unique-column name="MEMBER_ID" position="1"/>
-        </unique>
-    </table>
-    <table comment="フォロワー" name="followers"
-        schema="twitter.$$NoNameSchema$$" type="TABLE">
-        <column comment="フォロワーID" dbType="INT" javaType="Integer"
-            name="FOLLOWERSID" pkName="PRIMARY" primaryKey="true"
-            required="true" size="10" type="INTEGER"/>
-        <column comment="会員ID : 会員のID&#xa;" dbType="INT"
-            javaType="Integer" name="MEMBER_ID" required="true"
-            size="10" type="INTEGER"/>
         <foreign-key foreignSchema="twitter.$$NoNameSchema$$"
-            foreignTable="member" name="followers_ibfk_1">
-            <reference foreign="MEMBER_ID" local="MEMBER_ID"/>
+            foreignTable="member" name="follow_ibfk_2">
+            <reference foreign="MEMBER_ID" local="YOU_ID"/>
         </foreign-key>
-        <unique name="MEMBER_ID">
-            <unique-column name="MEMBER_ID" position="1"/>
+        <unique name="YOU_ID">
+            <unique-column name="YOU_ID" position="1"/>
         </unique>
+        <index name="ME_ID">
+            <index-column name="ME_ID" position="1"/>
+        </index>
     </table>
     <table comment="ログイン" name="login" schema="twitter.$$NoNameSchema$$" type="TABLE">
         <column autoIncrement="true" comment="ログインID : ログインした瞬間のID&#xa;"
             dbType="INT" javaType="Integer" name="LOGIN_ID"
             pkName="PRIMARY" primaryKey="true" required="true" size="10" type="INTEGER"/>
-        <column comment="ログイン日時" dbType="DATETIME"
-            javaType="java.sql.Timestamp" name="LOGIN_DATETIME"
-            required="true" size="19" type="TIMESTAMP"/>
         <column comment="会員ID : 会員のID&#xa;" dbType="INT"
             javaType="Integer" name="MEMBER_ID" required="true"
             size="10" type="INTEGER"/>
+        <column comment="ログイン日時" dbType="DATETIME"
+            javaType="java.sql.Timestamp" name="LOGIN_DATETIME"
+            required="true" size="19" type="TIMESTAMP"/>
         <foreign-key foreignSchema="twitter.$$NoNameSchema$$"
             foreignTable="member" name="login_ibfk_1">
             <reference foreign="MEMBER_ID" local="MEMBER_ID"/>
@@ -61,9 +56,6 @@
             size="100" type="VARCHAR"/>
         <column comment="会員ユーザ名 : 会員のユーザ名" dbType="VARCHAR"
             javaType="String" name="USER_NAME" required="true" size="50" type="VARCHAR"/>
-        <column comment="更新日時" dbType="DATETIME"
-            javaType="java.sql.Timestamp" name="UPDATE_DATETIME"
-            size="19" type="TIMESTAMP"/>
         <column comment="生年月日 : 会員の生年月日" dbType="DATE"
             javaType="java.util.Date" name="BIRTHDATE" size="10" type="DATE"/>
         <column comment="プロフィール" dbType="VARCHAR" javaType="String"
@@ -71,6 +63,9 @@
         <column comment="登録日時" dbType="DATETIME"
             javaType="java.sql.Timestamp" name="REGESTER_DATETIME"
             required="true" size="19" type="TIMESTAMP"/>
+        <column comment="更新日時" dbType="DATETIME"
+            javaType="java.sql.Timestamp" name="UPDATE_DATETIME"
+            size="19" type="TIMESTAMP"/>
         <unique name="EMAIL_ADDRESS">
             <unique-column name="EMAIL_ADDRESS" position="1"/>
         </unique>
@@ -99,11 +94,11 @@
     </table>
     <table comment="会員退会" name="member_withdraw"
         schema="twitter.$$NoNameSchema$$" type="TABLE">
-        <column comment="退会理由ID : 会員の退会理由ID" dbType="INT"
-            javaType="Integer" name="WITHDRAWAL_REASON_ID" size="10" type="INTEGER"/>
         <column comment="会員ID : 会員のID&#xa;" dbType="INT"
             javaType="Integer" name="MEMBER_ID" pkName="PRIMARY"
             primaryKey="true" required="true" size="10" type="INTEGER"/>
+        <column comment="退会理由ID : 会員の退会理由ID" dbType="INT"
+            javaType="Integer" name="WITHDRAWAL_REASON_ID" size="10" type="INTEGER"/>
         <column comment="退会理由入力テキスト" dbType="TEXT" javaType="String"
             name="WITHDRAWAL_REASON_INPUT_TEXT" size="65535" type="LONGVARCHAR"/>
         <column comment="withdrawal_datetime : 退会日時" dbType="DATETIME"

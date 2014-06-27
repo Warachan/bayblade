@@ -341,15 +341,15 @@ public class BsLoginCB extends AbstractConditionBean {
          */
         public HpSpecifiedColumn columnLoginId() { return doColumn("LOGIN_ID"); }
         /**
-         * LOGIN_DATETIME: {NotNull, DATETIME(19)}
-         * @return The information object of specified column. (NotNull)
-         */
-        public HpSpecifiedColumn columnLoginDatetime() { return doColumn("LOGIN_DATETIME"); }
-        /**
          * MEMBER_ID: {IX, NotNull, INT(10), FK to member}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnMemberId() { return doColumn("MEMBER_ID"); }
+        /**
+         * LOGIN_DATETIME: {NotNull, DATETIME(19)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public HpSpecifiedColumn columnLoginDatetime() { return doColumn("LOGIN_DATETIME"); }
         public void everyColumn() { doEveryColumn(); }
         public void exceptRecordMetaColumn() { doExceptRecordMetaColumn(); }
         @Override

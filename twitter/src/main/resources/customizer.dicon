@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN" 
+<!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN"
 	"http://www.seasar.org/dtd/components24.dtd">
 <components>
 	<include path="default-customizer.dicon"/>
@@ -13,12 +13,16 @@
 	<!-- _/   Action   _/ -->
 	<!-- _/_/_/_/_/_/_/_/ -->
 	<component name="actionCustomizer" class="org.seasar.framework.container.customizer.CustomizerChain">
+	<!-- 作成したクラスを追加 -->
+	<!-- 追加設定ここまで -->
 		<!-- = = = = = = = -->
 		<!-- Basic Aspect  -->
 		<!-- = = = = = = = -->
 		<initMethod name="addAspectCustomizer">
 			<!-- you can trace your actions in log -->
 			<arg>"aop.actionTraceInterceptor"</arg>
+			<!--ここ重要-->
+			<arg>true</arg>
 		</initMethod>
 		<initMethod name="addAspectCustomizer">
 			<!-- you can throw exception with message in action -->
@@ -37,6 +41,21 @@
 			</arg>
 		</initMethod>
 
+	<initMethod name="addCustomizer">
+		<arg>
+			<component
+				class="org.seasar.framework.container.customizer.AspectCustomizer">
+				<property name="interceptorName">"loginInterceptor"</property>
+				<!--ここ重要-->
+				<property name="useLookupAdapter">true</property>
+				<!-- 処理の対象外ににしたいAction(これ以外が対象になる) -->
+				<initMethod name="addIgnoreClassPattern">
+					<arg>"jp.bizreach.twitter.app.web"</arg>
+					<arg>"IndexAction"</arg>
+				</initMethod>
+			</component>
+		</arg>
+	</initMethod>
 		<!-- = = = = = = = = = = -->
 		<!-- Application Aspect	 -->
 		<!-- = = = = = = = = = = -->

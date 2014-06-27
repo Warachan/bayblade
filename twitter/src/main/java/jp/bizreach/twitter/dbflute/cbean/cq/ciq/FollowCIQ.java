@@ -62,11 +62,17 @@ public class FollowCIQ extends AbstractBsFollowCQ {
     //                                                                Override about Query
     //                                                                ====================
     protected ConditionValue getCValueFollowId() { return _myCQ.getFollowId(); }
-    protected ConditionValue getCValueMemberId() { return _myCQ.getMemberId(); }
-    public String keepMemberId_InScopeRelation_Member(MemberCQ sq)
-    { return _myCQ.keepMemberId_InScopeRelation_Member(sq); }
-    public String keepMemberId_NotInScopeRelation_Member(MemberCQ sq)
-    { return _myCQ.keepMemberId_NotInScopeRelation_Member(sq); }
+    protected ConditionValue getCValueYouId() { return _myCQ.getYouId(); }
+    public String keepYouId_InScopeRelation_MemberByYouId(MemberCQ sq)
+    { return _myCQ.keepYouId_InScopeRelation_MemberByYouId(sq); }
+    public String keepYouId_NotInScopeRelation_MemberByYouId(MemberCQ sq)
+    { return _myCQ.keepYouId_NotInScopeRelation_MemberByYouId(sq); }
+    protected ConditionValue getCValueMeId() { return _myCQ.getMeId(); }
+    public String keepMeId_InScopeRelation_MemberByMeId(MemberCQ sq)
+    { return _myCQ.keepMeId_InScopeRelation_MemberByMeId(sq); }
+    public String keepMeId_NotInScopeRelation_MemberByMeId(MemberCQ sq)
+    { return _myCQ.keepMeId_NotInScopeRelation_MemberByMeId(sq); }
+    protected ConditionValue getCValueFollowDatetime() { return _myCQ.getFollowDatetime(); }
     protected Map<String, Object> xfindFixedConditionDynamicParameterMap(String pp) { return null; }
     public String keepScalarCondition(FollowCQ sq)
     { throwIICBOE("ScalarCondition"); return null; }

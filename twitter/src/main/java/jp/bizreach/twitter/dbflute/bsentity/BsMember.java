@@ -19,7 +19,7 @@ import jp.bizreach.twitter.dbflute.exentity.*;
  *     MEMBER_ID
  * 
  * [column]
- *     MEMBER_ID, EMAIL_ADDRESS, USER_NAME, UPDATE_DATETIME, BIRTHDATE, PROFILE, REGESTER_DATETIME
+ *     MEMBER_ID, EMAIL_ADDRESS, USER_NAME, BIRTHDATE, PROFILE, REGESTER_DATETIME, UPDATE_DATETIME
  * 
  * [sequence]
  *     
@@ -31,33 +31,33 @@ import jp.bizreach.twitter.dbflute.exentity.*;
  *     
  * 
  * [foreign table]
- *     follow(AsOne), followers(AsOne), member_security(AsOne), member_withdraw(AsOne)
+ *     follow(AsOne), member_security(AsOne), member_withdraw(AsOne)
  * 
  * [referrer table]
- *     login, tweet, follow, followers, member_security, member_withdraw
+ *     follow, login, tweet, member_security, member_withdraw
  * 
  * [foreign property]
- *     followAsOne, followersAsOne, memberSecurityAsOne, memberWithdrawAsOne
+ *     followByYouIdAsOne, memberSecurityAsOne, memberWithdrawAsOne
  * 
  * [referrer property]
- *     loginList, tweetList
+ *     followByMeIdList, loginList, tweetList
  * 
  * [get/set template]
  * /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
  * Integer memberId = entity.getMemberId();
  * String emailAddress = entity.getEmailAddress();
  * String userName = entity.getUserName();
- * java.sql.Timestamp updateDatetime = entity.getUpdateDatetime();
  * java.util.Date birthdate = entity.getBirthdate();
  * String profile = entity.getProfile();
  * java.sql.Timestamp regesterDatetime = entity.getRegesterDatetime();
+ * java.sql.Timestamp updateDatetime = entity.getUpdateDatetime();
  * entity.setMemberId(memberId);
  * entity.setEmailAddress(emailAddress);
  * entity.setUserName(userName);
- * entity.setUpdateDatetime(updateDatetime);
  * entity.setBirthdate(birthdate);
  * entity.setProfile(profile);
  * entity.setRegesterDatetime(regesterDatetime);
+ * entity.setUpdateDatetime(updateDatetime);
  * = = = = = = = = = =/
  * </pre>
  * @author DBFlute(AutoGenerator)
@@ -85,9 +85,6 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     /** USER_NAME: {UQ, NotNull, VARCHAR(50)} */
     protected String _userName;
 
-    /** UPDATE_DATETIME: {DATETIME(19)} */
-    protected java.sql.Timestamp _updateDatetime;
-
     /** BIRTHDATE: {DATE(10)} */
     protected java.util.Date _birthdate;
 
@@ -96,6 +93,9 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
 
     /** REGESTER_DATETIME: {NotNull, DATETIME(19)} */
     protected java.sql.Timestamp _regesterDatetime;
+
+    /** UPDATE_DATETIME: {DATETIME(19)} */
+    protected java.sql.Timestamp _updateDatetime;
 
     // -----------------------------------------------------
     //                                              Internal
@@ -183,42 +183,23 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     // ===================================================================================
     //                                                                    Foreign Property
     //                                                                    ================
-    /** follow by MEMBER_ID, named 'followAsOne'. */
-    protected Follow _followAsOne;
+    /** follow by YOU_ID, named 'followByYouIdAsOne'. */
+    protected Follow _followByYouIdAsOne;
 
     /**
-     * [get] follow by MEMBER_ID, named 'followAsOne'.
-     * @return the entity of foreign property(referrer-as-one) 'followAsOne'. (NullAllowed: when e.g. no data, no setupSelect)
+     * [get] follow by YOU_ID, named 'followByYouIdAsOne'.
+     * @return the entity of foreign property(referrer-as-one) 'followByYouIdAsOne'. (NullAllowed: when e.g. no data, no setupSelect)
      */
-    public Follow getFollowAsOne() {
-        return _followAsOne;
+    public Follow getFollowByYouIdAsOne() {
+        return _followByYouIdAsOne;
     }
 
     /**
-     * [set] follow by MEMBER_ID, named 'followAsOne'.
-     * @param followAsOne The entity of foreign property(referrer-as-one) 'followAsOne'. (NullAllowed)
+     * [set] follow by YOU_ID, named 'followByYouIdAsOne'.
+     * @param followByYouIdAsOne The entity of foreign property(referrer-as-one) 'followByYouIdAsOne'. (NullAllowed)
      */
-    public void setFollowAsOne(Follow followAsOne) {
-        _followAsOne = followAsOne;
-    }
-
-    /** followers by MEMBER_ID, named 'followersAsOne'. */
-    protected Followers _followersAsOne;
-
-    /**
-     * [get] followers by MEMBER_ID, named 'followersAsOne'.
-     * @return the entity of foreign property(referrer-as-one) 'followersAsOne'. (NullAllowed: when e.g. no data, no setupSelect)
-     */
-    public Followers getFollowersAsOne() {
-        return _followersAsOne;
-    }
-
-    /**
-     * [set] followers by MEMBER_ID, named 'followersAsOne'.
-     * @param followersAsOne The entity of foreign property(referrer-as-one) 'followersAsOne'. (NullAllowed)
-     */
-    public void setFollowersAsOne(Followers followersAsOne) {
-        _followersAsOne = followersAsOne;
+    public void setFollowByYouIdAsOne(Follow followByYouIdAsOne) {
+        _followByYouIdAsOne = followByYouIdAsOne;
     }
 
     /** member_security by MEMBER_ID, named 'memberSecurityAsOne'. */
@@ -262,6 +243,26 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     // ===================================================================================
     //                                                                   Referrer Property
     //                                                                   =================
+    /** follow by ME_ID, named 'followByMeIdList'. */
+    protected List<Follow> _followByMeIdList;
+
+    /**
+     * [get] follow by ME_ID, named 'followByMeIdList'.
+     * @return The entity list of referrer property 'followByMeIdList'. (NotNull: even if no loading, returns empty list)
+     */
+    public List<Follow> getFollowByMeIdList() {
+        if (_followByMeIdList == null) { _followByMeIdList = newReferrerList(); }
+        return _followByMeIdList;
+    }
+
+    /**
+     * [set] follow by ME_ID, named 'followByMeIdList'.
+     * @param followByMeIdList The entity list of referrer property 'followByMeIdList'. (NullAllowed)
+     */
+    public void setFollowByMeIdList(List<Follow> followByMeIdList) {
+        _followByMeIdList = followByMeIdList;
+    }
+
     /** login by MEMBER_ID, named 'loginList'. */
     protected List<Login> _loginList;
 
@@ -406,14 +407,14 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
         StringBuilder sb = new StringBuilder();
         sb.append(toString());
         String li = "\n  ";
-        if (_followAsOne != null)
-        { sb.append(li).append(xbRDS(_followAsOne, "followAsOne")); }
-        if (_followersAsOne != null)
-        { sb.append(li).append(xbRDS(_followersAsOne, "followersAsOne")); }
+        if (_followByYouIdAsOne != null)
+        { sb.append(li).append(xbRDS(_followByYouIdAsOne, "followByYouIdAsOne")); }
         if (_memberSecurityAsOne != null)
         { sb.append(li).append(xbRDS(_memberSecurityAsOne, "memberSecurityAsOne")); }
         if (_memberWithdrawAsOne != null)
         { sb.append(li).append(xbRDS(_memberWithdrawAsOne, "memberWithdrawAsOne")); }
+        if (_followByMeIdList != null) { for (Entity et : _followByMeIdList)
+        { if (et != null) { sb.append(li).append(xbRDS(et, "followByMeIdList")); } } }
         if (_loginList != null) { for (Entity et : _loginList)
         { if (et != null) { sb.append(li).append(xbRDS(et, "loginList")); } } }
         if (_tweetList != null) { for (Entity et : _tweetList)
@@ -441,10 +442,10 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
         sb.append(dm).append(getMemberId());
         sb.append(dm).append(getEmailAddress());
         sb.append(dm).append(getUserName());
-        sb.append(dm).append(getUpdateDatetime());
         sb.append(dm).append(xfUD(getBirthdate()));
         sb.append(dm).append(getProfile());
         sb.append(dm).append(getRegesterDatetime());
+        sb.append(dm).append(getUpdateDatetime());
         if (sb.length() > dm.length()) {
             sb.delete(0, dm.length());
         }
@@ -460,10 +461,11 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     protected String buildRelationString() {
         StringBuilder sb = new StringBuilder();
         String cm = ",";
-        if (_followAsOne != null) { sb.append(cm).append("followAsOne"); }
-        if (_followersAsOne != null) { sb.append(cm).append("followersAsOne"); }
+        if (_followByYouIdAsOne != null) { sb.append(cm).append("followByYouIdAsOne"); }
         if (_memberSecurityAsOne != null) { sb.append(cm).append("memberSecurityAsOne"); }
         if (_memberWithdrawAsOne != null) { sb.append(cm).append("memberWithdrawAsOne"); }
+        if (_followByMeIdList != null && !_followByMeIdList.isEmpty())
+        { sb.append(cm).append("followByMeIdList"); }
         if (_loginList != null && !_loginList.isEmpty())
         { sb.append(cm).append("loginList"); }
         if (_tweetList != null && !_tweetList.isEmpty())
@@ -547,25 +549,6 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [get] UPDATE_DATETIME: {DATETIME(19)} <br />
-     * 更新日時
-     * @return The value of the column 'UPDATE_DATETIME'. (NullAllowed even if selected: for no constraint)
-     */
-    public java.sql.Timestamp getUpdateDatetime() {
-        return _updateDatetime;
-    }
-
-    /**
-     * [set] UPDATE_DATETIME: {DATETIME(19)} <br />
-     * 更新日時
-     * @param updateDatetime The value of the column 'UPDATE_DATETIME'. (NullAllowed: null update allowed for no constraint)
-     */
-    public void setUpdateDatetime(java.sql.Timestamp updateDatetime) {
-        __modifiedProperties.addPropertyName("updateDatetime");
-        _updateDatetime = updateDatetime;
-    }
-
-    /**
      * [get] BIRTHDATE: {DATE(10)} <br />
      * 生年月日 : 会員の生年月日
      * @return The value of the column 'BIRTHDATE'. (NullAllowed even if selected: for no constraint)
@@ -620,5 +603,24 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     public void setRegesterDatetime(java.sql.Timestamp regesterDatetime) {
         __modifiedProperties.addPropertyName("regesterDatetime");
         _regesterDatetime = regesterDatetime;
+    }
+
+    /**
+     * [get] UPDATE_DATETIME: {DATETIME(19)} <br />
+     * 更新日時
+     * @return The value of the column 'UPDATE_DATETIME'. (NullAllowed even if selected: for no constraint)
+     */
+    public java.sql.Timestamp getUpdateDatetime() {
+        return _updateDatetime;
+    }
+
+    /**
+     * [set] UPDATE_DATETIME: {DATETIME(19)} <br />
+     * 更新日時
+     * @param updateDatetime The value of the column 'UPDATE_DATETIME'. (NullAllowed: null update allowed for no constraint)
+     */
+    public void setUpdateDatetime(java.sql.Timestamp updateDatetime) {
+        __modifiedProperties.addPropertyName("updateDatetime");
+        _updateDatetime = updateDatetime;
     }
 }

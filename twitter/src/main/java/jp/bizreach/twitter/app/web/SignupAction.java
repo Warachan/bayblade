@@ -38,9 +38,9 @@ public class SignupAction {
     @Resource
     protected SignupForm signupForm;
     @Resource
-    protected MemberBhv memberBhv;
-    @Resource
     protected SessionDto sessionDto;
+    @Resource
+    protected MemberBhv memberBhv;
     @Resource
     protected MemberSecurityBhv memberSecurityBhv;
     // -----------------------------------------------------
@@ -95,12 +95,13 @@ public class SignupAction {
             Timestamp timestamp = new Timestamp(date.getTime());
             sessionDto.email = newEmail;
             Member member = insertMember(timestamp);
-            sessionDto.id = member.getMemberId();
-            LOG.debug("***" + sessionDto.id);
+            sessionDto.myId = member.getMemberId();
+            LOG.debug("***" + sessionDto.myId);
 
             if (newPassword.equals(confirmPass)) {
                 insertSecurity(timestamp, member);
-                return "/home/twitter.jsp";
+                //                return "/home/twitter.jsp";
+                return "/home/?redirect=true";
             } else {
                 matchError = "パスワードが一致しません。";
                 return "/signup/signup.jsp";
