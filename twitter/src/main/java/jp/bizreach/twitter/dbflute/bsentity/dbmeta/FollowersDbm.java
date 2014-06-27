@@ -153,7 +153,7 @@ public class FollowersDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                     Object Instance
     //                                                                     ===============
-    public Entity newEntity() { return newMyEntity(); }
+    public Followers newEntity() { return new Followers(); }
     public Followers newMyEntity() { return new Followers(); }
 
     // ===================================================================================

@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Set;
 
-import org.seasar.dbflute.dbmeta.DBMeta;
 import org.seasar.dbflute.Entity;
+import org.seasar.dbflute.dbmeta.DBMeta;
 import jp.bizreach.twitter.dbflute.allcommon.DBMetaInstanceHandler;
 import jp.bizreach.twitter.dbflute.exentity.*;
 
@@ -149,7 +149,7 @@ public abstract class BsMemberSecurity implements Entity, Serializable, Cloneabl
     protected Member _member;
 
     /**
-     * member by my MEMBER_ID, named 'member'.
+     * [get] member by my MEMBER_ID, named 'member'.
      * @return The entity of foreign property 'member'. (NullAllowed: when e.g. null FK column, no setupSelect)
      */
     public Member getMember() {
@@ -157,7 +157,7 @@ public abstract class BsMemberSecurity implements Entity, Serializable, Cloneabl
     }
 
     /**
-     * member by my MEMBER_ID, named 'member'.
+     * [set] member by my MEMBER_ID, named 'member'.
      * @param member The entity of foreign property 'member'. (NullAllowed)
      */
     public void setMember(Member member) {
@@ -344,7 +344,7 @@ public abstract class BsMemberSecurity implements Entity, Serializable, Cloneabl
      */
     public void setMemberId(Integer memberId) {
         __modifiedProperties.addPropertyName("memberId");
-        this._memberId = memberId;
+        _memberId = memberId;
     }
 
     /**
@@ -363,7 +363,7 @@ public abstract class BsMemberSecurity implements Entity, Serializable, Cloneabl
      */
     public void setPassword(String password) {
         __modifiedProperties.addPropertyName("password");
-        this._password = password;
+        _password = password;
     }
 
     /**
@@ -382,7 +382,7 @@ public abstract class BsMemberSecurity implements Entity, Serializable, Cloneabl
      */
     public void setPasswordUpdateDatetime(java.sql.Timestamp passwordUpdateDatetime) {
         __modifiedProperties.addPropertyName("passwordUpdateDatetime");
-        this._passwordUpdateDatetime = passwordUpdateDatetime;
+        _passwordUpdateDatetime = passwordUpdateDatetime;
     }
 
     /**
@@ -401,6 +401,6 @@ public abstract class BsMemberSecurity implements Entity, Serializable, Cloneabl
      */
     public void setPasswordRegesterationDatetime(java.sql.Timestamp passwordRegesterationDatetime) {
         __modifiedProperties.addPropertyName("passwordRegesterationDatetime");
-        this._passwordRegesterationDatetime = passwordRegesterationDatetime;
+        _passwordRegesterationDatetime = passwordRegesterationDatetime;
     }
 }

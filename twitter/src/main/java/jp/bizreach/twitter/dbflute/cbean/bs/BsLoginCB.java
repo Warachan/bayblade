@@ -81,11 +81,23 @@ public class BsLoginCB extends AbstractConditionBean {
     /**
      * Accept the query condition of primary key as equal.
      * @param loginId : PK, ID, NotNull, INT(10). (NotNull)
+     * @return this. (NotNull)
+     */
+    public LoginCB acceptPK(Integer loginId) {
+        assertObjectNotNull("loginId", loginId);
+        BsLoginCB cb = this;
+        cb.query().setLoginId_Equal(loginId);
+        return (LoginCB)this;
+    }
+
+    /**
+     * Accept the query condition of primary key as equal. (old style)
+     * @param loginId : PK, ID, NotNull, INT(10). (NotNull)
      */
     public void acceptPrimaryKey(Integer loginId) {
         assertObjectNotNull("loginId", loginId);
         BsLoginCB cb = this;
-        cb.query().setLoginId_Equal(loginId);;
+        cb.query().setLoginId_Equal(loginId);
     }
 
     public ConditionBean addOrderBy_PK_Asc() {

@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Set;
 
-import org.seasar.dbflute.dbmeta.DBMeta;
 import org.seasar.dbflute.Entity;
+import org.seasar.dbflute.dbmeta.DBMeta;
 import jp.bizreach.twitter.dbflute.allcommon.DBMetaInstanceHandler;
 import jp.bizreach.twitter.dbflute.exentity.*;
 
@@ -144,7 +144,7 @@ public abstract class BsLogin implements Entity, Serializable, Cloneable {
     protected Member _member;
 
     /**
-     * member by my MEMBER_ID, named 'member'.
+     * [get] member by my MEMBER_ID, named 'member'.
      * @return The entity of foreign property 'member'. (NullAllowed: when e.g. null FK column, no setupSelect)
      */
     public Member getMember() {
@@ -152,7 +152,7 @@ public abstract class BsLogin implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * member by my MEMBER_ID, named 'member'.
+     * [set] member by my MEMBER_ID, named 'member'.
      * @param member The entity of foreign property 'member'. (NullAllowed)
      */
     public void setMember(Member member) {
@@ -338,7 +338,7 @@ public abstract class BsLogin implements Entity, Serializable, Cloneable {
      */
     public void setLoginId(Integer loginId) {
         __modifiedProperties.addPropertyName("loginId");
-        this._loginId = loginId;
+        _loginId = loginId;
     }
 
     /**
@@ -357,7 +357,7 @@ public abstract class BsLogin implements Entity, Serializable, Cloneable {
      */
     public void setLoginDatetime(java.sql.Timestamp loginDatetime) {
         __modifiedProperties.addPropertyName("loginDatetime");
-        this._loginDatetime = loginDatetime;
+        _loginDatetime = loginDatetime;
     }
 
     /**
@@ -376,6 +376,6 @@ public abstract class BsLogin implements Entity, Serializable, Cloneable {
      */
     public void setMemberId(Integer memberId) {
         __modifiedProperties.addPropertyName("memberId");
-        this._memberId = memberId;
+        _memberId = memberId;
     }
 }

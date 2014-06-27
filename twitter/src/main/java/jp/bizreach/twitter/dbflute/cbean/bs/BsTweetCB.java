@@ -81,11 +81,23 @@ public class BsTweetCB extends AbstractConditionBean {
     /**
      * Accept the query condition of primary key as equal.
      * @param tweetId : PK, ID, NotNull, INT(10). (NotNull)
+     * @return this. (NotNull)
+     */
+    public TweetCB acceptPK(Integer tweetId) {
+        assertObjectNotNull("tweetId", tweetId);
+        BsTweetCB cb = this;
+        cb.query().setTweetId_Equal(tweetId);
+        return (TweetCB)this;
+    }
+
+    /**
+     * Accept the query condition of primary key as equal. (old style)
+     * @param tweetId : PK, ID, NotNull, INT(10). (NotNull)
      */
     public void acceptPrimaryKey(Integer tweetId) {
         assertObjectNotNull("tweetId", tweetId);
         BsTweetCB cb = this;
-        cb.query().setTweetId_Equal(tweetId);;
+        cb.query().setTweetId_Equal(tweetId);
     }
 
     public ConditionBean addOrderBy_PK_Asc() {

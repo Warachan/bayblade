@@ -81,21 +81,35 @@ public class BsFollowersCB extends AbstractConditionBean {
     /**
      * Accept the query condition of primary key as equal.
      * @param followersid : PK, NotNull, INT(10). (NotNull)
+     * @return this. (NotNull)
+     */
+    public FollowersCB acceptPK(Integer followersid) {
+        assertObjectNotNull("followersid", followersid);
+        BsFollowersCB cb = this;
+        cb.query().setFollowersid_Equal(followersid);
+        return (FollowersCB)this;
+    }
+
+    /**
+     * Accept the query condition of primary key as equal. (old style)
+     * @param followersid : PK, NotNull, INT(10). (NotNull)
      */
     public void acceptPrimaryKey(Integer followersid) {
         assertObjectNotNull("followersid", followersid);
         BsFollowersCB cb = this;
-        cb.query().setFollowersid_Equal(followersid);;
+        cb.query().setFollowersid_Equal(followersid);
     }
 
     /**
      * Accept the query condition of unique key as equal.
      * @param memberId : UQ, NotNull, INT(10), FK to member. (NotNull)
+     * @return this. (NotNull)
      */
-    public void acceptUniqueOf(Integer memberId) {
+    public FollowersCB acceptUniqueOf(Integer memberId) {
         assertObjectNotNull("memberId", memberId);
         BsFollowersCB cb = this;
-        cb.query().setMemberId_Equal(memberId);;
+        cb.query().setMemberId_Equal(memberId);
+        return (FollowersCB)this;
     }
 
     public ConditionBean addOrderBy_PK_Asc() {

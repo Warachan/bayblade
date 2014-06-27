@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.Set;
 import java.util.Date;
 
-import org.seasar.dbflute.dbmeta.DBMeta;
 import org.seasar.dbflute.Entity;
+import org.seasar.dbflute.dbmeta.DBMeta;
 import jp.bizreach.twitter.dbflute.allcommon.DBMetaInstanceHandler;
 import jp.bizreach.twitter.dbflute.exentity.*;
 
@@ -187,7 +187,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     protected Follow _followAsOne;
 
     /**
-     * follow by MEMBER_ID, named 'followAsOne'.
+     * [get] follow by MEMBER_ID, named 'followAsOne'.
      * @return the entity of foreign property(referrer-as-one) 'followAsOne'. (NullAllowed: when e.g. no data, no setupSelect)
      */
     public Follow getFollowAsOne() {
@@ -195,7 +195,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * follow by MEMBER_ID, named 'followAsOne'.
+     * [set] follow by MEMBER_ID, named 'followAsOne'.
      * @param followAsOne The entity of foreign property(referrer-as-one) 'followAsOne'. (NullAllowed)
      */
     public void setFollowAsOne(Follow followAsOne) {
@@ -206,7 +206,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     protected Followers _followersAsOne;
 
     /**
-     * followers by MEMBER_ID, named 'followersAsOne'.
+     * [get] followers by MEMBER_ID, named 'followersAsOne'.
      * @return the entity of foreign property(referrer-as-one) 'followersAsOne'. (NullAllowed: when e.g. no data, no setupSelect)
      */
     public Followers getFollowersAsOne() {
@@ -214,7 +214,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * followers by MEMBER_ID, named 'followersAsOne'.
+     * [set] followers by MEMBER_ID, named 'followersAsOne'.
      * @param followersAsOne The entity of foreign property(referrer-as-one) 'followersAsOne'. (NullAllowed)
      */
     public void setFollowersAsOne(Followers followersAsOne) {
@@ -225,7 +225,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     protected MemberSecurity _memberSecurityAsOne;
 
     /**
-     * member_security by MEMBER_ID, named 'memberSecurityAsOne'.
+     * [get] member_security by MEMBER_ID, named 'memberSecurityAsOne'.
      * @return the entity of foreign property(referrer-as-one) 'memberSecurityAsOne'. (NullAllowed: when e.g. no data, no setupSelect)
      */
     public MemberSecurity getMemberSecurityAsOne() {
@@ -233,7 +233,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * member_security by MEMBER_ID, named 'memberSecurityAsOne'.
+     * [set] member_security by MEMBER_ID, named 'memberSecurityAsOne'.
      * @param memberSecurityAsOne The entity of foreign property(referrer-as-one) 'memberSecurityAsOne'. (NullAllowed)
      */
     public void setMemberSecurityAsOne(MemberSecurity memberSecurityAsOne) {
@@ -244,7 +244,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     protected MemberWithdraw _memberWithdrawAsOne;
 
     /**
-     * member_withdraw by MEMBER_ID, named 'memberWithdrawAsOne'.
+     * [get] member_withdraw by MEMBER_ID, named 'memberWithdrawAsOne'.
      * @return the entity of foreign property(referrer-as-one) 'memberWithdrawAsOne'. (NullAllowed: when e.g. no data, no setupSelect)
      */
     public MemberWithdraw getMemberWithdrawAsOne() {
@@ -252,7 +252,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * member_withdraw by MEMBER_ID, named 'memberWithdrawAsOne'.
+     * [set] member_withdraw by MEMBER_ID, named 'memberWithdrawAsOne'.
      * @param memberWithdrawAsOne The entity of foreign property(referrer-as-one) 'memberWithdrawAsOne'. (NullAllowed)
      */
     public void setMemberWithdrawAsOne(MemberWithdraw memberWithdrawAsOne) {
@@ -266,7 +266,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     protected List<Login> _loginList;
 
     /**
-     * login by MEMBER_ID, named 'loginList'.
+     * [get] login by MEMBER_ID, named 'loginList'.
      * @return The entity list of referrer property 'loginList'. (NotNull: even if no loading, returns empty list)
      */
     public List<Login> getLoginList() {
@@ -275,7 +275,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * login by MEMBER_ID, named 'loginList'.
+     * [set] login by MEMBER_ID, named 'loginList'.
      * @param loginList The entity list of referrer property 'loginList'. (NullAllowed)
      */
     public void setLoginList(List<Login> loginList) {
@@ -286,7 +286,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     protected List<Tweet> _tweetList;
 
     /**
-     * tweet by MEMBER_ID, named 'tweetList'.
+     * [get] tweet by MEMBER_ID, named 'tweetList'.
      * @return The entity list of referrer property 'tweetList'. (NotNull: even if no loading, returns empty list)
      */
     public List<Tweet> getTweetList() {
@@ -295,7 +295,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * tweet by MEMBER_ID, named 'tweetList'.
+     * [set] tweet by MEMBER_ID, named 'tweetList'.
      * @param tweetList The entity list of referrer property 'tweetList'. (NullAllowed)
      */
     public void setTweetList(List<Tweet> tweetList) {
@@ -505,7 +505,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
      */
     public void setMemberId(Integer memberId) {
         __modifiedProperties.addPropertyName("memberId");
-        this._memberId = memberId;
+        _memberId = memberId;
     }
 
     /**
@@ -524,7 +524,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
      */
     public void setEmailAddress(String emailAddress) {
         __modifiedProperties.addPropertyName("emailAddress");
-        this._emailAddress = emailAddress;
+        _emailAddress = emailAddress;
     }
 
     /**
@@ -543,7 +543,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
      */
     public void setUserName(String userName) {
         __modifiedProperties.addPropertyName("userName");
-        this._userName = userName;
+        _userName = userName;
     }
 
     /**
@@ -562,7 +562,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
      */
     public void setUpdateDatetime(java.sql.Timestamp updateDatetime) {
         __modifiedProperties.addPropertyName("updateDatetime");
-        this._updateDatetime = updateDatetime;
+        _updateDatetime = updateDatetime;
     }
 
     /**
@@ -581,7 +581,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
      */
     public void setBirthdate(java.util.Date birthdate) {
         __modifiedProperties.addPropertyName("birthdate");
-        this._birthdate = birthdate;
+        _birthdate = birthdate;
     }
 
     /**
@@ -600,7 +600,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
      */
     public void setProfile(String profile) {
         __modifiedProperties.addPropertyName("profile");
-        this._profile = profile;
+        _profile = profile;
     }
 
     /**
@@ -619,6 +619,6 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
      */
     public void setRegesterDatetime(java.sql.Timestamp regesterDatetime) {
         __modifiedProperties.addPropertyName("regesterDatetime");
-        this._regesterDatetime = regesterDatetime;
+        _regesterDatetime = regesterDatetime;
     }
 }

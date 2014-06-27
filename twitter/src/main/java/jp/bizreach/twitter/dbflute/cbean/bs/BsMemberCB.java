@@ -81,31 +81,47 @@ public class BsMemberCB extends AbstractConditionBean {
     /**
      * Accept the query condition of primary key as equal.
      * @param memberId : PK, ID, NotNull, INT(10). (NotNull)
+     * @return this. (NotNull)
+     */
+    public MemberCB acceptPK(Integer memberId) {
+        assertObjectNotNull("memberId", memberId);
+        BsMemberCB cb = this;
+        cb.query().setMemberId_Equal(memberId);
+        return (MemberCB)this;
+    }
+
+    /**
+     * Accept the query condition of primary key as equal. (old style)
+     * @param memberId : PK, ID, NotNull, INT(10). (NotNull)
      */
     public void acceptPrimaryKey(Integer memberId) {
         assertObjectNotNull("memberId", memberId);
         BsMemberCB cb = this;
-        cb.query().setMemberId_Equal(memberId);;
+        cb.query().setMemberId_Equal(memberId);
     }
 
     /**
      * Accept the query condition of unique key as equal.
      * @param emailAddress : UQ, NotNull, VARCHAR(100). (NotNull)
+     * @return this. (NotNull)
      */
-    public void acceptUniqueOfEmailAddress(String emailAddress) {
+    public MemberCB acceptUniqueOfEmailAddress(String emailAddress) {
         assertObjectNotNull("emailAddress", emailAddress);
         BsMemberCB cb = this;
-        cb.query().setEmailAddress_Equal(emailAddress);;
+        cb.query().setEmailAddress_Equal(emailAddress);
+        return (MemberCB)this;
     }
 
     /**
      * Accept the query condition of unique key as equal.
      * @param userName : UQ, NotNull, VARCHAR(50). (NotNull)
+     * @return this. (NotNull)
      */
-    public void acceptUniqueOfUserName(String userName) {
+    public MemberCB acceptUniqueOfUserName(String userName) {
         assertObjectNotNull("userName", userName);
         BsMemberCB cb = this;
-        cb.query().setUserName_Equal(userName);;
+        cb.query().setUserName_Equal(userName);
+        return (MemberCB)this;
     }
 
     public ConditionBean addOrderBy_PK_Asc() {

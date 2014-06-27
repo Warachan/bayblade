@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Set;
 
-import org.seasar.dbflute.dbmeta.DBMeta;
 import org.seasar.dbflute.Entity;
+import org.seasar.dbflute.dbmeta.DBMeta;
 import jp.bizreach.twitter.dbflute.allcommon.DBMetaInstanceHandler;
 import jp.bizreach.twitter.dbflute.exentity.*;
 
@@ -149,7 +149,7 @@ public abstract class BsMemberWithdraw implements Entity, Serializable, Cloneabl
     protected Member _member;
 
     /**
-     * member by my MEMBER_ID, named 'member'.
+     * [get] member by my MEMBER_ID, named 'member'.
      * @return The entity of foreign property 'member'. (NullAllowed: when e.g. null FK column, no setupSelect)
      */
     public Member getMember() {
@@ -157,7 +157,7 @@ public abstract class BsMemberWithdraw implements Entity, Serializable, Cloneabl
     }
 
     /**
-     * member by my MEMBER_ID, named 'member'.
+     * [set] member by my MEMBER_ID, named 'member'.
      * @param member The entity of foreign property 'member'. (NullAllowed)
      */
     public void setMember(Member member) {
@@ -344,7 +344,7 @@ public abstract class BsMemberWithdraw implements Entity, Serializable, Cloneabl
      */
     public void setWithdrawalReasonId(Integer withdrawalReasonId) {
         __modifiedProperties.addPropertyName("withdrawalReasonId");
-        this._withdrawalReasonId = withdrawalReasonId;
+        _withdrawalReasonId = withdrawalReasonId;
     }
 
     /**
@@ -363,7 +363,7 @@ public abstract class BsMemberWithdraw implements Entity, Serializable, Cloneabl
      */
     public void setMemberId(Integer memberId) {
         __modifiedProperties.addPropertyName("memberId");
-        this._memberId = memberId;
+        _memberId = memberId;
     }
 
     /**
@@ -382,7 +382,7 @@ public abstract class BsMemberWithdraw implements Entity, Serializable, Cloneabl
      */
     public void setWithdrawalReasonInputText(String withdrawalReasonInputText) {
         __modifiedProperties.addPropertyName("withdrawalReasonInputText");
-        this._withdrawalReasonInputText = withdrawalReasonInputText;
+        _withdrawalReasonInputText = withdrawalReasonInputText;
     }
 
     /**
@@ -401,6 +401,6 @@ public abstract class BsMemberWithdraw implements Entity, Serializable, Cloneabl
      */
     public void setWithdrawalDatetime(java.sql.Timestamp withdrawalDatetime) {
         __modifiedProperties.addPropertyName("withdrawalDatetime");
-        this._withdrawalDatetime = withdrawalDatetime;
+        _withdrawalDatetime = withdrawalDatetime;
     }
 }

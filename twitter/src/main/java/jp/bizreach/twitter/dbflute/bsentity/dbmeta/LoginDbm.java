@@ -166,7 +166,7 @@ public class LoginDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                     Object Instance
     //                                                                     ===============
-    public Entity newEntity() { return newMyEntity(); }
+    public Login newEntity() { return new Login(); }
     public Login newMyEntity() { return new Login(); }
 
     // ===================================================================================

@@ -178,7 +178,7 @@ public class TweetDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                     Object Instance
     //                                                                     ===============
-    public Entity newEntity() { return newMyEntity(); }
+    public Tweet newEntity() { return new Tweet(); }
     public Tweet newMyEntity() { return new Tweet(); }
 
     // ===================================================================================
