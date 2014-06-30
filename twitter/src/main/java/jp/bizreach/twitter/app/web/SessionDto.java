@@ -12,5 +12,5 @@ public class SessionDto implements Serializable {
     public Integer yourId;
     public String email;
     public String username;
-    public String followName;
+    //public String followName;
 }

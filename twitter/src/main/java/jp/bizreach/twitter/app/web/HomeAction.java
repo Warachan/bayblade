@@ -38,41 +38,39 @@ public class HomeAction {
 
     public ArrayList<Object> timeLine = new ArrayList<>();
     public ArrayList<String> followList = new ArrayList<String>();
-    public String name;
+    public String toFollowMember;
 
+    // TODO mayuko.sakaba ask head フォローリストを表示させるとタイムラインが消える。
     // TODO mayuko.sakaba プロフィール文、写真登録がまだできていないですよー！
+    // TODO mayuko.sakaba フォローしている人のツィート
+    // TODO mayuko.sakaba いい感じにツィート時間を表示する。 →JSONを使う？
 
     @Execute(validator = false)
+    /* ツィートタイムラインを表示　*/
     public String index() {
-        //        /* セッションが会員IDを保持しているか確認　*/
-        //        if (sessionDto.myId == null) {
-        //            return "/?redirect = true";
-        //        }
-        /* ツィートタイムラインを表示　*/
-        TweetCB cb = new TweetCB();
-        cb.query().setMemberId_Equal(sessionDto.myId);
-        cb.query().addOrderBy_TweetId_Desc();
-        ListResultBean<Tweet> tweetList = tweetBhv.selectList(cb);
+        TweetCB tweetCb = new TweetCB();
+        tweetCb.query().setMemberId_Equal(sessionDto.myId);
+        tweetCb.query().addOrderBy_TweetId_Desc();
+        ListResultBean<Tweet> tweetList = tweetBhv.selectList(tweetCb);
         LOG.debug("***" + tweetList);
         for (Tweet tweet : tweetList) {
             String inputTweet = tweet.getTweet();
-            // TODO mayuko.sakaba いい感じにツィート時間を表示する。 →JSONを使う？
             timeLine.add(inputTweet);
             LOG.debug("***" + timeLine);
         }
-        return "/home/twitter.jsp";
+        return "/twitter/home.jsp";
     }
 
     @Execute(validator = false)
+    /* ツィートと、ツィート時間を新しく追加 */
     public String tweet() {
-        /* ツィートと、ツィート時間を新しく追加 */
         Date date = new Date();
-        Timestamp timestamp = new Timestamp(date.getTime());
+        Timestamp tweetTime = new Timestamp(date.getTime());
         String input = homeForm.inputTweet;
         Tweet tweet = new Tweet();
         tweet.setMemberId(sessionDto.myId);
         tweet.setTweet(input);
-        tweet.setTweetDatetime(timestamp);
+        tweet.setTweetDatetime(tweetTime);
         tweetBhv.insert(tweet);
         return "/home/?redirect = true";
         // todo: tweetした瞬間のいい感じの時間を表示する。 datetimeとツィートをそろえて文字列として表示しなければならない→平分ではできない。JSONを使う。
@@ -82,34 +80,20 @@ public class HomeAction {
     }
 
     @Execute(validator = false)
+    /* フォロー候補者検索　*/
     public String search() {
-        /* フォロー候補者検索　*/
         MemberCB cb = new MemberCB();
         cb.query().setUserName_LikeSearch(homeForm.searchName, new LikeSearchOption().likeContain());
         cb.query().addOrderBy_MemberId_Asc();
         LOG.debug("***" + homeForm.searchName);
         ListResultBean<Member> memberList = memberBhv.selectList(cb);
         for (Member member : memberList) {
-            name = member.getUserName();
+            toFollowMember = member.getUserName();
             String userName = member.getUserName();
             followList.add(userName);
-            LOG.debug("***" + name);
+            LOG.debug("***" + toFollowMember);
         }
-        return "/home/twitter.jsp";
-    }
-
-    /* URLパターンが一致しているか確認 */
-    //    @Execute(urlPattern = "/{sessionDto.followName}")
-    //    public String edit() {
-    //
-    //    }
-
-    @Execute(validator = false)
-    public String goFollow() {
-        /* フォローする相手のページへ飛ぶ　*/
-        sessionDto.followName = homeForm.name;
-
-        return "/profile/?redirect=true";
+        return "/twitter/home.jsp";
     }
     // TODO mayuko.sakaba <-- s:formどのタイミングで分けたらいいのか -->??
     /* 自分のプロフィールページに行く*/

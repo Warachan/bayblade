@@ -13,8 +13,7 @@
 	<!-- _/   Action   _/ -->
 	<!-- _/_/_/_/_/_/_/_/ -->
 	<component name="actionCustomizer" class="org.seasar.framework.container.customizer.CustomizerChain">
-	<!-- 作成したクラスを追加 -->
-	<!-- 追加設定ここまで -->
+
 		<!-- = = = = = = = -->
 		<!-- Basic Aspect  -->
 		<!-- = = = = = = = -->
@@ -52,6 +51,10 @@
 				<initMethod name="addIgnoreClassPattern">
 					<arg>"jp.bizreach.twitter.app.web"</arg>
 					<arg>"IndexAction"</arg>
+				</initMethod>
+				<initMethod name="addIgnoreClassPattern">
+					<arg>"jp.bizreach.twitter.app.web"</arg>
+					<arg>"SignupAction"</arg>
 				</initMethod>
 			</component>
 		</arg>

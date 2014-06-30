@@ -8,12 +8,13 @@
 
 				===========================================================================
 					<h3>Follow</h3>
-					<s:form action="/profile/">
-						<s:submit property="follow" value="follow"/><br>
+					<s:form action="/member/">
+						<input type="hidden" name="yourName" value="${yourName}"/>
+						<s:link href="/member/${yourName}/follow">follow</s:link>
 					</s:form>
 				===========================================================================
 					<h3>Tweets</h3>
-					<s:form action="/profile/">
+					<s:form action="/member/">
 								<c:forEach items="${timeLine}" var="items" varStatus="status">
 									${f:h (timeLine[status.index])}<br>
 								</c:forEach>

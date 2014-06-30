@@ -63,7 +63,7 @@ public class SignupAction {
     //                                                                             =======
     @Execute(validator = false)
     public String index() {
-        return "/signup/signup.jsp";
+        return "/signup.jsp";
     }
 
     @Execute(validator = false)
@@ -78,18 +78,18 @@ public class SignupAction {
 
         if (newEmail == "" || newPassword == "" || username == "") {
             missingError = "*全ての欄は必須項目です。";
-            return "/signup/signup.jsp";
+            return "/signup.jsp";
         }
         int nameCount = selectNameCount();
         if (nameCount > 0) {
             userError = "そのユーザ名はすでに使われています。";
-            return "/signup/signup.jsp";
+            return "/signup.jsp";
         }
         if (emailMatcher.matches() && pswdMatcher.matches()) {
             int count = selectEmailCount();
             if (count > 0) {
                 overlapsError = "このメールアドレスはすでに登録されています。";
-                return "/signup/signup.jsp";
+                return "/signup.jsp";
             }
             Date date = new Date();
             Timestamp timestamp = new Timestamp(date.getTime());
@@ -100,15 +100,15 @@ public class SignupAction {
 
             if (newPassword.equals(confirmPass)) {
                 insertSecurity(timestamp, member);
-                //                return "/home/twitter.jsp";
+                //                return /twitter/home.jsp";
                 return "/home/?redirect=true";
             } else {
                 matchError = "パスワードが一致しません。";
-                return "/signup/signup.jsp";
+                return "/signup.jsp";
             }
         } else {
             overlapsError = "このメールアドレスはすでに登録されています。";
-            return "/signup/signup.jsp";
+            return "/signup.jsp";
         }
     }
 

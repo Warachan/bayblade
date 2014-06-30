@@ -21,12 +21,12 @@ import org.seasar.dbflute.cbean.ListResultBean;
 import org.seasar.struts.annotation.ActionForm;
 import org.seasar.struts.annotation.Execute;
 
-public class ProfileAction {
+public class MemberAction {
 
     // ===================================================================================
     //                                                                          Definition
     //                                                                          ==========
-    private static final Log LOG = LogFactory.getLog(ProfileAction.class);
+    private static final Log LOG = LogFactory.getLog(MemberAction.class);
 
     // ===================================================================================
     //                                                                           Attribute
@@ -36,7 +36,7 @@ public class ProfileAction {
     //                                          ------------
     @ActionForm
     @Resource
-    protected ProfileForm profileForm;
+    protected MemberForm memberForm;
     @Resource
     protected SessionDto sessionDto;
     @Resource
@@ -56,20 +56,20 @@ public class ProfileAction {
     // ===================================================================================
     //                                                                             Execute
     //                                                                             =======
-    @Execute(validator = false)
+
+    // TODO mayuko.sakaba フォロー相手重複時の処理を書く。
+    // TODO mayuko.sakaba 自分をフォローできないようにする。
+
+    @Execute(validator = false, urlPattern = "{yourName}")
     public String index() {
-        /* セッションが会員IDを保持しているか確認　*/
-        if (sessionDto.myId == null) {
-            LOG.debug("***" + sessionDto.myId);
-            return "/?redirect=true";
-        }
         /*　アカウント名を表示する*/
+        // TODO mayuko.sakaba  このアカウントのユーザーのプロフィールを表示できるようにする。
         MemberCB cb = new MemberCB();
-        cb.query().setUserName_Equal(sessionDto.followName);
+        cb.query().setUserName_Equal(memberForm.yourName);
         Member member = memberBhv.selectEntity(cb);
         sessionDto.yourId = member.getMemberId();
-        LOG.debug("***" + sessionDto.followName + "+" + sessionDto.yourId);
-        account = sessionDto.followName;
+        LOG.debug("***" + memberForm.yourName + "+" + sessionDto.yourId);
+        account = memberForm.yourName;
         /* ツィートタイムラインを表示　*/
         TweetCB tweetCb = new TweetCB();
         tweetCb.query().setMemberId_Equal(sessionDto.yourId);
@@ -80,51 +80,42 @@ public class ProfileAction {
             String inputTweets = tweet.getTweet();
             timeLine.add(inputTweets);
         }
-        return "/follow/profile.jsp";
+        return "/twitter/member.jsp";
     }
 
-    /* ツィートと、ツィート時間を新しく追加 */
-    // TODO mayuko.sakaba jspをあわせて製作すること。
-    //    @Execute(validator = false)
-    //    public String myTweet() {
-    //        Date date = new Date();
-    //        Timestamp timestamp = new Timestamp(date.getTime());
-    //        input = profileForm.input;
-    //        Tweet tweet = new Tweet();
-    //        tweet.setMemberId(sessionDto.yourId);
-    //        tweet.setTweet(input);
-    //        tweet.setTweetDatetime(timestamp);
-    //        tweetBhv.insert(tweet);
-    //        return "/profile/?redirect=true";
-    //    }
-
     /* このアカウントの会員をフォロー　*/
-    // TODO mayuko.sakaba フォロー相手重複時の処理を書く。
-    @Execute(validator = false)
+    @Execute(validator = false, urlPattern = "{yourName}/follow")
     public String follow() {
         /* アカウント保有者のメンバーID検索 */
         Member member = selectMember();
         /* フォローテーブルに追加 */
         insertFollowingMember(member);
-        return "/profile/";
+        return "/member/" + memberForm.yourName + "/?redirect=true";
     }
 
     private Member selectMember() {
         MemberCB cb = new MemberCB();
-        cb.query().setMemberId_Equal(sessionDto.yourId);
-        LOG.debug("seeUsername" + sessionDto.followName);
+        cb.query().setUserName_Equal(memberForm.yourName);
+        LOG.debug("seeUsername" + memberForm.yourName);
         Member member = memberBhv.selectEntity(cb);
         return member;
     }
 
     private void insertFollowingMember(Member member) {
         Date date = new Date();
-        Timestamp timestamp = new Timestamp(date.getTime());
-        Follow follow = new Follow();
-        follow.setMeId(sessionDto.myId);
-        follow.setYouId(member.getMemberId());
-        follow.setFollowDatetime(timestamp);
-        LOG.debug("@@@" + member.getMemberId() + sessionDto.myId);
-        followBhv.insert(follow);
+        Timestamp tweetTime = new Timestamp(date.getTime());
+        LOG.debug("***" + memberForm.yourName);
+        //        FollowCB cb = new FollowCB();
+        //        cb.query().setFollowId_Equal(sessionDto.myId);
+        //        cb.query().setFollowId_Equal(sessionDto.yourId);
+        //        Follow follow = followBhv.selectEntity(cb);
+        //        if (follow == null) {
+        Follow insertFollow = new Follow();
+        insertFollow.setMeId(sessionDto.myId);
+        insertFollow.setYouId(member.getMemberId());
+        insertFollow.setFollowDatetime(tweetTime);
+        LOG.debug("***" + member.getMemberId() + sessionDto.myId);
+        followBhv.insert(insertFollow);
+        //        }
     }
 }

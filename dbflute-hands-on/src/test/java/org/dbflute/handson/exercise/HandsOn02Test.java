@@ -22,6 +22,7 @@ public class HandsOn02Test extends UnitContainerTestCase {
     protected MemberBhv memberBhv;
 
     public void test_firstSelect() throws Exception {
+
         // ## Arrange ##
         MemberCB cb = new MemberCB();
         cb.query().setMemberName_PrefixSearch("S");
@@ -46,6 +47,7 @@ public class HandsOn02Test extends UnitContainerTestCase {
      * @throws Exception
      */
     public void test_omake() throws Exception {
+
         // ## Arrange ##
         MemberCB cb = new MemberCB();
         cb.setupSelect_MemberStatus(); // 関連しているテーブルからカラムを取ってきて欲しい
@@ -74,7 +76,7 @@ public class HandsOn02Test extends UnitContainerTestCase {
      * 会員IDが 1 であることをアサート
      */
     public void test_IDisOne() throws Exception {
-        // TODO warachan 他のエクササイズでは、Act や Assert の上に空行を入れているので、ここでも空けよう (全体的に統一ね) by jflute
+        // TODO warachan 【直しました】他のエクササイズでは、Act や Assert の上に空行を入れているので、ここでも空けよう (全体的に統一ね) by jflute
 
         // ## Arrange ##
         MemberCB cb = new MemberCB();
@@ -101,18 +103,19 @@ public class HandsOn02Test extends UnitContainerTestCase {
      * 生年月日がないことをアサート
      */
     public void test_NoBirthDate() throws Exception {
+
         // ## Arrange ##
         MemberCB cb = new MemberCB();
         cb.query().setBirthdate_IsNull();
         cb.query().addOrderBy_FormalizedDatetime_Desc();
 
         // ## Act ##
-        // TODO warachan テーブル名 + List という名前を心がけよう、e.g. memberList by jflute
+        // TODO warachan 【直しました】テーブル名 + List という名前を心がけよう、e.g. memberList by jflute
         // 直すときは、変数を選択して ctrl + 1 -> enter で rename できるよ
         ListResultBean<Member> memberList = memberBhv.selectList(cb);
 
         // ## Assert ##
-        // assertすることをアサートすること入れる。三種類。全て同じ役割だけど、一番上が望ましい。
+        // assertすることを入れる。三種類。全て同じ役割だけど、一番上が望ましい。
         assertHasAnyElement(memberList);
         assertFalse(memberList.isEmpty());
         if (memberList.isEmpty()) {
@@ -120,7 +123,7 @@ public class HandsOn02Test extends UnitContainerTestCase {
         }
 
         for (Member member : memberList) {
-            // TODO warachan 変数名のポリシーがバラバラなので統一しよう by jflute
+            // TODO warachan 【直しました】変数名のポリシーがバラバラなので統一しよう by jflute
             // name -> memberName, timestamp -> formalizedDatetime
             // カラム名を意識した名前にするか、型を意識した名前にするか、ケースバイケースではあるけど、
             // ここではカラム名を意識した方がいいかな
@@ -132,8 +135,7 @@ public class HandsOn02Test extends UnitContainerTestCase {
             assertTrue(member.getBirthdate() == null);
             // もしこのデータが必ず生年月日が全員にあるとどうなる？
             // 空リストを帰ってくる
-            // 空リストが帰ってきた場合、素通りになる
-            // それを防ぐために
+            // →空リストが帰ってきた場合、素通りになる
         }
     }
 }

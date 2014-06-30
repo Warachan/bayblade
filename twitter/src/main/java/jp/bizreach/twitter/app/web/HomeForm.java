@@ -7,5 +7,6 @@ public class HomeForm {
     // ここにメッセージを入れることができる。詳しくは調べること。
     public String inputTweet;
     public String searchName;
-    public String name;
+    public String toFollowMember;
+    public String input;
 }
