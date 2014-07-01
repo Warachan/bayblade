@@ -18,7 +18,7 @@ import jp.bizreach.twitter.dbflute.exentity.*;
  *     MEMBER_ID
  * 
  * [column]
- *     MEMBER_ID, PASSWORD, PASSWORD_UPDATE_DATETIME, PASSWORD_REGESTERATION_DATETIME
+ *     MEMBER_ID, PASSWORD, INS_DATETIME, UPD_DATETIME, INS_TRACE, UPD_TRACE
  * 
  * [sequence]
  *     
@@ -45,12 +45,16 @@ import jp.bizreach.twitter.dbflute.exentity.*;
  * /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
  * Integer memberId = entity.getMemberId();
  * String password = entity.getPassword();
- * java.sql.Timestamp passwordUpdateDatetime = entity.getPasswordUpdateDatetime();
- * java.sql.Timestamp passwordRegesterationDatetime = entity.getPasswordRegesterationDatetime();
+ * java.sql.Timestamp insDatetime = entity.getInsDatetime();
+ * java.sql.Timestamp updDatetime = entity.getUpdDatetime();
+ * String insTrace = entity.getInsTrace();
+ * String updTrace = entity.getUpdTrace();
  * entity.setMemberId(memberId);
  * entity.setPassword(password);
- * entity.setPasswordUpdateDatetime(passwordUpdateDatetime);
- * entity.setPasswordRegesterationDatetime(passwordRegesterationDatetime);
+ * entity.setInsDatetime(insDatetime);
+ * entity.setUpdDatetime(updDatetime);
+ * entity.setInsTrace(insTrace);
+ * entity.setUpdTrace(updTrace);
  * = = = = = = = = = =/
  * </pre>
  * @author DBFlute(AutoGenerator)
@@ -75,11 +79,17 @@ public abstract class BsMemberSecurity implements Entity, Serializable, Cloneabl
     /** PASSWORD: {NotNull, VARCHAR(50)} */
     protected String _password;
 
-    /** PASSWORD_UPDATE_DATETIME: {DATETIME(19)} */
-    protected java.sql.Timestamp _passwordUpdateDatetime;
+    /** INS_DATETIME: {NotNull, DATETIME(19)} */
+    protected java.sql.Timestamp _insDatetime;
 
-    /** PASSWORD_REGESTERATION_DATETIME: {NotNull, DATETIME(19)} */
-    protected java.sql.Timestamp _passwordRegesterationDatetime;
+    /** UPD_DATETIME: {NotNull, DATETIME(19)} */
+    protected java.sql.Timestamp _updDatetime;
+
+    /** INS_TRACE: {NotNull, VARCHAR(256)} */
+    protected String _insTrace;
+
+    /** UPD_TRACE: {NotNull, VARCHAR(256)} */
+    protected String _updTrace;
 
     // -----------------------------------------------------
     //                                              Internal
@@ -295,8 +305,10 @@ public abstract class BsMemberSecurity implements Entity, Serializable, Cloneabl
         String dm = ", ";
         sb.append(dm).append(getMemberId());
         sb.append(dm).append(getPassword());
-        sb.append(dm).append(getPasswordUpdateDatetime());
-        sb.append(dm).append(getPasswordRegesterationDatetime());
+        sb.append(dm).append(getInsDatetime());
+        sb.append(dm).append(getUpdDatetime());
+        sb.append(dm).append(getInsTrace());
+        sb.append(dm).append(getUpdTrace());
         if (sb.length() > dm.length()) {
             sb.delete(0, dm.length());
         }
@@ -367,40 +379,78 @@ public abstract class BsMemberSecurity implements Entity, Serializable, Cloneabl
     }
 
     /**
-     * [get] PASSWORD_UPDATE_DATETIME: {DATETIME(19)} <br />
-     * パスワード更新日時
-     * @return The value of the column 'PASSWORD_UPDATE_DATETIME'. (NullAllowed even if selected: for no constraint)
+     * [get] INS_DATETIME: {NotNull, DATETIME(19)} <br />
+     * insert日時
+     * @return The value of the column 'INS_DATETIME'. (basically NotNull if selected: for the constraint)
      */
-    public java.sql.Timestamp getPasswordUpdateDatetime() {
-        return _passwordUpdateDatetime;
+    public java.sql.Timestamp getInsDatetime() {
+        return _insDatetime;
     }
 
     /**
-     * [set] PASSWORD_UPDATE_DATETIME: {DATETIME(19)} <br />
-     * パスワード更新日時
-     * @param passwordUpdateDatetime The value of the column 'PASSWORD_UPDATE_DATETIME'. (NullAllowed: null update allowed for no constraint)
+     * [set] INS_DATETIME: {NotNull, DATETIME(19)} <br />
+     * insert日時
+     * @param insDatetime The value of the column 'INS_DATETIME'. (basically NotNull if update: for the constraint)
      */
-    public void setPasswordUpdateDatetime(java.sql.Timestamp passwordUpdateDatetime) {
-        __modifiedProperties.addPropertyName("passwordUpdateDatetime");
-        _passwordUpdateDatetime = passwordUpdateDatetime;
+    public void setInsDatetime(java.sql.Timestamp insDatetime) {
+        __modifiedProperties.addPropertyName("insDatetime");
+        _insDatetime = insDatetime;
     }
 
     /**
-     * [get] PASSWORD_REGESTERATION_DATETIME: {NotNull, DATETIME(19)} <br />
-     * パスワード登録日時
-     * @return The value of the column 'PASSWORD_REGESTERATION_DATETIME'. (basically NotNull if selected: for the constraint)
+     * [get] UPD_DATETIME: {NotNull, DATETIME(19)} <br />
+     * UPD_DATETIME
+     * @return The value of the column 'UPD_DATETIME'. (basically NotNull if selected: for the constraint)
      */
-    public java.sql.Timestamp getPasswordRegesterationDatetime() {
-        return _passwordRegesterationDatetime;
+    public java.sql.Timestamp getUpdDatetime() {
+        return _updDatetime;
     }
 
     /**
-     * [set] PASSWORD_REGESTERATION_DATETIME: {NotNull, DATETIME(19)} <br />
-     * パスワード登録日時
-     * @param passwordRegesterationDatetime The value of the column 'PASSWORD_REGESTERATION_DATETIME'. (basically NotNull if update: for the constraint)
+     * [set] UPD_DATETIME: {NotNull, DATETIME(19)} <br />
+     * UPD_DATETIME
+     * @param updDatetime The value of the column 'UPD_DATETIME'. (basically NotNull if update: for the constraint)
      */
-    public void setPasswordRegesterationDatetime(java.sql.Timestamp passwordRegesterationDatetime) {
-        __modifiedProperties.addPropertyName("passwordRegesterationDatetime");
-        _passwordRegesterationDatetime = passwordRegesterationDatetime;
+    public void setUpdDatetime(java.sql.Timestamp updDatetime) {
+        __modifiedProperties.addPropertyName("updDatetime");
+        _updDatetime = updDatetime;
+    }
+
+    /**
+     * [get] INS_TRACE: {NotNull, VARCHAR(256)} <br />
+     * Insertトレース
+     * @return The value of the column 'INS_TRACE'. (basically NotNull if selected: for the constraint)
+     */
+    public String getInsTrace() {
+        return _insTrace;
+    }
+
+    /**
+     * [set] INS_TRACE: {NotNull, VARCHAR(256)} <br />
+     * Insertトレース
+     * @param insTrace The value of the column 'INS_TRACE'. (basically NotNull if update: for the constraint)
+     */
+    public void setInsTrace(String insTrace) {
+        __modifiedProperties.addPropertyName("insTrace");
+        _insTrace = insTrace;
+    }
+
+    /**
+     * [get] UPD_TRACE: {NotNull, VARCHAR(256)} <br />
+     * UPD トレース
+     * @return The value of the column 'UPD_TRACE'. (basically NotNull if selected: for the constraint)
+     */
+    public String getUpdTrace() {
+        return _updTrace;
+    }
+
+    /**
+     * [set] UPD_TRACE: {NotNull, VARCHAR(256)} <br />
+     * UPD トレース
+     * @param updTrace The value of the column 'UPD_TRACE'. (basically NotNull if update: for the constraint)
+     */
+    public void setUpdTrace(String updTrace) {
+        __modifiedProperties.addPropertyName("updTrace");
+        _updTrace = updTrace;
     }
 }

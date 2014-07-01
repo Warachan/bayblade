@@ -119,51 +119,131 @@ public class BsFollowCQ extends AbstractBsFollowCQ {
      */
     public BsFollowCQ addOrderBy_YouId_Desc() { regOBD("YOU_ID"); return this; }
 
-    protected ConditionValue _meId;
-    public ConditionValue getMeId()
-    { if (_meId == null) { _meId = nCV(); }
-      return _meId; }
-    protected ConditionValue getCValueMeId() { return getMeId(); }
+    protected ConditionValue _memberId;
+    public ConditionValue getMemberId()
+    { if (_memberId == null) { _memberId = nCV(); }
+      return _memberId; }
+    protected ConditionValue getCValueMemberId() { return getMemberId(); }
 
-    public Map<String, MemberCQ> getMeId_InScopeRelation_MemberByMeId() { return xgetSQueMap("meId_InScopeRelation_MemberByMeId"); }
-    public String keepMeId_InScopeRelation_MemberByMeId(MemberCQ sq) { return xkeepSQue("meId_InScopeRelation_MemberByMeId", sq); }
+    public Map<String, MemberCQ> getMemberId_InScopeRelation_MemberByMemberId() { return xgetSQueMap("memberId_InScopeRelation_MemberByMemberId"); }
+    public String keepMemberId_InScopeRelation_MemberByMemberId(MemberCQ sq) { return xkeepSQue("memberId_InScopeRelation_MemberByMemberId", sq); }
 
-    public Map<String, MemberCQ> getMeId_NotInScopeRelation_MemberByMeId() { return xgetSQueMap("meId_NotInScopeRelation_MemberByMeId"); }
-    public String keepMeId_NotInScopeRelation_MemberByMeId(MemberCQ sq) { return xkeepSQue("meId_NotInScopeRelation_MemberByMeId", sq); }
-
-    /** 
-     * Add order-by as ascend. <br />
-     * ME_ID: {IX, NotNull, INT(10), FK to member}
-     * @return this. (NotNull)
-     */
-    public BsFollowCQ addOrderBy_MeId_Asc() { regOBA("ME_ID"); return this; }
-
-    /**
-     * Add order-by as descend. <br />
-     * ME_ID: {IX, NotNull, INT(10), FK to member}
-     * @return this. (NotNull)
-     */
-    public BsFollowCQ addOrderBy_MeId_Desc() { regOBD("ME_ID"); return this; }
-
-    protected ConditionValue _followDatetime;
-    public ConditionValue getFollowDatetime()
-    { if (_followDatetime == null) { _followDatetime = nCV(); }
-      return _followDatetime; }
-    protected ConditionValue getCValueFollowDatetime() { return getFollowDatetime(); }
+    public Map<String, MemberCQ> getMemberId_NotInScopeRelation_MemberByMemberId() { return xgetSQueMap("memberId_NotInScopeRelation_MemberByMemberId"); }
+    public String keepMemberId_NotInScopeRelation_MemberByMemberId(MemberCQ sq) { return xkeepSQue("memberId_NotInScopeRelation_MemberByMemberId", sq); }
 
     /** 
      * Add order-by as ascend. <br />
-     * FOLLOW_DATETIME: {NotNull, DATETIME(19)}
+     * MEMBER_ID: {IX, NotNull, INT(10), FK to member}
      * @return this. (NotNull)
      */
-    public BsFollowCQ addOrderBy_FollowDatetime_Asc() { regOBA("FOLLOW_DATETIME"); return this; }
+    public BsFollowCQ addOrderBy_MemberId_Asc() { regOBA("MEMBER_ID"); return this; }
 
     /**
      * Add order-by as descend. <br />
-     * FOLLOW_DATETIME: {NotNull, DATETIME(19)}
+     * MEMBER_ID: {IX, NotNull, INT(10), FK to member}
      * @return this. (NotNull)
      */
-    public BsFollowCQ addOrderBy_FollowDatetime_Desc() { regOBD("FOLLOW_DATETIME"); return this; }
+    public BsFollowCQ addOrderBy_MemberId_Desc() { regOBD("MEMBER_ID"); return this; }
+
+    protected ConditionValue _insDatetime;
+    public ConditionValue getInsDatetime()
+    { if (_insDatetime == null) { _insDatetime = nCV(); }
+      return _insDatetime; }
+    protected ConditionValue getCValueInsDatetime() { return getInsDatetime(); }
+
+    /** 
+     * Add order-by as ascend. <br />
+     * INS_DATETIME: {NotNull, DATETIME(19)}
+     * @return this. (NotNull)
+     */
+    public BsFollowCQ addOrderBy_InsDatetime_Asc() { regOBA("INS_DATETIME"); return this; }
+
+    /**
+     * Add order-by as descend. <br />
+     * INS_DATETIME: {NotNull, DATETIME(19)}
+     * @return this. (NotNull)
+     */
+    public BsFollowCQ addOrderBy_InsDatetime_Desc() { regOBD("INS_DATETIME"); return this; }
+
+    protected ConditionValue _updDatetime;
+    public ConditionValue getUpdDatetime()
+    { if (_updDatetime == null) { _updDatetime = nCV(); }
+      return _updDatetime; }
+    protected ConditionValue getCValueUpdDatetime() { return getUpdDatetime(); }
+
+    /** 
+     * Add order-by as ascend. <br />
+     * UPD_DATETIME: {NotNull, DATETIME(19)}
+     * @return this. (NotNull)
+     */
+    public BsFollowCQ addOrderBy_UpdDatetime_Asc() { regOBA("UPD_DATETIME"); return this; }
+
+    /**
+     * Add order-by as descend. <br />
+     * UPD_DATETIME: {NotNull, DATETIME(19)}
+     * @return this. (NotNull)
+     */
+    public BsFollowCQ addOrderBy_UpdDatetime_Desc() { regOBD("UPD_DATETIME"); return this; }
+
+    protected ConditionValue _insTrace;
+    public ConditionValue getInsTrace()
+    { if (_insTrace == null) { _insTrace = nCV(); }
+      return _insTrace; }
+    protected ConditionValue getCValueInsTrace() { return getInsTrace(); }
+
+    /** 
+     * Add order-by as ascend. <br />
+     * INS_TRACE: {NotNull, VARCHAR(256)}
+     * @return this. (NotNull)
+     */
+    public BsFollowCQ addOrderBy_InsTrace_Asc() { regOBA("INS_TRACE"); return this; }
+
+    /**
+     * Add order-by as descend. <br />
+     * INS_TRACE: {NotNull, VARCHAR(256)}
+     * @return this. (NotNull)
+     */
+    public BsFollowCQ addOrderBy_InsTrace_Desc() { regOBD("INS_TRACE"); return this; }
+
+    protected ConditionValue _updTrace;
+    public ConditionValue getUpdTrace()
+    { if (_updTrace == null) { _updTrace = nCV(); }
+      return _updTrace; }
+    protected ConditionValue getCValueUpdTrace() { return getUpdTrace(); }
+
+    /** 
+     * Add order-by as ascend. <br />
+     * UPD_TRACE: {NotNull, VARCHAR(256)}
+     * @return this. (NotNull)
+     */
+    public BsFollowCQ addOrderBy_UpdTrace_Asc() { regOBA("UPD_TRACE"); return this; }
+
+    /**
+     * Add order-by as descend. <br />
+     * UPD_TRACE: {NotNull, VARCHAR(256)}
+     * @return this. (NotNull)
+     */
+    public BsFollowCQ addOrderBy_UpdTrace_Desc() { regOBD("UPD_TRACE"); return this; }
+
+    protected ConditionValue _delFlg;
+    public ConditionValue getDelFlg()
+    { if (_delFlg == null) { _delFlg = nCV(); }
+      return _delFlg; }
+    protected ConditionValue getCValueDelFlg() { return getDelFlg(); }
+
+    /** 
+     * Add order-by as ascend. <br />
+     * DEL_FLG: {NotNull, CHAR(1), default=[N]}
+     * @return this. (NotNull)
+     */
+    public BsFollowCQ addOrderBy_DelFlg_Asc() { regOBA("DEL_FLG"); return this; }
+
+    /**
+     * Add order-by as descend. <br />
+     * DEL_FLG: {NotNull, CHAR(1), default=[N]}
+     * @return this. (NotNull)
+     */
+    public BsFollowCQ addOrderBy_DelFlg_Desc() { regOBD("DEL_FLG"); return this; }
 
     // ===================================================================================
     //                                                             SpecifiedDerivedOrderBy
@@ -206,8 +286,8 @@ public class BsFollowCQ extends AbstractBsFollowCQ {
     public void reflectRelationOnUnionQuery(ConditionQuery bqs, ConditionQuery uqs) {
         FollowCQ bq = (FollowCQ)bqs;
         FollowCQ uq = (FollowCQ)uqs;
-        if (bq.hasConditionQueryMemberByMeId()) {
-            uq.queryMemberByMeId().reflectRelationOnUnionQuery(bq.queryMemberByMeId(), uq.queryMemberByMeId());
+        if (bq.hasConditionQueryMemberByMemberId()) {
+            uq.queryMemberByMemberId().reflectRelationOnUnionQuery(bq.queryMemberByMemberId(), uq.queryMemberByMemberId());
         }
         if (bq.hasConditionQueryMemberByYouId()) {
             uq.queryMemberByYouId().reflectRelationOnUnionQuery(bq.queryMemberByYouId(), uq.queryMemberByYouId());
@@ -219,23 +299,23 @@ public class BsFollowCQ extends AbstractBsFollowCQ {
     //                                                                       =============
     /**
      * Get the condition-query for relation table. <br />
-     * member by my ME_ID, named 'memberByMeId'.
+     * member by my MEMBER_ID, named 'memberByMemberId'.
      * @return The instance of condition-query. (NotNull)
      */
-    public MemberCQ queryMemberByMeId() {
-        return getConditionQueryMemberByMeId();
+    public MemberCQ queryMemberByMemberId() {
+        return getConditionQueryMemberByMemberId();
     }
-    public MemberCQ getConditionQueryMemberByMeId() {
-        String prop = "memberByMeId";
-        if (!xhasQueRlMap(prop)) { xregQueRl(prop, xcreateQueryMemberByMeId()); xsetupOuterJoinMemberByMeId(); }
+    public MemberCQ getConditionQueryMemberByMemberId() {
+        String prop = "memberByMemberId";
+        if (!xhasQueRlMap(prop)) { xregQueRl(prop, xcreateQueryMemberByMemberId()); xsetupOuterJoinMemberByMemberId(); }
         return xgetQueRlMap(prop);
     }
-    protected MemberCQ xcreateQueryMemberByMeId() {
-        String nrp = xresolveNRP("follow", "memberByMeId"); String jan = xresolveJAN(nrp, xgetNNLvl());
-        return xinitRelCQ(new MemberCQ(this, xgetSqlClause(), jan, xgetNNLvl()), _baseCB, "memberByMeId", nrp);
+    protected MemberCQ xcreateQueryMemberByMemberId() {
+        String nrp = xresolveNRP("follow", "memberByMemberId"); String jan = xresolveJAN(nrp, xgetNNLvl());
+        return xinitRelCQ(new MemberCQ(this, xgetSqlClause(), jan, xgetNNLvl()), _baseCB, "memberByMemberId", nrp);
     }
-    protected void xsetupOuterJoinMemberByMeId() { xregOutJo("memberByMeId"); }
-    public boolean hasConditionQueryMemberByMeId() { return xhasQueRlMap("memberByMeId"); }
+    protected void xsetupOuterJoinMemberByMemberId() { xregOutJo("memberByMemberId"); }
+    public boolean hasConditionQueryMemberByMemberId() { return xhasQueRlMap("memberByMemberId"); }
 
     /**
      * Get the condition-query for relation table. <br />

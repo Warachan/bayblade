@@ -68,7 +68,10 @@ public class TweetCIQ extends AbstractBsTweetCQ {
     public String keepMemberId_NotInScopeRelation_Member(MemberCQ sq)
     { return _myCQ.keepMemberId_NotInScopeRelation_Member(sq); }
     protected ConditionValue getCValueTweet() { return _myCQ.getTweet(); }
-    protected ConditionValue getCValueTweetDatetime() { return _myCQ.getTweetDatetime(); }
+    protected ConditionValue getCValueInsDatetime() { return _myCQ.getInsDatetime(); }
+    protected ConditionValue getCValueUpdDatetime() { return _myCQ.getUpdDatetime(); }
+    protected ConditionValue getCValueInsTrace() { return _myCQ.getInsTrace(); }
+    protected ConditionValue getCValueUpdTrace() { return _myCQ.getUpdTrace(); }
     protected Map<String, Object> xfindFixedConditionDynamicParameterMap(String pp) { return null; }
     public String keepScalarCondition(TweetCQ sq)
     { throwIICBOE("ScalarCondition"); return null; }

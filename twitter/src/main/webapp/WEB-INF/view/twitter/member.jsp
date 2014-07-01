@@ -9,8 +9,17 @@
 				===========================================================================
 					<h3>Follow</h3>
 					<s:form action="/member/">
-						<input type="hidden" name="yourName" value="${yourName}"/>
-						<s:link href="/member/${yourName}/follow">follow</s:link>
+						<c:choose>
+							<c:when test="${followStatus}">
+								<input type="hidden" name="yourName" value="${yourName}"/>
+								<s:link href="/member/${yourName}/follow">follow?</s:link>
+							</c:when>
+							<c:otherwise>
+								<input type="hidden" name="yourName" value="${yourName}"/>
+								${relationship}
+								<s:link href="/member/${yourName}/unfollow">unfollow?</s:link>
+							</c:otherwise>
+						</c:choose>
 					</s:form>
 				===========================================================================
 					<h3>Tweets</h3>

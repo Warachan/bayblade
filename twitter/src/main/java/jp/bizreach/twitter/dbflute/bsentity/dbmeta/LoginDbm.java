@@ -40,7 +40,10 @@ public class LoginDbm extends AbstractDBMeta {
     {
         setupEpg(_epgMap, new EpgLoginId(), "loginId");
         setupEpg(_epgMap, new EpgMemberId(), "memberId");
-        setupEpg(_epgMap, new EpgLoginDatetime(), "loginDatetime");
+        setupEpg(_epgMap, new EpgInsDatetime(), "insDatetime");
+        setupEpg(_epgMap, new EpgUpdDatetime(), "updDatetime");
+        setupEpg(_epgMap, new EpgInsTrace(), "insTrace");
+        setupEpg(_epgMap, new EpgUpdTrace(), "updTrace");
     }
     public static class EpgLoginId implements PropertyGateway {
         public Object read(Entity et) { return ((Login)et).getLoginId(); }
@@ -50,9 +53,21 @@ public class LoginDbm extends AbstractDBMeta {
         public Object read(Entity et) { return ((Login)et).getMemberId(); }
         public void write(Entity et, Object vl) { ((Login)et).setMemberId(cti(vl)); }
     }
-    public static class EpgLoginDatetime implements PropertyGateway {
-        public Object read(Entity et) { return ((Login)et).getLoginDatetime(); }
-        public void write(Entity et, Object vl) { ((Login)et).setLoginDatetime((java.sql.Timestamp)vl); }
+    public static class EpgInsDatetime implements PropertyGateway {
+        public Object read(Entity et) { return ((Login)et).getInsDatetime(); }
+        public void write(Entity et, Object vl) { ((Login)et).setInsDatetime((java.sql.Timestamp)vl); }
+    }
+    public static class EpgUpdDatetime implements PropertyGateway {
+        public Object read(Entity et) { return ((Login)et).getUpdDatetime(); }
+        public void write(Entity et, Object vl) { ((Login)et).setUpdDatetime((java.sql.Timestamp)vl); }
+    }
+    public static class EpgInsTrace implements PropertyGateway {
+        public Object read(Entity et) { return ((Login)et).getInsTrace(); }
+        public void write(Entity et, Object vl) { ((Login)et).setInsTrace((String)vl); }
+    }
+    public static class EpgUpdTrace implements PropertyGateway {
+        public Object read(Entity et) { return ((Login)et).getUpdTrace(); }
+        public void write(Entity et, Object vl) { ((Login)et).setUpdTrace((String)vl); }
     }
     public PropertyGateway findPropertyGateway(String prop)
     { return doFindEpg(_epgMap, prop); }
@@ -87,7 +102,10 @@ public class LoginDbm extends AbstractDBMeta {
     //                                                                         ===========
     protected final ColumnInfo _columnLoginId = cci("LOGIN_ID", "LOGIN_ID", null, null, Integer.class, "loginId", null, true, true, true, "INT", 10, 0, null, false, null, null, null, null, null);
     protected final ColumnInfo _columnMemberId = cci("MEMBER_ID", "MEMBER_ID", null, null, Integer.class, "memberId", null, false, false, true, "INT", 10, 0, null, false, null, null, "member", null, null);
-    protected final ColumnInfo _columnLoginDatetime = cci("LOGIN_DATETIME", "LOGIN_DATETIME", null, null, java.sql.Timestamp.class, "loginDatetime", null, false, false, true, "DATETIME", 19, 0, null, false, null, null, null, null, null);
+    protected final ColumnInfo _columnInsDatetime = cci("INS_DATETIME", "INS_DATETIME", null, null, java.sql.Timestamp.class, "insDatetime", null, false, false, true, "DATETIME", 19, 0, null, false, null, null, null, null, null);
+    protected final ColumnInfo _columnUpdDatetime = cci("UPD_DATETIME", "UPD_DATETIME", null, null, java.sql.Timestamp.class, "updDatetime", null, false, false, true, "DATETIME", 19, 0, null, false, null, null, null, null, null);
+    protected final ColumnInfo _columnInsTrace = cci("INS_TRACE", "INS_TRACE", null, null, String.class, "insTrace", null, false, false, true, "VARCHAR", 256, 0, null, false, null, null, null, null, null);
+    protected final ColumnInfo _columnUpdTrace = cci("UPD_TRACE", "UPD_TRACE", null, null, String.class, "updTrace", null, false, false, true, "VARCHAR", 256, 0, null, false, null, null, null, null, null);
 
     /**
      * LOGIN_ID: {PK, ID, NotNull, INT(10)}
@@ -100,16 +118,34 @@ public class LoginDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnMemberId() { return _columnMemberId; }
     /**
-     * LOGIN_DATETIME: {NotNull, DATETIME(19)}
+     * INS_DATETIME: {NotNull, DATETIME(19)}
      * @return The information object of specified column. (NotNull)
      */
-    public ColumnInfo columnLoginDatetime() { return _columnLoginDatetime; }
+    public ColumnInfo columnInsDatetime() { return _columnInsDatetime; }
+    /**
+     * UPD_DATETIME: {NotNull, DATETIME(19)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnUpdDatetime() { return _columnUpdDatetime; }
+    /**
+     * INS_TRACE: {NotNull, VARCHAR(256)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnInsTrace() { return _columnInsTrace; }
+    /**
+     * UPD_TRACE: {NotNull, VARCHAR(256)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnUpdTrace() { return _columnUpdTrace; }
 
     protected List<ColumnInfo> ccil() {
         List<ColumnInfo> ls = newArrayList();
         ls.add(columnLoginId());
         ls.add(columnMemberId());
-        ls.add(columnLoginDatetime());
+        ls.add(columnInsDatetime());
+        ls.add(columnUpdDatetime());
+        ls.add(columnInsTrace());
+        ls.add(columnUpdTrace());
         return ls;
     }
 

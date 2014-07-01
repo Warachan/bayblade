@@ -24,7 +24,7 @@ import jp.bizreach.twitter.dbflute.cbean.*;
  *     FOLLOW_ID
  *
  * [column]
- *     FOLLOW_ID, YOU_ID, ME_ID, FOLLOW_DATETIME
+ *     FOLLOW_ID, YOU_ID, MEMBER_ID, INS_DATETIME, UPD_DATETIME, INS_TRACE, UPD_TRACE, DEL_FLG
  *
  * [sequence]
  *     
@@ -42,7 +42,7 @@ import jp.bizreach.twitter.dbflute.cbean.*;
  *     
  *
  * [foreign property]
- *     memberByMeId, memberByYouId
+ *     memberByMemberId, memberByYouId
  *
  * [referrer property]
  *     
@@ -489,8 +489,8 @@ public abstract class BsFollowBhv extends AbstractBehaviorWritable {
      * @param followList The list of follow. (NotNull, EmptyAllowed)
      * @return The list of foreign table. (NotNull, EmptyAllowed, NotNullElement)
      */
-    public List<Member> pulloutMemberByMeId(List<Follow> followList)
-    { return helpPulloutInternally(followList, "memberByMeId"); }
+    public List<Member> pulloutMemberByMemberId(List<Follow> followList)
+    { return helpPulloutInternally(followList, "memberByMemberId"); }
 
     /**
      * Pull out the list of foreign table 'Member'.

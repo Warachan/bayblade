@@ -19,7 +19,7 @@ import jp.bizreach.twitter.dbflute.exentity.*;
  *     MEMBER_ID
  * 
  * [column]
- *     MEMBER_ID, EMAIL_ADDRESS, USER_NAME, BIRTHDATE, PROFILE, REGESTER_DATETIME, UPDATE_DATETIME
+ *     MEMBER_ID, EMAIL_ADDRESS, USER_NAME, BIRTHDATE, PROFILE, INS_DATETIME, UPD_DATETIME, INS_TRACE, UPD_TRACE
  * 
  * [sequence]
  *     
@@ -40,7 +40,7 @@ import jp.bizreach.twitter.dbflute.exentity.*;
  *     followByYouIdAsOne, memberSecurityAsOne, memberWithdrawAsOne
  * 
  * [referrer property]
- *     followByMeIdList, loginList, tweetList
+ *     followByMemberIdList, loginList, tweetList
  * 
  * [get/set template]
  * /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
@@ -49,15 +49,19 @@ import jp.bizreach.twitter.dbflute.exentity.*;
  * String userName = entity.getUserName();
  * java.util.Date birthdate = entity.getBirthdate();
  * String profile = entity.getProfile();
- * java.sql.Timestamp regesterDatetime = entity.getRegesterDatetime();
- * java.sql.Timestamp updateDatetime = entity.getUpdateDatetime();
+ * java.sql.Timestamp insDatetime = entity.getInsDatetime();
+ * java.sql.Timestamp updDatetime = entity.getUpdDatetime();
+ * String insTrace = entity.getInsTrace();
+ * String updTrace = entity.getUpdTrace();
  * entity.setMemberId(memberId);
  * entity.setEmailAddress(emailAddress);
  * entity.setUserName(userName);
  * entity.setBirthdate(birthdate);
  * entity.setProfile(profile);
- * entity.setRegesterDatetime(regesterDatetime);
- * entity.setUpdateDatetime(updateDatetime);
+ * entity.setInsDatetime(insDatetime);
+ * entity.setUpdDatetime(updDatetime);
+ * entity.setInsTrace(insTrace);
+ * entity.setUpdTrace(updTrace);
  * = = = = = = = = = =/
  * </pre>
  * @author DBFlute(AutoGenerator)
@@ -91,11 +95,17 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     /** PROFILE: {VARCHAR(200)} */
     protected String _profile;
 
-    /** REGESTER_DATETIME: {NotNull, DATETIME(19)} */
-    protected java.sql.Timestamp _regesterDatetime;
+    /** INS_DATETIME: {NotNull, DATETIME(19)} */
+    protected java.sql.Timestamp _insDatetime;
 
-    /** UPDATE_DATETIME: {DATETIME(19)} */
-    protected java.sql.Timestamp _updateDatetime;
+    /** UPD_DATETIME: {NotNull, DATETIME(19)} */
+    protected java.sql.Timestamp _updDatetime;
+
+    /** INS_TRACE: {NotNull, VARCHAR(256)} */
+    protected String _insTrace;
+
+    /** UPD_TRACE: {NotNull, VARCHAR(256)} */
+    protected String _updTrace;
 
     // -----------------------------------------------------
     //                                              Internal
@@ -243,24 +253,24 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     // ===================================================================================
     //                                                                   Referrer Property
     //                                                                   =================
-    /** follow by ME_ID, named 'followByMeIdList'. */
-    protected List<Follow> _followByMeIdList;
+    /** follow by MEMBER_ID, named 'followByMemberIdList'. */
+    protected List<Follow> _followByMemberIdList;
 
     /**
-     * [get] follow by ME_ID, named 'followByMeIdList'.
-     * @return The entity list of referrer property 'followByMeIdList'. (NotNull: even if no loading, returns empty list)
+     * [get] follow by MEMBER_ID, named 'followByMemberIdList'.
+     * @return The entity list of referrer property 'followByMemberIdList'. (NotNull: even if no loading, returns empty list)
      */
-    public List<Follow> getFollowByMeIdList() {
-        if (_followByMeIdList == null) { _followByMeIdList = newReferrerList(); }
-        return _followByMeIdList;
+    public List<Follow> getFollowByMemberIdList() {
+        if (_followByMemberIdList == null) { _followByMemberIdList = newReferrerList(); }
+        return _followByMemberIdList;
     }
 
     /**
-     * [set] follow by ME_ID, named 'followByMeIdList'.
-     * @param followByMeIdList The entity list of referrer property 'followByMeIdList'. (NullAllowed)
+     * [set] follow by MEMBER_ID, named 'followByMemberIdList'.
+     * @param followByMemberIdList The entity list of referrer property 'followByMemberIdList'. (NullAllowed)
      */
-    public void setFollowByMeIdList(List<Follow> followByMeIdList) {
-        _followByMeIdList = followByMeIdList;
+    public void setFollowByMemberIdList(List<Follow> followByMemberIdList) {
+        _followByMemberIdList = followByMemberIdList;
     }
 
     /** login by MEMBER_ID, named 'loginList'. */
@@ -413,8 +423,8 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
         { sb.append(li).append(xbRDS(_memberSecurityAsOne, "memberSecurityAsOne")); }
         if (_memberWithdrawAsOne != null)
         { sb.append(li).append(xbRDS(_memberWithdrawAsOne, "memberWithdrawAsOne")); }
-        if (_followByMeIdList != null) { for (Entity et : _followByMeIdList)
-        { if (et != null) { sb.append(li).append(xbRDS(et, "followByMeIdList")); } } }
+        if (_followByMemberIdList != null) { for (Entity et : _followByMemberIdList)
+        { if (et != null) { sb.append(li).append(xbRDS(et, "followByMemberIdList")); } } }
         if (_loginList != null) { for (Entity et : _loginList)
         { if (et != null) { sb.append(li).append(xbRDS(et, "loginList")); } } }
         if (_tweetList != null) { for (Entity et : _tweetList)
@@ -444,8 +454,10 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
         sb.append(dm).append(getUserName());
         sb.append(dm).append(xfUD(getBirthdate()));
         sb.append(dm).append(getProfile());
-        sb.append(dm).append(getRegesterDatetime());
-        sb.append(dm).append(getUpdateDatetime());
+        sb.append(dm).append(getInsDatetime());
+        sb.append(dm).append(getUpdDatetime());
+        sb.append(dm).append(getInsTrace());
+        sb.append(dm).append(getUpdTrace());
         if (sb.length() > dm.length()) {
             sb.delete(0, dm.length());
         }
@@ -464,8 +476,8 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
         if (_followByYouIdAsOne != null) { sb.append(cm).append("followByYouIdAsOne"); }
         if (_memberSecurityAsOne != null) { sb.append(cm).append("memberSecurityAsOne"); }
         if (_memberWithdrawAsOne != null) { sb.append(cm).append("memberWithdrawAsOne"); }
-        if (_followByMeIdList != null && !_followByMeIdList.isEmpty())
-        { sb.append(cm).append("followByMeIdList"); }
+        if (_followByMemberIdList != null && !_followByMemberIdList.isEmpty())
+        { sb.append(cm).append("followByMemberIdList"); }
         if (_loginList != null && !_loginList.isEmpty())
         { sb.append(cm).append("loginList"); }
         if (_tweetList != null && !_tweetList.isEmpty())
@@ -587,40 +599,78 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [get] REGESTER_DATETIME: {NotNull, DATETIME(19)} <br />
-     * 登録日時
-     * @return The value of the column 'REGESTER_DATETIME'. (basically NotNull if selected: for the constraint)
+     * [get] INS_DATETIME: {NotNull, DATETIME(19)} <br />
+     * insert日時
+     * @return The value of the column 'INS_DATETIME'. (basically NotNull if selected: for the constraint)
      */
-    public java.sql.Timestamp getRegesterDatetime() {
-        return _regesterDatetime;
+    public java.sql.Timestamp getInsDatetime() {
+        return _insDatetime;
     }
 
     /**
-     * [set] REGESTER_DATETIME: {NotNull, DATETIME(19)} <br />
-     * 登録日時
-     * @param regesterDatetime The value of the column 'REGESTER_DATETIME'. (basically NotNull if update: for the constraint)
+     * [set] INS_DATETIME: {NotNull, DATETIME(19)} <br />
+     * insert日時
+     * @param insDatetime The value of the column 'INS_DATETIME'. (basically NotNull if update: for the constraint)
      */
-    public void setRegesterDatetime(java.sql.Timestamp regesterDatetime) {
-        __modifiedProperties.addPropertyName("regesterDatetime");
-        _regesterDatetime = regesterDatetime;
+    public void setInsDatetime(java.sql.Timestamp insDatetime) {
+        __modifiedProperties.addPropertyName("insDatetime");
+        _insDatetime = insDatetime;
     }
 
     /**
-     * [get] UPDATE_DATETIME: {DATETIME(19)} <br />
-     * 更新日時
-     * @return The value of the column 'UPDATE_DATETIME'. (NullAllowed even if selected: for no constraint)
+     * [get] UPD_DATETIME: {NotNull, DATETIME(19)} <br />
+     * UPD_DATETIME
+     * @return The value of the column 'UPD_DATETIME'. (basically NotNull if selected: for the constraint)
      */
-    public java.sql.Timestamp getUpdateDatetime() {
-        return _updateDatetime;
+    public java.sql.Timestamp getUpdDatetime() {
+        return _updDatetime;
     }
 
     /**
-     * [set] UPDATE_DATETIME: {DATETIME(19)} <br />
-     * 更新日時
-     * @param updateDatetime The value of the column 'UPDATE_DATETIME'. (NullAllowed: null update allowed for no constraint)
+     * [set] UPD_DATETIME: {NotNull, DATETIME(19)} <br />
+     * UPD_DATETIME
+     * @param updDatetime The value of the column 'UPD_DATETIME'. (basically NotNull if update: for the constraint)
      */
-    public void setUpdateDatetime(java.sql.Timestamp updateDatetime) {
-        __modifiedProperties.addPropertyName("updateDatetime");
-        _updateDatetime = updateDatetime;
+    public void setUpdDatetime(java.sql.Timestamp updDatetime) {
+        __modifiedProperties.addPropertyName("updDatetime");
+        _updDatetime = updDatetime;
+    }
+
+    /**
+     * [get] INS_TRACE: {NotNull, VARCHAR(256)} <br />
+     * Insertトレース
+     * @return The value of the column 'INS_TRACE'. (basically NotNull if selected: for the constraint)
+     */
+    public String getInsTrace() {
+        return _insTrace;
+    }
+
+    /**
+     * [set] INS_TRACE: {NotNull, VARCHAR(256)} <br />
+     * Insertトレース
+     * @param insTrace The value of the column 'INS_TRACE'. (basically NotNull if update: for the constraint)
+     */
+    public void setInsTrace(String insTrace) {
+        __modifiedProperties.addPropertyName("insTrace");
+        _insTrace = insTrace;
+    }
+
+    /**
+     * [get] UPD_TRACE: {NotNull, VARCHAR(256)} <br />
+     * UPD トレース
+     * @return The value of the column 'UPD_TRACE'. (basically NotNull if selected: for the constraint)
+     */
+    public String getUpdTrace() {
+        return _updTrace;
+    }
+
+    /**
+     * [set] UPD_TRACE: {NotNull, VARCHAR(256)} <br />
+     * UPD トレース
+     * @param updTrace The value of the column 'UPD_TRACE'. (basically NotNull if update: for the constraint)
+     */
+    public void setUpdTrace(String updTrace) {
+        __modifiedProperties.addPropertyName("updTrace");
+        _updTrace = updTrace;
     }
 }

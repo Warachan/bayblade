@@ -67,8 +67,10 @@ public class MemberSecurityCIQ extends AbstractBsMemberSecurityCQ {
     public String keepMemberId_NotInScopeRelation_Member(MemberCQ sq)
     { return _myCQ.keepMemberId_NotInScopeRelation_Member(sq); }
     protected ConditionValue getCValuePassword() { return _myCQ.getPassword(); }
-    protected ConditionValue getCValuePasswordUpdateDatetime() { return _myCQ.getPasswordUpdateDatetime(); }
-    protected ConditionValue getCValuePasswordRegesterationDatetime() { return _myCQ.getPasswordRegesterationDatetime(); }
+    protected ConditionValue getCValueInsDatetime() { return _myCQ.getInsDatetime(); }
+    protected ConditionValue getCValueUpdDatetime() { return _myCQ.getUpdDatetime(); }
+    protected ConditionValue getCValueInsTrace() { return _myCQ.getInsTrace(); }
+    protected ConditionValue getCValueUpdTrace() { return _myCQ.getUpdTrace(); }
     protected Map<String, Object> xfindFixedConditionDynamicParameterMap(String pp) { return null; }
     public String keepScalarCondition(MemberSecurityCQ sq)
     { throwIICBOE("ScalarCondition"); return null; }

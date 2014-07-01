@@ -119,45 +119,85 @@ public class BsMemberSecurityCQ extends AbstractBsMemberSecurityCQ {
      */
     public BsMemberSecurityCQ addOrderBy_Password_Desc() { regOBD("PASSWORD"); return this; }
 
-    protected ConditionValue _passwordUpdateDatetime;
-    public ConditionValue getPasswordUpdateDatetime()
-    { if (_passwordUpdateDatetime == null) { _passwordUpdateDatetime = nCV(); }
-      return _passwordUpdateDatetime; }
-    protected ConditionValue getCValuePasswordUpdateDatetime() { return getPasswordUpdateDatetime(); }
+    protected ConditionValue _insDatetime;
+    public ConditionValue getInsDatetime()
+    { if (_insDatetime == null) { _insDatetime = nCV(); }
+      return _insDatetime; }
+    protected ConditionValue getCValueInsDatetime() { return getInsDatetime(); }
 
     /** 
      * Add order-by as ascend. <br />
-     * PASSWORD_UPDATE_DATETIME: {DATETIME(19)}
+     * INS_DATETIME: {NotNull, DATETIME(19)}
      * @return this. (NotNull)
      */
-    public BsMemberSecurityCQ addOrderBy_PasswordUpdateDatetime_Asc() { regOBA("PASSWORD_UPDATE_DATETIME"); return this; }
+    public BsMemberSecurityCQ addOrderBy_InsDatetime_Asc() { regOBA("INS_DATETIME"); return this; }
 
     /**
      * Add order-by as descend. <br />
-     * PASSWORD_UPDATE_DATETIME: {DATETIME(19)}
+     * INS_DATETIME: {NotNull, DATETIME(19)}
      * @return this. (NotNull)
      */
-    public BsMemberSecurityCQ addOrderBy_PasswordUpdateDatetime_Desc() { regOBD("PASSWORD_UPDATE_DATETIME"); return this; }
+    public BsMemberSecurityCQ addOrderBy_InsDatetime_Desc() { regOBD("INS_DATETIME"); return this; }
 
-    protected ConditionValue _passwordRegesterationDatetime;
-    public ConditionValue getPasswordRegesterationDatetime()
-    { if (_passwordRegesterationDatetime == null) { _passwordRegesterationDatetime = nCV(); }
-      return _passwordRegesterationDatetime; }
-    protected ConditionValue getCValuePasswordRegesterationDatetime() { return getPasswordRegesterationDatetime(); }
+    protected ConditionValue _updDatetime;
+    public ConditionValue getUpdDatetime()
+    { if (_updDatetime == null) { _updDatetime = nCV(); }
+      return _updDatetime; }
+    protected ConditionValue getCValueUpdDatetime() { return getUpdDatetime(); }
 
     /** 
      * Add order-by as ascend. <br />
-     * PASSWORD_REGESTERATION_DATETIME: {NotNull, DATETIME(19)}
+     * UPD_DATETIME: {NotNull, DATETIME(19)}
      * @return this. (NotNull)
      */
-    public BsMemberSecurityCQ addOrderBy_PasswordRegesterationDatetime_Asc() { regOBA("PASSWORD_REGESTERATION_DATETIME"); return this; }
+    public BsMemberSecurityCQ addOrderBy_UpdDatetime_Asc() { regOBA("UPD_DATETIME"); return this; }
 
     /**
      * Add order-by as descend. <br />
-     * PASSWORD_REGESTERATION_DATETIME: {NotNull, DATETIME(19)}
+     * UPD_DATETIME: {NotNull, DATETIME(19)}
      * @return this. (NotNull)
      */
-    public BsMemberSecurityCQ addOrderBy_PasswordRegesterationDatetime_Desc() { regOBD("PASSWORD_REGESTERATION_DATETIME"); return this; }
+    public BsMemberSecurityCQ addOrderBy_UpdDatetime_Desc() { regOBD("UPD_DATETIME"); return this; }
+
+    protected ConditionValue _insTrace;
+    public ConditionValue getInsTrace()
+    { if (_insTrace == null) { _insTrace = nCV(); }
+      return _insTrace; }
+    protected ConditionValue getCValueInsTrace() { return getInsTrace(); }
+
+    /** 
+     * Add order-by as ascend. <br />
+     * INS_TRACE: {NotNull, VARCHAR(256)}
+     * @return this. (NotNull)
+     */
+    public BsMemberSecurityCQ addOrderBy_InsTrace_Asc() { regOBA("INS_TRACE"); return this; }
+
+    /**
+     * Add order-by as descend. <br />
+     * INS_TRACE: {NotNull, VARCHAR(256)}
+     * @return this. (NotNull)
+     */
+    public BsMemberSecurityCQ addOrderBy_InsTrace_Desc() { regOBD("INS_TRACE"); return this; }
+
+    protected ConditionValue _updTrace;
+    public ConditionValue getUpdTrace()
+    { if (_updTrace == null) { _updTrace = nCV(); }
+      return _updTrace; }
+    protected ConditionValue getCValueUpdTrace() { return getUpdTrace(); }
+
+    /** 
+     * Add order-by as ascend. <br />
+     * UPD_TRACE: {NotNull, VARCHAR(256)}
+     * @return this. (NotNull)
+     */
+    public BsMemberSecurityCQ addOrderBy_UpdTrace_Asc() { regOBA("UPD_TRACE"); return this; }
+
+    /**
+     * Add order-by as descend. <br />
+     * UPD_TRACE: {NotNull, VARCHAR(256)}
+     * @return this. (NotNull)
+     */
+    public BsMemberSecurityCQ addOrderBy_UpdTrace_Desc() { regOBD("UPD_TRACE"); return this; }
 
     // ===================================================================================
     //                                                             SpecifiedDerivedOrderBy

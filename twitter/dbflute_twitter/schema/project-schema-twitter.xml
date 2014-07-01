@@ -9,14 +9,25 @@
             primaryKey="true" required="true" size="10" type="INTEGER"/>
         <column comment="フォローする人のID : 会員のID&#xa;" dbType="INT"
             javaType="Integer" name="YOU_ID" required="true" size="10" type="INTEGER"/>
-        <column comment="フォローされる人のID : 会員のID&#xa;" dbType="INT"
-            javaType="Integer" name="ME_ID" required="true" size="10" type="INTEGER"/>
-        <column comment="follow_datetime" dbType="DATETIME"
-            javaType="java.sql.Timestamp" name="FOLLOW_DATETIME"
+        <column comment="フォローされる人のID : フォローしている自分のID&#xa;" dbType="INT"
+            javaType="Integer" name="MEMBER_ID" required="true"
+            size="10" type="INTEGER"/>
+        <column comment="insert日時" dbType="DATETIME"
+            javaType="java.sql.Timestamp" name="INS_DATETIME"
             required="true" size="19" type="TIMESTAMP"/>
+        <column comment="UPD_DATETIME" dbType="DATETIME"
+            javaType="java.sql.Timestamp" name="UPD_DATETIME"
+            required="true" size="19" type="TIMESTAMP"/>
+        <column comment="Insertトレース" dbType="VARCHAR" javaType="String"
+            name="INS_TRACE" required="true" size="256" type="VARCHAR"/>
+        <column comment="UPD トレース" dbType="VARCHAR" javaType="String"
+            name="UPD_TRACE" required="true" size="256" type="VARCHAR"/>
+        <column comment="DEL_FLG : 削除フラグ Y=削除　N=削除していない" dbType="CHAR"
+            default="N" javaType="String" name="DEL_FLG" required="true"
+            size="1" type="CHAR"/>
         <foreign-key foreignSchema="twitter.$$NoNameSchema$$"
             foreignTable="member" name="follow_ibfk_1">
-            <reference foreign="MEMBER_ID" local="ME_ID"/>
+            <reference foreign="MEMBER_ID" local="MEMBER_ID"/>
         </foreign-key>
         <foreign-key foreignSchema="twitter.$$NoNameSchema$$"
             foreignTable="member" name="follow_ibfk_2">
@@ -25,8 +36,8 @@
         <unique name="YOU_ID">
             <unique-column name="YOU_ID" position="1"/>
         </unique>
-        <index name="ME_ID">
-            <index-column name="ME_ID" position="1"/>
+        <index name="MEMBER_ID">
+            <index-column name="MEMBER_ID" position="1"/>
         </index>
     </table>
     <table comment="ログイン" name="login" schema="twitter.$$NoNameSchema$$" type="TABLE">
@@ -36,9 +47,16 @@
         <column comment="会員ID : 会員のID&#xa;" dbType="INT"
             javaType="Integer" name="MEMBER_ID" required="true"
             size="10" type="INTEGER"/>
-        <column comment="ログイン日時" dbType="DATETIME"
-            javaType="java.sql.Timestamp" name="LOGIN_DATETIME"
+        <column comment="insert日時" dbType="DATETIME"
+            javaType="java.sql.Timestamp" name="INS_DATETIME"
             required="true" size="19" type="TIMESTAMP"/>
+        <column comment="UPD_DATETIME" dbType="DATETIME"
+            javaType="java.sql.Timestamp" name="UPD_DATETIME"
+            required="true" size="19" type="TIMESTAMP"/>
+        <column comment="Insertトレース" dbType="VARCHAR" javaType="String"
+            name="INS_TRACE" required="true" size="256" type="VARCHAR"/>
+        <column comment="UPD トレース" dbType="VARCHAR" javaType="String"
+            name="UPD_TRACE" required="true" size="256" type="VARCHAR"/>
         <foreign-key foreignSchema="twitter.$$NoNameSchema$$"
             foreignTable="member" name="login_ibfk_1">
             <reference foreign="MEMBER_ID" local="MEMBER_ID"/>
@@ -60,12 +78,16 @@
             javaType="java.util.Date" name="BIRTHDATE" size="10" type="DATE"/>
         <column comment="プロフィール" dbType="VARCHAR" javaType="String"
             name="PROFILE" size="200" type="VARCHAR"/>
-        <column comment="登録日時" dbType="DATETIME"
-            javaType="java.sql.Timestamp" name="REGESTER_DATETIME"
+        <column comment="insert日時" dbType="DATETIME"
+            javaType="java.sql.Timestamp" name="INS_DATETIME"
             required="true" size="19" type="TIMESTAMP"/>
-        <column comment="更新日時" dbType="DATETIME"
-            javaType="java.sql.Timestamp" name="UPDATE_DATETIME"
-            size="19" type="TIMESTAMP"/>
+        <column comment="UPD_DATETIME" dbType="DATETIME"
+            javaType="java.sql.Timestamp" name="UPD_DATETIME"
+            required="true" size="19" type="TIMESTAMP"/>
+        <column comment="Insertトレース" dbType="VARCHAR" javaType="String"
+            name="INS_TRACE" required="true" size="256" type="VARCHAR"/>
+        <column comment="UPD トレース" dbType="VARCHAR" javaType="String"
+            name="UPD_TRACE" required="true" size="256" type="VARCHAR"/>
         <unique name="EMAIL_ADDRESS">
             <unique-column name="EMAIL_ADDRESS" position="1"/>
         </unique>
@@ -80,13 +102,16 @@
             primaryKey="true" required="true" size="10" type="INTEGER"/>
         <column comment="パスワード" dbType="VARCHAR" javaType="String"
             name="PASSWORD" required="true" size="50" type="VARCHAR"/>
-        <column comment="パスワード更新日時" dbType="DATETIME"
-            javaType="java.sql.Timestamp"
-            name="PASSWORD_UPDATE_DATETIME" size="19" type="TIMESTAMP"/>
-        <column comment="パスワード登録日時" dbType="DATETIME"
-            javaType="java.sql.Timestamp"
-            name="PASSWORD_REGESTERATION_DATETIME" required="true"
-            size="19" type="TIMESTAMP"/>
+        <column comment="insert日時" dbType="DATETIME"
+            javaType="java.sql.Timestamp" name="INS_DATETIME"
+            required="true" size="19" type="TIMESTAMP"/>
+        <column comment="UPD_DATETIME" dbType="DATETIME"
+            javaType="java.sql.Timestamp" name="UPD_DATETIME"
+            required="true" size="19" type="TIMESTAMP"/>
+        <column comment="Insertトレース" dbType="VARCHAR" javaType="String"
+            name="INS_TRACE" required="true" size="256" type="VARCHAR"/>
+        <column comment="UPD トレース" dbType="VARCHAR" javaType="String"
+            name="UPD_TRACE" required="true" size="256" type="VARCHAR"/>
         <foreign-key foreignSchema="twitter.$$NoNameSchema$$"
             foreignTable="member" name="member_security_ibfk_1">
             <reference foreign="MEMBER_ID" local="MEMBER_ID"/>
@@ -119,9 +144,16 @@
             size="10" type="INTEGER"/>
         <column comment="TWEET" dbType="VARCHAR" javaType="String"
             name="TWEET" required="true" size="140" type="VARCHAR"/>
-        <column comment="TWEET日時" dbType="DATETIME"
-            javaType="java.sql.Timestamp" name="TWEET_DATETIME"
+        <column comment="insert日時" dbType="DATETIME"
+            javaType="java.sql.Timestamp" name="INS_DATETIME"
             required="true" size="19" type="TIMESTAMP"/>
+        <column comment="UPD_DATETIME" dbType="DATETIME"
+            javaType="java.sql.Timestamp" name="UPD_DATETIME"
+            required="true" size="19" type="TIMESTAMP"/>
+        <column comment="Insertトレース" dbType="VARCHAR" javaType="String"
+            name="INS_TRACE" required="true" size="256" type="VARCHAR"/>
+        <column comment="UPD トレース" dbType="VARCHAR" javaType="String"
+            name="UPD_TRACE" required="true" size="256" type="VARCHAR"/>
         <foreign-key foreignSchema="twitter.$$NoNameSchema$$"
             foreignTable="member" name="tweet_ibfk_1">
             <reference foreign="MEMBER_ID" local="MEMBER_ID"/>

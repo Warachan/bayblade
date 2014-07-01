@@ -41,7 +41,10 @@ public class TweetDbm extends AbstractDBMeta {
         setupEpg(_epgMap, new EpgTweetId(), "tweetId");
         setupEpg(_epgMap, new EpgMemberId(), "memberId");
         setupEpg(_epgMap, new EpgTweet(), "tweet");
-        setupEpg(_epgMap, new EpgTweetDatetime(), "tweetDatetime");
+        setupEpg(_epgMap, new EpgInsDatetime(), "insDatetime");
+        setupEpg(_epgMap, new EpgUpdDatetime(), "updDatetime");
+        setupEpg(_epgMap, new EpgInsTrace(), "insTrace");
+        setupEpg(_epgMap, new EpgUpdTrace(), "updTrace");
     }
     public static class EpgTweetId implements PropertyGateway {
         public Object read(Entity et) { return ((Tweet)et).getTweetId(); }
@@ -55,9 +58,21 @@ public class TweetDbm extends AbstractDBMeta {
         public Object read(Entity et) { return ((Tweet)et).getTweet(); }
         public void write(Entity et, Object vl) { ((Tweet)et).setTweet((String)vl); }
     }
-    public static class EpgTweetDatetime implements PropertyGateway {
-        public Object read(Entity et) { return ((Tweet)et).getTweetDatetime(); }
-        public void write(Entity et, Object vl) { ((Tweet)et).setTweetDatetime((java.sql.Timestamp)vl); }
+    public static class EpgInsDatetime implements PropertyGateway {
+        public Object read(Entity et) { return ((Tweet)et).getInsDatetime(); }
+        public void write(Entity et, Object vl) { ((Tweet)et).setInsDatetime((java.sql.Timestamp)vl); }
+    }
+    public static class EpgUpdDatetime implements PropertyGateway {
+        public Object read(Entity et) { return ((Tweet)et).getUpdDatetime(); }
+        public void write(Entity et, Object vl) { ((Tweet)et).setUpdDatetime((java.sql.Timestamp)vl); }
+    }
+    public static class EpgInsTrace implements PropertyGateway {
+        public Object read(Entity et) { return ((Tweet)et).getInsTrace(); }
+        public void write(Entity et, Object vl) { ((Tweet)et).setInsTrace((String)vl); }
+    }
+    public static class EpgUpdTrace implements PropertyGateway {
+        public Object read(Entity et) { return ((Tweet)et).getUpdTrace(); }
+        public void write(Entity et, Object vl) { ((Tweet)et).setUpdTrace((String)vl); }
     }
     public PropertyGateway findPropertyGateway(String prop)
     { return doFindEpg(_epgMap, prop); }
@@ -93,7 +108,10 @@ public class TweetDbm extends AbstractDBMeta {
     protected final ColumnInfo _columnTweetId = cci("TWEET_ID", "TWEET_ID", null, null, Integer.class, "tweetId", null, true, true, true, "INT", 10, 0, null, false, null, null, null, null, null);
     protected final ColumnInfo _columnMemberId = cci("MEMBER_ID", "MEMBER_ID", null, null, Integer.class, "memberId", null, false, false, true, "INT", 10, 0, null, false, null, null, "member", null, null);
     protected final ColumnInfo _columnTweet = cci("TWEET", "TWEET", null, null, String.class, "tweet", null, false, false, true, "VARCHAR", 140, 0, null, false, null, null, null, null, null);
-    protected final ColumnInfo _columnTweetDatetime = cci("TWEET_DATETIME", "TWEET_DATETIME", null, null, java.sql.Timestamp.class, "tweetDatetime", null, false, false, true, "DATETIME", 19, 0, null, false, null, null, null, null, null);
+    protected final ColumnInfo _columnInsDatetime = cci("INS_DATETIME", "INS_DATETIME", null, null, java.sql.Timestamp.class, "insDatetime", null, false, false, true, "DATETIME", 19, 0, null, false, null, null, null, null, null);
+    protected final ColumnInfo _columnUpdDatetime = cci("UPD_DATETIME", "UPD_DATETIME", null, null, java.sql.Timestamp.class, "updDatetime", null, false, false, true, "DATETIME", 19, 0, null, false, null, null, null, null, null);
+    protected final ColumnInfo _columnInsTrace = cci("INS_TRACE", "INS_TRACE", null, null, String.class, "insTrace", null, false, false, true, "VARCHAR", 256, 0, null, false, null, null, null, null, null);
+    protected final ColumnInfo _columnUpdTrace = cci("UPD_TRACE", "UPD_TRACE", null, null, String.class, "updTrace", null, false, false, true, "VARCHAR", 256, 0, null, false, null, null, null, null, null);
 
     /**
      * TWEET_ID: {PK, ID, NotNull, INT(10)}
@@ -111,17 +129,35 @@ public class TweetDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnTweet() { return _columnTweet; }
     /**
-     * TWEET_DATETIME: {NotNull, DATETIME(19)}
+     * INS_DATETIME: {NotNull, DATETIME(19)}
      * @return The information object of specified column. (NotNull)
      */
-    public ColumnInfo columnTweetDatetime() { return _columnTweetDatetime; }
+    public ColumnInfo columnInsDatetime() { return _columnInsDatetime; }
+    /**
+     * UPD_DATETIME: {NotNull, DATETIME(19)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnUpdDatetime() { return _columnUpdDatetime; }
+    /**
+     * INS_TRACE: {NotNull, VARCHAR(256)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnInsTrace() { return _columnInsTrace; }
+    /**
+     * UPD_TRACE: {NotNull, VARCHAR(256)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnUpdTrace() { return _columnUpdTrace; }
 
     protected List<ColumnInfo> ccil() {
         List<ColumnInfo> ls = newArrayList();
         ls.add(columnTweetId());
         ls.add(columnMemberId());
         ls.add(columnTweet());
-        ls.add(columnTweetDatetime());
+        ls.add(columnInsDatetime());
+        ls.add(columnUpdDatetime());
+        ls.add(columnInsTrace());
+        ls.add(columnUpdTrace());
         return ls;
     }
 

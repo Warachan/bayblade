@@ -67,7 +67,10 @@ public class LoginCIQ extends AbstractBsLoginCQ {
     { return _myCQ.keepMemberId_InScopeRelation_Member(sq); }
     public String keepMemberId_NotInScopeRelation_Member(MemberCQ sq)
     { return _myCQ.keepMemberId_NotInScopeRelation_Member(sq); }
-    protected ConditionValue getCValueLoginDatetime() { return _myCQ.getLoginDatetime(); }
+    protected ConditionValue getCValueInsDatetime() { return _myCQ.getInsDatetime(); }
+    protected ConditionValue getCValueUpdDatetime() { return _myCQ.getUpdDatetime(); }
+    protected ConditionValue getCValueInsTrace() { return _myCQ.getInsTrace(); }
+    protected ConditionValue getCValueUpdTrace() { return _myCQ.getUpdTrace(); }
     protected Map<String, Object> xfindFixedConditionDynamicParameterMap(String pp) { return null; }
     public String keepScalarCondition(LoginCQ sq)
     { throwIICBOE("ScalarCondition"); return null; }

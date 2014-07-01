@@ -16,7 +16,6 @@
 package jp.bizreach.twitter.app.web;
 
 import java.sql.Timestamp;
-import java.util.Date;
 
 import javax.annotation.Resource;
 
@@ -71,17 +70,19 @@ public class IndexAction {
             cb.query().queryMemberSecurityAsOne().setPassword_Equal(inputPassword);
             cb.query().setEmailAddress_Equal(inputEmail);
             Member member = memberBhv.selectEntity(cb);
-            Date date = new Date();
-            Timestamp timestamp = new Timestamp(date.getTime());
             if (member != null) {
                 sessionDto.myId = member.getMemberId();
                 sessionDto.email = member.getEmailAddress();
                 sessionDto.username = member.getUserName();
-                LOG.debug("***" + sessionDto.username);
+                Timestamp loginTime = member.getInsDatetime();
                 Login login = new Login();
-                login.setMemberId(member.getMemberId());
-                login.setLoginDatetime(timestamp);
+                login.setMemberId(sessionDto.myId);
+                login.setInsDatetime(loginTime);
+                login.setUpdDatetime(loginTime);
+                login.setInsTrace(inputEmail);
+                login.setUpdTrace(inputEmail);
                 loginBhv.insert(login);
+                LOG.debug("***" + sessionDto.username);
                 return "/home/?redirect=true";
             }
         }

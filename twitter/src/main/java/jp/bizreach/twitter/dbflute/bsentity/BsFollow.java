@@ -18,7 +18,7 @@ import jp.bizreach.twitter.dbflute.exentity.*;
  *     FOLLOW_ID
  * 
  * [column]
- *     FOLLOW_ID, YOU_ID, ME_ID, FOLLOW_DATETIME
+ *     FOLLOW_ID, YOU_ID, MEMBER_ID, INS_DATETIME, UPD_DATETIME, INS_TRACE, UPD_TRACE, DEL_FLG
  * 
  * [sequence]
  *     
@@ -36,7 +36,7 @@ import jp.bizreach.twitter.dbflute.exentity.*;
  *     
  * 
  * [foreign property]
- *     memberByMeId, memberByYouId
+ *     memberByMemberId, memberByYouId
  * 
  * [referrer property]
  *     
@@ -45,12 +45,20 @@ import jp.bizreach.twitter.dbflute.exentity.*;
  * /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
  * Integer followId = entity.getFollowId();
  * Integer youId = entity.getYouId();
- * Integer meId = entity.getMeId();
- * java.sql.Timestamp followDatetime = entity.getFollowDatetime();
+ * Integer memberId = entity.getMemberId();
+ * java.sql.Timestamp insDatetime = entity.getInsDatetime();
+ * java.sql.Timestamp updDatetime = entity.getUpdDatetime();
+ * String insTrace = entity.getInsTrace();
+ * String updTrace = entity.getUpdTrace();
+ * String delFlg = entity.getDelFlg();
  * entity.setFollowId(followId);
  * entity.setYouId(youId);
- * entity.setMeId(meId);
- * entity.setFollowDatetime(followDatetime);
+ * entity.setMemberId(memberId);
+ * entity.setInsDatetime(insDatetime);
+ * entity.setUpdDatetime(updDatetime);
+ * entity.setInsTrace(insTrace);
+ * entity.setUpdTrace(updTrace);
+ * entity.setDelFlg(delFlg);
  * = = = = = = = = = =/
  * </pre>
  * @author DBFlute(AutoGenerator)
@@ -75,11 +83,23 @@ public abstract class BsFollow implements Entity, Serializable, Cloneable {
     /** YOU_ID: {UQ, NotNull, INT(10), FK to member} */
     protected Integer _youId;
 
-    /** ME_ID: {IX, NotNull, INT(10), FK to member} */
-    protected Integer _meId;
+    /** MEMBER_ID: {IX, NotNull, INT(10), FK to member} */
+    protected Integer _memberId;
 
-    /** FOLLOW_DATETIME: {NotNull, DATETIME(19)} */
-    protected java.sql.Timestamp _followDatetime;
+    /** INS_DATETIME: {NotNull, DATETIME(19)} */
+    protected java.sql.Timestamp _insDatetime;
+
+    /** UPD_DATETIME: {NotNull, DATETIME(19)} */
+    protected java.sql.Timestamp _updDatetime;
+
+    /** INS_TRACE: {NotNull, VARCHAR(256)} */
+    protected String _insTrace;
+
+    /** UPD_TRACE: {NotNull, VARCHAR(256)} */
+    protected String _updTrace;
+
+    /** DEL_FLG: {NotNull, CHAR(1), default=[N]} */
+    protected String _delFlg;
 
     // -----------------------------------------------------
     //                                              Internal
@@ -156,23 +176,23 @@ public abstract class BsFollow implements Entity, Serializable, Cloneable {
     // ===================================================================================
     //                                                                    Foreign Property
     //                                                                    ================
-    /** member by my ME_ID, named 'memberByMeId'. */
-    protected Member _memberByMeId;
+    /** member by my MEMBER_ID, named 'memberByMemberId'. */
+    protected Member _memberByMemberId;
 
     /**
-     * [get] member by my ME_ID, named 'memberByMeId'.
-     * @return The entity of foreign property 'memberByMeId'. (NullAllowed: when e.g. null FK column, no setupSelect)
+     * [get] member by my MEMBER_ID, named 'memberByMemberId'.
+     * @return The entity of foreign property 'memberByMemberId'. (NullAllowed: when e.g. null FK column, no setupSelect)
      */
-    public Member getMemberByMeId() {
-        return _memberByMeId;
+    public Member getMemberByMemberId() {
+        return _memberByMemberId;
     }
 
     /**
-     * [set] member by my ME_ID, named 'memberByMeId'.
-     * @param memberByMeId The entity of foreign property 'memberByMeId'. (NullAllowed)
+     * [set] member by my MEMBER_ID, named 'memberByMemberId'.
+     * @param memberByMemberId The entity of foreign property 'memberByMemberId'. (NullAllowed)
      */
-    public void setMemberByMeId(Member memberByMeId) {
-        _memberByMeId = memberByMeId;
+    public void setMemberByMemberId(Member memberByMemberId) {
+        _memberByMemberId = memberByMemberId;
     }
 
     /** member by my YOU_ID, named 'memberByYouId'. */
@@ -301,8 +321,8 @@ public abstract class BsFollow implements Entity, Serializable, Cloneable {
         StringBuilder sb = new StringBuilder();
         sb.append(toString());
         String li = "\n  ";
-        if (_memberByMeId != null)
-        { sb.append(li).append(xbRDS(_memberByMeId, "memberByMeId")); }
+        if (_memberByMemberId != null)
+        { sb.append(li).append(xbRDS(_memberByMemberId, "memberByMemberId")); }
         if (_memberByYouId != null)
         { sb.append(li).append(xbRDS(_memberByYouId, "memberByYouId")); }
         return sb.toString();
@@ -327,8 +347,12 @@ public abstract class BsFollow implements Entity, Serializable, Cloneable {
         String dm = ", ";
         sb.append(dm).append(getFollowId());
         sb.append(dm).append(getYouId());
-        sb.append(dm).append(getMeId());
-        sb.append(dm).append(getFollowDatetime());
+        sb.append(dm).append(getMemberId());
+        sb.append(dm).append(getInsDatetime());
+        sb.append(dm).append(getUpdDatetime());
+        sb.append(dm).append(getInsTrace());
+        sb.append(dm).append(getUpdTrace());
+        sb.append(dm).append(getDelFlg());
         if (sb.length() > dm.length()) {
             sb.delete(0, dm.length());
         }
@@ -338,7 +362,7 @@ public abstract class BsFollow implements Entity, Serializable, Cloneable {
     protected String buildRelationString() {
         StringBuilder sb = new StringBuilder();
         String cm = ",";
-        if (_memberByMeId != null) { sb.append(cm).append("memberByMeId"); }
+        if (_memberByMemberId != null) { sb.append(cm).append("memberByMemberId"); }
         if (_memberByYouId != null) { sb.append(cm).append("memberByYouId"); }
         if (sb.length() > cm.length()) {
             sb.delete(0, cm.length()).insert(0, "(").append(")");
@@ -400,40 +424,116 @@ public abstract class BsFollow implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [get] ME_ID: {IX, NotNull, INT(10), FK to member} <br />
-     * フォローされる人のID : 会員のID
-     * @return The value of the column 'ME_ID'. (basically NotNull if selected: for the constraint)
+     * [get] MEMBER_ID: {IX, NotNull, INT(10), FK to member} <br />
+     * フォローされる人のID : フォローしている自分のID
+     * @return The value of the column 'MEMBER_ID'. (basically NotNull if selected: for the constraint)
      */
-    public Integer getMeId() {
-        return _meId;
+    public Integer getMemberId() {
+        return _memberId;
     }
 
     /**
-     * [set] ME_ID: {IX, NotNull, INT(10), FK to member} <br />
-     * フォローされる人のID : 会員のID
-     * @param meId The value of the column 'ME_ID'. (basically NotNull if update: for the constraint)
+     * [set] MEMBER_ID: {IX, NotNull, INT(10), FK to member} <br />
+     * フォローされる人のID : フォローしている自分のID
+     * @param memberId The value of the column 'MEMBER_ID'. (basically NotNull if update: for the constraint)
      */
-    public void setMeId(Integer meId) {
-        __modifiedProperties.addPropertyName("meId");
-        _meId = meId;
+    public void setMemberId(Integer memberId) {
+        __modifiedProperties.addPropertyName("memberId");
+        _memberId = memberId;
     }
 
     /**
-     * [get] FOLLOW_DATETIME: {NotNull, DATETIME(19)} <br />
-     * follow_datetime
-     * @return The value of the column 'FOLLOW_DATETIME'. (basically NotNull if selected: for the constraint)
+     * [get] INS_DATETIME: {NotNull, DATETIME(19)} <br />
+     * insert日時
+     * @return The value of the column 'INS_DATETIME'. (basically NotNull if selected: for the constraint)
      */
-    public java.sql.Timestamp getFollowDatetime() {
-        return _followDatetime;
+    public java.sql.Timestamp getInsDatetime() {
+        return _insDatetime;
     }
 
     /**
-     * [set] FOLLOW_DATETIME: {NotNull, DATETIME(19)} <br />
-     * follow_datetime
-     * @param followDatetime The value of the column 'FOLLOW_DATETIME'. (basically NotNull if update: for the constraint)
+     * [set] INS_DATETIME: {NotNull, DATETIME(19)} <br />
+     * insert日時
+     * @param insDatetime The value of the column 'INS_DATETIME'. (basically NotNull if update: for the constraint)
      */
-    public void setFollowDatetime(java.sql.Timestamp followDatetime) {
-        __modifiedProperties.addPropertyName("followDatetime");
-        _followDatetime = followDatetime;
+    public void setInsDatetime(java.sql.Timestamp insDatetime) {
+        __modifiedProperties.addPropertyName("insDatetime");
+        _insDatetime = insDatetime;
+    }
+
+    /**
+     * [get] UPD_DATETIME: {NotNull, DATETIME(19)} <br />
+     * UPD_DATETIME
+     * @return The value of the column 'UPD_DATETIME'. (basically NotNull if selected: for the constraint)
+     */
+    public java.sql.Timestamp getUpdDatetime() {
+        return _updDatetime;
+    }
+
+    /**
+     * [set] UPD_DATETIME: {NotNull, DATETIME(19)} <br />
+     * UPD_DATETIME
+     * @param updDatetime The value of the column 'UPD_DATETIME'. (basically NotNull if update: for the constraint)
+     */
+    public void setUpdDatetime(java.sql.Timestamp updDatetime) {
+        __modifiedProperties.addPropertyName("updDatetime");
+        _updDatetime = updDatetime;
+    }
+
+    /**
+     * [get] INS_TRACE: {NotNull, VARCHAR(256)} <br />
+     * Insertトレース
+     * @return The value of the column 'INS_TRACE'. (basically NotNull if selected: for the constraint)
+     */
+    public String getInsTrace() {
+        return _insTrace;
+    }
+
+    /**
+     * [set] INS_TRACE: {NotNull, VARCHAR(256)} <br />
+     * Insertトレース
+     * @param insTrace The value of the column 'INS_TRACE'. (basically NotNull if update: for the constraint)
+     */
+    public void setInsTrace(String insTrace) {
+        __modifiedProperties.addPropertyName("insTrace");
+        _insTrace = insTrace;
+    }
+
+    /**
+     * [get] UPD_TRACE: {NotNull, VARCHAR(256)} <br />
+     * UPD トレース
+     * @return The value of the column 'UPD_TRACE'. (basically NotNull if selected: for the constraint)
+     */
+    public String getUpdTrace() {
+        return _updTrace;
+    }
+
+    /**
+     * [set] UPD_TRACE: {NotNull, VARCHAR(256)} <br />
+     * UPD トレース
+     * @param updTrace The value of the column 'UPD_TRACE'. (basically NotNull if update: for the constraint)
+     */
+    public void setUpdTrace(String updTrace) {
+        __modifiedProperties.addPropertyName("updTrace");
+        _updTrace = updTrace;
+    }
+
+    /**
+     * [get] DEL_FLG: {NotNull, CHAR(1), default=[N]} <br />
+     * DEL_FLG : 削除フラグ Y=削除　N=削除していない
+     * @return The value of the column 'DEL_FLG'. (basically NotNull if selected: for the constraint)
+     */
+    public String getDelFlg() {
+        return _delFlg;
+    }
+
+    /**
+     * [set] DEL_FLG: {NotNull, CHAR(1), default=[N]} <br />
+     * DEL_FLG : 削除フラグ Y=削除　N=削除していない
+     * @param delFlg The value of the column 'DEL_FLG'. (basically NotNull if update: for the constraint)
+     */
+    public void setDelFlg(String delFlg) {
+        __modifiedProperties.addPropertyName("delFlg");
+        _delFlg = delFlg;
     }
 }

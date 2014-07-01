@@ -13,7 +13,7 @@ import jp.bizreach.twitter.dbflute.exentity.*;
  *     FOLLOW_ID
  *
  * [column]
- *     FOLLOW_ID, YOU_ID, ME_ID, FOLLOW_DATETIME
+ *     FOLLOW_ID, YOU_ID, MEMBER_ID, INS_DATETIME, UPD_DATETIME, INS_TRACE, UPD_TRACE, DEL_FLG
  *
  * [sequence]
  *     
@@ -31,7 +31,7 @@ import jp.bizreach.twitter.dbflute.exentity.*;
  *     
  *
  * [foreign property]
- *     memberByMeId, memberByYouId
+ *     memberByMemberId, memberByYouId
  *
  * [referrer property]
  *     
@@ -59,12 +59,12 @@ public class LoaderOfFollow {
     // ===================================================================================
     //                                                                    Pull out Foreign
     //                                                                    ================
-    protected LoaderOfMember _foreignMemberByMeIdLoader;
-    public LoaderOfMember pulloutMemberByMeId() {
-        if (_foreignMemberByMeIdLoader != null) { return _foreignMemberByMeIdLoader; }
-        List<Member> pulledList = myBhv().pulloutMemberByMeId(_selectedList);
-        _foreignMemberByMeIdLoader = new LoaderOfMember().ready(pulledList, _selector);
-        return _foreignMemberByMeIdLoader;
+    protected LoaderOfMember _foreignMemberByMemberIdLoader;
+    public LoaderOfMember pulloutMemberByMemberId() {
+        if (_foreignMemberByMemberIdLoader != null) { return _foreignMemberByMemberIdLoader; }
+        List<Member> pulledList = myBhv().pulloutMemberByMemberId(_selectedList);
+        _foreignMemberByMemberIdLoader = new LoaderOfMember().ready(pulledList, _selector);
+        return _foreignMemberByMemberIdLoader;
     }
 
     protected LoaderOfMember _foreignMemberByYouIdLoader;

@@ -1,4 +1,324 @@
 map:{
+    ; 2014/07/01 19:07:27 = map:{
+        ; diffDate = 2014/07/01 19:07:27
+        ; tableDiff = map:{
+            ; follow = map:{
+                ; tableName = follow
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; MEMBER_ID = map:{
+                        ; columnName = MEMBER_ID
+                        ; diffType = ADD
+                    }
+                    ; ME_ID = map:{
+                        ; columnName = ME_ID
+                        ; diffType = DELETE
+                    }
+                }
+                ; foreignKeyDiff = map:{
+                    ; follow_ibfk_1(new) = map:{
+                        ; constraintName = follow_ibfk_1(new)
+                        ; diffType = ADD
+                    }
+                    ; follow_ibfk_1(old) = map:{
+                        ; constraintName = follow_ibfk_1(old)
+                        ; diffType = DELETE
+                    }
+                }
+                ; indexDiff = map:{
+                    ; MEMBER_ID = map:{
+                        ; constraintName = MEMBER_ID
+                        ; diffType = ADD
+                    }
+                    ; ME_ID = map:{
+                        ; constraintName = ME_ID
+                        ; diffType = DELETE
+                    }
+                }
+            }
+        }
+    }
+    ; 2014/07/01 14:23:38 = map:{
+        ; diffDate = 2014/07/01 14:23:38
+        ; tableDiff = map:{
+            ; follow = map:{
+                ; tableName = follow
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; DEL_FLG = map:{
+                        ; columnName = DEL_FLG
+                        ; diffType = ADD
+                    }
+                }
+            }
+        }
+    }
+    ; 2014/07/01 14:18:33 = map:{
+        ; diffDate = 2014/07/01 14:18:33
+        ; tableDiff = map:{
+            ; login = map:{
+                ; tableName = login
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; UPD_DATETIME = map:{
+                        ; columnName = UPD_DATETIME
+                        ; diffType = ADD
+                    }
+                    ; UPD_TRACE = map:{
+                        ; columnName = UPD_TRACE
+                        ; diffType = ADD
+                    }
+                    ; INS_TRACE = map:{
+                        ; columnName = INS_TRACE
+                        ; diffType = CHANGE
+                        ; notNullDiff = map:{
+                            ; next = true
+                            ; previous = false
+                        }
+                    }
+                }
+            }
+            ; tweet = map:{
+                ; tableName = tweet
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; UPD_DATETIME = map:{
+                        ; columnName = UPD_DATETIME
+                        ; diffType = ADD
+                    }
+                    ; INS_TRACE = map:{
+                        ; columnName = INS_TRACE
+                        ; diffType = ADD
+                    }
+                    ; UPD_TRACE = map:{
+                        ; columnName = UPD_TRACE
+                        ; diffType = ADD
+                    }
+                }
+            }
+        }
+    }
+    ; 2014/07/01 13:46:48 = map:{
+        ; diffDate = 2014/07/01 13:46:48
+        ; tableDiff = map:{
+            ; tweet = map:{
+                ; tableName = tweet
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; UPD_DATETIME = map:{
+                        ; columnName = UPD_DATETIME
+                        ; diffType = DELETE
+                    }
+                    ; INS_TRACE = map:{
+                        ; columnName = INS_TRACE
+                        ; diffType = DELETE
+                    }
+                    ; UPD_TRACE = map:{
+                        ; columnName = UPD_TRACE
+                        ; diffType = DELETE
+                    }
+                }
+            }
+        }
+    }
+    ; 2014/07/01 13:34:22 = map:{
+        ; diffDate = 2014/07/01 13:34:22
+        ; tableDiff = map:{
+            ; login = map:{
+                ; tableName = login
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; INS_TRACE = map:{
+                        ; columnName = INS_TRACE
+                        ; diffType = CHANGE
+                        ; notNullDiff = map:{
+                            ; next = false
+                            ; previous = true
+                        }
+                    }
+                }
+            }
+        }
+    }
+    ; 2014/07/01 13:32:16 = map:{
+        ; diffDate = 2014/07/01 13:32:16
+        ; tableDiff = map:{
+            ; login = map:{
+                ; tableName = login
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; UPD_DATETIME = map:{
+                        ; columnName = UPD_DATETIME
+                        ; diffType = DELETE
+                    }
+                    ; UPD_TRACE = map:{
+                        ; columnName = UPD_TRACE
+                        ; diffType = DELETE
+                    }
+                }
+            }
+        }
+    }
+    ; 2014/07/01 13:25:21 = map:{
+        ; diffDate = 2014/07/01 13:25:21
+        ; tableDiff = map:{
+            ; member = map:{
+                ; tableName = member
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; REGESTER_DATETIME = map:{
+                        ; columnName = REGESTER_DATETIME
+                        ; diffType = DELETE
+                    }
+                }
+            }
+            ; member_security = map:{
+                ; tableName = member_security
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; PASSWORD_UPDATE_DATETIME = map:{
+                        ; columnName = PASSWORD_UPDATE_DATETIME
+                        ; diffType = DELETE
+                    }
+                    ; PASSWORD_REGESTERATION_DATETIME = map:{
+                        ; columnName = PASSWORD_REGESTERATION_DATETIME
+                        ; diffType = DELETE
+                    }
+                }
+            }
+        }
+    }
+    ; 2014/07/01 13:10:13 = map:{
+        ; diffDate = 2014/07/01 13:10:13
+        ; tableDiff = map:{
+            ; follow = map:{
+                ; tableName = follow
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; INS_DATETIME = map:{
+                        ; columnName = INS_DATETIME
+                        ; diffType = ADD
+                    }
+                    ; UPD_DATETIME = map:{
+                        ; columnName = UPD_DATETIME
+                        ; diffType = ADD
+                    }
+                    ; INS_TRACE = map:{
+                        ; columnName = INS_TRACE
+                        ; diffType = ADD
+                    }
+                    ; UPD_TRACE = map:{
+                        ; columnName = UPD_TRACE
+                        ; diffType = ADD
+                    }
+                    ; FOLLOW_DATETIME = map:{
+                        ; columnName = FOLLOW_DATETIME
+                        ; diffType = DELETE
+                    }
+                }
+            }
+            ; login = map:{
+                ; tableName = login
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; INS_DATETIME = map:{
+                        ; columnName = INS_DATETIME
+                        ; diffType = ADD
+                    }
+                    ; UPD_DATETIME = map:{
+                        ; columnName = UPD_DATETIME
+                        ; diffType = ADD
+                    }
+                    ; INS_TRACE = map:{
+                        ; columnName = INS_TRACE
+                        ; diffType = ADD
+                    }
+                    ; UPD_TRACE = map:{
+                        ; columnName = UPD_TRACE
+                        ; diffType = ADD
+                    }
+                    ; LOGIN_DATETIME = map:{
+                        ; columnName = LOGIN_DATETIME
+                        ; diffType = DELETE
+                    }
+                }
+            }
+            ; member = map:{
+                ; tableName = member
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; INS_DATETIME = map:{
+                        ; columnName = INS_DATETIME
+                        ; diffType = ADD
+                    }
+                    ; UPD_DATETIME = map:{
+                        ; columnName = UPD_DATETIME
+                        ; diffType = ADD
+                    }
+                    ; INS_TRACE = map:{
+                        ; columnName = INS_TRACE
+                        ; diffType = ADD
+                    }
+                    ; UPD_TRACE = map:{
+                        ; columnName = UPD_TRACE
+                        ; diffType = ADD
+                    }
+                    ; UPDATE_DATETIME = map:{
+                        ; columnName = UPDATE_DATETIME
+                        ; diffType = DELETE
+                    }
+                }
+            }
+            ; member_security = map:{
+                ; tableName = member_security
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; INS_DATETIME = map:{
+                        ; columnName = INS_DATETIME
+                        ; diffType = ADD
+                    }
+                    ; UPD_DATETIME = map:{
+                        ; columnName = UPD_DATETIME
+                        ; diffType = ADD
+                    }
+                    ; INS_TRACE = map:{
+                        ; columnName = INS_TRACE
+                        ; diffType = ADD
+                    }
+                    ; UPD_TRACE = map:{
+                        ; columnName = UPD_TRACE
+                        ; diffType = ADD
+                    }
+                }
+            }
+            ; tweet = map:{
+                ; tableName = tweet
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; INS_DATETIME = map:{
+                        ; columnName = INS_DATETIME
+                        ; diffType = ADD
+                    }
+                    ; UPD_DATETIME = map:{
+                        ; columnName = UPD_DATETIME
+                        ; diffType = ADD
+                    }
+                    ; INS_TRACE = map:{
+                        ; columnName = INS_TRACE
+                        ; diffType = ADD
+                    }
+                    ; UPD_TRACE = map:{
+                        ; columnName = UPD_TRACE
+                        ; diffType = ADD
+                    }
+                    ; TWEET_DATETIME = map:{
+                        ; columnName = TWEET_DATETIME
+                        ; diffType = DELETE
+                    }
+                }
+            }
+        }
+    }
     ; 2014/06/27 16:40:16 = map:{
         ; diffDate = 2014/06/27 16:40:16
         ; tableDiff = map:{

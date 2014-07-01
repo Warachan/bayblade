@@ -351,10 +351,25 @@ public class BsTweetCB extends AbstractConditionBean {
          */
         public HpSpecifiedColumn columnTweet() { return doColumn("TWEET"); }
         /**
-         * TWEET_DATETIME: {NotNull, DATETIME(19)}
+         * INS_DATETIME: {NotNull, DATETIME(19)}
          * @return The information object of specified column. (NotNull)
          */
-        public HpSpecifiedColumn columnTweetDatetime() { return doColumn("TWEET_DATETIME"); }
+        public HpSpecifiedColumn columnInsDatetime() { return doColumn("INS_DATETIME"); }
+        /**
+         * UPD_DATETIME: {NotNull, DATETIME(19)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public HpSpecifiedColumn columnUpdDatetime() { return doColumn("UPD_DATETIME"); }
+        /**
+         * INS_TRACE: {NotNull, VARCHAR(256)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public HpSpecifiedColumn columnInsTrace() { return doColumn("INS_TRACE"); }
+        /**
+         * UPD_TRACE: {NotNull, VARCHAR(256)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public HpSpecifiedColumn columnUpdTrace() { return doColumn("UPD_TRACE"); }
         public void everyColumn() { doEveryColumn(); }
         public void exceptRecordMetaColumn() { doExceptRecordMetaColumn(); }
         @Override

@@ -118,11 +118,229 @@ p.tablecount {
 </div>
 
 <div class="section">
-	<h2><span class="dt">Diff Date: </span>2014/06/27 16:40:16</h2>
+	<h2><span class="dt">Diff Date: </span>2014/07/01 19:07:27</h2>
 
 	<h3>Change Table</h3>
 	<div class="table-content">
 		<h4><a href="./schema-twitter.html#follow">follow</a></h4>
+		<div class="change-table-content">
+			<h5>Add Column</h5>
+			<ul class="column-content">
+				<li>MEMBER_ID</li>
+			</ul>
+			<h5>Delete Column</h5>
+			<ul class="column-content">
+				<li>ME_ID</li>
+			</ul>
+			<h5>Add FK</h5>
+			<ul class="column-content">
+				<li>follow_ibfk_1(new)</li>
+			</ul>
+			<h5>Delete FK</h5>
+			<ul class="column-content">
+				<li>follow_ibfk_1(old)</li>
+			</ul>
+			<h5>Add Index</h5>
+			<ul class="column-content">
+				<li>MEMBER_ID</li>
+			</ul>
+			<h5>Delete Index</h5>
+			<ul class="column-content">
+				<li>ME_ID</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="section">
+	<h2><span class="dt">Diff Date: </span>2014/07/01 14:23:38</h2>
+
+	<h3>Change Table</h3>
+	<div class="table-content">
+		<h4>follow</h4>
+		<div class="change-table-content">
+			<h5>Add Column</h5>
+			<ul class="column-content">
+				<li>DEL_FLG</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="section">
+	<h2><span class="dt">Diff Date: </span>2014/07/01 14:18:33</h2>
+
+	<h3>Change Table</h3>
+	<div class="table-content">
+		<h4>login</h4>
+		<div class="change-table-content">
+			<h5>Add Column</h5>
+			<ul class="column-content">
+				<li>UPD_DATETIME</li>
+				<li>UPD_TRACE</li>
+			</ul>
+			<h5>Change Column</h5>
+			<dl class="column-content">
+				<dt>INS_TRACE</dt>
+				<dd><span>Not Null</span>false&nbsp;-&gt;&nbsp;true</dd>
+			</dl>
+		</div>
+		<h4>tweet</h4>
+		<div class="change-table-content">
+			<h5>Add Column</h5>
+			<ul class="column-content">
+				<li>UPD_DATETIME</li>
+				<li>INS_TRACE</li>
+				<li>UPD_TRACE</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="section">
+	<h2><span class="dt">Diff Date: </span>2014/07/01 13:46:48</h2>
+
+	<h3>Change Table</h3>
+	<div class="table-content">
+		<h4>tweet</h4>
+		<div class="change-table-content">
+			<h5>Delete Column</h5>
+			<ul class="column-content">
+				<li>UPD_DATETIME</li>
+				<li>INS_TRACE</li>
+				<li>UPD_TRACE</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="section">
+	<h2><span class="dt">Diff Date: </span>2014/07/01 13:34:22</h2>
+
+	<h3>Change Table</h3>
+	<div class="table-content">
+		<h4>login</h4>
+		<div class="change-table-content">
+			<h5>Change Column</h5>
+			<dl class="column-content">
+				<dt>INS_TRACE</dt>
+				<dd><span>Not Null</span>true&nbsp;-&gt;&nbsp;false</dd>
+			</dl>
+		</div>
+	</div>
+</div>
+<div class="section">
+	<h2><span class="dt">Diff Date: </span>2014/07/01 13:32:16</h2>
+
+	<h3>Change Table</h3>
+	<div class="table-content">
+		<h4>login</h4>
+		<div class="change-table-content">
+			<h5>Delete Column</h5>
+			<ul class="column-content">
+				<li>UPD_DATETIME</li>
+				<li>UPD_TRACE</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="section">
+	<h2><span class="dt">Diff Date: </span>2014/07/01 13:25:21</h2>
+
+	<h3>Change Table</h3>
+	<div class="table-content">
+		<h4>member</h4>
+		<div class="change-table-content">
+			<h5>Delete Column</h5>
+			<ul class="column-content">
+				<li>REGESTER_DATETIME</li>
+			</ul>
+		</div>
+		<h4>member_security</h4>
+		<div class="change-table-content">
+			<h5>Delete Column</h5>
+			<ul class="column-content">
+				<li>PASSWORD_UPDATE_DATETIME</li>
+				<li>PASSWORD_REGESTERATION_DATETIME</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="section">
+	<h2><span class="dt">Diff Date: </span>2014/07/01 13:10:13</h2>
+
+	<h3>Change Table</h3>
+	<div class="table-content">
+		<h4>follow</h4>
+		<div class="change-table-content">
+			<h5>Add Column</h5>
+			<ul class="column-content">
+				<li>INS_DATETIME</li>
+				<li>UPD_DATETIME</li>
+				<li>INS_TRACE</li>
+				<li>UPD_TRACE</li>
+			</ul>
+			<h5>Delete Column</h5>
+			<ul class="column-content">
+				<li>FOLLOW_DATETIME</li>
+			</ul>
+		</div>
+		<h4>login</h4>
+		<div class="change-table-content">
+			<h5>Add Column</h5>
+			<ul class="column-content">
+				<li>INS_DATETIME</li>
+				<li>UPD_DATETIME</li>
+				<li>INS_TRACE</li>
+				<li>UPD_TRACE</li>
+			</ul>
+			<h5>Delete Column</h5>
+			<ul class="column-content">
+				<li>LOGIN_DATETIME</li>
+			</ul>
+		</div>
+		<h4>member</h4>
+		<div class="change-table-content">
+			<h5>Add Column</h5>
+			<ul class="column-content">
+				<li>INS_DATETIME</li>
+				<li>UPD_DATETIME</li>
+				<li>INS_TRACE</li>
+				<li>UPD_TRACE</li>
+			</ul>
+			<h5>Delete Column</h5>
+			<ul class="column-content">
+				<li>UPDATE_DATETIME</li>
+			</ul>
+		</div>
+		<h4>member_security</h4>
+		<div class="change-table-content">
+			<h5>Add Column</h5>
+			<ul class="column-content">
+				<li>INS_DATETIME</li>
+				<li>UPD_DATETIME</li>
+				<li>INS_TRACE</li>
+				<li>UPD_TRACE</li>
+			</ul>
+		</div>
+		<h4>tweet</h4>
+		<div class="change-table-content">
+			<h5>Add Column</h5>
+			<ul class="column-content">
+				<li>INS_DATETIME</li>
+				<li>UPD_DATETIME</li>
+				<li>INS_TRACE</li>
+				<li>UPD_TRACE</li>
+			</ul>
+			<h5>Delete Column</h5>
+			<ul class="column-content">
+				<li>TWEET_DATETIME</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="section">
+	<h2><span class="dt">Diff Date: </span>2014/06/27 16:40:16</h2>
+
+	<h3>Change Table</h3>
+	<div class="table-content">
+		<h4>follow</h4>
 		<div class="change-table-content">
 			<h5>Add UQ</h5>
 			<ul class="column-content">

@@ -40,8 +40,12 @@ public class FollowDbm extends AbstractDBMeta {
     {
         setupEpg(_epgMap, new EpgFollowId(), "followId");
         setupEpg(_epgMap, new EpgYouId(), "youId");
-        setupEpg(_epgMap, new EpgMeId(), "meId");
-        setupEpg(_epgMap, new EpgFollowDatetime(), "followDatetime");
+        setupEpg(_epgMap, new EpgMemberId(), "memberId");
+        setupEpg(_epgMap, new EpgInsDatetime(), "insDatetime");
+        setupEpg(_epgMap, new EpgUpdDatetime(), "updDatetime");
+        setupEpg(_epgMap, new EpgInsTrace(), "insTrace");
+        setupEpg(_epgMap, new EpgUpdTrace(), "updTrace");
+        setupEpg(_epgMap, new EpgDelFlg(), "delFlg");
     }
     public static class EpgFollowId implements PropertyGateway {
         public Object read(Entity et) { return ((Follow)et).getFollowId(); }
@@ -51,13 +55,29 @@ public class FollowDbm extends AbstractDBMeta {
         public Object read(Entity et) { return ((Follow)et).getYouId(); }
         public void write(Entity et, Object vl) { ((Follow)et).setYouId(cti(vl)); }
     }
-    public static class EpgMeId implements PropertyGateway {
-        public Object read(Entity et) { return ((Follow)et).getMeId(); }
-        public void write(Entity et, Object vl) { ((Follow)et).setMeId(cti(vl)); }
+    public static class EpgMemberId implements PropertyGateway {
+        public Object read(Entity et) { return ((Follow)et).getMemberId(); }
+        public void write(Entity et, Object vl) { ((Follow)et).setMemberId(cti(vl)); }
     }
-    public static class EpgFollowDatetime implements PropertyGateway {
-        public Object read(Entity et) { return ((Follow)et).getFollowDatetime(); }
-        public void write(Entity et, Object vl) { ((Follow)et).setFollowDatetime((java.sql.Timestamp)vl); }
+    public static class EpgInsDatetime implements PropertyGateway {
+        public Object read(Entity et) { return ((Follow)et).getInsDatetime(); }
+        public void write(Entity et, Object vl) { ((Follow)et).setInsDatetime((java.sql.Timestamp)vl); }
+    }
+    public static class EpgUpdDatetime implements PropertyGateway {
+        public Object read(Entity et) { return ((Follow)et).getUpdDatetime(); }
+        public void write(Entity et, Object vl) { ((Follow)et).setUpdDatetime((java.sql.Timestamp)vl); }
+    }
+    public static class EpgInsTrace implements PropertyGateway {
+        public Object read(Entity et) { return ((Follow)et).getInsTrace(); }
+        public void write(Entity et, Object vl) { ((Follow)et).setInsTrace((String)vl); }
+    }
+    public static class EpgUpdTrace implements PropertyGateway {
+        public Object read(Entity et) { return ((Follow)et).getUpdTrace(); }
+        public void write(Entity et, Object vl) { ((Follow)et).setUpdTrace((String)vl); }
+    }
+    public static class EpgDelFlg implements PropertyGateway {
+        public Object read(Entity et) { return ((Follow)et).getDelFlg(); }
+        public void write(Entity et, Object vl) { ((Follow)et).setDelFlg((String)vl); }
     }
     public PropertyGateway findPropertyGateway(String prop)
     { return doFindEpg(_epgMap, prop); }
@@ -67,12 +87,12 @@ public class FollowDbm extends AbstractDBMeta {
     //                                      ----------------
     protected final Map<String, PropertyGateway> _efpgMap = newHashMap();
     {
-        setupEfpg(_efpgMap, new EfpgMemberByMeId(), "memberByMeId");
+        setupEfpg(_efpgMap, new EfpgMemberByMemberId(), "memberByMemberId");
         setupEfpg(_efpgMap, new EfpgMemberByYouId(), "memberByYouId");
     }
-    public class EfpgMemberByMeId implements PropertyGateway {
-        public Object read(Entity et) { return ((Follow)et).getMemberByMeId(); }
-        public void write(Entity et, Object vl) { ((Follow)et).setMemberByMeId((Member)vl); }
+    public class EfpgMemberByMemberId implements PropertyGateway {
+        public Object read(Entity et) { return ((Follow)et).getMemberByMemberId(); }
+        public void write(Entity et, Object vl) { ((Follow)et).setMemberByMemberId((Member)vl); }
     }
     public class EfpgMemberByYouId implements PropertyGateway {
         public Object read(Entity et) { return ((Follow)et).getMemberByYouId(); }
@@ -97,8 +117,12 @@ public class FollowDbm extends AbstractDBMeta {
     //                                                                         ===========
     protected final ColumnInfo _columnFollowId = cci("FOLLOW_ID", "FOLLOW_ID", null, null, Integer.class, "followId", null, true, true, true, "INT", 10, 0, null, false, null, null, null, null, null);
     protected final ColumnInfo _columnYouId = cci("YOU_ID", "YOU_ID", null, null, Integer.class, "youId", null, false, false, true, "INT", 10, 0, null, false, null, null, "memberByYouId", null, null);
-    protected final ColumnInfo _columnMeId = cci("ME_ID", "ME_ID", null, null, Integer.class, "meId", null, false, false, true, "INT", 10, 0, null, false, null, null, "memberByMeId", null, null);
-    protected final ColumnInfo _columnFollowDatetime = cci("FOLLOW_DATETIME", "FOLLOW_DATETIME", null, null, java.sql.Timestamp.class, "followDatetime", null, false, false, true, "DATETIME", 19, 0, null, false, null, null, null, null, null);
+    protected final ColumnInfo _columnMemberId = cci("MEMBER_ID", "MEMBER_ID", null, null, Integer.class, "memberId", null, false, false, true, "INT", 10, 0, null, false, null, null, "memberByMemberId", null, null);
+    protected final ColumnInfo _columnInsDatetime = cci("INS_DATETIME", "INS_DATETIME", null, null, java.sql.Timestamp.class, "insDatetime", null, false, false, true, "DATETIME", 19, 0, null, false, null, null, null, null, null);
+    protected final ColumnInfo _columnUpdDatetime = cci("UPD_DATETIME", "UPD_DATETIME", null, null, java.sql.Timestamp.class, "updDatetime", null, false, false, true, "DATETIME", 19, 0, null, false, null, null, null, null, null);
+    protected final ColumnInfo _columnInsTrace = cci("INS_TRACE", "INS_TRACE", null, null, String.class, "insTrace", null, false, false, true, "VARCHAR", 256, 0, null, false, null, null, null, null, null);
+    protected final ColumnInfo _columnUpdTrace = cci("UPD_TRACE", "UPD_TRACE", null, null, String.class, "updTrace", null, false, false, true, "VARCHAR", 256, 0, null, false, null, null, null, null, null);
+    protected final ColumnInfo _columnDelFlg = cci("DEL_FLG", "DEL_FLG", null, null, String.class, "delFlg", null, false, false, true, "CHAR", 1, 0, "N", false, null, null, null, null, null);
 
     /**
      * FOLLOW_ID: {PK, ID, NotNull, INT(10)}
@@ -111,22 +135,46 @@ public class FollowDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnYouId() { return _columnYouId; }
     /**
-     * ME_ID: {IX, NotNull, INT(10), FK to member}
+     * MEMBER_ID: {IX, NotNull, INT(10), FK to member}
      * @return The information object of specified column. (NotNull)
      */
-    public ColumnInfo columnMeId() { return _columnMeId; }
+    public ColumnInfo columnMemberId() { return _columnMemberId; }
     /**
-     * FOLLOW_DATETIME: {NotNull, DATETIME(19)}
+     * INS_DATETIME: {NotNull, DATETIME(19)}
      * @return The information object of specified column. (NotNull)
      */
-    public ColumnInfo columnFollowDatetime() { return _columnFollowDatetime; }
+    public ColumnInfo columnInsDatetime() { return _columnInsDatetime; }
+    /**
+     * UPD_DATETIME: {NotNull, DATETIME(19)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnUpdDatetime() { return _columnUpdDatetime; }
+    /**
+     * INS_TRACE: {NotNull, VARCHAR(256)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnInsTrace() { return _columnInsTrace; }
+    /**
+     * UPD_TRACE: {NotNull, VARCHAR(256)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnUpdTrace() { return _columnUpdTrace; }
+    /**
+     * DEL_FLG: {NotNull, CHAR(1), default=[N]}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnDelFlg() { return _columnDelFlg; }
 
     protected List<ColumnInfo> ccil() {
         List<ColumnInfo> ls = newArrayList();
         ls.add(columnFollowId());
         ls.add(columnYouId());
-        ls.add(columnMeId());
-        ls.add(columnFollowDatetime());
+        ls.add(columnMemberId());
+        ls.add(columnInsDatetime());
+        ls.add(columnUpdDatetime());
+        ls.add(columnInsTrace());
+        ls.add(columnUpdTrace());
+        ls.add(columnDelFlg());
         return ls;
     }
 
@@ -151,12 +199,12 @@ public class FollowDbm extends AbstractDBMeta {
     //                                      Foreign Property
     //                                      ----------------
     /**
-     * member by my ME_ID, named 'memberByMeId'.
+     * member by my MEMBER_ID, named 'memberByMemberId'.
      * @return The information object of foreign property. (NotNull)
      */
-    public ForeignInfo foreignMemberByMeId() {
-        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnMeId(), MemberDbm.getInstance().columnMemberId());
-        return cfi("follow_ibfk_1", "memberByMeId", this, MemberDbm.getInstance(), mp, 0, null, false, false, false, false, null, null, false, "followByMeIdList");
+    public ForeignInfo foreignMemberByMemberId() {
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnMemberId(), MemberDbm.getInstance().columnMemberId());
+        return cfi("follow_ibfk_1", "memberByMemberId", this, MemberDbm.getInstance(), mp, 0, null, false, false, false, false, null, null, false, "followByMemberIdList");
     }
     /**
      * member by my YOU_ID, named 'memberByYouId'.

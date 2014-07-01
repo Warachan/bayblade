@@ -67,12 +67,16 @@ public class FollowCIQ extends AbstractBsFollowCQ {
     { return _myCQ.keepYouId_InScopeRelation_MemberByYouId(sq); }
     public String keepYouId_NotInScopeRelation_MemberByYouId(MemberCQ sq)
     { return _myCQ.keepYouId_NotInScopeRelation_MemberByYouId(sq); }
-    protected ConditionValue getCValueMeId() { return _myCQ.getMeId(); }
-    public String keepMeId_InScopeRelation_MemberByMeId(MemberCQ sq)
-    { return _myCQ.keepMeId_InScopeRelation_MemberByMeId(sq); }
-    public String keepMeId_NotInScopeRelation_MemberByMeId(MemberCQ sq)
-    { return _myCQ.keepMeId_NotInScopeRelation_MemberByMeId(sq); }
-    protected ConditionValue getCValueFollowDatetime() { return _myCQ.getFollowDatetime(); }
+    protected ConditionValue getCValueMemberId() { return _myCQ.getMemberId(); }
+    public String keepMemberId_InScopeRelation_MemberByMemberId(MemberCQ sq)
+    { return _myCQ.keepMemberId_InScopeRelation_MemberByMemberId(sq); }
+    public String keepMemberId_NotInScopeRelation_MemberByMemberId(MemberCQ sq)
+    { return _myCQ.keepMemberId_NotInScopeRelation_MemberByMemberId(sq); }
+    protected ConditionValue getCValueInsDatetime() { return _myCQ.getInsDatetime(); }
+    protected ConditionValue getCValueUpdDatetime() { return _myCQ.getUpdDatetime(); }
+    protected ConditionValue getCValueInsTrace() { return _myCQ.getInsTrace(); }
+    protected ConditionValue getCValueUpdTrace() { return _myCQ.getUpdTrace(); }
+    protected ConditionValue getCValueDelFlg() { return _myCQ.getDelFlg(); }
     protected Map<String, Object> xfindFixedConditionDynamicParameterMap(String pp) { return null; }
     public String keepScalarCondition(FollowCQ sq)
     { throwIICBOE("ScalarCondition"); return null; }

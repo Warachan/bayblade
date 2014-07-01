@@ -6,6 +6,7 @@ import java.util.Date;
 
 import javax.annotation.Resource;
 
+import jp.bizreach.twitter.dbflute.cbean.FollowCB;
 import jp.bizreach.twitter.dbflute.cbean.MemberCB;
 import jp.bizreach.twitter.dbflute.cbean.TweetCB;
 import jp.bizreach.twitter.dbflute.exbhv.FollowBhv;
@@ -51,34 +52,44 @@ public class MemberAction {
     //                                          ------------
     public ArrayList<Object> timeLine = new ArrayList<>();
     public String account;
-    public String input;
+    public String alreadyFollowingError;
+    public String relationship;
+    public boolean followStatus;
 
     // ===================================================================================
     //                                                                             Execute
     //                                                                             =======
 
-    // TODO mayuko.sakaba フォロー相手重複時の処理を書く。
-    // TODO mayuko.sakaba 自分をフォローできないようにする。
-
     @Execute(validator = false, urlPattern = "{yourName}")
     public String index() {
-        /*　アカウント名を表示する*/
+        /*　アカウント名を表示する */
         // TODO mayuko.sakaba  このアカウントのユーザーのプロフィールを表示できるようにする。
-        MemberCB cb = new MemberCB();
-        cb.query().setUserName_Equal(memberForm.yourName);
-        Member member = memberBhv.selectEntity(cb);
-        sessionDto.yourId = member.getMemberId();
-        LOG.debug("***" + memberForm.yourName + "+" + sessionDto.yourId);
+        MemberCB memberCb = new MemberCB();
+        memberCb.query().setUserName_Equal(memberForm.yourName);
+        Member member = memberBhv.selectEntity(memberCb);
+        //        member.getBirthdate();
+        //        member.getProfile();
         account = memberForm.yourName;
         /* ツィートタイムラインを表示　*/
         TweetCB tweetCb = new TweetCB();
-        tweetCb.query().setMemberId_Equal(sessionDto.yourId);
-        LOG.debug("***" + sessionDto.yourId);
+        tweetCb.query().setMemberId_Equal(member.getMemberId());
         tweetCb.query().addOrderBy_MemberId_Desc();
         ListResultBean<Tweet> tweetList = tweetBhv.selectList(tweetCb);
         for (Tweet tweet : tweetList) {
             String inputTweets = tweet.getTweet();
             timeLine.add(inputTweets);
+        }
+        /* フォローできる相手か判断する */
+        FollowCB followCb = new FollowCB();
+        followCb.query().setYouId_Equal(member.getMemberId());
+        Follow follow = followBhv.selectEntity(followCb);
+        if (follow == null) {
+            followStatus = new Boolean(true);
+        } else if (follow.getDelFlg().equals("Y")) {
+            followStatus = new Boolean(true);
+        } else {
+            followStatus = new Boolean(false);
+            relationship = "フォロー中";
         }
         return "/twitter/member.jsp";
     }
@@ -88,8 +99,49 @@ public class MemberAction {
     public String follow() {
         /* アカウント保有者のメンバーID検索 */
         Member member = selectMember();
-        /* フォローテーブルに追加 */
-        insertFollowingMember(member);
+        /* フォローしたことのない相手を新しくフォローする */
+        FollowCB followCb = new FollowCB();
+        followCb.query().setYouId_Equal(member.getMemberId());
+        Follow selectFollow = followBhv.selectEntity(followCb);
+        Follow follow = new Follow();
+        if (selectFollow == null) {
+            Date date = new Date();
+            Timestamp tweetTime = new Timestamp(date.getTime());
+            LOG.debug("***" + memberForm.yourName);
+            follow.setMemberId(sessionDto.myId);
+            follow.setYouId(member.getMemberId());
+            follow.setInsDatetime(tweetTime);
+            follow.setUpdDatetime(tweetTime);
+            follow.setInsTrace("following");
+            follow.setUpdTrace("following");
+            LOG.debug("***" + member.getMemberId());
+            followBhv.insert(follow);
+        } else {
+            /* フォローしたことのある相手なら削除フラグをNにする */
+            Integer followId = selectFollow.getFollowId();
+            follow.setFollowId(followId);
+            follow.setDelFlg("N");
+            followBhv.update(follow);
+
+        }
+        return "/member/" + memberForm.yourName + "/?redirect=true";
+    }
+
+    /* このアカウント保有者をアンフォロー */
+    @Execute(validator = false, urlPattern = "{yourName}/unfollow")
+    public String unfollow() {
+        /* アカウント保有者のメンバーID検索 */
+        Member member = selectMember();
+        FollowCB followCb = new FollowCB();
+        followCb.query().setYouId_Equal(member.getMemberId());
+        Follow selectFollow = followBhv.selectEntity(followCb);
+        Integer followId = selectFollow.getFollowId();
+        LOG.debug(followId);
+        Follow follow = new Follow();
+        follow.setFollowId(followId);
+        follow.setYouId(member.getMemberId());
+        follow.setDelFlg("Y");
+        followBhv.update(follow);
         return "/member/" + memberForm.yourName + "/?redirect=true";
     }
 
@@ -99,23 +151,5 @@ public class MemberAction {
         LOG.debug("seeUsername" + memberForm.yourName);
         Member member = memberBhv.selectEntity(cb);
         return member;
-    }
-
-    private void insertFollowingMember(Member member) {
-        Date date = new Date();
-        Timestamp tweetTime = new Timestamp(date.getTime());
-        LOG.debug("***" + memberForm.yourName);
-        //        FollowCB cb = new FollowCB();
-        //        cb.query().setFollowId_Equal(sessionDto.myId);
-        //        cb.query().setFollowId_Equal(sessionDto.yourId);
-        //        Follow follow = followBhv.selectEntity(cb);
-        //        if (follow == null) {
-        Follow insertFollow = new Follow();
-        insertFollow.setMeId(sessionDto.myId);
-        insertFollow.setYouId(member.getMemberId());
-        insertFollow.setFollowDatetime(tweetTime);
-        LOG.debug("***" + member.getMemberId() + sessionDto.myId);
-        followBhv.insert(insertFollow);
-        //        }
     }
 }

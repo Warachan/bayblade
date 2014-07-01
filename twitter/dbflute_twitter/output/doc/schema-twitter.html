@@ -292,7 +292,7 @@ dl.procedurelist dd.column pre {
 	<tbody id="table-list-body">
 	<tr>
 		<td class="rownumcell">1</td>
-		<td><a href="#follow" title="type=TABLE, primaryKey={FOLLOW_ID}, nameLength=6, columnCount=4">follow</a></td>
+		<td><a href="#follow" title="type=TABLE, primaryKey={FOLLOW_ID}, nameLength=6, columnCount=8">follow</a></td>
 		<td class="typecell">TABLE</td>
 		<td class="relcell"><a href="#member" title="follow_ibfk_1">member</a>, <a href="#member" title="follow_ibfk_2">member</a></td>
 		<td class="relcell">&nbsp;</td>
@@ -301,7 +301,7 @@ dl.procedurelist dd.column pre {
 	</tr>
 	<tr>
 		<td class="rownumcell">2</td>
-		<td><a href="#login" title="type=TABLE, primaryKey={LOGIN_ID}, nameLength=5, columnCount=3">login</a></td>
+		<td><a href="#login" title="type=TABLE, primaryKey={LOGIN_ID}, nameLength=5, columnCount=6">login</a></td>
 		<td class="typecell">TABLE</td>
 		<td class="relcell"><a href="#member" title="login_ibfk_1">member</a></td>
 		<td class="relcell">&nbsp;</td>
@@ -310,7 +310,7 @@ dl.procedurelist dd.column pre {
 	</tr>
 	<tr>
 		<td class="rownumcell">3</td>
-		<td><a href="#member" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=6, columnCount=7">member</a></td>
+		<td><a href="#member" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=6, columnCount=9">member</a></td>
 		<td class="typecell">TABLE</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"><a href="#follow" title="follow_ibfk_1">follow</a>, <a href="#follow" title="follow_ibfk_2">follow</a>, <a href="#login" title="login_ibfk_1">login</a>, <a href="#member_security" title="member_security_ibfk_1">member_security</a>, <a href="#member_withdraw" title="member_withdraw_ibfk_1">member_withdraw</a>, <a href="#tweet" title="tweet_ibfk_1">tweet</a></td>
@@ -319,7 +319,7 @@ dl.procedurelist dd.column pre {
 	</tr>
 	<tr>
 		<td class="rownumcell">4</td>
-		<td><a href="#member_security" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=15, columnCount=4">member_security</a></td>
+		<td><a href="#member_security" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=15, columnCount=6">member_security</a></td>
 		<td class="typecell">TABLE</td>
 		<td class="relcell"><a href="#member" title="member_security_ibfk_1">member</a></td>
 		<td class="relcell">&nbsp;</td>
@@ -337,7 +337,7 @@ dl.procedurelist dd.column pre {
 	</tr>
 	<tr>
 		<td class="rownumcell">6</td>
-		<td><a href="#tweet" title="type=TABLE, primaryKey={TWEET_ID}, nameLength=5, columnCount=4">tweet</a></td>
+		<td><a href="#tweet" title="type=TABLE, primaryKey={TWEET_ID}, nameLength=5, columnCount=7">tweet</a></td>
 		<td class="typecell">TABLE</td>
 		<td class="relcell"><a href="#member" title="tweet_ibfk_1">member</a></td>
 		<td class="relcell">&nbsp;</td>
@@ -347,7 +347,7 @@ dl.procedurelist dd.column pre {
 	</tbody>
 </table>
 
-  <h2 id="follow" title="type=TABLE, primaryKey={FOLLOW_ID}, nameLength=6, columnCount=4">
+  <h2 id="follow" title="type=TABLE, primaryKey={FOLLOW_ID}, nameLength=6, columnCount=8">
 follow
 </h2>
 <p class="tablecomment">フォロー</p>
@@ -363,6 +363,7 @@ follow
 		<th>Name</th>
 		<th>Type</th>
 		<th>Size</th>
+		<th>Default</th>
 		<th>ForeignTable</th>
 		<th>ReferrerTable</th>
 		<th>Classification</th>
@@ -381,6 +382,7 @@ follow
 		<td id="follow_follow_id">FOLLOW_ID</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
+		<td class="defvalcell"> &nbsp;</td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
@@ -398,6 +400,7 @@ follow
 		<td id="follow_you_id">YOU_ID</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
+		<td class="defvalcell"> &nbsp;</td>
 		<td class="relcell"><a href="#member" title="follow_ibfk_2">member</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
@@ -410,16 +413,17 @@ follow
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell"> &nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
-		<td class="flgcell" title="ME_ID(ME_ID)">o</td>
+		<td class="flgcell" title="MEMBER_ID(MEMBER_ID)">o</td>
 		<td class="flgcell">*</td>
-		<td id="follow_me_id">ME_ID</td>
+		<td id="follow_member_id">MEMBER_ID</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
+		<td class="defvalcell"> &nbsp;</td>
 		<td class="relcell"><a href="#member" title="follow_ibfk_1">member</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"> フォローされる人のID&nbsp;:&nbsp;会員のID</td>
-		<td class="subcell">meId</td>
+		<td class="commentcell"> フォローされる人のID&nbsp;:&nbsp;フォローしている自分のID</td>
+		<td class="subcell">memberId</td>
 		<td class="subcell">Integer</td>
 	</tr>
 	<tr>
@@ -429,18 +433,91 @@ follow
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td id="follow_follow_datetime">FOLLOW_DATETIME</td>
+		<td id="follow_ins_datetime">INS_DATETIME</td>
 		<td class="typecell">DATETIME</td>
 		<td class="sizecell"> 19 </td>
+		<td class="defvalcell"> &nbsp;</td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"> follow_datetime</td>
-		<td class="subcell">followDatetime</td>
+		<td class="commentcell"> insert日時</td>
+		<td class="subcell">insDatetime</td>
 		<td class="subcell">Timestamp</td>
 	</tr>
+	<tr>
+		<td class="rownumcell">5</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td id="follow_upd_datetime">UPD_DATETIME</td>
+		<td class="typecell">DATETIME</td>
+		<td class="sizecell"> 19 </td>
+		<td class="defvalcell"> &nbsp;</td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> UPD_DATETIME</td>
+		<td class="subcell">updDatetime</td>
+		<td class="subcell">Timestamp</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">6</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td id="follow_ins_trace">INS_TRACE</td>
+		<td class="typecell">VARCHAR</td>
+		<td class="sizecell"> 256 </td>
+		<td class="defvalcell"> &nbsp;</td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> Insertトレース</td>
+		<td class="subcell">insTrace</td>
+		<td class="subcell">String</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">7</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td id="follow_upd_trace">UPD_TRACE</td>
+		<td class="typecell">VARCHAR</td>
+		<td class="sizecell"> 256 </td>
+		<td class="defvalcell"> &nbsp;</td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> UPD&nbsp;トレース</td>
+		<td class="subcell">updTrace</td>
+		<td class="subcell">String</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">8</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td id="follow_del_flg">DEL_FLG</td>
+		<td class="typecell">CHAR</td>
+		<td class="sizecell"> 1 </td>
+		<td class="defvalcell"> N</td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> DEL_FLG&nbsp;:&nbsp;削除フラグ&nbsp;Y=削除　N=削除していない</td>
+		<td class="subcell">delFlg</td>
+		<td class="subcell">String</td>
+	</tr>
 </table>
-  <h2 id="login" title="type=TABLE, primaryKey={LOGIN_ID}, nameLength=5, columnCount=3">
+  <h2 id="login" title="type=TABLE, primaryKey={LOGIN_ID}, nameLength=5, columnCount=6">
 login
 </h2>
 <p class="tablecomment">ログイン</p>
@@ -505,18 +582,69 @@ login
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td id="login_login_datetime">LOGIN_DATETIME</td>
+		<td id="login_ins_datetime">INS_DATETIME</td>
 		<td class="typecell">DATETIME</td>
 		<td class="sizecell"> 19 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"> ログイン日時</td>
-		<td class="subcell">loginDatetime</td>
+		<td class="commentcell"> insert日時</td>
+		<td class="subcell">insDatetime</td>
 		<td class="subcell">Timestamp</td>
 	</tr>
+	<tr>
+		<td class="rownumcell">4</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td id="login_upd_datetime">UPD_DATETIME</td>
+		<td class="typecell">DATETIME</td>
+		<td class="sizecell"> 19 </td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> UPD_DATETIME</td>
+		<td class="subcell">updDatetime</td>
+		<td class="subcell">Timestamp</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">5</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td id="login_ins_trace">INS_TRACE</td>
+		<td class="typecell">VARCHAR</td>
+		<td class="sizecell"> 256 </td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> Insertトレース</td>
+		<td class="subcell">insTrace</td>
+		<td class="subcell">String</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">6</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td id="login_upd_trace">UPD_TRACE</td>
+		<td class="typecell">VARCHAR</td>
+		<td class="sizecell"> 256 </td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> UPD&nbsp;トレース</td>
+		<td class="subcell">updTrace</td>
+		<td class="subcell">String</td>
+	</tr>
 </table>
-  <h2 id="member" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=6, columnCount=7">
+  <h2 id="member" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=6, columnCount=9">
 member
 </h2>
 <p class="tablecomment">会員</p>
@@ -632,14 +760,14 @@ member
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td id="member_regester_datetime">REGESTER_DATETIME</td>
+		<td id="member_ins_datetime">INS_DATETIME</td>
 		<td class="typecell">DATETIME</td>
 		<td class="sizecell"> 19 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"> 登録日時</td>
-		<td class="subcell">regesterDatetime</td>
+		<td class="commentcell"> insert日時</td>
+		<td class="subcell">insDatetime</td>
 		<td class="subcell">Timestamp</td>
 	</tr>
 	<tr>
@@ -648,19 +776,53 @@ member
 		<td class="flgcell"> &nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
-		<td class="flgcell"> &nbsp;</td>
-		<td id="member_update_datetime">UPDATE_DATETIME</td>
+		<td class="flgcell">*</td>
+		<td id="member_upd_datetime">UPD_DATETIME</td>
 		<td class="typecell">DATETIME</td>
 		<td class="sizecell"> 19 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"> 更新日時</td>
-		<td class="subcell">updateDatetime</td>
+		<td class="commentcell"> UPD_DATETIME</td>
+		<td class="subcell">updDatetime</td>
 		<td class="subcell">Timestamp</td>
 	</tr>
+	<tr>
+		<td class="rownumcell">8</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td id="member_ins_trace">INS_TRACE</td>
+		<td class="typecell">VARCHAR</td>
+		<td class="sizecell"> 256 </td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> Insertトレース</td>
+		<td class="subcell">insTrace</td>
+		<td class="subcell">String</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">9</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td id="member_upd_trace">UPD_TRACE</td>
+		<td class="typecell">VARCHAR</td>
+		<td class="sizecell"> 256 </td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> UPD&nbsp;トレース</td>
+		<td class="subcell">updTrace</td>
+		<td class="subcell">String</td>
+	</tr>
 </table>
-  <h2 id="member_security" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=15, columnCount=4">
+  <h2 id="member_security" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=15, columnCount=6">
 member_security
 </h2>
 <p class="tablecomment">会員セキュリティ</p>
@@ -724,15 +886,15 @@ member_security
 		<td class="flgcell"> &nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
-		<td class="flgcell"> &nbsp;</td>
-		<td id="member_security_password_update_datetime">PASSWORD_UPDATE_DATETIME</td>
+		<td class="flgcell">*</td>
+		<td id="member_security_ins_datetime">INS_DATETIME</td>
 		<td class="typecell">DATETIME</td>
 		<td class="sizecell"> 19 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"> パスワード更新日時</td>
-		<td class="subcell">passwordUpdateDatetime</td>
+		<td class="commentcell"> insert日時</td>
+		<td class="subcell">insDatetime</td>
 		<td class="subcell">Timestamp</td>
 	</tr>
 	<tr>
@@ -742,15 +904,49 @@ member_security
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td id="member_security_password_regesteration_datetime">PASSWORD_REGESTERATION_DATETIME</td>
+		<td id="member_security_upd_datetime">UPD_DATETIME</td>
 		<td class="typecell">DATETIME</td>
 		<td class="sizecell"> 19 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"> パスワード登録日時</td>
-		<td class="subcell">passwordRegesterationDatetime</td>
+		<td class="commentcell"> UPD_DATETIME</td>
+		<td class="subcell">updDatetime</td>
 		<td class="subcell">Timestamp</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">5</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td id="member_security_ins_trace">INS_TRACE</td>
+		<td class="typecell">VARCHAR</td>
+		<td class="sizecell"> 256 </td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> Insertトレース</td>
+		<td class="subcell">insTrace</td>
+		<td class="subcell">String</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">6</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td id="member_security_upd_trace">UPD_TRACE</td>
+		<td class="typecell">VARCHAR</td>
+		<td class="sizecell"> 256 </td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> UPD&nbsp;トレース</td>
+		<td class="subcell">updTrace</td>
+		<td class="subcell">String</td>
 	</tr>
 </table>
   <h2 id="member_withdraw" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=15, columnCount=4">
@@ -846,7 +1042,7 @@ member_withdraw
 		<td class="subcell">Timestamp</td>
 	</tr>
 </table>
-  <h2 id="tweet" title="type=TABLE, primaryKey={TWEET_ID}, nameLength=5, columnCount=4">
+  <h2 id="tweet" title="type=TABLE, primaryKey={TWEET_ID}, nameLength=5, columnCount=7">
 tweet
 </h2>
 <p class="tablecomment">TWEET</p>
@@ -928,15 +1124,66 @@ tweet
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td id="tweet_tweet_datetime">TWEET_DATETIME</td>
+		<td id="tweet_ins_datetime">INS_DATETIME</td>
 		<td class="typecell">DATETIME</td>
 		<td class="sizecell"> 19 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"> TWEET日時</td>
-		<td class="subcell">tweetDatetime</td>
+		<td class="commentcell"> insert日時</td>
+		<td class="subcell">insDatetime</td>
 		<td class="subcell">Timestamp</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">5</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td id="tweet_upd_datetime">UPD_DATETIME</td>
+		<td class="typecell">DATETIME</td>
+		<td class="sizecell"> 19 </td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> UPD_DATETIME</td>
+		<td class="subcell">updDatetime</td>
+		<td class="subcell">Timestamp</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">6</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td id="tweet_ins_trace">INS_TRACE</td>
+		<td class="typecell">VARCHAR</td>
+		<td class="sizecell"> 256 </td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> Insertトレース</td>
+		<td class="subcell">insTrace</td>
+		<td class="subcell">String</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">7</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td id="tweet_upd_trace">UPD_TRACE</td>
+		<td class="typecell">VARCHAR</td>
+		<td class="sizecell"> 256 </td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> UPD&nbsp;トレース</td>
+		<td class="subcell">updTrace</td>
+		<td class="subcell">String</td>
 	</tr>
 </table>
 

@@ -79,8 +79,8 @@ public class BsMemberCQ extends AbstractBsMemberCQ {
       return _memberId; }
     protected ConditionValue getCValueMemberId() { return getMemberId(); }
 
-    public Map<String, FollowCQ> getMemberId_ExistsReferrer_FollowByMeIdList() { return xgetSQueMap("memberId_ExistsReferrer_FollowByMeIdList"); }
-    public String keepMemberId_ExistsReferrer_FollowByMeIdList(FollowCQ sq) { return xkeepSQue("memberId_ExistsReferrer_FollowByMeIdList", sq); }
+    public Map<String, FollowCQ> getMemberId_ExistsReferrer_FollowByMemberIdList() { return xgetSQueMap("memberId_ExistsReferrer_FollowByMemberIdList"); }
+    public String keepMemberId_ExistsReferrer_FollowByMemberIdList(FollowCQ sq) { return xkeepSQue("memberId_ExistsReferrer_FollowByMemberIdList", sq); }
 
     public Map<String, FollowCQ> getMemberId_ExistsReferrer_FollowByYouIdAsOne() { return xgetSQueMap("memberId_ExistsReferrer_FollowByYouIdAsOne"); }
     public String keepMemberId_ExistsReferrer_FollowByYouIdAsOne(FollowCQ sq) { return xkeepSQue("memberId_ExistsReferrer_FollowByYouIdAsOne", sq); }
@@ -97,8 +97,8 @@ public class BsMemberCQ extends AbstractBsMemberCQ {
     public Map<String, TweetCQ> getMemberId_ExistsReferrer_TweetList() { return xgetSQueMap("memberId_ExistsReferrer_TweetList"); }
     public String keepMemberId_ExistsReferrer_TweetList(TweetCQ sq) { return xkeepSQue("memberId_ExistsReferrer_TweetList", sq); }
 
-    public Map<String, FollowCQ> getMemberId_NotExistsReferrer_FollowByMeIdList() { return xgetSQueMap("memberId_NotExistsReferrer_FollowByMeIdList"); }
-    public String keepMemberId_NotExistsReferrer_FollowByMeIdList(FollowCQ sq) { return xkeepSQue("memberId_NotExistsReferrer_FollowByMeIdList", sq); }
+    public Map<String, FollowCQ> getMemberId_NotExistsReferrer_FollowByMemberIdList() { return xgetSQueMap("memberId_NotExistsReferrer_FollowByMemberIdList"); }
+    public String keepMemberId_NotExistsReferrer_FollowByMemberIdList(FollowCQ sq) { return xkeepSQue("memberId_NotExistsReferrer_FollowByMemberIdList", sq); }
 
     public Map<String, FollowCQ> getMemberId_NotExistsReferrer_FollowByYouIdAsOne() { return xgetSQueMap("memberId_NotExistsReferrer_FollowByYouIdAsOne"); }
     public String keepMemberId_NotExistsReferrer_FollowByYouIdAsOne(FollowCQ sq) { return xkeepSQue("memberId_NotExistsReferrer_FollowByYouIdAsOne", sq); }
@@ -115,8 +115,8 @@ public class BsMemberCQ extends AbstractBsMemberCQ {
     public Map<String, TweetCQ> getMemberId_NotExistsReferrer_TweetList() { return xgetSQueMap("memberId_NotExistsReferrer_TweetList"); }
     public String keepMemberId_NotExistsReferrer_TweetList(TweetCQ sq) { return xkeepSQue("memberId_NotExistsReferrer_TweetList", sq); }
 
-    public Map<String, FollowCQ> getMemberId_SpecifyDerivedReferrer_FollowByMeIdList() { return xgetSQueMap("memberId_SpecifyDerivedReferrer_FollowByMeIdList"); }
-    public String keepMemberId_SpecifyDerivedReferrer_FollowByMeIdList(FollowCQ sq) { return xkeepSQue("memberId_SpecifyDerivedReferrer_FollowByMeIdList", sq); }
+    public Map<String, FollowCQ> getMemberId_SpecifyDerivedReferrer_FollowByMemberIdList() { return xgetSQueMap("memberId_SpecifyDerivedReferrer_FollowByMemberIdList"); }
+    public String keepMemberId_SpecifyDerivedReferrer_FollowByMemberIdList(FollowCQ sq) { return xkeepSQue("memberId_SpecifyDerivedReferrer_FollowByMemberIdList", sq); }
 
     public Map<String, LoginCQ> getMemberId_SpecifyDerivedReferrer_LoginList() { return xgetSQueMap("memberId_SpecifyDerivedReferrer_LoginList"); }
     public String keepMemberId_SpecifyDerivedReferrer_LoginList(LoginCQ sq) { return xkeepSQue("memberId_SpecifyDerivedReferrer_LoginList", sq); }
@@ -124,8 +124,8 @@ public class BsMemberCQ extends AbstractBsMemberCQ {
     public Map<String, TweetCQ> getMemberId_SpecifyDerivedReferrer_TweetList() { return xgetSQueMap("memberId_SpecifyDerivedReferrer_TweetList"); }
     public String keepMemberId_SpecifyDerivedReferrer_TweetList(TweetCQ sq) { return xkeepSQue("memberId_SpecifyDerivedReferrer_TweetList", sq); }
 
-    public Map<String, FollowCQ> getMemberId_InScopeRelation_FollowByMeIdList() { return xgetSQueMap("memberId_InScopeRelation_FollowByMeIdList"); }
-    public String keepMemberId_InScopeRelation_FollowByMeIdList(FollowCQ sq) { return xkeepSQue("memberId_InScopeRelation_FollowByMeIdList", sq); }
+    public Map<String, FollowCQ> getMemberId_InScopeRelation_FollowByMemberIdList() { return xgetSQueMap("memberId_InScopeRelation_FollowByMemberIdList"); }
+    public String keepMemberId_InScopeRelation_FollowByMemberIdList(FollowCQ sq) { return xkeepSQue("memberId_InScopeRelation_FollowByMemberIdList", sq); }
 
     public Map<String, FollowCQ> getMemberId_InScopeRelation_FollowByYouIdAsOne() { return xgetSQueMap("memberId_InScopeRelation_FollowByYouIdAsOne"); }
     public String keepMemberId_InScopeRelation_FollowByYouIdAsOne(FollowCQ sq) { return xkeepSQue("memberId_InScopeRelation_FollowByYouIdAsOne", sq); }
@@ -142,8 +142,8 @@ public class BsMemberCQ extends AbstractBsMemberCQ {
     public Map<String, TweetCQ> getMemberId_InScopeRelation_TweetList() { return xgetSQueMap("memberId_InScopeRelation_TweetList"); }
     public String keepMemberId_InScopeRelation_TweetList(TweetCQ sq) { return xkeepSQue("memberId_InScopeRelation_TweetList", sq); }
 
-    public Map<String, FollowCQ> getMemberId_NotInScopeRelation_FollowByMeIdList() { return xgetSQueMap("memberId_NotInScopeRelation_FollowByMeIdList"); }
-    public String keepMemberId_NotInScopeRelation_FollowByMeIdList(FollowCQ sq) { return xkeepSQue("memberId_NotInScopeRelation_FollowByMeIdList", sq); }
+    public Map<String, FollowCQ> getMemberId_NotInScopeRelation_FollowByMemberIdList() { return xgetSQueMap("memberId_NotInScopeRelation_FollowByMemberIdList"); }
+    public String keepMemberId_NotInScopeRelation_FollowByMemberIdList(FollowCQ sq) { return xkeepSQue("memberId_NotInScopeRelation_FollowByMemberIdList", sq); }
 
     public Map<String, FollowCQ> getMemberId_NotInScopeRelation_FollowByYouIdAsOne() { return xgetSQueMap("memberId_NotInScopeRelation_FollowByYouIdAsOne"); }
     public String keepMemberId_NotInScopeRelation_FollowByYouIdAsOne(FollowCQ sq) { return xkeepSQue("memberId_NotInScopeRelation_FollowByYouIdAsOne", sq); }
@@ -160,10 +160,10 @@ public class BsMemberCQ extends AbstractBsMemberCQ {
     public Map<String, TweetCQ> getMemberId_NotInScopeRelation_TweetList() { return xgetSQueMap("memberId_NotInScopeRelation_TweetList"); }
     public String keepMemberId_NotInScopeRelation_TweetList(TweetCQ sq) { return xkeepSQue("memberId_NotInScopeRelation_TweetList", sq); }
 
-    public Map<String, FollowCQ> getMemberId_QueryDerivedReferrer_FollowByMeIdList() { return xgetSQueMap("memberId_QueryDerivedReferrer_FollowByMeIdList"); }
-    public String keepMemberId_QueryDerivedReferrer_FollowByMeIdList(FollowCQ sq) { return xkeepSQue("memberId_QueryDerivedReferrer_FollowByMeIdList", sq); }
-    public Map<String, Object> getMemberId_QueryDerivedReferrer_FollowByMeIdListParameter() { return xgetSQuePmMap("memberId_QueryDerivedReferrer_FollowByMeIdList"); }
-    public String keepMemberId_QueryDerivedReferrer_FollowByMeIdListParameter(Object pm) { return xkeepSQuePm("memberId_QueryDerivedReferrer_FollowByMeIdList", pm); }
+    public Map<String, FollowCQ> getMemberId_QueryDerivedReferrer_FollowByMemberIdList() { return xgetSQueMap("memberId_QueryDerivedReferrer_FollowByMemberIdList"); }
+    public String keepMemberId_QueryDerivedReferrer_FollowByMemberIdList(FollowCQ sq) { return xkeepSQue("memberId_QueryDerivedReferrer_FollowByMemberIdList", sq); }
+    public Map<String, Object> getMemberId_QueryDerivedReferrer_FollowByMemberIdListParameter() { return xgetSQuePmMap("memberId_QueryDerivedReferrer_FollowByMemberIdList"); }
+    public String keepMemberId_QueryDerivedReferrer_FollowByMemberIdListParameter(Object pm) { return xkeepSQuePm("memberId_QueryDerivedReferrer_FollowByMemberIdList", pm); }
 
     public Map<String, LoginCQ> getMemberId_QueryDerivedReferrer_LoginList() { return xgetSQueMap("memberId_QueryDerivedReferrer_LoginList"); }
     public String keepMemberId_QueryDerivedReferrer_LoginList(LoginCQ sq) { return xkeepSQue("memberId_QueryDerivedReferrer_LoginList", sq); }
@@ -269,45 +269,85 @@ public class BsMemberCQ extends AbstractBsMemberCQ {
      */
     public BsMemberCQ addOrderBy_Profile_Desc() { regOBD("PROFILE"); return this; }
 
-    protected ConditionValue _regesterDatetime;
-    public ConditionValue getRegesterDatetime()
-    { if (_regesterDatetime == null) { _regesterDatetime = nCV(); }
-      return _regesterDatetime; }
-    protected ConditionValue getCValueRegesterDatetime() { return getRegesterDatetime(); }
+    protected ConditionValue _insDatetime;
+    public ConditionValue getInsDatetime()
+    { if (_insDatetime == null) { _insDatetime = nCV(); }
+      return _insDatetime; }
+    protected ConditionValue getCValueInsDatetime() { return getInsDatetime(); }
 
     /** 
      * Add order-by as ascend. <br />
-     * REGESTER_DATETIME: {NotNull, DATETIME(19)}
+     * INS_DATETIME: {NotNull, DATETIME(19)}
      * @return this. (NotNull)
      */
-    public BsMemberCQ addOrderBy_RegesterDatetime_Asc() { regOBA("REGESTER_DATETIME"); return this; }
+    public BsMemberCQ addOrderBy_InsDatetime_Asc() { regOBA("INS_DATETIME"); return this; }
 
     /**
      * Add order-by as descend. <br />
-     * REGESTER_DATETIME: {NotNull, DATETIME(19)}
+     * INS_DATETIME: {NotNull, DATETIME(19)}
      * @return this. (NotNull)
      */
-    public BsMemberCQ addOrderBy_RegesterDatetime_Desc() { regOBD("REGESTER_DATETIME"); return this; }
+    public BsMemberCQ addOrderBy_InsDatetime_Desc() { regOBD("INS_DATETIME"); return this; }
 
-    protected ConditionValue _updateDatetime;
-    public ConditionValue getUpdateDatetime()
-    { if (_updateDatetime == null) { _updateDatetime = nCV(); }
-      return _updateDatetime; }
-    protected ConditionValue getCValueUpdateDatetime() { return getUpdateDatetime(); }
+    protected ConditionValue _updDatetime;
+    public ConditionValue getUpdDatetime()
+    { if (_updDatetime == null) { _updDatetime = nCV(); }
+      return _updDatetime; }
+    protected ConditionValue getCValueUpdDatetime() { return getUpdDatetime(); }
 
     /** 
      * Add order-by as ascend. <br />
-     * UPDATE_DATETIME: {DATETIME(19)}
+     * UPD_DATETIME: {NotNull, DATETIME(19)}
      * @return this. (NotNull)
      */
-    public BsMemberCQ addOrderBy_UpdateDatetime_Asc() { regOBA("UPDATE_DATETIME"); return this; }
+    public BsMemberCQ addOrderBy_UpdDatetime_Asc() { regOBA("UPD_DATETIME"); return this; }
 
     /**
      * Add order-by as descend. <br />
-     * UPDATE_DATETIME: {DATETIME(19)}
+     * UPD_DATETIME: {NotNull, DATETIME(19)}
      * @return this. (NotNull)
      */
-    public BsMemberCQ addOrderBy_UpdateDatetime_Desc() { regOBD("UPDATE_DATETIME"); return this; }
+    public BsMemberCQ addOrderBy_UpdDatetime_Desc() { regOBD("UPD_DATETIME"); return this; }
+
+    protected ConditionValue _insTrace;
+    public ConditionValue getInsTrace()
+    { if (_insTrace == null) { _insTrace = nCV(); }
+      return _insTrace; }
+    protected ConditionValue getCValueInsTrace() { return getInsTrace(); }
+
+    /** 
+     * Add order-by as ascend. <br />
+     * INS_TRACE: {NotNull, VARCHAR(256)}
+     * @return this. (NotNull)
+     */
+    public BsMemberCQ addOrderBy_InsTrace_Asc() { regOBA("INS_TRACE"); return this; }
+
+    /**
+     * Add order-by as descend. <br />
+     * INS_TRACE: {NotNull, VARCHAR(256)}
+     * @return this. (NotNull)
+     */
+    public BsMemberCQ addOrderBy_InsTrace_Desc() { regOBD("INS_TRACE"); return this; }
+
+    protected ConditionValue _updTrace;
+    public ConditionValue getUpdTrace()
+    { if (_updTrace == null) { _updTrace = nCV(); }
+      return _updTrace; }
+    protected ConditionValue getCValueUpdTrace() { return getUpdTrace(); }
+
+    /** 
+     * Add order-by as ascend. <br />
+     * UPD_TRACE: {NotNull, VARCHAR(256)}
+     * @return this. (NotNull)
+     */
+    public BsMemberCQ addOrderBy_UpdTrace_Asc() { regOBA("UPD_TRACE"); return this; }
+
+    /**
+     * Add order-by as descend. <br />
+     * UPD_TRACE: {NotNull, VARCHAR(256)}
+     * @return this. (NotNull)
+     */
+    public BsMemberCQ addOrderBy_UpdTrace_Desc() { regOBD("UPD_TRACE"); return this; }
 
     // ===================================================================================
     //                                                             SpecifiedDerivedOrderBy

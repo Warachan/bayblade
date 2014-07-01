@@ -43,8 +43,10 @@ public class MemberDbm extends AbstractDBMeta {
         setupEpg(_epgMap, new EpgUserName(), "userName");
         setupEpg(_epgMap, new EpgBirthdate(), "birthdate");
         setupEpg(_epgMap, new EpgProfile(), "profile");
-        setupEpg(_epgMap, new EpgRegesterDatetime(), "regesterDatetime");
-        setupEpg(_epgMap, new EpgUpdateDatetime(), "updateDatetime");
+        setupEpg(_epgMap, new EpgInsDatetime(), "insDatetime");
+        setupEpg(_epgMap, new EpgUpdDatetime(), "updDatetime");
+        setupEpg(_epgMap, new EpgInsTrace(), "insTrace");
+        setupEpg(_epgMap, new EpgUpdTrace(), "updTrace");
     }
     public static class EpgMemberId implements PropertyGateway {
         public Object read(Entity et) { return ((Member)et).getMemberId(); }
@@ -66,13 +68,21 @@ public class MemberDbm extends AbstractDBMeta {
         public Object read(Entity et) { return ((Member)et).getProfile(); }
         public void write(Entity et, Object vl) { ((Member)et).setProfile((String)vl); }
     }
-    public static class EpgRegesterDatetime implements PropertyGateway {
-        public Object read(Entity et) { return ((Member)et).getRegesterDatetime(); }
-        public void write(Entity et, Object vl) { ((Member)et).setRegesterDatetime((java.sql.Timestamp)vl); }
+    public static class EpgInsDatetime implements PropertyGateway {
+        public Object read(Entity et) { return ((Member)et).getInsDatetime(); }
+        public void write(Entity et, Object vl) { ((Member)et).setInsDatetime((java.sql.Timestamp)vl); }
     }
-    public static class EpgUpdateDatetime implements PropertyGateway {
-        public Object read(Entity et) { return ((Member)et).getUpdateDatetime(); }
-        public void write(Entity et, Object vl) { ((Member)et).setUpdateDatetime((java.sql.Timestamp)vl); }
+    public static class EpgUpdDatetime implements PropertyGateway {
+        public Object read(Entity et) { return ((Member)et).getUpdDatetime(); }
+        public void write(Entity et, Object vl) { ((Member)et).setUpdDatetime((java.sql.Timestamp)vl); }
+    }
+    public static class EpgInsTrace implements PropertyGateway {
+        public Object read(Entity et) { return ((Member)et).getInsTrace(); }
+        public void write(Entity et, Object vl) { ((Member)et).setInsTrace((String)vl); }
+    }
+    public static class EpgUpdTrace implements PropertyGateway {
+        public Object read(Entity et) { return ((Member)et).getUpdTrace(); }
+        public void write(Entity et, Object vl) { ((Member)et).setUpdTrace((String)vl); }
     }
     public PropertyGateway findPropertyGateway(String prop)
     { return doFindEpg(_epgMap, prop); }
@@ -115,13 +125,15 @@ public class MemberDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnMemberId = cci("MEMBER_ID", "MEMBER_ID", null, null, Integer.class, "memberId", null, true, true, true, "INT", 10, 0, null, false, null, null, null, "followByMeIdList,loginList,tweetList", null);
+    protected final ColumnInfo _columnMemberId = cci("MEMBER_ID", "MEMBER_ID", null, null, Integer.class, "memberId", null, true, true, true, "INT", 10, 0, null, false, null, null, null, "followByMemberIdList,loginList,tweetList", null);
     protected final ColumnInfo _columnEmailAddress = cci("EMAIL_ADDRESS", "EMAIL_ADDRESS", null, null, String.class, "emailAddress", null, false, false, true, "VARCHAR", 100, 0, null, false, null, null, null, null, null);
     protected final ColumnInfo _columnUserName = cci("USER_NAME", "USER_NAME", null, null, String.class, "userName", null, false, false, true, "VARCHAR", 50, 0, null, false, null, null, null, null, null);
     protected final ColumnInfo _columnBirthdate = cci("BIRTHDATE", "BIRTHDATE", null, null, java.util.Date.class, "birthdate", null, false, false, false, "DATE", 10, 0, null, false, null, null, null, null, null);
     protected final ColumnInfo _columnProfile = cci("PROFILE", "PROFILE", null, null, String.class, "profile", null, false, false, false, "VARCHAR", 200, 0, null, false, null, null, null, null, null);
-    protected final ColumnInfo _columnRegesterDatetime = cci("REGESTER_DATETIME", "REGESTER_DATETIME", null, null, java.sql.Timestamp.class, "regesterDatetime", null, false, false, true, "DATETIME", 19, 0, null, false, null, null, null, null, null);
-    protected final ColumnInfo _columnUpdateDatetime = cci("UPDATE_DATETIME", "UPDATE_DATETIME", null, null, java.sql.Timestamp.class, "updateDatetime", null, false, false, false, "DATETIME", 19, 0, null, false, null, null, null, null, null);
+    protected final ColumnInfo _columnInsDatetime = cci("INS_DATETIME", "INS_DATETIME", null, null, java.sql.Timestamp.class, "insDatetime", null, false, false, true, "DATETIME", 19, 0, null, false, null, null, null, null, null);
+    protected final ColumnInfo _columnUpdDatetime = cci("UPD_DATETIME", "UPD_DATETIME", null, null, java.sql.Timestamp.class, "updDatetime", null, false, false, true, "DATETIME", 19, 0, null, false, null, null, null, null, null);
+    protected final ColumnInfo _columnInsTrace = cci("INS_TRACE", "INS_TRACE", null, null, String.class, "insTrace", null, false, false, true, "VARCHAR", 256, 0, null, false, null, null, null, null, null);
+    protected final ColumnInfo _columnUpdTrace = cci("UPD_TRACE", "UPD_TRACE", null, null, String.class, "updTrace", null, false, false, true, "VARCHAR", 256, 0, null, false, null, null, null, null, null);
 
     /**
      * MEMBER_ID: {PK, ID, NotNull, INT(10)}
@@ -149,15 +161,25 @@ public class MemberDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnProfile() { return _columnProfile; }
     /**
-     * REGESTER_DATETIME: {NotNull, DATETIME(19)}
+     * INS_DATETIME: {NotNull, DATETIME(19)}
      * @return The information object of specified column. (NotNull)
      */
-    public ColumnInfo columnRegesterDatetime() { return _columnRegesterDatetime; }
+    public ColumnInfo columnInsDatetime() { return _columnInsDatetime; }
     /**
-     * UPDATE_DATETIME: {DATETIME(19)}
+     * UPD_DATETIME: {NotNull, DATETIME(19)}
      * @return The information object of specified column. (NotNull)
      */
-    public ColumnInfo columnUpdateDatetime() { return _columnUpdateDatetime; }
+    public ColumnInfo columnUpdDatetime() { return _columnUpdDatetime; }
+    /**
+     * INS_TRACE: {NotNull, VARCHAR(256)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnInsTrace() { return _columnInsTrace; }
+    /**
+     * UPD_TRACE: {NotNull, VARCHAR(256)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnUpdTrace() { return _columnUpdTrace; }
 
     protected List<ColumnInfo> ccil() {
         List<ColumnInfo> ls = newArrayList();
@@ -166,8 +188,10 @@ public class MemberDbm extends AbstractDBMeta {
         ls.add(columnUserName());
         ls.add(columnBirthdate());
         ls.add(columnProfile());
-        ls.add(columnRegesterDatetime());
-        ls.add(columnUpdateDatetime());
+        ls.add(columnInsDatetime());
+        ls.add(columnUpdDatetime());
+        ls.add(columnInsTrace());
+        ls.add(columnUpdTrace());
         return ls;
     }
 
@@ -220,12 +244,12 @@ public class MemberDbm extends AbstractDBMeta {
     //                                     Referrer Property
     //                                     -----------------
     /**
-     * follow by ME_ID, named 'followByMeIdList'.
+     * follow by MEMBER_ID, named 'followByMemberIdList'.
      * @return The information object of referrer property. (NotNull)
      */
-    public ReferrerInfo referrerFollowByMeIdList() {
-        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnMemberId(), FollowDbm.getInstance().columnMeId());
-        return cri("follow_ibfk_1", "followByMeIdList", this, FollowDbm.getInstance(), mp, false, "memberByMeId");
+    public ReferrerInfo referrerFollowByMemberIdList() {
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnMemberId(), FollowDbm.getInstance().columnMemberId());
+        return cri("follow_ibfk_1", "followByMemberIdList", this, FollowDbm.getInstance(), mp, false, "memberByMemberId");
     }
     /**
      * login by MEMBER_ID, named 'loginList'.

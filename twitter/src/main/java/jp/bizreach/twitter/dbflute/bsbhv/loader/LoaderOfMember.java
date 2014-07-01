@@ -15,7 +15,7 @@ import jp.bizreach.twitter.dbflute.cbean.*;
  *     MEMBER_ID
  *
  * [column]
- *     MEMBER_ID, EMAIL_ADDRESS, USER_NAME, BIRTHDATE, PROFILE, REGESTER_DATETIME, UPDATE_DATETIME
+ *     MEMBER_ID, EMAIL_ADDRESS, USER_NAME, BIRTHDATE, PROFILE, INS_DATETIME, UPD_DATETIME, INS_TRACE, UPD_TRACE
  *
  * [sequence]
  *     
@@ -36,7 +36,7 @@ import jp.bizreach.twitter.dbflute.cbean.*;
  *     followByYouIdAsOne, memberSecurityAsOne, memberWithdrawAsOne
  *
  * [referrer property]
- *     followByMeIdList, loginList, tweetList
+ *     followByMemberIdList, loginList, tweetList
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
@@ -61,14 +61,14 @@ public class LoaderOfMember {
     // ===================================================================================
     //                                                                       Load Referrer
     //                                                                       =============
-    protected List<Follow> _referrerFollowByMeIdList;
-    public NestedReferrerLoaderGateway<LoaderOfFollow> loadFollowByMeIdList(ConditionBeanSetupper<FollowCB> setupper) {
-        myBhv().loadFollowByMeIdList(_selectedList, setupper).withNestedReferrer(new ReferrerListHandler<Follow>() {
-            public void handle(List<Follow> referrerList) { _referrerFollowByMeIdList = referrerList; }
+    protected List<Follow> _referrerFollowByMemberIdList;
+    public NestedReferrerLoaderGateway<LoaderOfFollow> loadFollowByMemberIdList(ConditionBeanSetupper<FollowCB> setupper) {
+        myBhv().loadFollowByMemberIdList(_selectedList, setupper).withNestedReferrer(new ReferrerListHandler<Follow>() {
+            public void handle(List<Follow> referrerList) { _referrerFollowByMemberIdList = referrerList; }
         });
         return new NestedReferrerLoaderGateway<LoaderOfFollow>() {
             public void withNestedReferrer(ReferrerLoaderHandler<LoaderOfFollow> handler) {
-                handler.handle(new LoaderOfFollow().ready(_referrerFollowByMeIdList, _selector));
+                handler.handle(new LoaderOfFollow().ready(_referrerFollowByMemberIdList, _selector));
             }
         };
     }

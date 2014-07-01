@@ -62,11 +62,13 @@ public class SignupAction {
     //                                                                             Execute
     //                                                                             =======
     @Execute(validator = false)
+    /* signup画面表示 */
     public String index() {
         return "/signup.jsp";
     }
 
     @Execute(validator = false)
+    /* 会員登録メソッド */
     public String regester() {
         LOG.debug("***" + signupForm);
         newEmail = signupForm.newEmail;
@@ -129,8 +131,11 @@ public class SignupAction {
     private Member insertMember(Timestamp timestamp) {
         Member member = new Member();
         member.setEmailAddress(sessionDto.email);
-        member.setRegesterDatetime(timestamp);
         member.setUserName(username);
+        member.setInsDatetime(timestamp);
+        member.setUpdDatetime(timestamp);
+        member.setInsTrace("signedup");
+        member.setUpdTrace("signedup");
         memberBhv.insert(member);
         return member;
     }
@@ -153,7 +158,10 @@ public class SignupAction {
         MemberSecurity security = new MemberSecurity();
         security.setMemberId(member.getMemberId());
         security.setPassword(newPassword);
-        security.setPasswordRegesterationDatetime(timestamp);
+        security.setInsDatetime(timestamp);
+        security.setUpdDatetime(timestamp);
+        security.setInsTrace("signedup");
+        security.setUpdTrace("signedup");
         memberSecurityBhv.insert(security);
     }
 

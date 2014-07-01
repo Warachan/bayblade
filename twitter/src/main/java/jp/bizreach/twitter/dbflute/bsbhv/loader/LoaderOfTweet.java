@@ -13,7 +13,7 @@ import jp.bizreach.twitter.dbflute.exentity.*;
  *     TWEET_ID
  *
  * [column]
- *     TWEET_ID, MEMBER_ID, TWEET, TWEET_DATETIME
+ *     TWEET_ID, MEMBER_ID, TWEET, INS_DATETIME, UPD_DATETIME, INS_TRACE, UPD_TRACE
  *
  * [sequence]
  *     

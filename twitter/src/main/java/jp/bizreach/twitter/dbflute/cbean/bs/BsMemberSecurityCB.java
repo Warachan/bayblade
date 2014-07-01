@@ -343,15 +343,25 @@ public class BsMemberSecurityCB extends AbstractConditionBean {
          */
         public HpSpecifiedColumn columnPassword() { return doColumn("PASSWORD"); }
         /**
-         * PASSWORD_UPDATE_DATETIME: {DATETIME(19)}
+         * INS_DATETIME: {NotNull, DATETIME(19)}
          * @return The information object of specified column. (NotNull)
          */
-        public HpSpecifiedColumn columnPasswordUpdateDatetime() { return doColumn("PASSWORD_UPDATE_DATETIME"); }
+        public HpSpecifiedColumn columnInsDatetime() { return doColumn("INS_DATETIME"); }
         /**
-         * PASSWORD_REGESTERATION_DATETIME: {NotNull, DATETIME(19)}
+         * UPD_DATETIME: {NotNull, DATETIME(19)}
          * @return The information object of specified column. (NotNull)
          */
-        public HpSpecifiedColumn columnPasswordRegesterationDatetime() { return doColumn("PASSWORD_REGESTERATION_DATETIME"); }
+        public HpSpecifiedColumn columnUpdDatetime() { return doColumn("UPD_DATETIME"); }
+        /**
+         * INS_TRACE: {NotNull, VARCHAR(256)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public HpSpecifiedColumn columnInsTrace() { return doColumn("INS_TRACE"); }
+        /**
+         * UPD_TRACE: {NotNull, VARCHAR(256)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public HpSpecifiedColumn columnUpdTrace() { return doColumn("UPD_TRACE"); }
         public void everyColumn() { doEveryColumn(); }
         public void exceptRecordMetaColumn() { doExceptRecordMetaColumn(); }
         @Override

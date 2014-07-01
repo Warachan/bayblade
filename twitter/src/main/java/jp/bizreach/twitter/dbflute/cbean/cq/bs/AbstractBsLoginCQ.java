@@ -297,79 +297,399 @@ public abstract class AbstractBsLoginCQ extends AbstractConditionQuery {
 
     /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br />
-     * LOGIN_DATETIME: {NotNull, DATETIME(19)}
-     * @param loginDatetime The value of loginDatetime as equal. (NullAllowed: if null, no condition)
+     * INS_DATETIME: {NotNull, DATETIME(19)}
+     * @param insDatetime The value of insDatetime as equal. (NullAllowed: if null, no condition)
      */
-    public void setLoginDatetime_Equal(java.sql.Timestamp loginDatetime) {
-        regLoginDatetime(CK_EQ,  loginDatetime);
+    public void setInsDatetime_Equal(java.sql.Timestamp insDatetime) {
+        regInsDatetime(CK_EQ,  insDatetime);
     }
 
     /**
      * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br />
-     * LOGIN_DATETIME: {NotNull, DATETIME(19)}
-     * @param loginDatetime The value of loginDatetime as greaterThan. (NullAllowed: if null, no condition)
+     * INS_DATETIME: {NotNull, DATETIME(19)}
+     * @param insDatetime The value of insDatetime as greaterThan. (NullAllowed: if null, no condition)
      */
-    public void setLoginDatetime_GreaterThan(java.sql.Timestamp loginDatetime) {
-        regLoginDatetime(CK_GT,  loginDatetime);
+    public void setInsDatetime_GreaterThan(java.sql.Timestamp insDatetime) {
+        regInsDatetime(CK_GT,  insDatetime);
     }
 
     /**
      * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br />
-     * LOGIN_DATETIME: {NotNull, DATETIME(19)}
-     * @param loginDatetime The value of loginDatetime as lessThan. (NullAllowed: if null, no condition)
+     * INS_DATETIME: {NotNull, DATETIME(19)}
+     * @param insDatetime The value of insDatetime as lessThan. (NullAllowed: if null, no condition)
      */
-    public void setLoginDatetime_LessThan(java.sql.Timestamp loginDatetime) {
-        regLoginDatetime(CK_LT,  loginDatetime);
+    public void setInsDatetime_LessThan(java.sql.Timestamp insDatetime) {
+        regInsDatetime(CK_LT,  insDatetime);
     }
 
     /**
      * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br />
-     * LOGIN_DATETIME: {NotNull, DATETIME(19)}
-     * @param loginDatetime The value of loginDatetime as greaterEqual. (NullAllowed: if null, no condition)
+     * INS_DATETIME: {NotNull, DATETIME(19)}
+     * @param insDatetime The value of insDatetime as greaterEqual. (NullAllowed: if null, no condition)
      */
-    public void setLoginDatetime_GreaterEqual(java.sql.Timestamp loginDatetime) {
-        regLoginDatetime(CK_GE,  loginDatetime);
+    public void setInsDatetime_GreaterEqual(java.sql.Timestamp insDatetime) {
+        regInsDatetime(CK_GE,  insDatetime);
     }
 
     /**
      * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br />
-     * LOGIN_DATETIME: {NotNull, DATETIME(19)}
-     * @param loginDatetime The value of loginDatetime as lessEqual. (NullAllowed: if null, no condition)
+     * INS_DATETIME: {NotNull, DATETIME(19)}
+     * @param insDatetime The value of insDatetime as lessEqual. (NullAllowed: if null, no condition)
      */
-    public void setLoginDatetime_LessEqual(java.sql.Timestamp loginDatetime) {
-        regLoginDatetime(CK_LE, loginDatetime);
+    public void setInsDatetime_LessEqual(java.sql.Timestamp insDatetime) {
+        regInsDatetime(CK_LE, insDatetime);
     }
 
     /**
      * FromTo with various options. (versatile) {(default) fromDatetime &lt;= column &lt;= toDatetime} <br />
      * And NullIgnored, OnlyOnceRegistered. <br />
-     * LOGIN_DATETIME: {NotNull, DATETIME(19)}
-     * <pre>e.g. setLoginDatetime_FromTo(fromDate, toDate, new <span style="color: #DD4747">FromToOption</span>().compareAsDate());</pre>
-     * @param fromDatetime The from-datetime(yyyy/MM/dd HH:mm:ss.SSS) of loginDatetime. (NullAllowed: if null, no from-condition)
-     * @param toDatetime The to-datetime(yyyy/MM/dd HH:mm:ss.SSS) of loginDatetime. (NullAllowed: if null, no to-condition)
+     * INS_DATETIME: {NotNull, DATETIME(19)}
+     * <pre>e.g. setInsDatetime_FromTo(fromDate, toDate, new <span style="color: #DD4747">FromToOption</span>().compareAsDate());</pre>
+     * @param fromDatetime The from-datetime(yyyy/MM/dd HH:mm:ss.SSS) of insDatetime. (NullAllowed: if null, no from-condition)
+     * @param toDatetime The to-datetime(yyyy/MM/dd HH:mm:ss.SSS) of insDatetime. (NullAllowed: if null, no to-condition)
      * @param fromToOption The option of from-to. (NotNull)
      */
-    public void setLoginDatetime_FromTo(Date fromDatetime, Date toDatetime, FromToOption fromToOption) {
-        regFTQ((fromDatetime != null ? new java.sql.Timestamp(fromDatetime.getTime()) : null), (toDatetime != null ? new java.sql.Timestamp(toDatetime.getTime()) : null), getCValueLoginDatetime(), "LOGIN_DATETIME", fromToOption);
+    public void setInsDatetime_FromTo(Date fromDatetime, Date toDatetime, FromToOption fromToOption) {
+        regFTQ((fromDatetime != null ? new java.sql.Timestamp(fromDatetime.getTime()) : null), (toDatetime != null ? new java.sql.Timestamp(toDatetime.getTime()) : null), getCValueInsDatetime(), "INS_DATETIME", fromToOption);
     }
 
     /**
      * DateFromTo. (Date means yyyy/MM/dd) {fromDate &lt;= column &lt; toDate + 1 day} <br />
      * And NullIgnored, OnlyOnceRegistered. <br />
-     * LOGIN_DATETIME: {NotNull, DATETIME(19)}
+     * INS_DATETIME: {NotNull, DATETIME(19)}
      * <pre>
      * e.g. from:{2007/04/10 08:24:53} to:{2007/04/16 14:36:29}
      *  column &gt;= '2007/04/10 00:00:00' and column <span style="color: #DD4747">&lt; '2007/04/17 00:00:00'</span>
      * </pre>
-     * @param fromDate The from-date(yyyy/MM/dd) of loginDatetime. (NullAllowed: if null, no from-condition)
-     * @param toDate The to-date(yyyy/MM/dd) of loginDatetime. (NullAllowed: if null, no to-condition)
+     * @param fromDate The from-date(yyyy/MM/dd) of insDatetime. (NullAllowed: if null, no from-condition)
+     * @param toDate The to-date(yyyy/MM/dd) of insDatetime. (NullAllowed: if null, no to-condition)
      */
-    public void setLoginDatetime_DateFromTo(Date fromDate, Date toDate) {
-        setLoginDatetime_FromTo(fromDate, toDate, new FromToOption().compareAsDate());
+    public void setInsDatetime_DateFromTo(Date fromDate, Date toDate) {
+        setInsDatetime_FromTo(fromDate, toDate, new FromToOption().compareAsDate());
     }
 
-    protected void regLoginDatetime(ConditionKey ky, Object vl) { regQ(ky, vl, getCValueLoginDatetime(), "LOGIN_DATETIME"); }
-    protected abstract ConditionValue getCValueLoginDatetime();
+    protected void regInsDatetime(ConditionKey ky, Object vl) { regQ(ky, vl, getCValueInsDatetime(), "INS_DATETIME"); }
+    protected abstract ConditionValue getCValueInsDatetime();
+
+    /**
+     * Equal(=). And NullIgnored, OnlyOnceRegistered. <br />
+     * UPD_DATETIME: {NotNull, DATETIME(19)}
+     * @param updDatetime The value of updDatetime as equal. (NullAllowed: if null, no condition)
+     */
+    public void setUpdDatetime_Equal(java.sql.Timestamp updDatetime) {
+        regUpdDatetime(CK_EQ,  updDatetime);
+    }
+
+    /**
+     * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br />
+     * UPD_DATETIME: {NotNull, DATETIME(19)}
+     * @param updDatetime The value of updDatetime as greaterThan. (NullAllowed: if null, no condition)
+     */
+    public void setUpdDatetime_GreaterThan(java.sql.Timestamp updDatetime) {
+        regUpdDatetime(CK_GT,  updDatetime);
+    }
+
+    /**
+     * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br />
+     * UPD_DATETIME: {NotNull, DATETIME(19)}
+     * @param updDatetime The value of updDatetime as lessThan. (NullAllowed: if null, no condition)
+     */
+    public void setUpdDatetime_LessThan(java.sql.Timestamp updDatetime) {
+        regUpdDatetime(CK_LT,  updDatetime);
+    }
+
+    /**
+     * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br />
+     * UPD_DATETIME: {NotNull, DATETIME(19)}
+     * @param updDatetime The value of updDatetime as greaterEqual. (NullAllowed: if null, no condition)
+     */
+    public void setUpdDatetime_GreaterEqual(java.sql.Timestamp updDatetime) {
+        regUpdDatetime(CK_GE,  updDatetime);
+    }
+
+    /**
+     * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br />
+     * UPD_DATETIME: {NotNull, DATETIME(19)}
+     * @param updDatetime The value of updDatetime as lessEqual. (NullAllowed: if null, no condition)
+     */
+    public void setUpdDatetime_LessEqual(java.sql.Timestamp updDatetime) {
+        regUpdDatetime(CK_LE, updDatetime);
+    }
+
+    /**
+     * FromTo with various options. (versatile) {(default) fromDatetime &lt;= column &lt;= toDatetime} <br />
+     * And NullIgnored, OnlyOnceRegistered. <br />
+     * UPD_DATETIME: {NotNull, DATETIME(19)}
+     * <pre>e.g. setUpdDatetime_FromTo(fromDate, toDate, new <span style="color: #DD4747">FromToOption</span>().compareAsDate());</pre>
+     * @param fromDatetime The from-datetime(yyyy/MM/dd HH:mm:ss.SSS) of updDatetime. (NullAllowed: if null, no from-condition)
+     * @param toDatetime The to-datetime(yyyy/MM/dd HH:mm:ss.SSS) of updDatetime. (NullAllowed: if null, no to-condition)
+     * @param fromToOption The option of from-to. (NotNull)
+     */
+    public void setUpdDatetime_FromTo(Date fromDatetime, Date toDatetime, FromToOption fromToOption) {
+        regFTQ((fromDatetime != null ? new java.sql.Timestamp(fromDatetime.getTime()) : null), (toDatetime != null ? new java.sql.Timestamp(toDatetime.getTime()) : null), getCValueUpdDatetime(), "UPD_DATETIME", fromToOption);
+    }
+
+    /**
+     * DateFromTo. (Date means yyyy/MM/dd) {fromDate &lt;= column &lt; toDate + 1 day} <br />
+     * And NullIgnored, OnlyOnceRegistered. <br />
+     * UPD_DATETIME: {NotNull, DATETIME(19)}
+     * <pre>
+     * e.g. from:{2007/04/10 08:24:53} to:{2007/04/16 14:36:29}
+     *  column &gt;= '2007/04/10 00:00:00' and column <span style="color: #DD4747">&lt; '2007/04/17 00:00:00'</span>
+     * </pre>
+     * @param fromDate The from-date(yyyy/MM/dd) of updDatetime. (NullAllowed: if null, no from-condition)
+     * @param toDate The to-date(yyyy/MM/dd) of updDatetime. (NullAllowed: if null, no to-condition)
+     */
+    public void setUpdDatetime_DateFromTo(Date fromDate, Date toDate) {
+        setUpdDatetime_FromTo(fromDate, toDate, new FromToOption().compareAsDate());
+    }
+
+    protected void regUpdDatetime(ConditionKey ky, Object vl) { regQ(ky, vl, getCValueUpdDatetime(), "UPD_DATETIME"); }
+    protected abstract ConditionValue getCValueUpdDatetime();
+
+    /**
+     * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
+     * INS_TRACE: {NotNull, VARCHAR(256)}
+     * @param insTrace The value of insTrace as equal. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setInsTrace_Equal(String insTrace) {
+        doSetInsTrace_Equal(fRES(insTrace));
+    }
+
+    protected void doSetInsTrace_Equal(String insTrace) {
+        regInsTrace(CK_EQ, insTrace);
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
+     * INS_TRACE: {NotNull, VARCHAR(256)}
+     * @param insTrace The value of insTrace as notEqual. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setInsTrace_NotEqual(String insTrace) {
+        doSetInsTrace_NotEqual(fRES(insTrace));
+    }
+
+    protected void doSetInsTrace_NotEqual(String insTrace) {
+        regInsTrace(CK_NES, insTrace);
+    }
+
+    /**
+     * GreaterThan(&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
+     * INS_TRACE: {NotNull, VARCHAR(256)}
+     * @param insTrace The value of insTrace as greaterThan. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setInsTrace_GreaterThan(String insTrace) {
+        regInsTrace(CK_GT, fRES(insTrace));
+    }
+
+    /**
+     * LessThan(&lt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
+     * INS_TRACE: {NotNull, VARCHAR(256)}
+     * @param insTrace The value of insTrace as lessThan. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setInsTrace_LessThan(String insTrace) {
+        regInsTrace(CK_LT, fRES(insTrace));
+    }
+
+    /**
+     * GreaterEqual(&gt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
+     * INS_TRACE: {NotNull, VARCHAR(256)}
+     * @param insTrace The value of insTrace as greaterEqual. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setInsTrace_GreaterEqual(String insTrace) {
+        regInsTrace(CK_GE, fRES(insTrace));
+    }
+
+    /**
+     * LessEqual(&lt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
+     * INS_TRACE: {NotNull, VARCHAR(256)}
+     * @param insTrace The value of insTrace as lessEqual. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setInsTrace_LessEqual(String insTrace) {
+        regInsTrace(CK_LE, fRES(insTrace));
+    }
+
+    /**
+     * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br />
+     * INS_TRACE: {NotNull, VARCHAR(256)}
+     * @param insTraceList The collection of insTrace as inScope. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setInsTrace_InScope(Collection<String> insTraceList) {
+        doSetInsTrace_InScope(insTraceList);
+    }
+
+    public void doSetInsTrace_InScope(Collection<String> insTraceList) {
+        regINS(CK_INS, cTL(insTraceList), getCValueInsTrace(), "INS_TRACE");
+    }
+
+    /**
+     * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br />
+     * INS_TRACE: {NotNull, VARCHAR(256)}
+     * @param insTraceList The collection of insTrace as notInScope. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setInsTrace_NotInScope(Collection<String> insTraceList) {
+        doSetInsTrace_NotInScope(insTraceList);
+    }
+
+    public void doSetInsTrace_NotInScope(Collection<String> insTraceList) {
+        regINS(CK_NINS, cTL(insTraceList), getCValueInsTrace(), "INS_TRACE");
+    }
+
+    /**
+     * PrefixSearch {like 'xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br />
+     * INS_TRACE: {NotNull, VARCHAR(256)}
+     * @param insTrace The value of insTrace as prefixSearch. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setInsTrace_PrefixSearch(String insTrace) {
+        setInsTrace_LikeSearch(insTrace, cLSOP());
+    }
+
+    /**
+     * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br />
+     * INS_TRACE: {NotNull, VARCHAR(256)} <br />
+     * <pre>e.g. setInsTrace_LikeSearch("xxx", new <span style="color: #DD4747">LikeSearchOption</span>().likeContain());</pre>
+     * @param insTrace The value of insTrace as likeSearch. (NullAllowed: if null (or empty), no condition)
+     * @param likeSearchOption The option of like-search. (NotNull)
+     */
+    public void setInsTrace_LikeSearch(String insTrace, LikeSearchOption likeSearchOption) {
+        regLSQ(CK_LS, fRES(insTrace), getCValueInsTrace(), "INS_TRACE", likeSearchOption);
+    }
+
+    /**
+     * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br />
+     * And NullOrEmptyIgnored, SeveralRegistered. <br />
+     * INS_TRACE: {NotNull, VARCHAR(256)}
+     * @param insTrace The value of insTrace as notLikeSearch. (NullAllowed: if null (or empty), no condition)
+     * @param likeSearchOption The option of not-like-search. (NotNull)
+     */
+    public void setInsTrace_NotLikeSearch(String insTrace, LikeSearchOption likeSearchOption) {
+        regLSQ(CK_NLS, fRES(insTrace), getCValueInsTrace(), "INS_TRACE", likeSearchOption);
+    }
+
+    protected void regInsTrace(ConditionKey ky, Object vl) { regQ(ky, vl, getCValueInsTrace(), "INS_TRACE"); }
+    protected abstract ConditionValue getCValueInsTrace();
+
+    /**
+     * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
+     * UPD_TRACE: {NotNull, VARCHAR(256)}
+     * @param updTrace The value of updTrace as equal. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setUpdTrace_Equal(String updTrace) {
+        doSetUpdTrace_Equal(fRES(updTrace));
+    }
+
+    protected void doSetUpdTrace_Equal(String updTrace) {
+        regUpdTrace(CK_EQ, updTrace);
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
+     * UPD_TRACE: {NotNull, VARCHAR(256)}
+     * @param updTrace The value of updTrace as notEqual. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setUpdTrace_NotEqual(String updTrace) {
+        doSetUpdTrace_NotEqual(fRES(updTrace));
+    }
+
+    protected void doSetUpdTrace_NotEqual(String updTrace) {
+        regUpdTrace(CK_NES, updTrace);
+    }
+
+    /**
+     * GreaterThan(&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
+     * UPD_TRACE: {NotNull, VARCHAR(256)}
+     * @param updTrace The value of updTrace as greaterThan. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setUpdTrace_GreaterThan(String updTrace) {
+        regUpdTrace(CK_GT, fRES(updTrace));
+    }
+
+    /**
+     * LessThan(&lt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
+     * UPD_TRACE: {NotNull, VARCHAR(256)}
+     * @param updTrace The value of updTrace as lessThan. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setUpdTrace_LessThan(String updTrace) {
+        regUpdTrace(CK_LT, fRES(updTrace));
+    }
+
+    /**
+     * GreaterEqual(&gt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
+     * UPD_TRACE: {NotNull, VARCHAR(256)}
+     * @param updTrace The value of updTrace as greaterEqual. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setUpdTrace_GreaterEqual(String updTrace) {
+        regUpdTrace(CK_GE, fRES(updTrace));
+    }
+
+    /**
+     * LessEqual(&lt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
+     * UPD_TRACE: {NotNull, VARCHAR(256)}
+     * @param updTrace The value of updTrace as lessEqual. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setUpdTrace_LessEqual(String updTrace) {
+        regUpdTrace(CK_LE, fRES(updTrace));
+    }
+
+    /**
+     * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br />
+     * UPD_TRACE: {NotNull, VARCHAR(256)}
+     * @param updTraceList The collection of updTrace as inScope. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setUpdTrace_InScope(Collection<String> updTraceList) {
+        doSetUpdTrace_InScope(updTraceList);
+    }
+
+    public void doSetUpdTrace_InScope(Collection<String> updTraceList) {
+        regINS(CK_INS, cTL(updTraceList), getCValueUpdTrace(), "UPD_TRACE");
+    }
+
+    /**
+     * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br />
+     * UPD_TRACE: {NotNull, VARCHAR(256)}
+     * @param updTraceList The collection of updTrace as notInScope. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setUpdTrace_NotInScope(Collection<String> updTraceList) {
+        doSetUpdTrace_NotInScope(updTraceList);
+    }
+
+    public void doSetUpdTrace_NotInScope(Collection<String> updTraceList) {
+        regINS(CK_NINS, cTL(updTraceList), getCValueUpdTrace(), "UPD_TRACE");
+    }
+
+    /**
+     * PrefixSearch {like 'xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br />
+     * UPD_TRACE: {NotNull, VARCHAR(256)}
+     * @param updTrace The value of updTrace as prefixSearch. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setUpdTrace_PrefixSearch(String updTrace) {
+        setUpdTrace_LikeSearch(updTrace, cLSOP());
+    }
+
+    /**
+     * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br />
+     * UPD_TRACE: {NotNull, VARCHAR(256)} <br />
+     * <pre>e.g. setUpdTrace_LikeSearch("xxx", new <span style="color: #DD4747">LikeSearchOption</span>().likeContain());</pre>
+     * @param updTrace The value of updTrace as likeSearch. (NullAllowed: if null (or empty), no condition)
+     * @param likeSearchOption The option of like-search. (NotNull)
+     */
+    public void setUpdTrace_LikeSearch(String updTrace, LikeSearchOption likeSearchOption) {
+        regLSQ(CK_LS, fRES(updTrace), getCValueUpdTrace(), "UPD_TRACE", likeSearchOption);
+    }
+
+    /**
+     * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br />
+     * And NullOrEmptyIgnored, SeveralRegistered. <br />
+     * UPD_TRACE: {NotNull, VARCHAR(256)}
+     * @param updTrace The value of updTrace as notLikeSearch. (NullAllowed: if null (or empty), no condition)
+     * @param likeSearchOption The option of not-like-search. (NotNull)
+     */
+    public void setUpdTrace_NotLikeSearch(String updTrace, LikeSearchOption likeSearchOption) {
+        regLSQ(CK_NLS, fRES(updTrace), getCValueUpdTrace(), "UPD_TRACE", likeSearchOption);
+    }
+
+    protected void regUpdTrace(ConditionKey ky, Object vl) { regQ(ky, vl, getCValueUpdTrace(), "UPD_TRACE"); }
+    protected abstract ConditionValue getCValueUpdTrace();
 
     // ===================================================================================
     //                                                                     ScalarCondition

@@ -431,15 +431,25 @@ public class BsMemberCB extends AbstractConditionBean {
          */
         public HpSpecifiedColumn columnProfile() { return doColumn("PROFILE"); }
         /**
-         * REGESTER_DATETIME: {NotNull, DATETIME(19)}
+         * INS_DATETIME: {NotNull, DATETIME(19)}
          * @return The information object of specified column. (NotNull)
          */
-        public HpSpecifiedColumn columnRegesterDatetime() { return doColumn("REGESTER_DATETIME"); }
+        public HpSpecifiedColumn columnInsDatetime() { return doColumn("INS_DATETIME"); }
         /**
-         * UPDATE_DATETIME: {DATETIME(19)}
+         * UPD_DATETIME: {NotNull, DATETIME(19)}
          * @return The information object of specified column. (NotNull)
          */
-        public HpSpecifiedColumn columnUpdateDatetime() { return doColumn("UPDATE_DATETIME"); }
+        public HpSpecifiedColumn columnUpdDatetime() { return doColumn("UPD_DATETIME"); }
+        /**
+         * INS_TRACE: {NotNull, VARCHAR(256)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public HpSpecifiedColumn columnInsTrace() { return doColumn("INS_TRACE"); }
+        /**
+         * UPD_TRACE: {NotNull, VARCHAR(256)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public HpSpecifiedColumn columnUpdTrace() { return doColumn("UPD_TRACE"); }
         public void everyColumn() { doEveryColumn(); }
         public void exceptRecordMetaColumn() { doExceptRecordMetaColumn(); }
         @Override
@@ -514,9 +524,9 @@ public class BsMemberCB extends AbstractConditionBean {
         /**
          * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br />
          * {select max(FOO) from follow where ...) as FOO_MAX} <br />
-         * follow by ME_ID, named 'followByMeIdList'.
+         * follow by MEMBER_ID, named 'followByMemberIdList'.
          * <pre>
-         * cb.specify().<span style="color: #DD4747">derivedFollowByMeIdList()</span>.<span style="color: #DD4747">max</span>(new SubQuery&lt;FollowCB&gt;() {
+         * cb.specify().<span style="color: #DD4747">derivedFollowByMemberIdList()</span>.<span style="color: #DD4747">max</span>(new SubQuery&lt;FollowCB&gt;() {
          *     public void query(FollowCB subCB) {
          *         subCB.specify().<span style="color: #DD4747">columnFoo...</span> <span style="color: #3F7E5E">// derived column by function</span>
          *         subCB.query().setBar... <span style="color: #3F7E5E">// referrer condition</span>
@@ -525,11 +535,11 @@ public class BsMemberCB extends AbstractConditionBean {
          * </pre>
          * @return The object to set up a function for referrer table. (NotNull)
          */
-        public HpSDRFunction<FollowCB, MemberCQ> derivedFollowByMeIdList() {
-            assertDerived("followByMeIdList"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
+        public HpSDRFunction<FollowCB, MemberCQ> derivedFollowByMemberIdList() {
+            assertDerived("followByMemberIdList"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
             return new HpSDRFunction<FollowCB, MemberCQ>(_baseCB, _qyCall.qy(), new HpSDRSetupper<FollowCB, MemberCQ>() {
                 public void setup(String fn, SubQuery<FollowCB> sq, MemberCQ cq, String al, DerivedReferrerOption op) {
-                    cq.xsderiveFollowByMeIdList(fn, sq, al, op); } }, _dbmetaProvider);
+                    cq.xsderiveFollowByMemberIdList(fn, sq, al, op); } }, _dbmetaProvider);
         }
         /**
          * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br />

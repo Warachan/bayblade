@@ -18,7 +18,7 @@ import jp.bizreach.twitter.dbflute.exentity.*;
  *     TWEET_ID
  * 
  * [column]
- *     TWEET_ID, MEMBER_ID, TWEET, TWEET_DATETIME
+ *     TWEET_ID, MEMBER_ID, TWEET, INS_DATETIME, UPD_DATETIME, INS_TRACE, UPD_TRACE
  * 
  * [sequence]
  *     
@@ -46,11 +46,17 @@ import jp.bizreach.twitter.dbflute.exentity.*;
  * Integer tweetId = entity.getTweetId();
  * Integer memberId = entity.getMemberId();
  * String tweet = entity.getTweet();
- * java.sql.Timestamp tweetDatetime = entity.getTweetDatetime();
+ * java.sql.Timestamp insDatetime = entity.getInsDatetime();
+ * java.sql.Timestamp updDatetime = entity.getUpdDatetime();
+ * String insTrace = entity.getInsTrace();
+ * String updTrace = entity.getUpdTrace();
  * entity.setTweetId(tweetId);
  * entity.setMemberId(memberId);
  * entity.setTweet(tweet);
- * entity.setTweetDatetime(tweetDatetime);
+ * entity.setInsDatetime(insDatetime);
+ * entity.setUpdDatetime(updDatetime);
+ * entity.setInsTrace(insTrace);
+ * entity.setUpdTrace(updTrace);
  * = = = = = = = = = =/
  * </pre>
  * @author DBFlute(AutoGenerator)
@@ -78,8 +84,17 @@ public abstract class BsTweet implements Entity, Serializable, Cloneable {
     /** TWEET: {NotNull, VARCHAR(140)} */
     protected String _tweet;
 
-    /** TWEET_DATETIME: {NotNull, DATETIME(19)} */
-    protected java.sql.Timestamp _tweetDatetime;
+    /** INS_DATETIME: {NotNull, DATETIME(19)} */
+    protected java.sql.Timestamp _insDatetime;
+
+    /** UPD_DATETIME: {NotNull, DATETIME(19)} */
+    protected java.sql.Timestamp _updDatetime;
+
+    /** INS_TRACE: {NotNull, VARCHAR(256)} */
+    protected String _insTrace;
+
+    /** UPD_TRACE: {NotNull, VARCHAR(256)} */
+    protected String _updTrace;
 
     // -----------------------------------------------------
     //                                              Internal
@@ -296,7 +311,10 @@ public abstract class BsTweet implements Entity, Serializable, Cloneable {
         sb.append(dm).append(getTweetId());
         sb.append(dm).append(getMemberId());
         sb.append(dm).append(getTweet());
-        sb.append(dm).append(getTweetDatetime());
+        sb.append(dm).append(getInsDatetime());
+        sb.append(dm).append(getUpdDatetime());
+        sb.append(dm).append(getInsTrace());
+        sb.append(dm).append(getUpdTrace());
         if (sb.length() > dm.length()) {
             sb.delete(0, dm.length());
         }
@@ -386,21 +404,78 @@ public abstract class BsTweet implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [get] TWEET_DATETIME: {NotNull, DATETIME(19)} <br />
-     * TWEET日時
-     * @return The value of the column 'TWEET_DATETIME'. (basically NotNull if selected: for the constraint)
+     * [get] INS_DATETIME: {NotNull, DATETIME(19)} <br />
+     * insert日時
+     * @return The value of the column 'INS_DATETIME'. (basically NotNull if selected: for the constraint)
      */
-    public java.sql.Timestamp getTweetDatetime() {
-        return _tweetDatetime;
+    public java.sql.Timestamp getInsDatetime() {
+        return _insDatetime;
     }
 
     /**
-     * [set] TWEET_DATETIME: {NotNull, DATETIME(19)} <br />
-     * TWEET日時
-     * @param tweetDatetime The value of the column 'TWEET_DATETIME'. (basically NotNull if update: for the constraint)
+     * [set] INS_DATETIME: {NotNull, DATETIME(19)} <br />
+     * insert日時
+     * @param insDatetime The value of the column 'INS_DATETIME'. (basically NotNull if update: for the constraint)
      */
-    public void setTweetDatetime(java.sql.Timestamp tweetDatetime) {
-        __modifiedProperties.addPropertyName("tweetDatetime");
-        _tweetDatetime = tweetDatetime;
+    public void setInsDatetime(java.sql.Timestamp insDatetime) {
+        __modifiedProperties.addPropertyName("insDatetime");
+        _insDatetime = insDatetime;
+    }
+
+    /**
+     * [get] UPD_DATETIME: {NotNull, DATETIME(19)} <br />
+     * UPD_DATETIME
+     * @return The value of the column 'UPD_DATETIME'. (basically NotNull if selected: for the constraint)
+     */
+    public java.sql.Timestamp getUpdDatetime() {
+        return _updDatetime;
+    }
+
+    /**
+     * [set] UPD_DATETIME: {NotNull, DATETIME(19)} <br />
+     * UPD_DATETIME
+     * @param updDatetime The value of the column 'UPD_DATETIME'. (basically NotNull if update: for the constraint)
+     */
+    public void setUpdDatetime(java.sql.Timestamp updDatetime) {
+        __modifiedProperties.addPropertyName("updDatetime");
+        _updDatetime = updDatetime;
+    }
+
+    /**
+     * [get] INS_TRACE: {NotNull, VARCHAR(256)} <br />
+     * Insertトレース
+     * @return The value of the column 'INS_TRACE'. (basically NotNull if selected: for the constraint)
+     */
+    public String getInsTrace() {
+        return _insTrace;
+    }
+
+    /**
+     * [set] INS_TRACE: {NotNull, VARCHAR(256)} <br />
+     * Insertトレース
+     * @param insTrace The value of the column 'INS_TRACE'. (basically NotNull if update: for the constraint)
+     */
+    public void setInsTrace(String insTrace) {
+        __modifiedProperties.addPropertyName("insTrace");
+        _insTrace = insTrace;
+    }
+
+    /**
+     * [get] UPD_TRACE: {NotNull, VARCHAR(256)} <br />
+     * UPD トレース
+     * @return The value of the column 'UPD_TRACE'. (basically NotNull if selected: for the constraint)
+     */
+    public String getUpdTrace() {
+        return _updTrace;
+    }
+
+    /**
+     * [set] UPD_TRACE: {NotNull, VARCHAR(256)} <br />
+     * UPD トレース
+     * @param updTrace The value of the column 'UPD_TRACE'. (basically NotNull if update: for the constraint)
+     */
+    public void setUpdTrace(String updTrace) {
+        __modifiedProperties.addPropertyName("updTrace");
+        _updTrace = updTrace;
     }
 }

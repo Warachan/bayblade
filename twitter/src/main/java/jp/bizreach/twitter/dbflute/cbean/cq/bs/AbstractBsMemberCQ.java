@@ -148,25 +148,25 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * Set up ExistsReferrer (correlated sub-query). <br />
-     * {exists (select ME_ID from follow where ...)} <br />
-     * follow by ME_ID, named 'followByMeIdAsOne'.
+     * {exists (select MEMBER_ID from follow where ...)} <br />
+     * follow by MEMBER_ID, named 'followByMemberIdAsOne'.
      * <pre>
-     * cb.query().<span style="color: #DD4747">existsFollowByMeIdList</span>(new SubQuery&lt;FollowCB&gt;() {
+     * cb.query().<span style="color: #DD4747">existsFollowByMemberIdList</span>(new SubQuery&lt;FollowCB&gt;() {
      *     public void query(FollowCB subCB) {
      *         subCB.query().setXxx...
      *     }
      * });
      * </pre>
-     * @param subQuery The sub-query of FollowByMeIdList for 'exists'. (NotNull)
+     * @param subQuery The sub-query of FollowByMemberIdList for 'exists'. (NotNull)
      */
-    public void existsFollowByMeIdList(SubQuery<FollowCB> subQuery) {
+    public void existsFollowByMemberIdList(SubQuery<FollowCB> subQuery) {
         assertObjectNotNull("subQuery", subQuery);
         FollowCB cb = new FollowCB(); cb.xsetupForExistsReferrer(this);
         try { lock(); subQuery.query(cb); } finally { unlock(); }
-        String pp = keepMemberId_ExistsReferrer_FollowByMeIdList(cb.query());
-        registerExistsReferrer(cb.query(), "MEMBER_ID", "ME_ID", pp, "followByMeIdList");
+        String pp = keepMemberId_ExistsReferrer_FollowByMemberIdList(cb.query());
+        registerExistsReferrer(cb.query(), "MEMBER_ID", "MEMBER_ID", pp, "followByMemberIdList");
     }
-    public abstract String keepMemberId_ExistsReferrer_FollowByMeIdList(FollowCQ sq);
+    public abstract String keepMemberId_ExistsReferrer_FollowByMemberIdList(FollowCQ sq);
 
     /**
      * Set up ExistsReferrer (correlated sub-query). <br />
@@ -280,25 +280,25 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * Set up NotExistsReferrer (correlated sub-query). <br />
-     * {not exists (select ME_ID from follow where ...)} <br />
-     * follow by ME_ID, named 'followByMeIdAsOne'.
+     * {not exists (select MEMBER_ID from follow where ...)} <br />
+     * follow by MEMBER_ID, named 'followByMemberIdAsOne'.
      * <pre>
-     * cb.query().<span style="color: #DD4747">notExistsFollowByMeIdList</span>(new SubQuery&lt;FollowCB&gt;() {
+     * cb.query().<span style="color: #DD4747">notExistsFollowByMemberIdList</span>(new SubQuery&lt;FollowCB&gt;() {
      *     public void query(FollowCB subCB) {
      *         subCB.query().setXxx...
      *     }
      * });
      * </pre>
-     * @param subQuery The sub-query of MemberId_NotExistsReferrer_FollowByMeIdList for 'not exists'. (NotNull)
+     * @param subQuery The sub-query of MemberId_NotExistsReferrer_FollowByMemberIdList for 'not exists'. (NotNull)
      */
-    public void notExistsFollowByMeIdList(SubQuery<FollowCB> subQuery) {
+    public void notExistsFollowByMemberIdList(SubQuery<FollowCB> subQuery) {
         assertObjectNotNull("subQuery", subQuery);
         FollowCB cb = new FollowCB(); cb.xsetupForExistsReferrer(this);
         try { lock(); subQuery.query(cb); } finally { unlock(); }
-        String pp = keepMemberId_NotExistsReferrer_FollowByMeIdList(cb.query());
-        registerNotExistsReferrer(cb.query(), "MEMBER_ID", "ME_ID", pp, "followByMeIdList");
+        String pp = keepMemberId_NotExistsReferrer_FollowByMemberIdList(cb.query());
+        registerNotExistsReferrer(cb.query(), "MEMBER_ID", "MEMBER_ID", pp, "followByMemberIdList");
     }
-    public abstract String keepMemberId_NotExistsReferrer_FollowByMeIdList(FollowCQ sq);
+    public abstract String keepMemberId_NotExistsReferrer_FollowByMemberIdList(FollowCQ sq);
 
     /**
      * Set up NotExistsReferrer (correlated sub-query). <br />
@@ -412,18 +412,18 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * Set up InScopeRelation (sub-query). <br />
-     * {in (select ME_ID from follow where ...)} <br />
-     * follow by ME_ID, named 'followByMeIdAsOne'.
-     * @param subQuery The sub-query of FollowByMeIdList for 'in-scope'. (NotNull)
+     * {in (select MEMBER_ID from follow where ...)} <br />
+     * follow by MEMBER_ID, named 'followByMemberIdAsOne'.
+     * @param subQuery The sub-query of FollowByMemberIdList for 'in-scope'. (NotNull)
      */
-    public void inScopeFollowByMeIdList(SubQuery<FollowCB> subQuery) {
+    public void inScopeFollowByMemberIdList(SubQuery<FollowCB> subQuery) {
         assertObjectNotNull("subQuery", subQuery);
         FollowCB cb = new FollowCB(); cb.xsetupForInScopeRelation(this);
         try { lock(); subQuery.query(cb); } finally { unlock(); }
-        String pp = keepMemberId_InScopeRelation_FollowByMeIdList(cb.query());
-        registerInScopeRelation(cb.query(), "MEMBER_ID", "ME_ID", pp, "followByMeIdList");
+        String pp = keepMemberId_InScopeRelation_FollowByMemberIdList(cb.query());
+        registerInScopeRelation(cb.query(), "MEMBER_ID", "MEMBER_ID", pp, "followByMemberIdList");
     }
-    public abstract String keepMemberId_InScopeRelation_FollowByMeIdList(FollowCQ sq);
+    public abstract String keepMemberId_InScopeRelation_FollowByMemberIdList(FollowCQ sq);
 
     /**
      * Set up InScopeRelation (sub-query). <br />
@@ -502,18 +502,18 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * Set up NotInScopeRelation (sub-query). <br />
-     * {not in (select ME_ID from follow where ...)} <br />
-     * follow by ME_ID, named 'followByMeIdAsOne'.
-     * @param subQuery The sub-query of FollowByMeIdList for 'not in-scope'. (NotNull)
+     * {not in (select MEMBER_ID from follow where ...)} <br />
+     * follow by MEMBER_ID, named 'followByMemberIdAsOne'.
+     * @param subQuery The sub-query of FollowByMemberIdList for 'not in-scope'. (NotNull)
      */
-    public void notInScopeFollowByMeIdList(SubQuery<FollowCB> subQuery) {
+    public void notInScopeFollowByMemberIdList(SubQuery<FollowCB> subQuery) {
         assertObjectNotNull("subQuery", subQuery);
         FollowCB cb = new FollowCB(); cb.xsetupForInScopeRelation(this);
         try { lock(); subQuery.query(cb); } finally { unlock(); }
-        String pp = keepMemberId_NotInScopeRelation_FollowByMeIdList(cb.query());
-        registerNotInScopeRelation(cb.query(), "MEMBER_ID", "ME_ID", pp, "followByMeIdList");
+        String pp = keepMemberId_NotInScopeRelation_FollowByMemberIdList(cb.query());
+        registerNotInScopeRelation(cb.query(), "MEMBER_ID", "MEMBER_ID", pp, "followByMemberIdList");
     }
-    public abstract String keepMemberId_NotInScopeRelation_FollowByMeIdList(FollowCQ sq);
+    public abstract String keepMemberId_NotInScopeRelation_FollowByMemberIdList(FollowCQ sq);
 
     /**
      * Set up NotInScopeRelation (sub-query). <br />
@@ -590,14 +590,14 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
     }
     public abstract String keepMemberId_NotInScopeRelation_TweetList(TweetCQ sq);
 
-    public void xsderiveFollowByMeIdList(String fn, SubQuery<FollowCB> sq, String al, DerivedReferrerOption op) {
+    public void xsderiveFollowByMemberIdList(String fn, SubQuery<FollowCB> sq, String al, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
         FollowCB cb = new FollowCB(); cb.xsetupForDerivedReferrer(this);
         try { lock(); sq.query(cb); } finally { unlock(); }
-        String pp = keepMemberId_SpecifyDerivedReferrer_FollowByMeIdList(cb.query());
-        registerSpecifyDerivedReferrer(fn, cb.query(), "MEMBER_ID", "ME_ID", pp, "followByMeIdList", al, op);
+        String pp = keepMemberId_SpecifyDerivedReferrer_FollowByMemberIdList(cb.query());
+        registerSpecifyDerivedReferrer(fn, cb.query(), "MEMBER_ID", "MEMBER_ID", pp, "followByMemberIdList", al, op);
     }
-    public abstract String keepMemberId_SpecifyDerivedReferrer_FollowByMeIdList(FollowCQ sq);
+    public abstract String keepMemberId_SpecifyDerivedReferrer_FollowByMemberIdList(FollowCQ sq);
 
     public void xsderiveLoginList(String fn, SubQuery<LoginCB> sq, String al, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
@@ -620,9 +620,9 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
     /**
      * Prepare for (Query)DerivedReferrer (correlated sub-query). <br />
      * {FOO &lt;= (select max(BAR) from follow where ...)} <br />
-     * follow by ME_ID, named 'followByMeIdAsOne'.
+     * follow by MEMBER_ID, named 'followByMemberIdAsOne'.
      * <pre>
-     * cb.query().<span style="color: #DD4747">derivedFollowByMeIdList()</span>.<span style="color: #DD4747">max</span>(new SubQuery&lt;FollowCB&gt;() {
+     * cb.query().<span style="color: #DD4747">derivedFollowByMemberIdList()</span>.<span style="color: #DD4747">max</span>(new SubQuery&lt;FollowCB&gt;() {
      *     public void query(FollowCB subCB) {
      *         subCB.specify().<span style="color: #DD4747">columnFoo...</span> <span style="color: #3F7E5E">// derived column by function</span>
      *         subCB.query().setBar... <span style="color: #3F7E5E">// referrer condition</span>
@@ -631,25 +631,25 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
      * </pre>
      * @return The object to set up a function for referrer table. (NotNull)
      */
-    public HpQDRFunction<FollowCB> derivedFollowByMeIdList() {
-        return xcreateQDRFunctionFollowByMeIdList();
+    public HpQDRFunction<FollowCB> derivedFollowByMemberIdList() {
+        return xcreateQDRFunctionFollowByMemberIdList();
     }
-    protected HpQDRFunction<FollowCB> xcreateQDRFunctionFollowByMeIdList() {
+    protected HpQDRFunction<FollowCB> xcreateQDRFunctionFollowByMemberIdList() {
         return new HpQDRFunction<FollowCB>(new HpQDRSetupper<FollowCB>() {
             public void setup(String fn, SubQuery<FollowCB> sq, String rd, Object vl, DerivedReferrerOption op) {
-                xqderiveFollowByMeIdList(fn, sq, rd, vl, op);
+                xqderiveFollowByMemberIdList(fn, sq, rd, vl, op);
             }
         });
     }
-    public void xqderiveFollowByMeIdList(String fn, SubQuery<FollowCB> sq, String rd, Object vl, DerivedReferrerOption op) {
+    public void xqderiveFollowByMemberIdList(String fn, SubQuery<FollowCB> sq, String rd, Object vl, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
         FollowCB cb = new FollowCB(); cb.xsetupForDerivedReferrer(this);
         try { lock(); sq.query(cb); } finally { unlock(); }
-        String sqpp = keepMemberId_QueryDerivedReferrer_FollowByMeIdList(cb.query()); String prpp = keepMemberId_QueryDerivedReferrer_FollowByMeIdListParameter(vl);
-        registerQueryDerivedReferrer(fn, cb.query(), "MEMBER_ID", "ME_ID", sqpp, "followByMeIdList", rd, vl, prpp, op);
+        String sqpp = keepMemberId_QueryDerivedReferrer_FollowByMemberIdList(cb.query()); String prpp = keepMemberId_QueryDerivedReferrer_FollowByMemberIdListParameter(vl);
+        registerQueryDerivedReferrer(fn, cb.query(), "MEMBER_ID", "MEMBER_ID", sqpp, "followByMemberIdList", rd, vl, prpp, op);
     }
-    public abstract String keepMemberId_QueryDerivedReferrer_FollowByMeIdList(FollowCQ sq);
-    public abstract String keepMemberId_QueryDerivedReferrer_FollowByMeIdListParameter(Object vl);
+    public abstract String keepMemberId_QueryDerivedReferrer_FollowByMemberIdList(FollowCQ sq);
+    public abstract String keepMemberId_QueryDerivedReferrer_FollowByMemberIdListParameter(Object vl);
 
     /**
      * Prepare for (Query)DerivedReferrer (correlated sub-query). <br />
@@ -1208,167 +1208,399 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br />
-     * REGESTER_DATETIME: {NotNull, DATETIME(19)}
-     * @param regesterDatetime The value of regesterDatetime as equal. (NullAllowed: if null, no condition)
+     * INS_DATETIME: {NotNull, DATETIME(19)}
+     * @param insDatetime The value of insDatetime as equal. (NullAllowed: if null, no condition)
      */
-    public void setRegesterDatetime_Equal(java.sql.Timestamp regesterDatetime) {
-        regRegesterDatetime(CK_EQ,  regesterDatetime);
+    public void setInsDatetime_Equal(java.sql.Timestamp insDatetime) {
+        regInsDatetime(CK_EQ,  insDatetime);
     }
 
     /**
      * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br />
-     * REGESTER_DATETIME: {NotNull, DATETIME(19)}
-     * @param regesterDatetime The value of regesterDatetime as greaterThan. (NullAllowed: if null, no condition)
+     * INS_DATETIME: {NotNull, DATETIME(19)}
+     * @param insDatetime The value of insDatetime as greaterThan. (NullAllowed: if null, no condition)
      */
-    public void setRegesterDatetime_GreaterThan(java.sql.Timestamp regesterDatetime) {
-        regRegesterDatetime(CK_GT,  regesterDatetime);
+    public void setInsDatetime_GreaterThan(java.sql.Timestamp insDatetime) {
+        regInsDatetime(CK_GT,  insDatetime);
     }
 
     /**
      * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br />
-     * REGESTER_DATETIME: {NotNull, DATETIME(19)}
-     * @param regesterDatetime The value of regesterDatetime as lessThan. (NullAllowed: if null, no condition)
+     * INS_DATETIME: {NotNull, DATETIME(19)}
+     * @param insDatetime The value of insDatetime as lessThan. (NullAllowed: if null, no condition)
      */
-    public void setRegesterDatetime_LessThan(java.sql.Timestamp regesterDatetime) {
-        regRegesterDatetime(CK_LT,  regesterDatetime);
+    public void setInsDatetime_LessThan(java.sql.Timestamp insDatetime) {
+        regInsDatetime(CK_LT,  insDatetime);
     }
 
     /**
      * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br />
-     * REGESTER_DATETIME: {NotNull, DATETIME(19)}
-     * @param regesterDatetime The value of regesterDatetime as greaterEqual. (NullAllowed: if null, no condition)
+     * INS_DATETIME: {NotNull, DATETIME(19)}
+     * @param insDatetime The value of insDatetime as greaterEqual. (NullAllowed: if null, no condition)
      */
-    public void setRegesterDatetime_GreaterEqual(java.sql.Timestamp regesterDatetime) {
-        regRegesterDatetime(CK_GE,  regesterDatetime);
+    public void setInsDatetime_GreaterEqual(java.sql.Timestamp insDatetime) {
+        regInsDatetime(CK_GE,  insDatetime);
     }
 
     /**
      * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br />
-     * REGESTER_DATETIME: {NotNull, DATETIME(19)}
-     * @param regesterDatetime The value of regesterDatetime as lessEqual. (NullAllowed: if null, no condition)
+     * INS_DATETIME: {NotNull, DATETIME(19)}
+     * @param insDatetime The value of insDatetime as lessEqual. (NullAllowed: if null, no condition)
      */
-    public void setRegesterDatetime_LessEqual(java.sql.Timestamp regesterDatetime) {
-        regRegesterDatetime(CK_LE, regesterDatetime);
+    public void setInsDatetime_LessEqual(java.sql.Timestamp insDatetime) {
+        regInsDatetime(CK_LE, insDatetime);
     }
 
     /**
      * FromTo with various options. (versatile) {(default) fromDatetime &lt;= column &lt;= toDatetime} <br />
      * And NullIgnored, OnlyOnceRegistered. <br />
-     * REGESTER_DATETIME: {NotNull, DATETIME(19)}
-     * <pre>e.g. setRegesterDatetime_FromTo(fromDate, toDate, new <span style="color: #DD4747">FromToOption</span>().compareAsDate());</pre>
-     * @param fromDatetime The from-datetime(yyyy/MM/dd HH:mm:ss.SSS) of regesterDatetime. (NullAllowed: if null, no from-condition)
-     * @param toDatetime The to-datetime(yyyy/MM/dd HH:mm:ss.SSS) of regesterDatetime. (NullAllowed: if null, no to-condition)
+     * INS_DATETIME: {NotNull, DATETIME(19)}
+     * <pre>e.g. setInsDatetime_FromTo(fromDate, toDate, new <span style="color: #DD4747">FromToOption</span>().compareAsDate());</pre>
+     * @param fromDatetime The from-datetime(yyyy/MM/dd HH:mm:ss.SSS) of insDatetime. (NullAllowed: if null, no from-condition)
+     * @param toDatetime The to-datetime(yyyy/MM/dd HH:mm:ss.SSS) of insDatetime. (NullAllowed: if null, no to-condition)
      * @param fromToOption The option of from-to. (NotNull)
      */
-    public void setRegesterDatetime_FromTo(Date fromDatetime, Date toDatetime, FromToOption fromToOption) {
-        regFTQ((fromDatetime != null ? new java.sql.Timestamp(fromDatetime.getTime()) : null), (toDatetime != null ? new java.sql.Timestamp(toDatetime.getTime()) : null), getCValueRegesterDatetime(), "REGESTER_DATETIME", fromToOption);
+    public void setInsDatetime_FromTo(Date fromDatetime, Date toDatetime, FromToOption fromToOption) {
+        regFTQ((fromDatetime != null ? new java.sql.Timestamp(fromDatetime.getTime()) : null), (toDatetime != null ? new java.sql.Timestamp(toDatetime.getTime()) : null), getCValueInsDatetime(), "INS_DATETIME", fromToOption);
     }
 
     /**
      * DateFromTo. (Date means yyyy/MM/dd) {fromDate &lt;= column &lt; toDate + 1 day} <br />
      * And NullIgnored, OnlyOnceRegistered. <br />
-     * REGESTER_DATETIME: {NotNull, DATETIME(19)}
+     * INS_DATETIME: {NotNull, DATETIME(19)}
      * <pre>
      * e.g. from:{2007/04/10 08:24:53} to:{2007/04/16 14:36:29}
      *  column &gt;= '2007/04/10 00:00:00' and column <span style="color: #DD4747">&lt; '2007/04/17 00:00:00'</span>
      * </pre>
-     * @param fromDate The from-date(yyyy/MM/dd) of regesterDatetime. (NullAllowed: if null, no from-condition)
-     * @param toDate The to-date(yyyy/MM/dd) of regesterDatetime. (NullAllowed: if null, no to-condition)
+     * @param fromDate The from-date(yyyy/MM/dd) of insDatetime. (NullAllowed: if null, no from-condition)
+     * @param toDate The to-date(yyyy/MM/dd) of insDatetime. (NullAllowed: if null, no to-condition)
      */
-    public void setRegesterDatetime_DateFromTo(Date fromDate, Date toDate) {
-        setRegesterDatetime_FromTo(fromDate, toDate, new FromToOption().compareAsDate());
+    public void setInsDatetime_DateFromTo(Date fromDate, Date toDate) {
+        setInsDatetime_FromTo(fromDate, toDate, new FromToOption().compareAsDate());
     }
 
-    protected void regRegesterDatetime(ConditionKey ky, Object vl) { regQ(ky, vl, getCValueRegesterDatetime(), "REGESTER_DATETIME"); }
-    protected abstract ConditionValue getCValueRegesterDatetime();
+    protected void regInsDatetime(ConditionKey ky, Object vl) { regQ(ky, vl, getCValueInsDatetime(), "INS_DATETIME"); }
+    protected abstract ConditionValue getCValueInsDatetime();
 
     /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br />
-     * UPDATE_DATETIME: {DATETIME(19)}
-     * @param updateDatetime The value of updateDatetime as equal. (NullAllowed: if null, no condition)
+     * UPD_DATETIME: {NotNull, DATETIME(19)}
+     * @param updDatetime The value of updDatetime as equal. (NullAllowed: if null, no condition)
      */
-    public void setUpdateDatetime_Equal(java.sql.Timestamp updateDatetime) {
-        regUpdateDatetime(CK_EQ,  updateDatetime);
+    public void setUpdDatetime_Equal(java.sql.Timestamp updDatetime) {
+        regUpdDatetime(CK_EQ,  updDatetime);
     }
 
     /**
      * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br />
-     * UPDATE_DATETIME: {DATETIME(19)}
-     * @param updateDatetime The value of updateDatetime as greaterThan. (NullAllowed: if null, no condition)
+     * UPD_DATETIME: {NotNull, DATETIME(19)}
+     * @param updDatetime The value of updDatetime as greaterThan. (NullAllowed: if null, no condition)
      */
-    public void setUpdateDatetime_GreaterThan(java.sql.Timestamp updateDatetime) {
-        regUpdateDatetime(CK_GT,  updateDatetime);
+    public void setUpdDatetime_GreaterThan(java.sql.Timestamp updDatetime) {
+        regUpdDatetime(CK_GT,  updDatetime);
     }
 
     /**
      * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br />
-     * UPDATE_DATETIME: {DATETIME(19)}
-     * @param updateDatetime The value of updateDatetime as lessThan. (NullAllowed: if null, no condition)
+     * UPD_DATETIME: {NotNull, DATETIME(19)}
+     * @param updDatetime The value of updDatetime as lessThan. (NullAllowed: if null, no condition)
      */
-    public void setUpdateDatetime_LessThan(java.sql.Timestamp updateDatetime) {
-        regUpdateDatetime(CK_LT,  updateDatetime);
+    public void setUpdDatetime_LessThan(java.sql.Timestamp updDatetime) {
+        regUpdDatetime(CK_LT,  updDatetime);
     }
 
     /**
      * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br />
-     * UPDATE_DATETIME: {DATETIME(19)}
-     * @param updateDatetime The value of updateDatetime as greaterEqual. (NullAllowed: if null, no condition)
+     * UPD_DATETIME: {NotNull, DATETIME(19)}
+     * @param updDatetime The value of updDatetime as greaterEqual. (NullAllowed: if null, no condition)
      */
-    public void setUpdateDatetime_GreaterEqual(java.sql.Timestamp updateDatetime) {
-        regUpdateDatetime(CK_GE,  updateDatetime);
+    public void setUpdDatetime_GreaterEqual(java.sql.Timestamp updDatetime) {
+        regUpdDatetime(CK_GE,  updDatetime);
     }
 
     /**
      * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br />
-     * UPDATE_DATETIME: {DATETIME(19)}
-     * @param updateDatetime The value of updateDatetime as lessEqual. (NullAllowed: if null, no condition)
+     * UPD_DATETIME: {NotNull, DATETIME(19)}
+     * @param updDatetime The value of updDatetime as lessEqual. (NullAllowed: if null, no condition)
      */
-    public void setUpdateDatetime_LessEqual(java.sql.Timestamp updateDatetime) {
-        regUpdateDatetime(CK_LE, updateDatetime);
+    public void setUpdDatetime_LessEqual(java.sql.Timestamp updDatetime) {
+        regUpdDatetime(CK_LE, updDatetime);
     }
 
     /**
      * FromTo with various options. (versatile) {(default) fromDatetime &lt;= column &lt;= toDatetime} <br />
      * And NullIgnored, OnlyOnceRegistered. <br />
-     * UPDATE_DATETIME: {DATETIME(19)}
-     * <pre>e.g. setUpdateDatetime_FromTo(fromDate, toDate, new <span style="color: #DD4747">FromToOption</span>().compareAsDate());</pre>
-     * @param fromDatetime The from-datetime(yyyy/MM/dd HH:mm:ss.SSS) of updateDatetime. (NullAllowed: if null, no from-condition)
-     * @param toDatetime The to-datetime(yyyy/MM/dd HH:mm:ss.SSS) of updateDatetime. (NullAllowed: if null, no to-condition)
+     * UPD_DATETIME: {NotNull, DATETIME(19)}
+     * <pre>e.g. setUpdDatetime_FromTo(fromDate, toDate, new <span style="color: #DD4747">FromToOption</span>().compareAsDate());</pre>
+     * @param fromDatetime The from-datetime(yyyy/MM/dd HH:mm:ss.SSS) of updDatetime. (NullAllowed: if null, no from-condition)
+     * @param toDatetime The to-datetime(yyyy/MM/dd HH:mm:ss.SSS) of updDatetime. (NullAllowed: if null, no to-condition)
      * @param fromToOption The option of from-to. (NotNull)
      */
-    public void setUpdateDatetime_FromTo(Date fromDatetime, Date toDatetime, FromToOption fromToOption) {
-        regFTQ((fromDatetime != null ? new java.sql.Timestamp(fromDatetime.getTime()) : null), (toDatetime != null ? new java.sql.Timestamp(toDatetime.getTime()) : null), getCValueUpdateDatetime(), "UPDATE_DATETIME", fromToOption);
+    public void setUpdDatetime_FromTo(Date fromDatetime, Date toDatetime, FromToOption fromToOption) {
+        regFTQ((fromDatetime != null ? new java.sql.Timestamp(fromDatetime.getTime()) : null), (toDatetime != null ? new java.sql.Timestamp(toDatetime.getTime()) : null), getCValueUpdDatetime(), "UPD_DATETIME", fromToOption);
     }
 
     /**
      * DateFromTo. (Date means yyyy/MM/dd) {fromDate &lt;= column &lt; toDate + 1 day} <br />
      * And NullIgnored, OnlyOnceRegistered. <br />
-     * UPDATE_DATETIME: {DATETIME(19)}
+     * UPD_DATETIME: {NotNull, DATETIME(19)}
      * <pre>
      * e.g. from:{2007/04/10 08:24:53} to:{2007/04/16 14:36:29}
      *  column &gt;= '2007/04/10 00:00:00' and column <span style="color: #DD4747">&lt; '2007/04/17 00:00:00'</span>
      * </pre>
-     * @param fromDate The from-date(yyyy/MM/dd) of updateDatetime. (NullAllowed: if null, no from-condition)
-     * @param toDate The to-date(yyyy/MM/dd) of updateDatetime. (NullAllowed: if null, no to-condition)
+     * @param fromDate The from-date(yyyy/MM/dd) of updDatetime. (NullAllowed: if null, no from-condition)
+     * @param toDate The to-date(yyyy/MM/dd) of updDatetime. (NullAllowed: if null, no to-condition)
      */
-    public void setUpdateDatetime_DateFromTo(Date fromDate, Date toDate) {
-        setUpdateDatetime_FromTo(fromDate, toDate, new FromToOption().compareAsDate());
+    public void setUpdDatetime_DateFromTo(Date fromDate, Date toDate) {
+        setUpdDatetime_FromTo(fromDate, toDate, new FromToOption().compareAsDate());
+    }
+
+    protected void regUpdDatetime(ConditionKey ky, Object vl) { regQ(ky, vl, getCValueUpdDatetime(), "UPD_DATETIME"); }
+    protected abstract ConditionValue getCValueUpdDatetime();
+
+    /**
+     * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
+     * INS_TRACE: {NotNull, VARCHAR(256)}
+     * @param insTrace The value of insTrace as equal. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setInsTrace_Equal(String insTrace) {
+        doSetInsTrace_Equal(fRES(insTrace));
+    }
+
+    protected void doSetInsTrace_Equal(String insTrace) {
+        regInsTrace(CK_EQ, insTrace);
     }
 
     /**
-     * IsNull {is null}. And OnlyOnceRegistered. <br />
-     * UPDATE_DATETIME: {DATETIME(19)}
+     * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
+     * INS_TRACE: {NotNull, VARCHAR(256)}
+     * @param insTrace The value of insTrace as notEqual. (NullAllowed: if null (or empty), no condition)
      */
-    public void setUpdateDatetime_IsNull() { regUpdateDatetime(CK_ISN, DOBJ); }
+    public void setInsTrace_NotEqual(String insTrace) {
+        doSetInsTrace_NotEqual(fRES(insTrace));
+    }
+
+    protected void doSetInsTrace_NotEqual(String insTrace) {
+        regInsTrace(CK_NES, insTrace);
+    }
 
     /**
-     * IsNotNull {is not null}. And OnlyOnceRegistered. <br />
-     * UPDATE_DATETIME: {DATETIME(19)}
+     * GreaterThan(&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
+     * INS_TRACE: {NotNull, VARCHAR(256)}
+     * @param insTrace The value of insTrace as greaterThan. (NullAllowed: if null (or empty), no condition)
      */
-    public void setUpdateDatetime_IsNotNull() { regUpdateDatetime(CK_ISNN, DOBJ); }
+    public void setInsTrace_GreaterThan(String insTrace) {
+        regInsTrace(CK_GT, fRES(insTrace));
+    }
 
-    protected void regUpdateDatetime(ConditionKey ky, Object vl) { regQ(ky, vl, getCValueUpdateDatetime(), "UPDATE_DATETIME"); }
-    protected abstract ConditionValue getCValueUpdateDatetime();
+    /**
+     * LessThan(&lt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
+     * INS_TRACE: {NotNull, VARCHAR(256)}
+     * @param insTrace The value of insTrace as lessThan. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setInsTrace_LessThan(String insTrace) {
+        regInsTrace(CK_LT, fRES(insTrace));
+    }
+
+    /**
+     * GreaterEqual(&gt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
+     * INS_TRACE: {NotNull, VARCHAR(256)}
+     * @param insTrace The value of insTrace as greaterEqual. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setInsTrace_GreaterEqual(String insTrace) {
+        regInsTrace(CK_GE, fRES(insTrace));
+    }
+
+    /**
+     * LessEqual(&lt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
+     * INS_TRACE: {NotNull, VARCHAR(256)}
+     * @param insTrace The value of insTrace as lessEqual. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setInsTrace_LessEqual(String insTrace) {
+        regInsTrace(CK_LE, fRES(insTrace));
+    }
+
+    /**
+     * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br />
+     * INS_TRACE: {NotNull, VARCHAR(256)}
+     * @param insTraceList The collection of insTrace as inScope. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setInsTrace_InScope(Collection<String> insTraceList) {
+        doSetInsTrace_InScope(insTraceList);
+    }
+
+    public void doSetInsTrace_InScope(Collection<String> insTraceList) {
+        regINS(CK_INS, cTL(insTraceList), getCValueInsTrace(), "INS_TRACE");
+    }
+
+    /**
+     * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br />
+     * INS_TRACE: {NotNull, VARCHAR(256)}
+     * @param insTraceList The collection of insTrace as notInScope. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setInsTrace_NotInScope(Collection<String> insTraceList) {
+        doSetInsTrace_NotInScope(insTraceList);
+    }
+
+    public void doSetInsTrace_NotInScope(Collection<String> insTraceList) {
+        regINS(CK_NINS, cTL(insTraceList), getCValueInsTrace(), "INS_TRACE");
+    }
+
+    /**
+     * PrefixSearch {like 'xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br />
+     * INS_TRACE: {NotNull, VARCHAR(256)}
+     * @param insTrace The value of insTrace as prefixSearch. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setInsTrace_PrefixSearch(String insTrace) {
+        setInsTrace_LikeSearch(insTrace, cLSOP());
+    }
+
+    /**
+     * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br />
+     * INS_TRACE: {NotNull, VARCHAR(256)} <br />
+     * <pre>e.g. setInsTrace_LikeSearch("xxx", new <span style="color: #DD4747">LikeSearchOption</span>().likeContain());</pre>
+     * @param insTrace The value of insTrace as likeSearch. (NullAllowed: if null (or empty), no condition)
+     * @param likeSearchOption The option of like-search. (NotNull)
+     */
+    public void setInsTrace_LikeSearch(String insTrace, LikeSearchOption likeSearchOption) {
+        regLSQ(CK_LS, fRES(insTrace), getCValueInsTrace(), "INS_TRACE", likeSearchOption);
+    }
+
+    /**
+     * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br />
+     * And NullOrEmptyIgnored, SeveralRegistered. <br />
+     * INS_TRACE: {NotNull, VARCHAR(256)}
+     * @param insTrace The value of insTrace as notLikeSearch. (NullAllowed: if null (or empty), no condition)
+     * @param likeSearchOption The option of not-like-search. (NotNull)
+     */
+    public void setInsTrace_NotLikeSearch(String insTrace, LikeSearchOption likeSearchOption) {
+        regLSQ(CK_NLS, fRES(insTrace), getCValueInsTrace(), "INS_TRACE", likeSearchOption);
+    }
+
+    protected void regInsTrace(ConditionKey ky, Object vl) { regQ(ky, vl, getCValueInsTrace(), "INS_TRACE"); }
+    protected abstract ConditionValue getCValueInsTrace();
+
+    /**
+     * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
+     * UPD_TRACE: {NotNull, VARCHAR(256)}
+     * @param updTrace The value of updTrace as equal. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setUpdTrace_Equal(String updTrace) {
+        doSetUpdTrace_Equal(fRES(updTrace));
+    }
+
+    protected void doSetUpdTrace_Equal(String updTrace) {
+        regUpdTrace(CK_EQ, updTrace);
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
+     * UPD_TRACE: {NotNull, VARCHAR(256)}
+     * @param updTrace The value of updTrace as notEqual. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setUpdTrace_NotEqual(String updTrace) {
+        doSetUpdTrace_NotEqual(fRES(updTrace));
+    }
+
+    protected void doSetUpdTrace_NotEqual(String updTrace) {
+        regUpdTrace(CK_NES, updTrace);
+    }
+
+    /**
+     * GreaterThan(&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
+     * UPD_TRACE: {NotNull, VARCHAR(256)}
+     * @param updTrace The value of updTrace as greaterThan. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setUpdTrace_GreaterThan(String updTrace) {
+        regUpdTrace(CK_GT, fRES(updTrace));
+    }
+
+    /**
+     * LessThan(&lt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
+     * UPD_TRACE: {NotNull, VARCHAR(256)}
+     * @param updTrace The value of updTrace as lessThan. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setUpdTrace_LessThan(String updTrace) {
+        regUpdTrace(CK_LT, fRES(updTrace));
+    }
+
+    /**
+     * GreaterEqual(&gt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
+     * UPD_TRACE: {NotNull, VARCHAR(256)}
+     * @param updTrace The value of updTrace as greaterEqual. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setUpdTrace_GreaterEqual(String updTrace) {
+        regUpdTrace(CK_GE, fRES(updTrace));
+    }
+
+    /**
+     * LessEqual(&lt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
+     * UPD_TRACE: {NotNull, VARCHAR(256)}
+     * @param updTrace The value of updTrace as lessEqual. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setUpdTrace_LessEqual(String updTrace) {
+        regUpdTrace(CK_LE, fRES(updTrace));
+    }
+
+    /**
+     * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br />
+     * UPD_TRACE: {NotNull, VARCHAR(256)}
+     * @param updTraceList The collection of updTrace as inScope. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setUpdTrace_InScope(Collection<String> updTraceList) {
+        doSetUpdTrace_InScope(updTraceList);
+    }
+
+    public void doSetUpdTrace_InScope(Collection<String> updTraceList) {
+        regINS(CK_INS, cTL(updTraceList), getCValueUpdTrace(), "UPD_TRACE");
+    }
+
+    /**
+     * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br />
+     * UPD_TRACE: {NotNull, VARCHAR(256)}
+     * @param updTraceList The collection of updTrace as notInScope. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setUpdTrace_NotInScope(Collection<String> updTraceList) {
+        doSetUpdTrace_NotInScope(updTraceList);
+    }
+
+    public void doSetUpdTrace_NotInScope(Collection<String> updTraceList) {
+        regINS(CK_NINS, cTL(updTraceList), getCValueUpdTrace(), "UPD_TRACE");
+    }
+
+    /**
+     * PrefixSearch {like 'xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br />
+     * UPD_TRACE: {NotNull, VARCHAR(256)}
+     * @param updTrace The value of updTrace as prefixSearch. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setUpdTrace_PrefixSearch(String updTrace) {
+        setUpdTrace_LikeSearch(updTrace, cLSOP());
+    }
+
+    /**
+     * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br />
+     * UPD_TRACE: {NotNull, VARCHAR(256)} <br />
+     * <pre>e.g. setUpdTrace_LikeSearch("xxx", new <span style="color: #DD4747">LikeSearchOption</span>().likeContain());</pre>
+     * @param updTrace The value of updTrace as likeSearch. (NullAllowed: if null (or empty), no condition)
+     * @param likeSearchOption The option of like-search. (NotNull)
+     */
+    public void setUpdTrace_LikeSearch(String updTrace, LikeSearchOption likeSearchOption) {
+        regLSQ(CK_LS, fRES(updTrace), getCValueUpdTrace(), "UPD_TRACE", likeSearchOption);
+    }
+
+    /**
+     * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br />
+     * And NullOrEmptyIgnored, SeveralRegistered. <br />
+     * UPD_TRACE: {NotNull, VARCHAR(256)}
+     * @param updTrace The value of updTrace as notLikeSearch. (NullAllowed: if null (or empty), no condition)
+     * @param likeSearchOption The option of not-like-search. (NotNull)
+     */
+    public void setUpdTrace_NotLikeSearch(String updTrace, LikeSearchOption likeSearchOption) {
+        regLSQ(CK_NLS, fRES(updTrace), getCValueUpdTrace(), "UPD_TRACE", likeSearchOption);
+    }
+
+    protected void regUpdTrace(ConditionKey ky, Object vl) { regQ(ky, vl, getCValueUpdTrace(), "UPD_TRACE"); }
+    protected abstract ConditionValue getCValueUpdTrace();
 
     // ===================================================================================
     //                                                                     ScalarCondition
