@@ -50,7 +50,7 @@ public class MemberAction {
     // -----------------------------------------------------
     //                                          Display Data
     //                                          ------------
-    public ArrayList<Object> timeLine = new ArrayList<>();
+    public ArrayList<TweetDto> timeLine = new ArrayList<>();
     public String account;
     public String alreadyFollowingError;
     public String relationship;
@@ -72,12 +72,16 @@ public class MemberAction {
         account = memberForm.yourName;
         /* ツィートタイムラインを表示　*/
         TweetCB tweetCb = new TweetCB();
+        tweetCb.setupSelect_Member();
         tweetCb.query().setMemberId_Equal(member.getMemberId());
         tweetCb.query().addOrderBy_MemberId_Desc();
         ListResultBean<Tweet> tweetList = tweetBhv.selectList(tweetCb);
         for (Tweet tweet : tweetList) {
-            String inputTweets = tweet.getTweet();
-            timeLine.add(inputTweets);
+            TweetDto tweetDto = new TweetDto();
+            tweetDto.memberName = tweet.getMember().getUserName();
+            tweetDto.tweet = tweet.getTweet();
+            tweetDto.tweetTime = tweet.getTweetDatetime();
+            timeLine.add(tweetDto);
         }
         /* フォローできる相手か判断する */
         FollowCB followCb = new FollowCB();

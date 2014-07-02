@@ -370,6 +370,11 @@ public class BsTweetCB extends AbstractConditionBean {
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnUpdTrace() { return doColumn("UPD_TRACE"); }
+        /**
+         * TWEET_DATETIME: {NotNull, VARCHAR(50)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public HpSpecifiedColumn columnTweetDatetime() { return doColumn("TWEET_DATETIME"); }
         public void everyColumn() { doEveryColumn(); }
         public void exceptRecordMetaColumn() { doExceptRecordMetaColumn(); }
         @Override

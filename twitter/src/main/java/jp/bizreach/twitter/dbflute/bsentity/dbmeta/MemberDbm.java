@@ -221,7 +221,7 @@ public class MemberDbm extends AbstractDBMeta {
      */
     public ForeignInfo foreignFollowByYouIdAsOne() {
         Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnMemberId(), FollowDbm.getInstance().columnYouId());
-        return cfi("follow_ibfk_2", "followByYouIdAsOne", this, FollowDbm.getInstance(), mp, 0, null, true, false, true, false, null, null, false, "memberByYouId");
+        return cfi("follow_ibfk_1", "followByYouIdAsOne", this, FollowDbm.getInstance(), mp, 0, null, true, false, true, false, null, null, false, "memberByYouId");
     }
     /**
      * member_security by MEMBER_ID, named 'memberSecurityAsOne'.
@@ -249,7 +249,7 @@ public class MemberDbm extends AbstractDBMeta {
      */
     public ReferrerInfo referrerFollowByMemberIdList() {
         Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnMemberId(), FollowDbm.getInstance().columnMemberId());
-        return cri("follow_ibfk_1", "followByMemberIdList", this, FollowDbm.getInstance(), mp, false, "memberByMemberId");
+        return cri("follow_ibfk_2", "followByMemberIdList", this, FollowDbm.getInstance(), mp, false, "memberByMemberId");
     }
     /**
      * login by MEMBER_ID, named 'loginList'.

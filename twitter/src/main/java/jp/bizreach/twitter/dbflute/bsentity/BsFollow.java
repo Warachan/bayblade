@@ -36,7 +36,7 @@ import jp.bizreach.twitter.dbflute.exentity.*;
  *     
  * 
  * [foreign property]
- *     memberByMemberId, memberByYouId
+ *     memberByYouId, memberByMemberId
  * 
  * [referrer property]
  *     
@@ -176,25 +176,6 @@ public abstract class BsFollow implements Entity, Serializable, Cloneable {
     // ===================================================================================
     //                                                                    Foreign Property
     //                                                                    ================
-    /** member by my MEMBER_ID, named 'memberByMemberId'. */
-    protected Member _memberByMemberId;
-
-    /**
-     * [get] member by my MEMBER_ID, named 'memberByMemberId'.
-     * @return The entity of foreign property 'memberByMemberId'. (NullAllowed: when e.g. null FK column, no setupSelect)
-     */
-    public Member getMemberByMemberId() {
-        return _memberByMemberId;
-    }
-
-    /**
-     * [set] member by my MEMBER_ID, named 'memberByMemberId'.
-     * @param memberByMemberId The entity of foreign property 'memberByMemberId'. (NullAllowed)
-     */
-    public void setMemberByMemberId(Member memberByMemberId) {
-        _memberByMemberId = memberByMemberId;
-    }
-
     /** member by my YOU_ID, named 'memberByYouId'. */
     protected Member _memberByYouId;
 
@@ -212,6 +193,25 @@ public abstract class BsFollow implements Entity, Serializable, Cloneable {
      */
     public void setMemberByYouId(Member memberByYouId) {
         _memberByYouId = memberByYouId;
+    }
+
+    /** member by my MEMBER_ID, named 'memberByMemberId'. */
+    protected Member _memberByMemberId;
+
+    /**
+     * [get] member by my MEMBER_ID, named 'memberByMemberId'.
+     * @return The entity of foreign property 'memberByMemberId'. (NullAllowed: when e.g. null FK column, no setupSelect)
+     */
+    public Member getMemberByMemberId() {
+        return _memberByMemberId;
+    }
+
+    /**
+     * [set] member by my MEMBER_ID, named 'memberByMemberId'.
+     * @param memberByMemberId The entity of foreign property 'memberByMemberId'. (NullAllowed)
+     */
+    public void setMemberByMemberId(Member memberByMemberId) {
+        _memberByMemberId = memberByMemberId;
     }
 
     // ===================================================================================
@@ -321,10 +321,10 @@ public abstract class BsFollow implements Entity, Serializable, Cloneable {
         StringBuilder sb = new StringBuilder();
         sb.append(toString());
         String li = "\n  ";
-        if (_memberByMemberId != null)
-        { sb.append(li).append(xbRDS(_memberByMemberId, "memberByMemberId")); }
         if (_memberByYouId != null)
         { sb.append(li).append(xbRDS(_memberByYouId, "memberByYouId")); }
+        if (_memberByMemberId != null)
+        { sb.append(li).append(xbRDS(_memberByMemberId, "memberByMemberId")); }
         return sb.toString();
     }
     protected String xbRDS(Entity et, String name) { // buildRelationDisplayString()
@@ -362,8 +362,8 @@ public abstract class BsFollow implements Entity, Serializable, Cloneable {
     protected String buildRelationString() {
         StringBuilder sb = new StringBuilder();
         String cm = ",";
-        if (_memberByMemberId != null) { sb.append(cm).append("memberByMemberId"); }
         if (_memberByYouId != null) { sb.append(cm).append("memberByYouId"); }
+        if (_memberByMemberId != null) { sb.append(cm).append("memberByMemberId"); }
         if (sb.length() > cm.length()) {
             sb.delete(0, cm.length()).insert(0, "(").append(")");
         }

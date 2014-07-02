@@ -1,4 +1,42 @@
 map:{
+    ; 2014/07/02 11:24:27 = map:{
+        ; diffDate = 2014/07/02 11:24:27
+        ; tableDiff = map:{
+            ; tweet = map:{
+                ; tableName = tweet
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; TWEET_DATETIME = map:{
+                        ; columnName = TWEET_DATETIME
+                        ; diffType = CHANGE
+                        ; dbTypeDiff = map:{
+                            ; next = VARCHAR
+                            ; previous = DATETIME
+                        }
+                        ; columnSizeDiff = map:{
+                            ; next = 50
+                            ; previous = 19
+                        }
+                    }
+                }
+            }
+        }
+    }
+    ; 2014/07/02 10:19:13 = map:{
+        ; diffDate = 2014/07/02 10:19:13
+        ; tableDiff = map:{
+            ; tweet = map:{
+                ; tableName = tweet
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; TWEET_DATETIME = map:{
+                        ; columnName = TWEET_DATETIME
+                        ; diffType = ADD
+                    }
+                }
+            }
+        }
+    }
     ; 2014/07/01 19:07:27 = map:{
         ; diffDate = 2014/07/01 19:07:27
         ; tableDiff = map:{

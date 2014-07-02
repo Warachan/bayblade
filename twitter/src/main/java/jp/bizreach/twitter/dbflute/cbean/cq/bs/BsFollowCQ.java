@@ -286,37 +286,17 @@ public class BsFollowCQ extends AbstractBsFollowCQ {
     public void reflectRelationOnUnionQuery(ConditionQuery bqs, ConditionQuery uqs) {
         FollowCQ bq = (FollowCQ)bqs;
         FollowCQ uq = (FollowCQ)uqs;
-        if (bq.hasConditionQueryMemberByMemberId()) {
-            uq.queryMemberByMemberId().reflectRelationOnUnionQuery(bq.queryMemberByMemberId(), uq.queryMemberByMemberId());
-        }
         if (bq.hasConditionQueryMemberByYouId()) {
             uq.queryMemberByYouId().reflectRelationOnUnionQuery(bq.queryMemberByYouId(), uq.queryMemberByYouId());
+        }
+        if (bq.hasConditionQueryMemberByMemberId()) {
+            uq.queryMemberByMemberId().reflectRelationOnUnionQuery(bq.queryMemberByMemberId(), uq.queryMemberByMemberId());
         }
     }
 
     // ===================================================================================
     //                                                                       Foreign Query
     //                                                                       =============
-    /**
-     * Get the condition-query for relation table. <br />
-     * member by my MEMBER_ID, named 'memberByMemberId'.
-     * @return The instance of condition-query. (NotNull)
-     */
-    public MemberCQ queryMemberByMemberId() {
-        return getConditionQueryMemberByMemberId();
-    }
-    public MemberCQ getConditionQueryMemberByMemberId() {
-        String prop = "memberByMemberId";
-        if (!xhasQueRlMap(prop)) { xregQueRl(prop, xcreateQueryMemberByMemberId()); xsetupOuterJoinMemberByMemberId(); }
-        return xgetQueRlMap(prop);
-    }
-    protected MemberCQ xcreateQueryMemberByMemberId() {
-        String nrp = xresolveNRP("follow", "memberByMemberId"); String jan = xresolveJAN(nrp, xgetNNLvl());
-        return xinitRelCQ(new MemberCQ(this, xgetSqlClause(), jan, xgetNNLvl()), _baseCB, "memberByMemberId", nrp);
-    }
-    protected void xsetupOuterJoinMemberByMemberId() { xregOutJo("memberByMemberId"); }
-    public boolean hasConditionQueryMemberByMemberId() { return xhasQueRlMap("memberByMemberId"); }
-
     /**
      * Get the condition-query for relation table. <br />
      * member by my YOU_ID, named 'memberByYouId'.
@@ -336,6 +316,26 @@ public class BsFollowCQ extends AbstractBsFollowCQ {
     }
     protected void xsetupOuterJoinMemberByYouId() { xregOutJo("memberByYouId"); }
     public boolean hasConditionQueryMemberByYouId() { return xhasQueRlMap("memberByYouId"); }
+
+    /**
+     * Get the condition-query for relation table. <br />
+     * member by my MEMBER_ID, named 'memberByMemberId'.
+     * @return The instance of condition-query. (NotNull)
+     */
+    public MemberCQ queryMemberByMemberId() {
+        return getConditionQueryMemberByMemberId();
+    }
+    public MemberCQ getConditionQueryMemberByMemberId() {
+        String prop = "memberByMemberId";
+        if (!xhasQueRlMap(prop)) { xregQueRl(prop, xcreateQueryMemberByMemberId()); xsetupOuterJoinMemberByMemberId(); }
+        return xgetQueRlMap(prop);
+    }
+    protected MemberCQ xcreateQueryMemberByMemberId() {
+        String nrp = xresolveNRP("follow", "memberByMemberId"); String jan = xresolveJAN(nrp, xgetNNLvl());
+        return xinitRelCQ(new MemberCQ(this, xgetSqlClause(), jan, xgetNNLvl()), _baseCB, "memberByMemberId", nrp);
+    }
+    protected void xsetupOuterJoinMemberByMemberId() { xregOutJo("memberByMemberId"); }
+    public boolean hasConditionQueryMemberByMemberId() { return xhasQueRlMap("memberByMemberId"); }
 
     protected Map<String, Object> xfindFixedConditionDynamicParameterMap(String property) {
         return null;

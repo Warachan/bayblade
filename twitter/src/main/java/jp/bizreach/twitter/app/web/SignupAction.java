@@ -77,27 +77,31 @@ public class SignupAction {
         username = signupForm.username;
         Matcher emailMatcher = emailMatch();
         Matcher pswdMatcher = pswdMatch();
-
+        /* 必須項目が空欄でないことをチェック */
         if (newEmail == "" || newPassword == "" || username == "") {
             missingError = "*全ての欄は必須項目です。";
             return "/signup.jsp";
         }
+        /* ユーザ名がすでに使われていないかチェック */
         int nameCount = selectNameCount();
         if (nameCount > 0) {
             userError = "そのユーザ名はすでに使われています。";
             return "/signup.jsp";
         }
+        /* メールアドレスがすでに使われていないかチェック */
         if (emailMatcher.matches() && pswdMatcher.matches()) {
             int count = selectEmailCount();
             if (count > 0) {
                 overlapsError = "このメールアドレスはすでに登録されています。";
                 return "/signup.jsp";
             }
+            /* 上記の問題に引っかからなかったら、会員登録する */
             Date date = new Date();
             Timestamp timestamp = new Timestamp(date.getTime());
             sessionDto.email = newEmail;
             Member member = insertMember(timestamp);
             sessionDto.myId = member.getMemberId();
+            sessionDto.username = member.getUserName();
             LOG.debug("***" + sessionDto.myId);
 
             if (newPassword.equals(confirmPass)) {

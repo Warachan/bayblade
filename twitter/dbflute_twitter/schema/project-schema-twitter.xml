@@ -27,11 +27,11 @@
             size="1" type="CHAR"/>
         <foreign-key foreignSchema="twitter.$$NoNameSchema$$"
             foreignTable="member" name="follow_ibfk_1">
-            <reference foreign="MEMBER_ID" local="MEMBER_ID"/>
+            <reference foreign="MEMBER_ID" local="YOU_ID"/>
         </foreign-key>
         <foreign-key foreignSchema="twitter.$$NoNameSchema$$"
             foreignTable="member" name="follow_ibfk_2">
-            <reference foreign="MEMBER_ID" local="YOU_ID"/>
+            <reference foreign="MEMBER_ID" local="MEMBER_ID"/>
         </foreign-key>
         <unique name="YOU_ID">
             <unique-column name="YOU_ID" position="1"/>
@@ -139,7 +139,7 @@
         <column autoIncrement="true" comment="TWEET_ID" dbType="INT"
             javaType="Integer" name="TWEET_ID" pkName="PRIMARY"
             primaryKey="true" required="true" size="10" type="INTEGER"/>
-        <column comment="会員ID : 会員のID&#xa;" dbType="INT"
+        <column comment="会員ID : tweetした人のID" dbType="INT"
             javaType="Integer" name="MEMBER_ID" required="true"
             size="10" type="INTEGER"/>
         <column comment="TWEET" dbType="VARCHAR" javaType="String"
@@ -154,6 +154,9 @@
             name="INS_TRACE" required="true" size="256" type="VARCHAR"/>
         <column comment="UPD トレース" dbType="VARCHAR" javaType="String"
             name="UPD_TRACE" required="true" size="256" type="VARCHAR"/>
+        <column comment="TWEET日時 : ツィートした日時（共通カラムではなく、画面に表示するためのもの）"
+            dbType="VARCHAR" javaType="String" name="TWEET_DATETIME"
+            required="true" size="50" type="VARCHAR"/>
         <foreign-key foreignSchema="twitter.$$NoNameSchema$$"
             foreignTable="member" name="tweet_ibfk_1">
             <reference foreign="MEMBER_ID" local="MEMBER_ID"/>

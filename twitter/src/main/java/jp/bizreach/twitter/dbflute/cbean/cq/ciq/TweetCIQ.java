@@ -72,6 +72,7 @@ public class TweetCIQ extends AbstractBsTweetCQ {
     protected ConditionValue getCValueUpdDatetime() { return _myCQ.getUpdDatetime(); }
     protected ConditionValue getCValueInsTrace() { return _myCQ.getInsTrace(); }
     protected ConditionValue getCValueUpdTrace() { return _myCQ.getUpdTrace(); }
+    protected ConditionValue getCValueTweetDatetime() { return _myCQ.getTweetDatetime(); }
     protected Map<String, Object> xfindFixedConditionDynamicParameterMap(String pp) { return null; }
     public String keepScalarCondition(TweetCQ sq)
     { throwIICBOE("ScalarCondition"); return null; }

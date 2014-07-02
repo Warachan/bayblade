@@ -61,3 +61,9 @@ handydateで日付チェック
 　　				<html:optionsCollection name="birthMonth" value="${f:h(monthList[status.index])}"/>
 				</html:select>
 				<s:submit property="setBirthday"/><br>
+
+	<html:text property="searchName" size="30" value=""/><br>
+	<c:forEach items="${candidateList}" var="items" varStatus="status">
+			<input type="hidden" name="toFollowMember" value="${f:h(candidateList[status.index])}"/>
+			<s:link href="/member/${f:h(candidateList[status.index])}">${f:h(candidateList[status.index])}</s:link>
+       	</c:forEach>

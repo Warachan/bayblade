@@ -18,7 +18,7 @@ import jp.bizreach.twitter.dbflute.exentity.*;
  *     TWEET_ID
  * 
  * [column]
- *     TWEET_ID, MEMBER_ID, TWEET, INS_DATETIME, UPD_DATETIME, INS_TRACE, UPD_TRACE
+ *     TWEET_ID, MEMBER_ID, TWEET, INS_DATETIME, UPD_DATETIME, INS_TRACE, UPD_TRACE, TWEET_DATETIME
  * 
  * [sequence]
  *     
@@ -50,6 +50,7 @@ import jp.bizreach.twitter.dbflute.exentity.*;
  * java.sql.Timestamp updDatetime = entity.getUpdDatetime();
  * String insTrace = entity.getInsTrace();
  * String updTrace = entity.getUpdTrace();
+ * String tweetDatetime = entity.getTweetDatetime();
  * entity.setTweetId(tweetId);
  * entity.setMemberId(memberId);
  * entity.setTweet(tweet);
@@ -57,6 +58,7 @@ import jp.bizreach.twitter.dbflute.exentity.*;
  * entity.setUpdDatetime(updDatetime);
  * entity.setInsTrace(insTrace);
  * entity.setUpdTrace(updTrace);
+ * entity.setTweetDatetime(tweetDatetime);
  * = = = = = = = = = =/
  * </pre>
  * @author DBFlute(AutoGenerator)
@@ -95,6 +97,9 @@ public abstract class BsTweet implements Entity, Serializable, Cloneable {
 
     /** UPD_TRACE: {NotNull, VARCHAR(256)} */
     protected String _updTrace;
+
+    /** TWEET_DATETIME: {NotNull, VARCHAR(50)} */
+    protected String _tweetDatetime;
 
     // -----------------------------------------------------
     //                                              Internal
@@ -315,6 +320,7 @@ public abstract class BsTweet implements Entity, Serializable, Cloneable {
         sb.append(dm).append(getUpdDatetime());
         sb.append(dm).append(getInsTrace());
         sb.append(dm).append(getUpdTrace());
+        sb.append(dm).append(getTweetDatetime());
         if (sb.length() > dm.length()) {
             sb.delete(0, dm.length());
         }
@@ -367,7 +373,7 @@ public abstract class BsTweet implements Entity, Serializable, Cloneable {
 
     /**
      * [get] MEMBER_ID: {IX, NotNull, INT(10), FK to member} <br />
-     * 会員ID : 会員のID
+     * 会員ID : tweetした人のID
      * @return The value of the column 'MEMBER_ID'. (basically NotNull if selected: for the constraint)
      */
     public Integer getMemberId() {
@@ -376,7 +382,7 @@ public abstract class BsTweet implements Entity, Serializable, Cloneable {
 
     /**
      * [set] MEMBER_ID: {IX, NotNull, INT(10), FK to member} <br />
-     * 会員ID : 会員のID
+     * 会員ID : tweetした人のID
      * @param memberId The value of the column 'MEMBER_ID'. (basically NotNull if update: for the constraint)
      */
     public void setMemberId(Integer memberId) {
@@ -477,5 +483,24 @@ public abstract class BsTweet implements Entity, Serializable, Cloneable {
     public void setUpdTrace(String updTrace) {
         __modifiedProperties.addPropertyName("updTrace");
         _updTrace = updTrace;
+    }
+
+    /**
+     * [get] TWEET_DATETIME: {NotNull, VARCHAR(50)} <br />
+     * TWEET日時 : ツィートした日時（共通カラムではなく、画面に表示するためのもの）
+     * @return The value of the column 'TWEET_DATETIME'. (basically NotNull if selected: for the constraint)
+     */
+    public String getTweetDatetime() {
+        return _tweetDatetime;
+    }
+
+    /**
+     * [set] TWEET_DATETIME: {NotNull, VARCHAR(50)} <br />
+     * TWEET日時 : ツィートした日時（共通カラムではなく、画面に表示するためのもの）
+     * @param tweetDatetime The value of the column 'TWEET_DATETIME'. (basically NotNull if update: for the constraint)
+     */
+    public void setTweetDatetime(String tweetDatetime) {
+        __modifiedProperties.addPropertyName("tweetDatetime");
+        _tweetDatetime = tweetDatetime;
     }
 }

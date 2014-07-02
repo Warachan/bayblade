@@ -219,6 +219,26 @@ public class BsTweetCQ extends AbstractBsTweetCQ {
      */
     public BsTweetCQ addOrderBy_UpdTrace_Desc() { regOBD("UPD_TRACE"); return this; }
 
+    protected ConditionValue _tweetDatetime;
+    public ConditionValue getTweetDatetime()
+    { if (_tweetDatetime == null) { _tweetDatetime = nCV(); }
+      return _tweetDatetime; }
+    protected ConditionValue getCValueTweetDatetime() { return getTweetDatetime(); }
+
+    /** 
+     * Add order-by as ascend. <br />
+     * TWEET_DATETIME: {NotNull, VARCHAR(50)}
+     * @return this. (NotNull)
+     */
+    public BsTweetCQ addOrderBy_TweetDatetime_Asc() { regOBA("TWEET_DATETIME"); return this; }
+
+    /**
+     * Add order-by as descend. <br />
+     * TWEET_DATETIME: {NotNull, VARCHAR(50)}
+     * @return this. (NotNull)
+     */
+    public BsTweetCQ addOrderBy_TweetDatetime_Desc() { regOBD("TWEET_DATETIME"); return this; }
+
     // ===================================================================================
     //                                                             SpecifiedDerivedOrderBy
     //                                                             =======================

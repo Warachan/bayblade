@@ -813,6 +813,128 @@ public abstract class AbstractBsTweetCQ extends AbstractConditionQuery {
     protected void regUpdTrace(ConditionKey ky, Object vl) { regQ(ky, vl, getCValueUpdTrace(), "UPD_TRACE"); }
     protected abstract ConditionValue getCValueUpdTrace();
 
+    /**
+     * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
+     * TWEET_DATETIME: {NotNull, VARCHAR(50)}
+     * @param tweetDatetime The value of tweetDatetime as equal. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setTweetDatetime_Equal(String tweetDatetime) {
+        doSetTweetDatetime_Equal(fRES(tweetDatetime));
+    }
+
+    protected void doSetTweetDatetime_Equal(String tweetDatetime) {
+        regTweetDatetime(CK_EQ, tweetDatetime);
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
+     * TWEET_DATETIME: {NotNull, VARCHAR(50)}
+     * @param tweetDatetime The value of tweetDatetime as notEqual. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setTweetDatetime_NotEqual(String tweetDatetime) {
+        doSetTweetDatetime_NotEqual(fRES(tweetDatetime));
+    }
+
+    protected void doSetTweetDatetime_NotEqual(String tweetDatetime) {
+        regTweetDatetime(CK_NES, tweetDatetime);
+    }
+
+    /**
+     * GreaterThan(&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
+     * TWEET_DATETIME: {NotNull, VARCHAR(50)}
+     * @param tweetDatetime The value of tweetDatetime as greaterThan. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setTweetDatetime_GreaterThan(String tweetDatetime) {
+        regTweetDatetime(CK_GT, fRES(tweetDatetime));
+    }
+
+    /**
+     * LessThan(&lt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
+     * TWEET_DATETIME: {NotNull, VARCHAR(50)}
+     * @param tweetDatetime The value of tweetDatetime as lessThan. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setTweetDatetime_LessThan(String tweetDatetime) {
+        regTweetDatetime(CK_LT, fRES(tweetDatetime));
+    }
+
+    /**
+     * GreaterEqual(&gt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
+     * TWEET_DATETIME: {NotNull, VARCHAR(50)}
+     * @param tweetDatetime The value of tweetDatetime as greaterEqual. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setTweetDatetime_GreaterEqual(String tweetDatetime) {
+        regTweetDatetime(CK_GE, fRES(tweetDatetime));
+    }
+
+    /**
+     * LessEqual(&lt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
+     * TWEET_DATETIME: {NotNull, VARCHAR(50)}
+     * @param tweetDatetime The value of tweetDatetime as lessEqual. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setTweetDatetime_LessEqual(String tweetDatetime) {
+        regTweetDatetime(CK_LE, fRES(tweetDatetime));
+    }
+
+    /**
+     * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br />
+     * TWEET_DATETIME: {NotNull, VARCHAR(50)}
+     * @param tweetDatetimeList The collection of tweetDatetime as inScope. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setTweetDatetime_InScope(Collection<String> tweetDatetimeList) {
+        doSetTweetDatetime_InScope(tweetDatetimeList);
+    }
+
+    public void doSetTweetDatetime_InScope(Collection<String> tweetDatetimeList) {
+        regINS(CK_INS, cTL(tweetDatetimeList), getCValueTweetDatetime(), "TWEET_DATETIME");
+    }
+
+    /**
+     * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br />
+     * TWEET_DATETIME: {NotNull, VARCHAR(50)}
+     * @param tweetDatetimeList The collection of tweetDatetime as notInScope. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setTweetDatetime_NotInScope(Collection<String> tweetDatetimeList) {
+        doSetTweetDatetime_NotInScope(tweetDatetimeList);
+    }
+
+    public void doSetTweetDatetime_NotInScope(Collection<String> tweetDatetimeList) {
+        regINS(CK_NINS, cTL(tweetDatetimeList), getCValueTweetDatetime(), "TWEET_DATETIME");
+    }
+
+    /**
+     * PrefixSearch {like 'xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br />
+     * TWEET_DATETIME: {NotNull, VARCHAR(50)}
+     * @param tweetDatetime The value of tweetDatetime as prefixSearch. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setTweetDatetime_PrefixSearch(String tweetDatetime) {
+        setTweetDatetime_LikeSearch(tweetDatetime, cLSOP());
+    }
+
+    /**
+     * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br />
+     * TWEET_DATETIME: {NotNull, VARCHAR(50)} <br />
+     * <pre>e.g. setTweetDatetime_LikeSearch("xxx", new <span style="color: #DD4747">LikeSearchOption</span>().likeContain());</pre>
+     * @param tweetDatetime The value of tweetDatetime as likeSearch. (NullAllowed: if null (or empty), no condition)
+     * @param likeSearchOption The option of like-search. (NotNull)
+     */
+    public void setTweetDatetime_LikeSearch(String tweetDatetime, LikeSearchOption likeSearchOption) {
+        regLSQ(CK_LS, fRES(tweetDatetime), getCValueTweetDatetime(), "TWEET_DATETIME", likeSearchOption);
+    }
+
+    /**
+     * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br />
+     * And NullOrEmptyIgnored, SeveralRegistered. <br />
+     * TWEET_DATETIME: {NotNull, VARCHAR(50)}
+     * @param tweetDatetime The value of tweetDatetime as notLikeSearch. (NullAllowed: if null (or empty), no condition)
+     * @param likeSearchOption The option of not-like-search. (NotNull)
+     */
+    public void setTweetDatetime_NotLikeSearch(String tweetDatetime, LikeSearchOption likeSearchOption) {
+        regLSQ(CK_NLS, fRES(tweetDatetime), getCValueTweetDatetime(), "TWEET_DATETIME", likeSearchOption);
+    }
+
+    protected void regTweetDatetime(ConditionKey ky, Object vl) { regQ(ky, vl, getCValueTweetDatetime(), "TWEET_DATETIME"); }
+    protected abstract ConditionValue getCValueTweetDatetime();
+
     // ===================================================================================
     //                                                                     ScalarCondition
     //                                                                     ===============

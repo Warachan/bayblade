@@ -337,7 +337,7 @@ dl.procedurelist dd.column pre {
 	</tr>
 	<tr>
 		<td class="rownumcell">6</td>
-		<td><a href="#tweet" title="type=TABLE, primaryKey={TWEET_ID}, nameLength=5, columnCount=7">tweet</a></td>
+		<td><a href="#tweet" title="type=TABLE, primaryKey={TWEET_ID}, nameLength=5, columnCount=8">tweet</a></td>
 		<td class="typecell">TABLE</td>
 		<td class="relcell"><a href="#member" title="tweet_ibfk_1">member</a></td>
 		<td class="relcell">&nbsp;</td>
@@ -401,7 +401,7 @@ follow
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
 		<td class="defvalcell"> &nbsp;</td>
-		<td class="relcell"><a href="#member" title="follow_ibfk_2">member</a>&nbsp;</td>
+		<td class="relcell"><a href="#member" title="follow_ibfk_1">member</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
 		<td class="commentcell"> フォローする人のID&nbsp;:&nbsp;会員のID</td>
@@ -419,7 +419,7 @@ follow
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
 		<td class="defvalcell"> &nbsp;</td>
-		<td class="relcell"><a href="#member" title="follow_ibfk_1">member</a>&nbsp;</td>
+		<td class="relcell"><a href="#member" title="follow_ibfk_2">member</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
 		<td class="commentcell"> フォローされる人のID&nbsp;:&nbsp;フォローしている自分のID</td>
@@ -1042,7 +1042,7 @@ member_withdraw
 		<td class="subcell">Timestamp</td>
 	</tr>
 </table>
-  <h2 id="tweet" title="type=TABLE, primaryKey={TWEET_ID}, nameLength=5, columnCount=7">
+  <h2 id="tweet" title="type=TABLE, primaryKey={TWEET_ID}, nameLength=5, columnCount=8">
 tweet
 </h2>
 <p class="tablecomment">TWEET</p>
@@ -1096,7 +1096,7 @@ tweet
 		<td class="relcell"><a href="#member" title="tweet_ibfk_1">member</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"> 会員ID&nbsp;:&nbsp;会員のID</td>
+		<td class="commentcell"> 会員ID&nbsp;:&nbsp;tweetした人のID</td>
 		<td class="subcell">memberId</td>
 		<td class="subcell">Integer</td>
 	</tr>
@@ -1183,6 +1183,23 @@ tweet
 		<td class="relcell"> &nbsp;</td>
 		<td class="commentcell"> UPD&nbsp;トレース</td>
 		<td class="subcell">updTrace</td>
+		<td class="subcell">String</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">8</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td id="tweet_tweet_datetime">TWEET_DATETIME</td>
+		<td class="typecell">VARCHAR</td>
+		<td class="sizecell"> 50 </td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> TWEET日時&nbsp;:&nbsp;ツィートした日時（共通カラムではなく、画面に表示するためのもの）</td>
+		<td class="subcell">tweetDatetime</td>
 		<td class="subcell">String</td>
 	</tr>
 </table>

@@ -24,7 +24,7 @@ import jp.bizreach.twitter.dbflute.cbean.*;
  *     TWEET_ID
  *
  * [column]
- *     TWEET_ID, MEMBER_ID, TWEET, INS_DATETIME, UPD_DATETIME, INS_TRACE, UPD_TRACE
+ *     TWEET_ID, MEMBER_ID, TWEET, INS_DATETIME, UPD_DATETIME, INS_TRACE, UPD_TRACE, TWEET_DATETIME
  *
  * [sequence]
  *     

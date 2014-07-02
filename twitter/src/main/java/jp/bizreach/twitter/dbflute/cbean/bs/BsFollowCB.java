@@ -273,34 +273,6 @@ public class BsFollowCB extends AbstractConditionBean {
     // ===================================================================================
     //                                                                         SetupSelect
     //                                                                         ===========
-    protected MemberNss _nssMemberByMemberId;
-    public MemberNss getNssMemberByMemberId() {
-        if (_nssMemberByMemberId == null) { _nssMemberByMemberId = new MemberNss(null); }
-        return _nssMemberByMemberId;
-    }
-    /**
-     * Set up relation columns to select clause. <br />
-     * member by my MEMBER_ID, named 'memberByMemberId'.
-     * <pre>
-     * FollowCB cb = new FollowCB();
-     * cb.<span style="color: #DD4747">setupSelect_MemberByMemberId()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
-     * cb.query().setFoo...(value);
-     * Follow follow = followBhv.selectEntityWithDeletedCheck(cb);
-     * ... = follow.<span style="color: #DD4747">getMemberByMemberId()</span>; <span style="color: #3F7E5E">// you can get by using SetupSelect</span>
-     * </pre>
-     * @return The set-upper of nested relation. {setupSelect...().with[nested-relation]} (NotNull)
-     */
-    public MemberNss setupSelect_MemberByMemberId() {
-        assertSetupSelectPurpose("memberByMemberId");
-        if (hasSpecifiedColumn()) { // if reverse call
-            specify().columnMemberId();
-        }
-        doSetupSelect(new SsCall() { public ConditionQuery qf() { return query().queryMemberByMemberId(); } });
-        if (_nssMemberByMemberId == null || !_nssMemberByMemberId.hasConditionQuery())
-        { _nssMemberByMemberId = new MemberNss(query().queryMemberByMemberId()); }
-        return _nssMemberByMemberId;
-    }
-
     protected MemberNss _nssMemberByYouId;
     public MemberNss getNssMemberByYouId() {
         if (_nssMemberByYouId == null) { _nssMemberByYouId = new MemberNss(null); }
@@ -327,6 +299,34 @@ public class BsFollowCB extends AbstractConditionBean {
         if (_nssMemberByYouId == null || !_nssMemberByYouId.hasConditionQuery())
         { _nssMemberByYouId = new MemberNss(query().queryMemberByYouId()); }
         return _nssMemberByYouId;
+    }
+
+    protected MemberNss _nssMemberByMemberId;
+    public MemberNss getNssMemberByMemberId() {
+        if (_nssMemberByMemberId == null) { _nssMemberByMemberId = new MemberNss(null); }
+        return _nssMemberByMemberId;
+    }
+    /**
+     * Set up relation columns to select clause. <br />
+     * member by my MEMBER_ID, named 'memberByMemberId'.
+     * <pre>
+     * FollowCB cb = new FollowCB();
+     * cb.<span style="color: #DD4747">setupSelect_MemberByMemberId()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
+     * cb.query().setFoo...(value);
+     * Follow follow = followBhv.selectEntityWithDeletedCheck(cb);
+     * ... = follow.<span style="color: #DD4747">getMemberByMemberId()</span>; <span style="color: #3F7E5E">// you can get by using SetupSelect</span>
+     * </pre>
+     * @return The set-upper of nested relation. {setupSelect...().with[nested-relation]} (NotNull)
+     */
+    public MemberNss setupSelect_MemberByMemberId() {
+        assertSetupSelectPurpose("memberByMemberId");
+        if (hasSpecifiedColumn()) { // if reverse call
+            specify().columnMemberId();
+        }
+        doSetupSelect(new SsCall() { public ConditionQuery qf() { return query().queryMemberByMemberId(); } });
+        if (_nssMemberByMemberId == null || !_nssMemberByMemberId.hasConditionQuery())
+        { _nssMemberByMemberId = new MemberNss(query().queryMemberByMemberId()); }
+        return _nssMemberByMemberId;
     }
 
     // [DBFlute-0.7.4]
@@ -371,8 +371,8 @@ public class BsFollowCB extends AbstractConditionBean {
     }
 
     public static class HpSpecification extends HpAbstractSpecification<FollowCQ> {
-        protected MemberCB.HpSpecification _memberByMemberId;
         protected MemberCB.HpSpecification _memberByYouId;
+        protected MemberCB.HpSpecification _memberByMemberId;
         public HpSpecification(ConditionBean baseCB, HpSpQyCall<FollowCQ> qyCall
                              , HpCBPurpose purpose, DBMetaProvider dbmetaProvider)
         { super(baseCB, qyCall, purpose, dbmetaProvider); }
@@ -421,38 +421,17 @@ public class BsFollowCB extends AbstractConditionBean {
         @Override
         protected void doSpecifyRequiredColumn() {
             columnFollowId(); // PK
-            if (qyCall().qy().hasConditionQueryMemberByMemberId()
-                    || qyCall().qy().xgetReferrerQuery() instanceof MemberCQ) {
-                columnMemberId(); // FK or one-to-one referrer
-            }
             if (qyCall().qy().hasConditionQueryMemberByYouId()
                     || qyCall().qy().xgetReferrerQuery() instanceof MemberCQ) {
                 columnYouId(); // FK or one-to-one referrer
             }
+            if (qyCall().qy().hasConditionQueryMemberByMemberId()
+                    || qyCall().qy().xgetReferrerQuery() instanceof MemberCQ) {
+                columnMemberId(); // FK or one-to-one referrer
+            }
         }
         @Override
         protected String getTableDbName() { return "follow"; }
-        /**
-         * Prepare to specify functions about relation table. <br />
-         * member by my MEMBER_ID, named 'memberByMemberId'.
-         * @return The instance for specification for relation table to specify. (NotNull)
-         */
-        public MemberCB.HpSpecification specifyMemberByMemberId() {
-            assertRelation("memberByMemberId");
-            if (_memberByMemberId == null) {
-                _memberByMemberId = new MemberCB.HpSpecification(_baseCB, new HpSpQyCall<MemberCQ>() {
-                    public boolean has() { return _qyCall.has() && _qyCall.qy().hasConditionQueryMemberByMemberId(); }
-                    public MemberCQ qy() { return _qyCall.qy().queryMemberByMemberId(); } }
-                    , _purpose, _dbmetaProvider);
-                if (xhasSyncQyCall()) { // inherits it
-                    _memberByMemberId.xsetSyncQyCall(new HpSpQyCall<MemberCQ>() {
-                        public boolean has() { return xsyncQyCall().has() && xsyncQyCall().qy().hasConditionQueryMemberByMemberId(); }
-                        public MemberCQ qy() { return xsyncQyCall().qy().queryMemberByMemberId(); }
-                    });
-                }
-            }
-            return _memberByMemberId;
-        }
         /**
          * Prepare to specify functions about relation table. <br />
          * member by my YOU_ID, named 'memberByYouId'.
@@ -473,6 +452,27 @@ public class BsFollowCB extends AbstractConditionBean {
                 }
             }
             return _memberByYouId;
+        }
+        /**
+         * Prepare to specify functions about relation table. <br />
+         * member by my MEMBER_ID, named 'memberByMemberId'.
+         * @return The instance for specification for relation table to specify. (NotNull)
+         */
+        public MemberCB.HpSpecification specifyMemberByMemberId() {
+            assertRelation("memberByMemberId");
+            if (_memberByMemberId == null) {
+                _memberByMemberId = new MemberCB.HpSpecification(_baseCB, new HpSpQyCall<MemberCQ>() {
+                    public boolean has() { return _qyCall.has() && _qyCall.qy().hasConditionQueryMemberByMemberId(); }
+                    public MemberCQ qy() { return _qyCall.qy().queryMemberByMemberId(); } }
+                    , _purpose, _dbmetaProvider);
+                if (xhasSyncQyCall()) { // inherits it
+                    _memberByMemberId.xsetSyncQyCall(new HpSpQyCall<MemberCQ>() {
+                        public boolean has() { return xsyncQyCall().has() && xsyncQyCall().qy().hasConditionQueryMemberByMemberId(); }
+                        public MemberCQ qy() { return xsyncQyCall().qy().queryMemberByMemberId(); }
+                    });
+                }
+            }
+            return _memberByMemberId;
         }
         /**
          * Prepare for (Specify)MyselfDerived (SubQuery).

@@ -42,7 +42,7 @@ import jp.bizreach.twitter.dbflute.cbean.*;
  *     
  *
  * [foreign property]
- *     memberByMemberId, memberByYouId
+ *     memberByYouId, memberByMemberId
  *
  * [referrer property]
  *     
@@ -489,16 +489,16 @@ public abstract class BsFollowBhv extends AbstractBehaviorWritable {
      * @param followList The list of follow. (NotNull, EmptyAllowed)
      * @return The list of foreign table. (NotNull, EmptyAllowed, NotNullElement)
      */
-    public List<Member> pulloutMemberByMemberId(List<Follow> followList)
-    { return helpPulloutInternally(followList, "memberByMemberId"); }
+    public List<Member> pulloutMemberByYouId(List<Follow> followList)
+    { return helpPulloutInternally(followList, "memberByYouId"); }
 
     /**
      * Pull out the list of foreign table 'Member'.
      * @param followList The list of follow. (NotNull, EmptyAllowed)
      * @return The list of foreign table. (NotNull, EmptyAllowed, NotNullElement)
      */
-    public List<Member> pulloutMemberByYouId(List<Follow> followList)
-    { return helpPulloutInternally(followList, "memberByYouId"); }
+    public List<Member> pulloutMemberByMemberId(List<Follow> followList)
+    { return helpPulloutInternally(followList, "memberByMemberId"); }
 
     // ===================================================================================
     //                                                                      Extract Column

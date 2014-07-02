@@ -148,28 +148,6 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * Set up ExistsReferrer (correlated sub-query). <br />
-     * {exists (select MEMBER_ID from follow where ...)} <br />
-     * follow by MEMBER_ID, named 'followByMemberIdAsOne'.
-     * <pre>
-     * cb.query().<span style="color: #DD4747">existsFollowByMemberIdList</span>(new SubQuery&lt;FollowCB&gt;() {
-     *     public void query(FollowCB subCB) {
-     *         subCB.query().setXxx...
-     *     }
-     * });
-     * </pre>
-     * @param subQuery The sub-query of FollowByMemberIdList for 'exists'. (NotNull)
-     */
-    public void existsFollowByMemberIdList(SubQuery<FollowCB> subQuery) {
-        assertObjectNotNull("subQuery", subQuery);
-        FollowCB cb = new FollowCB(); cb.xsetupForExistsReferrer(this);
-        try { lock(); subQuery.query(cb); } finally { unlock(); }
-        String pp = keepMemberId_ExistsReferrer_FollowByMemberIdList(cb.query());
-        registerExistsReferrer(cb.query(), "MEMBER_ID", "MEMBER_ID", pp, "followByMemberIdList");
-    }
-    public abstract String keepMemberId_ExistsReferrer_FollowByMemberIdList(FollowCQ sq);
-
-    /**
-     * Set up ExistsReferrer (correlated sub-query). <br />
      * {exists (select YOU_ID from follow where ...)} <br />
      * follow by YOU_ID, named 'followByYouIdAsOne'.
      * <pre>
@@ -189,6 +167,28 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
         registerExistsReferrer(cb.query(), "MEMBER_ID", "YOU_ID", pp, "followByYouIdAsOne");
     }
     public abstract String keepMemberId_ExistsReferrer_FollowByYouIdAsOne(FollowCQ sq);
+
+    /**
+     * Set up ExistsReferrer (correlated sub-query). <br />
+     * {exists (select MEMBER_ID from follow where ...)} <br />
+     * follow by MEMBER_ID, named 'followByMemberIdAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #DD4747">existsFollowByMemberIdList</span>(new SubQuery&lt;FollowCB&gt;() {
+     *     public void query(FollowCB subCB) {
+     *         subCB.query().setXxx...
+     *     }
+     * });
+     * </pre>
+     * @param subQuery The sub-query of FollowByMemberIdList for 'exists'. (NotNull)
+     */
+    public void existsFollowByMemberIdList(SubQuery<FollowCB> subQuery) {
+        assertObjectNotNull("subQuery", subQuery);
+        FollowCB cb = new FollowCB(); cb.xsetupForExistsReferrer(this);
+        try { lock(); subQuery.query(cb); } finally { unlock(); }
+        String pp = keepMemberId_ExistsReferrer_FollowByMemberIdList(cb.query());
+        registerExistsReferrer(cb.query(), "MEMBER_ID", "MEMBER_ID", pp, "followByMemberIdList");
+    }
+    public abstract String keepMemberId_ExistsReferrer_FollowByMemberIdList(FollowCQ sq);
 
     /**
      * Set up ExistsReferrer (correlated sub-query). <br />
@@ -280,28 +280,6 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * Set up NotExistsReferrer (correlated sub-query). <br />
-     * {not exists (select MEMBER_ID from follow where ...)} <br />
-     * follow by MEMBER_ID, named 'followByMemberIdAsOne'.
-     * <pre>
-     * cb.query().<span style="color: #DD4747">notExistsFollowByMemberIdList</span>(new SubQuery&lt;FollowCB&gt;() {
-     *     public void query(FollowCB subCB) {
-     *         subCB.query().setXxx...
-     *     }
-     * });
-     * </pre>
-     * @param subQuery The sub-query of MemberId_NotExistsReferrer_FollowByMemberIdList for 'not exists'. (NotNull)
-     */
-    public void notExistsFollowByMemberIdList(SubQuery<FollowCB> subQuery) {
-        assertObjectNotNull("subQuery", subQuery);
-        FollowCB cb = new FollowCB(); cb.xsetupForExistsReferrer(this);
-        try { lock(); subQuery.query(cb); } finally { unlock(); }
-        String pp = keepMemberId_NotExistsReferrer_FollowByMemberIdList(cb.query());
-        registerNotExistsReferrer(cb.query(), "MEMBER_ID", "MEMBER_ID", pp, "followByMemberIdList");
-    }
-    public abstract String keepMemberId_NotExistsReferrer_FollowByMemberIdList(FollowCQ sq);
-
-    /**
-     * Set up NotExistsReferrer (correlated sub-query). <br />
      * {not exists (select YOU_ID from follow where ...)} <br />
      * follow by YOU_ID, named 'followByYouIdAsOne'.
      * <pre>
@@ -321,6 +299,28 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
         registerNotExistsReferrer(cb.query(), "MEMBER_ID", "YOU_ID", pp, "followByYouIdAsOne");
     }
     public abstract String keepMemberId_NotExistsReferrer_FollowByYouIdAsOne(FollowCQ sq);
+
+    /**
+     * Set up NotExistsReferrer (correlated sub-query). <br />
+     * {not exists (select MEMBER_ID from follow where ...)} <br />
+     * follow by MEMBER_ID, named 'followByMemberIdAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #DD4747">notExistsFollowByMemberIdList</span>(new SubQuery&lt;FollowCB&gt;() {
+     *     public void query(FollowCB subCB) {
+     *         subCB.query().setXxx...
+     *     }
+     * });
+     * </pre>
+     * @param subQuery The sub-query of MemberId_NotExistsReferrer_FollowByMemberIdList for 'not exists'. (NotNull)
+     */
+    public void notExistsFollowByMemberIdList(SubQuery<FollowCB> subQuery) {
+        assertObjectNotNull("subQuery", subQuery);
+        FollowCB cb = new FollowCB(); cb.xsetupForExistsReferrer(this);
+        try { lock(); subQuery.query(cb); } finally { unlock(); }
+        String pp = keepMemberId_NotExistsReferrer_FollowByMemberIdList(cb.query());
+        registerNotExistsReferrer(cb.query(), "MEMBER_ID", "MEMBER_ID", pp, "followByMemberIdList");
+    }
+    public abstract String keepMemberId_NotExistsReferrer_FollowByMemberIdList(FollowCQ sq);
 
     /**
      * Set up NotExistsReferrer (correlated sub-query). <br />
@@ -412,21 +412,6 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * Set up InScopeRelation (sub-query). <br />
-     * {in (select MEMBER_ID from follow where ...)} <br />
-     * follow by MEMBER_ID, named 'followByMemberIdAsOne'.
-     * @param subQuery The sub-query of FollowByMemberIdList for 'in-scope'. (NotNull)
-     */
-    public void inScopeFollowByMemberIdList(SubQuery<FollowCB> subQuery) {
-        assertObjectNotNull("subQuery", subQuery);
-        FollowCB cb = new FollowCB(); cb.xsetupForInScopeRelation(this);
-        try { lock(); subQuery.query(cb); } finally { unlock(); }
-        String pp = keepMemberId_InScopeRelation_FollowByMemberIdList(cb.query());
-        registerInScopeRelation(cb.query(), "MEMBER_ID", "MEMBER_ID", pp, "followByMemberIdList");
-    }
-    public abstract String keepMemberId_InScopeRelation_FollowByMemberIdList(FollowCQ sq);
-
-    /**
-     * Set up InScopeRelation (sub-query). <br />
      * {in (select YOU_ID from follow where ...)} <br />
      * follow by YOU_ID, named 'followByYouIdAsOne'.
      * @param subQuery The sub-query of FollowByYouIdAsOne for 'in-scope'. (NotNull)
@@ -439,6 +424,21 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
         registerInScopeRelation(cb.query(), "MEMBER_ID", "YOU_ID", pp, "followByYouIdAsOne");
     }
     public abstract String keepMemberId_InScopeRelation_FollowByYouIdAsOne(FollowCQ sq);
+
+    /**
+     * Set up InScopeRelation (sub-query). <br />
+     * {in (select MEMBER_ID from follow where ...)} <br />
+     * follow by MEMBER_ID, named 'followByMemberIdAsOne'.
+     * @param subQuery The sub-query of FollowByMemberIdList for 'in-scope'. (NotNull)
+     */
+    public void inScopeFollowByMemberIdList(SubQuery<FollowCB> subQuery) {
+        assertObjectNotNull("subQuery", subQuery);
+        FollowCB cb = new FollowCB(); cb.xsetupForInScopeRelation(this);
+        try { lock(); subQuery.query(cb); } finally { unlock(); }
+        String pp = keepMemberId_InScopeRelation_FollowByMemberIdList(cb.query());
+        registerInScopeRelation(cb.query(), "MEMBER_ID", "MEMBER_ID", pp, "followByMemberIdList");
+    }
+    public abstract String keepMemberId_InScopeRelation_FollowByMemberIdList(FollowCQ sq);
 
     /**
      * Set up InScopeRelation (sub-query). <br />
@@ -502,21 +502,6 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * Set up NotInScopeRelation (sub-query). <br />
-     * {not in (select MEMBER_ID from follow where ...)} <br />
-     * follow by MEMBER_ID, named 'followByMemberIdAsOne'.
-     * @param subQuery The sub-query of FollowByMemberIdList for 'not in-scope'. (NotNull)
-     */
-    public void notInScopeFollowByMemberIdList(SubQuery<FollowCB> subQuery) {
-        assertObjectNotNull("subQuery", subQuery);
-        FollowCB cb = new FollowCB(); cb.xsetupForInScopeRelation(this);
-        try { lock(); subQuery.query(cb); } finally { unlock(); }
-        String pp = keepMemberId_NotInScopeRelation_FollowByMemberIdList(cb.query());
-        registerNotInScopeRelation(cb.query(), "MEMBER_ID", "MEMBER_ID", pp, "followByMemberIdList");
-    }
-    public abstract String keepMemberId_NotInScopeRelation_FollowByMemberIdList(FollowCQ sq);
-
-    /**
-     * Set up NotInScopeRelation (sub-query). <br />
      * {not in (select YOU_ID from follow where ...)} <br />
      * follow by YOU_ID, named 'followByYouIdAsOne'.
      * @param subQuery The sub-query of FollowByYouIdAsOne for 'not in-scope'. (NotNull)
@@ -529,6 +514,21 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
         registerNotInScopeRelation(cb.query(), "MEMBER_ID", "YOU_ID", pp, "followByYouIdAsOne");
     }
     public abstract String keepMemberId_NotInScopeRelation_FollowByYouIdAsOne(FollowCQ sq);
+
+    /**
+     * Set up NotInScopeRelation (sub-query). <br />
+     * {not in (select MEMBER_ID from follow where ...)} <br />
+     * follow by MEMBER_ID, named 'followByMemberIdAsOne'.
+     * @param subQuery The sub-query of FollowByMemberIdList for 'not in-scope'. (NotNull)
+     */
+    public void notInScopeFollowByMemberIdList(SubQuery<FollowCB> subQuery) {
+        assertObjectNotNull("subQuery", subQuery);
+        FollowCB cb = new FollowCB(); cb.xsetupForInScopeRelation(this);
+        try { lock(); subQuery.query(cb); } finally { unlock(); }
+        String pp = keepMemberId_NotInScopeRelation_FollowByMemberIdList(cb.query());
+        registerNotInScopeRelation(cb.query(), "MEMBER_ID", "MEMBER_ID", pp, "followByMemberIdList");
+    }
+    public abstract String keepMemberId_NotInScopeRelation_FollowByMemberIdList(FollowCQ sq);
 
     /**
      * Set up NotInScopeRelation (sub-query). <br />

@@ -11,6 +11,5 @@ public class HomeForm {
     public Integer birthDate;
     public String profile;
     public String inputTweet;
-    public String searchName;
-    public String toFollowMember;
+    public String searchWord;
 }

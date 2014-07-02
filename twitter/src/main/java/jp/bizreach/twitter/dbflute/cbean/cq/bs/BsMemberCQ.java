@@ -79,11 +79,11 @@ public class BsMemberCQ extends AbstractBsMemberCQ {
       return _memberId; }
     protected ConditionValue getCValueMemberId() { return getMemberId(); }
 
-    public Map<String, FollowCQ> getMemberId_ExistsReferrer_FollowByMemberIdList() { return xgetSQueMap("memberId_ExistsReferrer_FollowByMemberIdList"); }
-    public String keepMemberId_ExistsReferrer_FollowByMemberIdList(FollowCQ sq) { return xkeepSQue("memberId_ExistsReferrer_FollowByMemberIdList", sq); }
-
     public Map<String, FollowCQ> getMemberId_ExistsReferrer_FollowByYouIdAsOne() { return xgetSQueMap("memberId_ExistsReferrer_FollowByYouIdAsOne"); }
     public String keepMemberId_ExistsReferrer_FollowByYouIdAsOne(FollowCQ sq) { return xkeepSQue("memberId_ExistsReferrer_FollowByYouIdAsOne", sq); }
+
+    public Map<String, FollowCQ> getMemberId_ExistsReferrer_FollowByMemberIdList() { return xgetSQueMap("memberId_ExistsReferrer_FollowByMemberIdList"); }
+    public String keepMemberId_ExistsReferrer_FollowByMemberIdList(FollowCQ sq) { return xkeepSQue("memberId_ExistsReferrer_FollowByMemberIdList", sq); }
 
     public Map<String, LoginCQ> getMemberId_ExistsReferrer_LoginList() { return xgetSQueMap("memberId_ExistsReferrer_LoginList"); }
     public String keepMemberId_ExistsReferrer_LoginList(LoginCQ sq) { return xkeepSQue("memberId_ExistsReferrer_LoginList", sq); }
@@ -97,11 +97,11 @@ public class BsMemberCQ extends AbstractBsMemberCQ {
     public Map<String, TweetCQ> getMemberId_ExistsReferrer_TweetList() { return xgetSQueMap("memberId_ExistsReferrer_TweetList"); }
     public String keepMemberId_ExistsReferrer_TweetList(TweetCQ sq) { return xkeepSQue("memberId_ExistsReferrer_TweetList", sq); }
 
-    public Map<String, FollowCQ> getMemberId_NotExistsReferrer_FollowByMemberIdList() { return xgetSQueMap("memberId_NotExistsReferrer_FollowByMemberIdList"); }
-    public String keepMemberId_NotExistsReferrer_FollowByMemberIdList(FollowCQ sq) { return xkeepSQue("memberId_NotExistsReferrer_FollowByMemberIdList", sq); }
-
     public Map<String, FollowCQ> getMemberId_NotExistsReferrer_FollowByYouIdAsOne() { return xgetSQueMap("memberId_NotExistsReferrer_FollowByYouIdAsOne"); }
     public String keepMemberId_NotExistsReferrer_FollowByYouIdAsOne(FollowCQ sq) { return xkeepSQue("memberId_NotExistsReferrer_FollowByYouIdAsOne", sq); }
+
+    public Map<String, FollowCQ> getMemberId_NotExistsReferrer_FollowByMemberIdList() { return xgetSQueMap("memberId_NotExistsReferrer_FollowByMemberIdList"); }
+    public String keepMemberId_NotExistsReferrer_FollowByMemberIdList(FollowCQ sq) { return xkeepSQue("memberId_NotExistsReferrer_FollowByMemberIdList", sq); }
 
     public Map<String, LoginCQ> getMemberId_NotExistsReferrer_LoginList() { return xgetSQueMap("memberId_NotExistsReferrer_LoginList"); }
     public String keepMemberId_NotExistsReferrer_LoginList(LoginCQ sq) { return xkeepSQue("memberId_NotExistsReferrer_LoginList", sq); }
@@ -124,11 +124,11 @@ public class BsMemberCQ extends AbstractBsMemberCQ {
     public Map<String, TweetCQ> getMemberId_SpecifyDerivedReferrer_TweetList() { return xgetSQueMap("memberId_SpecifyDerivedReferrer_TweetList"); }
     public String keepMemberId_SpecifyDerivedReferrer_TweetList(TweetCQ sq) { return xkeepSQue("memberId_SpecifyDerivedReferrer_TweetList", sq); }
 
-    public Map<String, FollowCQ> getMemberId_InScopeRelation_FollowByMemberIdList() { return xgetSQueMap("memberId_InScopeRelation_FollowByMemberIdList"); }
-    public String keepMemberId_InScopeRelation_FollowByMemberIdList(FollowCQ sq) { return xkeepSQue("memberId_InScopeRelation_FollowByMemberIdList", sq); }
-
     public Map<String, FollowCQ> getMemberId_InScopeRelation_FollowByYouIdAsOne() { return xgetSQueMap("memberId_InScopeRelation_FollowByYouIdAsOne"); }
     public String keepMemberId_InScopeRelation_FollowByYouIdAsOne(FollowCQ sq) { return xkeepSQue("memberId_InScopeRelation_FollowByYouIdAsOne", sq); }
+
+    public Map<String, FollowCQ> getMemberId_InScopeRelation_FollowByMemberIdList() { return xgetSQueMap("memberId_InScopeRelation_FollowByMemberIdList"); }
+    public String keepMemberId_InScopeRelation_FollowByMemberIdList(FollowCQ sq) { return xkeepSQue("memberId_InScopeRelation_FollowByMemberIdList", sq); }
 
     public Map<String, LoginCQ> getMemberId_InScopeRelation_LoginList() { return xgetSQueMap("memberId_InScopeRelation_LoginList"); }
     public String keepMemberId_InScopeRelation_LoginList(LoginCQ sq) { return xkeepSQue("memberId_InScopeRelation_LoginList", sq); }
@@ -142,11 +142,11 @@ public class BsMemberCQ extends AbstractBsMemberCQ {
     public Map<String, TweetCQ> getMemberId_InScopeRelation_TweetList() { return xgetSQueMap("memberId_InScopeRelation_TweetList"); }
     public String keepMemberId_InScopeRelation_TweetList(TweetCQ sq) { return xkeepSQue("memberId_InScopeRelation_TweetList", sq); }
 
-    public Map<String, FollowCQ> getMemberId_NotInScopeRelation_FollowByMemberIdList() { return xgetSQueMap("memberId_NotInScopeRelation_FollowByMemberIdList"); }
-    public String keepMemberId_NotInScopeRelation_FollowByMemberIdList(FollowCQ sq) { return xkeepSQue("memberId_NotInScopeRelation_FollowByMemberIdList", sq); }
-
     public Map<String, FollowCQ> getMemberId_NotInScopeRelation_FollowByYouIdAsOne() { return xgetSQueMap("memberId_NotInScopeRelation_FollowByYouIdAsOne"); }
     public String keepMemberId_NotInScopeRelation_FollowByYouIdAsOne(FollowCQ sq) { return xkeepSQue("memberId_NotInScopeRelation_FollowByYouIdAsOne", sq); }
+
+    public Map<String, FollowCQ> getMemberId_NotInScopeRelation_FollowByMemberIdList() { return xgetSQueMap("memberId_NotInScopeRelation_FollowByMemberIdList"); }
+    public String keepMemberId_NotInScopeRelation_FollowByMemberIdList(FollowCQ sq) { return xkeepSQue("memberId_NotInScopeRelation_FollowByMemberIdList", sq); }
 
     public Map<String, LoginCQ> getMemberId_NotInScopeRelation_LoginList() { return xgetSQueMap("memberId_NotInScopeRelation_LoginList"); }
     public String keepMemberId_NotInScopeRelation_LoginList(LoginCQ sq) { return xkeepSQue("memberId_NotInScopeRelation_LoginList", sq); }
