@@ -33,11 +33,11 @@
             foreignTable="member" name="follow_ibfk_2">
             <reference foreign="MEMBER_ID" local="MEMBER_ID"/>
         </foreign-key>
-        <unique name="YOU_ID">
-            <unique-column name="YOU_ID" position="1"/>
-        </unique>
         <index name="MEMBER_ID">
             <index-column name="MEMBER_ID" position="1"/>
+        </index>
+        <index name="YOU_ID">
+            <index-column name="YOU_ID" position="1"/>
         </index>
     </table>
     <table comment="ログイン" name="login" schema="twitter.$$NoNameSchema$$" type="TABLE">

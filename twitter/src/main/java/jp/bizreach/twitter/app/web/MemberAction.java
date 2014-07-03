@@ -65,6 +65,7 @@ public class MemberAction {
         /*　アカウント名を表示する */
         // TODO mayuko.sakaba  このアカウントのユーザーのプロフィールを表示できるようにする。
         MemberCB memberCb = new MemberCB();
+        LOG.debug("nameCheck:" + memberForm.yourName);
         memberCb.query().setUserName_Equal(memberForm.yourName);
         Member member = memberBhv.selectEntity(memberCb);
         //        member.getBirthdate();
@@ -85,6 +86,7 @@ public class MemberAction {
         }
         /* フォローできる相手か判断する */
         FollowCB followCb = new FollowCB();
+        followCb.query().setMemberId_Equal(sessionDto.myId);
         followCb.query().setYouId_Equal(member.getMemberId());
         Follow follow = followBhv.selectEntity(followCb);
         if (follow == null) {
@@ -101,11 +103,16 @@ public class MemberAction {
     /* このアカウントの会員をフォロー　*/
     @Execute(validator = false, urlPattern = "{yourName}/follow")
     public String follow() {
-        /* アカウント保有者のメンバーID検索 */
+        /* 自分をフォローしない制約 */
         Member member = selectMember();
+        Integer memberId = member.getMemberId();
+        if (memberId.equals(sessionDto.myId)) {
+            return "/home/?redirect=true";
+        }
         /* フォローしたことのない相手を新しくフォローする */
         FollowCB followCb = new FollowCB();
         followCb.query().setYouId_Equal(member.getMemberId());
+        followCb.query().setMemberId_Equal(sessionDto.myId);
         Follow selectFollow = followBhv.selectEntity(followCb);
         Follow follow = new Follow();
         if (selectFollow == null) {
@@ -126,8 +133,10 @@ public class MemberAction {
             follow.setFollowId(followId);
             follow.setDelFlg("N");
             followBhv.update(follow);
-
         }
+        //        if (selectFollow.getYouId().equals(selectFollow.getMemberId())) {
+        //            return "/home/?redirect=true";
+        //        }
         return "/member/" + memberForm.yourName + "/?redirect=true";
     }
 
@@ -138,6 +147,7 @@ public class MemberAction {
         Member member = selectMember();
         FollowCB followCb = new FollowCB();
         followCb.query().setYouId_Equal(member.getMemberId());
+        followCb.query().setMemberId_Equal(sessionDto.myId);
         Follow selectFollow = followBhv.selectEntity(followCb);
         Integer followId = selectFollow.getFollowId();
         LOG.debug(followId);

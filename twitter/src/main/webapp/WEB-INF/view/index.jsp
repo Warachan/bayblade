@@ -9,7 +9,7 @@
 			e-mail:<html:text property ="loginEmail"/><br>
 			password:<html:text property="loginPassword"/><br>
 			<s:submit property="gotoLogin"/><br>
-				${error}
+					<html:errors/>
 	</s:form>
 
 	<s:form method="post">

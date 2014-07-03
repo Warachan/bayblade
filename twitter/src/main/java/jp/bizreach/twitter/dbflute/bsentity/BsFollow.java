@@ -80,7 +80,7 @@ public abstract class BsFollow implements Entity, Serializable, Cloneable {
     /** FOLLOW_ID: {PK, ID, NotNull, INT(10)} */
     protected Integer _followId;
 
-    /** YOU_ID: {UQ, NotNull, INT(10), FK to member} */
+    /** YOU_ID: {IX, NotNull, INT(10), FK to member} */
     protected Integer _youId;
 
     /** MEMBER_ID: {IX, NotNull, INT(10), FK to member} */
@@ -149,17 +149,6 @@ public abstract class BsFollow implements Entity, Serializable, Cloneable {
     public boolean hasPrimaryKeyValue() {
         if (getFollowId() == null) { return false; }
         return true;
-    }
-
-    /**
-     * To be unique by the unique column. <br />
-     * You can update the entity by the key when entity update (NOT batch update).
-     * @param youId : UQ, NotNull, INT(10), FK to member. (NotNull)
-     */
-    public void uniqueBy(Integer youId) {
-        __uniqueDrivenProperties.clear();
-        __uniqueDrivenProperties.addPropertyName("youId");
-        setYouId(youId);
     }
 
     /**
@@ -405,7 +394,7 @@ public abstract class BsFollow implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [get] YOU_ID: {UQ, NotNull, INT(10), FK to member} <br />
+     * [get] YOU_ID: {IX, NotNull, INT(10), FK to member} <br />
      * フォローする人のID : 会員のID
      * @return The value of the column 'YOU_ID'. (basically NotNull if selected: for the constraint)
      */
@@ -414,7 +403,7 @@ public abstract class BsFollow implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [set] YOU_ID: {UQ, NotNull, INT(10), FK to member} <br />
+     * [set] YOU_ID: {IX, NotNull, INT(10), FK to member} <br />
      * フォローする人のID : 会員のID
      * @param youId The value of the column 'YOU_ID'. (basically NotNull if update: for the constraint)
      */

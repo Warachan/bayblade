@@ -31,16 +31,16 @@ import jp.bizreach.twitter.dbflute.exentity.*;
  *     
  * 
  * [foreign table]
- *     follow(AsOne), member_security(AsOne), member_withdraw(AsOne)
+ *     member_security(AsOne), member_withdraw(AsOne)
  * 
  * [referrer table]
  *     follow, login, tweet, member_security, member_withdraw
  * 
  * [foreign property]
- *     followByYouIdAsOne, memberSecurityAsOne, memberWithdrawAsOne
+ *     memberSecurityAsOne, memberWithdrawAsOne
  * 
  * [referrer property]
- *     followByMemberIdList, loginList, tweetList
+ *     followByYouIdList, followByMemberIdList, loginList, tweetList
  * 
  * [get/set template]
  * /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
@@ -193,25 +193,6 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     // ===================================================================================
     //                                                                    Foreign Property
     //                                                                    ================
-    /** follow by YOU_ID, named 'followByYouIdAsOne'. */
-    protected Follow _followByYouIdAsOne;
-
-    /**
-     * [get] follow by YOU_ID, named 'followByYouIdAsOne'.
-     * @return the entity of foreign property(referrer-as-one) 'followByYouIdAsOne'. (NullAllowed: when e.g. no data, no setupSelect)
-     */
-    public Follow getFollowByYouIdAsOne() {
-        return _followByYouIdAsOne;
-    }
-
-    /**
-     * [set] follow by YOU_ID, named 'followByYouIdAsOne'.
-     * @param followByYouIdAsOne The entity of foreign property(referrer-as-one) 'followByYouIdAsOne'. (NullAllowed)
-     */
-    public void setFollowByYouIdAsOne(Follow followByYouIdAsOne) {
-        _followByYouIdAsOne = followByYouIdAsOne;
-    }
-
     /** member_security by MEMBER_ID, named 'memberSecurityAsOne'. */
     protected MemberSecurity _memberSecurityAsOne;
 
@@ -253,6 +234,26 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     // ===================================================================================
     //                                                                   Referrer Property
     //                                                                   =================
+    /** follow by YOU_ID, named 'followByYouIdList'. */
+    protected List<Follow> _followByYouIdList;
+
+    /**
+     * [get] follow by YOU_ID, named 'followByYouIdList'.
+     * @return The entity list of referrer property 'followByYouIdList'. (NotNull: even if no loading, returns empty list)
+     */
+    public List<Follow> getFollowByYouIdList() {
+        if (_followByYouIdList == null) { _followByYouIdList = newReferrerList(); }
+        return _followByYouIdList;
+    }
+
+    /**
+     * [set] follow by YOU_ID, named 'followByYouIdList'.
+     * @param followByYouIdList The entity list of referrer property 'followByYouIdList'. (NullAllowed)
+     */
+    public void setFollowByYouIdList(List<Follow> followByYouIdList) {
+        _followByYouIdList = followByYouIdList;
+    }
+
     /** follow by MEMBER_ID, named 'followByMemberIdList'. */
     protected List<Follow> _followByMemberIdList;
 
@@ -417,12 +418,12 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
         StringBuilder sb = new StringBuilder();
         sb.append(toString());
         String li = "\n  ";
-        if (_followByYouIdAsOne != null)
-        { sb.append(li).append(xbRDS(_followByYouIdAsOne, "followByYouIdAsOne")); }
         if (_memberSecurityAsOne != null)
         { sb.append(li).append(xbRDS(_memberSecurityAsOne, "memberSecurityAsOne")); }
         if (_memberWithdrawAsOne != null)
         { sb.append(li).append(xbRDS(_memberWithdrawAsOne, "memberWithdrawAsOne")); }
+        if (_followByYouIdList != null) { for (Entity et : _followByYouIdList)
+        { if (et != null) { sb.append(li).append(xbRDS(et, "followByYouIdList")); } } }
         if (_followByMemberIdList != null) { for (Entity et : _followByMemberIdList)
         { if (et != null) { sb.append(li).append(xbRDS(et, "followByMemberIdList")); } } }
         if (_loginList != null) { for (Entity et : _loginList)
@@ -473,9 +474,10 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     protected String buildRelationString() {
         StringBuilder sb = new StringBuilder();
         String cm = ",";
-        if (_followByYouIdAsOne != null) { sb.append(cm).append("followByYouIdAsOne"); }
         if (_memberSecurityAsOne != null) { sb.append(cm).append("memberSecurityAsOne"); }
         if (_memberWithdrawAsOne != null) { sb.append(cm).append("memberWithdrawAsOne"); }
+        if (_followByYouIdList != null && !_followByYouIdList.isEmpty())
+        { sb.append(cm).append("followByYouIdList"); }
         if (_followByMemberIdList != null && !_followByMemberIdList.isEmpty())
         { sb.append(cm).append("followByMemberIdList"); }
         if (_loginList != null && !_loginList.isEmpty())

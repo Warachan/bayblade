@@ -107,14 +107,14 @@ public class BsFollowCQ extends AbstractBsFollowCQ {
 
     /** 
      * Add order-by as ascend. <br />
-     * YOU_ID: {UQ, NotNull, INT(10), FK to member}
+     * YOU_ID: {IX, NotNull, INT(10), FK to member}
      * @return this. (NotNull)
      */
     public BsFollowCQ addOrderBy_YouId_Asc() { regOBA("YOU_ID"); return this; }
 
     /**
      * Add order-by as descend. <br />
-     * YOU_ID: {UQ, NotNull, INT(10), FK to member}
+     * YOU_ID: {IX, NotNull, INT(10), FK to member}
      * @return this. (NotNull)
      */
     public BsFollowCQ addOrderBy_YouId_Desc() { regOBD("YOU_ID"); return this; }

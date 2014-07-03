@@ -7,6 +7,9 @@
 	<s:form action="/logout/">
 		<s:submit property="index" value="logout"/>
 	</s:form>
+	<s:form action="/returnHome/">
+		<s:submit property="index" value="home"/>
+	</s:form>
 	<s:form action ="/home/">
 		<h3>Following</h3>
 		${noFollow}

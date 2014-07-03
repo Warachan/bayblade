@@ -92,13 +92,8 @@ public class MemberDbm extends AbstractDBMeta {
     //                                      ----------------
     protected final Map<String, PropertyGateway> _efpgMap = newHashMap();
     {
-        setupEfpg(_efpgMap, new EfpgFollowByYouIdAsOne(), "followByYouIdAsOne");
         setupEfpg(_efpgMap, new EfpgMemberSecurityAsOne(), "memberSecurityAsOne");
         setupEfpg(_efpgMap, new EfpgMemberWithdrawAsOne(), "memberWithdrawAsOne");
-    }
-    public class EfpgFollowByYouIdAsOne implements PropertyGateway {
-        public Object read(Entity et) { return ((Member)et).getFollowByYouIdAsOne(); }
-        public void write(Entity et, Object vl) { ((Member)et).setFollowByYouIdAsOne((Follow)vl); }
     }
     public class EfpgMemberSecurityAsOne implements PropertyGateway {
         public Object read(Entity et) { return ((Member)et).getMemberSecurityAsOne(); }
@@ -125,7 +120,7 @@ public class MemberDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnMemberId = cci("MEMBER_ID", "MEMBER_ID", null, null, Integer.class, "memberId", null, true, true, true, "INT", 10, 0, null, false, null, null, null, "followByMemberIdList,loginList,tweetList", null);
+    protected final ColumnInfo _columnMemberId = cci("MEMBER_ID", "MEMBER_ID", null, null, Integer.class, "memberId", null, true, true, true, "INT", 10, 0, null, false, null, null, null, "followByYouIdList,followByMemberIdList,loginList,tweetList", null);
     protected final ColumnInfo _columnEmailAddress = cci("EMAIL_ADDRESS", "EMAIL_ADDRESS", null, null, String.class, "emailAddress", null, false, false, true, "VARCHAR", 100, 0, null, false, null, null, null, null, null);
     protected final ColumnInfo _columnUserName = cci("USER_NAME", "USER_NAME", null, null, String.class, "userName", null, false, false, true, "VARCHAR", 50, 0, null, false, null, null, null, null, null);
     protected final ColumnInfo _columnBirthdate = cci("BIRTHDATE", "BIRTHDATE", null, null, java.util.Date.class, "birthdate", null, false, false, false, "DATE", 10, 0, null, false, null, null, null, null, null);
@@ -216,20 +211,12 @@ public class MemberDbm extends AbstractDBMeta {
     //                                      Foreign Property
     //                                      ----------------
     /**
-     * follow by YOU_ID, named 'followByYouIdAsOne'.
-     * @return The information object of foreign property(referrer-as-one). (NotNull)
-     */
-    public ForeignInfo foreignFollowByYouIdAsOne() {
-        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnMemberId(), FollowDbm.getInstance().columnYouId());
-        return cfi("follow_ibfk_1", "followByYouIdAsOne", this, FollowDbm.getInstance(), mp, 0, null, true, false, true, false, null, null, false, "memberByYouId");
-    }
-    /**
      * member_security by MEMBER_ID, named 'memberSecurityAsOne'.
      * @return The information object of foreign property(referrer-as-one). (NotNull)
      */
     public ForeignInfo foreignMemberSecurityAsOne() {
         Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnMemberId(), MemberSecurityDbm.getInstance().columnMemberId());
-        return cfi("member_security_ibfk_1", "memberSecurityAsOne", this, MemberSecurityDbm.getInstance(), mp, 1, null, true, false, true, false, null, null, false, "member");
+        return cfi("member_security_ibfk_1", "memberSecurityAsOne", this, MemberSecurityDbm.getInstance(), mp, 0, null, true, false, true, false, null, null, false, "member");
     }
     /**
      * member_withdraw by MEMBER_ID, named 'memberWithdrawAsOne'.
@@ -237,12 +224,20 @@ public class MemberDbm extends AbstractDBMeta {
      */
     public ForeignInfo foreignMemberWithdrawAsOne() {
         Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnMemberId(), MemberWithdrawDbm.getInstance().columnMemberId());
-        return cfi("member_withdraw_ibfk_1", "memberWithdrawAsOne", this, MemberWithdrawDbm.getInstance(), mp, 2, null, true, false, true, false, null, null, false, "member");
+        return cfi("member_withdraw_ibfk_1", "memberWithdrawAsOne", this, MemberWithdrawDbm.getInstance(), mp, 1, null, true, false, true, false, null, null, false, "member");
     }
 
     // -----------------------------------------------------
     //                                     Referrer Property
     //                                     -----------------
+    /**
+     * follow by YOU_ID, named 'followByYouIdList'.
+     * @return The information object of referrer property. (NotNull)
+     */
+    public ReferrerInfo referrerFollowByYouIdList() {
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnMemberId(), FollowDbm.getInstance().columnYouId());
+        return cri("follow_ibfk_1", "followByYouIdList", this, FollowDbm.getInstance(), mp, false, "memberByYouId");
+    }
     /**
      * follow by MEMBER_ID, named 'followByMemberIdList'.
      * @return The information object of referrer property. (NotNull)

@@ -13,12 +13,6 @@ public class IndexForm {
     @Required
     public String loginPassword;
 
-    @Required
-    public String newEmail;
-
-    @Required
-    public String newPassword;
-
     //    @Override
     //    public String toString() {
     //        return "{" + loginEmail + "," + loginPassword + "}";

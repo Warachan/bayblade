@@ -7,6 +7,9 @@
 	<s:form action="/logout/">
 		<s:submit property="index" value="logout"/>
 	</s:form>
+	<s:form action="/returnHome/">
+		<s:submit property="index" value="home"/>
+	</s:form>
 
 	<s:form action="/home/">
 			<h4>Users</h4>
@@ -22,7 +25,6 @@
 			<c:forEach items="${resultList}" var="items" varStatus="status">
 			${items.memberName} ${items.tweetTime}<br>
 			${items.tweet}<br>
-			<br>
        	 	</c:forEach>
 	</s:form>
 </body>

@@ -27,16 +27,16 @@ import jp.bizreach.twitter.dbflute.cbean.*;
  *     
  *
  * [foreign table]
- *     follow(AsOne), member_security(AsOne), member_withdraw(AsOne)
+ *     member_security(AsOne), member_withdraw(AsOne)
  *
  * [referrer table]
  *     follow, login, tweet, member_security, member_withdraw
  *
  * [foreign property]
- *     followByYouIdAsOne, memberSecurityAsOne, memberWithdrawAsOne
+ *     memberSecurityAsOne, memberWithdrawAsOne
  *
  * [referrer property]
- *     followByMemberIdList, loginList, tweetList
+ *     followByYouIdList, followByMemberIdList, loginList, tweetList
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
@@ -61,6 +61,18 @@ public class LoaderOfMember {
     // ===================================================================================
     //                                                                       Load Referrer
     //                                                                       =============
+    protected List<Follow> _referrerFollowByYouIdList;
+    public NestedReferrerLoaderGateway<LoaderOfFollow> loadFollowByYouIdList(ConditionBeanSetupper<FollowCB> setupper) {
+        myBhv().loadFollowByYouIdList(_selectedList, setupper).withNestedReferrer(new ReferrerListHandler<Follow>() {
+            public void handle(List<Follow> referrerList) { _referrerFollowByYouIdList = referrerList; }
+        });
+        return new NestedReferrerLoaderGateway<LoaderOfFollow>() {
+            public void withNestedReferrer(ReferrerLoaderHandler<LoaderOfFollow> handler) {
+                handler.handle(new LoaderOfFollow().ready(_referrerFollowByYouIdList, _selector));
+            }
+        };
+    }
+
     protected List<Follow> _referrerFollowByMemberIdList;
     public NestedReferrerLoaderGateway<LoaderOfFollow> loadFollowByMemberIdList(ConditionBeanSetupper<FollowCB> setupper) {
         myBhv().loadFollowByMemberIdList(_selectedList, setupper).withNestedReferrer(new ReferrerListHandler<Follow>() {
@@ -100,14 +112,6 @@ public class LoaderOfMember {
     // ===================================================================================
     //                                                                    Pull out Foreign
     //                                                                    ================
-    protected LoaderOfFollow _foreignFollowByYouIdAsOneLoader;
-    public LoaderOfFollow pulloutFollowByYouIdAsOne() {
-        if (_foreignFollowByYouIdAsOneLoader != null) { return _foreignFollowByYouIdAsOneLoader; }
-        List<Follow> pulledList = myBhv().pulloutFollowByYouIdAsOne(_selectedList);
-        _foreignFollowByYouIdAsOneLoader = new LoaderOfFollow().ready(pulledList, _selector);
-        return _foreignFollowByYouIdAsOneLoader;
-    }
-
     protected LoaderOfMemberSecurity _foreignMemberSecurityAsOneLoader;
     public LoaderOfMemberSecurity pulloutMemberSecurityAsOne() {
         if (_foreignMemberSecurityAsOneLoader != null) { return _foreignMemberSecurityAsOneLoader; }

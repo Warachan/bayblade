@@ -4,6 +4,9 @@
 		<s:form action="/logout/">
 			<s:submit property="index" value="logout"/>
 		</s:form>
+		<s:form action="/returnHome/">
+			<s:submit property="index" value="home"/>
+		</s:form>
 		<h1> ${account}'s Page</h1>
 				===========================================================================
 					<h3>Follow</h3>
@@ -26,6 +29,7 @@
 								<c:forEach items="${timeLine}" var="items" varStatus="status">
 									${f:h (items.memberName)} ${f:h(items.tweetTime)}<br>
 									${f:h(items.tweet)}<br>
+		        ==========================================================================<br>
 								</c:forEach>
 					</s:form>
 	</body>

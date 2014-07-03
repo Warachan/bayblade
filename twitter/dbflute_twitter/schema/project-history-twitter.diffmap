@@ -1,4 +1,25 @@
 map:{
+    ; 2014/07/03 09:25:40 = map:{
+        ; diffDate = 2014/07/03 09:25:40
+        ; tableDiff = map:{
+            ; follow = map:{
+                ; tableName = follow
+                ; diffType = CHANGE
+                ; uniqueKeyDiff = map:{
+                    ; YOU_ID = map:{
+                        ; constraintName = YOU_ID
+                        ; diffType = DELETE
+                    }
+                }
+                ; indexDiff = map:{
+                    ; YOU_ID = map:{
+                        ; constraintName = YOU_ID
+                        ; diffType = ADD
+                    }
+                }
+            }
+        }
+    }
     ; 2014/07/02 11:24:27 = map:{
         ; diffDate = 2014/07/02 11:24:27
         ; tableDiff = map:{

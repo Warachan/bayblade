@@ -6,14 +6,14 @@
 <s:form action="/signup/regester/">
 			<h4>Email</h4>
 			<html:text property ="newEmail"/><br>
-				${overlapsError}
+			<html:errors property="newEmail"/>
 			<h4>Username</h4>
 			<html:text property="username"/><br>
-				${userError}
+			<html:errors property="username"/>
 			<h4>Password</h4>
-			<html:text property="newPassword"/><br>
+			<html:text property="password"/><br>
 			confirm password: <html:text property="confirmPass"/><br>
-				${matchError}
+			<html:errors property="password"/>
 			<s:submit property="Regester"/><br>
 				${characterError}
 				${missingError}

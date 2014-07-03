@@ -100,18 +100,6 @@ public class BsFollowCB extends AbstractConditionBean {
         cb.query().setFollowId_Equal(followId);
     }
 
-    /**
-     * Accept the query condition of unique key as equal.
-     * @param youId : UQ, NotNull, INT(10), FK to member. (NotNull)
-     * @return this. (NotNull)
-     */
-    public FollowCB acceptUniqueOf(Integer youId) {
-        assertObjectNotNull("youId", youId);
-        BsFollowCB cb = this;
-        cb.query().setYouId_Equal(youId);
-        return (FollowCB)this;
-    }
-
     public ConditionBean addOrderBy_PK_Asc() {
         query().addOrderBy_FollowId_Asc();
         return this;
@@ -382,7 +370,7 @@ public class BsFollowCB extends AbstractConditionBean {
          */
         public HpSpecifiedColumn columnFollowId() { return doColumn("FOLLOW_ID"); }
         /**
-         * YOU_ID: {UQ, NotNull, INT(10), FK to member}
+         * YOU_ID: {IX, NotNull, INT(10), FK to member}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnYouId() { return doColumn("YOU_ID"); }

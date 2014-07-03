@@ -130,7 +130,7 @@ public class FollowDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnFollowId() { return _columnFollowId; }
     /**
-     * YOU_ID: {UQ, NotNull, INT(10), FK to member}
+     * YOU_ID: {IX, NotNull, INT(10), FK to member}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnYouId() { return _columnYouId; }
@@ -204,7 +204,7 @@ public class FollowDbm extends AbstractDBMeta {
      */
     public ForeignInfo foreignMemberByYouId() {
         Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnYouId(), MemberDbm.getInstance().columnMemberId());
-        return cfi("follow_ibfk_1", "memberByYouId", this, MemberDbm.getInstance(), mp, 0, null, true, false, false, false, null, null, false, "followByYouIdAsOne");
+        return cfi("follow_ibfk_1", "memberByYouId", this, MemberDbm.getInstance(), mp, 0, null, false, false, false, false, null, null, false, "followByYouIdList");
     }
     /**
      * member by my MEMBER_ID, named 'memberByMemberId'.

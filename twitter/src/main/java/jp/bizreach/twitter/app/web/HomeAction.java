@@ -19,6 +19,8 @@ import jp.bizreach.twitter.dbflute.exentity.Tweet;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.struts.action.ActionMessage;
+import org.apache.struts.action.ActionMessages;
 import org.seasar.dbflute.cbean.ListResultBean;
 import org.seasar.dbflute.cbean.OrQuery;
 import org.seasar.dbflute.cbean.coption.LikeSearchOption;
@@ -58,9 +60,9 @@ public class HomeAction {
     //                                          Display Data
     //                                          ------------
     public ArrayList<TweetDto> timeLine = new ArrayList<TweetDto>();
-    public ArrayList<String> followSuggestions = new ArrayList<>();
+    public ArrayList<MemberDto> followSuggestionList = new ArrayList<>();
+    public ArrayList<Integer> followSuggestionId = new ArrayList<>();
     public ArrayList<Integer> followIdList = new ArrayList<Integer>();
-    public ArrayList<String> followMemberList = new ArrayList<>();
     public ArrayList<TweetDto> resultList = new ArrayList<TweetDto>();
     public ArrayList<String> candidateList = new ArrayList<String>();
     public String nameResult;
@@ -68,8 +70,14 @@ public class HomeAction {
     public String profile;
     public String noMatchUsers;
     public String noMatchTweets;
+    public String account;
+    public String followed;
+
+    // 【要確認todo】
+    // TODO mayuko.sakaba 共通カラム使っているのに、フォローステータスを更新するたびに更新されていない。
 
     // 【時間があればtodo】
+    // TODO mayuko.sakaba 検索でcolumQueryを使うか判断する→久保さんに確認
     // TODO mayuko.sakaba 他の会員検索を別のactionクラスに分ける
     // TODO mayuko.sakaba 誕生日登録がまだですよー！
     // TODO mayuko.sakaba MM,ddとすると、月や日付が一桁のときに0始まりで表示されてしまう。(→JSONを使う？、そもそも表示する必要があるのか？)
@@ -79,56 +87,22 @@ public class HomeAction {
     //                                                                             =======
     @Execute(validator = false)
     public String index() {
+        /* 自分の名前を表示させる（確認用）後に削除 */
+        account = sessionDto.username;
         /* フォローしている相手を検索　*/
         selectFollowList();
         /* フォローする候補者を自動で表示 */
-        //        MemberCB memberCB = new MemberCB();
-        //        memberCB.columnQuery(new SpecifyQuery<MemberCB>() {
-        //
-        //            @Override
-        //            public void specify(MemberCB cb) {
-        //                cb.specify().columnMemberId();
-        //
-        //            }
-        //        }).notEqual(new SpecifyQuery<MemberCB>() {
-        //
-        //            @Override
-        //            public void specify(MemberCB cb) {
-        //                //                cb.setupSelect_FollowByYouIdAsOne();
-        //                cb.specify().columnMemberId();
-        //
-        //            }
-        //        });
-        // TODO mayuko.sakaba miloseだけ省かれている？
-        // TODO mayuko.sakaba page検索ができていない。
-        MemberCB memberCB = new MemberCB();
-        memberCB.setupSelect_FollowByYouIdAsOne();
-        memberCB.orScopeQuery(new OrQuery<MemberCB>() {
-            @Override
-            public void query(MemberCB orCB) {
-                orCB.query().setMemberId_NotEqual(sessionDto.myId);
-                orCB.query().setMemberId_NotInScope(followIdList);
-            }
-        });
-        //        memberCB.query().setMemberId_NotEqual(sessionDto.myId);
-        //        memberCB.query().setMemberId_NotInScope(followIdList);
-        ListResultBean<Member> memberList = memberBhv.selectList(memberCB);
-        for (Member member : memberList) {
-            String userName = member.getUserName();
-            followSuggestions.add(userName);
+        followIdList.add(sessionDto.myId);
+        MemberCB memberCb = new MemberCB();
+        memberCb.query().setMemberId_NotInScope(followIdList);
+        memberCb.paging(5, 1);
+        ListResultBean<Member> selectList = memberBhv.selectList(memberCb);
+        for (Member member : selectList) {
+            MemberDto memberDto = new MemberDto();
+            memberDto.memberId = member.getMemberId();
+            memberDto.memberName = member.getUserName();
+            followSuggestionList.add(memberDto);
         }
-        //        FollowCB followCB = new FollowCB();
-        //        followCB.setupSelect_MemberByMemberId();
-        //        followCB.query().setMemberId_NotEqual(sessionDto.myId);
-        //        followCB.query().addOrderBy_FollowId_Asc();
-        //        //followCB.query().set;
-        //        ListResultBean<Follow> followList = followBhv.selectList(followCB);
-        //        LOG.debug("**@" + followList.size());
-        //        for (Follow follow : followList) {
-        //            String toFollowMember = follow.getMemberByMemberId().getUserName();
-        //            followSuggestions.add(toFollowMember);
-        //        }
-        /* ツィートタイムラインを表示　*/
         showTimeline();
         return "/twitter/home.jsp";
     }
@@ -136,6 +110,8 @@ public class HomeAction {
     private void selectFollowList() {
         FollowCB followCB = new FollowCB();
         followCB.query().setMemberId_Equal(sessionDto.myId);
+        followCB.query().setYouId_NotEqual(sessionDto.myId);
+        followCB.query().setDelFlg_Equal("N");
         ListResultBean<Follow> selectFollowList = followBhv.selectList(followCB);
         for (Follow follow : selectFollowList) {
             Integer followId = follow.getYouId();
@@ -169,52 +145,49 @@ public class HomeAction {
         }
     }
 
-    //    @Execute(validator = false)
-    //    /*　誕生日登録　*/
-    //    public String setBirthday() {
-    //        for (int i = 1; i <= 12; i++) {
-    //            monthList.add(i);
-    //            LOG.debug("***" + i);
-    //        }
-    //        Integer birthMonth = monthList.get(homeForm.birthMonth);
-    //        return "/twitter/home.jsp";
-    //        String birthday = homeForm.birthday;
-    //        if (birthday != null) {
-    //            Member member = new Member();
-    //            LOG.debug("***" + birthday);
-    //            HandyDate inputDate = new HandyDate(birthday);
-    //            Date editDate = inputDate.getDate();
-    //            member.setMemberId(sessionDto.myId);
-    //            member.setBirthdate(editDate);
-    //            memberBhv.update(member);
-    //            return "/twitter/home.jsp";
-    //        } else {
-    //            return "home/?redirect=true";
-    //        }
-    //    }
-    /* フォロー・フォロワー一覧を出す */
     @Execute(validator = false)
     public String goFollow() {
         return "/followList/?redirect=true";
     }
 
     @Execute(validator = false)
-    /*　プロフィール登録　*/
-    // TODO mayuko.sakaba ここでプロフィール登録するのはなく、別の設定ページを作る
-    public String editProfile() {
-        profile = homeForm.profile;
-        if (profile != null) {
-            Member member = new Member();
-            member.setMemberId(sessionDto.myId);
-            member.setProfile(profile);
-            memberBhv.update(member);
-            return "/home/?redirect=true";
-        } else {
+    public String addFollow() {
+        /* 自分をフォローしない制約 */
+        LOG.debug("@@@" + homeForm.suggestFollowId);
+        MemberCB cb = new MemberCB();
+        cb.query().setMemberId_Equal(homeForm.suggestFollowId);
+        Member member = memberBhv.selectEntity(cb);
+        if (member.getMemberId().equals(sessionDto.myId)) {
             return "/home/?redirect=true";
         }
+        /* フォローしたことのない相手を新しくフォローする */
+        FollowCB addFollowCb = new FollowCB();
+        LOG.debug("check:" + homeForm.suggestFollowId);
+        addFollowCb.query().setYouId_Equal(homeForm.suggestFollowId);
+        addFollowCb.query().setMemberId_Equal(sessionDto.myId);
+        Follow selectFollow = followBhv.selectEntity(addFollowCb);
+        Follow follow = new Follow();
+        if (selectFollow == null) {
+            Date date = new Date();
+            Timestamp followTime = new Timestamp(date.getTime());
+            follow.setMemberId(sessionDto.myId);
+            follow.setYouId(homeForm.suggestFollowId);
+            follow.setInsDatetime(followTime);
+            follow.setUpdDatetime(followTime);
+            follow.setInsTrace("***");
+            follow.setUpdTrace("***");
+            followBhv.insert(follow);
+        } else {
+            /* フォローしたことのある相手なら削除フラグをNにする */
+            Integer followId = selectFollow.getFollowId();
+            follow.setFollowId(followId);
+            follow.setDelFlg("N");
+            followBhv.update(follow);
+        }
+        return "/home/?redirect=true";
     }
 
-    @Execute(validator = false)
+    @Execute(validate = "validate", input = "/home/?redirect =true")
     /* ツィートと、ツィート時間を新しく追加 */
     public String tweet() {
         Date date = new Date();
@@ -232,6 +205,17 @@ public class HomeAction {
         tweet.setUpdTrace(inputTweet);
         tweetBhv.insert(tweet);
         return "/home/?redirect = true";
+    }
+
+    public ActionMessages validate() {
+        ActionMessages errors = new ActionMessages();
+        if (homeForm.inputTweet.length() >= 140) {
+            errors.add("inputTweet", new ActionMessage("140文字以上は入力できません。", false));
+        }
+        if (homeForm.inputTweet == "") {
+            errors.add("inputTweet", new ActionMessage("なにも入力されていませんよー！", false));
+        }
+        return errors;
     }
 
     @Execute(validator = false)
@@ -277,3 +261,48 @@ public class HomeAction {
         return "/twitter/searchresult.jsp";
     }
 }
+
+//    @Execute(validator = false)
+//    /*　誕生日登録　*/
+//    public String setBirthday() {
+//        for (int i = 1; i <= 12; i++) {
+//            monthList.add(i);
+//            LOG.debug("***" + i);
+//        }
+//        Integer birthMonth = monthList.get(homeForm.birthMonth);
+//        return "/twitter/home.jsp";
+//        String birthday = homeForm.birthday;
+//        if (birthday != null) {
+//            Member member = new Member();
+//            LOG.debug("***" + birthday);
+//            HandyDate inputDate = new HandyDate(birthday);
+//            Date editDate = inputDate.getDate();
+//            member.setMemberId(sessionDto.myId);
+//            member.setBirthdate(editDate);
+//            memberBhv.update(member);
+//            return "/twitter/home.jsp";
+//        } else {
+//            return "home/?redirect=true";
+//        }
+//    }
+/* フォロー・フォロワー一覧を出す */
+
+//    @Execute(validator = false)
+//    /*　プロフィール登録　*/
+//    // TODO mayuko.sakaba ここでプロフィール登録するのはなく、別の設定ページを作る
+//    public String editProfile() {
+//        profile = homeForm.profile;
+//        if (profile != null) {
+//            Member member = new Member();
+//            member.setMemberId(sessionDto.myId);
+//            member.setProfile(profile);
+//            memberBhv.update(member);
+//            return "/home/?redirect=true";
+//        } else {
+//            return "/home/?redirect=true";
+//        }
+//    }
+// <h3>Profile</h3>
+// ${profile}<br>
+// <html:text property="profile" size="30"/><br>
+//    <s:submit property="editProfile"/><br>
