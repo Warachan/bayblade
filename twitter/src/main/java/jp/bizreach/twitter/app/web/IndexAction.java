@@ -15,6 +15,7 @@
  */
 package jp.bizreach.twitter.app.web;
 
+import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -36,9 +37,21 @@ import org.seasar.struts.util.RequestUtil;
 
 /**
  * @author mayuko.sakaba
+ *  ログイン画面、会員登録したければサインアップ画面に行く。
  */
 
 public class IndexAction {
+    // ===================================================================================
+    //                                                                          Definition
+    //                                                                          ==========
+
+    private static final Log LOG = LogFactory.getLog(IndexAction.class);
+    // ===================================================================================
+    //                                                                           Attribute
+    //                                                                           =========
+    // -----------------------------------------------------
+    //                                          DI Component
+    //                                          ------------
     @ActionForm
     @Resource
     protected IndexForm indexForm;
@@ -48,13 +61,19 @@ public class IndexAction {
     protected MemberBhv memberBhv;
     @Resource
     protected LoginBhv loginBhv;
-
-    private static final Log LOG = LogFactory.getLog(IndexAction.class);
+    @Resource
+    protected PassDigestLogic passDigestLogic;
+    // -----------------------------------------------------
+    //                                          Display Data
+    //                                          ------------
 
     public String error;
     public String overlapsError;
     public String regesterationError;
 
+    // ===================================================================================
+    //                                                                             Execute
+    //                                                                             =======
     // TODO mayuko.sakaba  ユーザ名でログインできるようにする。
     @Execute(validator = false)
     public String index() {
@@ -67,7 +86,7 @@ public class IndexAction {
     public String gotoLogin() {
         LOG.debug("***" + indexForm);
         String inputEmail = indexForm.loginEmail;
-        String inputPassword = indexForm.loginPassword;
+
         //        String inputEmail = indexForm.loginEmail;
         //        String inputPassword = indexForm.loginPassword;
         //        MemberCB cb = new MemberCB();
@@ -91,20 +110,21 @@ public class IndexAction {
         return "/home/?redirect=true";
     }
 
-    public ActionMessages validate() {
+    public ActionMessages validate() throws NoSuchAlgorithmException {
         ActionMessages errors = new ActionMessages();
+        String inputPassword = indexForm.loginPassword;
+        String digestedPass = passDigestLogic.build(inputPassword);
         MemberCB cb = new MemberCB();
-        cb.setupSelect_MemberSecurityAsOne();
         cb.query().setEmailAddress_Equal(indexForm.loginEmail);
+        cb.query().queryMemberSecurityAsOne().setPassword_Equal(digestedPass);
         Member member = memberBhv.selectEntity(cb);
-        if (member == null || member.getMemberSecurityAsOne().getPassword() == null) {
-            LOG.info("*******************************************************************************");
-            errors.add("loginEmail", new ActionMessage("正しいメールアドレスとパスワードを入力してください。", false));
-        } else {
+        LOG.debug("@@@@@@@@@@@@@@@@@@@@@" + member);
+        if (member != null) {
             sessionDto.myId = member.getMemberId();
             sessionDto.email = member.getEmailAddress();
             sessionDto.username = member.getUserName();
-            //            Timestamp loginTime = member.getInsDatetime();
+        } else {
+            errors.add("loginEmail", new ActionMessage("Wrong password or email address.", false));
         }
         return errors;
     }

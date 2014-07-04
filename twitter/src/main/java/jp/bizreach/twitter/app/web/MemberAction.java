@@ -95,7 +95,7 @@ public class MemberAction {
             followStatus = new Boolean(true);
         } else {
             followStatus = new Boolean(false);
-            relationship = "フォロー中";
+            relationship = "Following";
         }
         return "/twitter/member.jsp";
     }

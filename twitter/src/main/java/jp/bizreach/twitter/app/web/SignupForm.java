@@ -4,13 +4,10 @@ import javax.annotation.Resource;
 
 import jp.bizreach.twitter.dbflute.exbhv.MemberBhv;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.seasar.struts.annotation.Required;
 
 public class SignupForm {
 
-    private static final Log LOG = LogFactory.getLog(SignupForm.class);
     @Resource
     MemberBhv memberBhv;
     @Required

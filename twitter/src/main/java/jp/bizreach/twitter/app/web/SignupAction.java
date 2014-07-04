@@ -1,5 +1,6 @@
 package jp.bizreach.twitter.app.web;
 
+import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.regex.Matcher;
@@ -45,6 +46,8 @@ public class SignupAction {
     protected MemberBhv memberBhv;
     @Resource
     protected MemberSecurityBhv memberSecurityBhv;
+    @Resource
+    protected PassDigestLogic passDigestLogic;
     // -----------------------------------------------------
     //                                          Display Data
     //                                          ------------
@@ -57,6 +60,7 @@ public class SignupAction {
     public String characterError;
     public String userError;
     public String missingError;
+    protected String passDigest;
 
     // TODO mayuko.sakaba signup.jspにて、なぜゲッターメソッドがなかったのにValue=""をいれたら直ったか調べること。
     // TODO mayuko.sakaba indexActionForm に対する定義が見つかりません →　これなに？
@@ -71,49 +75,47 @@ public class SignupAction {
 
     @Execute(validate = "validate", input = "/signup.jsp")
     /* 会員登録メソッド */
-    public String regester() {
+    public String regester() throws NoSuchAlgorithmException {
 
         newEmail = signupForm.newEmail;
         password = signupForm.password;
         confirmPass = signupForm.confirmPass;
         username = signupForm.username;
-        Matcher emailMatcher = emailMatch();
-        Matcher pswdMatcher = pswdMatch();
+        //        Matcher emailMatcher = emailMatch();
+        //        Matcher pswdMatcher = pswdMatch();
 
-        /** 必須項目が空欄でないことをチェック
-        if (newEmail == "" || password == "" || username == "") {
-            missingError = "*全ての欄は必須項目です。";
-            return "/signup.jsp";
-        }
-        */
+        /* パスワード不可逆暗号化　*/
+        String digestedPass = passDigestLogic.build(password);
 
-        /* ユーザ名がすでに使われていないかチェック */
-        /**
-        int nameCount = selectNameCount();
-        if (nameCount > 0) {
-            userError = "そのユーザ名はすでに使われています。";
-            return "/signup.jsp";
-        }
-        */
-        /* 上記の問題に引っかからなかったら、会員登録する */
+        /* validationに引っかからなかったら、会員登録する */
         Date date = new Date();
         Timestamp timestamp = new Timestamp(date.getTime());
         sessionDto.email = newEmail;
-        Member member = insertMember(timestamp);
+        Member member = new Member();
+        member.setEmailAddress(sessionDto.email);
+        member.setUserName(username);
+        member.setInsDatetime(timestamp);
+        member.setUpdDatetime(timestamp);
+        member.setInsTrace("signedup");
+        member.setUpdTrace("signedup");
+        memberBhv.insert(member);
+
+        MemberSecurity security = new MemberSecurity();
+        security.setMemberId(member.getMemberId());
+        security.setPassword(digestedPass);
+        security.setInsDatetime(timestamp);
+        security.setUpdDatetime(timestamp);
+        security.setInsTrace("signedup");
+        security.setUpdTrace("signedup");
+        memberSecurityBhv.insert(security);
         sessionDto.myId = member.getMemberId();
         sessionDto.username = member.getUserName();
         LOG.debug("***" + sessionDto.myId);
 
-        if (password.equals(confirmPass)) {
-            //insertSecurity(timestamp, member);
-            //                return /twitter/home.jsp";
-            return "/home/?redirect=true";
-        } else {
-            matchError = "パスワードが一致しません。";
-            return "/signup.jsp";
-        }
+        return "/home/?redirect =true";
     }
 
+    // TODO mayuko.sakaba サインアップ時にログイン時間として登録するが抜けている。
     /* Validation */
     public ActionMessages validate() {
         ActionMessages errors = new ActionMessages();
@@ -122,39 +124,39 @@ public class SignupAction {
         Pattern ptn = Pattern.compile(emailPtn);
         Matcher emailMatcher = ptn.matcher(signupForm.newEmail);
         if (!emailMatcher.matches()) {
-            errors.add("newEmail", new ActionMessage("メールアドレスが不正です。", false));
+            errors.add("newEmail", new ActionMessage("Wrong Email Address", false));
         }
         if (signupForm.newEmail.length() > 30) {
-            errors.add("newEmail", new ActionMessage("メールアドレスが長すぎます。", false));
+            errors.add("newEmail", new ActionMessage("Your email address is too long.", false));
         }
         MemberCB cb = new MemberCB();
         cb.query().setEmailAddress_Equal(signupForm.newEmail);
         int count = memberBhv.selectCount(cb);
         if (count > 0) {
-            errors.add("newEmail", new ActionMessage("このメールアドレスはすでに登録されています。", false));
+            errors.add("newEmail", new ActionMessage("This email address is already registered.", false));
         }
         /* username */
-        if (signupForm.username.length() <= 5) {
-            errors.add("username", new ActionMessage("ユーザ名は五文字以上で入力してください。", false));
-        }
+        //        if (signupForm.username.length() < 5) {
+        //            errors.add("username", new ActionMessage("Username should be more than 5 characters.", false));
+        //        }
         MemberCB check = new MemberCB();
         check.query().setUserName_Equal(signupForm.username);
         int nameCount = memberBhv.selectCount(check);
         if (nameCount > 0) {
-            errors.add("username", new ActionMessage("このユーザ名はすでに使われています。", false));
+            errors.add("username", new ActionMessage("This username is already used by someone else.", false));
         }
         /*　password */
         String pswdPtn = "[\\w]+";
         Pattern ptn2 = Pattern.compile(pswdPtn);
         Matcher pswdMatcher = ptn2.matcher(signupForm.password);
         if (!pswdMatcher.matches()) {
-            errors.add("password", new ActionMessage("errors.invalid", false));
+            errors.add("password", new ActionMessage("Invalid password. Only alphabets or numbers are allowed", false));
         }
         if (!signupForm.password.equals(signupForm.confirmPass)) {
-            errors.add("password", new ActionMessage("パスワードが一致しません。", false));
+            errors.add("password", new ActionMessage("Password doesn't match.", false));
         }
-        if (signupForm.password.length() >= 20 || signupForm.password.length() <= 5) {
-            errors.add("password", new ActionMessage("パスワードは5文字以上、20文字以内で入力してください。", false));
+        if (signupForm.password.length() > 20 && signupForm.password.length() < 1) {
+            errors.add("password", new ActionMessage("Please enter your password no more than 20 characters.", false));
         }
         return errors;
     }
@@ -211,3 +213,19 @@ public class SignupAction {
     }
 
 }
+
+/** 必須項目が空欄でないことをチェック
+    if (newEmail == "" || password == "" || username == "") {
+        missingError = "*全ての欄は必須項目です。";
+        return "/signup.jsp";
+    }
+ */
+
+/* ユーザ名がすでに使われていないかチェック */
+/**
+    int nameCount = selectNameCount();
+    if (nameCount > 0) {
+        userError = "そのユーザ名はすでに使われています。";
+        return "/signup.jsp";
+    }
+ */
