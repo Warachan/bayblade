@@ -15,7 +15,7 @@
 				<s:submit property="search" value="Search" styleClass = "searchButton"/>
 			</s:form></span>
 			<span class><s:form action="/logout/"  styleClass = "logoutForm">
-				<s:submit property="index" value="Logout" styleClass = "logout"/>
+				<s:submit property="index" value="Logout" styleClass = "logoutButton"/>
 			</s:form></span>
 		</ul>
 <body>

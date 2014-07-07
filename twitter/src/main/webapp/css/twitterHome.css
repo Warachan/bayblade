@@ -44,17 +44,16 @@ h3, h4{
 
 /*---global-navigation---*/
 .global-navigation {
-    margin-top:30px;
-    margin-left:300px;
-	width: 2500px;
+	width: 1250px;
     height: 30px;
+    margin:auto;
+    margin-top:20px;
 }
 
 .global-navigation li {
     display: inline;
-    width: 100px;
+    width: 20%;
     float:left;
-
 }
 .global-navigation a {
  	color: #C6C6C6;
@@ -70,13 +69,17 @@ h3, h4{
 .global-navigation a:hover{
 	background: #D5E5FF;
 }
-.search{
-	margin-left:400px;
-	width:200px;
+#home{
+	margin-left:10px;
+}
+
+#search{
+	width:400px;
+	margin-left:200px;
 }
 .searchForm{
 	display:inline-block;
-	margin-left:900px;
+	margin-left:10px;
 }
 .searchButton{
 	color:#FFFFFF;
@@ -100,8 +103,8 @@ h3, h4{
 	/*height: 20px;*/
 	border: 2px solid #68CFC3;
 }
-.logoutForm{
-	margin-left:385px
+#logout{
+	width:100px;
 }
 .logoutButton{
 	color:#FFFFFF;

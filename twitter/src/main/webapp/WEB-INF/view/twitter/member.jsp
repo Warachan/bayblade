@@ -17,7 +17,7 @@
 				<s:submit property="search" value="Search" styleClass = "searchButton"/>
 			</s:form></span>
 			<span class><s:form action="/logout/"  styleClass = "logoutForm">
-				<s:submit property="index" value="Logout" styleClass = "logout"/>
+				<s:submit property="index" value="Logout" styleClass = "logoutButton"/>
 			</s:form></span>
 		</ul>
 	<body>
@@ -56,9 +56,16 @@
 						</s:form>
 					</div>
 					<figure class ="main-top-eyecatch">
-						<img src="../img/hana.jpg">
+							<c:choose>
+								<c:when test="${recruitStatus}">
+									<img src="../img/syuukatu.jpg">
+								</c:when>
+								<c:otherwise>
+									<img src="../img/kigyou.jpg">
+								</c:otherwise>
+							</c:choose>
 					</figure>
-				</div>
+					</div>
 					<div class ="fixBlock"></div>
 				<div class="main-bottom">
 					<div class="main-bottom-timeline">

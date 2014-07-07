@@ -13,14 +13,19 @@
 	</div>
 		<ul class = "global-navigation">
 			<li><a href= "http:/twitter/profile/">Profile</a></li>
-			<li><a href= "http:/twitter/home/">Home</a></li>
-			<span class ="search"><s:form action="/home/" styleClass = "searchForm">
-				<html:text property="searchWord" size ="30" value="" styleClass = "searchBox"/>
-				<s:submit property="search" value="Search" styleClass = "searchButton"/>
-			</s:form></span>
-			<span class ="logout"><s:form action="/logout/"  styleClass = "logoutForm">
-				<s:submit property="index" value="Logout" styleClass = "logoutButton"/>
-			</s:form></span>
+			<li id="home"><a href= "http:/twitter/home/">Home</a></li>
+			<!--<span class ="search"><s:form action="/home/" styleClass = "searchForm">-->
+				<li id="search">
+					<s:form action="/home/">
+						<html:text property="searchWord" size ="30" value="" styleClass = "searchBox"/>
+						<s:submit property="search" value="Search" styleClass = "searchButton"/>
+					</s:form>
+				</li>
+				<li id="logout">
+					<s:form action="/logout/"  styleClass = "logoutForm">
+						<s:submit property="index" value="Logout" styleClass = "logoutButton"/>
+					</s:form>
+				</li>
 		</ul>
 	<div class = "main">
 		<div class = "main-top">
@@ -43,7 +48,14 @@
 				</s:form>
 			</div>
 			<figure class ="main-top-eyecatch">
-				<img src="../img/hana.jpg">
+			<c:choose>
+				<c:when test="${recruitStatus}">
+						<img src="../img/syuukatu.jpg">
+				</c:when>
+				<c:otherwise>
+						<img src="../img/kigyou.jpg">
+				</c:otherwise>
+			</c:choose>
 			</figure>
 		</div>
 		<div class ="fixBlock"></div>
@@ -85,6 +97,7 @@
 					</s:form>
 					</c:forEach>
 				</ul>
+			</s:form>
 		</div>
 	</div>
 </div>
