@@ -12,21 +12,21 @@ import jp.bizreach.twitter.dbflute.cbean.cq.bs.*;
 import jp.bizreach.twitter.dbflute.cbean.cq.*;
 
 /**
- * The condition-query for in-line of member_withdraw.
+ * The condition-query for in-line of member_status.
  * @author DBFlute(AutoGenerator)
  */
-public class MemberWithdrawCIQ extends AbstractBsMemberWithdrawCQ {
+public class MemberStatusCIQ extends AbstractBsMemberStatusCQ {
 
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    protected BsMemberWithdrawCQ _myCQ;
+    protected BsMemberStatusCQ _myCQ;
 
     // ===================================================================================
     //                                                                         Constructor
     //                                                                         ===========
-    public MemberWithdrawCIQ(ConditionQuery referrerQuery, SqlClause sqlClause
-                        , String aliasName, int nestLevel, BsMemberWithdrawCQ myCQ) {
+    public MemberStatusCIQ(ConditionQuery referrerQuery, SqlClause sqlClause
+                        , String aliasName, int nestLevel, BsMemberStatusCQ myCQ) {
         super(referrerQuery, sqlClause, aliasName, nestLevel);
         _myCQ = myCQ;
         _foreignPropertyName = _myCQ.xgetForeignPropertyName(); // accept foreign property name
@@ -61,26 +61,34 @@ public class MemberWithdrawCIQ extends AbstractBsMemberWithdrawCQ {
     // ===================================================================================
     //                                                                Override about Query
     //                                                                ====================
-    protected ConditionValue getCValueMemberId() { return _myCQ.getMemberId(); }
-    public String keepMemberId_InScopeRelation_Member(MemberCQ sq)
-    { return _myCQ.keepMemberId_InScopeRelation_Member(sq); }
-    public String keepMemberId_NotInScopeRelation_Member(MemberCQ sq)
-    { return _myCQ.keepMemberId_NotInScopeRelation_Member(sq); }
-    protected ConditionValue getCValueWithdrawalReasonId() { return _myCQ.getWithdrawalReasonId(); }
-    protected ConditionValue getCValueWithdrawalReasonInputText() { return _myCQ.getWithdrawalReasonInputText(); }
-    protected ConditionValue getCValueWithdrawalDatetime() { return _myCQ.getWithdrawalDatetime(); }
+    protected ConditionValue getCValueMemberStatusCode() { return _myCQ.getMemberStatusCode(); }
+    public String keepMemberStatusCode_ExistsReferrer_MemberList(MemberCQ sq)
+    { throwIICBOE("ExistsReferrer"); return null; }
+    public String keepMemberStatusCode_NotExistsReferrer_MemberList(MemberCQ sq)
+    { throwIICBOE("NotExistsReferrer"); return null; }
+    public String keepMemberStatusCode_InScopeRelation_MemberList(MemberCQ sq)
+    { return _myCQ.keepMemberStatusCode_InScopeRelation_MemberList(sq); }
+    public String keepMemberStatusCode_NotInScopeRelation_MemberList(MemberCQ sq)
+    { return _myCQ.keepMemberStatusCode_NotInScopeRelation_MemberList(sq); }
+    public String keepMemberStatusCode_SpecifyDerivedReferrer_MemberList(MemberCQ sq)
+    { throwIICBOE("(Specify)DerivedReferrer"); return null; }
+    public String keepMemberStatusCode_QueryDerivedReferrer_MemberList(MemberCQ sq)
+    { throwIICBOE("(Query)DerivedReferrer"); return null; }
+    public String keepMemberStatusCode_QueryDerivedReferrer_MemberListParameter(Object vl)
+    { throwIICBOE("(Query)DerivedReferrer"); return null; }
+    protected ConditionValue getCValueMemberStatusName() { return _myCQ.getMemberStatusName(); }
     protected Map<String, Object> xfindFixedConditionDynamicParameterMap(String pp) { return null; }
-    public String keepScalarCondition(MemberWithdrawCQ sq)
+    public String keepScalarCondition(MemberStatusCQ sq)
     { throwIICBOE("ScalarCondition"); return null; }
-    public String keepSpecifyMyselfDerived(MemberWithdrawCQ sq)
+    public String keepSpecifyMyselfDerived(MemberStatusCQ sq)
     { throwIICBOE("(Specify)MyselfDerived"); return null;}
-    public String keepQueryMyselfDerived(MemberWithdrawCQ sq)
+    public String keepQueryMyselfDerived(MemberStatusCQ sq)
     { throwIICBOE("(Query)MyselfDerived"); return null;}
     public String keepQueryMyselfDerivedParameter(Object vl)
     { throwIICBOE("(Query)MyselfDerived"); return null;}
-    public String keepMyselfExists(MemberWithdrawCQ sq)
+    public String keepMyselfExists(MemberStatusCQ sq)
     { throwIICBOE("MyselfExists"); return null;}
-    public String keepMyselfInScope(MemberWithdrawCQ sq)
+    public String keepMyselfInScope(MemberStatusCQ sq)
     { throwIICBOE("MyselfInScope"); return null;}
 
     protected void throwIICBOE(String name)
@@ -90,6 +98,6 @@ public class MemberWithdrawCIQ extends AbstractBsMemberWithdrawCQ {
     //                                                                       Very Internal
     //                                                                       =============
     // very internal (for suppressing warn about 'Not Use Import')
-    protected String xinCB() { return MemberWithdrawCB.class.getName(); }
-    protected String xinCQ() { return MemberWithdrawCQ.class.getName(); }
+    protected String xinCB() { return MemberStatusCB.class.getName(); }
+    protected String xinCQ() { return MemberStatusCQ.class.getName(); }
 }

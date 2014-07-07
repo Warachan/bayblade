@@ -44,23 +44,15 @@ h3, h4{
 
 /*---global-navigation---*/
 .global-navigation {
-    margin-top: 40px;
-	width: 1350px;
-    height: 30px
+    margin-top:30px;
+    margin-left:300px;
+	width: 2500px;
+    height: 30px;
 }
-global-navigation li.return{
-	margin-left:597px;
-	color: #C6C6C6
- 	background: clear;
- 	font-weight: bold;
-    font-size: 15px;
-    text-align: center;
-    text-decoration: none;
 
-}
 .global-navigation li {
     display: inline;
-    width: 20%;
+    width: 100px;
     float:left;
 
 }
@@ -78,9 +70,13 @@ global-navigation li.return{
 .global-navigation a:hover{
 	background: #D5E5FF;
 }
+.search{
+	margin-left:400px;
+	width:200px;
+}
 .searchForm{
-	width:500px;
-	margin-left:340px;
+	display:inline-block;
+	margin-left:900px;
 }
 .searchButton{
 	color:#FFFFFF;
@@ -107,7 +103,7 @@ global-navigation li.return{
 .logoutForm{
 	margin-left:385px
 }
-.logout{
+.logoutButton{
 	color:#FFFFFF;
 	background-color: #68CFC3;
     background-positon: 50% 50%;
@@ -118,7 +114,7 @@ global-navigation li.return{
 	border-radius: 20px;
 	border-style:none;
 }
-.logout:hover{
+.logoutButton:hover{
 	color: #68CFC3;
 	background-color: #FFFFFF;
 	width: 80px;
@@ -198,7 +194,7 @@ global-navigation li.return{
 	padding:20px;
 }
 .signup-box{
-	width:500px;
+	width:560px;
 	margin-left:222px;
 	margin-top:50px;
 	border:1px solid #68CFC3;
@@ -211,7 +207,7 @@ global-navigation li.return{
 	margin-left: 5px;
 }
 .signup-box h2{
-	margin-left:48px;
+	margin-left:60px;
 	margin-top:15px;
 }
 .signup-box h4{
@@ -233,7 +229,54 @@ global-navigation li.return{
 .email{
 	margin-top:10px;
 }
-.email,.name,.username,.password,.register{
+.email,.name,.username,.password,.register,.profile{
+	margin-left:30px;
+}
+
+/*---profile page ---*/
+.profile-main{
+	clear:left;
+	width:1000px;
+	margin:auto;
+	padding:20px;
+}
+.profile-box{
+	width:560px;
+	margin-left:222px;
+	margin-top:50px;
+	border:1px solid #68CFC3;
+}
+.profileForm{
+	padding-left: 50px;
+}
+.profile-box li{
+	list-style:none;
+	margin-left: 5px;
+}
+.profile-box h2{
+	margin-left:85px;
+	margin-top:20px;
+}
+.profile-box h4{
+	margin-top: 20px;
+}
+
+.register{
+	color:#FFFFFF;
+	background-color: #68CFC3;
+	width: 80px;
+	height:20px;
+	font-weight:bold;
+	border-radius: 20px;
+	border-style:none;
+	margin-top:20px;
+	margin-bottom:20px;
+}
+
+.email{
+	margin-top:10px;
+}
+.email,.name,.username,.password,.register,.profile{
 	margin-left:30px;
 }
 /*---main page---*/
@@ -248,14 +291,27 @@ global-navigation li.return{
 	margin:auto;
 }
 
+
 /*---main-top---*/
 .main-top{
-	margin-top:20px;
+	height:auto;
+	margin-top:47px;
+}
+.fixBlock{
+	height:0px;
+	clear:both;
 }
 .main-top-profile{
-	display:inline-block;
-	width: 760px;
-	height:132px;
+	width: 750px;
+	height:autopx;
+	padding:17px;
+	border:2px solid #3EBA2B;
+	float:left;
+}
+.member-top-profile{
+	width: 750px;
+	margin-left:-8px;
+	height:autopx;
 	padding:17px;
 	border:2px solid #3EBA2B;
 	float:left;
@@ -266,8 +322,14 @@ global-navigation li.return{
 	padding-top:5px;
 }
 .memberFollowStatus{
-	margin-left:8px;
-	font-size:20px;
+	margin-left: 10px;
+	font-size:17px;
+}
+
+.recruitStatus{
+	margin-left:10px;
+	margin-top:5px;
+	font-size:15px;
 }
 
 .main-top-eyecatch{
@@ -309,6 +371,9 @@ global-navigation li.return{
 	margin-top:20px;
 	border:2px solid #3EBA2B;
 }
+.main-bottom li{
+	list-style:none;
+}
 .main-bottom h4{
 	margin:23px
 }
@@ -321,18 +386,32 @@ global-navigation li.return{
 	height:53px;
 	margin-left:23px;
 }
+.main-bottom-tweetForm{
+	padding-bottom:30px;
+}
 .tweetBox{
 	width:500px;
 	height:30px;
 	border:2px solid #3EBA2B;
+}
+#tweet{
+white-space:pre;
+whitespace:pre-line;
+whitespace:-pre-wrap;
+whitespace:-moz-pre-wrap;
+whitespace:hp-pre-wrap;
+whitespace:-o-pre-wrap;
+whitespace:pre-wrap;
+word-wrap:break-word;
+width:800px;
 }
 .tweetButton{
 	border-style:none;
 	width: 100px;
 	height:30px;
 	font-weight:bold;
-	margin-top:9px;
-	margin-left:27px;
+	margin-left:25px;
+	margin-top:20px;
 	color: #FFFFFF;
 	background-color:#68CFC3;
 }
@@ -341,7 +420,6 @@ global-navigation li.return{
 	height:auto;
 	margin-top:15px;
 }
-
 .main-bottom dl{
 	padding:10px;
 	border-top:1px solid #68CFC3;

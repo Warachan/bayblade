@@ -122,6 +122,7 @@ public class IndexAction {
                 sessionDto.email = member.getEmailAddress();
                 sessionDto.username = member.getUserName();
                 sessionDto.accountName = member.getAccountName();
+                sessionDto.status = member.getMemberStatusCode();
             } else {
                 errors.add("loginKey", new ActionMessage("ログインIDもしくはパスワードが間違っています。", false));
             }

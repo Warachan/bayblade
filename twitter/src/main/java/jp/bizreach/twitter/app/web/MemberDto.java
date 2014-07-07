@@ -9,6 +9,11 @@ public class MemberDto {
     public Integer memberId;
     public String userName;
     public String accountName;
+    public String status;
+    public String groupName;
+    public String profile;
+    public Integer acceptedCompany;
+    public Integer recruitingNumber;
 
     public String getUserName() {
         return userName;

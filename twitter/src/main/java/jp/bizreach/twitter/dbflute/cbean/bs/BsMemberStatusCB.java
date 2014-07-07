@@ -20,23 +20,22 @@ import jp.bizreach.twitter.dbflute.allcommon.ImplementedInvokerAssistant;
 import jp.bizreach.twitter.dbflute.allcommon.ImplementedSqlClauseCreator;
 import jp.bizreach.twitter.dbflute.cbean.*;
 import jp.bizreach.twitter.dbflute.cbean.cq.*;
-import jp.bizreach.twitter.dbflute.cbean.nss.*;
 
 /**
- * The base condition-bean of member_withdraw.
+ * The base condition-bean of member_status.
  * @author DBFlute(AutoGenerator)
  */
-public class BsMemberWithdrawCB extends AbstractConditionBean {
+public class BsMemberStatusCB extends AbstractConditionBean {
 
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    protected MemberWithdrawCQ _conditionQuery;
+    protected MemberStatusCQ _conditionQuery;
 
     // ===================================================================================
     //                                                                         Constructor
     //                                                                         ===========
-    public BsMemberWithdrawCB() {
+    public BsMemberStatusCB() {
         if (DBFluteConfig.getInstance().isPagingCountLater()) {
             enablePagingCountLater();
         }
@@ -72,7 +71,7 @@ public class BsMemberWithdrawCB extends AbstractConditionBean {
     //                                                                          Table Name
     //                                                                          ==========
     public String getTableDbName() {
-        return "member_withdraw";
+        return "member_status";
     }
 
     // ===================================================================================
@@ -80,33 +79,33 @@ public class BsMemberWithdrawCB extends AbstractConditionBean {
     //                                                                 ===================
     /**
      * Accept the query condition of primary key as equal.
-     * @param memberId : PK, NotNull, INT(10), FK to member. (NotNull)
+     * @param memberStatusCode : PK, NotNull, INT(10). (NotNull)
      * @return this. (NotNull)
      */
-    public MemberWithdrawCB acceptPK(Integer memberId) {
-        assertObjectNotNull("memberId", memberId);
-        BsMemberWithdrawCB cb = this;
-        cb.query().setMemberId_Equal(memberId);
-        return (MemberWithdrawCB)this;
+    public MemberStatusCB acceptPK(Integer memberStatusCode) {
+        assertObjectNotNull("memberStatusCode", memberStatusCode);
+        BsMemberStatusCB cb = this;
+        cb.query().setMemberStatusCode_Equal(memberStatusCode);
+        return (MemberStatusCB)this;
     }
 
     /**
      * Accept the query condition of primary key as equal. (old style)
-     * @param memberId : PK, NotNull, INT(10), FK to member. (NotNull)
+     * @param memberStatusCode : PK, NotNull, INT(10). (NotNull)
      */
-    public void acceptPrimaryKey(Integer memberId) {
-        assertObjectNotNull("memberId", memberId);
-        BsMemberWithdrawCB cb = this;
-        cb.query().setMemberId_Equal(memberId);
+    public void acceptPrimaryKey(Integer memberStatusCode) {
+        assertObjectNotNull("memberStatusCode", memberStatusCode);
+        BsMemberStatusCB cb = this;
+        cb.query().setMemberStatusCode_Equal(memberStatusCode);
     }
 
     public ConditionBean addOrderBy_PK_Asc() {
-        query().addOrderBy_MemberId_Asc();
+        query().addOrderBy_MemberStatusCode_Asc();
         return this;
     }
 
     public ConditionBean addOrderBy_PK_Desc() {
-        query().addOrderBy_MemberId_Desc();
+        query().addOrderBy_MemberStatusCode_Desc();
         return this;
     }
 
@@ -187,30 +186,30 @@ public class BsMemberWithdrawCB extends AbstractConditionBean {
      * </pre>
      * @return The instance of condition-query for base-point table to set up query. (NotNull)
      */
-    public MemberWithdrawCQ query() {
+    public MemberStatusCQ query() {
         assertQueryPurpose(); // assert only when user-public query 
         return getConditionQuery();
     }
 
-    public MemberWithdrawCQ getConditionQuery() { // public for parameter comment and internal
+    public MemberStatusCQ getConditionQuery() { // public for parameter comment and internal
         if (_conditionQuery == null) {
             _conditionQuery = createLocalCQ();
         }
         return _conditionQuery;
     }
 
-    protected MemberWithdrawCQ createLocalCQ() {
+    protected MemberStatusCQ createLocalCQ() {
         return xcreateCQ(null, getSqlClause(), getSqlClause().getBasePointAliasName(), 0);
     }
 
-    protected MemberWithdrawCQ xcreateCQ(ConditionQuery childQuery, SqlClause sqlClause, String aliasName, int nestLevel) {
-        MemberWithdrawCQ cq = xnewCQ(childQuery, sqlClause, aliasName, nestLevel);
+    protected MemberStatusCQ xcreateCQ(ConditionQuery childQuery, SqlClause sqlClause, String aliasName, int nestLevel) {
+        MemberStatusCQ cq = xnewCQ(childQuery, sqlClause, aliasName, nestLevel);
         cq.xsetBaseCB(this);
         return cq;
     }
 
-    protected MemberWithdrawCQ xnewCQ(ConditionQuery childQuery, SqlClause sqlClause, String aliasName, int nestLevel) {
-        return new MemberWithdrawCQ(childQuery, sqlClause, aliasName, nestLevel);
+    protected MemberStatusCQ xnewCQ(ConditionQuery childQuery, SqlClause sqlClause, String aliasName, int nestLevel) {
+        return new MemberStatusCQ(childQuery, sqlClause, aliasName, nestLevel);
     }
 
     public ConditionQuery localCQ() {
@@ -225,18 +224,18 @@ public class BsMemberWithdrawCB extends AbstractConditionBean {
      * You don't need to call SetupSelect in union-query,
      * because it inherits calls before. (Don't call SetupSelect after here)
      * <pre>
-     * cb.query().<span style="color: #DD4747">union</span>(new UnionQuery&lt;MemberWithdrawCB&gt;() {
-     *     public void query(MemberWithdrawCB unionCB) {
+     * cb.query().<span style="color: #DD4747">union</span>(new UnionQuery&lt;MemberStatusCB&gt;() {
+     *     public void query(MemberStatusCB unionCB) {
      *         unionCB.query().setXxx...
      *     }
      * });
      * </pre>
      * @param unionQuery The query of 'union'. (NotNull)
      */
-    public void union(UnionQuery<MemberWithdrawCB> unionQuery) {
-        final MemberWithdrawCB cb = new MemberWithdrawCB(); cb.xsetupForUnion(this); xsyncUQ(cb); 
+    public void union(UnionQuery<MemberStatusCB> unionQuery) {
+        final MemberStatusCB cb = new MemberStatusCB(); cb.xsetupForUnion(this); xsyncUQ(cb); 
         try { lock(); unionQuery.query(cb); } finally { unlock(); } xsaveUCB(cb);
-        final MemberWithdrawCQ cq = cb.query(); query().xsetUnionQuery(cq);
+        final MemberStatusCQ cq = cb.query(); query().xsetUnionQuery(cq);
     }
 
     /**
@@ -244,48 +243,23 @@ public class BsMemberWithdrawCB extends AbstractConditionBean {
      * You don't need to call SetupSelect in union-query,
      * because it inherits calls before. (Don't call SetupSelect after here)
      * <pre>
-     * cb.query().<span style="color: #DD4747">unionAll</span>(new UnionQuery&lt;MemberWithdrawCB&gt;() {
-     *     public void query(MemberWithdrawCB unionCB) {
+     * cb.query().<span style="color: #DD4747">unionAll</span>(new UnionQuery&lt;MemberStatusCB&gt;() {
+     *     public void query(MemberStatusCB unionCB) {
      *         unionCB.query().setXxx...
      *     }
      * });
      * </pre>
      * @param unionQuery The query of 'union all'. (NotNull)
      */
-    public void unionAll(UnionQuery<MemberWithdrawCB> unionQuery) {
-        final MemberWithdrawCB cb = new MemberWithdrawCB(); cb.xsetupForUnion(this); xsyncUQ(cb);
+    public void unionAll(UnionQuery<MemberStatusCB> unionQuery) {
+        final MemberStatusCB cb = new MemberStatusCB(); cb.xsetupForUnion(this); xsyncUQ(cb);
         try { lock(); unionQuery.query(cb); } finally { unlock(); } xsaveUCB(cb);
-        final MemberWithdrawCQ cq = cb.query(); query().xsetUnionAllQuery(cq);
+        final MemberStatusCQ cq = cb.query(); query().xsetUnionAllQuery(cq);
     }
 
     // ===================================================================================
     //                                                                         SetupSelect
     //                                                                         ===========
-    protected MemberNss _nssMember;
-    public MemberNss getNssMember() {
-        if (_nssMember == null) { _nssMember = new MemberNss(null); }
-        return _nssMember;
-    }
-    /**
-     * Set up relation columns to select clause. <br />
-     * member by my MEMBER_ID, named 'member'.
-     * <pre>
-     * MemberWithdrawCB cb = new MemberWithdrawCB();
-     * cb.<span style="color: #DD4747">setupSelect_Member()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
-     * cb.query().setFoo...(value);
-     * MemberWithdraw memberWithdraw = memberWithdrawBhv.selectEntityWithDeletedCheck(cb);
-     * ... = memberWithdraw.<span style="color: #DD4747">getMember()</span>; <span style="color: #3F7E5E">// you can get by using SetupSelect</span>
-     * </pre>
-     * @return The set-upper of nested relation. {setupSelect...().with[nested-relation]} (NotNull)
-     */
-    public MemberNss setupSelect_Member() {
-        assertSetupSelectPurpose("member");
-        doSetupSelect(new SsCall() { public ConditionQuery qf() { return query().queryMember(); } });
-        if (_nssMember == null || !_nssMember.hasConditionQuery())
-        { _nssMember = new MemberNss(query().queryMember()); }
-        return _nssMember;
-    }
-
     // [DBFlute-0.7.4]
     // ===================================================================================
     //                                                                             Specify
@@ -311,9 +285,9 @@ public class BsMemberWithdrawCB extends AbstractConditionBean {
     public HpSpecification specify() {
         assertSpecifyPurpose();
         if (_specification == null) { _specification = new HpSpecification(this
-            , new HpSpQyCall<MemberWithdrawCQ>() {
+            , new HpSpQyCall<MemberStatusCQ>() {
                 public boolean has() { return true; }
-                public MemberWithdrawCQ qy() { return getConditionQuery(); }
+                public MemberStatusCQ qy() { return getConditionQuery(); }
             }
             , _purpose, getDBMetaProvider()); }
         return _specification;
@@ -327,68 +301,56 @@ public class BsMemberWithdrawCB extends AbstractConditionBean {
         return _specification != null && _specification.isAlreadySpecifiedRequiredColumn();
     }
 
-    public static class HpSpecification extends HpAbstractSpecification<MemberWithdrawCQ> {
-        protected MemberCB.HpSpecification _member;
-        public HpSpecification(ConditionBean baseCB, HpSpQyCall<MemberWithdrawCQ> qyCall
+    public static class HpSpecification extends HpAbstractSpecification<MemberStatusCQ> {
+        public HpSpecification(ConditionBean baseCB, HpSpQyCall<MemberStatusCQ> qyCall
                              , HpCBPurpose purpose, DBMetaProvider dbmetaProvider)
         { super(baseCB, qyCall, purpose, dbmetaProvider); }
         /**
-         * MEMBER_ID: {PK, NotNull, INT(10), FK to member}
+         * MEMBER_STATUS_CODE: {PK, NotNull, INT(10)}
          * @return The information object of specified column. (NotNull)
          */
-        public HpSpecifiedColumn columnMemberId() { return doColumn("MEMBER_ID"); }
+        public HpSpecifiedColumn columnMemberStatusCode() { return doColumn("MEMBER_STATUS_CODE"); }
         /**
-         * WITHDRAWAL_REASON_ID: {INT(10)}
+         * MEMBER_STATUS_NAME: {NotNull, VARCHAR(20)}
          * @return The information object of specified column. (NotNull)
          */
-        public HpSpecifiedColumn columnWithdrawalReasonId() { return doColumn("WITHDRAWAL_REASON_ID"); }
-        /**
-         * WITHDRAWAL_REASON_INPUT_TEXT: {TEXT(65535)}
-         * @return The information object of specified column. (NotNull)
-         */
-        public HpSpecifiedColumn columnWithdrawalReasonInputText() { return doColumn("WITHDRAWAL_REASON_INPUT_TEXT"); }
-        /**
-         * WITHDRAWAL_DATETIME: {NotNull, DATETIME(19)}
-         * @return The information object of specified column. (NotNull)
-         */
-        public HpSpecifiedColumn columnWithdrawalDatetime() { return doColumn("WITHDRAWAL_DATETIME"); }
+        public HpSpecifiedColumn columnMemberStatusName() { return doColumn("MEMBER_STATUS_NAME"); }
         public void everyColumn() { doEveryColumn(); }
         public void exceptRecordMetaColumn() { doExceptRecordMetaColumn(); }
         @Override
         protected void doSpecifyRequiredColumn() {
-            columnMemberId(); // PK
+            columnMemberStatusCode(); // PK
         }
         @Override
-        protected String getTableDbName() { return "member_withdraw"; }
+        protected String getTableDbName() { return "member_status"; }
         /**
-         * Prepare to specify functions about relation table. <br />
-         * member by my MEMBER_ID, named 'member'.
-         * @return The instance for specification for relation table to specify. (NotNull)
+         * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br />
+         * {select max(FOO) from member where ...) as FOO_MAX} <br />
+         * member by MEMBER_STATUS_CODE, named 'memberList'.
+         * <pre>
+         * cb.specify().<span style="color: #DD4747">derivedMemberList()</span>.<span style="color: #DD4747">max</span>(new SubQuery&lt;MemberCB&gt;() {
+         *     public void query(MemberCB subCB) {
+         *         subCB.specify().<span style="color: #DD4747">columnFoo...</span> <span style="color: #3F7E5E">// derived column by function</span>
+         *         subCB.query().setBar... <span style="color: #3F7E5E">// referrer condition</span>
+         *     }
+         * }, Member.<span style="color: #DD4747">ALIAS_foo...</span>);
+         * </pre>
+         * @return The object to set up a function for referrer table. (NotNull)
          */
-        public MemberCB.HpSpecification specifyMember() {
-            assertRelation("member");
-            if (_member == null) {
-                _member = new MemberCB.HpSpecification(_baseCB, new HpSpQyCall<MemberCQ>() {
-                    public boolean has() { return _qyCall.has() && _qyCall.qy().hasConditionQueryMember(); }
-                    public MemberCQ qy() { return _qyCall.qy().queryMember(); } }
-                    , _purpose, _dbmetaProvider);
-                if (xhasSyncQyCall()) { // inherits it
-                    _member.xsetSyncQyCall(new HpSpQyCall<MemberCQ>() {
-                        public boolean has() { return xsyncQyCall().has() && xsyncQyCall().qy().hasConditionQueryMember(); }
-                        public MemberCQ qy() { return xsyncQyCall().qy().queryMember(); }
-                    });
-                }
-            }
-            return _member;
+        public HpSDRFunction<MemberCB, MemberStatusCQ> derivedMemberList() {
+            assertDerived("memberList"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
+            return new HpSDRFunction<MemberCB, MemberStatusCQ>(_baseCB, _qyCall.qy(), new HpSDRSetupper<MemberCB, MemberStatusCQ>() {
+                public void setup(String fn, SubQuery<MemberCB> sq, MemberStatusCQ cq, String al, DerivedReferrerOption op) {
+                    cq.xsderiveMemberList(fn, sq, al, op); } }, _dbmetaProvider);
         }
         /**
          * Prepare for (Specify)MyselfDerived (SubQuery).
          * @return The object to set up a function for myself table. (NotNull)
          */
-        public HpSDRFunction<MemberWithdrawCB, MemberWithdrawCQ> myselfDerived() {
+        public HpSDRFunction<MemberStatusCB, MemberStatusCQ> myselfDerived() {
             assertDerived("myselfDerived"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
-            return new HpSDRFunction<MemberWithdrawCB, MemberWithdrawCQ>(_baseCB, _qyCall.qy(), new HpSDRSetupper<MemberWithdrawCB, MemberWithdrawCQ>() {
-                public void setup(String fn, SubQuery<MemberWithdrawCB> sq, MemberWithdrawCQ cq, String al, DerivedReferrerOption op) {
+            return new HpSDRFunction<MemberStatusCB, MemberStatusCQ>(_baseCB, _qyCall.qy(), new HpSDRSetupper<MemberStatusCB, MemberStatusCQ>() {
+                public void setup(String fn, SubQuery<MemberStatusCB> sq, MemberStatusCQ cq, String al, DerivedReferrerOption op) {
                     cq.xsmyselfDerive(fn, sq, al, op); } }, _dbmetaProvider);
         }
     }
@@ -401,12 +363,12 @@ public class BsMemberWithdrawCB extends AbstractConditionBean {
      * Set up column-query. {column1 = column2}
      * <pre>
      * <span style="color: #3F7E5E">// where FOO &lt; BAR</span>
-     * cb.<span style="color: #DD4747">columnQuery</span>(new SpecifyQuery&lt;MemberWithdrawCB&gt;() {
-     *     public void query(MemberWithdrawCB cb) {
+     * cb.<span style="color: #DD4747">columnQuery</span>(new SpecifyQuery&lt;MemberStatusCB&gt;() {
+     *     public void query(MemberStatusCB cb) {
      *         cb.specify().<span style="color: #DD4747">columnFoo()</span>; <span style="color: #3F7E5E">// left column</span>
      *     }
-     * }).lessThan(new SpecifyQuery&lt;MemberWithdrawCB&gt;() {
-     *     public void query(MemberWithdrawCB cb) {
+     * }).lessThan(new SpecifyQuery&lt;MemberStatusCB&gt;() {
+     *     public void query(MemberStatusCB cb) {
      *         cb.specify().<span style="color: #DD4747">columnBar()</span>; <span style="color: #3F7E5E">// right column</span>
      *     }
      * }); <span style="color: #3F7E5E">// you can calculate for right column like '}).plus(3);'</span>
@@ -414,17 +376,17 @@ public class BsMemberWithdrawCB extends AbstractConditionBean {
      * @param leftSpecifyQuery The specify-query for left column. (NotNull)
      * @return The object for setting up operand and right column. (NotNull)
      */
-    public HpColQyOperand<MemberWithdrawCB> columnQuery(final SpecifyQuery<MemberWithdrawCB> leftSpecifyQuery) {
-        return new HpColQyOperand<MemberWithdrawCB>(new HpColQyHandler<MemberWithdrawCB>() {
-            public HpCalculator handle(SpecifyQuery<MemberWithdrawCB> rightSp, String operand) {
+    public HpColQyOperand<MemberStatusCB> columnQuery(final SpecifyQuery<MemberStatusCB> leftSpecifyQuery) {
+        return new HpColQyOperand<MemberStatusCB>(new HpColQyHandler<MemberStatusCB>() {
+            public HpCalculator handle(SpecifyQuery<MemberStatusCB> rightSp, String operand) {
                 return xcolqy(xcreateColumnQueryCB(), xcreateColumnQueryCB(), leftSpecifyQuery, rightSp, operand);
             }
         });
     }
 
-    protected MemberWithdrawCB xcreateColumnQueryCB() {
-        MemberWithdrawCB cb = new MemberWithdrawCB();
-        cb.xsetupForColumnQuery((MemberWithdrawCB)this);
+    protected MemberStatusCB xcreateColumnQueryCB() {
+        MemberStatusCB cb = new MemberStatusCB();
+        cb.xsetupForColumnQuery((MemberStatusCB)this);
         return cb;
     }
 
@@ -436,9 +398,9 @@ public class BsMemberWithdrawCB extends AbstractConditionBean {
      * This is very specialty so you can get the frontier spirit. Bon voyage!
      * @return The condition-bean for dream cruise, which is linked to main condition-bean.
      */
-    public MemberWithdrawCB dreamCruiseCB() {
-        MemberWithdrawCB cb = new MemberWithdrawCB();
-        cb.xsetupForDreamCruise((MemberWithdrawCB) this);
+    public MemberStatusCB dreamCruiseCB() {
+        MemberStatusCB cb = new MemberStatusCB();
+        cb.xsetupForDreamCruise((MemberStatusCB) this);
         return cb;
     }
 
@@ -455,8 +417,8 @@ public class BsMemberWithdrawCB extends AbstractConditionBean {
      * (Same-column-and-same-condition-key conditions are allowed in or-scope)
      * <pre>
      * <span style="color: #3F7E5E">// where (FOO = '...' or BAR = '...')</span>
-     * cb.<span style="color: #DD4747">orScopeQuery</span>(new OrQuery&lt;MemberWithdrawCB&gt;() {
-     *     public void query(MemberWithdrawCB orCB) {
+     * cb.<span style="color: #DD4747">orScopeQuery</span>(new OrQuery&lt;MemberStatusCB&gt;() {
+     *     public void query(MemberStatusCB orCB) {
      *         orCB.query().setFOO_Equal...
      *         orCB.query().setBAR_Equal...
      *     }
@@ -464,8 +426,8 @@ public class BsMemberWithdrawCB extends AbstractConditionBean {
      * </pre>
      * @param orQuery The query for or-condition. (NotNull)
      */
-    public void orScopeQuery(OrQuery<MemberWithdrawCB> orQuery) {
-        xorSQ((MemberWithdrawCB)this, orQuery);
+    public void orScopeQuery(OrQuery<MemberStatusCB> orQuery) {
+        xorSQ((MemberStatusCB)this, orQuery);
     }
 
     @Override
@@ -478,11 +440,11 @@ public class BsMemberWithdrawCB extends AbstractConditionBean {
      * (However nested or-scope query and as-or-split of like-search in and-part are unsupported)
      * <pre>
      * <span style="color: #3F7E5E">// where (FOO = '...' or (BAR = '...' and QUX = '...'))</span>
-     * cb.<span style="color: #DD4747">orScopeQuery</span>(new OrQuery&lt;MemberWithdrawCB&gt;() {
-     *     public void query(MemberWithdrawCB orCB) {
+     * cb.<span style="color: #DD4747">orScopeQuery</span>(new OrQuery&lt;MemberStatusCB&gt;() {
+     *     public void query(MemberStatusCB orCB) {
      *         orCB.query().setFOO_Equal...
-     *         orCB.<span style="color: #DD4747">orScopeQueryAndPart</span>(new AndQuery&lt;MemberWithdrawCB&gt;() {
-     *             public void query(MemberWithdrawCB andCB) {
+     *         orCB.<span style="color: #DD4747">orScopeQueryAndPart</span>(new AndQuery&lt;MemberStatusCB&gt;() {
+     *             public void query(MemberStatusCB andCB) {
      *                 andCB.query().setBar_...
      *                 andCB.query().setQux_...
      *             }
@@ -492,8 +454,8 @@ public class BsMemberWithdrawCB extends AbstractConditionBean {
      * </pre>
      * @param andQuery The query for and-condition. (NotNull)
      */
-    public void orScopeQueryAndPart(AndQuery<MemberWithdrawCB> andQuery) {
-        xorSQAP((MemberWithdrawCB)this, andQuery);
+    public void orScopeQueryAndPart(AndQuery<MemberStatusCB> andQuery) {
+        xorSQAP((MemberStatusCB)this, andQuery);
     }
 
     // ===================================================================================
@@ -519,15 +481,15 @@ public class BsMemberWithdrawCB extends AbstractConditionBean {
     //                                                                        ============
     @Override
     protected void xprepareSyncQyCall(ConditionBean mainCB) {
-        final MemberWithdrawCB cb;
+        final MemberStatusCB cb;
         if (mainCB != null) {
-            cb = (MemberWithdrawCB)mainCB;
+            cb = (MemberStatusCB)mainCB;
         } else {
-            cb = new MemberWithdrawCB();
+            cb = new MemberStatusCB();
         }
-        specify().xsetSyncQyCall(new HpSpQyCall<MemberWithdrawCQ>() {
+        specify().xsetSyncQyCall(new HpSpQyCall<MemberStatusCQ>() {
             public boolean has() { return true; }
-            public MemberWithdrawCQ qy() { return cb.query(); }
+            public MemberStatusCQ qy() { return cb.query(); }
         });
     }
 
@@ -535,8 +497,8 @@ public class BsMemberWithdrawCB extends AbstractConditionBean {
     //                                                                            Internal
     //                                                                            ========
     // very internal (for suppressing warn about 'Not Use Import')
-    protected String getConditionBeanClassNameInternally() { return MemberWithdrawCB.class.getName(); }
-    protected String getConditionQueryClassNameInternally() { return MemberWithdrawCQ.class.getName(); }
+    protected String getConditionBeanClassNameInternally() { return MemberStatusCB.class.getName(); }
+    protected String getConditionQueryClassNameInternally() { return MemberStatusCQ.class.getName(); }
     protected String getSubQueryClassNameInternally() { return SubQuery.class.getName(); }
     protected String getConditionOptionClassNameInternally() { return ConditionOption.class.getName(); }
 }

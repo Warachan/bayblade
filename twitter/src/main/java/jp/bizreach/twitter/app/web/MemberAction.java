@@ -56,9 +56,15 @@ public class MemberAction {
     public String noFollow;
     public String noFollower;
     public String account;
-    public String alreadyFollowingError;
+    public String groupName;
+    public Integer graduationYear;
+    public String profile;
+    public Integer status;
+    public String interestedIndustry;
+    public Integer recruitingNumber;
     public String relationship;
     public boolean followStatus;
+    public boolean recruitStatus;
 
     // ===================================================================================
     //                                                                             Execute
@@ -72,8 +78,17 @@ public class MemberAction {
         LOG.debug("nameCheck:" + memberForm.yourName);
         memberCb.query().setUserName_Equal(memberForm.yourName);
         Member member = memberBhv.selectEntity(memberCb);
-        //        member.getBirthdate();
-        //        member.getProfile();
+        status = member.getMemberStatusCode();
+        profile = member.getProfile();
+        groupName = member.getGroupName();
+        interestedIndustry = member.getInterestedIndustry();
+        recruitingNumber = member.getRecruitingNumber();
+        graduationYear = member.getGraduationYear();
+        if (status.equals(1)) {
+            recruitStatus = new Boolean(true);
+        } else if (status.equals(2)) {
+            recruitStatus = new Boolean(false);
+        }
         account = (member.getAccountName() + "@" + member.getUserName());
         /* ツィートタイムラインを表示　*/
         TweetCB tweetCb = new TweetCB();

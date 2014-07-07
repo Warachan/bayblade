@@ -2,17 +2,17 @@ package jp.bizreach.twitter.dbflute.cbean.cq;
 
 import org.seasar.dbflute.cbean.ConditionQuery;
 import org.seasar.dbflute.cbean.sqlclause.SqlClause;
-import jp.bizreach.twitter.dbflute.cbean.cq.bs.BsMemberWithdrawCQ;
+import jp.bizreach.twitter.dbflute.cbean.cq.bs.BsMemberStatusCQ;
 
 /**
- * The condition-query of member_withdraw.
+ * The condition-query of member_status.
  * <p>
  * You can implement your original methods here.
  * This class remains when re-generating.
  * </p>
  * @author DBFlute(AutoGenerator)
  */
-public class MemberWithdrawCQ extends BsMemberWithdrawCQ {
+public class MemberStatusCQ extends BsMemberStatusCQ {
 
     // ===================================================================================
     //                                                                         Constructor
@@ -25,7 +25,7 @@ public class MemberWithdrawCQ extends BsMemberWithdrawCQ {
      * @param aliasName The alias name for this query. (NotNull)
      * @param nestLevel The nest level of this query. (if zero, this is base query)
      */
-    public MemberWithdrawCQ(ConditionQuery referrerQuery, SqlClause sqlClause, String aliasName, int nestLevel) {
+    public MemberStatusCQ(ConditionQuery referrerQuery, SqlClause sqlClause, String aliasName, int nestLevel) {
         super(referrerQuery, sqlClause, aliasName, nestLevel);
     }
 

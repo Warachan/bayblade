@@ -19,7 +19,7 @@ import jp.bizreach.twitter.dbflute.exentity.*;
  *     MEMBER_ID
  * 
  * [column]
- *     MEMBER_ID, EMAIL_ADDRESS, USER_NAME, BIRTHDATE, PROFILE, INS_DATETIME, UPD_DATETIME, INS_TRACE, UPD_TRACE, ACCOUNT_NAME
+ *     MEMBER_ID, EMAIL_ADDRESS, MEMBER_STATUS_CODE, USER_NAME, ACCOUNT_NAME, GROUP_NAME, INS_DATETIME, UPD_DATETIME, INS_TRACE, UPD_TRACE, RECRUITING_NUMBER, INTERESTED_INDUSTRY, GRADUATION_YEAR, BIRTHDATE, PROFILE
  * 
  * [sequence]
  *     
@@ -31,39 +31,49 @@ import jp.bizreach.twitter.dbflute.exentity.*;
  *     
  * 
  * [foreign table]
- *     member_security(AsOne), member_withdraw(AsOne)
+ *     member_status, member_security(AsOne)
  * 
  * [referrer table]
- *     follow, login, tweet, member_security, member_withdraw
+ *     follow, login, tweet, member_security
  * 
  * [foreign property]
- *     memberSecurityAsOne, memberWithdrawAsOne
+ *     memberStatus, memberSecurityAsOne
  * 
  * [referrer property]
- *     followByMemberIdList, followByYouIdList, loginList, tweetList
+ *     followByYouIdList, followByMemberIdList, loginList, tweetList
  * 
  * [get/set template]
  * /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
  * Integer memberId = entity.getMemberId();
  * String emailAddress = entity.getEmailAddress();
+ * Integer memberStatusCode = entity.getMemberStatusCode();
  * String userName = entity.getUserName();
- * java.util.Date birthdate = entity.getBirthdate();
- * String profile = entity.getProfile();
+ * String accountName = entity.getAccountName();
+ * String groupName = entity.getGroupName();
  * java.sql.Timestamp insDatetime = entity.getInsDatetime();
  * java.sql.Timestamp updDatetime = entity.getUpdDatetime();
  * String insTrace = entity.getInsTrace();
  * String updTrace = entity.getUpdTrace();
- * String accountName = entity.getAccountName();
+ * Integer recruitingNumber = entity.getRecruitingNumber();
+ * String interestedIndustry = entity.getInterestedIndustry();
+ * Integer graduationYear = entity.getGraduationYear();
+ * java.util.Date birthdate = entity.getBirthdate();
+ * String profile = entity.getProfile();
  * entity.setMemberId(memberId);
  * entity.setEmailAddress(emailAddress);
+ * entity.setMemberStatusCode(memberStatusCode);
  * entity.setUserName(userName);
- * entity.setBirthdate(birthdate);
- * entity.setProfile(profile);
+ * entity.setAccountName(accountName);
+ * entity.setGroupName(groupName);
  * entity.setInsDatetime(insDatetime);
  * entity.setUpdDatetime(updDatetime);
  * entity.setInsTrace(insTrace);
  * entity.setUpdTrace(updTrace);
- * entity.setAccountName(accountName);
+ * entity.setRecruitingNumber(recruitingNumber);
+ * entity.setInterestedIndustry(interestedIndustry);
+ * entity.setGraduationYear(graduationYear);
+ * entity.setBirthdate(birthdate);
+ * entity.setProfile(profile);
  * = = = = = = = = = =/
  * </pre>
  * @author DBFlute(AutoGenerator)
@@ -88,14 +98,17 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     /** EMAIL_ADDRESS: {UQ, NotNull, VARCHAR(100)} */
     protected String _emailAddress;
 
+    /** MEMBER_STATUS_CODE: {IX, NotNull, INT(10), FK to member_status} */
+    protected Integer _memberStatusCode;
+
     /** USER_NAME: {UQ, NotNull, VARCHAR(100)} */
     protected String _userName;
 
-    /** BIRTHDATE: {DATE(10)} */
-    protected java.util.Date _birthdate;
+    /** ACCOUNT_NAME: {NotNull, VARCHAR(100)} */
+    protected String _accountName;
 
-    /** PROFILE: {VARCHAR(200)} */
-    protected String _profile;
+    /** GROUP_NAME: {NotNull, VARCHAR(100)} */
+    protected String _groupName;
 
     /** INS_DATETIME: {NotNull, DATETIME(19)} */
     protected java.sql.Timestamp _insDatetime;
@@ -109,8 +122,20 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     /** UPD_TRACE: {NotNull, VARCHAR(256)} */
     protected String _updTrace;
 
-    /** ACCOUNT_NAME: {NotNull, VARCHAR(100)} */
-    protected String _accountName;
+    /** RECRUITING_NUMBER: {INT(10)} */
+    protected Integer _recruitingNumber;
+
+    /** INTERESTED_INDUSTRY: {VARCHAR(100)} */
+    protected String _interestedIndustry;
+
+    /** GRADUATION_YEAR: {INT(10)} */
+    protected Integer _graduationYear;
+
+    /** BIRTHDATE: {DATE(10)} */
+    protected java.util.Date _birthdate;
+
+    /** PROFILE: {VARCHAR(200)} */
+    protected String _profile;
 
     // -----------------------------------------------------
     //                                              Internal
@@ -198,6 +223,25 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     // ===================================================================================
     //                                                                    Foreign Property
     //                                                                    ================
+    /** member_status by my MEMBER_STATUS_CODE, named 'memberStatus'. */
+    protected MemberStatus _memberStatus;
+
+    /**
+     * [get] member_status by my MEMBER_STATUS_CODE, named 'memberStatus'.
+     * @return The entity of foreign property 'memberStatus'. (NullAllowed: when e.g. null FK column, no setupSelect)
+     */
+    public MemberStatus getMemberStatus() {
+        return _memberStatus;
+    }
+
+    /**
+     * [set] member_status by my MEMBER_STATUS_CODE, named 'memberStatus'.
+     * @param memberStatus The entity of foreign property 'memberStatus'. (NullAllowed)
+     */
+    public void setMemberStatus(MemberStatus memberStatus) {
+        _memberStatus = memberStatus;
+    }
+
     /** member_security by MEMBER_ID, named 'memberSecurityAsOne'. */
     protected MemberSecurity _memberSecurityAsOne;
 
@@ -217,48 +261,9 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
         _memberSecurityAsOne = memberSecurityAsOne;
     }
 
-    /** member_withdraw by MEMBER_ID, named 'memberWithdrawAsOne'. */
-    protected MemberWithdraw _memberWithdrawAsOne;
-
-    /**
-     * [get] member_withdraw by MEMBER_ID, named 'memberWithdrawAsOne'.
-     * @return the entity of foreign property(referrer-as-one) 'memberWithdrawAsOne'. (NullAllowed: when e.g. no data, no setupSelect)
-     */
-    public MemberWithdraw getMemberWithdrawAsOne() {
-        return _memberWithdrawAsOne;
-    }
-
-    /**
-     * [set] member_withdraw by MEMBER_ID, named 'memberWithdrawAsOne'.
-     * @param memberWithdrawAsOne The entity of foreign property(referrer-as-one) 'memberWithdrawAsOne'. (NullAllowed)
-     */
-    public void setMemberWithdrawAsOne(MemberWithdraw memberWithdrawAsOne) {
-        _memberWithdrawAsOne = memberWithdrawAsOne;
-    }
-
     // ===================================================================================
     //                                                                   Referrer Property
     //                                                                   =================
-    /** follow by MEMBER_ID, named 'followByMemberIdList'. */
-    protected List<Follow> _followByMemberIdList;
-
-    /**
-     * [get] follow by MEMBER_ID, named 'followByMemberIdList'.
-     * @return The entity list of referrer property 'followByMemberIdList'. (NotNull: even if no loading, returns empty list)
-     */
-    public List<Follow> getFollowByMemberIdList() {
-        if (_followByMemberIdList == null) { _followByMemberIdList = newReferrerList(); }
-        return _followByMemberIdList;
-    }
-
-    /**
-     * [set] follow by MEMBER_ID, named 'followByMemberIdList'.
-     * @param followByMemberIdList The entity list of referrer property 'followByMemberIdList'. (NullAllowed)
-     */
-    public void setFollowByMemberIdList(List<Follow> followByMemberIdList) {
-        _followByMemberIdList = followByMemberIdList;
-    }
-
     /** follow by YOU_ID, named 'followByYouIdList'. */
     protected List<Follow> _followByYouIdList;
 
@@ -277,6 +282,26 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
      */
     public void setFollowByYouIdList(List<Follow> followByYouIdList) {
         _followByYouIdList = followByYouIdList;
+    }
+
+    /** follow by MEMBER_ID, named 'followByMemberIdList'. */
+    protected List<Follow> _followByMemberIdList;
+
+    /**
+     * [get] follow by MEMBER_ID, named 'followByMemberIdList'.
+     * @return The entity list of referrer property 'followByMemberIdList'. (NotNull: even if no loading, returns empty list)
+     */
+    public List<Follow> getFollowByMemberIdList() {
+        if (_followByMemberIdList == null) { _followByMemberIdList = newReferrerList(); }
+        return _followByMemberIdList;
+    }
+
+    /**
+     * [set] follow by MEMBER_ID, named 'followByMemberIdList'.
+     * @param followByMemberIdList The entity list of referrer property 'followByMemberIdList'. (NullAllowed)
+     */
+    public void setFollowByMemberIdList(List<Follow> followByMemberIdList) {
+        _followByMemberIdList = followByMemberIdList;
     }
 
     /** login by MEMBER_ID, named 'loginList'. */
@@ -423,14 +448,14 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
         StringBuilder sb = new StringBuilder();
         sb.append(toString());
         String li = "\n  ";
+        if (_memberStatus != null)
+        { sb.append(li).append(xbRDS(_memberStatus, "memberStatus")); }
         if (_memberSecurityAsOne != null)
         { sb.append(li).append(xbRDS(_memberSecurityAsOne, "memberSecurityAsOne")); }
-        if (_memberWithdrawAsOne != null)
-        { sb.append(li).append(xbRDS(_memberWithdrawAsOne, "memberWithdrawAsOne")); }
-        if (_followByMemberIdList != null) { for (Entity et : _followByMemberIdList)
-        { if (et != null) { sb.append(li).append(xbRDS(et, "followByMemberIdList")); } } }
         if (_followByYouIdList != null) { for (Entity et : _followByYouIdList)
         { if (et != null) { sb.append(li).append(xbRDS(et, "followByYouIdList")); } } }
+        if (_followByMemberIdList != null) { for (Entity et : _followByMemberIdList)
+        { if (et != null) { sb.append(li).append(xbRDS(et, "followByMemberIdList")); } } }
         if (_loginList != null) { for (Entity et : _loginList)
         { if (et != null) { sb.append(li).append(xbRDS(et, "loginList")); } } }
         if (_tweetList != null) { for (Entity et : _tweetList)
@@ -457,14 +482,19 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
         String dm = ", ";
         sb.append(dm).append(getMemberId());
         sb.append(dm).append(getEmailAddress());
+        sb.append(dm).append(getMemberStatusCode());
         sb.append(dm).append(getUserName());
-        sb.append(dm).append(xfUD(getBirthdate()));
-        sb.append(dm).append(getProfile());
+        sb.append(dm).append(getAccountName());
+        sb.append(dm).append(getGroupName());
         sb.append(dm).append(getInsDatetime());
         sb.append(dm).append(getUpdDatetime());
         sb.append(dm).append(getInsTrace());
         sb.append(dm).append(getUpdTrace());
-        sb.append(dm).append(getAccountName());
+        sb.append(dm).append(getRecruitingNumber());
+        sb.append(dm).append(getInterestedIndustry());
+        sb.append(dm).append(getGraduationYear());
+        sb.append(dm).append(xfUD(getBirthdate()));
+        sb.append(dm).append(getProfile());
         if (sb.length() > dm.length()) {
             sb.delete(0, dm.length());
         }
@@ -480,12 +510,12 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     protected String buildRelationString() {
         StringBuilder sb = new StringBuilder();
         String cm = ",";
+        if (_memberStatus != null) { sb.append(cm).append("memberStatus"); }
         if (_memberSecurityAsOne != null) { sb.append(cm).append("memberSecurityAsOne"); }
-        if (_memberWithdrawAsOne != null) { sb.append(cm).append("memberWithdrawAsOne"); }
-        if (_followByMemberIdList != null && !_followByMemberIdList.isEmpty())
-        { sb.append(cm).append("followByMemberIdList"); }
         if (_followByYouIdList != null && !_followByYouIdList.isEmpty())
         { sb.append(cm).append("followByYouIdList"); }
+        if (_followByMemberIdList != null && !_followByMemberIdList.isEmpty())
+        { sb.append(cm).append("followByMemberIdList"); }
         if (_loginList != null && !_loginList.isEmpty())
         { sb.append(cm).append("loginList"); }
         if (_tweetList != null && !_tweetList.isEmpty())
@@ -550,6 +580,25 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
+     * [get] MEMBER_STATUS_CODE: {IX, NotNull, INT(10), FK to member_status} <br />
+     * メンバーステータスコード : 企業か学生か
+     * @return The value of the column 'MEMBER_STATUS_CODE'. (basically NotNull if selected: for the constraint)
+     */
+    public Integer getMemberStatusCode() {
+        return _memberStatusCode;
+    }
+
+    /**
+     * [set] MEMBER_STATUS_CODE: {IX, NotNull, INT(10), FK to member_status} <br />
+     * メンバーステータスコード : 企業か学生か
+     * @param memberStatusCode The value of the column 'MEMBER_STATUS_CODE'. (basically NotNull if update: for the constraint)
+     */
+    public void setMemberStatusCode(Integer memberStatusCode) {
+        __modifiedProperties.addPropertyName("memberStatusCode");
+        _memberStatusCode = memberStatusCode;
+    }
+
+    /**
      * [get] USER_NAME: {UQ, NotNull, VARCHAR(100)} <br />
      * 会員ユーザ名 : 会員のユーザ名
      * @return The value of the column 'USER_NAME'. (basically NotNull if selected: for the constraint)
@@ -569,41 +618,41 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [get] BIRTHDATE: {DATE(10)} <br />
-     * 生年月日 : 会員の生年月日
-     * @return The value of the column 'BIRTHDATE'. (NullAllowed even if selected: for no constraint)
+     * [get] ACCOUNT_NAME: {NotNull, VARCHAR(100)} <br />
+     * アカウント名
+     * @return The value of the column 'ACCOUNT_NAME'. (basically NotNull if selected: for the constraint)
      */
-    public java.util.Date getBirthdate() {
-        return _birthdate;
+    public String getAccountName() {
+        return _accountName;
     }
 
     /**
-     * [set] BIRTHDATE: {DATE(10)} <br />
-     * 生年月日 : 会員の生年月日
-     * @param birthdate The value of the column 'BIRTHDATE'. (NullAllowed: null update allowed for no constraint)
+     * [set] ACCOUNT_NAME: {NotNull, VARCHAR(100)} <br />
+     * アカウント名
+     * @param accountName The value of the column 'ACCOUNT_NAME'. (basically NotNull if update: for the constraint)
      */
-    public void setBirthdate(java.util.Date birthdate) {
-        __modifiedProperties.addPropertyName("birthdate");
-        _birthdate = birthdate;
+    public void setAccountName(String accountName) {
+        __modifiedProperties.addPropertyName("accountName");
+        _accountName = accountName;
     }
 
     /**
-     * [get] PROFILE: {VARCHAR(200)} <br />
-     * プロフィール
-     * @return The value of the column 'PROFILE'. (NullAllowed even if selected: for no constraint)
+     * [get] GROUP_NAME: {NotNull, VARCHAR(100)} <br />
+     * 所属団体名 : 学校、もしくは企業名を登録
+     * @return The value of the column 'GROUP_NAME'. (basically NotNull if selected: for the constraint)
      */
-    public String getProfile() {
-        return _profile;
+    public String getGroupName() {
+        return _groupName;
     }
 
     /**
-     * [set] PROFILE: {VARCHAR(200)} <br />
-     * プロフィール
-     * @param profile The value of the column 'PROFILE'. (NullAllowed: null update allowed for no constraint)
+     * [set] GROUP_NAME: {NotNull, VARCHAR(100)} <br />
+     * 所属団体名 : 学校、もしくは企業名を登録
+     * @param groupName The value of the column 'GROUP_NAME'. (basically NotNull if update: for the constraint)
      */
-    public void setProfile(String profile) {
-        __modifiedProperties.addPropertyName("profile");
-        _profile = profile;
+    public void setGroupName(String groupName) {
+        __modifiedProperties.addPropertyName("groupName");
+        _groupName = groupName;
     }
 
     /**
@@ -683,21 +732,97 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [get] ACCOUNT_NAME: {NotNull, VARCHAR(100)} <br />
-     * アカウント名
-     * @return The value of the column 'ACCOUNT_NAME'. (basically NotNull if selected: for the constraint)
+     * [get] RECRUITING_NUMBER: {INT(10)} <br />
+     * 採用数 : 企業の採用予定数
+     * @return The value of the column 'RECRUITING_NUMBER'. (NullAllowed even if selected: for no constraint)
      */
-    public String getAccountName() {
-        return _accountName;
+    public Integer getRecruitingNumber() {
+        return _recruitingNumber;
     }
 
     /**
-     * [set] ACCOUNT_NAME: {NotNull, VARCHAR(100)} <br />
-     * アカウント名
-     * @param accountName The value of the column 'ACCOUNT_NAME'. (basically NotNull if update: for the constraint)
+     * [set] RECRUITING_NUMBER: {INT(10)} <br />
+     * 採用数 : 企業の採用予定数
+     * @param recruitingNumber The value of the column 'RECRUITING_NUMBER'. (NullAllowed: null update allowed for no constraint)
      */
-    public void setAccountName(String accountName) {
-        __modifiedProperties.addPropertyName("accountName");
-        _accountName = accountName;
+    public void setRecruitingNumber(Integer recruitingNumber) {
+        __modifiedProperties.addPropertyName("recruitingNumber");
+        _recruitingNumber = recruitingNumber;
+    }
+
+    /**
+     * [get] INTERESTED_INDUSTRY: {VARCHAR(100)} <br />
+     * 希望業界 : 学生が希望している業界。
+     * @return The value of the column 'INTERESTED_INDUSTRY'. (NullAllowed even if selected: for no constraint)
+     */
+    public String getInterestedIndustry() {
+        return _interestedIndustry;
+    }
+
+    /**
+     * [set] INTERESTED_INDUSTRY: {VARCHAR(100)} <br />
+     * 希望業界 : 学生が希望している業界。
+     * @param interestedIndustry The value of the column 'INTERESTED_INDUSTRY'. (NullAllowed: null update allowed for no constraint)
+     */
+    public void setInterestedIndustry(String interestedIndustry) {
+        __modifiedProperties.addPropertyName("interestedIndustry");
+        _interestedIndustry = interestedIndustry;
+    }
+
+    /**
+     * [get] GRADUATION_YEAR: {INT(10)} <br />
+     * 卒業年 : 卒業年もしくは卒業予定年
+     * @return The value of the column 'GRADUATION_YEAR'. (NullAllowed even if selected: for no constraint)
+     */
+    public Integer getGraduationYear() {
+        return _graduationYear;
+    }
+
+    /**
+     * [set] GRADUATION_YEAR: {INT(10)} <br />
+     * 卒業年 : 卒業年もしくは卒業予定年
+     * @param graduationYear The value of the column 'GRADUATION_YEAR'. (NullAllowed: null update allowed for no constraint)
+     */
+    public void setGraduationYear(Integer graduationYear) {
+        __modifiedProperties.addPropertyName("graduationYear");
+        _graduationYear = graduationYear;
+    }
+
+    /**
+     * [get] BIRTHDATE: {DATE(10)} <br />
+     * 生年月日 : 会員の生年月日
+     * @return The value of the column 'BIRTHDATE'. (NullAllowed even if selected: for no constraint)
+     */
+    public java.util.Date getBirthdate() {
+        return _birthdate;
+    }
+
+    /**
+     * [set] BIRTHDATE: {DATE(10)} <br />
+     * 生年月日 : 会員の生年月日
+     * @param birthdate The value of the column 'BIRTHDATE'. (NullAllowed: null update allowed for no constraint)
+     */
+    public void setBirthdate(java.util.Date birthdate) {
+        __modifiedProperties.addPropertyName("birthdate");
+        _birthdate = birthdate;
+    }
+
+    /**
+     * [get] PROFILE: {VARCHAR(200)} <br />
+     * プロフィール
+     * @return The value of the column 'PROFILE'. (NullAllowed even if selected: for no constraint)
+     */
+    public String getProfile() {
+        return _profile;
+    }
+
+    /**
+     * [set] PROFILE: {VARCHAR(200)} <br />
+     * プロフィール
+     * @param profile The value of the column 'PROFILE'. (NullAllowed: null update allowed for no constraint)
+     */
+    public void setProfile(String profile) {
+        __modifiedProperties.addPropertyName("profile");
+        _profile = profile;
     }
 }

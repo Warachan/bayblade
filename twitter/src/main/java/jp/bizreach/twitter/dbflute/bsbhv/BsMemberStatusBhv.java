@@ -18,13 +18,13 @@ import jp.bizreach.twitter.dbflute.bsentity.dbmeta.*;
 import jp.bizreach.twitter.dbflute.cbean.*;
 
 /**
- * The behavior of member_withdraw as TABLE. <br />
+ * The behavior of member_status as TABLE. <br />
  * <pre>
  * [primary key]
- *     MEMBER_ID
+ *     MEMBER_STATUS_CODE
  *
  * [column]
- *     MEMBER_ID, WITHDRAWAL_REASON_ID, WITHDRAWAL_REASON_INPUT_TEXT, WITHDRAWAL_DATETIME
+ *     MEMBER_STATUS_CODE, MEMBER_STATUS_NAME
  *
  * [sequence]
  *     
@@ -36,20 +36,20 @@ import jp.bizreach.twitter.dbflute.cbean.*;
  *     
  *
  * [foreign table]
- *     member
+ *     
  *
  * [referrer table]
- *     
- *
- * [foreign property]
  *     member
  *
- * [referrer property]
+ * [foreign property]
  *     
+ *
+ * [referrer property]
+ *     memberList
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
-public abstract class BsMemberWithdrawBhv extends AbstractBehaviorWritable {
+public abstract class BsMemberStatusBhv extends AbstractBehaviorWritable {
 
     // ===================================================================================
     //                                                                          Definition
@@ -61,31 +61,31 @@ public abstract class BsMemberWithdrawBhv extends AbstractBehaviorWritable {
     //                                                                          Table name
     //                                                                          ==========
     /** @return The name on database of table. (NotNull) */
-    public String getTableDbName() { return "member_withdraw"; }
+    public String getTableDbName() { return "member_status"; }
 
     // ===================================================================================
     //                                                                              DBMeta
     //                                                                              ======
     /** {@inheritDoc} */
-    public DBMeta getDBMeta() { return MemberWithdrawDbm.getInstance(); }
+    public DBMeta getDBMeta() { return MemberStatusDbm.getInstance(); }
 
     /** @return The instance of DBMeta as my table type. (NotNull) */
-    public MemberWithdrawDbm getMyDBMeta() { return MemberWithdrawDbm.getInstance(); }
+    public MemberStatusDbm getMyDBMeta() { return MemberStatusDbm.getInstance(); }
 
     // ===================================================================================
     //                                                                        New Instance
     //                                                                        ============
     /** {@inheritDoc} */
-    public MemberWithdraw newEntity() { return new MemberWithdraw(); }
+    public MemberStatus newEntity() { return new MemberStatus(); }
 
     /** {@inheritDoc} */
-    public MemberWithdrawCB newConditionBean() { return new MemberWithdrawCB(); }
+    public MemberStatusCB newConditionBean() { return new MemberStatusCB(); }
 
     /** @return The instance of new entity as my table type. (NotNull) */
-    public MemberWithdraw newMyEntity() { return new MemberWithdraw(); }
+    public MemberStatus newMyEntity() { return new MemberStatus(); }
 
     /** @return The instance of new condition-bean as my table type. (NotNull) */
-    public MemberWithdrawCB newMyConditionBean() { return new MemberWithdrawCB(); }
+    public MemberStatusCB newMyConditionBean() { return new MemberStatusCB(); }
 
     // ===================================================================================
     //                                                                        Count Select
@@ -94,27 +94,27 @@ public abstract class BsMemberWithdrawBhv extends AbstractBehaviorWritable {
      * Select the count of uniquely-selected records by the condition-bean. {IgnorePagingCondition, IgnoreSpecifyColumn}<br />
      * SpecifyColumn is ignored but you can use it only to remove text type column for union's distinct.
      * <pre>
-     * MemberWithdrawCB cb = new MemberWithdrawCB();
+     * MemberStatusCB cb = new MemberStatusCB();
      * cb.query().setFoo...(value);
-     * int count = memberWithdrawBhv.<span style="color: #DD4747">selectCount</span>(cb);
+     * int count = memberStatusBhv.<span style="color: #DD4747">selectCount</span>(cb);
      * </pre>
-     * @param cb The condition-bean of MemberWithdraw. (NotNull)
+     * @param cb The condition-bean of MemberStatus. (NotNull)
      * @return The count for the condition. (NotMinus)
      */
-    public int selectCount(MemberWithdrawCB cb) {
+    public int selectCount(MemberStatusCB cb) {
         return facadeSelectCount(cb);
     }
 
-    protected int facadeSelectCount(MemberWithdrawCB cb) {
+    protected int facadeSelectCount(MemberStatusCB cb) {
         return doSelectCountUniquely(cb);
     }
 
-    protected int doSelectCountUniquely(MemberWithdrawCB cb) { // called by selectCount(cb)
+    protected int doSelectCountUniquely(MemberStatusCB cb) { // called by selectCount(cb)
         assertCBStateValid(cb);
         return delegateSelectCountUniquely(cb);
     }
 
-    protected int doSelectCountPlainly(MemberWithdrawCB cb) { // called by selectPage(cb)
+    protected int doSelectCountPlainly(MemberStatusCB cb) { // called by selectPage(cb)
         assertCBStateValid(cb);
         return delegateSelectCountPlainly(cb);
     }
@@ -129,33 +129,33 @@ public abstract class BsMemberWithdrawBhv extends AbstractBehaviorWritable {
      * <span style="color: #AD4747; font-size: 120%">The return might be null if no data, so you should have null check.</span> <br />
      * <span style="color: #AD4747; font-size: 120%">If the data always exists as your business rule, use selectEntityWithDeletedCheck().</span>
      * <pre>
-     * MemberWithdrawCB cb = new MemberWithdrawCB();
+     * MemberStatusCB cb = new MemberStatusCB();
      * cb.query().setFoo...(value);
-     * MemberWithdraw memberWithdraw = memberWithdrawBhv.<span style="color: #DD4747">selectEntity</span>(cb);
-     * if (memberWithdraw != null) { <span style="color: #3F7E5E">// null check</span>
-     *     ... = memberWithdraw.get...();
+     * MemberStatus memberStatus = memberStatusBhv.<span style="color: #DD4747">selectEntity</span>(cb);
+     * if (memberStatus != null) { <span style="color: #3F7E5E">// null check</span>
+     *     ... = memberStatus.get...();
      * } else {
      *     ...
      * }
      * </pre>
-     * @param cb The condition-bean of MemberWithdraw. (NotNull)
+     * @param cb The condition-bean of MemberStatus. (NotNull)
      * @return The entity selected by the condition. (NullAllowed: if no data, it returns null)
      * @exception EntityDuplicatedException When the entity has been duplicated.
      * @exception SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
-    public MemberWithdraw selectEntity(MemberWithdrawCB cb) {
+    public MemberStatus selectEntity(MemberStatusCB cb) {
         return facadeSelectEntity(cb);
     }
 
-    protected MemberWithdraw facadeSelectEntity(MemberWithdrawCB cb) {
+    protected MemberStatus facadeSelectEntity(MemberStatusCB cb) {
         return doSelectEntity(cb, typeOfSelectedEntity());
     }
 
-    protected <ENTITY extends MemberWithdraw> ENTITY doSelectEntity(MemberWithdrawCB cb, Class<ENTITY> tp) {
+    protected <ENTITY extends MemberStatus> ENTITY doSelectEntity(MemberStatusCB cb, Class<ENTITY> tp) {
         return helpSelectEntityInternally(cb, tp);
     }
 
-    protected <ENTITY extends MemberWithdraw> OptionalEntity<ENTITY> doSelectOptionalEntity(MemberWithdrawCB cb, Class<ENTITY> tp) {
+    protected <ENTITY extends MemberStatus> OptionalEntity<ENTITY> doSelectOptionalEntity(MemberStatusCB cb, Class<ENTITY> tp) {
         return createOptionalEntity(doSelectEntity(cb, tp), cb);
     }
 
@@ -165,26 +165,26 @@ public abstract class BsMemberWithdrawBhv extends AbstractBehaviorWritable {
      * Select the entity by the condition-bean with deleted check. <br />
      * <span style="color: #AD4747; font-size: 120%">If the data always exists as your business rule, this method is good.</span>
      * <pre>
-     * MemberWithdrawCB cb = new MemberWithdrawCB();
+     * MemberStatusCB cb = new MemberStatusCB();
      * cb.query().setFoo...(value);
-     * MemberWithdraw memberWithdraw = memberWithdrawBhv.<span style="color: #DD4747">selectEntityWithDeletedCheck</span>(cb);
-     * ... = memberWithdraw.get...(); <span style="color: #3F7E5E">// the entity always be not null</span>
+     * MemberStatus memberStatus = memberStatusBhv.<span style="color: #DD4747">selectEntityWithDeletedCheck</span>(cb);
+     * ... = memberStatus.get...(); <span style="color: #3F7E5E">// the entity always be not null</span>
      * </pre>
-     * @param cb The condition-bean of MemberWithdraw. (NotNull)
+     * @param cb The condition-bean of MemberStatus. (NotNull)
      * @return The entity selected by the condition. (NotNull: if no data, throws exception)
      * @exception EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @exception EntityDuplicatedException When the entity has been duplicated.
      * @exception SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
-    public MemberWithdraw selectEntityWithDeletedCheck(MemberWithdrawCB cb) {
+    public MemberStatus selectEntityWithDeletedCheck(MemberStatusCB cb) {
         return facadeSelectEntityWithDeletedCheck(cb);
     }
 
-    protected MemberWithdraw facadeSelectEntityWithDeletedCheck(MemberWithdrawCB cb) {
+    protected MemberStatus facadeSelectEntityWithDeletedCheck(MemberStatusCB cb) {
         return doSelectEntityWithDeletedCheck(cb, typeOfSelectedEntity());
     }
 
-    protected <ENTITY extends MemberWithdraw> ENTITY doSelectEntityWithDeletedCheck(MemberWithdrawCB cb, Class<ENTITY> tp) {
+    protected <ENTITY extends MemberStatus> ENTITY doSelectEntityWithDeletedCheck(MemberStatusCB cb, Class<ENTITY> tp) {
         assertCBStateValid(cb); assertObjectNotNull("entityType", tp);
         return helpSelectEntityWithDeletedCheckInternally(cb, tp);
     }
@@ -193,46 +193,46 @@ public abstract class BsMemberWithdrawBhv extends AbstractBehaviorWritable {
 
     /**
      * Select the entity by the primary-key value.
-     * @param memberId : PK, NotNull, INT(10), FK to member. (NotNull)
+     * @param memberStatusCode : PK, NotNull, INT(10). (NotNull)
      * @return The entity selected by the PK. (NullAllowed: if no data, it returns null)
      * @exception EntityDuplicatedException When the entity has been duplicated.
      * @exception SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
-    public MemberWithdraw selectByPKValue(Integer memberId) {
-        return facadeSelectByPKValue(memberId);
+    public MemberStatus selectByPKValue(Integer memberStatusCode) {
+        return facadeSelectByPKValue(memberStatusCode);
     }
 
-    protected MemberWithdraw facadeSelectByPKValue(Integer memberId) {
-        return doSelectByPK(memberId, typeOfSelectedEntity());
+    protected MemberStatus facadeSelectByPKValue(Integer memberStatusCode) {
+        return doSelectByPK(memberStatusCode, typeOfSelectedEntity());
     }
 
-    protected <ENTITY extends MemberWithdraw> ENTITY doSelectByPK(Integer memberId, Class<ENTITY> tp) {
-        return doSelectEntity(xprepareCBAsPK(memberId), tp);
+    protected <ENTITY extends MemberStatus> ENTITY doSelectByPK(Integer memberStatusCode, Class<ENTITY> tp) {
+        return doSelectEntity(xprepareCBAsPK(memberStatusCode), tp);
     }
 
-    protected <ENTITY extends MemberWithdraw> OptionalEntity<ENTITY> doSelectOptionalByPK(Integer memberId, Class<ENTITY> tp) {
-        return createOptionalEntity(doSelectByPK(memberId, tp), memberId);
+    protected <ENTITY extends MemberStatus> OptionalEntity<ENTITY> doSelectOptionalByPK(Integer memberStatusCode, Class<ENTITY> tp) {
+        return createOptionalEntity(doSelectByPK(memberStatusCode, tp), memberStatusCode);
     }
 
     /**
      * Select the entity by the primary-key value with deleted check.
-     * @param memberId : PK, NotNull, INT(10), FK to member. (NotNull)
+     * @param memberStatusCode : PK, NotNull, INT(10). (NotNull)
      * @return The entity selected by the PK. (NotNull: if no data, throws exception)
      * @exception EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @exception EntityDuplicatedException When the entity has been duplicated.
      * @exception SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
-    public MemberWithdraw selectByPKValueWithDeletedCheck(Integer memberId) {
-        return doSelectByPKWithDeletedCheck(memberId, typeOfSelectedEntity());
+    public MemberStatus selectByPKValueWithDeletedCheck(Integer memberStatusCode) {
+        return doSelectByPKWithDeletedCheck(memberStatusCode, typeOfSelectedEntity());
     }
 
-    protected <ENTITY extends MemberWithdraw> ENTITY doSelectByPKWithDeletedCheck(Integer memberId, Class<ENTITY> tp) {
-        return doSelectEntityWithDeletedCheck(xprepareCBAsPK(memberId), tp);
+    protected <ENTITY extends MemberStatus> ENTITY doSelectByPKWithDeletedCheck(Integer memberStatusCode, Class<ENTITY> tp) {
+        return doSelectEntityWithDeletedCheck(xprepareCBAsPK(memberStatusCode), tp);
     }
 
-    protected MemberWithdrawCB xprepareCBAsPK(Integer memberId) {
-        assertObjectNotNull("memberId", memberId);
-        return newConditionBean().acceptPK(memberId);
+    protected MemberStatusCB xprepareCBAsPK(Integer memberStatusCode) {
+        assertObjectNotNull("memberStatusCode", memberStatusCode);
+        return newConditionBean().acceptPK(memberStatusCode);
     }
 
     // ===================================================================================
@@ -241,27 +241,27 @@ public abstract class BsMemberWithdrawBhv extends AbstractBehaviorWritable {
     /**
      * Select the list as result bean.
      * <pre>
-     * MemberWithdrawCB cb = new MemberWithdrawCB();
+     * MemberStatusCB cb = new MemberStatusCB();
      * cb.query().setFoo...(value);
      * cb.query().addOrderBy_Bar...();
-     * ListResultBean&lt;MemberWithdraw&gt; memberWithdrawList = memberWithdrawBhv.<span style="color: #DD4747">selectList</span>(cb);
-     * for (MemberWithdraw memberWithdraw : memberWithdrawList) {
-     *     ... = memberWithdraw.get...();
+     * ListResultBean&lt;MemberStatus&gt; memberStatusList = memberStatusBhv.<span style="color: #DD4747">selectList</span>(cb);
+     * for (MemberStatus memberStatus : memberStatusList) {
+     *     ... = memberStatus.get...();
      * }
      * </pre>
-     * @param cb The condition-bean of MemberWithdraw. (NotNull)
+     * @param cb The condition-bean of MemberStatus. (NotNull)
      * @return The result bean of selected list. (NotNull: if no data, returns empty list)
      * @exception DangerousResultSizeException When the result size is over the specified safety size.
      */
-    public ListResultBean<MemberWithdraw> selectList(MemberWithdrawCB cb) {
+    public ListResultBean<MemberStatus> selectList(MemberStatusCB cb) {
         return facadeSelectList(cb);
     }
 
-    protected ListResultBean<MemberWithdraw> facadeSelectList(MemberWithdrawCB cb) {
+    protected ListResultBean<MemberStatus> facadeSelectList(MemberStatusCB cb) {
         return doSelectList(cb, typeOfSelectedEntity());
     }
 
-    protected <ENTITY extends MemberWithdraw> ListResultBean<ENTITY> doSelectList(MemberWithdrawCB cb, Class<ENTITY> tp) {
+    protected <ENTITY extends MemberStatus> ListResultBean<ENTITY> doSelectList(MemberStatusCB cb, Class<ENTITY> tp) {
         return helpSelectListInternally(cb, tp);
     }
 
@@ -274,33 +274,33 @@ public abstract class BsMemberWithdrawBhv extends AbstractBehaviorWritable {
      * Select the page as result bean. <br />
      * (both count-select and paging-select are executed)
      * <pre>
-     * MemberWithdrawCB cb = new MemberWithdrawCB();
+     * MemberStatusCB cb = new MemberStatusCB();
      * cb.query().setFoo...(value);
      * cb.query().addOrderBy_Bar...();
      * cb.<span style="color: #DD4747">paging</span>(20, 3); <span style="color: #3F7E5E">// 20 records per a page and current page number is 3</span>
-     * PagingResultBean&lt;MemberWithdraw&gt; page = memberWithdrawBhv.<span style="color: #DD4747">selectPage</span>(cb);
+     * PagingResultBean&lt;MemberStatus&gt; page = memberStatusBhv.<span style="color: #DD4747">selectPage</span>(cb);
      * int allRecordCount = page.getAllRecordCount();
      * int allPageCount = page.getAllPageCount();
      * boolean isExistPrePage = page.isExistPrePage();
      * boolean isExistNextPage = page.isExistNextPage();
      * ...
-     * for (MemberWithdraw memberWithdraw : page) {
-     *     ... = memberWithdraw.get...();
+     * for (MemberStatus memberStatus : page) {
+     *     ... = memberStatus.get...();
      * }
      * </pre>
-     * @param cb The condition-bean of MemberWithdraw. (NotNull)
+     * @param cb The condition-bean of MemberStatus. (NotNull)
      * @return The result bean of selected page. (NotNull: if no data, returns bean as empty list)
      * @exception DangerousResultSizeException When the result size is over the specified safety size.
      */
-    public PagingResultBean<MemberWithdraw> selectPage(MemberWithdrawCB cb) {
+    public PagingResultBean<MemberStatus> selectPage(MemberStatusCB cb) {
         return facadeSelectPage(cb);
     }
 
-    protected PagingResultBean<MemberWithdraw> facadeSelectPage(MemberWithdrawCB cb) {
+    protected PagingResultBean<MemberStatus> facadeSelectPage(MemberStatusCB cb) {
         return doSelectPage(cb, typeOfSelectedEntity());
     }
 
-    protected <ENTITY extends MemberWithdraw> PagingResultBean<ENTITY> doSelectPage(MemberWithdrawCB cb, Class<ENTITY> tp) {
+    protected <ENTITY extends MemberStatus> PagingResultBean<ENTITY> doSelectPage(MemberStatusCB cb, Class<ENTITY> tp) {
         return helpSelectPageInternally(cb, tp);
     }
 
@@ -312,26 +312,26 @@ public abstract class BsMemberWithdrawBhv extends AbstractBehaviorWritable {
     /**
      * Select the cursor by the condition-bean.
      * <pre>
-     * MemberWithdrawCB cb = new MemberWithdrawCB();
+     * MemberStatusCB cb = new MemberStatusCB();
      * cb.query().setFoo...(value);
-     * memberWithdrawBhv.<span style="color: #DD4747">selectCursor</span>(cb, new EntityRowHandler&lt;MemberWithdraw&gt;() {
-     *     public void handle(MemberWithdraw entity) {
+     * memberStatusBhv.<span style="color: #DD4747">selectCursor</span>(cb, new EntityRowHandler&lt;MemberStatus&gt;() {
+     *     public void handle(MemberStatus entity) {
      *         ... = entity.getFoo...();
      *     }
      * });
      * </pre>
-     * @param cb The condition-bean of MemberWithdraw. (NotNull)
-     * @param entityRowHandler The handler of entity row of MemberWithdraw. (NotNull)
+     * @param cb The condition-bean of MemberStatus. (NotNull)
+     * @param entityRowHandler The handler of entity row of MemberStatus. (NotNull)
      */
-    public void selectCursor(MemberWithdrawCB cb, EntityRowHandler<MemberWithdraw> entityRowHandler) {
+    public void selectCursor(MemberStatusCB cb, EntityRowHandler<MemberStatus> entityRowHandler) {
         facadeSelectCursor(cb, entityRowHandler);
     }
 
-    protected void facadeSelectCursor(MemberWithdrawCB cb, EntityRowHandler<MemberWithdraw> entityRowHandler) {
+    protected void facadeSelectCursor(MemberStatusCB cb, EntityRowHandler<MemberStatus> entityRowHandler) {
         doSelectCursor(cb, entityRowHandler, typeOfSelectedEntity());
     }
 
-    protected <ENTITY extends MemberWithdraw> void doSelectCursor(MemberWithdrawCB cb, EntityRowHandler<ENTITY> handler, Class<ENTITY> tp) {
+    protected <ENTITY extends MemberStatus> void doSelectCursor(MemberStatusCB cb, EntityRowHandler<ENTITY> handler, Class<ENTITY> tp) {
         assertCBStateValid(cb); assertObjectNotNull("entityRowHandler", handler); assertObjectNotNull("entityType", tp);
         assertSpecifyDerivedReferrerEntityProperty(cb, tp);
         helpSelectCursorInternally(cb, handler, tp);
@@ -344,8 +344,8 @@ public abstract class BsMemberWithdrawBhv extends AbstractBehaviorWritable {
      * Select the scalar value derived by a function from uniquely-selected records. <br />
      * You should call a function method after this method called like as follows:
      * <pre>
-     * memberWithdrawBhv.<span style="color: #DD4747">scalarSelect</span>(Date.class).max(new ScalarQuery() {
-     *     public void query(MemberWithdrawCB cb) {
+     * memberStatusBhv.<span style="color: #DD4747">scalarSelect</span>(Date.class).max(new ScalarQuery() {
+     *     public void query(MemberStatusCB cb) {
      *         cb.specify().<span style="color: #DD4747">columnFooDatetime()</span>; <span style="color: #3F7E5E">// required for a function</span>
      *         cb.query().setBarName_PrefixSearch("S");
      *     }
@@ -355,15 +355,15 @@ public abstract class BsMemberWithdrawBhv extends AbstractBehaviorWritable {
      * @param resultType The type of result. (NotNull)
      * @return The scalar function object to specify function for scalar value. (NotNull)
      */
-    public <RESULT> HpSLSFunction<MemberWithdrawCB, RESULT> scalarSelect(Class<RESULT> resultType) {
+    public <RESULT> HpSLSFunction<MemberStatusCB, RESULT> scalarSelect(Class<RESULT> resultType) {
         return facadeScalarSelect(resultType);
     }
 
-    protected <RESULT> HpSLSFunction<MemberWithdrawCB, RESULT> facadeScalarSelect(Class<RESULT> resultType) {
+    protected <RESULT> HpSLSFunction<MemberStatusCB, RESULT> facadeScalarSelect(Class<RESULT> resultType) {
         return doScalarSelect(resultType, newConditionBean());
     }
 
-    protected <RESULT, CB extends MemberWithdrawCB> HpSLSFunction<CB, RESULT> doScalarSelect(final Class<RESULT> tp, final CB cb) {
+    protected <RESULT, CB extends MemberStatusCB> HpSLSFunction<CB, RESULT> doScalarSelect(final Class<RESULT> tp, final CB cb) {
         assertObjectNotNull("resultType", tp); assertCBStateValid(cb);
         cb.xsetupForScalarSelect(); cb.getSqlClause().disableSelectIndex(); // for when you use union
         HpSLSExecutor<CB, RESULT> executor = createHpSLSExecutor(); // variable to resolve generic
@@ -412,12 +412,12 @@ public abstract class BsMemberWithdrawBhv extends AbstractBehaviorWritable {
      * </pre>
      * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br />
      * The condition-bean, which the set-upper provides, has order by FK before callback.
-     * @param memberWithdrawList The entity list of memberWithdraw. (NotNull)
+     * @param memberStatusList The entity list of memberStatus. (NotNull)
      * @param handler The callback to handle the referrer loader for actually loading referrer. (NotNull)
      */
-    public void load(List<MemberWithdraw> memberWithdrawList, ReferrerLoaderHandler<LoaderOfMemberWithdraw> handler) {
-        xassLRArg(memberWithdrawList, handler);
-        handler.handle(new LoaderOfMemberWithdraw().ready(memberWithdrawList, _behaviorSelector));
+    public void load(List<MemberStatus> memberStatusList, ReferrerLoaderHandler<LoaderOfMemberStatus> handler) {
+        xassLRArg(memberStatusList, handler);
+        handler.handle(new LoaderOfMemberStatus().ready(memberStatusList, _behaviorSelector));
     }
 
     /**
@@ -448,35 +448,119 @@ public abstract class BsMemberWithdrawBhv extends AbstractBehaviorWritable {
      * </pre>
      * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br />
      * The condition-bean, which the set-upper provides, has order by FK before callback.
-     * @param memberWithdraw The entity of memberWithdraw. (NotNull)
+     * @param memberStatus The entity of memberStatus. (NotNull)
      * @param handler The callback to handle the referrer loader for actually loading referrer. (NotNull)
      */
-    public void load(MemberWithdraw memberWithdraw, ReferrerLoaderHandler<LoaderOfMemberWithdraw> handler) {
-        xassLRArg(memberWithdraw, handler);
-        handler.handle(new LoaderOfMemberWithdraw().ready(xnewLRAryLs(memberWithdraw), _behaviorSelector));
+    public void load(MemberStatus memberStatus, ReferrerLoaderHandler<LoaderOfMemberStatus> handler) {
+        xassLRArg(memberStatus, handler);
+        handler.handle(new LoaderOfMemberStatus().ready(xnewLRAryLs(memberStatus), _behaviorSelector));
+    }
+
+    /**
+     * Load referrer of memberList by the set-upper of referrer. <br />
+     * member by MEMBER_STATUS_CODE, named 'memberList'.
+     * <pre>
+     * memberStatusBhv.<span style="color: #DD4747">loadMemberList</span>(memberStatusList, new ConditionBeanSetupper&lt;MemberCB&gt;() {
+     *     public void setup(MemberCB cb) {
+     *         cb.setupSelect...();
+     *         cb.query().setFoo...(value);
+     *         cb.query().addOrderBy_Bar...();
+     *     }
+     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
+     * <span style="color: #3F7E5E">//}).withNestedList(referrerList -&gt {</span>
+     * <span style="color: #3F7E5E">//    ...</span>
+     * <span style="color: #3F7E5E">//});</span>
+     * for (MemberStatus memberStatus : memberStatusList) {
+     *     ... = memberStatus.<span style="color: #DD4747">getMemberList()</span>;
+     * }
+     * </pre>
+     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br />
+     * The condition-bean, which the set-upper provides, has settings before callback as follows:
+     * <pre>
+     * cb.query().setMemberStatusCode_InScope(pkList);
+     * cb.query().addOrderBy_MemberStatusCode_Asc();
+     * </pre>
+     * @param memberStatusList The entity list of memberStatus. (NotNull)
+     * @param setupper The callback to set up referrer condition-bean for loading referrer. (NotNull)
+     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
+     */
+    public NestedReferrerListGateway<Member> loadMemberList(List<MemberStatus> memberStatusList, ConditionBeanSetupper<MemberCB> setupper) {
+        xassLRArg(memberStatusList, setupper);
+        return doLoadMemberList(memberStatusList, new LoadReferrerOption<MemberCB, Member>().xinit(setupper));
+    }
+
+    /**
+     * Load referrer of memberList by the set-upper of referrer. <br />
+     * member by MEMBER_STATUS_CODE, named 'memberList'.
+     * <pre>
+     * memberStatusBhv.<span style="color: #DD4747">loadMemberList</span>(memberStatusList, new ConditionBeanSetupper&lt;MemberCB&gt;() {
+     *     public void setup(MemberCB cb) {
+     *         cb.setupSelect...();
+     *         cb.query().setFoo...(value);
+     *         cb.query().addOrderBy_Bar...();
+     *     }
+     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
+     * <span style="color: #3F7E5E">//}).withNestedList(referrerList -&gt {</span>
+     * <span style="color: #3F7E5E">//    ...</span>
+     * <span style="color: #3F7E5E">//});</span>
+     * ... = memberStatus.<span style="color: #DD4747">getMemberList()</span>;
+     * </pre>
+     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br />
+     * The condition-bean, which the set-upper provides, has settings before callback as follows:
+     * <pre>
+     * cb.query().setMemberStatusCode_InScope(pkList);
+     * cb.query().addOrderBy_MemberStatusCode_Asc();
+     * </pre>
+     * @param memberStatus The entity of memberStatus. (NotNull)
+     * @param setupper The callback to set up referrer condition-bean for loading referrer. (NotNull)
+     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
+     */
+    public NestedReferrerListGateway<Member> loadMemberList(MemberStatus memberStatus, ConditionBeanSetupper<MemberCB> setupper) {
+        xassLRArg(memberStatus, setupper);
+        return doLoadMemberList(xnewLRLs(memberStatus), new LoadReferrerOption<MemberCB, Member>().xinit(setupper));
+    }
+
+    /**
+     * {Refer to overload method that has an argument of the list of entity.} #beforejava8
+     * @param memberStatus The entity of memberStatus. (NotNull)
+     * @param loadReferrerOption The option of load-referrer. (NotNull)
+     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
+     */
+    public NestedReferrerListGateway<Member> loadMemberList(MemberStatus memberStatus, LoadReferrerOption<MemberCB, Member> loadReferrerOption) {
+        xassLRArg(memberStatus, loadReferrerOption);
+        return loadMemberList(xnewLRLs(memberStatus), loadReferrerOption);
+    }
+
+    /**
+     * {Refer to overload method that has an argument of condition-bean setupper.} #beforejava8
+     * @param memberStatusList The entity list of memberStatus. (NotNull)
+     * @param loadReferrerOption The option of load-referrer. (NotNull)
+     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
+     */
+    @SuppressWarnings("unchecked")
+    public NestedReferrerListGateway<Member> loadMemberList(List<MemberStatus> memberStatusList, LoadReferrerOption<MemberCB, Member> loadReferrerOption) {
+        xassLRArg(memberStatusList, loadReferrerOption);
+        if (memberStatusList.isEmpty()) { return (NestedReferrerListGateway<Member>)EMPTY_NREF_LGWAY; }
+        return doLoadMemberList(memberStatusList, loadReferrerOption);
+    }
+
+    protected NestedReferrerListGateway<Member> doLoadMemberList(List<MemberStatus> memberStatusList, LoadReferrerOption<MemberCB, Member> option) {
+        return helpLoadReferrerInternally(memberStatusList, option, "memberList");
     }
 
     // ===================================================================================
     //                                                                   Pull out Relation
     //                                                                   =================
-    /**
-     * Pull out the list of foreign table 'Member'.
-     * @param memberWithdrawList The list of memberWithdraw. (NotNull, EmptyAllowed)
-     * @return The list of foreign table. (NotNull, EmptyAllowed, NotNullElement)
-     */
-    public List<Member> pulloutMember(List<MemberWithdraw> memberWithdrawList)
-    { return helpPulloutInternally(memberWithdrawList, "member"); }
-
     // ===================================================================================
     //                                                                      Extract Column
     //                                                                      ==============
     /**
-     * Extract the value list of (single) primary key memberId.
-     * @param memberWithdrawList The list of memberWithdraw. (NotNull, EmptyAllowed)
+     * Extract the value list of (single) primary key memberStatusCode.
+     * @param memberStatusList The list of memberStatus. (NotNull, EmptyAllowed)
      * @return The list of the column value. (NotNull, EmptyAllowed, NotNullElement)
      */
-    public List<Integer> extractMemberIdList(List<MemberWithdraw> memberWithdrawList)
-    { return helpExtractListInternally(memberWithdrawList, "memberId"); }
+    public List<Integer> extractMemberStatusCodeList(List<MemberStatus> memberStatusList)
+    { return helpExtractListInternally(memberStatusList, "memberStatusCode"); }
 
     // ===================================================================================
     //                                                                       Entity Update
@@ -484,29 +568,29 @@ public abstract class BsMemberWithdrawBhv extends AbstractBehaviorWritable {
     /**
      * Insert the entity modified-only. (DefaultConstraintsEnabled)
      * <pre>
-     * MemberWithdraw memberWithdraw = new MemberWithdraw();
+     * MemberStatus memberStatus = new MemberStatus();
      * <span style="color: #3F7E5E">// if auto-increment, you don't need to set the PK value</span>
-     * memberWithdraw.setFoo...(value);
-     * memberWithdraw.setBar...(value);
+     * memberStatus.setFoo...(value);
+     * memberStatus.setBar...(value);
      * <span style="color: #3F7E5E">// you don't need to set values of common columns</span>
-     * <span style="color: #3F7E5E">//memberWithdraw.setRegisterUser(value);</span>
-     * <span style="color: #3F7E5E">//memberWithdraw.set...;</span>
-     * memberWithdrawBhv.<span style="color: #DD4747">insert</span>(memberWithdraw);
-     * ... = memberWithdraw.getPK...(); <span style="color: #3F7E5E">// if auto-increment, you can get the value after</span>
+     * <span style="color: #3F7E5E">//memberStatus.setRegisterUser(value);</span>
+     * <span style="color: #3F7E5E">//memberStatus.set...;</span>
+     * memberStatusBhv.<span style="color: #DD4747">insert</span>(memberStatus);
+     * ... = memberStatus.getPK...(); <span style="color: #3F7E5E">// if auto-increment, you can get the value after</span>
      * </pre>
      * <p>While, when the entity is created by select, all columns are registered.</p>
-     * @param memberWithdraw The entity of insert. (NotNull, PrimaryKeyNullAllowed: when auto-increment)
+     * @param memberStatus The entity of insert. (NotNull, PrimaryKeyNullAllowed: when auto-increment)
      * @exception EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
      */
-    public void insert(MemberWithdraw memberWithdraw) {
-        doInsert(memberWithdraw, null);
+    public void insert(MemberStatus memberStatus) {
+        doInsert(memberStatus, null);
     }
 
-    protected void doInsert(MemberWithdraw et, InsertOption<MemberWithdrawCB> op) {
-        assertObjectNotNull("memberWithdraw", et); prepareInsertOption(op); delegateInsert(et, op);
+    protected void doInsert(MemberStatus et, InsertOption<MemberStatusCB> op) {
+        assertObjectNotNull("memberStatus", et); prepareInsertOption(op); delegateInsert(et, op);
     }
 
-    protected void prepareInsertOption(InsertOption<MemberWithdrawCB> op) {
+    protected void prepareInsertOption(InsertOption<MemberStatusCB> op) {
         if (op == null) { return; } assertInsertOptionStatus(op);
         if (op.hasSpecifiedInsertColumn()) { op.resolveInsertColumnSpecification(createCBForSpecifiedUpdate()); }
     }
@@ -516,44 +600,44 @@ public abstract class BsMemberWithdrawBhv extends AbstractBehaviorWritable {
     /**
      * Update the entity modified-only. (ZeroUpdateException, NonExclusiveControl)
      * <pre>
-     * MemberWithdraw memberWithdraw = new MemberWithdraw();
-     * memberWithdraw.setPK...(value); <span style="color: #3F7E5E">// required</span>
-     * memberWithdraw.setFoo...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
+     * MemberStatus memberStatus = new MemberStatus();
+     * memberStatus.setPK...(value); <span style="color: #3F7E5E">// required</span>
+     * memberStatus.setFoo...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
      * <span style="color: #3F7E5E">// you don't need to set values of common columns</span>
-     * <span style="color: #3F7E5E">//memberWithdraw.setRegisterUser(value);</span>
-     * <span style="color: #3F7E5E">//memberWithdraw.set...;</span>
+     * <span style="color: #3F7E5E">//memberStatus.setRegisterUser(value);</span>
+     * <span style="color: #3F7E5E">//memberStatus.set...;</span>
      * <span style="color: #3F7E5E">// if exclusive control, the value of concurrency column is required</span>
-     * memberWithdraw.<span style="color: #DD4747">setVersionNo</span>(value);
+     * memberStatus.<span style="color: #DD4747">setVersionNo</span>(value);
      * try {
-     *     memberWithdrawBhv.<span style="color: #DD4747">update</span>(memberWithdraw);
+     *     memberStatusBhv.<span style="color: #DD4747">update</span>(memberStatus);
      * } catch (EntityAlreadyUpdatedException e) { <span style="color: #3F7E5E">// if concurrent update</span>
      *     ...
      * }
      * </pre>
-     * @param memberWithdraw The entity of update. (NotNull, PrimaryKeyNotNull)
+     * @param memberStatus The entity of update. (NotNull, PrimaryKeyNotNull)
      * @exception EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @exception EntityDuplicatedException When the entity has been duplicated.
      * @exception EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
      */
-    public void update(MemberWithdraw memberWithdraw) {
-        doUpdate(memberWithdraw, null);
+    public void update(MemberStatus memberStatus) {
+        doUpdate(memberStatus, null);
     }
 
-    protected void doUpdate(MemberWithdraw et, UpdateOption<MemberWithdrawCB> op) {
-        assertObjectNotNull("memberWithdraw", et); prepareUpdateOption(op); helpUpdateInternally(et, op);
+    protected void doUpdate(MemberStatus et, UpdateOption<MemberStatusCB> op) {
+        assertObjectNotNull("memberStatus", et); prepareUpdateOption(op); helpUpdateInternally(et, op);
     }
 
-    protected void prepareUpdateOption(UpdateOption<MemberWithdrawCB> op) {
+    protected void prepareUpdateOption(UpdateOption<MemberStatusCB> op) {
         if (op == null) { return; } assertUpdateOptionStatus(op);
         if (op.hasSelfSpecification()) { op.resolveSelfSpecification(createCBForVaryingUpdate()); }
         if (op.hasSpecifiedUpdateColumn()) { op.resolveUpdateColumnSpecification(createCBForSpecifiedUpdate()); }
     }
 
-    protected MemberWithdrawCB createCBForVaryingUpdate()
-    { MemberWithdrawCB cb = newConditionBean(); cb.xsetupForVaryingUpdate(); return cb; }
+    protected MemberStatusCB createCBForVaryingUpdate()
+    { MemberStatusCB cb = newConditionBean(); cb.xsetupForVaryingUpdate(); return cb; }
 
-    protected MemberWithdrawCB createCBForSpecifiedUpdate()
-    { MemberWithdrawCB cb = newConditionBean(); cb.xsetupForSpecifiedUpdate(); return cb; }
+    protected MemberStatusCB createCBForSpecifiedUpdate()
+    { MemberStatusCB cb = newConditionBean(); cb.xsetupForSpecifiedUpdate(); return cb; }
 
     protected void doModify(Entity et, UpdateOption<? extends ConditionBean> op) { doUpdate(downcast(et), downcast(op)); }
 
@@ -564,17 +648,17 @@ public abstract class BsMemberWithdrawBhv extends AbstractBehaviorWritable {
      * Insert or update the entity modified-only. (DefaultConstraintsEnabled, NonExclusiveControl) <br />
      * if (the entity has no PK) { insert() } else { update(), but no data, insert() } <br />
      * <p><span style="color: #DD4747; font-size: 120%">Attention, you cannot update by unique keys instead of PK.</span></p>
-     * @param memberWithdraw The entity of insert or update. (NotNull, ...depends on insert or update)
+     * @param memberStatus The entity of insert or update. (NotNull, ...depends on insert or update)
      * @exception EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @exception EntityDuplicatedException When the entity has been duplicated.
      * @exception EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
      */
-    public void insertOrUpdate(MemberWithdraw memberWithdraw) {
-        doInsertOrUpdate(memberWithdraw, null, null);
+    public void insertOrUpdate(MemberStatus memberStatus) {
+        doInsertOrUpdate(memberStatus, null, null);
     }
 
-    protected void doInsertOrUpdate(MemberWithdraw et, InsertOption<MemberWithdrawCB> iop, UpdateOption<MemberWithdrawCB> uop) {
-        assertObjectNotNull("memberWithdraw", et); helpInsertOrUpdateInternally(et, iop, uop);
+    protected void doInsertOrUpdate(MemberStatus et, InsertOption<MemberStatusCB> iop, UpdateOption<MemberStatusCB> uop) {
+        assertObjectNotNull("memberStatus", et); helpInsertOrUpdateInternally(et, iop, uop);
     }
 
     protected void doCreateOrModify(Entity et, InsertOption<? extends ConditionBean> iop, UpdateOption<? extends ConditionBean> uop)
@@ -586,29 +670,29 @@ public abstract class BsMemberWithdrawBhv extends AbstractBehaviorWritable {
     /**
      * Delete the entity. (ZeroUpdateException, NonExclusiveControl)
      * <pre>
-     * MemberWithdraw memberWithdraw = new MemberWithdraw();
-     * memberWithdraw.setPK...(value); <span style="color: #3F7E5E">// required</span>
+     * MemberStatus memberStatus = new MemberStatus();
+     * memberStatus.setPK...(value); <span style="color: #3F7E5E">// required</span>
      * <span style="color: #3F7E5E">// if exclusive control, the value of concurrency column is required</span>
-     * memberWithdraw.<span style="color: #DD4747">setVersionNo</span>(value);
+     * memberStatus.<span style="color: #DD4747">setVersionNo</span>(value);
      * try {
-     *     memberWithdrawBhv.<span style="color: #DD4747">delete</span>(memberWithdraw);
+     *     memberStatusBhv.<span style="color: #DD4747">delete</span>(memberStatus);
      * } catch (EntityAlreadyUpdatedException e) { <span style="color: #3F7E5E">// if concurrent update</span>
      *     ...
      * }
      * </pre>
-     * @param memberWithdraw The entity of delete. (NotNull, PrimaryKeyNotNull)
+     * @param memberStatus The entity of delete. (NotNull, PrimaryKeyNotNull)
      * @exception EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @exception EntityDuplicatedException When the entity has been duplicated.
      */
-    public void delete(MemberWithdraw memberWithdraw) {
-        doDelete(memberWithdraw, null);
+    public void delete(MemberStatus memberStatus) {
+        doDelete(memberStatus, null);
     }
 
-    protected void doDelete(MemberWithdraw et, final DeleteOption<MemberWithdrawCB> op) {
-        assertObjectNotNull("memberWithdraw", et); prepareDeleteOption(op); helpDeleteInternally(et, op);
+    protected void doDelete(MemberStatus et, final DeleteOption<MemberStatusCB> op) {
+        assertObjectNotNull("memberStatus", et); prepareDeleteOption(op); helpDeleteInternally(et, op);
     }
 
-    protected void prepareDeleteOption(DeleteOption<MemberWithdrawCB> op) { if (op != null) { assertDeleteOptionStatus(op); } }
+    protected void prepareDeleteOption(DeleteOption<MemberStatusCB> op) { if (op != null) { assertDeleteOptionStatus(op); } }
 
     protected void doRemove(Entity et, DeleteOption<? extends ConditionBean> op) { doDelete(downcast(et), downcast(op)); }
 
@@ -624,36 +708,36 @@ public abstract class BsMemberWithdrawBhv extends AbstractBehaviorWritable {
      * <p><span style="color: #DD4747; font-size: 120%">The columns of least common multiple are registered like this:</span></p>
      * <pre>
      * for (... : ...) {
-     *     MemberWithdraw memberWithdraw = new MemberWithdraw();
-     *     memberWithdraw.setFooName("foo");
+     *     MemberStatus memberStatus = new MemberStatus();
+     *     memberStatus.setFooName("foo");
      *     if (...) {
-     *         memberWithdraw.setFooPrice(123);
+     *         memberStatus.setFooPrice(123);
      *     }
      *     <span style="color: #3F7E5E">// FOO_NAME and FOO_PRICE (and record meta columns) are registered</span>
      *     <span style="color: #3F7E5E">// FOO_PRICE not-called in any entities are registered as null without default value</span>
      *     <span style="color: #3F7E5E">// columns not-called in all entities are registered as null or default value</span>
-     *     memberWithdrawList.add(memberWithdraw);
+     *     memberStatusList.add(memberStatus);
      * }
-     * memberWithdrawBhv.<span style="color: #DD4747">batchInsert</span>(memberWithdrawList);
+     * memberStatusBhv.<span style="color: #DD4747">batchInsert</span>(memberStatusList);
      * </pre>
      * <p>While, when the entities are created by select, all columns are registered.</p>
      * <p>And if the table has an identity, entities after the process don't have incremented values.
      * (When you use the (normal) insert(), you can get the incremented value from your entity)</p>
-     * @param memberWithdrawList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNullAllowed: when auto-increment)
+     * @param memberStatusList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNullAllowed: when auto-increment)
      * @return The array of inserted count. (NotNull, EmptyAllowed)
      */
-    public int[] batchInsert(List<MemberWithdraw> memberWithdrawList) {
-        return doBatchInsert(memberWithdrawList, null);
+    public int[] batchInsert(List<MemberStatus> memberStatusList) {
+        return doBatchInsert(memberStatusList, null);
     }
 
-    protected int[] doBatchInsert(List<MemberWithdraw> ls, InsertOption<MemberWithdrawCB> op) {
-        assertObjectNotNull("memberWithdrawList", ls);
-        InsertOption<MemberWithdrawCB> rlop; if (op != null) { rlop = op; } else { rlop = createPlainInsertOption(); }
+    protected int[] doBatchInsert(List<MemberStatus> ls, InsertOption<MemberStatusCB> op) {
+        assertObjectNotNull("memberStatusList", ls);
+        InsertOption<MemberStatusCB> rlop; if (op != null) { rlop = op; } else { rlop = createPlainInsertOption(); }
         prepareBatchInsertOption(ls, rlop); // required
         return delegateBatchInsert(ls, rlop);
     }
 
-    protected void prepareBatchInsertOption(List<MemberWithdraw> ls, InsertOption<MemberWithdrawCB> op) {
+    protected void prepareBatchInsertOption(List<MemberStatus> ls, InsertOption<MemberStatusCB> op) {
         op.xallowInsertColumnModifiedPropertiesFragmented();
         op.xacceptInsertColumnModifiedPropertiesIfNeeds(ls);
         prepareInsertOption(op);
@@ -667,36 +751,36 @@ public abstract class BsMemberWithdrawBhv extends AbstractBehaviorWritable {
      * <span style="color: #DD4747; font-size: 120%">You should specify same-set columns to all entities like this:</span>
      * <pre>
      * for (... : ...) {
-     *     MemberWithdraw memberWithdraw = new MemberWithdraw();
-     *     memberWithdraw.setFooName("foo");
+     *     MemberStatus memberStatus = new MemberStatus();
+     *     memberStatus.setFooName("foo");
      *     if (...) {
-     *         memberWithdraw.setFooPrice(123);
+     *         memberStatus.setFooPrice(123);
      *     } else {
-     *         memberWithdraw.setFooPrice(null); <span style="color: #3F7E5E">// updated as null</span>
-     *         <span style="color: #3F7E5E">//memberWithdraw.setFooDate(...); // *not allowed, fragmented</span>
+     *         memberStatus.setFooPrice(null); <span style="color: #3F7E5E">// updated as null</span>
+     *         <span style="color: #3F7E5E">//memberStatus.setFooDate(...); // *not allowed, fragmented</span>
      *     }
      *     <span style="color: #3F7E5E">// FOO_NAME and FOO_PRICE (and record meta columns) are updated</span>
      *     <span style="color: #3F7E5E">// (others are not updated: their values are kept)</span>
-     *     memberWithdrawList.add(memberWithdraw);
+     *     memberStatusList.add(memberStatus);
      * }
-     * memberWithdrawBhv.<span style="color: #DD4747">batchUpdate</span>(memberWithdrawList);
+     * memberStatusBhv.<span style="color: #DD4747">batchUpdate</span>(memberStatusList);
      * </pre>
-     * @param memberWithdrawList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @param memberStatusList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
      * @return The array of updated count. (NotNull, EmptyAllowed)
      * @exception EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      */
-    public int[] batchUpdate(List<MemberWithdraw> memberWithdrawList) {
-        return doBatchUpdate(memberWithdrawList, null);
+    public int[] batchUpdate(List<MemberStatus> memberStatusList) {
+        return doBatchUpdate(memberStatusList, null);
     }
 
-    protected int[] doBatchUpdate(List<MemberWithdraw> ls, UpdateOption<MemberWithdrawCB> op) {
-        assertObjectNotNull("memberWithdrawList", ls);
-        UpdateOption<MemberWithdrawCB> rlop; if (op != null) { rlop = op; } else { rlop = createPlainUpdateOption(); }
+    protected int[] doBatchUpdate(List<MemberStatus> ls, UpdateOption<MemberStatusCB> op) {
+        assertObjectNotNull("memberStatusList", ls);
+        UpdateOption<MemberStatusCB> rlop; if (op != null) { rlop = op; } else { rlop = createPlainUpdateOption(); }
         prepareBatchUpdateOption(ls, rlop); // required
         return delegateBatchUpdate(ls, rlop);
     }
 
-    protected void prepareBatchUpdateOption(List<MemberWithdraw> ls, UpdateOption<MemberWithdrawCB> op) {
+    protected void prepareBatchUpdateOption(List<MemberStatus> ls, UpdateOption<MemberStatusCB> op) {
         op.xacceptUpdateColumnModifiedPropertiesIfNeeds(ls);
         prepareUpdateOption(op);
     }
@@ -708,15 +792,15 @@ public abstract class BsMemberWithdrawBhv extends AbstractBehaviorWritable {
      * This method uses executeBatch() of java.sql.PreparedStatement.
      * <pre>
      * <span style="color: #3F7E5E">// e.g. update two columns only</span>
-     * memberWithdrawBhv.<span style="color: #DD4747">batchUpdate</span>(memberWithdrawList, new SpecifyQuery<MemberWithdrawCB>() {
-     *     public void specify(MemberWithdrawCB cb) { <span style="color: #3F7E5E">// the two only updated</span>
+     * memberStatusBhv.<span style="color: #DD4747">batchUpdate</span>(memberStatusList, new SpecifyQuery<MemberStatusCB>() {
+     *     public void specify(MemberStatusCB cb) { <span style="color: #3F7E5E">// the two only updated</span>
      *         cb.specify().<span style="color: #DD4747">columnFooStatusCode()</span>; <span style="color: #3F7E5E">// should be modified in any entities</span>
      *         cb.specify().<span style="color: #DD4747">columnBarDate()</span>; <span style="color: #3F7E5E">// should be modified in any entities</span>
      *     }
      * });
      * <span style="color: #3F7E5E">// e.g. update every column in the table</span>
-     * memberWithdrawBhv.<span style="color: #DD4747">batchUpdate</span>(memberWithdrawList, new SpecifyQuery<MemberWithdrawCB>() {
-     *     public void specify(MemberWithdrawCB cb) { <span style="color: #3F7E5E">// all columns are updated</span>
+     * memberStatusBhv.<span style="color: #DD4747">batchUpdate</span>(memberStatusList, new SpecifyQuery<MemberStatusCB>() {
+     *     public void specify(MemberStatusCB cb) { <span style="color: #3F7E5E">// all columns are updated</span>
      *         cb.specify().<span style="color: #DD4747">columnEveryColumn()</span>; <span style="color: #3F7E5E">// no check of modified properties</span>
      *     }
      * });
@@ -726,13 +810,13 @@ public abstract class BsMemberWithdrawBhv extends AbstractBehaviorWritable {
      * and an optimistic lock column because they are specified implicitly.</p>
      * <p>And you should specify columns that are modified in any entities (at least one entity).
      * But if you specify every column, it has no check.</p>
-     * @param memberWithdrawList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @param memberStatusList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
      * @param updateColumnSpec The specification of update columns. (NotNull)
      * @return The array of updated count. (NotNull, EmptyAllowed)
      * @exception EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      */
-    public int[] batchUpdate(List<MemberWithdraw> memberWithdrawList, SpecifyQuery<MemberWithdrawCB> updateColumnSpec) {
-        return doBatchUpdate(memberWithdrawList, createSpecifiedUpdateOption(updateColumnSpec));
+    public int[] batchUpdate(List<MemberStatus> memberStatusList, SpecifyQuery<MemberStatusCB> updateColumnSpec) {
+        return doBatchUpdate(memberStatusList, createSpecifiedUpdateOption(updateColumnSpec));
     }
 
     @Override
@@ -742,16 +826,16 @@ public abstract class BsMemberWithdrawBhv extends AbstractBehaviorWritable {
     /**
      * Batch-delete the entity list. (NonExclusiveControl) <br />
      * This method uses executeBatch() of java.sql.PreparedStatement.
-     * @param memberWithdrawList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @param memberStatusList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
      * @return The array of deleted count. (NotNull, EmptyAllowed)
      * @exception EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      */
-    public int[] batchDelete(List<MemberWithdraw> memberWithdrawList) {
-        return doBatchDelete(memberWithdrawList, null);
+    public int[] batchDelete(List<MemberStatus> memberStatusList) {
+        return doBatchDelete(memberStatusList, null);
     }
 
-    protected int[] doBatchDelete(List<MemberWithdraw> ls, DeleteOption<MemberWithdrawCB> op) {
-        assertObjectNotNull("memberWithdrawList", ls);
+    protected int[] doBatchDelete(List<MemberStatus> ls, DeleteOption<MemberStatusCB> op) {
+        assertObjectNotNull("memberStatusList", ls);
         prepareDeleteOption(op);
         return delegateBatchDelete(ls, op);
     }
@@ -767,8 +851,8 @@ public abstract class BsMemberWithdrawBhv extends AbstractBehaviorWritable {
     /**
      * Insert the several entities by query (modified-only for fixed value).
      * <pre>
-     * memberWithdrawBhv.<span style="color: #DD4747">queryInsert</span>(new QueryInsertSetupper&lt;MemberWithdraw, MemberWithdrawCB&gt;() {
-     *     public ConditionBean setup(memberWithdraw entity, MemberWithdrawCB intoCB) {
+     * memberStatusBhv.<span style="color: #DD4747">queryInsert</span>(new QueryInsertSetupper&lt;MemberStatus, MemberStatusCB&gt;() {
+     *     public ConditionBean setup(memberStatus entity, MemberStatusCB intoCB) {
      *         FooCB cb = FooCB();
      *         cb.setupSelect_Bar();
      *
@@ -790,18 +874,18 @@ public abstract class BsMemberWithdrawBhv extends AbstractBehaviorWritable {
      * @param setupper The setup-per of query-insert. (NotNull)
      * @return The inserted count.
      */
-    public int queryInsert(QueryInsertSetupper<MemberWithdraw, MemberWithdrawCB> setupper) {
+    public int queryInsert(QueryInsertSetupper<MemberStatus, MemberStatusCB> setupper) {
         return doQueryInsert(setupper, null);
     }
 
-    protected int doQueryInsert(QueryInsertSetupper<MemberWithdraw, MemberWithdrawCB> sp, InsertOption<MemberWithdrawCB> op) {
+    protected int doQueryInsert(QueryInsertSetupper<MemberStatus, MemberStatusCB> sp, InsertOption<MemberStatusCB> op) {
         assertObjectNotNull("setupper", sp); prepareInsertOption(op);
-        MemberWithdraw et = newEntity(); MemberWithdrawCB cb = createCBForQueryInsert();
+        MemberStatus et = newEntity(); MemberStatusCB cb = createCBForQueryInsert();
         return delegateQueryInsert(et, cb, sp.setup(et, cb), op);
     }
 
-    protected MemberWithdrawCB createCBForQueryInsert()
-    { MemberWithdrawCB cb = newConditionBean(); cb.xsetupForQueryInsert(); return cb; }
+    protected MemberStatusCB createCBForQueryInsert()
+    { MemberStatusCB cb = newConditionBean(); cb.xsetupForQueryInsert(); return cb; }
 
     protected int doRangeCreate(QueryInsertSetupper<? extends Entity, ? extends ConditionBean> setupper, InsertOption<? extends ConditionBean> op)
     { return doQueryInsert(downcast(setupper), downcast(op)); }
@@ -809,31 +893,31 @@ public abstract class BsMemberWithdrawBhv extends AbstractBehaviorWritable {
     /**
      * Update the several entities by query non-strictly modified-only. (NonExclusiveControl)
      * <pre>
-     * MemberWithdraw memberWithdraw = new MemberWithdraw();
+     * MemberStatus memberStatus = new MemberStatus();
      * <span style="color: #3F7E5E">// you don't need to set PK value</span>
-     * <span style="color: #3F7E5E">//memberWithdraw.setPK...(value);</span>
-     * memberWithdraw.setFoo...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
+     * <span style="color: #3F7E5E">//memberStatus.setPK...(value);</span>
+     * memberStatus.setFoo...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
      * <span style="color: #3F7E5E">// you don't need to set values of common columns</span>
-     * <span style="color: #3F7E5E">//memberWithdraw.setRegisterUser(value);</span>
-     * <span style="color: #3F7E5E">//memberWithdraw.set...;</span>
+     * <span style="color: #3F7E5E">//memberStatus.setRegisterUser(value);</span>
+     * <span style="color: #3F7E5E">//memberStatus.set...;</span>
      * <span style="color: #3F7E5E">// you don't need to set a value of concurrency column</span>
      * <span style="color: #3F7E5E">// (auto-increment for version number is valid though non-exclusive control)</span>
-     * <span style="color: #3F7E5E">//memberWithdraw.setVersionNo(value);</span>
-     * MemberWithdrawCB cb = new MemberWithdrawCB();
+     * <span style="color: #3F7E5E">//memberStatus.setVersionNo(value);</span>
+     * MemberStatusCB cb = new MemberStatusCB();
      * cb.query().setFoo...(value);
-     * memberWithdrawBhv.<span style="color: #DD4747">queryUpdate</span>(memberWithdraw, cb);
+     * memberStatusBhv.<span style="color: #DD4747">queryUpdate</span>(memberStatus, cb);
      * </pre>
-     * @param memberWithdraw The entity that contains update values. (NotNull, PrimaryKeyNullAllowed)
-     * @param cb The condition-bean of MemberWithdraw. (NotNull)
+     * @param memberStatus The entity that contains update values. (NotNull, PrimaryKeyNullAllowed)
+     * @param cb The condition-bean of MemberStatus. (NotNull)
      * @return The updated count.
      * @exception NonQueryUpdateNotAllowedException When the query has no condition.
      */
-    public int queryUpdate(MemberWithdraw memberWithdraw, MemberWithdrawCB cb) {
-        return doQueryUpdate(memberWithdraw, cb, null);
+    public int queryUpdate(MemberStatus memberStatus, MemberStatusCB cb) {
+        return doQueryUpdate(memberStatus, cb, null);
     }
 
-    protected int doQueryUpdate(MemberWithdraw et, MemberWithdrawCB cb, UpdateOption<MemberWithdrawCB> op) {
-        assertObjectNotNull("memberWithdraw", et); assertCBStateValid(cb); prepareUpdateOption(op);
+    protected int doQueryUpdate(MemberStatus et, MemberStatusCB cb, UpdateOption<MemberStatusCB> op) {
+        assertObjectNotNull("memberStatus", et); assertCBStateValid(cb); prepareUpdateOption(op);
         return checkCountBeforeQueryUpdateIfNeeds(cb) ? delegateQueryUpdate(et, cb, op) : 0;
     }
 
@@ -843,19 +927,19 @@ public abstract class BsMemberWithdrawBhv extends AbstractBehaviorWritable {
     /**
      * Delete the several entities by query. (NonExclusiveControl)
      * <pre>
-     * MemberWithdrawCB cb = new MemberWithdrawCB();
+     * MemberStatusCB cb = new MemberStatusCB();
      * cb.query().setFoo...(value);
-     * memberWithdrawBhv.<span style="color: #DD4747">queryDelete</span>(memberWithdraw, cb);
+     * memberStatusBhv.<span style="color: #DD4747">queryDelete</span>(memberStatus, cb);
      * </pre>
-     * @param cb The condition-bean of MemberWithdraw. (NotNull)
+     * @param cb The condition-bean of MemberStatus. (NotNull)
      * @return The deleted count.
      * @exception NonQueryDeleteNotAllowedException When the query has no condition.
      */
-    public int queryDelete(MemberWithdrawCB cb) {
+    public int queryDelete(MemberStatusCB cb) {
         return doQueryDelete(cb, null);
     }
 
-    protected int doQueryDelete(MemberWithdrawCB cb, DeleteOption<MemberWithdrawCB> op) {
+    protected int doQueryDelete(MemberStatusCB cb, DeleteOption<MemberStatusCB> op) {
         assertCBStateValid(cb); prepareDeleteOption(op);
         return checkCountBeforeQueryUpdateIfNeeds(cb) ? delegateQueryDelete(cb, op) : 0;
     }
@@ -873,23 +957,23 @@ public abstract class BsMemberWithdrawBhv extends AbstractBehaviorWritable {
      * For example, disableCommonColumnAutoSetup(), disablePrimaryKeyIdentity(). <br />
      * Other specifications are same as insert(entity).
      * <pre>
-     * MemberWithdraw memberWithdraw = new MemberWithdraw();
+     * MemberStatus memberStatus = new MemberStatus();
      * <span style="color: #3F7E5E">// if auto-increment, you don't need to set the PK value</span>
-     * memberWithdraw.setFoo...(value);
-     * memberWithdraw.setBar...(value);
-     * InsertOption<MemberWithdrawCB> option = new InsertOption<MemberWithdrawCB>();
+     * memberStatus.setFoo...(value);
+     * memberStatus.setBar...(value);
+     * InsertOption<MemberStatusCB> option = new InsertOption<MemberStatusCB>();
      * <span style="color: #3F7E5E">// you can insert by your values for common columns</span>
      * option.disableCommonColumnAutoSetup();
-     * memberWithdrawBhv.<span style="color: #DD4747">varyingInsert</span>(memberWithdraw, option);
-     * ... = memberWithdraw.getPK...(); <span style="color: #3F7E5E">// if auto-increment, you can get the value after</span>
+     * memberStatusBhv.<span style="color: #DD4747">varyingInsert</span>(memberStatus, option);
+     * ... = memberStatus.getPK...(); <span style="color: #3F7E5E">// if auto-increment, you can get the value after</span>
      * </pre>
-     * @param memberWithdraw The entity of insert. (NotNull, PrimaryKeyNullAllowed: when auto-increment)
+     * @param memberStatus The entity of insert. (NotNull, PrimaryKeyNullAllowed: when auto-increment)
      * @param option The option of insert for varying requests. (NotNull)
      * @exception EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
      */
-    public void varyingInsert(MemberWithdraw memberWithdraw, InsertOption<MemberWithdrawCB> option) {
+    public void varyingInsert(MemberStatus memberStatus, InsertOption<MemberStatusCB> option) {
         assertInsertOptionNotNull(option);
-        doInsert(memberWithdraw, option);
+        doInsert(memberStatus, option);
     }
 
     /**
@@ -897,62 +981,62 @@ public abstract class BsMemberWithdrawBhv extends AbstractBehaviorWritable {
      * For example, self(selfCalculationSpecification), specify(updateColumnSpecification), disableCommonColumnAutoSetup(). <br />
      * Other specifications are same as update(entity).
      * <pre>
-     * MemberWithdraw memberWithdraw = new MemberWithdraw();
-     * memberWithdraw.setPK...(value); <span style="color: #3F7E5E">// required</span>
-     * memberWithdraw.setOther...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
+     * MemberStatus memberStatus = new MemberStatus();
+     * memberStatus.setPK...(value); <span style="color: #3F7E5E">// required</span>
+     * memberStatus.setOther...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
      * <span style="color: #3F7E5E">// if exclusive control, the value of concurrency column is required</span>
-     * memberWithdraw.<span style="color: #DD4747">setVersionNo</span>(value);
+     * memberStatus.<span style="color: #DD4747">setVersionNo</span>(value);
      * try {
      *     <span style="color: #3F7E5E">// you can update by self calculation values</span>
-     *     UpdateOption&lt;MemberWithdrawCB&gt; option = new UpdateOption&lt;MemberWithdrawCB&gt;();
-     *     option.self(new SpecifyQuery&lt;MemberWithdrawCB&gt;() {
-     *         public void specify(MemberWithdrawCB cb) {
+     *     UpdateOption&lt;MemberStatusCB&gt; option = new UpdateOption&lt;MemberStatusCB&gt;();
+     *     option.self(new SpecifyQuery&lt;MemberStatusCB&gt;() {
+     *         public void specify(MemberStatusCB cb) {
      *             cb.specify().<span style="color: #DD4747">columnXxxCount()</span>;
      *         }
      *     }).plus(1); <span style="color: #3F7E5E">// XXX_COUNT = XXX_COUNT + 1</span>
-     *     memberWithdrawBhv.<span style="color: #DD4747">varyingUpdate</span>(memberWithdraw, option);
+     *     memberStatusBhv.<span style="color: #DD4747">varyingUpdate</span>(memberStatus, option);
      * } catch (EntityAlreadyUpdatedException e) { <span style="color: #3F7E5E">// if concurrent update</span>
      *     ...
      * }
      * </pre>
-     * @param memberWithdraw The entity of update. (NotNull, PrimaryKeyNotNull)
+     * @param memberStatus The entity of update. (NotNull, PrimaryKeyNotNull)
      * @param option The option of update for varying requests. (NotNull)
      * @exception EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @exception EntityDuplicatedException When the entity has been duplicated.
      * @exception EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
      */
-    public void varyingUpdate(MemberWithdraw memberWithdraw, UpdateOption<MemberWithdrawCB> option) {
+    public void varyingUpdate(MemberStatus memberStatus, UpdateOption<MemberStatusCB> option) {
         assertUpdateOptionNotNull(option);
-        doUpdate(memberWithdraw, option);
+        doUpdate(memberStatus, option);
     }
 
     /**
      * Insert or update the entity with varying requests. (ExclusiveControl: when update) <br />
      * Other specifications are same as insertOrUpdate(entity).
-     * @param memberWithdraw The entity of insert or update. (NotNull)
+     * @param memberStatus The entity of insert or update. (NotNull)
      * @param insertOption The option of insert for varying requests. (NotNull)
      * @param updateOption The option of update for varying requests. (NotNull)
      * @exception EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @exception EntityDuplicatedException When the entity has been duplicated.
      * @exception EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
      */
-    public void varyingInsertOrUpdate(MemberWithdraw memberWithdraw, InsertOption<MemberWithdrawCB> insertOption, UpdateOption<MemberWithdrawCB> updateOption) {
+    public void varyingInsertOrUpdate(MemberStatus memberStatus, InsertOption<MemberStatusCB> insertOption, UpdateOption<MemberStatusCB> updateOption) {
         assertInsertOptionNotNull(insertOption); assertUpdateOptionNotNull(updateOption);
-        doInsertOrUpdate(memberWithdraw, insertOption, updateOption);
+        doInsertOrUpdate(memberStatus, insertOption, updateOption);
     }
 
     /**
      * Delete the entity with varying requests. (ZeroUpdateException, NonExclusiveControl) <br />
      * Now a valid option does not exist. <br />
      * Other specifications are same as delete(entity).
-     * @param memberWithdraw The entity of delete. (NotNull, PrimaryKeyNotNull, ConcurrencyColumnNotNull)
+     * @param memberStatus The entity of delete. (NotNull, PrimaryKeyNotNull, ConcurrencyColumnNotNull)
      * @param option The option of update for varying requests. (NotNull)
      * @exception EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @exception EntityDuplicatedException When the entity has been duplicated.
      */
-    public void varyingDelete(MemberWithdraw memberWithdraw, DeleteOption<MemberWithdrawCB> option) {
+    public void varyingDelete(MemberStatus memberStatus, DeleteOption<MemberStatusCB> option) {
         assertDeleteOptionNotNull(option);
-        doDelete(memberWithdraw, option);
+        doDelete(memberStatus, option);
     }
 
     // -----------------------------------------------------
@@ -963,13 +1047,13 @@ public abstract class BsMemberWithdrawBhv extends AbstractBehaviorWritable {
      * For example, disableCommonColumnAutoSetup()
      * , disablePrimaryKeyIdentity(), limitBatchInsertLogging(). <br />
      * Other specifications are same as batchInsert(entityList).
-     * @param memberWithdrawList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @param memberStatusList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
      * @param option The option of insert for varying requests. (NotNull)
      * @return The array of updated count. (NotNull, EmptyAllowed)
      */
-    public int[] varyingBatchInsert(List<MemberWithdraw> memberWithdrawList, InsertOption<MemberWithdrawCB> option) {
+    public int[] varyingBatchInsert(List<MemberStatus> memberStatusList, InsertOption<MemberStatusCB> option) {
         assertInsertOptionNotNull(option);
-        return doBatchInsert(memberWithdrawList, option);
+        return doBatchInsert(memberStatusList, option);
     }
 
     /**
@@ -977,26 +1061,26 @@ public abstract class BsMemberWithdrawBhv extends AbstractBehaviorWritable {
      * For example, self(selfCalculationSpecification), specify(updateColumnSpecification)
      * , disableCommonColumnAutoSetup(), limitBatchUpdateLogging(). <br />
      * Other specifications are same as batchUpdate(entityList).
-     * @param memberWithdrawList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @param memberStatusList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
      * @param option The option of update for varying requests. (NotNull)
      * @return The array of updated count. (NotNull, EmptyAllowed)
      */
-    public int[] varyingBatchUpdate(List<MemberWithdraw> memberWithdrawList, UpdateOption<MemberWithdrawCB> option) {
+    public int[] varyingBatchUpdate(List<MemberStatus> memberStatusList, UpdateOption<MemberStatusCB> option) {
         assertUpdateOptionNotNull(option);
-        return doBatchUpdate(memberWithdrawList, option);
+        return doBatchUpdate(memberStatusList, option);
     }
 
     /**
      * Batch-delete the list with varying requests. <br />
      * For example, limitBatchDeleteLogging(). <br />
      * Other specifications are same as batchDelete(entityList).
-     * @param memberWithdrawList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @param memberStatusList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
      * @param option The option of delete for varying requests. (NotNull)
      * @return The array of deleted count. (NotNull, EmptyAllowed)
      */
-    public int[] varyingBatchDelete(List<MemberWithdraw> memberWithdrawList, DeleteOption<MemberWithdrawCB> option) {
+    public int[] varyingBatchDelete(List<MemberStatus> memberStatusList, DeleteOption<MemberStatusCB> option) {
         assertDeleteOptionNotNull(option);
-        return doBatchDelete(memberWithdrawList, option);
+        return doBatchDelete(memberStatusList, option);
     }
 
     // -----------------------------------------------------
@@ -1010,7 +1094,7 @@ public abstract class BsMemberWithdrawBhv extends AbstractBehaviorWritable {
      * @param option The option of insert for varying requests. (NotNull)
      * @return The inserted count.
      */
-    public int varyingQueryInsert(QueryInsertSetupper<MemberWithdraw, MemberWithdrawCB> setupper, InsertOption<MemberWithdrawCB> option) {
+    public int varyingQueryInsert(QueryInsertSetupper<MemberStatus, MemberStatusCB> setupper, InsertOption<MemberStatusCB> option) {
         assertInsertOptionNotNull(option);
         return doQueryInsert(setupper, option);
     }
@@ -1022,44 +1106,44 @@ public abstract class BsMemberWithdrawBhv extends AbstractBehaviorWritable {
      * Other specifications are same as queryUpdate(entity, cb).
      * <pre>
      * <span style="color: #3F7E5E">// ex) you can update by self calculation values</span>
-     * MemberWithdraw memberWithdraw = new MemberWithdraw();
+     * MemberStatus memberStatus = new MemberStatus();
      * <span style="color: #3F7E5E">// you don't need to set PK value</span>
-     * <span style="color: #3F7E5E">//memberWithdraw.setPK...(value);</span>
-     * memberWithdraw.setOther...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
+     * <span style="color: #3F7E5E">//memberStatus.setPK...(value);</span>
+     * memberStatus.setOther...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
      * <span style="color: #3F7E5E">// you don't need to set a value of concurrency column</span>
      * <span style="color: #3F7E5E">// (auto-increment for version number is valid though non-exclusive control)</span>
-     * <span style="color: #3F7E5E">//memberWithdraw.setVersionNo(value);</span>
-     * MemberWithdrawCB cb = new MemberWithdrawCB();
+     * <span style="color: #3F7E5E">//memberStatus.setVersionNo(value);</span>
+     * MemberStatusCB cb = new MemberStatusCB();
      * cb.query().setFoo...(value);
-     * UpdateOption&lt;MemberWithdrawCB&gt; option = new UpdateOption&lt;MemberWithdrawCB&gt;();
-     * option.self(new SpecifyQuery&lt;MemberWithdrawCB&gt;() {
-     *     public void specify(MemberWithdrawCB cb) {
+     * UpdateOption&lt;MemberStatusCB&gt; option = new UpdateOption&lt;MemberStatusCB&gt;();
+     * option.self(new SpecifyQuery&lt;MemberStatusCB&gt;() {
+     *     public void specify(MemberStatusCB cb) {
      *         cb.specify().<span style="color: #DD4747">columnFooCount()</span>;
      *     }
      * }).plus(1); <span style="color: #3F7E5E">// FOO_COUNT = FOO_COUNT + 1</span>
-     * memberWithdrawBhv.<span style="color: #DD4747">varyingQueryUpdate</span>(memberWithdraw, cb, option);
+     * memberStatusBhv.<span style="color: #DD4747">varyingQueryUpdate</span>(memberStatus, cb, option);
      * </pre>
-     * @param memberWithdraw The entity that contains update values. (NotNull) {PrimaryKeyNotRequired}
-     * @param cb The condition-bean of MemberWithdraw. (NotNull)
+     * @param memberStatus The entity that contains update values. (NotNull) {PrimaryKeyNotRequired}
+     * @param cb The condition-bean of MemberStatus. (NotNull)
      * @param option The option of update for varying requests. (NotNull)
      * @return The updated count.
      * @exception NonQueryUpdateNotAllowedException When the query has no condition (if not allowed).
      */
-    public int varyingQueryUpdate(MemberWithdraw memberWithdraw, MemberWithdrawCB cb, UpdateOption<MemberWithdrawCB> option) {
+    public int varyingQueryUpdate(MemberStatus memberStatus, MemberStatusCB cb, UpdateOption<MemberStatusCB> option) {
         assertUpdateOptionNotNull(option);
-        return doQueryUpdate(memberWithdraw, cb, option);
+        return doQueryUpdate(memberStatus, cb, option);
     }
 
     /**
      * Delete the several entities by query with varying requests non-strictly. <br />
      * For example, allowNonQueryDelete(). <br />
      * Other specifications are same as batchUpdateNonstrict(entityList).
-     * @param cb The condition-bean of MemberWithdraw. (NotNull)
+     * @param cb The condition-bean of MemberStatus. (NotNull)
      * @param option The option of delete for varying requests. (NotNull)
      * @return The deleted count.
      * @exception NonQueryDeleteNotAllowedException When the query has no condition (if not allowed).
      */
-    public int varyingQueryDelete(MemberWithdrawCB cb, DeleteOption<MemberWithdrawCB> option) {
+    public int varyingQueryDelete(MemberStatusCB cb, DeleteOption<MemberStatusCB> option) {
         assertDeleteOptionNotNull(option);
         return doQueryDelete(cb, option);
     }
@@ -1098,25 +1182,25 @@ public abstract class BsMemberWithdrawBhv extends AbstractBehaviorWritable {
      * </pre>
      * @return The basic executor of outside-SQL. (NotNull)
      */
-    public OutsideSqlBasicExecutor<MemberWithdrawBhv> outsideSql() {
+    public OutsideSqlBasicExecutor<MemberStatusBhv> outsideSql() {
         return doOutsideSql();
     }
 
     // ===================================================================================
     //                                                                       Assist Helper
     //                                                                       =============
-    protected Class<MemberWithdraw> typeOfSelectedEntity() { return MemberWithdraw.class; }
-    protected MemberWithdraw downcast(Entity et) { return helpEntityDowncastInternally(et, MemberWithdraw.class); }
-    protected MemberWithdrawCB downcast(ConditionBean cb) { return helpConditionBeanDowncastInternally(cb, MemberWithdrawCB.class); }
+    protected Class<MemberStatus> typeOfSelectedEntity() { return MemberStatus.class; }
+    protected MemberStatus downcast(Entity et) { return helpEntityDowncastInternally(et, MemberStatus.class); }
+    protected MemberStatusCB downcast(ConditionBean cb) { return helpConditionBeanDowncastInternally(cb, MemberStatusCB.class); }
     @SuppressWarnings("unchecked")
-    protected List<MemberWithdraw> downcast(List<? extends Entity> ls) { return (List<MemberWithdraw>)ls; }
+    protected List<MemberStatus> downcast(List<? extends Entity> ls) { return (List<MemberStatus>)ls; }
     @SuppressWarnings("unchecked")
-    protected InsertOption<MemberWithdrawCB> downcast(InsertOption<? extends ConditionBean> op) { return (InsertOption<MemberWithdrawCB>)op; }
+    protected InsertOption<MemberStatusCB> downcast(InsertOption<? extends ConditionBean> op) { return (InsertOption<MemberStatusCB>)op; }
     @SuppressWarnings("unchecked")
-    protected UpdateOption<MemberWithdrawCB> downcast(UpdateOption<? extends ConditionBean> op) { return (UpdateOption<MemberWithdrawCB>)op; }
+    protected UpdateOption<MemberStatusCB> downcast(UpdateOption<? extends ConditionBean> op) { return (UpdateOption<MemberStatusCB>)op; }
     @SuppressWarnings("unchecked")
-    protected DeleteOption<MemberWithdrawCB> downcast(DeleteOption<? extends ConditionBean> op) { return (DeleteOption<MemberWithdrawCB>)op; }
+    protected DeleteOption<MemberStatusCB> downcast(DeleteOption<? extends ConditionBean> op) { return (DeleteOption<MemberStatusCB>)op; }
     @SuppressWarnings("unchecked")
-    protected QueryInsertSetupper<MemberWithdraw, MemberWithdrawCB> downcast(QueryInsertSetupper<? extends Entity, ? extends ConditionBean> sp)
-    { return (QueryInsertSetupper<MemberWithdraw, MemberWithdrawCB>)sp; }
+    protected QueryInsertSetupper<MemberStatus, MemberStatusCB> downcast(QueryInsertSetupper<? extends Entity, ? extends ConditionBean> sp)
+    { return (QueryInsertSetupper<MemberStatus, MemberStatusCB>)sp; }
 }

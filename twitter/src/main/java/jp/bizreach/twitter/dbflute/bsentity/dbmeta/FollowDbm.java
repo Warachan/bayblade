@@ -87,16 +87,16 @@ public class FollowDbm extends AbstractDBMeta {
     //                                      ----------------
     protected final Map<String, PropertyGateway> _efpgMap = newHashMap();
     {
-        setupEfpg(_efpgMap, new EfpgMemberByMemberId(), "memberByMemberId");
         setupEfpg(_efpgMap, new EfpgMemberByYouId(), "memberByYouId");
-    }
-    public class EfpgMemberByMemberId implements PropertyGateway {
-        public Object read(Entity et) { return ((Follow)et).getMemberByMemberId(); }
-        public void write(Entity et, Object vl) { ((Follow)et).setMemberByMemberId((Member)vl); }
+        setupEfpg(_efpgMap, new EfpgMemberByMemberId(), "memberByMemberId");
     }
     public class EfpgMemberByYouId implements PropertyGateway {
         public Object read(Entity et) { return ((Follow)et).getMemberByYouId(); }
         public void write(Entity et, Object vl) { ((Follow)et).setMemberByYouId((Member)vl); }
+    }
+    public class EfpgMemberByMemberId implements PropertyGateway {
+        public Object read(Entity et) { return ((Follow)et).getMemberByMemberId(); }
+        public void write(Entity et, Object vl) { ((Follow)et).setMemberByMemberId((Member)vl); }
     }
     public PropertyGateway findForeignPropertyGateway(String prop)
     { return doFindEfpg(_efpgMap, prop); }
@@ -199,20 +199,20 @@ public class FollowDbm extends AbstractDBMeta {
     //                                      Foreign Property
     //                                      ----------------
     /**
-     * member by my MEMBER_ID, named 'memberByMemberId'.
-     * @return The information object of foreign property. (NotNull)
-     */
-    public ForeignInfo foreignMemberByMemberId() {
-        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnMemberId(), MemberDbm.getInstance().columnMemberId());
-        return cfi("follow_ibfk_1", "memberByMemberId", this, MemberDbm.getInstance(), mp, 0, null, false, false, false, false, null, null, false, "followByMemberIdList");
-    }
-    /**
      * member by my YOU_ID, named 'memberByYouId'.
      * @return The information object of foreign property. (NotNull)
      */
     public ForeignInfo foreignMemberByYouId() {
         Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnYouId(), MemberDbm.getInstance().columnMemberId());
-        return cfi("follow_ibfk_2", "memberByYouId", this, MemberDbm.getInstance(), mp, 1, null, false, false, false, false, null, null, false, "followByYouIdList");
+        return cfi("follow_ibfk_1", "memberByYouId", this, MemberDbm.getInstance(), mp, 0, null, false, false, false, false, null, null, false, "followByYouIdList");
+    }
+    /**
+     * member by my MEMBER_ID, named 'memberByMemberId'.
+     * @return The information object of foreign property. (NotNull)
+     */
+    public ForeignInfo foreignMemberByMemberId() {
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnMemberId(), MemberDbm.getInstance().columnMemberId());
+        return cfi("follow_ibfk_2", "memberByMemberId", this, MemberDbm.getInstance(), mp, 1, null, false, false, false, false, null, null, false, "followByMemberIdList");
     }
 
     // -----------------------------------------------------

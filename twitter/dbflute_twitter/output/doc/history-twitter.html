@@ -118,11 +118,63 @@ p.tablecount {
 </div>
 
 <div class="section">
+	<h2><span class="dt">Diff Date: </span>2014/07/07 19:17:20</h2>
+
+	<h3>Change Table</h3>
+	<div class="table-content">
+		<h4><a href="./schema-twitter.html#member">member</a></h4>
+		<div class="change-table-content">
+			<h5>Add Column</h5>
+			<ul class="column-content">
+				<li>INTERESTED_INDUSTRY</li>
+			</ul>
+			<h5>Delete Column</h5>
+			<ul class="column-content">
+				<li>ACCEPTED_COMPANY</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="section">
+	<h2><span class="dt">Diff Date: </span>2014/07/07 12:08:27</h2>
+
+	<h3>Add Table</h3>
+	<ul class="table-content">
+		<li>member_status</li>
+	</ul>
+	<h3>Change Table</h3>
+	<div class="table-content">
+		<h4>member</h4>
+		<div class="change-table-content">
+			<h5>Add Column</h5>
+			<ul class="column-content">
+				<li>MEMBER_STATUS_CODE</li>
+				<li>GROUP_NAME</li>
+				<li>RECRUITING_NUMBER</li>
+				<li>ACCEPTED_COMPANY</li>
+				<li>GRADUATION_YEAR</li>
+			</ul>
+			<h5>Add FK</h5>
+			<ul class="column-content">
+				<li>member_ibfk_1(new)</li>
+			</ul>
+			<h5>Add Index</h5>
+			<ul class="column-content">
+				<li>MEMBER_STATUS_CODE</li>
+			</ul>
+		</div>
+	</div>
+	<h3>Delete Table</h3>
+	<ul class="table-content">
+		<li>member_withdraw</li>
+	</ul>
+</div>
+<div class="section">
 	<h2><span class="dt">Diff Date: </span>2014/07/04 15:57:57</h2>
 
 	<h3>Change Table</h3>
 	<div class="table-content">
-		<h4><a href="./schema-twitter.html#follow">follow</a></h4>
+		<h4>follow</h4>
 		<div class="change-table-content">
 			<h5>Add UQ</h5>
 			<ul class="column-content">
@@ -133,7 +185,7 @@ p.tablecount {
 				<li>YOU_ID</li>
 			</ul>
 		</div>
-		<h4><a href="./schema-twitter.html#member">member</a></h4>
+		<h4>member</h4>
 		<div class="change-table-content">
 			<h5>Add Column</h5>
 			<ul class="column-content">

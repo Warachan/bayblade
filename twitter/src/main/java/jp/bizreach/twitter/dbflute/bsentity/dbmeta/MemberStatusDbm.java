@@ -13,17 +13,17 @@ import jp.bizreach.twitter.dbflute.allcommon.*;
 import jp.bizreach.twitter.dbflute.exentity.*;
 
 /**
- * The DB meta of member_withdraw. (Singleton)
+ * The DB meta of member_status. (Singleton)
  * @author DBFlute(AutoGenerator)
  */
-public class MemberWithdrawDbm extends AbstractDBMeta {
+public class MemberStatusDbm extends AbstractDBMeta {
 
     // ===================================================================================
     //                                                                           Singleton
     //                                                                           =========
-    private static final MemberWithdrawDbm _instance = new MemberWithdrawDbm();
-    private MemberWithdrawDbm() {}
-    public static MemberWithdrawDbm getInstance() { return _instance; }
+    private static final MemberStatusDbm _instance = new MemberStatusDbm();
+    private MemberStatusDbm() {}
+    public static MemberStatusDbm getInstance() { return _instance; }
 
     // ===================================================================================
     //                                                                       Current DBDef
@@ -38,50 +38,26 @@ public class MemberWithdrawDbm extends AbstractDBMeta {
     //                                       ---------------
     protected final Map<String, PropertyGateway> _epgMap = newHashMap();
     {
-        setupEpg(_epgMap, new EpgMemberId(), "memberId");
-        setupEpg(_epgMap, new EpgWithdrawalReasonId(), "withdrawalReasonId");
-        setupEpg(_epgMap, new EpgWithdrawalReasonInputText(), "withdrawalReasonInputText");
-        setupEpg(_epgMap, new EpgWithdrawalDatetime(), "withdrawalDatetime");
+        setupEpg(_epgMap, new EpgMemberStatusCode(), "memberStatusCode");
+        setupEpg(_epgMap, new EpgMemberStatusName(), "memberStatusName");
     }
-    public static class EpgMemberId implements PropertyGateway {
-        public Object read(Entity et) { return ((MemberWithdraw)et).getMemberId(); }
-        public void write(Entity et, Object vl) { ((MemberWithdraw)et).setMemberId(cti(vl)); }
+    public static class EpgMemberStatusCode implements PropertyGateway {
+        public Object read(Entity et) { return ((MemberStatus)et).getMemberStatusCode(); }
+        public void write(Entity et, Object vl) { ((MemberStatus)et).setMemberStatusCode(cti(vl)); }
     }
-    public static class EpgWithdrawalReasonId implements PropertyGateway {
-        public Object read(Entity et) { return ((MemberWithdraw)et).getWithdrawalReasonId(); }
-        public void write(Entity et, Object vl) { ((MemberWithdraw)et).setWithdrawalReasonId(cti(vl)); }
-    }
-    public static class EpgWithdrawalReasonInputText implements PropertyGateway {
-        public Object read(Entity et) { return ((MemberWithdraw)et).getWithdrawalReasonInputText(); }
-        public void write(Entity et, Object vl) { ((MemberWithdraw)et).setWithdrawalReasonInputText((String)vl); }
-    }
-    public static class EpgWithdrawalDatetime implements PropertyGateway {
-        public Object read(Entity et) { return ((MemberWithdraw)et).getWithdrawalDatetime(); }
-        public void write(Entity et, Object vl) { ((MemberWithdraw)et).setWithdrawalDatetime((java.sql.Timestamp)vl); }
+    public static class EpgMemberStatusName implements PropertyGateway {
+        public Object read(Entity et) { return ((MemberStatus)et).getMemberStatusName(); }
+        public void write(Entity et, Object vl) { ((MemberStatus)et).setMemberStatusName((String)vl); }
     }
     public PropertyGateway findPropertyGateway(String prop)
     { return doFindEpg(_epgMap, prop); }
 
-    // -----------------------------------------------------
-    //                                      Foreign Property
-    //                                      ----------------
-    protected final Map<String, PropertyGateway> _efpgMap = newHashMap();
-    {
-        setupEfpg(_efpgMap, new EfpgMember(), "member");
-    }
-    public class EfpgMember implements PropertyGateway {
-        public Object read(Entity et) { return ((MemberWithdraw)et).getMember(); }
-        public void write(Entity et, Object vl) { ((MemberWithdraw)et).setMember((Member)vl); }
-    }
-    public PropertyGateway findForeignPropertyGateway(String prop)
-    { return doFindEfpg(_efpgMap, prop); }
-
     // ===================================================================================
     //                                                                          Table Info
     //                                                                          ==========
-    protected final String _tableDbName = "member_withdraw";
-    protected final String _tablePropertyName = "memberWithdraw";
-    protected final TableSqlName _tableSqlName = new TableSqlName("member_withdraw", _tableDbName);
+    protected final String _tableDbName = "member_status";
+    protected final String _tablePropertyName = "memberStatus";
+    protected final TableSqlName _tableSqlName = new TableSqlName("member_status", _tableDbName);
     { _tableSqlName.xacceptFilter(DBFluteConfig.getInstance().getTableSqlNameFilter()); }
     public String getTableDbName() { return _tableDbName; }
     public String getTablePropertyName() { return _tablePropertyName; }
@@ -90,38 +66,24 @@ public class MemberWithdrawDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnMemberId = cci("MEMBER_ID", "MEMBER_ID", null, null, Integer.class, "memberId", null, true, false, true, "INT", 10, 0, null, false, null, null, "member", null, null);
-    protected final ColumnInfo _columnWithdrawalReasonId = cci("WITHDRAWAL_REASON_ID", "WITHDRAWAL_REASON_ID", null, null, Integer.class, "withdrawalReasonId", null, false, false, false, "INT", 10, 0, null, false, null, null, null, null, null);
-    protected final ColumnInfo _columnWithdrawalReasonInputText = cci("WITHDRAWAL_REASON_INPUT_TEXT", "WITHDRAWAL_REASON_INPUT_TEXT", null, null, String.class, "withdrawalReasonInputText", null, false, false, false, "TEXT", 65535, 0, null, false, null, null, null, null, null);
-    protected final ColumnInfo _columnWithdrawalDatetime = cci("WITHDRAWAL_DATETIME", "WITHDRAWAL_DATETIME", null, null, java.sql.Timestamp.class, "withdrawalDatetime", null, false, false, true, "DATETIME", 19, 0, null, false, null, null, null, null, null);
+    protected final ColumnInfo _columnMemberStatusCode = cci("MEMBER_STATUS_CODE", "MEMBER_STATUS_CODE", null, null, Integer.class, "memberStatusCode", null, true, false, true, "INT", 10, 0, null, false, null, null, null, "memberList", null);
+    protected final ColumnInfo _columnMemberStatusName = cci("MEMBER_STATUS_NAME", "MEMBER_STATUS_NAME", null, null, String.class, "memberStatusName", null, false, false, true, "VARCHAR", 20, 0, null, false, null, null, null, null, null);
 
     /**
-     * MEMBER_ID: {PK, NotNull, INT(10), FK to member}
+     * MEMBER_STATUS_CODE: {PK, NotNull, INT(10)}
      * @return The information object of specified column. (NotNull)
      */
-    public ColumnInfo columnMemberId() { return _columnMemberId; }
+    public ColumnInfo columnMemberStatusCode() { return _columnMemberStatusCode; }
     /**
-     * WITHDRAWAL_REASON_ID: {INT(10)}
+     * MEMBER_STATUS_NAME: {NotNull, VARCHAR(20)}
      * @return The information object of specified column. (NotNull)
      */
-    public ColumnInfo columnWithdrawalReasonId() { return _columnWithdrawalReasonId; }
-    /**
-     * WITHDRAWAL_REASON_INPUT_TEXT: {TEXT(65535)}
-     * @return The information object of specified column. (NotNull)
-     */
-    public ColumnInfo columnWithdrawalReasonInputText() { return _columnWithdrawalReasonInputText; }
-    /**
-     * WITHDRAWAL_DATETIME: {NotNull, DATETIME(19)}
-     * @return The information object of specified column. (NotNull)
-     */
-    public ColumnInfo columnWithdrawalDatetime() { return _columnWithdrawalDatetime; }
+    public ColumnInfo columnMemberStatusName() { return _columnMemberStatusName; }
 
     protected List<ColumnInfo> ccil() {
         List<ColumnInfo> ls = newArrayList();
-        ls.add(columnMemberId());
-        ls.add(columnWithdrawalReasonId());
-        ls.add(columnWithdrawalReasonInputText());
-        ls.add(columnWithdrawalDatetime());
+        ls.add(columnMemberStatusCode());
+        ls.add(columnMemberStatusName());
         return ls;
     }
 
@@ -133,7 +95,7 @@ public class MemberWithdrawDbm extends AbstractDBMeta {
     // -----------------------------------------------------
     //                                       Primary Element
     //                                       ---------------
-    protected UniqueInfo cpui() { return hpcpui(columnMemberId()); }
+    protected UniqueInfo cpui() { return hpcpui(columnMemberStatusCode()); }
     public boolean hasPrimaryKey() { return true; }
     public boolean hasCompoundPrimaryKey() { return false; }
 
@@ -145,18 +107,18 @@ public class MemberWithdrawDbm extends AbstractDBMeta {
     // -----------------------------------------------------
     //                                      Foreign Property
     //                                      ----------------
-    /**
-     * member by my MEMBER_ID, named 'member'.
-     * @return The information object of foreign property. (NotNull)
-     */
-    public ForeignInfo foreignMember() {
-        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnMemberId(), MemberDbm.getInstance().columnMemberId());
-        return cfi("member_withdraw_ibfk_1", "member", this, MemberDbm.getInstance(), mp, 0, null, true, false, false, false, null, null, false, "memberWithdrawAsOne");
-    }
 
     // -----------------------------------------------------
     //                                     Referrer Property
     //                                     -----------------
+    /**
+     * member by MEMBER_STATUS_CODE, named 'memberList'.
+     * @return The information object of referrer property. (NotNull)
+     */
+    public ReferrerInfo referrerMemberList() {
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnMemberStatusCode(), MemberDbm.getInstance().columnMemberStatusCode());
+        return cri("member_ibfk_1", "memberList", this, MemberDbm.getInstance(), mp, false, "memberStatus");
+    }
 
     // ===================================================================================
     //                                                                        Various Info
@@ -165,28 +127,28 @@ public class MemberWithdrawDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                           Type Name
     //                                                                           =========
-    public String getEntityTypeName() { return "jp.bizreach.twitter.dbflute.exentity.MemberWithdraw"; }
-    public String getConditionBeanTypeName() { return "jp.bizreach.twitter.dbflute.cbean.MemberWithdrawCB"; }
-    public String getBehaviorTypeName() { return "jp.bizreach.twitter.dbflute.exbhv.MemberWithdrawBhv"; }
+    public String getEntityTypeName() { return "jp.bizreach.twitter.dbflute.exentity.MemberStatus"; }
+    public String getConditionBeanTypeName() { return "jp.bizreach.twitter.dbflute.cbean.MemberStatusCB"; }
+    public String getBehaviorTypeName() { return "jp.bizreach.twitter.dbflute.exbhv.MemberStatusBhv"; }
 
     // ===================================================================================
     //                                                                         Object Type
     //                                                                         ===========
-    public Class<MemberWithdraw> getEntityType() { return MemberWithdraw.class; }
+    public Class<MemberStatus> getEntityType() { return MemberStatus.class; }
 
     // ===================================================================================
     //                                                                     Object Instance
     //                                                                     ===============
-    public MemberWithdraw newEntity() { return new MemberWithdraw(); }
-    public MemberWithdraw newMyEntity() { return new MemberWithdraw(); }
+    public MemberStatus newEntity() { return new MemberStatus(); }
+    public MemberStatus newMyEntity() { return new MemberStatus(); }
 
     // ===================================================================================
     //                                                                   Map Communication
     //                                                                   =================
     public void acceptPrimaryKeyMap(Entity et, Map<String, ? extends Object> mp)
-    { doAcceptPrimaryKeyMap((MemberWithdraw)et, mp); }
+    { doAcceptPrimaryKeyMap((MemberStatus)et, mp); }
     public void acceptAllColumnMap(Entity et, Map<String, ? extends Object> mp)
-    { doAcceptAllColumnMap((MemberWithdraw)et, mp); }
+    { doAcceptAllColumnMap((MemberStatus)et, mp); }
     public Map<String, Object> extractPrimaryKeyMap(Entity et) { return doExtractPrimaryKeyMap(et); }
     public Map<String, Object> extractAllColumnMap(Entity et) { return doExtractAllColumnMap(et); }
 }

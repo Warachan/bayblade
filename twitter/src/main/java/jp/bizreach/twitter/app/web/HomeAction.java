@@ -68,10 +68,16 @@ public class HomeAction {
     public String nameResult;
     public String tweetResult;
     public String profile;
+    public Integer graduationYear;
+    public Integer status;
+    public String interestedIndustry;
+    public Integer recruitingNumber;
+    public String groupName;
     public String noMatchUsers;
     public String noMatchTweets;
     public String account;
     public String followed;
+    public boolean recruitStatus;
 
     // 【要確認todo】
     // TODO mayuko.sakaba 共通カラム使っているのに、フォローステータスを更新するたびに更新されていない。
@@ -89,6 +95,24 @@ public class HomeAction {
     public String index() {
         /* 自分の名前を表示させる（確認用）後に削除 */
         account = sessionDto.accountName + "@" + sessionDto.username;
+        /*  自分のプロフィールを取得　*/
+        MemberCB myCb = new MemberCB();
+        myCb.setupSelect_MemberStatus();
+        myCb.query().setMemberId_Equal(sessionDto.myId);
+        Member me = memberBhv.selectEntity(myCb);
+        LOG.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + me.getAccountName());
+        status = me.getMemberStatusCode();
+        profile = me.getProfile();
+        groupName = me.getGroupName();
+        //interestedIndustry = me.getAcceptedCompany();
+        recruitingNumber = me.getRecruitingNumber();
+        graduationYear = me.getGraduationYear();
+        if (status.equals(1)) {
+            recruitStatus = new Boolean(true);
+        } else if (status.equals(2)) {
+            recruitStatus = new Boolean(false);
+        }
+
         /* フォローしている相手を検索　*/
         selectFollowList();
         /* フォローする候補者を自動で表示 */

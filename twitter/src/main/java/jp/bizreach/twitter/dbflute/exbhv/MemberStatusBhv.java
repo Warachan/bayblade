@@ -1,14 +1,14 @@
 package jp.bizreach.twitter.dbflute.exbhv;
 
-import jp.bizreach.twitter.dbflute.bsbhv.BsMemberWithdrawBhv;
+import jp.bizreach.twitter.dbflute.bsbhv.BsMemberStatusBhv;
 
 /**
- * The behavior of member_withdraw.
+ * The behavior of member_status.
  * <p>
  * You can implement your original methods here.
  * This class remains when re-generating.
  * </p>
  * @author DBFlute(AutoGenerator)
  */
-public class MemberWithdrawBhv extends BsMemberWithdrawBhv {
+public class MemberStatusBhv extends BsMemberStatusBhv {
 }

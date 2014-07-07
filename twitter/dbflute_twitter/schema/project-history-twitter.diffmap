@@ -1,4 +1,74 @@
 map:{
+    ; 2014/07/07 19:17:20 = map:{
+        ; diffDate = 2014/07/07 19:17:20
+        ; tableDiff = map:{
+            ; member = map:{
+                ; tableName = member
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; INTERESTED_INDUSTRY = map:{
+                        ; columnName = INTERESTED_INDUSTRY
+                        ; diffType = ADD
+                    }
+                    ; ACCEPTED_COMPANY = map:{
+                        ; columnName = ACCEPTED_COMPANY
+                        ; diffType = DELETE
+                    }
+                }
+            }
+        }
+    }
+    ; 2014/07/07 12:08:27 = map:{
+        ; diffDate = 2014/07/07 12:08:27
+        ; tableDiff = map:{
+            ; member_status = map:{
+                ; tableName = member_status
+                ; diffType = ADD
+            }
+            ; member = map:{
+                ; tableName = member
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; MEMBER_STATUS_CODE = map:{
+                        ; columnName = MEMBER_STATUS_CODE
+                        ; diffType = ADD
+                    }
+                    ; GROUP_NAME = map:{
+                        ; columnName = GROUP_NAME
+                        ; diffType = ADD
+                    }
+                    ; RECRUITING_NUMBER = map:{
+                        ; columnName = RECRUITING_NUMBER
+                        ; diffType = ADD
+                    }
+                    ; ACCEPTED_COMPANY = map:{
+                        ; columnName = ACCEPTED_COMPANY
+                        ; diffType = ADD
+                    }
+                    ; GRADUATION_YEAR = map:{
+                        ; columnName = GRADUATION_YEAR
+                        ; diffType = ADD
+                    }
+                }
+                ; foreignKeyDiff = map:{
+                    ; member_ibfk_1(new) = map:{
+                        ; constraintName = member_ibfk_1(new)
+                        ; diffType = ADD
+                    }
+                }
+                ; indexDiff = map:{
+                    ; MEMBER_STATUS_CODE = map:{
+                        ; constraintName = MEMBER_STATUS_CODE
+                        ; diffType = ADD
+                    }
+                }
+            }
+            ; member_withdraw = map:{
+                ; tableName = member_withdraw
+                ; diffType = DELETE
+            }
+        }
+    }
     ; 2014/07/04 15:57:57 = map:{
         ; diffDate = 2014/07/04 15:57:57
         ; tableDiff = map:{

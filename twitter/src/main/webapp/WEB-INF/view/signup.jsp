@@ -7,6 +7,9 @@
 	<link href='http://fonts.googleapis.com/css?family=Libre+Baskerville' rel='stylesheet' type='text/css'>
 </head>
 <div class = "wrapper">
+	<ul class = "global-navigation">
+			<li><a href= "http:/twitter/">Login</a></li>
+	</ul>
 <body>
 	<div class="signup-main">
 		<div class="signup-box">
@@ -14,30 +17,46 @@
 		<s:form action="/signup/regester/" styleClass="signupForm">
 			<div class="email">
 				<h4>Email</h4>
-				<html:text property ="newEmail" size="50" styleClass="emailBox"/>
+				<html:text property ="newEmail" size="60" styleClass="emailBox"/>
 					<div class = "emailError">
 						<html:errors property="newEmail"/>
 					</div>
 			</div>
 			<div class="name">
 				<h4>Name</h4>
-				<html:text property="accountName"  size="50" styleClass = "nameBox"/>
+				<html:text property="accountName"  size="60" styleClass = "nameBox"/>
 					<div class="nameError">
 					<html:errors property="accountName"/>
 					</div>
 			</div>
 			<div class="username">
 				<h4>Username</h4>
-				<html:text property="username"  size="50" styleClass = "usernameBox"/><br>
+				<html:text property="username"  size="60" styleClass = "usernameBox"/><br>
 					<div class = "usernameError">
-					<html:errors property="username"/>
+						<html:errors property="username"/>
 					</div>
+			</div>
+			<div class="profile">
+				<div class ="status">
+					<h4>Student or Company?</h4>
+						<html:select property="status">
+							<html:option value=""></html:option>
+    　							<html:option value="student">Student</html:option>
+    　							<html:option value="company">Company</html:option>
+						</html:select>
+						<html:errors property="status"/>
+				</div>
+				<div class = "group">
+					<h4>School/Company Name</h4>
+						<html:text property="groupName"/>
+						<html:errors property="groupName"/>
+				</div>
 			</div>
 			<div class="password">
 				<h4>Password</h4>
 				*8文字以上、20文字以内で入力してください。<br>
-					<html:password property="password"  size="50" styleClass="passwordBox"/><br>
-					Confirm password: <html:password property="confirmPass" size="50" styleClass="confirmBox"/><br>
+					<html:password property="password"  size="60" styleClass="passwordBox"/><br>
+					Confirm password: <html:password property="confirmPass" size="60" styleClass="confirmBox"/><br>
 					<div class ="passwordError">
 						<html:errors property="password"/>
 					</div>

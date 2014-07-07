@@ -61,12 +61,15 @@ public class SignupAction {
     public String accountName;
     public String password;
     public String confirmPass;
+    public String groupName;
     public String matchError;
     public String overlapsError;
     public String characterError;
     public String userError;
     public String missingError;
     protected String digestedPass;
+
+    // public ArrayList<Integer> yearList = new ArrayList<>();
 
     // TODO mayuko.sakaba signup.jspにて、なぜゲッターメソッドがなかったのにValue=""をいれたら直ったか調べること。
     // TODO mayuko.sakaba indexActionForm に対する定義が見つかりません →　これなに？
@@ -88,6 +91,7 @@ public class SignupAction {
         confirmPass = signupForm.confirmPass;
         username = signupForm.username;
         accountName = signupForm.accountName;
+        groupName = signupForm.groupName;
 
         /* パスワード不可逆暗号化　*/
         digestedPass = passDigestLogic.build(password);
@@ -104,10 +108,17 @@ public class SignupAction {
         member.setUpdDatetime(timestamp);
         member.setInsTrace("signedup");
         member.setUpdTrace("signedup");
+        member.setGroupName(groupName);
+        if (signupForm.status.equals("student")) {
+            member.setMemberStatusCode(1);
+        } else if (signupForm.status.equals("company")) {
+            member.setMemberStatusCode(2);
+        }
         memberBhv.insert(member);
         sessionDto.myId = member.getMemberId();
         sessionDto.username = member.getUserName();
         sessionDto.accountName = member.getAccountName();
+        sessionDto.status = member.getMemberStatusCode();
 
         MemberSecurity security = new MemberSecurity();
         security.setMemberId(member.getMemberId());
@@ -178,6 +189,14 @@ public class SignupAction {
         //        if (signupForm.username.length() < 5) {
         //            errors.add("username", new ActionMessage("Username should be more than 5 characters.", false));
         //        }
+        /* status */
+        if (signupForm.status == "") {
+            errors.add("status", new ActionMessage("どちらか選択してください。", false));
+        }
+        /* group */
+        if (signupForm.groupName == "") {
+            errors.add("groupName", new ActionMessage("所属企業か所属大学名が未入力です。", false));
+        }
         /*　password */
         String pswdPtn = "[\\w]+";
         Pattern ptn3 = Pattern.compile(pswdPtn);
@@ -197,71 +216,4 @@ public class SignupAction {
         }
         return errors;
     }
-    //    private Matcher pswdMatch() {
-    //        String pswdPtn = "[\\w]+";
-    //        Pattern ptn2 = Pattern.compile(pswdPtn);
-    //        Matcher pswdMatcher = ptn2.matcher(password);
-    //        return pswdMatcher;
-    //    }
-    //
-    //    private Matcher emailMatch() {
-    //        String emailPtn = "[\\w\\.\\-]+@(?:[\\w\\-]+\\.)+[\\w\\-]+";
-    //        Pattern ptn = Pattern.compile(emailPtn);
-    //        Matcher emailMatcher = ptn.matcher(newEmail);
-    //        return emailMatcher;
-    //    }
-    //
-    //    private Member insertMember(Timestamp timestamp) {
-    //        Member member = new Member();
-    //        member.setEmailAddress(sessionDto.email);
-    //        member.setUserName(username);
-    //        member.setInsDatetime(timestamp);
-    //        member.setUpdDatetime(timestamp);
-    //        member.setInsTrace("signedup");
-    //        member.setUpdTrace("signedup");
-    //        memberBhv.insert(member);
-    //        return member;
-    //    }
-    //
-    //    private int selectEmailCount() {
-    //        MemberCB cb = new MemberCB();
-    //        cb.query().setEmailAddress_Equal(newEmail);
-    //        int count = memberBhv.selectCount(cb);
-    //        return count;
-    //    }
-    //
-    //    private int selectNameCount() {
-    //        MemberCB check = new MemberCB();
-    //        check.query().setUserName_Equal(username);
-    //        int nameCount = memberBhv.selectCount(check);
-    //        return nameCount;
-    //    }
-    //
-    //    private void insertSecurity(Timestamp timestamp, Member member) {
-    //        MemberSecurity security = new MemberSecurity();
-    //        security.setMemberId(member.getMemberId());
-    //        security.setPassword(password);
-    //        security.setInsDatetime(timestamp);
-    //        security.setUpdDatetime(timestamp);
-    //        security.setInsTrace("signedup");
-    //        security.setUpdTrace("signedup");
-    //        memberSecurityBhv.insert(security);
-    //    }
-
 }
-
-/** 必須項目が空欄でないことをチェック
-    if (newEmail == "" || password == "" || username == "") {
-        missingError = "*全ての欄は必須項目です。";
-        return "/signup.jsp";
-    }
- */
-
-/* ユーザ名がすでに使われていないかチェック */
-/**
-    int nameCount = selectNameCount();
-    if (nameCount > 0) {
-        userError = "そのユーザ名はすでに使われています。";
-        return "/signup.jsp";
-    }
- */

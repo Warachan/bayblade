@@ -1,8 +1,6 @@
 package jp.bizreach.twitter.app.web;
 
 import java.security.NoSuchAlgorithmException;
-import java.sql.Timestamp;
-import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -64,6 +62,7 @@ public class ProfileAction {
     //                                          ------------
     public String email;
     public String accountName;
+    public String groupName;
     public String password;
     public String confirmPass;
     public String matchError;
@@ -72,48 +71,82 @@ public class ProfileAction {
     public String userError;
     public String missingError;
     protected String digestedPass;
+    public boolean status;
 
     // TODO mayuko.sakaba signup.jspにて、なぜゲッターメソッドがなかったのにValue=""をいれたら直ったか調べること。
     // TODO mayuko.sakaba indexActionForm に対する定義が見つかりません →　これなに？
     // ===================================================================================
     //                                                                             Execute
     //                                                                             =======
+
     @Execute(validator = false)
-    /* signup画面表示 */
     public String index() {
-        return "/signup.jsp";
+        return "/profile.jsp";
     }
 
-    @Execute(validate = "validate", input = "/signup.jsp")
-    /* 会員登録メソッド */
-    public String regester() throws NoSuchAlgorithmException {
-
+    @Execute(validate = "validate", input = "/profile.jsp")
+    /* プロフィール編集メソッド */
+    public String editProfile() throws NoSuchAlgorithmException {
         email = profileForm.updateEmail;
         password = profileForm.updatePassword;
         confirmPass = profileForm.confirmPass;
-        accountName = profileForm.updateProfile;
-
+        accountName = profileForm.updateName;
+        groupName = profileForm.updateGroup;
         /* パスワード不可逆暗号化　*/
         digestedPass = passDigestLogic.build(password);
-
-        /* validationに引っかからなかったら、会員登録する */
-        Date date = new Date();
-        Timestamp timestamp = new Timestamp(date.getTime());
+        /* validationに引っかからなかったら、プロフィール編集する */
         Member member = new Member();
-        member.setEmailAddress(email);
-        member.setAccountName(accountName);
-        member.setUpdTrace(sessionDto.username);
-        memberBhv.update(member);
-        sessionDto.accountName = member.getAccountName();
-        sessionDto.email = email;
-
-        MemberSecurity security = new MemberSecurity();
-        security.setMemberId(sessionDto.myId);
-        security.setPassword(digestedPass);
-        memberSecurityBhv.update(security);
-        LOG.debug("***" + sessionDto.myId);
-
-        return "/home/?redirect =true";
+        member.setMemberId(sessionDto.myId);
+        if (email != "") {
+            member.setEmailAddress(email);
+            memberBhv.update(member);
+            sessionDto.email = email;
+        }
+        if (accountName != "") {
+            member.setAccountName(accountName);
+            memberBhv.update(member);
+            sessionDto.accountName = member.getAccountName();
+        }
+        if (groupName != "") {
+            member.setGroupName(profileForm.updateGroup);
+            memberBhv.update(member);
+        }
+        if (profileForm.updateStatus != "") {
+            if (profileForm.updateStatus.equals("student")) {
+                member.setMemberStatusCode(1);
+                memberBhv.update(member);
+                sessionDto.status = member.getMemberStatusCode();
+            } else if (profileForm.updateStatus.equals("company")) {
+                member.setMemberStatusCode(2);
+                memberBhv.update(member);
+                sessionDto.status = member.getMemberStatusCode();
+            }
+        }
+        if (password != "") {
+            MemberSecurity security = new MemberSecurity();
+            security.setMemberId(sessionDto.myId);
+            security.setPassword(digestedPass);
+            memberSecurityBhv.update(security);
+            LOG.debug("***" + sessionDto.myId);
+        }
+        if (sessionDto.status.equals(1)) {
+            status = new Boolean(true);
+        } else if (sessionDto.status.equals(2)) {
+            status = new Boolean(false);
+        }
+        if (profileForm.interestedIndustry != "") {
+            member.setInterestedIndustry(profileForm.interestedIndustry);
+            memberBhv.update(member);
+        }
+        if (profileForm.graduationYear != null) {
+            member.setGraduationYear(profileForm.graduationYear);
+            memberBhv.update(member);
+        }
+        if (profileForm.recruitingNumber != null) {
+            member.setRecruitingNumber(profileForm.recruitingNumber);
+            memberBhv.update(member);
+        }
+        return "/profile/?redirect=true";
     }
 
     /* 会員登録画面　Validation */
@@ -126,9 +159,7 @@ public class ProfileAction {
         MemberCB cb = new MemberCB();
         cb.query().setEmailAddress_Equal(profileForm.updateEmail);
         int count = memberBhv.selectCount(cb);
-        if (profileForm.updateEmail == "") {
-            errors.add("updateEmail", new ActionMessage("メールアドレスが未入力です。", false));
-        } else {
+        if (profileForm.updateEmail != "") {
             if (!emailMatcher.matches()) {
                 errors.add("updateEmail", new ActionMessage("メールアドレスが不正です。", false));
             }
@@ -141,36 +172,28 @@ public class ProfileAction {
         }
         /* accountName */
         // TODO mayuko.sakaba 入力に許される文字列の指定がまだです。
-        if (profileForm.updateName == "") {
-            errors.add("updateName", new ActionMessage("名前が未入力です。", false));
+        if (profileForm.updateName != "") {
+            if (profileForm.updateName.length() > 100) {
+                errors.add("updateName", new ActionMessage("このアカウント名は長すぎます。", false));
+            }
         }
-        /* profile */
-        //        String usernamePtn = "[\\w\\.\\-]+";
-        //        Pattern ptn2 = Pattern.compile(usernamePtn);
-        //        Matcher usernameMatcher = ptn2.matcher(profileForm.updateProfile);
-        //        MemberCB check = new MemberCB();
-        //        check.query().setUserName_Equal(profileForm.updateProfile);
-        //        int nameCount = memberBhv.selectCount(check);
-        //            if (!usernameMatcher.matches()) {
-        //                errors.add("username", new ActionMessage("ユーザ名に不正な文字が含まれています。", false));
-        //            }
-        //            if (nameCount > 0) {
-        //                errors.add("username", new ActionMessage("このユーザ名はすでに使われています。", false));
-        //            }
-        if (profileForm.updateProfile == "") {
-            errors.add("updateProfile", new ActionMessage("ユーザ名が未入力です。", false));
+        /* recruitingNumber */
+        if (sessionDto.status.equals(2)) {
+            if (profileForm.recruitingNumber > 1000) {
+                errors.add("recrutingNumber", new ActionMessage("人数が多すぎます。", false));
+            }
         }
-        if (profileForm.updateProfile.length() > 100) {
-            errors.add("updateProfile", new ActionMessage("ユーザ名が未入力です。", false));
+        /* interestedIndustry */
+        if (sessionDto.status.equals(1)) {
+            if (profileForm.interestedIndustry.length() > 100) {
+                errors.add("interestedIndustry", new ActionMessage("文字制限以上入力されました。", false));
+            }
         }
-
         /*　password */
         String pswdPtn = "[\\w]+";
         Pattern ptn3 = Pattern.compile(pswdPtn);
         Matcher pswdMatcher = ptn3.matcher(profileForm.updatePassword);
-        if (profileForm.updatePassword == "") {
-            errors.add("updatePassword", new ActionMessage("パスワードが未入力です。", false));
-        } else {
+        if (profileForm.updatePassword != "") {
             if (!pswdMatcher.matches()) {
                 errors.add("updatePassword", new ActionMessage("アルファベットか数字を入力してください。", false));
             }

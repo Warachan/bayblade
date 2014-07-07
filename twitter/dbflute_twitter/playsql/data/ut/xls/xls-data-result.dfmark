@@ -11,5 +11,4 @@ data-directory: playsql/data/ut/xls
   LOGIN (2)
   MEMBER_SECURITY (2)
   TWEET (1)
-  MEMBER_WITHDRAW (1)
   FOLLOW (1)

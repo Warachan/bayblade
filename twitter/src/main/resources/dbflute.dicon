@@ -17,6 +17,6 @@
     <component name="loginBhv" class="jp.bizreach.twitter.dbflute.exbhv.LoginBhv"/>
     <component name="memberBhv" class="jp.bizreach.twitter.dbflute.exbhv.MemberBhv"/>
     <component name="memberSecurityBhv" class="jp.bizreach.twitter.dbflute.exbhv.MemberSecurityBhv"/>
-    <component name="memberWithdrawBhv" class="jp.bizreach.twitter.dbflute.exbhv.MemberWithdrawBhv"/>
+    <component name="memberStatusBhv" class="jp.bizreach.twitter.dbflute.exbhv.MemberStatusBhv"/>
     <component name="tweetBhv" class="jp.bizreach.twitter.dbflute.exbhv.TweetBhv"/>
 </components>

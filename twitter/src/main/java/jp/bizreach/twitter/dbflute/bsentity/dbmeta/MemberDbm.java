@@ -40,14 +40,19 @@ public class MemberDbm extends AbstractDBMeta {
     {
         setupEpg(_epgMap, new EpgMemberId(), "memberId");
         setupEpg(_epgMap, new EpgEmailAddress(), "emailAddress");
+        setupEpg(_epgMap, new EpgMemberStatusCode(), "memberStatusCode");
         setupEpg(_epgMap, new EpgUserName(), "userName");
-        setupEpg(_epgMap, new EpgBirthdate(), "birthdate");
-        setupEpg(_epgMap, new EpgProfile(), "profile");
+        setupEpg(_epgMap, new EpgAccountName(), "accountName");
+        setupEpg(_epgMap, new EpgGroupName(), "groupName");
         setupEpg(_epgMap, new EpgInsDatetime(), "insDatetime");
         setupEpg(_epgMap, new EpgUpdDatetime(), "updDatetime");
         setupEpg(_epgMap, new EpgInsTrace(), "insTrace");
         setupEpg(_epgMap, new EpgUpdTrace(), "updTrace");
-        setupEpg(_epgMap, new EpgAccountName(), "accountName");
+        setupEpg(_epgMap, new EpgRecruitingNumber(), "recruitingNumber");
+        setupEpg(_epgMap, new EpgInterestedIndustry(), "interestedIndustry");
+        setupEpg(_epgMap, new EpgGraduationYear(), "graduationYear");
+        setupEpg(_epgMap, new EpgBirthdate(), "birthdate");
+        setupEpg(_epgMap, new EpgProfile(), "profile");
     }
     public static class EpgMemberId implements PropertyGateway {
         public Object read(Entity et) { return ((Member)et).getMemberId(); }
@@ -57,17 +62,21 @@ public class MemberDbm extends AbstractDBMeta {
         public Object read(Entity et) { return ((Member)et).getEmailAddress(); }
         public void write(Entity et, Object vl) { ((Member)et).setEmailAddress((String)vl); }
     }
+    public static class EpgMemberStatusCode implements PropertyGateway {
+        public Object read(Entity et) { return ((Member)et).getMemberStatusCode(); }
+        public void write(Entity et, Object vl) { ((Member)et).setMemberStatusCode(cti(vl)); }
+    }
     public static class EpgUserName implements PropertyGateway {
         public Object read(Entity et) { return ((Member)et).getUserName(); }
         public void write(Entity et, Object vl) { ((Member)et).setUserName((String)vl); }
     }
-    public static class EpgBirthdate implements PropertyGateway {
-        public Object read(Entity et) { return ((Member)et).getBirthdate(); }
-        public void write(Entity et, Object vl) { ((Member)et).setBirthdate((java.util.Date)vl); }
+    public static class EpgAccountName implements PropertyGateway {
+        public Object read(Entity et) { return ((Member)et).getAccountName(); }
+        public void write(Entity et, Object vl) { ((Member)et).setAccountName((String)vl); }
     }
-    public static class EpgProfile implements PropertyGateway {
-        public Object read(Entity et) { return ((Member)et).getProfile(); }
-        public void write(Entity et, Object vl) { ((Member)et).setProfile((String)vl); }
+    public static class EpgGroupName implements PropertyGateway {
+        public Object read(Entity et) { return ((Member)et).getGroupName(); }
+        public void write(Entity et, Object vl) { ((Member)et).setGroupName((String)vl); }
     }
     public static class EpgInsDatetime implements PropertyGateway {
         public Object read(Entity et) { return ((Member)et).getInsDatetime(); }
@@ -85,9 +94,25 @@ public class MemberDbm extends AbstractDBMeta {
         public Object read(Entity et) { return ((Member)et).getUpdTrace(); }
         public void write(Entity et, Object vl) { ((Member)et).setUpdTrace((String)vl); }
     }
-    public static class EpgAccountName implements PropertyGateway {
-        public Object read(Entity et) { return ((Member)et).getAccountName(); }
-        public void write(Entity et, Object vl) { ((Member)et).setAccountName((String)vl); }
+    public static class EpgRecruitingNumber implements PropertyGateway {
+        public Object read(Entity et) { return ((Member)et).getRecruitingNumber(); }
+        public void write(Entity et, Object vl) { ((Member)et).setRecruitingNumber(cti(vl)); }
+    }
+    public static class EpgInterestedIndustry implements PropertyGateway {
+        public Object read(Entity et) { return ((Member)et).getInterestedIndustry(); }
+        public void write(Entity et, Object vl) { ((Member)et).setInterestedIndustry((String)vl); }
+    }
+    public static class EpgGraduationYear implements PropertyGateway {
+        public Object read(Entity et) { return ((Member)et).getGraduationYear(); }
+        public void write(Entity et, Object vl) { ((Member)et).setGraduationYear(cti(vl)); }
+    }
+    public static class EpgBirthdate implements PropertyGateway {
+        public Object read(Entity et) { return ((Member)et).getBirthdate(); }
+        public void write(Entity et, Object vl) { ((Member)et).setBirthdate((java.util.Date)vl); }
+    }
+    public static class EpgProfile implements PropertyGateway {
+        public Object read(Entity et) { return ((Member)et).getProfile(); }
+        public void write(Entity et, Object vl) { ((Member)et).setProfile((String)vl); }
     }
     public PropertyGateway findPropertyGateway(String prop)
     { return doFindEpg(_epgMap, prop); }
@@ -97,16 +122,18 @@ public class MemberDbm extends AbstractDBMeta {
     //                                      ----------------
     protected final Map<String, PropertyGateway> _efpgMap = newHashMap();
     {
+        setupEfpg(_efpgMap, new EfpgMemberStatus(), "memberStatus");
+    }
+    public class EfpgMemberStatus implements PropertyGateway {
+        public Object read(Entity et) { return ((Member)et).getMemberStatus(); }
+        public void write(Entity et, Object vl) { ((Member)et).setMemberStatus((MemberStatus)vl); }
+    }
+    {
         setupEfpg(_efpgMap, new EfpgMemberSecurityAsOne(), "memberSecurityAsOne");
-        setupEfpg(_efpgMap, new EfpgMemberWithdrawAsOne(), "memberWithdrawAsOne");
     }
     public class EfpgMemberSecurityAsOne implements PropertyGateway {
         public Object read(Entity et) { return ((Member)et).getMemberSecurityAsOne(); }
         public void write(Entity et, Object vl) { ((Member)et).setMemberSecurityAsOne((MemberSecurity)vl); }
-    }
-    public class EfpgMemberWithdrawAsOne implements PropertyGateway {
-        public Object read(Entity et) { return ((Member)et).getMemberWithdrawAsOne(); }
-        public void write(Entity et, Object vl) { ((Member)et).setMemberWithdrawAsOne((MemberWithdraw)vl); }
     }
     public PropertyGateway findForeignPropertyGateway(String prop)
     { return doFindEfpg(_efpgMap, prop); }
@@ -125,16 +152,21 @@ public class MemberDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnMemberId = cci("MEMBER_ID", "MEMBER_ID", null, null, Integer.class, "memberId", null, true, true, true, "INT", 10, 0, null, false, null, null, null, "followByMemberIdList,followByYouIdList,loginList,tweetList", null);
+    protected final ColumnInfo _columnMemberId = cci("MEMBER_ID", "MEMBER_ID", null, null, Integer.class, "memberId", null, true, true, true, "INT", 10, 0, null, false, null, null, null, "followByYouIdList,followByMemberIdList,loginList,tweetList", null);
     protected final ColumnInfo _columnEmailAddress = cci("EMAIL_ADDRESS", "EMAIL_ADDRESS", null, null, String.class, "emailAddress", null, false, false, true, "VARCHAR", 100, 0, null, false, null, null, null, null, null);
+    protected final ColumnInfo _columnMemberStatusCode = cci("MEMBER_STATUS_CODE", "MEMBER_STATUS_CODE", null, null, Integer.class, "memberStatusCode", null, false, false, true, "INT", 10, 0, null, false, null, null, "memberStatus", null, null);
     protected final ColumnInfo _columnUserName = cci("USER_NAME", "USER_NAME", null, null, String.class, "userName", null, false, false, true, "VARCHAR", 100, 0, null, false, null, null, null, null, null);
-    protected final ColumnInfo _columnBirthdate = cci("BIRTHDATE", "BIRTHDATE", null, null, java.util.Date.class, "birthdate", null, false, false, false, "DATE", 10, 0, null, false, null, null, null, null, null);
-    protected final ColumnInfo _columnProfile = cci("PROFILE", "PROFILE", null, null, String.class, "profile", null, false, false, false, "VARCHAR", 200, 0, null, false, null, null, null, null, null);
+    protected final ColumnInfo _columnAccountName = cci("ACCOUNT_NAME", "ACCOUNT_NAME", null, null, String.class, "accountName", null, false, false, true, "VARCHAR", 100, 0, null, false, null, null, null, null, null);
+    protected final ColumnInfo _columnGroupName = cci("GROUP_NAME", "GROUP_NAME", null, null, String.class, "groupName", null, false, false, true, "VARCHAR", 100, 0, null, false, null, null, null, null, null);
     protected final ColumnInfo _columnInsDatetime = cci("INS_DATETIME", "INS_DATETIME", null, null, java.sql.Timestamp.class, "insDatetime", null, false, false, true, "DATETIME", 19, 0, null, false, null, null, null, null, null);
     protected final ColumnInfo _columnUpdDatetime = cci("UPD_DATETIME", "UPD_DATETIME", null, null, java.sql.Timestamp.class, "updDatetime", null, false, false, true, "DATETIME", 19, 0, null, false, null, null, null, null, null);
     protected final ColumnInfo _columnInsTrace = cci("INS_TRACE", "INS_TRACE", null, null, String.class, "insTrace", null, false, false, true, "VARCHAR", 256, 0, null, false, null, null, null, null, null);
     protected final ColumnInfo _columnUpdTrace = cci("UPD_TRACE", "UPD_TRACE", null, null, String.class, "updTrace", null, false, false, true, "VARCHAR", 256, 0, null, false, null, null, null, null, null);
-    protected final ColumnInfo _columnAccountName = cci("ACCOUNT_NAME", "ACCOUNT_NAME", null, null, String.class, "accountName", null, false, false, true, "VARCHAR", 100, 0, null, false, null, null, null, null, null);
+    protected final ColumnInfo _columnRecruitingNumber = cci("RECRUITING_NUMBER", "RECRUITING_NUMBER", null, null, Integer.class, "recruitingNumber", null, false, false, false, "INT", 10, 0, null, false, null, null, null, null, null);
+    protected final ColumnInfo _columnInterestedIndustry = cci("INTERESTED_INDUSTRY", "INTERESTED_INDUSTRY", null, null, String.class, "interestedIndustry", null, false, false, false, "VARCHAR", 100, 0, null, false, null, null, null, null, null);
+    protected final ColumnInfo _columnGraduationYear = cci("GRADUATION_YEAR", "GRADUATION_YEAR", null, null, Integer.class, "graduationYear", null, false, false, false, "INT", 10, 0, null, false, null, null, null, null, null);
+    protected final ColumnInfo _columnBirthdate = cci("BIRTHDATE", "BIRTHDATE", null, null, java.util.Date.class, "birthdate", null, false, false, false, "DATE", 10, 0, null, false, null, null, null, null, null);
+    protected final ColumnInfo _columnProfile = cci("PROFILE", "PROFILE", null, null, String.class, "profile", null, false, false, false, "VARCHAR", 200, 0, null, false, null, null, null, null, null);
 
     /**
      * MEMBER_ID: {PK, ID, NotNull, INT(10)}
@@ -147,20 +179,25 @@ public class MemberDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnEmailAddress() { return _columnEmailAddress; }
     /**
+     * MEMBER_STATUS_CODE: {IX, NotNull, INT(10), FK to member_status}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnMemberStatusCode() { return _columnMemberStatusCode; }
+    /**
      * USER_NAME: {UQ, NotNull, VARCHAR(100)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnUserName() { return _columnUserName; }
     /**
-     * BIRTHDATE: {DATE(10)}
+     * ACCOUNT_NAME: {NotNull, VARCHAR(100)}
      * @return The information object of specified column. (NotNull)
      */
-    public ColumnInfo columnBirthdate() { return _columnBirthdate; }
+    public ColumnInfo columnAccountName() { return _columnAccountName; }
     /**
-     * PROFILE: {VARCHAR(200)}
+     * GROUP_NAME: {NotNull, VARCHAR(100)}
      * @return The information object of specified column. (NotNull)
      */
-    public ColumnInfo columnProfile() { return _columnProfile; }
+    public ColumnInfo columnGroupName() { return _columnGroupName; }
     /**
      * INS_DATETIME: {NotNull, DATETIME(19)}
      * @return The information object of specified column. (NotNull)
@@ -182,23 +219,48 @@ public class MemberDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnUpdTrace() { return _columnUpdTrace; }
     /**
-     * ACCOUNT_NAME: {NotNull, VARCHAR(100)}
+     * RECRUITING_NUMBER: {INT(10)}
      * @return The information object of specified column. (NotNull)
      */
-    public ColumnInfo columnAccountName() { return _columnAccountName; }
+    public ColumnInfo columnRecruitingNumber() { return _columnRecruitingNumber; }
+    /**
+     * INTERESTED_INDUSTRY: {VARCHAR(100)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnInterestedIndustry() { return _columnInterestedIndustry; }
+    /**
+     * GRADUATION_YEAR: {INT(10)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnGraduationYear() { return _columnGraduationYear; }
+    /**
+     * BIRTHDATE: {DATE(10)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnBirthdate() { return _columnBirthdate; }
+    /**
+     * PROFILE: {VARCHAR(200)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnProfile() { return _columnProfile; }
 
     protected List<ColumnInfo> ccil() {
         List<ColumnInfo> ls = newArrayList();
         ls.add(columnMemberId());
         ls.add(columnEmailAddress());
+        ls.add(columnMemberStatusCode());
         ls.add(columnUserName());
-        ls.add(columnBirthdate());
-        ls.add(columnProfile());
+        ls.add(columnAccountName());
+        ls.add(columnGroupName());
         ls.add(columnInsDatetime());
         ls.add(columnUpdDatetime());
         ls.add(columnInsTrace());
         ls.add(columnUpdTrace());
-        ls.add(columnAccountName());
+        ls.add(columnRecruitingNumber());
+        ls.add(columnInterestedIndustry());
+        ls.add(columnGraduationYear());
+        ls.add(columnBirthdate());
+        ls.add(columnProfile());
         return ls;
     }
 
@@ -223,40 +285,40 @@ public class MemberDbm extends AbstractDBMeta {
     //                                      Foreign Property
     //                                      ----------------
     /**
+     * member_status by my MEMBER_STATUS_CODE, named 'memberStatus'.
+     * @return The information object of foreign property. (NotNull)
+     */
+    public ForeignInfo foreignMemberStatus() {
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnMemberStatusCode(), MemberStatusDbm.getInstance().columnMemberStatusCode());
+        return cfi("member_ibfk_1", "memberStatus", this, MemberStatusDbm.getInstance(), mp, 0, null, false, false, false, false, null, null, false, "memberList");
+    }
+    /**
      * member_security by MEMBER_ID, named 'memberSecurityAsOne'.
      * @return The information object of foreign property(referrer-as-one). (NotNull)
      */
     public ForeignInfo foreignMemberSecurityAsOne() {
         Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnMemberId(), MemberSecurityDbm.getInstance().columnMemberId());
-        return cfi("member_security_ibfk_1", "memberSecurityAsOne", this, MemberSecurityDbm.getInstance(), mp, 0, null, true, false, true, false, null, null, false, "member");
-    }
-    /**
-     * member_withdraw by MEMBER_ID, named 'memberWithdrawAsOne'.
-     * @return The information object of foreign property(referrer-as-one). (NotNull)
-     */
-    public ForeignInfo foreignMemberWithdrawAsOne() {
-        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnMemberId(), MemberWithdrawDbm.getInstance().columnMemberId());
-        return cfi("member_withdraw_ibfk_1", "memberWithdrawAsOne", this, MemberWithdrawDbm.getInstance(), mp, 1, null, true, false, true, false, null, null, false, "member");
+        return cfi("member_security_ibfk_1", "memberSecurityAsOne", this, MemberSecurityDbm.getInstance(), mp, 1, null, true, false, true, false, null, null, false, "member");
     }
 
     // -----------------------------------------------------
     //                                     Referrer Property
     //                                     -----------------
     /**
-     * follow by MEMBER_ID, named 'followByMemberIdList'.
-     * @return The information object of referrer property. (NotNull)
-     */
-    public ReferrerInfo referrerFollowByMemberIdList() {
-        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnMemberId(), FollowDbm.getInstance().columnMemberId());
-        return cri("follow_ibfk_1", "followByMemberIdList", this, FollowDbm.getInstance(), mp, false, "memberByMemberId");
-    }
-    /**
      * follow by YOU_ID, named 'followByYouIdList'.
      * @return The information object of referrer property. (NotNull)
      */
     public ReferrerInfo referrerFollowByYouIdList() {
         Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnMemberId(), FollowDbm.getInstance().columnYouId());
-        return cri("follow_ibfk_2", "followByYouIdList", this, FollowDbm.getInstance(), mp, false, "memberByYouId");
+        return cri("follow_ibfk_1", "followByYouIdList", this, FollowDbm.getInstance(), mp, false, "memberByYouId");
+    }
+    /**
+     * follow by MEMBER_ID, named 'followByMemberIdList'.
+     * @return The information object of referrer property. (NotNull)
+     */
+    public ReferrerInfo referrerFollowByMemberIdList() {
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnMemberId(), FollowDbm.getInstance().columnMemberId());
+        return cri("follow_ibfk_2", "followByMemberIdList", this, FollowDbm.getInstance(), mp, false, "memberByMemberId");
     }
     /**
      * login by MEMBER_ID, named 'loginList'.

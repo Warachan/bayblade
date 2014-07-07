@@ -9,13 +9,18 @@
 <!--<h1>Follow/Follower</h1>-->
 <div class = "wrapper">
 	<div class="header">
-	<s:form action="/logout/">
-		<s:submit property="index" value="Logout"/>
-	</s:form>
-	<s:form action="/returnHome/">
-		<s:submit property="index" value="Home"/>
-	</s:form>
 	</div>
+	<ul class = "global-navigation">
+			<li><a href= "http:/twitter/profile/">Profile</a></li>
+			<li><a href= "http:/twitter/home/">Home</a></li>
+			<span><s:form action="/home/" styleClass = "searchForm">
+				<html:text property="searchWord" size ="30" value="" styleClass = "searchBox"/>
+				<s:submit property="search" value="Search" styleClass = "searchButton"/>
+			</s:form></span>
+			<span class><s:form action="/logout/"  styleClass = "logoutForm">
+				<s:submit property="index" value="Logout" styleClass = "logout"/>
+			</s:form></span>
+		</ul>
 <body>
 	<div class ="follow-main">
 	<s:form action ="/home/">

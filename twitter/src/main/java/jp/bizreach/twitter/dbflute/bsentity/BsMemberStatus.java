@@ -11,14 +11,14 @@ import jp.bizreach.twitter.dbflute.allcommon.DBMetaInstanceHandler;
 import jp.bizreach.twitter.dbflute.exentity.*;
 
 /**
- * The entity of member_withdraw as TABLE. <br />
- * 会員退会
+ * The entity of member_status as TABLE. <br />
+ * メンバーステータス
  * <pre>
  * [primary-key]
- *     MEMBER_ID
+ *     MEMBER_STATUS_CODE
  * 
  * [column]
- *     MEMBER_ID, WITHDRAWAL_REASON_ID, WITHDRAWAL_REASON_INPUT_TEXT, WITHDRAWAL_DATETIME
+ *     MEMBER_STATUS_CODE, MEMBER_STATUS_NAME
  * 
  * [sequence]
  *     
@@ -30,32 +30,28 @@ import jp.bizreach.twitter.dbflute.exentity.*;
  *     
  * 
  * [foreign table]
- *     member
+ *     
  * 
  * [referrer table]
- *     
- * 
- * [foreign property]
  *     member
  * 
- * [referrer property]
+ * [foreign property]
  *     
+ * 
+ * [referrer property]
+ *     memberList
  * 
  * [get/set template]
  * /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
- * Integer memberId = entity.getMemberId();
- * Integer withdrawalReasonId = entity.getWithdrawalReasonId();
- * String withdrawalReasonInputText = entity.getWithdrawalReasonInputText();
- * java.sql.Timestamp withdrawalDatetime = entity.getWithdrawalDatetime();
- * entity.setMemberId(memberId);
- * entity.setWithdrawalReasonId(withdrawalReasonId);
- * entity.setWithdrawalReasonInputText(withdrawalReasonInputText);
- * entity.setWithdrawalDatetime(withdrawalDatetime);
+ * Integer memberStatusCode = entity.getMemberStatusCode();
+ * String memberStatusName = entity.getMemberStatusName();
+ * entity.setMemberStatusCode(memberStatusCode);
+ * entity.setMemberStatusName(memberStatusName);
  * = = = = = = = = = =/
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
-public abstract class BsMemberWithdraw implements Entity, Serializable, Cloneable {
+public abstract class BsMemberStatus implements Entity, Serializable, Cloneable {
 
     // ===================================================================================
     //                                                                          Definition
@@ -69,17 +65,11 @@ public abstract class BsMemberWithdraw implements Entity, Serializable, Cloneabl
     // -----------------------------------------------------
     //                                                Column
     //                                                ------
-    /** MEMBER_ID: {PK, NotNull, INT(10), FK to member} */
-    protected Integer _memberId;
+    /** MEMBER_STATUS_CODE: {PK, NotNull, INT(10)} */
+    protected Integer _memberStatusCode;
 
-    /** WITHDRAWAL_REASON_ID: {INT(10)} */
-    protected Integer _withdrawalReasonId;
-
-    /** WITHDRAWAL_REASON_INPUT_TEXT: {TEXT(65535)} */
-    protected String _withdrawalReasonInputText;
-
-    /** WITHDRAWAL_DATETIME: {NotNull, DATETIME(19)} */
-    protected java.sql.Timestamp _withdrawalDatetime;
+    /** MEMBER_STATUS_NAME: {NotNull, VARCHAR(20)} */
+    protected String _memberStatusName;
 
     // -----------------------------------------------------
     //                                              Internal
@@ -100,14 +90,14 @@ public abstract class BsMemberWithdraw implements Entity, Serializable, Cloneabl
      * {@inheritDoc}
      */
     public String getTableDbName() {
-        return "member_withdraw";
+        return "member_status";
     }
 
     /**
      * {@inheritDoc}
      */
     public String getTablePropertyName() { // according to Java Beans rule
-        return "memberWithdraw";
+        return "memberStatus";
     }
 
     // ===================================================================================
@@ -127,7 +117,7 @@ public abstract class BsMemberWithdraw implements Entity, Serializable, Cloneabl
      * {@inheritDoc}
      */
     public boolean hasPrimaryKeyValue() {
-        if (getMemberId() == null) { return false; }
+        if (getMemberStatusCode() == null) { return false; }
         return true;
     }
 
@@ -145,28 +135,29 @@ public abstract class BsMemberWithdraw implements Entity, Serializable, Cloneabl
     // ===================================================================================
     //                                                                    Foreign Property
     //                                                                    ================
-    /** member by my MEMBER_ID, named 'member'. */
-    protected Member _member;
-
-    /**
-     * [get] member by my MEMBER_ID, named 'member'.
-     * @return The entity of foreign property 'member'. (NullAllowed: when e.g. null FK column, no setupSelect)
-     */
-    public Member getMember() {
-        return _member;
-    }
-
-    /**
-     * [set] member by my MEMBER_ID, named 'member'.
-     * @param member The entity of foreign property 'member'. (NullAllowed)
-     */
-    public void setMember(Member member) {
-        _member = member;
-    }
-
     // ===================================================================================
     //                                                                   Referrer Property
     //                                                                   =================
+    /** member by MEMBER_STATUS_CODE, named 'memberList'. */
+    protected List<Member> _memberList;
+
+    /**
+     * [get] member by MEMBER_STATUS_CODE, named 'memberList'.
+     * @return The entity list of referrer property 'memberList'. (NotNull: even if no loading, returns empty list)
+     */
+    public List<Member> getMemberList() {
+        if (_memberList == null) { _memberList = newReferrerList(); }
+        return _memberList;
+    }
+
+    /**
+     * [set] member by MEMBER_STATUS_CODE, named 'memberList'.
+     * @param memberList The entity list of referrer property 'memberList'. (NullAllowed)
+     */
+    public void setMemberList(List<Member> memberList) {
+        _memberList = memberList;
+    }
+
     protected <ELEMENT> List<ELEMENT> newReferrerList() {
         return new ArrayList<ELEMENT>();
     }
@@ -226,9 +217,9 @@ public abstract class BsMemberWithdraw implements Entity, Serializable, Cloneabl
      * @return Comparing result.
      */
     public boolean equals(Object obj) {
-        if (obj == null || !(obj instanceof BsMemberWithdraw)) { return false; }
-        BsMemberWithdraw other = (BsMemberWithdraw)obj;
-        if (!xSV(getMemberId(), other.getMemberId())) { return false; }
+        if (obj == null || !(obj instanceof BsMemberStatus)) { return false; }
+        BsMemberStatus other = (BsMemberStatus)obj;
+        if (!xSV(getMemberStatusCode(), other.getMemberStatusCode())) { return false; }
         return true;
     }
     protected boolean xSV(Object v1, Object v2) {
@@ -242,7 +233,7 @@ public abstract class BsMemberWithdraw implements Entity, Serializable, Cloneabl
     public int hashCode() {
         int hs = 17;
         hs = xCH(hs, getTableDbName());
-        hs = xCH(hs, getMemberId());
+        hs = xCH(hs, getMemberStatusCode());
         return hs;
     }
     protected int xCH(int hs, Object vl) {
@@ -271,8 +262,8 @@ public abstract class BsMemberWithdraw implements Entity, Serializable, Cloneabl
         StringBuilder sb = new StringBuilder();
         sb.append(toString());
         String li = "\n  ";
-        if (_member != null)
-        { sb.append(li).append(xbRDS(_member, "member")); }
+        if (_memberList != null) { for (Entity et : _memberList)
+        { if (et != null) { sb.append(li).append(xbRDS(et, "memberList")); } } }
         return sb.toString();
     }
     protected String xbRDS(Entity et, String name) { // buildRelationDisplayString()
@@ -293,10 +284,8 @@ public abstract class BsMemberWithdraw implements Entity, Serializable, Cloneabl
     protected String buildColumnString() {
         StringBuilder sb = new StringBuilder();
         String dm = ", ";
-        sb.append(dm).append(getMemberId());
-        sb.append(dm).append(getWithdrawalReasonId());
-        sb.append(dm).append(getWithdrawalReasonInputText());
-        sb.append(dm).append(getWithdrawalDatetime());
+        sb.append(dm).append(getMemberStatusCode());
+        sb.append(dm).append(getMemberStatusName());
         if (sb.length() > dm.length()) {
             sb.delete(0, dm.length());
         }
@@ -306,7 +295,8 @@ public abstract class BsMemberWithdraw implements Entity, Serializable, Cloneabl
     protected String buildRelationString() {
         StringBuilder sb = new StringBuilder();
         String cm = ",";
-        if (_member != null) { sb.append(cm).append("member"); }
+        if (_memberList != null && !_memberList.isEmpty())
+        { sb.append(cm).append("memberList"); }
         if (sb.length() > cm.length()) {
             sb.delete(0, cm.length()).insert(0, "(").append(")");
         }
@@ -317,9 +307,9 @@ public abstract class BsMemberWithdraw implements Entity, Serializable, Cloneabl
      * Clone entity instance using super.clone(). (shallow copy) 
      * @return The cloned instance of this entity. (NotNull)
      */
-    public MemberWithdraw clone() {
+    public MemberStatus clone() {
         try {
-            return (MemberWithdraw)super.clone();
+            return (MemberStatus)super.clone();
         } catch (CloneNotSupportedException e) {
             throw new IllegalStateException("Failed to clone the entity: " + toString(), e);
         }
@@ -329,78 +319,40 @@ public abstract class BsMemberWithdraw implements Entity, Serializable, Cloneabl
     //                                                                            Accessor
     //                                                                            ========
     /**
-     * [get] MEMBER_ID: {PK, NotNull, INT(10), FK to member} <br />
-     * 会員ID : 会員のID
-     * @return The value of the column 'MEMBER_ID'. (basically NotNull if selected: for the constraint)
+     * [get] MEMBER_STATUS_CODE: {PK, NotNull, INT(10)} <br />
+     * メンバーステータスコード : 企業か学生か
+     * @return The value of the column 'MEMBER_STATUS_CODE'. (basically NotNull if selected: for the constraint)
      */
-    public Integer getMemberId() {
-        return _memberId;
+    public Integer getMemberStatusCode() {
+        return _memberStatusCode;
     }
 
     /**
-     * [set] MEMBER_ID: {PK, NotNull, INT(10), FK to member} <br />
-     * 会員ID : 会員のID
-     * @param memberId The value of the column 'MEMBER_ID'. (basically NotNull if update: for the constraint)
+     * [set] MEMBER_STATUS_CODE: {PK, NotNull, INT(10)} <br />
+     * メンバーステータスコード : 企業か学生か
+     * @param memberStatusCode The value of the column 'MEMBER_STATUS_CODE'. (basically NotNull if update: for the constraint)
      */
-    public void setMemberId(Integer memberId) {
-        __modifiedProperties.addPropertyName("memberId");
-        _memberId = memberId;
+    public void setMemberStatusCode(Integer memberStatusCode) {
+        __modifiedProperties.addPropertyName("memberStatusCode");
+        _memberStatusCode = memberStatusCode;
     }
 
     /**
-     * [get] WITHDRAWAL_REASON_ID: {INT(10)} <br />
-     * 退会理由ID : 会員の退会理由ID
-     * @return The value of the column 'WITHDRAWAL_REASON_ID'. (NullAllowed even if selected: for no constraint)
+     * [get] MEMBER_STATUS_NAME: {NotNull, VARCHAR(20)} <br />
+     * 会員ステータス名
+     * @return The value of the column 'MEMBER_STATUS_NAME'. (basically NotNull if selected: for the constraint)
      */
-    public Integer getWithdrawalReasonId() {
-        return _withdrawalReasonId;
+    public String getMemberStatusName() {
+        return _memberStatusName;
     }
 
     /**
-     * [set] WITHDRAWAL_REASON_ID: {INT(10)} <br />
-     * 退会理由ID : 会員の退会理由ID
-     * @param withdrawalReasonId The value of the column 'WITHDRAWAL_REASON_ID'. (NullAllowed: null update allowed for no constraint)
+     * [set] MEMBER_STATUS_NAME: {NotNull, VARCHAR(20)} <br />
+     * 会員ステータス名
+     * @param memberStatusName The value of the column 'MEMBER_STATUS_NAME'. (basically NotNull if update: for the constraint)
      */
-    public void setWithdrawalReasonId(Integer withdrawalReasonId) {
-        __modifiedProperties.addPropertyName("withdrawalReasonId");
-        _withdrawalReasonId = withdrawalReasonId;
-    }
-
-    /**
-     * [get] WITHDRAWAL_REASON_INPUT_TEXT: {TEXT(65535)} <br />
-     * 退会理由入力テキスト
-     * @return The value of the column 'WITHDRAWAL_REASON_INPUT_TEXT'. (NullAllowed even if selected: for no constraint)
-     */
-    public String getWithdrawalReasonInputText() {
-        return _withdrawalReasonInputText;
-    }
-
-    /**
-     * [set] WITHDRAWAL_REASON_INPUT_TEXT: {TEXT(65535)} <br />
-     * 退会理由入力テキスト
-     * @param withdrawalReasonInputText The value of the column 'WITHDRAWAL_REASON_INPUT_TEXT'. (NullAllowed: null update allowed for no constraint)
-     */
-    public void setWithdrawalReasonInputText(String withdrawalReasonInputText) {
-        __modifiedProperties.addPropertyName("withdrawalReasonInputText");
-        _withdrawalReasonInputText = withdrawalReasonInputText;
-    }
-
-    /**
-     * [get] WITHDRAWAL_DATETIME: {NotNull, DATETIME(19)} <br />
-     * withdrawal_datetime : 退会日時
-     * @return The value of the column 'WITHDRAWAL_DATETIME'. (basically NotNull if selected: for the constraint)
-     */
-    public java.sql.Timestamp getWithdrawalDatetime() {
-        return _withdrawalDatetime;
-    }
-
-    /**
-     * [set] WITHDRAWAL_DATETIME: {NotNull, DATETIME(19)} <br />
-     * withdrawal_datetime : 退会日時
-     * @param withdrawalDatetime The value of the column 'WITHDRAWAL_DATETIME'. (basically NotNull if update: for the constraint)
-     */
-    public void setWithdrawalDatetime(java.sql.Timestamp withdrawalDatetime) {
-        __modifiedProperties.addPropertyName("withdrawalDatetime");
-        _withdrawalDatetime = withdrawalDatetime;
+    public void setMemberStatusName(String memberStatusName) {
+        __modifiedProperties.addPropertyName("memberStatusName");
+        _memberStatusName = memberStatusName;
     }
 }

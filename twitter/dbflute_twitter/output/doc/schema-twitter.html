@@ -310,10 +310,10 @@ dl.procedurelist dd.column pre {
 	</tr>
 	<tr>
 		<td class="rownumcell">3</td>
-		<td><a href="#member" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=6, columnCount=10">member</a></td>
+		<td><a href="#member" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=6, columnCount=15">member</a></td>
 		<td class="typecell">TABLE</td>
-		<td class="relcell">&nbsp;</td>
-		<td class="relcell"><a href="#follow" title="follow_ibfk_1">follow</a>, <a href="#follow" title="follow_ibfk_2">follow</a>, <a href="#login" title="login_ibfk_1">login</a>, <a href="#member_security" title="member_security_ibfk_1">member_security</a>, <a href="#member_withdraw" title="member_withdraw_ibfk_1">member_withdraw</a>, <a href="#tweet" title="tweet_ibfk_1">tweet</a></td>
+		<td class="relcell"><a href="#member_status" title="member_ibfk_1">member_status</a></td>
+		<td class="relcell"><a href="#follow" title="follow_ibfk_1">follow</a>, <a href="#follow" title="follow_ibfk_2">follow</a>, <a href="#login" title="login_ibfk_1">login</a>, <a href="#member_security" title="member_security_ibfk_1">member_security</a>, <a href="#tweet" title="tweet_ibfk_1">tweet</a></td>
 		<td class="commentcell"> 会員</td>
 		<td class="subcell">Member</td>
 	</tr>
@@ -328,12 +328,12 @@ dl.procedurelist dd.column pre {
 	</tr>
 	<tr>
 		<td class="rownumcell">5</td>
-		<td><a href="#member_withdraw" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=15, columnCount=4">member_withdraw</a></td>
+		<td><a href="#member_status" title="type=TABLE, primaryKey={MEMBER_STATUS_CODE}, nameLength=13, columnCount=2">member_status</a></td>
 		<td class="typecell">TABLE</td>
-		<td class="relcell"><a href="#member" title="member_withdraw_ibfk_1">member</a></td>
 		<td class="relcell">&nbsp;</td>
-		<td class="commentcell"> 会員退会</td>
-		<td class="subcell">MemberWithdraw</td>
+		<td class="relcell"><a href="#member" title="member_ibfk_1">member</a></td>
+		<td class="commentcell"> メンバーステータス</td>
+		<td class="subcell">MemberStatus</td>
 	</tr>
 	<tr>
 		<td class="rownumcell">6</td>
@@ -401,7 +401,7 @@ follow
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
 		<td class="defvalcell"> &nbsp;</td>
-		<td class="relcell"><a href="#member" title="follow_ibfk_2">member</a>&nbsp;</td>
+		<td class="relcell"><a href="#member" title="follow_ibfk_1">member</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
 		<td class="commentcell"> フォローする人のID&nbsp;:&nbsp;会員のID</td>
@@ -419,7 +419,7 @@ follow
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
 		<td class="defvalcell"> &nbsp;</td>
-		<td class="relcell"><a href="#member" title="follow_ibfk_1">member</a>&nbsp;</td>
+		<td class="relcell"><a href="#member" title="follow_ibfk_2">member</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
 		<td class="commentcell"> フォローされる人のID&nbsp;:&nbsp;フォローしている自分のID</td>
@@ -644,7 +644,7 @@ login
 		<td class="subcell">String</td>
 	</tr>
 </table>
-  <h2 id="member" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=6, columnCount=10">
+  <h2 id="member" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=6, columnCount=15">
 member
 </h2>
 <p class="tablecomment">会員</p>
@@ -679,7 +679,7 @@ member
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
-		<td class="relcell"><a href="#follow" title="follow_ibfk_1">follow</a>,<br /><a href="#follow" title="follow_ibfk_2">follow</a>,<br /><a href="#login" title="login_ibfk_1">login</a>,<br /><a href="#member_security" title="member_security_ibfk_1">member_security</a>,<br /><a href="#member_withdraw" title="member_withdraw_ibfk_1">member_withdraw</a>,<br /><a href="#tweet" title="tweet_ibfk_1">tweet</a>&nbsp;</td>
+		<td class="relcell"><a href="#follow" title="follow_ibfk_1">follow</a>,<br /><a href="#follow" title="follow_ibfk_2">follow</a>,<br /><a href="#login" title="login_ibfk_1">login</a>,<br /><a href="#member_security" title="member_security_ibfk_1">member_security</a>,<br /><a href="#tweet" title="tweet_ibfk_1">tweet</a>&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
 		<td class="commentcell"> 会員ID&nbsp;:&nbsp;会員のID</td>
 		<td class="subcell">memberId</td>
@@ -706,6 +706,23 @@ member
 		<td class="rownumcell">3</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell" title="MEMBER_STATUS_CODE(MEMBER_STATUS_CODE)">o</td>
+		<td class="flgcell">*</td>
+		<td id="member_member_status_code">MEMBER_STATUS_CODE</td>
+		<td class="typecell">INT</td>
+		<td class="sizecell"> 10 </td>
+		<td class="relcell"><a href="#member_status" title="member_ibfk_1">member_status</a>&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> メンバーステータスコード&nbsp;:&nbsp;企業か学生か</td>
+		<td class="subcell">memberStatusCode</td>
+		<td class="subcell">Integer</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">4</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
 		<td class="flgcell" title="USER_NAME(USER_NAME)">o</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
@@ -720,41 +737,41 @@ member
 		<td class="subcell">String</td>
 	</tr>
 	<tr>
-		<td class="rownumcell">4</td>
-		<td class="flgcell">&nbsp;</td>
-		<td class="flgcell"> &nbsp;</td>
-		<td class="flgcell">&nbsp;</td>
-		<td class="flgcell">&nbsp;</td>
-		<td class="flgcell"> &nbsp;</td>
-		<td id="member_birthdate">BIRTHDATE</td>
-		<td class="typecell">DATE</td>
-		<td class="sizecell"> 10 </td>
-		<td class="relcell">&nbsp;&nbsp;</td>
-		<td class="relcell">&nbsp;</td>
-		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"> 生年月日&nbsp;:&nbsp;会員の生年月日</td>
-		<td class="subcell">birthdate</td>
-		<td class="subcell">Date</td>
-	</tr>
-	<tr>
 		<td class="rownumcell">5</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell"> &nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
-		<td class="flgcell"> &nbsp;</td>
-		<td id="member_profile">PROFILE</td>
+		<td class="flgcell">*</td>
+		<td id="member_account_name">ACCOUNT_NAME</td>
 		<td class="typecell">VARCHAR</td>
-		<td class="sizecell"> 200 </td>
+		<td class="sizecell"> 100 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"> プロフィール</td>
-		<td class="subcell">profile</td>
+		<td class="commentcell"> アカウント名</td>
+		<td class="subcell">accountName</td>
 		<td class="subcell">String</td>
 	</tr>
 	<tr>
 		<td class="rownumcell">6</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td id="member_group_name">GROUP_NAME</td>
+		<td class="typecell">VARCHAR</td>
+		<td class="sizecell"> 100 </td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> 所属団体名&nbsp;:&nbsp;学校、もしくは企業名を登録</td>
+		<td class="subcell">groupName</td>
+		<td class="subcell">String</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">7</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell"> &nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
@@ -771,7 +788,7 @@ member
 		<td class="subcell">Timestamp</td>
 	</tr>
 	<tr>
-		<td class="rownumcell">7</td>
+		<td class="rownumcell">8</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell"> &nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
@@ -788,7 +805,7 @@ member
 		<td class="subcell">Timestamp</td>
 	</tr>
 	<tr>
-		<td class="rownumcell">8</td>
+		<td class="rownumcell">9</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell"> &nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
@@ -805,7 +822,7 @@ member
 		<td class="subcell">String</td>
 	</tr>
 	<tr>
-		<td class="rownumcell">9</td>
+		<td class="rownumcell">10</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell"> &nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
@@ -822,20 +839,88 @@ member
 		<td class="subcell">String</td>
 	</tr>
 	<tr>
-		<td class="rownumcell">10</td>
+		<td class="rownumcell">11</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell"> &nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
-		<td class="flgcell">*</td>
-		<td id="member_account_name">ACCOUNT_NAME</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td id="member_recruiting_number">RECRUITING_NUMBER</td>
+		<td class="typecell">INT</td>
+		<td class="sizecell"> 10 </td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> 採用数&nbsp;:&nbsp;企業の採用予定数</td>
+		<td class="subcell">recruitingNumber</td>
+		<td class="subcell">Integer</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">12</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td id="member_interested_industry">INTERESTED_INDUSTRY</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 100 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"> アカウント名</td>
-		<td class="subcell">accountName</td>
+		<td class="commentcell"> 希望業界&nbsp;:&nbsp;学生が希望している業界。</td>
+		<td class="subcell">interestedIndustry</td>
+		<td class="subcell">String</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">13</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td id="member_graduation_year">GRADUATION_YEAR</td>
+		<td class="typecell">INT</td>
+		<td class="sizecell"> 10 </td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> 卒業年&nbsp;:&nbsp;卒業年もしくは卒業予定年</td>
+		<td class="subcell">graduationYear</td>
+		<td class="subcell">Integer</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">14</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td id="member_birthdate">BIRTHDATE</td>
+		<td class="typecell">DATE</td>
+		<td class="sizecell"> 10 </td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> 生年月日&nbsp;:&nbsp;会員の生年月日</td>
+		<td class="subcell">birthdate</td>
+		<td class="subcell">Date</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">15</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td id="member_profile">PROFILE</td>
+		<td class="typecell">VARCHAR</td>
+		<td class="sizecell"> 200 </td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> プロフィール</td>
+		<td class="subcell">profile</td>
 		<td class="subcell">String</td>
 	</tr>
 </table>
@@ -966,11 +1051,11 @@ member_security
 		<td class="subcell">String</td>
 	</tr>
 </table>
-  <h2 id="member_withdraw" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=15, columnCount=4">
-member_withdraw
+  <h2 id="member_status" title="type=TABLE, primaryKey={MEMBER_STATUS_CODE}, nameLength=13, columnCount=2">
+member_status
 </h2>
-<p class="tablecomment">会員退会</p>
-<table summary="Columns in member_withdraw">
+<p class="tablecomment">メンバーステータス</p>
+<table summary="Columns in member_status">
 	<thead>
 	<tr>
 		<th class="rownumhead">No.</th>
@@ -997,14 +1082,14 @@ member_withdraw
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td id="member_withdraw_member_id">MEMBER_ID</td>
+		<td id="member_status_member_status_code">MEMBER_STATUS_CODE</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
-		<td class="relcell"><a href="#member" title="member_withdraw_ibfk_1">member</a>&nbsp;</td>
-		<td class="relcell">&nbsp;</td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell"><a href="#member" title="member_ibfk_1">member</a>&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"> 会員ID&nbsp;:&nbsp;会員のID</td>
-		<td class="subcell">memberId</td>
+		<td class="commentcell"> メンバーステータスコード&nbsp;:&nbsp;企業か学生か</td>
+		<td class="subcell">memberStatusCode</td>
 		<td class="subcell">Integer</td>
 	</tr>
 	<tr>
@@ -1013,50 +1098,16 @@ member_withdraw
 		<td class="flgcell"> &nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
-		<td class="flgcell"> &nbsp;</td>
-		<td id="member_withdraw_withdrawal_reason_id">WITHDRAWAL_REASON_ID</td>
-		<td class="typecell">INT</td>
-		<td class="sizecell"> 10 </td>
-		<td class="relcell">&nbsp;&nbsp;</td>
-		<td class="relcell">&nbsp;</td>
-		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"> 退会理由ID&nbsp;:&nbsp;会員の退会理由ID</td>
-		<td class="subcell">withdrawalReasonId</td>
-		<td class="subcell">Integer</td>
-	</tr>
-	<tr>
-		<td class="rownumcell">3</td>
-		<td class="flgcell">&nbsp;</td>
-		<td class="flgcell"> &nbsp;</td>
-		<td class="flgcell">&nbsp;</td>
-		<td class="flgcell">&nbsp;</td>
-		<td class="flgcell"> &nbsp;</td>
-		<td id="member_withdraw_withdrawal_reason_input_text">WITHDRAWAL_REASON_INPUT_TEXT</td>
-		<td class="typecell">TEXT</td>
-		<td class="sizecell"> 65535 </td>
-		<td class="relcell">&nbsp;&nbsp;</td>
-		<td class="relcell">&nbsp;</td>
-		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"> 退会理由入力テキスト</td>
-		<td class="subcell">withdrawalReasonInputText</td>
-		<td class="subcell">String</td>
-	</tr>
-	<tr>
-		<td class="rownumcell">4</td>
-		<td class="flgcell">&nbsp;</td>
-		<td class="flgcell"> &nbsp;</td>
-		<td class="flgcell">&nbsp;</td>
-		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td id="member_withdraw_withdrawal_datetime">WITHDRAWAL_DATETIME</td>
-		<td class="typecell">DATETIME</td>
-		<td class="sizecell"> 19 </td>
+		<td id="member_status_member_status_name">MEMBER_STATUS_NAME</td>
+		<td class="typecell">VARCHAR</td>
+		<td class="sizecell"> 20 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"> withdrawal_datetime&nbsp;:&nbsp;退会日時</td>
-		<td class="subcell">withdrawalDatetime</td>
-		<td class="subcell">Timestamp</td>
+		<td class="commentcell"> 会員ステータス名</td>
+		<td class="subcell">memberStatusName</td>
+		<td class="subcell">String</td>
 	</tr>
 </table>
   <h2 id="tweet" title="type=TABLE, primaryKey={TWEET_ID}, nameLength=5, columnCount=8">
