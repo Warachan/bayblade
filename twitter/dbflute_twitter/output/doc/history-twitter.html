@@ -118,11 +118,41 @@ p.tablecount {
 </div>
 
 <div class="section">
-	<h2><span class="dt">Diff Date: </span>2014/07/03 09:25:40</h2>
+	<h2><span class="dt">Diff Date: </span>2014/07/04 15:57:57</h2>
 
 	<h3>Change Table</h3>
 	<div class="table-content">
 		<h4><a href="./schema-twitter.html#follow">follow</a></h4>
+		<div class="change-table-content">
+			<h5>Add UQ</h5>
+			<ul class="column-content">
+				<li>YOU_ID</li>
+			</ul>
+			<h5>Delete Index</h5>
+			<ul class="column-content">
+				<li>YOU_ID</li>
+			</ul>
+		</div>
+		<h4><a href="./schema-twitter.html#member">member</a></h4>
+		<div class="change-table-content">
+			<h5>Add Column</h5>
+			<ul class="column-content">
+				<li>ACCOUNT_NAME</li>
+			</ul>
+			<h5>Change Column</h5>
+			<dl class="column-content">
+				<dt>USER_NAME</dt>
+				<dd><span>Size</span>50&nbsp;-&gt;&nbsp;100</dd>
+			</dl>
+		</div>
+	</div>
+</div>
+<div class="section">
+	<h2><span class="dt">Diff Date: </span>2014/07/03 09:25:40</h2>
+
+	<h3>Change Table</h3>
+	<div class="table-content">
+		<h4>follow</h4>
 		<div class="change-table-content">
 			<h5>Delete UQ</h5>
 			<ul class="column-content">

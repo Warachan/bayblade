@@ -36,7 +36,7 @@ import jp.bizreach.twitter.dbflute.exentity.*;
  *     
  * 
  * [foreign property]
- *     memberByYouId, memberByMemberId
+ *     memberByMemberId, memberByYouId
  * 
  * [referrer property]
  *     
@@ -80,10 +80,10 @@ public abstract class BsFollow implements Entity, Serializable, Cloneable {
     /** FOLLOW_ID: {PK, ID, NotNull, INT(10)} */
     protected Integer _followId;
 
-    /** YOU_ID: {IX, NotNull, INT(10), FK to member} */
+    /** YOU_ID: {UQ+, NotNull, INT(10), FK to member} */
     protected Integer _youId;
 
-    /** MEMBER_ID: {IX, NotNull, INT(10), FK to member} */
+    /** MEMBER_ID: {+UQ, IX, NotNull, INT(10), FK to member} */
     protected Integer _memberId;
 
     /** INS_DATETIME: {NotNull, DATETIME(19)} */
@@ -152,6 +152,19 @@ public abstract class BsFollow implements Entity, Serializable, Cloneable {
     }
 
     /**
+     * To be unique by the unique column. <br />
+     * You can update the entity by the key when entity update (NOT batch update).
+     * @param youId : UQ+, NotNull, INT(10), FK to member. (NotNull)
+     * @param memberId : +UQ, IX, NotNull, INT(10), FK to member. (NotNull)
+     */
+    public void uniqueBy(Integer youId, Integer memberId) {
+        __uniqueDrivenProperties.clear();
+        __uniqueDrivenProperties.addPropertyName("youId");
+        __uniqueDrivenProperties.addPropertyName("memberId");
+        setYouId(youId);setMemberId(memberId);
+    }
+
+    /**
      * {@inheritDoc}
      */
     public Set<String> myuniqueDrivenProperties() {
@@ -165,25 +178,6 @@ public abstract class BsFollow implements Entity, Serializable, Cloneable {
     // ===================================================================================
     //                                                                    Foreign Property
     //                                                                    ================
-    /** member by my YOU_ID, named 'memberByYouId'. */
-    protected Member _memberByYouId;
-
-    /**
-     * [get] member by my YOU_ID, named 'memberByYouId'.
-     * @return The entity of foreign property 'memberByYouId'. (NullAllowed: when e.g. null FK column, no setupSelect)
-     */
-    public Member getMemberByYouId() {
-        return _memberByYouId;
-    }
-
-    /**
-     * [set] member by my YOU_ID, named 'memberByYouId'.
-     * @param memberByYouId The entity of foreign property 'memberByYouId'. (NullAllowed)
-     */
-    public void setMemberByYouId(Member memberByYouId) {
-        _memberByYouId = memberByYouId;
-    }
-
     /** member by my MEMBER_ID, named 'memberByMemberId'. */
     protected Member _memberByMemberId;
 
@@ -201,6 +195,25 @@ public abstract class BsFollow implements Entity, Serializable, Cloneable {
      */
     public void setMemberByMemberId(Member memberByMemberId) {
         _memberByMemberId = memberByMemberId;
+    }
+
+    /** member by my YOU_ID, named 'memberByYouId'. */
+    protected Member _memberByYouId;
+
+    /**
+     * [get] member by my YOU_ID, named 'memberByYouId'.
+     * @return The entity of foreign property 'memberByYouId'. (NullAllowed: when e.g. null FK column, no setupSelect)
+     */
+    public Member getMemberByYouId() {
+        return _memberByYouId;
+    }
+
+    /**
+     * [set] member by my YOU_ID, named 'memberByYouId'.
+     * @param memberByYouId The entity of foreign property 'memberByYouId'. (NullAllowed)
+     */
+    public void setMemberByYouId(Member memberByYouId) {
+        _memberByYouId = memberByYouId;
     }
 
     // ===================================================================================
@@ -310,10 +323,10 @@ public abstract class BsFollow implements Entity, Serializable, Cloneable {
         StringBuilder sb = new StringBuilder();
         sb.append(toString());
         String li = "\n  ";
-        if (_memberByYouId != null)
-        { sb.append(li).append(xbRDS(_memberByYouId, "memberByYouId")); }
         if (_memberByMemberId != null)
         { sb.append(li).append(xbRDS(_memberByMemberId, "memberByMemberId")); }
+        if (_memberByYouId != null)
+        { sb.append(li).append(xbRDS(_memberByYouId, "memberByYouId")); }
         return sb.toString();
     }
     protected String xbRDS(Entity et, String name) { // buildRelationDisplayString()
@@ -351,8 +364,8 @@ public abstract class BsFollow implements Entity, Serializable, Cloneable {
     protected String buildRelationString() {
         StringBuilder sb = new StringBuilder();
         String cm = ",";
-        if (_memberByYouId != null) { sb.append(cm).append("memberByYouId"); }
         if (_memberByMemberId != null) { sb.append(cm).append("memberByMemberId"); }
+        if (_memberByYouId != null) { sb.append(cm).append("memberByYouId"); }
         if (sb.length() > cm.length()) {
             sb.delete(0, cm.length()).insert(0, "(").append(")");
         }
@@ -394,7 +407,7 @@ public abstract class BsFollow implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [get] YOU_ID: {IX, NotNull, INT(10), FK to member} <br />
+     * [get] YOU_ID: {UQ+, NotNull, INT(10), FK to member} <br />
      * フォローする人のID : 会員のID
      * @return The value of the column 'YOU_ID'. (basically NotNull if selected: for the constraint)
      */
@@ -403,7 +416,7 @@ public abstract class BsFollow implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [set] YOU_ID: {IX, NotNull, INT(10), FK to member} <br />
+     * [set] YOU_ID: {UQ+, NotNull, INT(10), FK to member} <br />
      * フォローする人のID : 会員のID
      * @param youId The value of the column 'YOU_ID'. (basically NotNull if update: for the constraint)
      */
@@ -413,7 +426,7 @@ public abstract class BsFollow implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [get] MEMBER_ID: {IX, NotNull, INT(10), FK to member} <br />
+     * [get] MEMBER_ID: {+UQ, IX, NotNull, INT(10), FK to member} <br />
      * フォローされる人のID : フォローしている自分のID
      * @return The value of the column 'MEMBER_ID'. (basically NotNull if selected: for the constraint)
      */
@@ -422,7 +435,7 @@ public abstract class BsFollow implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [set] MEMBER_ID: {IX, NotNull, INT(10), FK to member} <br />
+     * [set] MEMBER_ID: {+UQ, IX, NotNull, INT(10), FK to member} <br />
      * フォローされる人のID : フォローしている自分のID
      * @param memberId The value of the column 'MEMBER_ID'. (basically NotNull if update: for the constraint)
      */

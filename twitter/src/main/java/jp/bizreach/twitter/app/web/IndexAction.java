@@ -31,6 +31,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
+import org.seasar.dbflute.cbean.OrQuery;
 import org.seasar.struts.annotation.ActionForm;
 import org.seasar.struts.annotation.Execute;
 import org.seasar.struts.util.RequestUtil;
@@ -85,18 +86,7 @@ public class IndexAction {
     @Execute(validate = "validate", input = "index.jsp")
     public String gotoLogin() {
         LOG.debug("***" + indexForm);
-        String inputEmail = indexForm.loginEmail;
-
-        //        String inputEmail = indexForm.loginEmail;
-        //        String inputPassword = indexForm.loginPassword;
-        //        MemberCB cb = new MemberCB();
-        //        cb.query().queryMemberSecurityAsOne().setPassword_Equal(inputPassword);
-        //        cb.query().setEmailAddress_Equal(inputEmail);
-        //        Member member = memberBhv.selectEntity(cb);
-        //        sessionDto.myId = member.getMemberId();
-        //        sessionDto.email = member.getEmailAddress();
-        //        sessionDto.username = member.getUserName();
-        //        Timestamp loginTime = member.getInsDatetime();
+        String inputEmail = indexForm.loginKey;
         Login login = new Login();
         Date loginDate = new Date();
         Timestamp loginTime = new Timestamp(loginDate.getTime());
@@ -110,21 +100,31 @@ public class IndexAction {
         return "/home/?redirect=true";
     }
 
+    /* ログイン validation */
     public ActionMessages validate() throws NoSuchAlgorithmException {
         ActionMessages errors = new ActionMessages();
-        String inputPassword = indexForm.loginPassword;
-        String digestedPass = passDigestLogic.build(inputPassword);
-        MemberCB cb = new MemberCB();
-        cb.query().setEmailAddress_Equal(indexForm.loginEmail);
-        cb.query().queryMemberSecurityAsOne().setPassword_Equal(digestedPass);
-        Member member = memberBhv.selectEntity(cb);
-        LOG.debug("@@@@@@@@@@@@@@@@@@@@@" + member);
-        if (member != null) {
-            sessionDto.myId = member.getMemberId();
-            sessionDto.email = member.getEmailAddress();
-            sessionDto.username = member.getUserName();
+        String digestedPass = passDigestLogic.build(indexForm.loginPassword);
+        if (indexForm.loginKey == "" || indexForm.loginPassword == "") {
+            errors.add("loginKey", new ActionMessage("ログインIDもしくはパスワードが未入力です。", false));
         } else {
-            errors.add("loginEmail", new ActionMessage("Wrong password or email address.", false));
+            MemberCB cb = new MemberCB();
+            cb.orScopeQuery(new OrQuery<MemberCB>() {
+                @Override
+                public void query(MemberCB orCB) {
+                    orCB.query().setEmailAddress_Equal(indexForm.loginKey);
+                    orCB.query().setUserName_Equal(indexForm.loginKey);
+                }
+            });
+            cb.query().queryMemberSecurityAsOne().setPassword_Equal(digestedPass);
+            Member member = memberBhv.selectEntity(cb);
+            if (member != null) {
+                sessionDto.myId = member.getMemberId();
+                sessionDto.email = member.getEmailAddress();
+                sessionDto.username = member.getUserName();
+                sessionDto.accountName = member.getAccountName();
+            } else {
+                errors.add("loginKey", new ActionMessage("ログインIDもしくはパスワードが間違っています。", false));
+            }
         }
         return errors;
     }

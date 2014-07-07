@@ -1,20 +1,28 @@
 package jp.bizreach.twitter.app.web;
 
-
 /**
  * @author mayuko.sakaba
  */
 public class TweetDto {
-    public String memberName;
+    public String username;
+    public String accountName;
     public String tweetTime;
     public String tweet;
 
-    public String getMemberName() {
-        return memberName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setMemberName(String memberName) {
-        this.memberName = memberName;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getAccountName() {
+        return accountName;
+    }
+
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
     }
 
     public String getTweetTime() {

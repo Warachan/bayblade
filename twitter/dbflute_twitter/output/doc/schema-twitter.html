@@ -310,7 +310,7 @@ dl.procedurelist dd.column pre {
 	</tr>
 	<tr>
 		<td class="rownumcell">3</td>
-		<td><a href="#member" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=6, columnCount=9">member</a></td>
+		<td><a href="#member" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=6, columnCount=10">member</a></td>
 		<td class="typecell">TABLE</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"><a href="#follow" title="follow_ibfk_1">follow</a>, <a href="#follow" title="follow_ibfk_2">follow</a>, <a href="#login" title="login_ibfk_1">login</a>, <a href="#member_security" title="member_security_ibfk_1">member_security</a>, <a href="#member_withdraw" title="member_withdraw_ibfk_1">member_withdraw</a>, <a href="#tweet" title="tweet_ibfk_1">tweet</a></td>
@@ -394,14 +394,14 @@ follow
 		<td class="rownumcell">2</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell" title="YOU_ID(YOU_ID, MEMBER_ID)">o<span class="flgplus">+</span></td>
 		<td class="flgcell">&nbsp;</td>
-		<td class="flgcell" title="YOU_ID(YOU_ID)">o</td>
 		<td class="flgcell">*</td>
 		<td id="follow_you_id">YOU_ID</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
 		<td class="defvalcell"> &nbsp;</td>
-		<td class="relcell"><a href="#member" title="follow_ibfk_1">member</a>&nbsp;</td>
+		<td class="relcell"><a href="#member" title="follow_ibfk_2">member</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
 		<td class="commentcell"> フォローする人のID&nbsp;:&nbsp;会員のID</td>
@@ -412,14 +412,14 @@ follow
 		<td class="rownumcell">3</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell"> &nbsp;</td>
-		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell" title="YOU_ID(YOU_ID, MEMBER_ID)"><span class="flgplus">+</span>o</td>
 		<td class="flgcell" title="MEMBER_ID(MEMBER_ID)">o</td>
 		<td class="flgcell">*</td>
 		<td id="follow_member_id">MEMBER_ID</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
 		<td class="defvalcell"> &nbsp;</td>
-		<td class="relcell"><a href="#member" title="follow_ibfk_2">member</a>&nbsp;</td>
+		<td class="relcell"><a href="#member" title="follow_ibfk_1">member</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
 		<td class="commentcell"> フォローされる人のID&nbsp;:&nbsp;フォローしている自分のID</td>
@@ -644,7 +644,7 @@ login
 		<td class="subcell">String</td>
 	</tr>
 </table>
-  <h2 id="member" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=6, columnCount=9">
+  <h2 id="member" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=6, columnCount=10">
 member
 </h2>
 <p class="tablecomment">会員</p>
@@ -711,7 +711,7 @@ member
 		<td class="flgcell">*</td>
 		<td id="member_user_name">USER_NAME</td>
 		<td class="typecell">VARCHAR</td>
-		<td class="sizecell"> 50 </td>
+		<td class="sizecell"> 100 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
@@ -819,6 +819,23 @@ member
 		<td class="relcell"> &nbsp;</td>
 		<td class="commentcell"> UPD&nbsp;トレース</td>
 		<td class="subcell">updTrace</td>
+		<td class="subcell">String</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">10</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td id="member_account_name">ACCOUNT_NAME</td>
+		<td class="typecell">VARCHAR</td>
+		<td class="sizecell"> 100 </td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> アカウント名</td>
+		<td class="subcell">accountName</td>
 		<td class="subcell">String</td>
 	</tr>
 </table>

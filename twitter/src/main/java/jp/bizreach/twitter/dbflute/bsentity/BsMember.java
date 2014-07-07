@@ -19,7 +19,7 @@ import jp.bizreach.twitter.dbflute.exentity.*;
  *     MEMBER_ID
  * 
  * [column]
- *     MEMBER_ID, EMAIL_ADDRESS, USER_NAME, BIRTHDATE, PROFILE, INS_DATETIME, UPD_DATETIME, INS_TRACE, UPD_TRACE
+ *     MEMBER_ID, EMAIL_ADDRESS, USER_NAME, BIRTHDATE, PROFILE, INS_DATETIME, UPD_DATETIME, INS_TRACE, UPD_TRACE, ACCOUNT_NAME
  * 
  * [sequence]
  *     
@@ -40,7 +40,7 @@ import jp.bizreach.twitter.dbflute.exentity.*;
  *     memberSecurityAsOne, memberWithdrawAsOne
  * 
  * [referrer property]
- *     followByYouIdList, followByMemberIdList, loginList, tweetList
+ *     followByMemberIdList, followByYouIdList, loginList, tweetList
  * 
  * [get/set template]
  * /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
@@ -53,6 +53,7 @@ import jp.bizreach.twitter.dbflute.exentity.*;
  * java.sql.Timestamp updDatetime = entity.getUpdDatetime();
  * String insTrace = entity.getInsTrace();
  * String updTrace = entity.getUpdTrace();
+ * String accountName = entity.getAccountName();
  * entity.setMemberId(memberId);
  * entity.setEmailAddress(emailAddress);
  * entity.setUserName(userName);
@@ -62,6 +63,7 @@ import jp.bizreach.twitter.dbflute.exentity.*;
  * entity.setUpdDatetime(updDatetime);
  * entity.setInsTrace(insTrace);
  * entity.setUpdTrace(updTrace);
+ * entity.setAccountName(accountName);
  * = = = = = = = = = =/
  * </pre>
  * @author DBFlute(AutoGenerator)
@@ -86,7 +88,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     /** EMAIL_ADDRESS: {UQ, NotNull, VARCHAR(100)} */
     protected String _emailAddress;
 
-    /** USER_NAME: {UQ, NotNull, VARCHAR(50)} */
+    /** USER_NAME: {UQ, NotNull, VARCHAR(100)} */
     protected String _userName;
 
     /** BIRTHDATE: {DATE(10)} */
@@ -106,6 +108,9 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
 
     /** UPD_TRACE: {NotNull, VARCHAR(256)} */
     protected String _updTrace;
+
+    /** ACCOUNT_NAME: {NotNull, VARCHAR(100)} */
+    protected String _accountName;
 
     // -----------------------------------------------------
     //                                              Internal
@@ -171,7 +176,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     /**
      * To be unique by the unique column. <br />
      * You can update the entity by the key when entity update (NOT batch update).
-     * @param userName : UQ, NotNull, VARCHAR(50). (NotNull)
+     * @param userName : UQ, NotNull, VARCHAR(100). (NotNull)
      */
     public void uniqueByUserName(String userName) {
         __uniqueDrivenProperties.clear();
@@ -234,26 +239,6 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     // ===================================================================================
     //                                                                   Referrer Property
     //                                                                   =================
-    /** follow by YOU_ID, named 'followByYouIdList'. */
-    protected List<Follow> _followByYouIdList;
-
-    /**
-     * [get] follow by YOU_ID, named 'followByYouIdList'.
-     * @return The entity list of referrer property 'followByYouIdList'. (NotNull: even if no loading, returns empty list)
-     */
-    public List<Follow> getFollowByYouIdList() {
-        if (_followByYouIdList == null) { _followByYouIdList = newReferrerList(); }
-        return _followByYouIdList;
-    }
-
-    /**
-     * [set] follow by YOU_ID, named 'followByYouIdList'.
-     * @param followByYouIdList The entity list of referrer property 'followByYouIdList'. (NullAllowed)
-     */
-    public void setFollowByYouIdList(List<Follow> followByYouIdList) {
-        _followByYouIdList = followByYouIdList;
-    }
-
     /** follow by MEMBER_ID, named 'followByMemberIdList'. */
     protected List<Follow> _followByMemberIdList;
 
@@ -272,6 +257,26 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
      */
     public void setFollowByMemberIdList(List<Follow> followByMemberIdList) {
         _followByMemberIdList = followByMemberIdList;
+    }
+
+    /** follow by YOU_ID, named 'followByYouIdList'. */
+    protected List<Follow> _followByYouIdList;
+
+    /**
+     * [get] follow by YOU_ID, named 'followByYouIdList'.
+     * @return The entity list of referrer property 'followByYouIdList'. (NotNull: even if no loading, returns empty list)
+     */
+    public List<Follow> getFollowByYouIdList() {
+        if (_followByYouIdList == null) { _followByYouIdList = newReferrerList(); }
+        return _followByYouIdList;
+    }
+
+    /**
+     * [set] follow by YOU_ID, named 'followByYouIdList'.
+     * @param followByYouIdList The entity list of referrer property 'followByYouIdList'. (NullAllowed)
+     */
+    public void setFollowByYouIdList(List<Follow> followByYouIdList) {
+        _followByYouIdList = followByYouIdList;
     }
 
     /** login by MEMBER_ID, named 'loginList'. */
@@ -422,10 +427,10 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
         { sb.append(li).append(xbRDS(_memberSecurityAsOne, "memberSecurityAsOne")); }
         if (_memberWithdrawAsOne != null)
         { sb.append(li).append(xbRDS(_memberWithdrawAsOne, "memberWithdrawAsOne")); }
-        if (_followByYouIdList != null) { for (Entity et : _followByYouIdList)
-        { if (et != null) { sb.append(li).append(xbRDS(et, "followByYouIdList")); } } }
         if (_followByMemberIdList != null) { for (Entity et : _followByMemberIdList)
         { if (et != null) { sb.append(li).append(xbRDS(et, "followByMemberIdList")); } } }
+        if (_followByYouIdList != null) { for (Entity et : _followByYouIdList)
+        { if (et != null) { sb.append(li).append(xbRDS(et, "followByYouIdList")); } } }
         if (_loginList != null) { for (Entity et : _loginList)
         { if (et != null) { sb.append(li).append(xbRDS(et, "loginList")); } } }
         if (_tweetList != null) { for (Entity et : _tweetList)
@@ -459,6 +464,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
         sb.append(dm).append(getUpdDatetime());
         sb.append(dm).append(getInsTrace());
         sb.append(dm).append(getUpdTrace());
+        sb.append(dm).append(getAccountName());
         if (sb.length() > dm.length()) {
             sb.delete(0, dm.length());
         }
@@ -476,10 +482,10 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
         String cm = ",";
         if (_memberSecurityAsOne != null) { sb.append(cm).append("memberSecurityAsOne"); }
         if (_memberWithdrawAsOne != null) { sb.append(cm).append("memberWithdrawAsOne"); }
-        if (_followByYouIdList != null && !_followByYouIdList.isEmpty())
-        { sb.append(cm).append("followByYouIdList"); }
         if (_followByMemberIdList != null && !_followByMemberIdList.isEmpty())
         { sb.append(cm).append("followByMemberIdList"); }
+        if (_followByYouIdList != null && !_followByYouIdList.isEmpty())
+        { sb.append(cm).append("followByYouIdList"); }
         if (_loginList != null && !_loginList.isEmpty())
         { sb.append(cm).append("loginList"); }
         if (_tweetList != null && !_tweetList.isEmpty())
@@ -544,7 +550,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [get] USER_NAME: {UQ, NotNull, VARCHAR(50)} <br />
+     * [get] USER_NAME: {UQ, NotNull, VARCHAR(100)} <br />
      * 会員ユーザ名 : 会員のユーザ名
      * @return The value of the column 'USER_NAME'. (basically NotNull if selected: for the constraint)
      */
@@ -553,7 +559,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [set] USER_NAME: {UQ, NotNull, VARCHAR(50)} <br />
+     * [set] USER_NAME: {UQ, NotNull, VARCHAR(100)} <br />
      * 会員ユーザ名 : 会員のユーザ名
      * @param userName The value of the column 'USER_NAME'. (basically NotNull if update: for the constraint)
      */
@@ -674,5 +680,24 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     public void setUpdTrace(String updTrace) {
         __modifiedProperties.addPropertyName("updTrace");
         _updTrace = updTrace;
+    }
+
+    /**
+     * [get] ACCOUNT_NAME: {NotNull, VARCHAR(100)} <br />
+     * アカウント名
+     * @return The value of the column 'ACCOUNT_NAME'. (basically NotNull if selected: for the constraint)
+     */
+    public String getAccountName() {
+        return _accountName;
+    }
+
+    /**
+     * [set] ACCOUNT_NAME: {NotNull, VARCHAR(100)} <br />
+     * アカウント名
+     * @param accountName The value of the column 'ACCOUNT_NAME'. (basically NotNull if update: for the constraint)
+     */
+    public void setAccountName(String accountName) {
+        __modifiedProperties.addPropertyName("accountName");
+        _accountName = accountName;
     }
 }

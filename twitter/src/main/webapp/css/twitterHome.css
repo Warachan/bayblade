@@ -1,0 +1,425 @@
+@charset "UTF-8";
+/*-----base-----*/
+h1 + p{
+	margin: 25px;
+}
+body,
+figure,
+h1,
+ul,
+dl,
+dd,
+h2,
+h3,
+h4,
+p {
+	margin: 0px;
+}
+ul{
+	padding: 0px;
+}
+body{
+	color: #68CFC3;
+	font-family: メイリオ, Meryo;
+	background-color: #FFFFFF;
+}
+h1{
+	font-size: 30px;
+	color:##68CFC3;
+	font-family: 'Libre Baskerville', serif;
+	text-align: center;
+}
+h2{
+	font-size:40px;
+	color: #68CFC3;
+	font-family: 'Libre Baskerville', serif;
+}
+h3, h4{
+	font-size: 30px;
+	color: #68CFC3;
+	font-family: 'Libre Baskerville', serif;
+}
+
+/*-----header-----*/
+
+/*---global-navigation---*/
+.global-navigation {
+    margin-top: 40px;
+	width: 1350px;
+    height: 30px
+}
+global-navigation li.return{
+	margin-left:597px;
+	color: #C6C6C6
+ 	background: clear;
+ 	font-weight: bold;
+    font-size: 15px;
+    text-align: center;
+    text-decoration: none;
+
+}
+.global-navigation li {
+    display: inline;
+    width: 20%;
+    float:left;
+
+}
+.global-navigation a {
+ 	color: #C6C6C6;
+ 	background: clear;
+    display: block;
+    line-height: 1.0;
+    padding: 6px 0;
+    font-weight: bold;
+    font-size: 15px;
+    text-align: center;
+    text-decoration: none;
+}
+.global-navigation a:hover{
+	background: #D5E5FF;
+}
+.searchForm{
+	width:500px;
+	margin-left:340px;
+}
+.searchButton{
+	color:#FFFFFF;
+	background-color: #68CFC3;
+	width: 80px;
+	height:20px;
+	font-weight:bold;
+	border-radius: 20px;
+	border-style:none;
+}
+.searchButton:hover{
+	color:#68CFC3;
+	background-color:#FFFFFF;
+	width: 80px;
+	height:20px;
+	font-weight:bold;
+	border-radius: 20px;
+	border-style:none;
+}
+.searchBox{
+	/*height: 20px;*/
+	border: 2px solid #68CFC3;
+}
+.logoutForm{
+	margin-left:385px
+}
+.logout{
+	color:#FFFFFF;
+	background-color: #68CFC3;
+    background-positon: 50% 50%;
+	width: 80px;
+	height:20px;
+	font-weight:bold;
+	border-radius: 20px;
+	border-radius: 20px;
+	border-style:none;
+}
+.logout:hover{
+	color: #68CFC3;
+	background-color: #FFFFFF;
+	width: 80px;
+	height:20px;
+	font-weight:bold;
+	border-style:none;
+}
+
+/*---top page---*/
+.top-main{
+	clear:left;
+	width:1000px;
+	height:400px;
+	margin:auto;
+}
+.loginForm{
+	margin-top:50px;
+}
+.top-main h4{
+	font-size:20px;
+}
+.loginId{
+	margin-top:10px;
+}
+.loginPass{
+	margin-top:10px;
+}
+.login{
+	width:400px;
+	height:220px;
+	margin-left:250px;
+	padding:15px;
+	border: 1px solid #68CFC3;
+}
+.loginError{
+	margin-left:5px;
+	margin-top:5px;
+}
+.loginError li{
+	list-style:none;
+}
+.signup{
+	width:300px;
+	height:100px;
+	border: 1px solid #68CFC3;
+	margin-left:250px;
+	margin-top:15px;
+	padding:15px;
+}
+
+.loginButton{
+	color:#FFFFFF;
+	background-color: #68CFC3;
+	width: 80px;
+	height:20px;
+	font-weight:bold;
+	border-radius: 20px;
+	border-style:none;
+	margin-top:20px;
+}
+.signupButton{
+	color:#FFFFFF;
+	background-color: #68CFC3;
+	width: 80px;
+	height:20px;
+	font-weight:bold;
+	border-style:none;
+	border-radius: 20px;
+	margin-top:20px;
+}
+
+/*---signup page ---*/
+.signup-main{
+	clear:left;
+	width:1000px;
+	margin:auto;
+	padding:20px;
+}
+.signup-box{
+	width:500px;
+	margin-left:222px;
+	margin-top:50px;
+	border:1px solid #68CFC3;
+}
+.signupForm{
+	padding-left: 50px;
+}
+.signup-box li{
+	list-style:none;
+	margin-left: 5px;
+}
+.signup-box h2{
+	margin-left:48px;
+	margin-top:15px;
+}
+.signup-box h4{
+	margin-top: 20px;
+}
+
+.register{
+	color:#FFFFFF;
+	background-color: #68CFC3;
+	width: 80px;
+	height:20px;
+	font-weight:bold;
+	border-radius: 20px;
+	border-style:none;
+	margin-top:20px;
+	margin-bottom:20px;
+}
+
+.email{
+	margin-top:10px;
+}
+.email,.name,.username,.password,.register{
+	margin-left:30px;
+}
+/*---main page---*/
+.main{
+	clear:left;
+	width:1250px;
+	margin:auto;
+}
+.member-main{
+	clear:left;
+	width:1000px;
+	margin:auto;
+}
+
+/*---main-top---*/
+.main-top{
+	margin-top:20px;
+}
+.main-top-profile{
+	display:inline-block;
+	width: 760px;
+	height:132px;
+	padding:17px;
+	border:2px solid #3EBA2B;
+	float:left;
+}
+.myProfile{
+	border-top: 1px solid #68CFC3;
+	margin-top:5px;
+	padding-top:5px;
+}
+.memberFollowStatus{
+	margin-left:8px;
+	font-size:20px;
+}
+
+.main-top-eyecatch{
+	width:140px;
+	heigh:100px;
+	margin-left: 825px;
+}
+.main-top-eyecatch img{
+	width:140px;
+	height:170px;
+}
+.followCheck{
+	width:150px;
+	height:30px;
+	color:#FFFFFF;
+	font-weight:bold;
+	background-color: #68CFC3;
+	margin-top:10px;
+	border-style:none;
+}
+.followOrUnfollow{
+	font-size:20px;
+	margin-left:8px;
+}
+.followOrUnfollow h2{
+	margin-bottom:8px;
+}
+.followLink{
+	margin-left:8px;
+}
+.followStatus{
+	margin-left:8px;
+}
+
+/*---main-bottom---*/
+.main-bottom{
+	width:967px;
+	height:auto;
+	margin-top:20px;
+	border:2px solid #3EBA2B;
+}
+.main-bottom h4{
+	margin:23px
+}
+
+.main-bottom h3{
+	margin:10px;]
+}
+
+.main-bottom-tweetBox{
+	height:53px;
+	margin-left:23px;
+}
+.tweetBox{
+	width:500px;
+	height:30px;
+	border:2px solid #3EBA2B;
+}
+.tweetButton{
+	border-style:none;
+	width: 100px;
+	height:30px;
+	font-weight:bold;
+	margin-top:9px;
+	margin-left:27px;
+	color: #FFFFFF;
+	background-color:#68CFC3;
+}
+.main-bottom-timeline{
+	width:auto;
+	height:auto;
+	margin-top:15px;
+}
+
+.main-bottom dl{
+	padding:10px;
+	border-top:1px solid #68CFC3;
+}
+
+/*---main-right---*/
+.main-right{
+	width:165px;
+	height:350px;
+	position:fixed;
+	left:auto;
+	top:113px;
+	margin-left:1042px;
+	padding: 23px;
+	border:2px solid #3EBA2B;
+}
+.main-right h3{
+	margin-bottom:10px;
+}
+
+.suggestFollow{
+	border-style:none;
+	width: 80px;
+	height:20px;
+	font-weight:bold;
+	margin-top:5px;
+	margin-bottom:8px;
+	color: #FFFFFF;
+	background-color:#68CFC3;
+}
+
+/*---searchResult page---*/
+.userList{
+	width: 947px;
+	height: auto;
+	border: 2px solid #3EBA2B;
+	padding:10px;
+}
+
+.userList h3{
+	margin-bottom:4px;
+ 	fontSize:20px;
+}
+ .errorMessage{
+ 	margin-bottom: 10px;
+ 	margin-left: 10px;
+}
+
+/*---FollowList page---*/
+.follow-main{
+	clear:left;
+	width:1000px;
+	margin:auto;
+}
+.follow-main h3{
+	margin-bottom: 5px;
+	border-bottom: 2px solid #3EBA2B;
+}
+
+.follow-main dt{
+	padding: 3px;
+}
+.following{
+	width: 440px;
+	height:auto;
+	border: 2px solid #3EBA2B;
+	float:left;
+}
+.followingList{
+	padding:10px;
+}
+.follower{
+	width: 440px;
+	height:auto;
+	border: 2px solid #3EBA2B;
+	float:left;
+	margin-left:30px;
+}
+.followerList{
+	padding:10px;
+}

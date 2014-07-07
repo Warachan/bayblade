@@ -148,28 +148,6 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * Set up ExistsReferrer (correlated sub-query). <br />
-     * {exists (select YOU_ID from follow where ...)} <br />
-     * follow by YOU_ID, named 'followByYouIdAsOne'.
-     * <pre>
-     * cb.query().<span style="color: #DD4747">existsFollowByYouIdList</span>(new SubQuery&lt;FollowCB&gt;() {
-     *     public void query(FollowCB subCB) {
-     *         subCB.query().setXxx...
-     *     }
-     * });
-     * </pre>
-     * @param subQuery The sub-query of FollowByYouIdList for 'exists'. (NotNull)
-     */
-    public void existsFollowByYouIdList(SubQuery<FollowCB> subQuery) {
-        assertObjectNotNull("subQuery", subQuery);
-        FollowCB cb = new FollowCB(); cb.xsetupForExistsReferrer(this);
-        try { lock(); subQuery.query(cb); } finally { unlock(); }
-        String pp = keepMemberId_ExistsReferrer_FollowByYouIdList(cb.query());
-        registerExistsReferrer(cb.query(), "MEMBER_ID", "YOU_ID", pp, "followByYouIdList");
-    }
-    public abstract String keepMemberId_ExistsReferrer_FollowByYouIdList(FollowCQ sq);
-
-    /**
-     * Set up ExistsReferrer (correlated sub-query). <br />
      * {exists (select MEMBER_ID from follow where ...)} <br />
      * follow by MEMBER_ID, named 'followByMemberIdAsOne'.
      * <pre>
@@ -189,6 +167,28 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
         registerExistsReferrer(cb.query(), "MEMBER_ID", "MEMBER_ID", pp, "followByMemberIdList");
     }
     public abstract String keepMemberId_ExistsReferrer_FollowByMemberIdList(FollowCQ sq);
+
+    /**
+     * Set up ExistsReferrer (correlated sub-query). <br />
+     * {exists (select YOU_ID from follow where ...)} <br />
+     * follow by YOU_ID, named 'followByYouIdAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #DD4747">existsFollowByYouIdList</span>(new SubQuery&lt;FollowCB&gt;() {
+     *     public void query(FollowCB subCB) {
+     *         subCB.query().setXxx...
+     *     }
+     * });
+     * </pre>
+     * @param subQuery The sub-query of FollowByYouIdList for 'exists'. (NotNull)
+     */
+    public void existsFollowByYouIdList(SubQuery<FollowCB> subQuery) {
+        assertObjectNotNull("subQuery", subQuery);
+        FollowCB cb = new FollowCB(); cb.xsetupForExistsReferrer(this);
+        try { lock(); subQuery.query(cb); } finally { unlock(); }
+        String pp = keepMemberId_ExistsReferrer_FollowByYouIdList(cb.query());
+        registerExistsReferrer(cb.query(), "MEMBER_ID", "YOU_ID", pp, "followByYouIdList");
+    }
+    public abstract String keepMemberId_ExistsReferrer_FollowByYouIdList(FollowCQ sq);
 
     /**
      * Set up ExistsReferrer (correlated sub-query). <br />
@@ -280,28 +280,6 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * Set up NotExistsReferrer (correlated sub-query). <br />
-     * {not exists (select YOU_ID from follow where ...)} <br />
-     * follow by YOU_ID, named 'followByYouIdAsOne'.
-     * <pre>
-     * cb.query().<span style="color: #DD4747">notExistsFollowByYouIdList</span>(new SubQuery&lt;FollowCB&gt;() {
-     *     public void query(FollowCB subCB) {
-     *         subCB.query().setXxx...
-     *     }
-     * });
-     * </pre>
-     * @param subQuery The sub-query of MemberId_NotExistsReferrer_FollowByYouIdList for 'not exists'. (NotNull)
-     */
-    public void notExistsFollowByYouIdList(SubQuery<FollowCB> subQuery) {
-        assertObjectNotNull("subQuery", subQuery);
-        FollowCB cb = new FollowCB(); cb.xsetupForExistsReferrer(this);
-        try { lock(); subQuery.query(cb); } finally { unlock(); }
-        String pp = keepMemberId_NotExistsReferrer_FollowByYouIdList(cb.query());
-        registerNotExistsReferrer(cb.query(), "MEMBER_ID", "YOU_ID", pp, "followByYouIdList");
-    }
-    public abstract String keepMemberId_NotExistsReferrer_FollowByYouIdList(FollowCQ sq);
-
-    /**
-     * Set up NotExistsReferrer (correlated sub-query). <br />
      * {not exists (select MEMBER_ID from follow where ...)} <br />
      * follow by MEMBER_ID, named 'followByMemberIdAsOne'.
      * <pre>
@@ -321,6 +299,28 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
         registerNotExistsReferrer(cb.query(), "MEMBER_ID", "MEMBER_ID", pp, "followByMemberIdList");
     }
     public abstract String keepMemberId_NotExistsReferrer_FollowByMemberIdList(FollowCQ sq);
+
+    /**
+     * Set up NotExistsReferrer (correlated sub-query). <br />
+     * {not exists (select YOU_ID from follow where ...)} <br />
+     * follow by YOU_ID, named 'followByYouIdAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #DD4747">notExistsFollowByYouIdList</span>(new SubQuery&lt;FollowCB&gt;() {
+     *     public void query(FollowCB subCB) {
+     *         subCB.query().setXxx...
+     *     }
+     * });
+     * </pre>
+     * @param subQuery The sub-query of MemberId_NotExistsReferrer_FollowByYouIdList for 'not exists'. (NotNull)
+     */
+    public void notExistsFollowByYouIdList(SubQuery<FollowCB> subQuery) {
+        assertObjectNotNull("subQuery", subQuery);
+        FollowCB cb = new FollowCB(); cb.xsetupForExistsReferrer(this);
+        try { lock(); subQuery.query(cb); } finally { unlock(); }
+        String pp = keepMemberId_NotExistsReferrer_FollowByYouIdList(cb.query());
+        registerNotExistsReferrer(cb.query(), "MEMBER_ID", "YOU_ID", pp, "followByYouIdList");
+    }
+    public abstract String keepMemberId_NotExistsReferrer_FollowByYouIdList(FollowCQ sq);
 
     /**
      * Set up NotExistsReferrer (correlated sub-query). <br />
@@ -412,21 +412,6 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * Set up InScopeRelation (sub-query). <br />
-     * {in (select YOU_ID from follow where ...)} <br />
-     * follow by YOU_ID, named 'followByYouIdAsOne'.
-     * @param subQuery The sub-query of FollowByYouIdList for 'in-scope'. (NotNull)
-     */
-    public void inScopeFollowByYouIdList(SubQuery<FollowCB> subQuery) {
-        assertObjectNotNull("subQuery", subQuery);
-        FollowCB cb = new FollowCB(); cb.xsetupForInScopeRelation(this);
-        try { lock(); subQuery.query(cb); } finally { unlock(); }
-        String pp = keepMemberId_InScopeRelation_FollowByYouIdList(cb.query());
-        registerInScopeRelation(cb.query(), "MEMBER_ID", "YOU_ID", pp, "followByYouIdList");
-    }
-    public abstract String keepMemberId_InScopeRelation_FollowByYouIdList(FollowCQ sq);
-
-    /**
-     * Set up InScopeRelation (sub-query). <br />
      * {in (select MEMBER_ID from follow where ...)} <br />
      * follow by MEMBER_ID, named 'followByMemberIdAsOne'.
      * @param subQuery The sub-query of FollowByMemberIdList for 'in-scope'. (NotNull)
@@ -439,6 +424,21 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
         registerInScopeRelation(cb.query(), "MEMBER_ID", "MEMBER_ID", pp, "followByMemberIdList");
     }
     public abstract String keepMemberId_InScopeRelation_FollowByMemberIdList(FollowCQ sq);
+
+    /**
+     * Set up InScopeRelation (sub-query). <br />
+     * {in (select YOU_ID from follow where ...)} <br />
+     * follow by YOU_ID, named 'followByYouIdAsOne'.
+     * @param subQuery The sub-query of FollowByYouIdList for 'in-scope'. (NotNull)
+     */
+    public void inScopeFollowByYouIdList(SubQuery<FollowCB> subQuery) {
+        assertObjectNotNull("subQuery", subQuery);
+        FollowCB cb = new FollowCB(); cb.xsetupForInScopeRelation(this);
+        try { lock(); subQuery.query(cb); } finally { unlock(); }
+        String pp = keepMemberId_InScopeRelation_FollowByYouIdList(cb.query());
+        registerInScopeRelation(cb.query(), "MEMBER_ID", "YOU_ID", pp, "followByYouIdList");
+    }
+    public abstract String keepMemberId_InScopeRelation_FollowByYouIdList(FollowCQ sq);
 
     /**
      * Set up InScopeRelation (sub-query). <br />
@@ -502,21 +502,6 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * Set up NotInScopeRelation (sub-query). <br />
-     * {not in (select YOU_ID from follow where ...)} <br />
-     * follow by YOU_ID, named 'followByYouIdAsOne'.
-     * @param subQuery The sub-query of FollowByYouIdList for 'not in-scope'. (NotNull)
-     */
-    public void notInScopeFollowByYouIdList(SubQuery<FollowCB> subQuery) {
-        assertObjectNotNull("subQuery", subQuery);
-        FollowCB cb = new FollowCB(); cb.xsetupForInScopeRelation(this);
-        try { lock(); subQuery.query(cb); } finally { unlock(); }
-        String pp = keepMemberId_NotInScopeRelation_FollowByYouIdList(cb.query());
-        registerNotInScopeRelation(cb.query(), "MEMBER_ID", "YOU_ID", pp, "followByYouIdList");
-    }
-    public abstract String keepMemberId_NotInScopeRelation_FollowByYouIdList(FollowCQ sq);
-
-    /**
-     * Set up NotInScopeRelation (sub-query). <br />
      * {not in (select MEMBER_ID from follow where ...)} <br />
      * follow by MEMBER_ID, named 'followByMemberIdAsOne'.
      * @param subQuery The sub-query of FollowByMemberIdList for 'not in-scope'. (NotNull)
@@ -529,6 +514,21 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
         registerNotInScopeRelation(cb.query(), "MEMBER_ID", "MEMBER_ID", pp, "followByMemberIdList");
     }
     public abstract String keepMemberId_NotInScopeRelation_FollowByMemberIdList(FollowCQ sq);
+
+    /**
+     * Set up NotInScopeRelation (sub-query). <br />
+     * {not in (select YOU_ID from follow where ...)} <br />
+     * follow by YOU_ID, named 'followByYouIdAsOne'.
+     * @param subQuery The sub-query of FollowByYouIdList for 'not in-scope'. (NotNull)
+     */
+    public void notInScopeFollowByYouIdList(SubQuery<FollowCB> subQuery) {
+        assertObjectNotNull("subQuery", subQuery);
+        FollowCB cb = new FollowCB(); cb.xsetupForInScopeRelation(this);
+        try { lock(); subQuery.query(cb); } finally { unlock(); }
+        String pp = keepMemberId_NotInScopeRelation_FollowByYouIdList(cb.query());
+        registerNotInScopeRelation(cb.query(), "MEMBER_ID", "YOU_ID", pp, "followByYouIdList");
+    }
+    public abstract String keepMemberId_NotInScopeRelation_FollowByYouIdList(FollowCQ sq);
 
     /**
      * Set up NotInScopeRelation (sub-query). <br />
@@ -590,15 +590,6 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
     }
     public abstract String keepMemberId_NotInScopeRelation_TweetList(TweetCQ sq);
 
-    public void xsderiveFollowByYouIdList(String fn, SubQuery<FollowCB> sq, String al, DerivedReferrerOption op) {
-        assertObjectNotNull("subQuery", sq);
-        FollowCB cb = new FollowCB(); cb.xsetupForDerivedReferrer(this);
-        try { lock(); sq.query(cb); } finally { unlock(); }
-        String pp = keepMemberId_SpecifyDerivedReferrer_FollowByYouIdList(cb.query());
-        registerSpecifyDerivedReferrer(fn, cb.query(), "MEMBER_ID", "YOU_ID", pp, "followByYouIdList", al, op);
-    }
-    public abstract String keepMemberId_SpecifyDerivedReferrer_FollowByYouIdList(FollowCQ sq);
-
     public void xsderiveFollowByMemberIdList(String fn, SubQuery<FollowCB> sq, String al, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
         FollowCB cb = new FollowCB(); cb.xsetupForDerivedReferrer(this);
@@ -607,6 +598,15 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
         registerSpecifyDerivedReferrer(fn, cb.query(), "MEMBER_ID", "MEMBER_ID", pp, "followByMemberIdList", al, op);
     }
     public abstract String keepMemberId_SpecifyDerivedReferrer_FollowByMemberIdList(FollowCQ sq);
+
+    public void xsderiveFollowByYouIdList(String fn, SubQuery<FollowCB> sq, String al, DerivedReferrerOption op) {
+        assertObjectNotNull("subQuery", sq);
+        FollowCB cb = new FollowCB(); cb.xsetupForDerivedReferrer(this);
+        try { lock(); sq.query(cb); } finally { unlock(); }
+        String pp = keepMemberId_SpecifyDerivedReferrer_FollowByYouIdList(cb.query());
+        registerSpecifyDerivedReferrer(fn, cb.query(), "MEMBER_ID", "YOU_ID", pp, "followByYouIdList", al, op);
+    }
+    public abstract String keepMemberId_SpecifyDerivedReferrer_FollowByYouIdList(FollowCQ sq);
 
     public void xsderiveLoginList(String fn, SubQuery<LoginCB> sq, String al, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
@@ -625,40 +625,6 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
         registerSpecifyDerivedReferrer(fn, cb.query(), "MEMBER_ID", "MEMBER_ID", pp, "tweetList", al, op);
     }
     public abstract String keepMemberId_SpecifyDerivedReferrer_TweetList(TweetCQ sq);
-
-    /**
-     * Prepare for (Query)DerivedReferrer (correlated sub-query). <br />
-     * {FOO &lt;= (select max(BAR) from follow where ...)} <br />
-     * follow by YOU_ID, named 'followByYouIdAsOne'.
-     * <pre>
-     * cb.query().<span style="color: #DD4747">derivedFollowByYouIdList()</span>.<span style="color: #DD4747">max</span>(new SubQuery&lt;FollowCB&gt;() {
-     *     public void query(FollowCB subCB) {
-     *         subCB.specify().<span style="color: #DD4747">columnFoo...</span> <span style="color: #3F7E5E">// derived column by function</span>
-     *         subCB.query().setBar... <span style="color: #3F7E5E">// referrer condition</span>
-     *     }
-     * }).<span style="color: #DD4747">greaterEqual</span>(123); <span style="color: #3F7E5E">// condition to derived column</span>
-     * </pre>
-     * @return The object to set up a function for referrer table. (NotNull)
-     */
-    public HpQDRFunction<FollowCB> derivedFollowByYouIdList() {
-        return xcreateQDRFunctionFollowByYouIdList();
-    }
-    protected HpQDRFunction<FollowCB> xcreateQDRFunctionFollowByYouIdList() {
-        return new HpQDRFunction<FollowCB>(new HpQDRSetupper<FollowCB>() {
-            public void setup(String fn, SubQuery<FollowCB> sq, String rd, Object vl, DerivedReferrerOption op) {
-                xqderiveFollowByYouIdList(fn, sq, rd, vl, op);
-            }
-        });
-    }
-    public void xqderiveFollowByYouIdList(String fn, SubQuery<FollowCB> sq, String rd, Object vl, DerivedReferrerOption op) {
-        assertObjectNotNull("subQuery", sq);
-        FollowCB cb = new FollowCB(); cb.xsetupForDerivedReferrer(this);
-        try { lock(); sq.query(cb); } finally { unlock(); }
-        String sqpp = keepMemberId_QueryDerivedReferrer_FollowByYouIdList(cb.query()); String prpp = keepMemberId_QueryDerivedReferrer_FollowByYouIdListParameter(vl);
-        registerQueryDerivedReferrer(fn, cb.query(), "MEMBER_ID", "YOU_ID", sqpp, "followByYouIdList", rd, vl, prpp, op);
-    }
-    public abstract String keepMemberId_QueryDerivedReferrer_FollowByYouIdList(FollowCQ sq);
-    public abstract String keepMemberId_QueryDerivedReferrer_FollowByYouIdListParameter(Object vl);
 
     /**
      * Prepare for (Query)DerivedReferrer (correlated sub-query). <br />
@@ -693,6 +659,40 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
     }
     public abstract String keepMemberId_QueryDerivedReferrer_FollowByMemberIdList(FollowCQ sq);
     public abstract String keepMemberId_QueryDerivedReferrer_FollowByMemberIdListParameter(Object vl);
+
+    /**
+     * Prepare for (Query)DerivedReferrer (correlated sub-query). <br />
+     * {FOO &lt;= (select max(BAR) from follow where ...)} <br />
+     * follow by YOU_ID, named 'followByYouIdAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #DD4747">derivedFollowByYouIdList()</span>.<span style="color: #DD4747">max</span>(new SubQuery&lt;FollowCB&gt;() {
+     *     public void query(FollowCB subCB) {
+     *         subCB.specify().<span style="color: #DD4747">columnFoo...</span> <span style="color: #3F7E5E">// derived column by function</span>
+     *         subCB.query().setBar... <span style="color: #3F7E5E">// referrer condition</span>
+     *     }
+     * }).<span style="color: #DD4747">greaterEqual</span>(123); <span style="color: #3F7E5E">// condition to derived column</span>
+     * </pre>
+     * @return The object to set up a function for referrer table. (NotNull)
+     */
+    public HpQDRFunction<FollowCB> derivedFollowByYouIdList() {
+        return xcreateQDRFunctionFollowByYouIdList();
+    }
+    protected HpQDRFunction<FollowCB> xcreateQDRFunctionFollowByYouIdList() {
+        return new HpQDRFunction<FollowCB>(new HpQDRSetupper<FollowCB>() {
+            public void setup(String fn, SubQuery<FollowCB> sq, String rd, Object vl, DerivedReferrerOption op) {
+                xqderiveFollowByYouIdList(fn, sq, rd, vl, op);
+            }
+        });
+    }
+    public void xqderiveFollowByYouIdList(String fn, SubQuery<FollowCB> sq, String rd, Object vl, DerivedReferrerOption op) {
+        assertObjectNotNull("subQuery", sq);
+        FollowCB cb = new FollowCB(); cb.xsetupForDerivedReferrer(this);
+        try { lock(); sq.query(cb); } finally { unlock(); }
+        String sqpp = keepMemberId_QueryDerivedReferrer_FollowByYouIdList(cb.query()); String prpp = keepMemberId_QueryDerivedReferrer_FollowByYouIdListParameter(vl);
+        registerQueryDerivedReferrer(fn, cb.query(), "MEMBER_ID", "YOU_ID", sqpp, "followByYouIdList", rd, vl, prpp, op);
+    }
+    public abstract String keepMemberId_QueryDerivedReferrer_FollowByYouIdList(FollowCQ sq);
+    public abstract String keepMemberId_QueryDerivedReferrer_FollowByYouIdListParameter(Object vl);
 
     /**
      * Prepare for (Query)DerivedReferrer (correlated sub-query). <br />
@@ -901,7 +901,7 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
-     * USER_NAME: {UQ, NotNull, VARCHAR(50)}
+     * USER_NAME: {UQ, NotNull, VARCHAR(100)}
      * @param userName The value of userName as equal. (NullAllowed: if null (or empty), no condition)
      */
     public void setUserName_Equal(String userName) {
@@ -914,7 +914,7 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
-     * USER_NAME: {UQ, NotNull, VARCHAR(50)}
+     * USER_NAME: {UQ, NotNull, VARCHAR(100)}
      * @param userName The value of userName as notEqual. (NullAllowed: if null (or empty), no condition)
      */
     public void setUserName_NotEqual(String userName) {
@@ -927,7 +927,7 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * GreaterThan(&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
-     * USER_NAME: {UQ, NotNull, VARCHAR(50)}
+     * USER_NAME: {UQ, NotNull, VARCHAR(100)}
      * @param userName The value of userName as greaterThan. (NullAllowed: if null (or empty), no condition)
      */
     public void setUserName_GreaterThan(String userName) {
@@ -936,7 +936,7 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * LessThan(&lt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
-     * USER_NAME: {UQ, NotNull, VARCHAR(50)}
+     * USER_NAME: {UQ, NotNull, VARCHAR(100)}
      * @param userName The value of userName as lessThan. (NullAllowed: if null (or empty), no condition)
      */
     public void setUserName_LessThan(String userName) {
@@ -945,7 +945,7 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * GreaterEqual(&gt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
-     * USER_NAME: {UQ, NotNull, VARCHAR(50)}
+     * USER_NAME: {UQ, NotNull, VARCHAR(100)}
      * @param userName The value of userName as greaterEqual. (NullAllowed: if null (or empty), no condition)
      */
     public void setUserName_GreaterEqual(String userName) {
@@ -954,7 +954,7 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * LessEqual(&lt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
-     * USER_NAME: {UQ, NotNull, VARCHAR(50)}
+     * USER_NAME: {UQ, NotNull, VARCHAR(100)}
      * @param userName The value of userName as lessEqual. (NullAllowed: if null (or empty), no condition)
      */
     public void setUserName_LessEqual(String userName) {
@@ -963,7 +963,7 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br />
-     * USER_NAME: {UQ, NotNull, VARCHAR(50)}
+     * USER_NAME: {UQ, NotNull, VARCHAR(100)}
      * @param userNameList The collection of userName as inScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setUserName_InScope(Collection<String> userNameList) {
@@ -976,7 +976,7 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br />
-     * USER_NAME: {UQ, NotNull, VARCHAR(50)}
+     * USER_NAME: {UQ, NotNull, VARCHAR(100)}
      * @param userNameList The collection of userName as notInScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setUserName_NotInScope(Collection<String> userNameList) {
@@ -989,7 +989,7 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * PrefixSearch {like 'xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br />
-     * USER_NAME: {UQ, NotNull, VARCHAR(50)}
+     * USER_NAME: {UQ, NotNull, VARCHAR(100)}
      * @param userName The value of userName as prefixSearch. (NullAllowed: if null (or empty), no condition)
      */
     public void setUserName_PrefixSearch(String userName) {
@@ -998,7 +998,7 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br />
-     * USER_NAME: {UQ, NotNull, VARCHAR(50)} <br />
+     * USER_NAME: {UQ, NotNull, VARCHAR(100)} <br />
      * <pre>e.g. setUserName_LikeSearch("xxx", new <span style="color: #DD4747">LikeSearchOption</span>().likeContain());</pre>
      * @param userName The value of userName as likeSearch. (NullAllowed: if null (or empty), no condition)
      * @param likeSearchOption The option of like-search. (NotNull)
@@ -1010,7 +1010,7 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br />
      * And NullOrEmptyIgnored, SeveralRegistered. <br />
-     * USER_NAME: {UQ, NotNull, VARCHAR(50)}
+     * USER_NAME: {UQ, NotNull, VARCHAR(100)}
      * @param userName The value of userName as notLikeSearch. (NullAllowed: if null (or empty), no condition)
      * @param likeSearchOption The option of not-like-search. (NotNull)
      */
@@ -1644,6 +1644,128 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     protected void regUpdTrace(ConditionKey ky, Object vl) { regQ(ky, vl, getCValueUpdTrace(), "UPD_TRACE"); }
     protected abstract ConditionValue getCValueUpdTrace();
+
+    /**
+     * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
+     * ACCOUNT_NAME: {NotNull, VARCHAR(100)}
+     * @param accountName The value of accountName as equal. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setAccountName_Equal(String accountName) {
+        doSetAccountName_Equal(fRES(accountName));
+    }
+
+    protected void doSetAccountName_Equal(String accountName) {
+        regAccountName(CK_EQ, accountName);
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
+     * ACCOUNT_NAME: {NotNull, VARCHAR(100)}
+     * @param accountName The value of accountName as notEqual. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setAccountName_NotEqual(String accountName) {
+        doSetAccountName_NotEqual(fRES(accountName));
+    }
+
+    protected void doSetAccountName_NotEqual(String accountName) {
+        regAccountName(CK_NES, accountName);
+    }
+
+    /**
+     * GreaterThan(&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
+     * ACCOUNT_NAME: {NotNull, VARCHAR(100)}
+     * @param accountName The value of accountName as greaterThan. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setAccountName_GreaterThan(String accountName) {
+        regAccountName(CK_GT, fRES(accountName));
+    }
+
+    /**
+     * LessThan(&lt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
+     * ACCOUNT_NAME: {NotNull, VARCHAR(100)}
+     * @param accountName The value of accountName as lessThan. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setAccountName_LessThan(String accountName) {
+        regAccountName(CK_LT, fRES(accountName));
+    }
+
+    /**
+     * GreaterEqual(&gt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
+     * ACCOUNT_NAME: {NotNull, VARCHAR(100)}
+     * @param accountName The value of accountName as greaterEqual. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setAccountName_GreaterEqual(String accountName) {
+        regAccountName(CK_GE, fRES(accountName));
+    }
+
+    /**
+     * LessEqual(&lt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
+     * ACCOUNT_NAME: {NotNull, VARCHAR(100)}
+     * @param accountName The value of accountName as lessEqual. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setAccountName_LessEqual(String accountName) {
+        regAccountName(CK_LE, fRES(accountName));
+    }
+
+    /**
+     * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br />
+     * ACCOUNT_NAME: {NotNull, VARCHAR(100)}
+     * @param accountNameList The collection of accountName as inScope. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setAccountName_InScope(Collection<String> accountNameList) {
+        doSetAccountName_InScope(accountNameList);
+    }
+
+    public void doSetAccountName_InScope(Collection<String> accountNameList) {
+        regINS(CK_INS, cTL(accountNameList), getCValueAccountName(), "ACCOUNT_NAME");
+    }
+
+    /**
+     * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br />
+     * ACCOUNT_NAME: {NotNull, VARCHAR(100)}
+     * @param accountNameList The collection of accountName as notInScope. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setAccountName_NotInScope(Collection<String> accountNameList) {
+        doSetAccountName_NotInScope(accountNameList);
+    }
+
+    public void doSetAccountName_NotInScope(Collection<String> accountNameList) {
+        regINS(CK_NINS, cTL(accountNameList), getCValueAccountName(), "ACCOUNT_NAME");
+    }
+
+    /**
+     * PrefixSearch {like 'xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br />
+     * ACCOUNT_NAME: {NotNull, VARCHAR(100)}
+     * @param accountName The value of accountName as prefixSearch. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setAccountName_PrefixSearch(String accountName) {
+        setAccountName_LikeSearch(accountName, cLSOP());
+    }
+
+    /**
+     * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br />
+     * ACCOUNT_NAME: {NotNull, VARCHAR(100)} <br />
+     * <pre>e.g. setAccountName_LikeSearch("xxx", new <span style="color: #DD4747">LikeSearchOption</span>().likeContain());</pre>
+     * @param accountName The value of accountName as likeSearch. (NullAllowed: if null (or empty), no condition)
+     * @param likeSearchOption The option of like-search. (NotNull)
+     */
+    public void setAccountName_LikeSearch(String accountName, LikeSearchOption likeSearchOption) {
+        regLSQ(CK_LS, fRES(accountName), getCValueAccountName(), "ACCOUNT_NAME", likeSearchOption);
+    }
+
+    /**
+     * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br />
+     * And NullOrEmptyIgnored, SeveralRegistered. <br />
+     * ACCOUNT_NAME: {NotNull, VARCHAR(100)}
+     * @param accountName The value of accountName as notLikeSearch. (NullAllowed: if null (or empty), no condition)
+     * @param likeSearchOption The option of not-like-search. (NotNull)
+     */
+    public void setAccountName_NotLikeSearch(String accountName, LikeSearchOption likeSearchOption) {
+        regLSQ(CK_NLS, fRES(accountName), getCValueAccountName(), "ACCOUNT_NAME", likeSearchOption);
+    }
+
+    protected void regAccountName(ConditionKey ky, Object vl) { regQ(ky, vl, getCValueAccountName(), "ACCOUNT_NAME"); }
+    protected abstract ConditionValue getCValueAccountName();
 
     // ===================================================================================
     //                                                                     ScalarCondition

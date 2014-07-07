@@ -114,7 +114,7 @@ public class BsMemberCB extends AbstractConditionBean {
 
     /**
      * Accept the query condition of unique key as equal.
-     * @param userName : UQ, NotNull, VARCHAR(50). (NotNull)
+     * @param userName : UQ, NotNull, VARCHAR(100). (NotNull)
      * @return this. (NotNull)
      */
     public MemberCB acceptUniqueOfUserName(String userName) {
@@ -391,7 +391,7 @@ public class BsMemberCB extends AbstractConditionBean {
          */
         public HpSpecifiedColumn columnEmailAddress() { return doColumn("EMAIL_ADDRESS"); }
         /**
-         * USER_NAME: {UQ, NotNull, VARCHAR(50)}
+         * USER_NAME: {UQ, NotNull, VARCHAR(100)}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnUserName() { return doColumn("USER_NAME"); }
@@ -425,6 +425,11 @@ public class BsMemberCB extends AbstractConditionBean {
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnUpdTrace() { return doColumn("UPD_TRACE"); }
+        /**
+         * ACCOUNT_NAME: {NotNull, VARCHAR(100)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public HpSpecifiedColumn columnAccountName() { return doColumn("ACCOUNT_NAME"); }
         public void everyColumn() { doEveryColumn(); }
         public void exceptRecordMetaColumn() { doExceptRecordMetaColumn(); }
         @Override
@@ -478,26 +483,6 @@ public class BsMemberCB extends AbstractConditionBean {
         /**
          * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br />
          * {select max(FOO) from follow where ...) as FOO_MAX} <br />
-         * follow by YOU_ID, named 'followByYouIdList'.
-         * <pre>
-         * cb.specify().<span style="color: #DD4747">derivedFollowByYouIdList()</span>.<span style="color: #DD4747">max</span>(new SubQuery&lt;FollowCB&gt;() {
-         *     public void query(FollowCB subCB) {
-         *         subCB.specify().<span style="color: #DD4747">columnFoo...</span> <span style="color: #3F7E5E">// derived column by function</span>
-         *         subCB.query().setBar... <span style="color: #3F7E5E">// referrer condition</span>
-         *     }
-         * }, Follow.<span style="color: #DD4747">ALIAS_foo...</span>);
-         * </pre>
-         * @return The object to set up a function for referrer table. (NotNull)
-         */
-        public HpSDRFunction<FollowCB, MemberCQ> derivedFollowByYouIdList() {
-            assertDerived("followByYouIdList"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
-            return new HpSDRFunction<FollowCB, MemberCQ>(_baseCB, _qyCall.qy(), new HpSDRSetupper<FollowCB, MemberCQ>() {
-                public void setup(String fn, SubQuery<FollowCB> sq, MemberCQ cq, String al, DerivedReferrerOption op) {
-                    cq.xsderiveFollowByYouIdList(fn, sq, al, op); } }, _dbmetaProvider);
-        }
-        /**
-         * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br />
-         * {select max(FOO) from follow where ...) as FOO_MAX} <br />
          * follow by MEMBER_ID, named 'followByMemberIdList'.
          * <pre>
          * cb.specify().<span style="color: #DD4747">derivedFollowByMemberIdList()</span>.<span style="color: #DD4747">max</span>(new SubQuery&lt;FollowCB&gt;() {
@@ -514,6 +499,26 @@ public class BsMemberCB extends AbstractConditionBean {
             return new HpSDRFunction<FollowCB, MemberCQ>(_baseCB, _qyCall.qy(), new HpSDRSetupper<FollowCB, MemberCQ>() {
                 public void setup(String fn, SubQuery<FollowCB> sq, MemberCQ cq, String al, DerivedReferrerOption op) {
                     cq.xsderiveFollowByMemberIdList(fn, sq, al, op); } }, _dbmetaProvider);
+        }
+        /**
+         * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br />
+         * {select max(FOO) from follow where ...) as FOO_MAX} <br />
+         * follow by YOU_ID, named 'followByYouIdList'.
+         * <pre>
+         * cb.specify().<span style="color: #DD4747">derivedFollowByYouIdList()</span>.<span style="color: #DD4747">max</span>(new SubQuery&lt;FollowCB&gt;() {
+         *     public void query(FollowCB subCB) {
+         *         subCB.specify().<span style="color: #DD4747">columnFoo...</span> <span style="color: #3F7E5E">// derived column by function</span>
+         *         subCB.query().setBar... <span style="color: #3F7E5E">// referrer condition</span>
+         *     }
+         * }, Follow.<span style="color: #DD4747">ALIAS_foo...</span>);
+         * </pre>
+         * @return The object to set up a function for referrer table. (NotNull)
+         */
+        public HpSDRFunction<FollowCB, MemberCQ> derivedFollowByYouIdList() {
+            assertDerived("followByYouIdList"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
+            return new HpSDRFunction<FollowCB, MemberCQ>(_baseCB, _qyCall.qy(), new HpSDRSetupper<FollowCB, MemberCQ>() {
+                public void setup(String fn, SubQuery<FollowCB> sq, MemberCQ cq, String al, DerivedReferrerOption op) {
+                    cq.xsderiveFollowByYouIdList(fn, sq, al, op); } }, _dbmetaProvider);
         }
         /**
          * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br />

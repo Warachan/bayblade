@@ -15,7 +15,7 @@ import jp.bizreach.twitter.dbflute.cbean.*;
  *     MEMBER_ID
  *
  * [column]
- *     MEMBER_ID, EMAIL_ADDRESS, USER_NAME, BIRTHDATE, PROFILE, INS_DATETIME, UPD_DATETIME, INS_TRACE, UPD_TRACE
+ *     MEMBER_ID, EMAIL_ADDRESS, USER_NAME, BIRTHDATE, PROFILE, INS_DATETIME, UPD_DATETIME, INS_TRACE, UPD_TRACE, ACCOUNT_NAME
  *
  * [sequence]
  *     
@@ -36,7 +36,7 @@ import jp.bizreach.twitter.dbflute.cbean.*;
  *     memberSecurityAsOne, memberWithdrawAsOne
  *
  * [referrer property]
- *     followByYouIdList, followByMemberIdList, loginList, tweetList
+ *     followByMemberIdList, followByYouIdList, loginList, tweetList
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
@@ -61,18 +61,6 @@ public class LoaderOfMember {
     // ===================================================================================
     //                                                                       Load Referrer
     //                                                                       =============
-    protected List<Follow> _referrerFollowByYouIdList;
-    public NestedReferrerLoaderGateway<LoaderOfFollow> loadFollowByYouIdList(ConditionBeanSetupper<FollowCB> setupper) {
-        myBhv().loadFollowByYouIdList(_selectedList, setupper).withNestedReferrer(new ReferrerListHandler<Follow>() {
-            public void handle(List<Follow> referrerList) { _referrerFollowByYouIdList = referrerList; }
-        });
-        return new NestedReferrerLoaderGateway<LoaderOfFollow>() {
-            public void withNestedReferrer(ReferrerLoaderHandler<LoaderOfFollow> handler) {
-                handler.handle(new LoaderOfFollow().ready(_referrerFollowByYouIdList, _selector));
-            }
-        };
-    }
-
     protected List<Follow> _referrerFollowByMemberIdList;
     public NestedReferrerLoaderGateway<LoaderOfFollow> loadFollowByMemberIdList(ConditionBeanSetupper<FollowCB> setupper) {
         myBhv().loadFollowByMemberIdList(_selectedList, setupper).withNestedReferrer(new ReferrerListHandler<Follow>() {
@@ -81,6 +69,18 @@ public class LoaderOfMember {
         return new NestedReferrerLoaderGateway<LoaderOfFollow>() {
             public void withNestedReferrer(ReferrerLoaderHandler<LoaderOfFollow> handler) {
                 handler.handle(new LoaderOfFollow().ready(_referrerFollowByMemberIdList, _selector));
+            }
+        };
+    }
+
+    protected List<Follow> _referrerFollowByYouIdList;
+    public NestedReferrerLoaderGateway<LoaderOfFollow> loadFollowByYouIdList(ConditionBeanSetupper<FollowCB> setupper) {
+        myBhv().loadFollowByYouIdList(_selectedList, setupper).withNestedReferrer(new ReferrerListHandler<Follow>() {
+            public void handle(List<Follow> referrerList) { _referrerFollowByYouIdList = referrerList; }
+        });
+        return new NestedReferrerLoaderGateway<LoaderOfFollow>() {
+            public void withNestedReferrer(ReferrerLoaderHandler<LoaderOfFollow> handler) {
+                handler.handle(new LoaderOfFollow().ready(_referrerFollowByYouIdList, _selector));
             }
         };
     }

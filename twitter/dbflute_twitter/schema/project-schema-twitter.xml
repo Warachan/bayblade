@@ -27,17 +27,18 @@
             size="1" type="CHAR"/>
         <foreign-key foreignSchema="twitter.$$NoNameSchema$$"
             foreignTable="member" name="follow_ibfk_1">
-            <reference foreign="MEMBER_ID" local="YOU_ID"/>
+            <reference foreign="MEMBER_ID" local="MEMBER_ID"/>
         </foreign-key>
         <foreign-key foreignSchema="twitter.$$NoNameSchema$$"
             foreignTable="member" name="follow_ibfk_2">
-            <reference foreign="MEMBER_ID" local="MEMBER_ID"/>
+            <reference foreign="MEMBER_ID" local="YOU_ID"/>
         </foreign-key>
+        <unique name="YOU_ID">
+            <unique-column name="YOU_ID" position="1"/>
+            <unique-column name="MEMBER_ID" position="2"/>
+        </unique>
         <index name="MEMBER_ID">
             <index-column name="MEMBER_ID" position="1"/>
-        </index>
-        <index name="YOU_ID">
-            <index-column name="YOU_ID" position="1"/>
         </index>
     </table>
     <table comment="ログイン" name="login" schema="twitter.$$NoNameSchema$$" type="TABLE">
@@ -73,7 +74,8 @@
             javaType="String" name="EMAIL_ADDRESS" required="true"
             size="100" type="VARCHAR"/>
         <column comment="会員ユーザ名 : 会員のユーザ名" dbType="VARCHAR"
-            javaType="String" name="USER_NAME" required="true" size="50" type="VARCHAR"/>
+            javaType="String" name="USER_NAME" required="true"
+            size="100" type="VARCHAR"/>
         <column comment="生年月日 : 会員の生年月日" dbType="DATE"
             javaType="java.util.Date" name="BIRTHDATE" size="10" type="DATE"/>
         <column comment="プロフィール" dbType="VARCHAR" javaType="String"
@@ -88,6 +90,8 @@
             name="INS_TRACE" required="true" size="256" type="VARCHAR"/>
         <column comment="UPD トレース" dbType="VARCHAR" javaType="String"
             name="UPD_TRACE" required="true" size="256" type="VARCHAR"/>
+        <column comment="アカウント名" dbType="VARCHAR" javaType="String"
+            name="ACCOUNT_NAME" required="true" size="100" type="VARCHAR"/>
         <unique name="EMAIL_ADDRESS">
             <unique-column name="EMAIL_ADDRESS" position="1"/>
         </unique>

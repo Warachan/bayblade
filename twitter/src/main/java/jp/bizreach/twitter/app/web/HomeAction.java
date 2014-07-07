@@ -64,7 +64,7 @@ public class HomeAction {
     public ArrayList<Integer> followSuggestionId = new ArrayList<>();
     public ArrayList<Integer> followIdList = new ArrayList<Integer>();
     public ArrayList<TweetDto> resultList = new ArrayList<TweetDto>();
-    public ArrayList<String> candidateList = new ArrayList<String>();
+    public ArrayList<MemberDto> candidateList = new ArrayList<>();
     public String nameResult;
     public String tweetResult;
     public String profile;
@@ -88,7 +88,7 @@ public class HomeAction {
     @Execute(validator = false)
     public String index() {
         /* 自分の名前を表示させる（確認用）後に削除 */
-        account = sessionDto.username;
+        account = sessionDto.accountName + "@" + sessionDto.username;
         /* フォローしている相手を検索　*/
         selectFollowList();
         /* フォローする候補者を自動で表示 */
@@ -100,7 +100,8 @@ public class HomeAction {
         for (Member member : selectList) {
             MemberDto memberDto = new MemberDto();
             memberDto.memberId = member.getMemberId();
-            memberDto.memberName = member.getUserName();
+            memberDto.accountName = member.getAccountName();
+            memberDto.userName = member.getUserName();
             followSuggestionList.add(memberDto);
         }
         showTimeline();
@@ -137,7 +138,8 @@ public class HomeAction {
         LOG.debug("***" + tweetList);
         for (Tweet tweet : tweetList) {
             TweetDto tweetDto = new TweetDto();
-            tweetDto.memberName = tweet.getMember().getUserName();
+            tweetDto.accountName = tweet.getMember().getAccountName();
+            tweetDto.username = tweet.getMember().getUserName();
             tweetDto.tweetTime = tweet.getTweetDatetime();
             tweetDto.tweet = tweet.getTweet();
             timeLine.add(tweetDto);
@@ -207,6 +209,7 @@ public class HomeAction {
         return "/home/?redirect = true";
     }
 
+    /* ツィートについてのvalidation */
     public ActionMessages validate() {
         ActionMessages errors = new ActionMessages();
         if (homeForm.inputTweet.length() >= 140) {
@@ -220,7 +223,7 @@ public class HomeAction {
 
     @Execute(validator = false)
     public String search() {
-        /* 検索ワードが含まれるユーザー名を検索　*/
+        /* 検索ワードが含まれるyユーザーを検索　*/
         MemberCB memberCB = new MemberCB();
         memberCB.query().setUserName_LikeSearch(homeForm.searchWord, new LikeSearchOption().likeContain());
         memberCB.query().setMemberId_NotEqual(sessionDto.myId);
@@ -228,10 +231,14 @@ public class HomeAction {
         LOG.debug("***" + homeForm.searchWord);
         ListResultBean<Member> memberList = memberBhv.selectList(memberCB);
         for (Member member : memberList) {
+            MemberDto memberDto = new MemberDto();
+            memberDto.accountName = member.getAccountName();
+            memberDto.userName = member.getUserName();
+            memberDto.memberId = member.getMemberId();
             LOG.debug("***" + sessionDto.myId + "," + member.getMemberId());
             nameResult = member.getUserName();
             String userName = member.getUserName();
-            candidateList.add(userName);
+            candidateList.add(memberDto);
             LOG.debug("***" + nameResult);
         }
         /* 検索ワードが含まれるツィートを検索 */
@@ -245,18 +252,22 @@ public class HomeAction {
             LOG.debug("***" + sessionDto.myId);
             TweetDto tweetDto = new TweetDto();
             tweetDto.tweet = tweet.getTweet();
-            tweetDto.memberName = tweet.getMember().getUserName();
+            tweetDto.accountName = tweet.getMember().getUpdTrace();
+            tweetDto.username = tweet.getMember().getUserName();
             tweetDto.tweetTime = tweet.getTweetDatetime();
             resultList.add(tweetDto);
         }
         /* 該当する検索結果がなかった場合の処理 */
         if (candidateList.isEmpty()) {
-            noMatchUsers = "No matching users";
+            noMatchUsers = "検索ワードと一致するユーザーはいません。";
             LOG.debug("hit" + candidateList);
         }
         if (resultList.isEmpty()) {
-            noMatchTweets = "No matching tweets";
+            noMatchTweets = "検索ワードと一致するツィートはありません。";
             LOG.debug("hit2" + resultList);
+        }
+        if (homeForm.searchWord == "") {
+            return "/home/?redirect=true";
         }
         return "/twitter/searchresult.jsp";
     }

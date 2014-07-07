@@ -9,8 +9,10 @@ import java.util.regex.Pattern;
 import javax.annotation.Resource;
 
 import jp.bizreach.twitter.dbflute.cbean.MemberCB;
+import jp.bizreach.twitter.dbflute.exbhv.LoginBhv;
 import jp.bizreach.twitter.dbflute.exbhv.MemberBhv;
 import jp.bizreach.twitter.dbflute.exbhv.MemberSecurityBhv;
+import jp.bizreach.twitter.dbflute.exentity.Login;
 import jp.bizreach.twitter.dbflute.exentity.Member;
 import jp.bizreach.twitter.dbflute.exentity.MemberSecurity;
 
@@ -22,6 +24,7 @@ import org.seasar.struts.annotation.ActionForm;
 import org.seasar.struts.annotation.Execute;
 
 /**
+ * 性別
  * @author mayuko.sakaba
  */
 public class SignupAction {
@@ -47,12 +50,15 @@ public class SignupAction {
     @Resource
     protected MemberSecurityBhv memberSecurityBhv;
     @Resource
+    protected LoginBhv loginBhv;
+    @Resource
     protected PassDigestLogic passDigestLogic;
     // -----------------------------------------------------
     //                                          Display Data
     //                                          ------------
     public String newEmail;
     public String username;
+    public String accountName;
     public String password;
     public String confirmPass;
     public String matchError;
@@ -60,7 +66,7 @@ public class SignupAction {
     public String characterError;
     public String userError;
     public String missingError;
-    protected String passDigest;
+    protected String digestedPass;
 
     // TODO mayuko.sakaba signup.jspにて、なぜゲッターメソッドがなかったのにValue=""をいれたら直ったか調べること。
     // TODO mayuko.sakaba indexActionForm に対する定義が見つかりません →　これなに？
@@ -81,11 +87,10 @@ public class SignupAction {
         password = signupForm.password;
         confirmPass = signupForm.confirmPass;
         username = signupForm.username;
-        //        Matcher emailMatcher = emailMatch();
-        //        Matcher pswdMatcher = pswdMatch();
+        accountName = signupForm.accountName;
 
         /* パスワード不可逆暗号化　*/
-        String digestedPass = passDigestLogic.build(password);
+        digestedPass = passDigestLogic.build(password);
 
         /* validationに引っかからなかったら、会員登録する */
         Date date = new Date();
@@ -94,11 +99,15 @@ public class SignupAction {
         Member member = new Member();
         member.setEmailAddress(sessionDto.email);
         member.setUserName(username);
+        member.setAccountName(accountName);
         member.setInsDatetime(timestamp);
         member.setUpdDatetime(timestamp);
         member.setInsTrace("signedup");
         member.setUpdTrace("signedup");
         memberBhv.insert(member);
+        sessionDto.myId = member.getMemberId();
+        sessionDto.username = member.getUserName();
+        sessionDto.accountName = member.getAccountName();
 
         MemberSecurity security = new MemberSecurity();
         security.setMemberId(member.getMemberId());
@@ -108,109 +117,136 @@ public class SignupAction {
         security.setInsTrace("signedup");
         security.setUpdTrace("signedup");
         memberSecurityBhv.insert(security);
-        sessionDto.myId = member.getMemberId();
-        sessionDto.username = member.getUserName();
         LOG.debug("***" + sessionDto.myId);
+
+        Login login = new Login();
+        login.setMemberId(sessionDto.myId);
+        login.setInsDatetime(timestamp);
+        login.setUpdDatetime(timestamp);
+        login.setInsTrace(sessionDto.email);
+        login.setUpdTrace(sessionDto.email);
+        loginBhv.insert(login);
 
         return "/home/?redirect =true";
     }
 
-    // TODO mayuko.sakaba サインアップ時にログイン時間として登録するが抜けている。
-    /* Validation */
+    /* 会員登録画面　Validation */
     public ActionMessages validate() {
         ActionMessages errors = new ActionMessages();
-        /* Email validate */
-        String emailPtn = "[\\w\\.\\-]+@(?:[\\w\\-]+\\.)+[\\w\\-]+";
+        /* Email */
+        String emailPtn = "[\\w\\.\\-+]+@(?:[\\w\\-]+\\.)+[\\w\\-]+";
         Pattern ptn = Pattern.compile(emailPtn);
         Matcher emailMatcher = ptn.matcher(signupForm.newEmail);
-        if (!emailMatcher.matches()) {
-            errors.add("newEmail", new ActionMessage("Wrong Email Address", false));
-        }
-        if (signupForm.newEmail.length() > 30) {
-            errors.add("newEmail", new ActionMessage("Your email address is too long.", false));
-        }
         MemberCB cb = new MemberCB();
         cb.query().setEmailAddress_Equal(signupForm.newEmail);
         int count = memberBhv.selectCount(cb);
-        if (count > 0) {
-            errors.add("newEmail", new ActionMessage("This email address is already registered.", false));
+        if (signupForm.newEmail == "") {
+            errors.add("newEmail", new ActionMessage("メールアドレスが未入力です。", false));
+        } else {
+            if (!emailMatcher.matches()) {
+                errors.add("newEmail", new ActionMessage("メールアドレスが不正です。", false));
+            }
+            if (signupForm.newEmail.length() > 128) { // 数はv4やregionupの登録文字数を参考にして
+                errors.add("newEmail", new ActionMessage("メールアドレスが長すぎます。", false));
+            }
+            if (count > 0) {
+                errors.add("newEmail", new ActionMessage("このメールアドレスはすでに登録されています。", false));
+            }
+        }
+        /* accountName */
+        // TODO mayuko.sakaba 入力に許される文字列の指定がまだです。
+        if (signupForm.accountName == "") {
+            errors.add("accountName", new ActionMessage("名前が未入力です。", false));
         }
         /* username */
-        //        if (signupForm.username.length() < 5) {
-        //            errors.add("username", new ActionMessage("Username should be more than 5 characters.", false));
-        //        }
+        String usernamePtn = "[\\w\\.\\-]+";
+        Pattern ptn2 = Pattern.compile(usernamePtn);
+        Matcher usernameMatcher = ptn2.matcher(signupForm.username);
         MemberCB check = new MemberCB();
         check.query().setUserName_Equal(signupForm.username);
         int nameCount = memberBhv.selectCount(check);
-        if (nameCount > 0) {
-            errors.add("username", new ActionMessage("This username is already used by someone else.", false));
+        if (signupForm.username == "") {
+            errors.add("username", new ActionMessage("ユーザ名が未入力です。", false));
+        } else {
+            if (!usernameMatcher.matches()) {
+                errors.add("username", new ActionMessage("ユーザ名に不正な文字が含まれています。", false));
+            }
+            if (nameCount > 0) {
+                errors.add("username", new ActionMessage("このユーザ名はすでに使われています。", false));
+            }
         }
+        //        if (signupForm.username.length() < 5) {
+        //            errors.add("username", new ActionMessage("Username should be more than 5 characters.", false));
+        //        }
         /*　password */
         String pswdPtn = "[\\w]+";
-        Pattern ptn2 = Pattern.compile(pswdPtn);
-        Matcher pswdMatcher = ptn2.matcher(signupForm.password);
-        if (!pswdMatcher.matches()) {
-            errors.add("password", new ActionMessage("Invalid password. Only alphabets or numbers are allowed", false));
-        }
-        if (!signupForm.password.equals(signupForm.confirmPass)) {
-            errors.add("password", new ActionMessage("Password doesn't match.", false));
-        }
-        if (signupForm.password.length() > 20 && signupForm.password.length() < 1) {
-            errors.add("password", new ActionMessage("Please enter your password no more than 20 characters.", false));
+        Pattern ptn3 = Pattern.compile(pswdPtn);
+        Matcher pswdMatcher = ptn3.matcher(signupForm.password);
+        if (signupForm.password == "") {
+            errors.add("password", new ActionMessage("パスワードが未入力です。", false));
+        } else {
+            if (!pswdMatcher.matches()) {
+                errors.add("password", new ActionMessage("アルファベットか数字を入力してください。", false));
+            }
+            if (signupForm.password.length() > 20 || signupForm.password.length() < 8) {
+                errors.add("password", new ActionMessage("パスワードは8文字以上、20文字以下にしてください。", false));
+            }
+            if (!signupForm.password.equals(signupForm.confirmPass)) {
+                errors.add("password", new ActionMessage("パスワードが一致しません。", false));
+            }
         }
         return errors;
     }
-
-    private Matcher pswdMatch() {
-        String pswdPtn = "[\\w]+";
-        Pattern ptn2 = Pattern.compile(pswdPtn);
-        Matcher pswdMatcher = ptn2.matcher(password);
-        return pswdMatcher;
-    }
-
-    private Matcher emailMatch() {
-        String emailPtn = "[\\w\\.\\-]+@(?:[\\w\\-]+\\.)+[\\w\\-]+";
-        Pattern ptn = Pattern.compile(emailPtn);
-        Matcher emailMatcher = ptn.matcher(newEmail);
-        return emailMatcher;
-    }
-
-    private Member insertMember(Timestamp timestamp) {
-        Member member = new Member();
-        member.setEmailAddress(sessionDto.email);
-        member.setUserName(username);
-        member.setInsDatetime(timestamp);
-        member.setUpdDatetime(timestamp);
-        member.setInsTrace("signedup");
-        member.setUpdTrace("signedup");
-        memberBhv.insert(member);
-        return member;
-    }
-
-    private int selectEmailCount() {
-        MemberCB cb = new MemberCB();
-        cb.query().setEmailAddress_Equal(newEmail);
-        int count = memberBhv.selectCount(cb);
-        return count;
-    }
-
-    private int selectNameCount() {
-        MemberCB check = new MemberCB();
-        check.query().setUserName_Equal(username);
-        int nameCount = memberBhv.selectCount(check);
-        return nameCount;
-    }
-
-    private void insertSecurity(Timestamp timestamp, Member member) {
-        MemberSecurity security = new MemberSecurity();
-        security.setMemberId(member.getMemberId());
-        security.setPassword(password);
-        security.setInsDatetime(timestamp);
-        security.setUpdDatetime(timestamp);
-        security.setInsTrace("signedup");
-        security.setUpdTrace("signedup");
-        memberSecurityBhv.insert(security);
-    }
+    //    private Matcher pswdMatch() {
+    //        String pswdPtn = "[\\w]+";
+    //        Pattern ptn2 = Pattern.compile(pswdPtn);
+    //        Matcher pswdMatcher = ptn2.matcher(password);
+    //        return pswdMatcher;
+    //    }
+    //
+    //    private Matcher emailMatch() {
+    //        String emailPtn = "[\\w\\.\\-]+@(?:[\\w\\-]+\\.)+[\\w\\-]+";
+    //        Pattern ptn = Pattern.compile(emailPtn);
+    //        Matcher emailMatcher = ptn.matcher(newEmail);
+    //        return emailMatcher;
+    //    }
+    //
+    //    private Member insertMember(Timestamp timestamp) {
+    //        Member member = new Member();
+    //        member.setEmailAddress(sessionDto.email);
+    //        member.setUserName(username);
+    //        member.setInsDatetime(timestamp);
+    //        member.setUpdDatetime(timestamp);
+    //        member.setInsTrace("signedup");
+    //        member.setUpdTrace("signedup");
+    //        memberBhv.insert(member);
+    //        return member;
+    //    }
+    //
+    //    private int selectEmailCount() {
+    //        MemberCB cb = new MemberCB();
+    //        cb.query().setEmailAddress_Equal(newEmail);
+    //        int count = memberBhv.selectCount(cb);
+    //        return count;
+    //    }
+    //
+    //    private int selectNameCount() {
+    //        MemberCB check = new MemberCB();
+    //        check.query().setUserName_Equal(username);
+    //        int nameCount = memberBhv.selectCount(check);
+    //        return nameCount;
+    //    }
+    //
+    //    private void insertSecurity(Timestamp timestamp, Member member) {
+    //        MemberSecurity security = new MemberSecurity();
+    //        security.setMemberId(member.getMemberId());
+    //        security.setPassword(password);
+    //        security.setInsDatetime(timestamp);
+    //        security.setUpdDatetime(timestamp);
+    //        security.setInsTrace("signedup");
+    //        security.setUpdTrace("signedup");
+    //        memberSecurityBhv.insert(security);
+    //    }
 
 }
 

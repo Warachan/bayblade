@@ -7,7 +7,24 @@ package jp.bizreach.twitter.app.web;
  */
 public class MemberDto {
     public Integer memberId;
-    public String memberName;
+    public String userName;
+    public String accountName;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getAccountName() {
+        return accountName;
+    }
+
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
+    }
 
     public Integer getMemberId() {
         return memberId;
@@ -15,13 +32,5 @@ public class MemberDto {
 
     public void setMemberId(Integer memberId) {
         this.memberId = memberId;
-    }
-
-    public String getMemberName() {
-        return memberName;
-    }
-
-    public void setMemberName(String memberName) {
-        this.memberName = memberName;
     }
 }

@@ -8065,3 +8065,2766 @@ _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
     repsEnvType      = ut
     refreshProject   = twitter
 _/_/_/_/_/_/_/_/_/_/ {Sql2Entity}
+2014-07-04 15:36:17,441 [main] INFO  (DfReplaceSchemaTask#begin():87) - +------------------------------------------+
+2014-07-04 15:36:17,444 [main] INFO  (DfReplaceSchemaTask#begin():88) - |                                          |
+2014-07-04 15:36:17,445 [main] INFO  (DfReplaceSchemaTask#begin():89) - |              ReplaceSchema               |
+2014-07-04 15:36:17,469 [main] INFO  (DfReplaceSchemaTask#begin():97) - |                                          |
+2014-07-04 15:36:17,469 [main] INFO  (DfReplaceSchemaTask#begin():98) - +------------------------------------------+
+2014-07-04 15:36:17,471 [main] INFO  (DfReplaceSchemaTask#waitBeforeReps():329) - ...Waiting for your GO SIGN from stdin before ReplaceSchema:
+2014-07-04 15:36:19,006 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2014-07-04 15:36:19,007 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = com.mysql.jdbc.Driver
+2014-07-04 15:36:19,008 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:mysql://localhost:3306/twitter
+2014-07-04 15:36:19,009 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = twitter
+2014-07-04 15:36:19,024 [main] INFO  (DfDataSourceHandler#createConnection():168) - ...Connecting to database by data source:
+2014-07-04 15:36:19,276 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():235) -   product = MySQL 5.6.17
+2014-07-04 15:36:19,277 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():236) -   driver  = MySQL Connector Java mysql-connector-java-5.1.26 ( Revision: ${bzr.revision-id} ) for JDBC 4.0
+2014-07-04 15:36:19,299 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():207) - 
+2014-07-04 15:36:19,300 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():208) - * * * * * * * * * * *
+2014-07-04 15:36:19,301 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():209) - *                   *
+2014-07-04 15:36:19,301 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():210) - * Initialize Schema *
+2014-07-04 15:36:19,302 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():211) - *                   *
+2014-07-04 15:36:19,303 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():212) - * * * * * * * * * * *
+2014-07-04 15:36:19,324 [main] INFO  (DfTableExtractor#doGetTableList():67) - ...Getting tables:
+2014-07-04 15:36:19,325 [main] INFO  (DfTableExtractor#doGetTableList():68) -   schema = {twitter.$$NoNameSchema$$ as main}
+2014-07-04 15:36:19,326 [main] INFO  (DfTableExtractor#doGetTableList():69) -   types  = [TABLE, VIEW]
+2014-07-04 15:36:19,380 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - truncate table follow
+2014-07-04 15:36:19,415 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - truncate table login
+2014-07-04 15:36:19,468 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - truncate table member_security
+2014-07-04 15:36:19,506 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - truncate table member_withdraw
+2014-07-04 15:36:19,554 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - truncate table tweet
+2014-07-04 15:36:19,595 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - alter table follow drop foreign key follow_ibfk_2
+2014-07-04 15:36:19,623 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - alter table follow drop foreign key follow_ibfk_1
+2014-07-04 15:36:19,632 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - alter table login drop foreign key login_ibfk_1
+2014-07-04 15:36:19,647 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - alter table member_security drop foreign key member_security_ibfk_1
+2014-07-04 15:36:19,656 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - alter table member_withdraw drop foreign key member_withdraw_ibfk_1
+2014-07-04 15:36:19,671 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - alter table tweet drop foreign key tweet_ibfk_1
+2014-07-04 15:36:19,687 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - drop table follow
+2014-07-04 15:36:19,710 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - drop table login
+2014-07-04 15:36:19,730 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - drop table member
+2014-07-04 15:36:19,751 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - drop table member_security
+2014-07-04 15:36:19,769 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - drop table member_withdraw
+2014-07-04 15:36:19,788 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - drop table tweet
+2014-07-04 15:36:19,861 [main] INFO  (DfCreateSchemaProcess#createSchema():244) - 
+2014-07-04 15:36:19,862 [main] INFO  (DfCreateSchemaProcess#createSchema():245) - * * * * * * * * *
+2014-07-04 15:36:19,863 [main] INFO  (DfCreateSchemaProcess#createSchema():246) - *               *
+2014-07-04 15:36:19,864 [main] INFO  (DfCreateSchemaProcess#createSchema():247) - * Create Schema *
+2014-07-04 15:36:19,864 [main] INFO  (DfCreateSchemaProcess#createSchema():248) - *               *
+2014-07-04 15:36:19,865 [main] INFO  (DfCreateSchemaProcess#createSchema():249) - * * * * * * * * *
+2014-07-04 15:36:19,871 [main] INFO  (DfSqlFileFireMan#fire():65) - ...Firing: replace-schema-00-system.sql
+2014-07-04 15:36:19,874 [main] INFO  (DfReplaceSchemaProperties#checkTargetEnvType():277) - ...Checking envType: ut in [ut]
+2014-07-04 15:36:19,875 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+-- #df:checkEnv(ut)#
+
+-- #df:changeUser(system)#
+-- #df:checkUser(mainSchema)#
+create database twitter
+2014-07-04 15:36:19,878 [main] INFO  (DfCreateSchemaProcess$1#dispatch():273) - ...Creating a connection to system
+2014-07-04 15:36:19,880 [main] INFO  (DfReplaceSchemaProperties#createAdditionalUserConnection():514) - ...Creating a connection for additional user: root
+2014-07-04 15:36:19,893 [main] INFO  (DfCreateSchemaProcess$1#dispatch():299) - ...Saying good-bye to the user 'system' because of checked: [mainSchema]
+2014-07-04 15:36:19,895 [main] INFO  (DfCreateSchemaProcess$1#dispatch():301) -  -> Can't create database 'twitter'; database exists
+2014-07-04 15:36:19,896 [main] INFO  (DfCreateSchemaProcess$DfSqlFileRunnerExecuteCreateSchema#isTargetSql():411) - ...Reviving the user 'system' until the end of this SQL file
+2014-07-04 15:36:19,897 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+-- #df:reviveUser()#
+-- #df:checkUser(mainUser, grant)#
+grant all privileges on twitter.*
+  to twitter@localhost identified by 'twitter'
+2014-07-04 15:36:19,901 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - flush privileges
+2014-07-04 15:36:19,903 [main] INFO  (DfSqlFileRunnerBase#traceResult():172) -  -> success=2 failure=0
+2014-07-04 15:36:19,904 [main] INFO  (DfSqlFileFireMan#fire():65) - ...Firing: replace-schema-10-basic.sql
+2014-07-04 15:36:19,905 [main] INFO  (DfCreateSchemaProcess$DfSqlFileRunnerExecuteCreateSchema#restoreRevivedUser():348) - ...Saying good-bye to the user 'system' again
+2014-07-04 15:36:19,905 [main] INFO  (DfCreateSchemaProcess$DfSqlFileRunnerExecuteCreateSchema#restoreRevivedUser():352) - ...Clearing revived users
+2014-07-04 15:36:19,906 [main] INFO  (DfCreateSchemaProcess$DfSqlFileRunnerExecuteCreateSchema#restoreCurrentUser():359) - ...Coming back to the main user from the user 'system'
+2014-07-04 15:36:19,910 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+/* Create Tables */
+
+CREATE TABLE FOLLOW
+(
+	FOLLOW_ID INT(100) NOT NULL UNIQUE AUTO_INCREMENT COMMENT 'フォローID',
+	YOU_ID INT(100) NOT NULL COMMENT 'フォローする人のID : 会員のID
+',
+	MEMBER_ID INT(100) NOT NULL COMMENT 'フォローされる人のID : フォローしている自分のID
+',
+	INS_DATETIME DATETIME NOT NULL COMMENT 'insert日時',
+	UPD_DATETIME DATETIME NOT NULL COMMENT 'UPD_DATETIME',
+	INS_TRACE VARCHAR(256) NOT NULL COMMENT 'Insertトレース',
+	UPD_TRACE VARCHAR(256) NOT NULL COMMENT 'UPD トレース',
+	DEL_FLG CHAR(1) DEFAULT 'N' NOT NULL COMMENT 'DEL_FLG : 削除フラグ Y=削除　N=削除していない',
+	PRIMARY KEY (FOLLOW_ID)
+) COMMENT = 'フォロー'
+2014-07-04 15:36:19,953 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE LOGIN
+(
+	LOGIN_ID INT NOT NULL AUTO_INCREMENT COMMENT 'ログインID : ログインした瞬間のID
+',
+	MEMBER_ID INT(100) NOT NULL COMMENT '会員ID : 会員のID
+',
+	INS_DATETIME DATETIME NOT NULL COMMENT 'insert日時',
+	UPD_DATETIME DATETIME NOT NULL COMMENT 'UPD_DATETIME',
+	INS_TRACE VARCHAR(256) NOT NULL COMMENT 'Insertトレース',
+	UPD_TRACE VARCHAR(256) NOT NULL COMMENT 'UPD トレース',
+	PRIMARY KEY (LOGIN_ID)
+) COMMENT = 'ログイン'
+2014-07-04 15:36:20,008 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE MEMBER
+(
+	MEMBER_ID INT(100) NOT NULL UNIQUE AUTO_INCREMENT COMMENT '会員ID : 会員のID
+',
+	EMAIL_ADDRESS VARCHAR(100) NOT NULL UNIQUE COMMENT 'メールアドレス : 会員のメールアドレス',
+	USER_NAME VARCHAR(50) NOT NULL UNIQUE COMMENT '会員ユーザ名 : 会員のユーザ名',
+	BIRTHDATE DATE COMMENT '生年月日 : 会員の生年月日',
+	PROFILE VARCHAR(200) COMMENT 'プロフィール',
+	INS_DATETIME DATETIME NOT NULL COMMENT 'insert日時',
+	UPD_DATETIME DATETIME NOT NULL COMMENT 'UPD_DATETIME',
+	INS_TRACE VARCHAR(256) NOT NULL COMMENT 'Insertトレース',
+	UPD_TRACE VARCHAR(256) NOT NULL COMMENT 'UPD トレース',
+	PRIMARY KEY (MEMBER_ID)
+) COMMENT = '会員'
+2014-07-04 15:36:20,072 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE MEMBER_SECURITY
+(
+	MEMBER_ID INT(100) NOT NULL UNIQUE COMMENT '会員ID : 会員のID
+',
+	PASSWORD VARCHAR(50) NOT NULL COMMENT 'パスワード',
+	INS_DATETIME DATETIME NOT NULL COMMENT 'insert日時',
+	UPD_DATETIME DATETIME NOT NULL COMMENT 'UPD_DATETIME',
+	INS_TRACE VARCHAR(256) NOT NULL COMMENT 'Insertトレース',
+	UPD_TRACE VARCHAR(256) NOT NULL COMMENT 'UPD トレース',
+	PRIMARY KEY (MEMBER_ID)
+) COMMENT = '会員セキュリティ'
+2014-07-04 15:36:20,140 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE MEMBER_WITHDRAW
+(
+	MEMBER_ID INT(100) NOT NULL UNIQUE COMMENT '会員ID : 会員のID
+',
+	WITHDRAWAL_REASON_ID INT COMMENT '退会理由ID : 会員の退会理由ID',
+	WITHDRAWAL_REASON_INPUT_TEXT TEXT COMMENT '退会理由入力テキスト',
+	WITHDRAWAL_DATETIME DATETIME NOT NULL COMMENT 'withdrawal_datetime : 退会日時',
+	PRIMARY KEY (MEMBER_ID)
+) COMMENT = '会員退会'
+2014-07-04 15:36:20,200 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE TWEET
+(
+	TWEET_ID INT NOT NULL UNIQUE AUTO_INCREMENT COMMENT 'TWEET_ID',
+	MEMBER_ID INT(100) NOT NULL COMMENT '会員ID : tweetした人のID',
+	TWEET VARCHAR(140) NOT NULL COMMENT 'TWEET',
+	INS_DATETIME DATETIME NOT NULL COMMENT 'insert日時',
+	UPD_DATETIME DATETIME NOT NULL COMMENT 'UPD_DATETIME',
+	INS_TRACE VARCHAR(256) NOT NULL COMMENT 'Insertトレース',
+	UPD_TRACE VARCHAR(256) NOT NULL COMMENT 'UPD トレース',
+	TWEET_DATETIME VARCHAR(50) NOT NULL COMMENT 'TWEET日時 : ツィートした日時（共通カラムではなく、画面に表示するためのもの）',
+	PRIMARY KEY (TWEET_ID)
+) COMMENT = 'TWEET'
+2014-07-04 15:36:20,254 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+/* Create Foreign Keys */
+
+ALTER TABLE FOLLOW
+	ADD FOREIGN KEY (YOU_ID)
+	REFERENCES MEMBER (MEMBER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2014-07-04 15:36:20,342 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE FOLLOW
+	ADD FOREIGN KEY (MEMBER_ID)
+	REFERENCES MEMBER (MEMBER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2014-07-04 15:36:20,444 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE LOGIN
+	ADD FOREIGN KEY (MEMBER_ID)
+	REFERENCES MEMBER (MEMBER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2014-07-04 15:36:20,544 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE MEMBER_SECURITY
+	ADD FOREIGN KEY (MEMBER_ID)
+	REFERENCES MEMBER (MEMBER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2014-07-04 15:36:20,642 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE MEMBER_WITHDRAW
+	ADD FOREIGN KEY (MEMBER_ID)
+	REFERENCES MEMBER (MEMBER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2014-07-04 15:36:20,742 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE TWEET
+	ADD FOREIGN KEY (MEMBER_ID)
+	REFERENCES MEMBER (MEMBER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2014-07-04 15:36:20,864 [main] INFO  (DfSqlFileRunnerBase#traceResult():172) -  -> success=12 failure=0
+2014-07-04 15:36:20,866 [main] INFO  (DfSqlFileFireMan#fire():90) - {Create Schema}: success=14 failure=0 (in 2 files)
+2014-07-04 15:36:20,868 [main] INFO  (DfCreateSchemaProcess#destroyChangeUserConnection():542) - ...Closing connections to change-users: [system]
+2014-07-04 15:36:20,930 [main] INFO  (DfLoadDataProcess#execute():129) - 
+2014-07-04 15:36:20,931 [main] INFO  (DfLoadDataProcess#execute():130) - * * * * * * * * * * *
+2014-07-04 15:36:20,932 [main] INFO  (DfLoadDataProcess#execute():131) - *                   *
+2014-07-04 15:36:20,932 [main] INFO  (DfLoadDataProcess#execute():132) - * Load Data         *
+2014-07-04 15:36:20,933 [main] INFO  (DfLoadDataProcess#execute():133) - *                   *
+2014-07-04 15:36:20,934 [main] INFO  (DfLoadDataProcess#execute():134) - * * * * * * * * * * *
+2014-07-04 15:36:20,962 [main] INFO  (DfXlsDataHandlerImpl#writeSeveralData():126) - /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+2014-07-04 15:36:20,963 [main] INFO  (DfXlsDataHandlerImpl#writeSeveralData():127) - writeData(playsql\data\ut\xls\20-member.xls)
+2014-07-04 15:36:20,964 [main] INFO  (DfXlsDataHandlerImpl#writeSeveralData():128) - = = = = = = =/
+2014-07-04 15:36:21,297 [main] INFO  (DfTableExtractor#doGetTableList():67) - ...Getting tables:
+2014-07-04 15:36:21,298 [main] INFO  (DfTableExtractor#doGetTableList():68) -   schema = {twitter.$$NoNameSchema$$ as main}
+2014-07-04 15:36:21,299 [main] INFO  (DfTableExtractor#doGetTableList():69) -   types  = [TABLE, VIEW]
+2014-07-04 15:36:21,367 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - MEMBER:{1, Stojkovic@gmail.com, Pixy, 1965/03/03, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0}
+2014-07-04 15:36:21,430 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - MEMBER:{2, Savicevic@gmail.com, Genius, 1966/09/15, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0}
+2014-07-04 15:36:21,432 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - MEMBER:{3, Mijatovic@gmail.com, Mijato, null, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0}
+2014-07-04 15:36:21,433 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - MEMBER:{4, Stankovic@gmail.com, Stanko, 1978/09/11, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0}
+2014-07-04 15:36:21,434 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - MEMBER:{5, Milosevic@gmail.com, Milose, null, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0}
+2014-07-04 15:36:21,435 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - MEMBER:{6, Mihajlovic@gmail.com, FreeKick, 1969/02/20, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0}
+2014-07-04 15:36:21,436 [main] INFO  (DfXlsDataHandlerImpl#doWriteDataTable():210) - ...Skipping the terminal garbage row
+2014-07-04 15:36:21,443 [main] INFO  (DfAbsractDataWriter#noticeLoadedRowSize():1059) -  -> 6 rows are loaded to MEMBER
+2014-07-04 15:36:21,446 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - LOGIN:{1, 1, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0}
+2014-07-04 15:36:21,447 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - LOGIN:{2, 2, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0}
+2014-07-04 15:36:21,448 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - LOGIN:{3, 3, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0}
+2014-07-04 15:36:21,448 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - LOGIN:{4, 4, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0}
+2014-07-04 15:36:21,449 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - LOGIN:{5, 5, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0}
+2014-07-04 15:36:21,450 [main] INFO  (DfXlsDataHandlerImpl#doWriteDataTable():210) - ...Skipping the terminal garbage row
+2014-07-04 15:36:21,454 [main] INFO  (DfAbsractDataWriter#noticeLoadedRowSize():1059) -  -> 5 rows are loaded to LOGIN
+2014-07-04 15:36:21,456 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - MEMBER_SECURITY:{1, aaa, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0}
+2014-07-04 15:36:21,458 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - MEMBER_SECURITY:{2, bbb, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0}
+2014-07-04 15:36:21,459 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - MEMBER_SECURITY:{3, ccc, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0}
+2014-07-04 15:36:21,459 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - MEMBER_SECURITY:{4, ddd, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0}
+2014-07-04 15:36:21,460 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - MEMBER_SECURITY:{5, eee2, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0}
+2014-07-04 15:36:21,461 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - MEMBER_SECURITY:{6, fff, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0}
+2014-07-04 15:36:21,462 [main] INFO  (DfXlsDataHandlerImpl#doWriteDataTable():210) - ...Skipping the terminal garbage row
+2014-07-04 15:36:21,470 [main] INFO  (DfAbsractDataWriter#noticeLoadedRowSize():1059) -  -> 6 rows are loaded to MEMBER_SECURITY
+2014-07-04 15:36:21,472 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - TWEET:{1, 1234, 充実した一日だった。, 2014-06-23 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-25 00:00:00.0, 2014-06-26 00:00:00.0, 2014-06-24 00:00:00.0}
+2014-07-04 15:36:21,475 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - TWEET:{2, 2345, 清君頼りになるー！, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-25 00:00:00.0, 2014-06-25 00:00:00.0, 2014-06-25 00:00:00.0}
+2014-07-04 15:36:21,478 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - TWEET:{3, 3456, GLD, 2014-06-25 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-25 00:00:00.0, 2014-06-25 00:00:00.0, 2014-06-25 00:00:00.0}
+2014-07-04 15:36:21,479 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - TWEET:{4, 875, BRZ, 2014-06-26 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-25 00:00:00.0, 2014-06-25 00:00:00.0, 2014-06-25 00:00:00.0}
+2014-07-04 15:36:21,480 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - TWEET:{5, 1111, BRZ, 2014-06-27 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-25 00:00:00.0, 2014-06-25 00:00:00.0, 2014-06-25 00:00:00.0}
+2014-07-04 15:36:21,481 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - TWEET:{6, 5422, SIL, 2014-06-28 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-25 00:00:00.0, 2014-06-25 00:00:00.0, 2014-06-25 00:00:00.0}
+2014-07-04 15:36:21,482 [main] INFO  (DfXlsDataHandlerImpl#doWriteDataTable():210) - ...Skipping the terminal garbage row
+2014-07-04 15:36:21,486 [main] INFO  (DfAbsractDataWriter#noticeLoadedRowSize():1059) -  -> 6 rows are loaded to TWEET
+2014-07-04 15:36:21,487 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - MEMBER_WITHDRAW:{1, 1, 俺はワールドカップでPK外した…, 2006/12/24 23:59:59.123}
+2014-07-04 15:36:21,490 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - MEMBER_WITHDRAW:{2, 1, null, 2007/11/11 16:00:00.456}
+2014-07-04 15:36:21,491 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - MEMBER_WITHDRAW:{3, 2, 左サイドで走りすぎて疲れた, 2006/12/24 05:52:29.789}
+2014-07-04 15:36:21,493 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - MEMBER_WITHDRAW:{4, 3, コバチが２人いるため, 2007/11/13 16:00:00.456}
+2014-07-04 15:36:21,503 [main] INFO  (DfAbsractDataWriter#noticeLoadedRowSize():1059) -  -> 4 rows are loaded to MEMBER_WITHDRAW
+2014-07-04 15:36:21,504 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - FOLLOW:{1, 1, 2, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, n}
+2014-07-04 15:36:21,505 [main] INFO  (DfXlsDataHandlerImpl#doWriteDataTable():210) - ...Skipping the terminal garbage row
+2014-07-04 15:36:21,509 [main] INFO  (DfAbsractDataWriter#noticeLoadedRowSize():1059) -  -> 1 rows are loaded to FOLLOW
+2014-07-04 15:36:21,512 [main] INFO  (DfLoadDataProcess#lazyCheckLoadedClassifiaction():379) - ...Checking implicit set of classification
+2014-07-04 15:36:21,529 [main] INFO  (DfTakeFinallyProcess#takeFinally():221) - 
+2014-07-04 15:36:21,529 [main] INFO  (DfTakeFinallyProcess#takeFinally():222) - * * * * * * * **
+2014-07-04 15:36:21,530 [main] INFO  (DfTakeFinallyProcess#takeFinally():223) - *              *
+2014-07-04 15:36:21,530 [main] INFO  (DfTakeFinallyProcess#takeFinally():224) - * Take Finally *
+2014-07-04 15:36:21,531 [main] INFO  (DfTakeFinallyProcess#takeFinally():225) - *              *
+2014-07-04 15:36:21,532 [main] INFO  (DfTakeFinallyProcess#takeFinally():226) - * * * * * * * **
+2014-07-04 15:36:21,541 [main] INFO  (DfSqlFileFireMan#fire():65) - ...Firing: take-finally.sql
+2014-07-04 15:36:21,547 [main] INFO  (DfSqlFileRunnerBase#traceResult():172) -  -> success=0 failure=0
+2014-07-04 15:36:21,547 [main] INFO  (DfSqlFileFireMan#fire():90) - {Take Finally}: success=0 failure=0 (in 1 files)
+2014-07-04 15:36:21,549 [main] INFO  (DfDataSourceHandler#destroy():121) - ...closeReally()
+2014-07-04 15:36:21,554 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():150) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m04s109ms
+
+  DBFLUTE_CLIENT: {twitter}
+    database  = mysql (MySQL 5.6.17)
+    language  = java
+    container = seasar
+    package   = jp.bizreach.twitter.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = com.mysql.jdbc.Driver
+    url    = jdbc:mysql://localhost:3306/twitter
+    schema = {twitter.$$NoNameSchema$$ as main}
+    user   = twitter
+    props  = {user=root, password=}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = twitter
+
+ {Create Schema}: success=14 failure=0 (in 2 files)
+  o replace-schema-00-system.sql
+  o replace-schema-10-basic.sql
+
+ {Load Data}: loaded-files=1
+  (ut)
+  o 20-member.xls
+
+ {Take Finally}: success=0 failure=0 (in 1 files)
+  o take-finally.sql
+_/_/_/_/_/_/_/_/_/_/ {ReplaceSchema}
+2014-07-04 15:36:22,521 [main] INFO  (TorqueJDBCTransformTask#begin():100) - +------------------------------------------+
+2014-07-04 15:36:22,524 [main] INFO  (TorqueJDBCTransformTask#begin():101) - |                                          |
+2014-07-04 15:36:22,524 [main] INFO  (TorqueJDBCTransformTask#begin():102) - |                   JDBC                   |
+2014-07-04 15:36:22,525 [main] INFO  (TorqueJDBCTransformTask#begin():103) - |                                          |
+2014-07-04 15:36:22,525 [main] INFO  (TorqueJDBCTransformTask#begin():104) - +------------------------------------------+
+2014-07-04 15:36:22,567 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2014-07-04 15:36:22,568 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = com.mysql.jdbc.Driver
+2014-07-04 15:36:22,568 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:mysql://localhost:3306/twitter
+2014-07-04 15:36:22,569 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = twitter
+2014-07-04 15:36:22,627 [main] INFO  (DfSchemaXmlSerializer#serialize():286) - 
+2014-07-04 15:36:22,628 [main] INFO  (DfSchemaXmlSerializer#serialize():287) - ...Starting to process JDBC to SchemaXML
+2014-07-04 15:36:22,629 [main] INFO  (DfSchemaXmlSerializer#doLoadPreviousSchema():1469) - ...Loading previous schema (schema diff process)
+2014-07-04 15:36:22,642 [main] INFO  (DTDResolver#resolveEntity():197) - ...Resolving XML by database.dtd in same package
+2014-07-04 15:36:22,715 [main] INFO  (DfSchemaXmlSerializer#generateXML():361) - ...Getting DB connection
+2014-07-04 15:36:22,719 [main] INFO  (DfDataSourceHandler#createConnection():168) - ...Connecting to database by data source:
+2014-07-04 15:36:22,930 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():235) -   product = MySQL 5.6.17
+2014-07-04 15:36:22,931 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():236) -   driver  = MySQL Connector Java mysql-connector-java-5.1.26 ( Revision: ${bzr.revision-id} ) for JDBC 4.0
+2014-07-04 15:36:22,933 [main] INFO  (DfSchemaXmlSerializer#generateXML():364) - ...Getting DB meta data
+2014-07-04 15:36:22,935 [main] INFO  (DfTableExtractor#doGetTableList():67) - ...Getting tables:
+2014-07-04 15:36:22,936 [main] INFO  (DfTableExtractor#doGetTableList():68) -   schema = {twitter.$$NoNameSchema$$ as main}
+2014-07-04 15:36:22,936 [main] INFO  (DfTableExtractor#doGetTableList():69) -   types  = [TABLE, VIEW]
+2014-07-04 15:36:22,947 [main] INFO  (DfDbCommentExtractorBase#doSelectUserTabComments():121) - select table_type as OBJECT_TYPE, table_name as TABLE_NAME, table_comment as COMMENTS from information_schema.tables where table_schema = 'twitter' order by table_name asc
+2014-07-04 15:36:22,950 [main] INFO  (DfDbCommentExtractorBase#doSelectUserColComments():168) - select table_name as TABLE_NAME, column_name as COLUMN_NAME, column_comment as COMMENTS from information_schema.columns where table_schema = 'twitter' order by table_name asc, column_name asc
+2014-07-04 15:36:22,968 [main] INFO  (DfSchemaXmlSerializer#processTable():421) - 
+2014-07-04 15:36:22,969 [main] INFO  (DfSchemaXmlSerializer#processTable():422) - $ /= = = = = = = = = = = = = = = = = = = = = = = = = =
+2014-07-04 15:36:22,969 [main] INFO  (DfSchemaXmlSerializer#processTable():423) - $ [Table List]
+2014-07-04 15:36:22,970 [main] INFO  (DfSchemaXmlSerializer#doProcessTable():506) - $ twitter.follow(TABLE) // フォロー
+2014-07-04 15:36:23,011 [main] INFO  (DfSchemaXmlSerializer#doProcessTable():506) - $ twitter.login(TABLE) // ログイン
+2014-07-04 15:36:23,024 [main] INFO  (DfSchemaXmlSerializer#doProcessTable():506) - $ twitter.member(TABLE) // 会員
+2014-07-04 15:36:23,039 [main] INFO  (DfSchemaXmlSerializer#doProcessTable():506) - $ twitter.member_security(TABLE) // 会員セキュリティ
+2014-07-04 15:36:23,053 [main] INFO  (DfSchemaXmlSerializer#doProcessTable():506) - $ twitter.member_withdraw(TABLE) // 会員退会
+2014-07-04 15:36:23,065 [main] INFO  (DfSchemaXmlSerializer#doProcessTable():506) - $ twitter.tweet(TABLE) // TWEET
+2014-07-04 15:36:23,077 [main] INFO  (DfSchemaXmlSerializer#processTable():435) - $ 
+2014-07-04 15:36:23,078 [main] INFO  (DfSchemaXmlSerializer#processTable():436) - $ [Table Count]
+2014-07-04 15:36:23,079 [main] INFO  (DfSchemaXmlSerializer#processTable():437) - $ 6
+2014-07-04 15:36:23,080 [main] INFO  (DfSchemaXmlSerializer#processTable():438) - $ = = = = = = = = = =/
+2014-07-04 15:36:23,082 [main] INFO  (DfSchemaXmlSerializer#processTable():439) - 
+2014-07-04 15:36:23,091 [main] INFO  (DfSchemaXmlSerializer#processSequence():799) - ...Getting sequences
+2014-07-04 15:36:23,098 [main] INFO  (DfSchemaXmlSerializer#serialize():301) - ...Serializing XML:
+2014-07-04 15:36:23,100 [main] INFO  (DfSchemaXmlSerializer#serialize():302) -   filePath = ./schema/project-schema-twitter.xml
+2014-07-04 15:36:23,101 [main] INFO  (DfSchemaXmlSerializer#serialize():303) -   encoding = UTF-8
+2014-07-04 15:36:23,133 [main] INFO  (DfSchemaXmlSerializer#doLoadNextSchema():1487) - ...Loading next schema (schema diff process)
+2014-07-04 15:36:23,136 [main] INFO  (DTDResolver#resolveEntity():197) - ...Resolving XML by database.dtd in same package
+2014-07-04 15:36:23,194 [main] INFO  (DfSchemaXmlSerializer#doLoadNextSchema():1502) -  -> same as previous (schema diff)
+2014-07-04 15:36:23,195 [main] INFO  (DfDataSourceHandler#destroy():121) - ...closeReally()
+2014-07-04 15:36:23,202 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():150) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m00s676ms
+
+  DBFLUTE_CLIENT: {twitter}
+    database  = mysql (MySQL 5.6.17)
+    language  = java
+    container = seasar
+    package   = jp.bizreach.twitter.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = com.mysql.jdbc.Driver
+    url    = jdbc:mysql://localhost:3306/twitter
+    schema = {twitter.$$NoNameSchema$$ as main}
+    user   = twitter
+    props  = {}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = twitter
+_/_/_/_/_/_/_/_/_/_/ {JDBC}
+2014-07-04 15:36:24,111 [main] INFO  (TorqueDocumentationTask#begin():171) - +------------------------------------------+
+2014-07-04 15:36:24,114 [main] INFO  (TorqueDocumentationTask#begin():172) - |                                          |
+2014-07-04 15:36:24,114 [main] INFO  (TorqueDocumentationTask#begin():173) - |                   Doc                    |
+2014-07-04 15:36:24,114 [main] INFO  (TorqueDocumentationTask#begin():181) - |                                          |
+2014-07-04 15:36:24,115 [main] INFO  (TorqueDocumentationTask#begin():182) - +------------------------------------------+
+2014-07-04 15:36:24,159 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2014-07-04 15:36:24,160 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = com.mysql.jdbc.Driver
+2014-07-04 15:36:24,160 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:mysql://localhost:3306/twitter
+2014-07-04 15:36:24,161 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = twitter
+2014-07-04 15:36:24,164 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():242) - 
+2014-07-04 15:36:24,165 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():243) - * * * * * * * * * * *
+2014-07-04 15:36:24,165 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():244) - *                   *
+2014-07-04 15:36:24,166 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():245) - *    Schema HTML    *
+2014-07-04 15:36:24,166 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():246) - *                   *
+2014-07-04 15:36:24,167 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():247) - * * * * * * * * * * *
+2014-07-04 15:36:24,345 [main] INFO  (DTDResolver#resolveEntity():197) - ...Resolving XML by database.dtd in same package
+2014-07-04 15:36:24,408 [main] INFO  (DfAbstractTexenTask#fireVelocityProcess():255) - generator.parse("doc/ControlDocument.vm", c);
+2014-07-04 15:36:24,472 [main] INFO  (Database#doEnableDocumentOutputDirectory():1180) - ...Setting up documentOutputDirectory: ./output/doc
+2014-07-04 15:36:24,485 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():62) - /=======================================
+2014-07-04 15:36:24,485 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():63) - ...Initializing additional primary keys.
+2014-07-04 15:36:24,488 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():88) - ==========/
+2014-07-04 15:36:24,489 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():62) - /=======================================
+2014-07-04 15:36:24,490 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():63) - ...Initializing additional unique keys.
+2014-07-04 15:36:24,493 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():83) - ==========/
+2014-07-04 15:36:24,495 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():67) - /=======================================
+2014-07-04 15:36:24,496 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():68) - ...Initializing additional foreign keys.
+2014-07-04 15:36:24,499 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():85) - ==========/
+2014-07-04 15:36:24,509 [main] INFO  (DfDocumentSelector#doLoadSchemaHistory():150) - ...Loading schema history
+2014-07-04 15:36:24,589 [main] INFO  (DfDocumentSelector#doLoadSchemaHistory():154) -  -> found history: count=27
+2014-07-04 15:36:24,834 [main] INFO  (DfRefreshResourceProcess#refreshResources():63) - ...Refreshing: [twitter]
+2014-07-04 15:36:24,883 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():150) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m00s770ms
+
+  DBFLUTE_CLIENT: {twitter}
+    database  = mysql
+    language  = java
+    container = seasar
+    package   = jp.bizreach.twitter.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = com.mysql.jdbc.Driver
+    url    = jdbc:mysql://localhost:3306/twitter
+    schema = {twitter.$$NoNameSchema$$ as main}
+    user   = twitter
+    props  = {}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = twitter
+_/_/_/_/_/_/_/_/_/_/ {Doc}
+2014-07-04 15:36:27,803 [main] INFO  (TorqueDataModelTask#begin():105) - +------------------------------------------+
+2014-07-04 15:36:27,806 [main] INFO  (TorqueDataModelTask#begin():106) - |                                          |
+2014-07-04 15:36:27,806 [main] INFO  (TorqueDataModelTask#begin():107) - |                 Generate                 |
+2014-07-04 15:36:27,807 [main] INFO  (TorqueDataModelTask#begin():108) - |                                          |
+2014-07-04 15:36:27,807 [main] INFO  (TorqueDataModelTask#begin():109) - +------------------------------------------+
+2014-07-04 15:36:27,846 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2014-07-04 15:36:27,847 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = com.mysql.jdbc.Driver
+2014-07-04 15:36:27,847 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:mysql://localhost:3306/twitter
+2014-07-04 15:36:27,848 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = twitter
+2014-07-04 15:36:27,866 [main] INFO  (TorqueDataModelTask#setupControlTemplate():160) - 
+2014-07-04 15:36:27,867 [main] INFO  (TorqueDataModelTask#setupControlTemplate():161) - ...Using Java control: om/ControlGenerateJava.vm
+2014-07-04 15:36:28,002 [main] INFO  (DTDResolver#resolveEntity():197) - ...Resolving XML by database.dtd in same package
+2014-07-04 15:36:28,043 [main] INFO  (DfAbstractTexenTask#fireVelocityProcess():255) - generator.parse("om/ControlGenerateJava.vm", c);
+2014-07-04 15:36:28,196 [main] INFO  (Database#doEnableGenerateOutputDirectory():1148) - ...Setting up generateOutputDirectory: ../src/main/java
+2014-07-04 15:36:28,201 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():62) - /=======================================
+2014-07-04 15:36:28,202 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():63) - ...Initializing additional primary keys.
+2014-07-04 15:36:28,204 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():88) - ==========/
+2014-07-04 15:36:28,206 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():62) - /=======================================
+2014-07-04 15:36:28,206 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():63) - ...Initializing additional unique keys.
+2014-07-04 15:36:28,209 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():83) - ==========/
+2014-07-04 15:36:28,211 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():67) - /=======================================
+2014-07-04 15:36:28,211 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():68) - ...Initializing additional foreign keys.
+2014-07-04 15:36:28,213 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():85) - ==========/
+2014-07-04 15:36:28,234 [main] INFO  (DfIncludeQueryInitializer#initializeIncludeQuery():59) - /=============================
+2014-07-04 15:36:28,234 [main] INFO  (DfIncludeQueryInitializer#initializeIncludeQuery():60) - ...Initializing include query.
+2014-07-04 15:36:28,235 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():83) - String
+2014-07-04 15:36:28,236 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():83) - Number
+2014-07-04 15:36:28,236 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():83) - Date
+2014-07-04 15:36:28,237 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():88) -   NotEqual -> []
+2014-07-04 15:36:28,237 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():88) -   InScope -> []
+2014-07-04 15:36:28,238 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():88) -   NotInScope -> []
+2014-07-04 15:36:28,238 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():83) - OrderBy
+2014-07-04 15:36:28,239 [main] INFO  (DfIncludeQueryInitializer#initializeIncludeQuery():62) - ========/
+2014-07-04 15:36:28,254 [main] INFO  (Database#info():2573) - public void parseAllCommon() {
+2014-07-04 15:36:28,256 [main] INFO  (Database#info():2573) -     parse('DBCurrent');
+2014-07-04 15:36:28,264 [main] INFO  (Database#info():2573) -     parse('DBFluteConfig');
+2014-07-04 15:36:28,291 [main] INFO  (Database#info():2573) -     parse('DBFluteInitializer');
+2014-07-04 15:36:28,296 [main] INFO  (Database#info():2573) -     parse('DBMetaInstanceHandler');
+2014-07-04 15:36:28,313 [main] INFO  (Database#info():2573) -     parse('EntityDefinedCommonColumn');
+2014-07-04 15:36:28,319 [main] INFO  (Database#info():2573) -     parse('ImplementedBehaviorSelector');
+2014-07-04 15:36:28,325 [main] INFO  (Database#info():2573) -     parse('ImplementedCommonColumnAutoSetupper');
+2014-07-04 15:36:28,333 [main] INFO  (Database#info():2573) -     parse('ImplementedInvokerAssistant');
+2014-07-04 15:36:28,340 [main] INFO  (Database#info():2573) -     parse('ImplementedSqlClauseCreator');
+2014-07-04 15:36:28,345 [main] INFO  (Database#info():2573) - }
+2014-07-04 15:36:28,346 [main] INFO  (Database#info():2573) - public void parseContainerConfig() {
+2014-07-04 15:36:28,347 [main] INFO  (Database#info():2573) -     parse('../resources/dbflute.dicon')
+2014-07-04 15:36:28,354 [main] INFO  (Database#info():2573) - }
+2014-07-04 15:36:28,359 [main] INFO  (DfOldClassHandler#info():1037) - public void deleteOldTableClass() {
+2014-07-04 15:36:28,382 [main] INFO  (DfOldClassHandler#info():1037) - }
+2014-07-04 15:36:28,383 [main] INFO  (Database#info():2573) - public void parseTableClass() {
+2014-07-04 15:36:28,384 [main] INFO  (Database#info():2573) -     parse('follow');
+2014-07-04 15:36:28,753 [main] INFO  (Database#info():2573) -     parse('login');
+2014-07-04 15:36:29,003 [main] INFO  (Database#info():2573) -     parse('member');
+2014-07-04 15:36:29,295 [main] INFO  (Database#info():2573) -     parse('member_security');
+2014-07-04 15:36:29,420 [main] INFO  (Database#info():2573) -     parse('member_withdraw');
+2014-07-04 15:36:29,540 [main] INFO  (Database#info():2573) -     parse('tweet');
+2014-07-04 15:36:29,651 [main] INFO  (Database#info():2573) - }
+2014-07-04 15:36:29,651 [main] INFO  (Database#info():2573) -  
+2014-07-04 15:36:29,675 [main] INFO  (DfRefreshResourceProcess#refreshResources():63) - ...Refreshing: [twitter]
+2014-07-04 15:36:29,684 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():150) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m01s875ms
+
+  DBFLUTE_CLIENT: {twitter}
+    database  = mysql
+    language  = java
+    container = seasar
+    package   = jp.bizreach.twitter.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = com.mysql.jdbc.Driver
+    url    = jdbc:mysql://localhost:3306/twitter
+    schema = {twitter.$$NoNameSchema$$ as main}
+    user   = twitter
+    props  = {}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = twitter
+_/_/_/_/_/_/_/_/_/_/ {Generate}
+2014-07-04 15:36:30,560 [main] INFO  (DfOutsideSqlTestTask#begin():72) - +------------------------------------------+
+2014-07-04 15:36:30,563 [main] INFO  (DfOutsideSqlTestTask#begin():73) - |                                          |
+2014-07-04 15:36:30,563 [main] INFO  (DfOutsideSqlTestTask#begin():74) - |              OutsideSqlTest              |
+2014-07-04 15:36:30,564 [main] INFO  (DfOutsideSqlTestTask#begin():75) - |                                          |
+2014-07-04 15:36:30,564 [main] INFO  (DfOutsideSqlTestTask#begin():76) - +------------------------------------------+
+2014-07-04 15:36:30,603 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2014-07-04 15:36:30,603 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = com.mysql.jdbc.Driver
+2014-07-04 15:36:30,604 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:mysql://localhost:3306/twitter
+2014-07-04 15:36:30,605 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = twitter
+2014-07-04 15:36:30,639 [main] INFO  (DfSqlFileFireMan#fire():90) - {Fired SQL}: success=0 failure=0 (in 0 files)
+2014-07-04 15:36:30,646 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():150) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m00s080ms
+
+  DBFLUTE_CLIENT: {twitter}
+    database  = mysql
+    language  = java
+    container = seasar
+    package   = jp.bizreach.twitter.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = com.mysql.jdbc.Driver
+    url    = jdbc:mysql://localhost:3306/twitter
+    schema = {twitter.$$NoNameSchema$$ as main}
+    user   = twitter
+    props  = {}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = twitter
+
+ {Checked SQL}
+_/_/_/_/_/_/_/_/_/_/ {OutsideSqlTest}
+2014-07-04 15:36:31,470 [main] INFO  (DfSql2EntityTask#begin():100) - +------------------------------------------+
+2014-07-04 15:36:31,472 [main] INFO  (DfSql2EntityTask#begin():101) - |                                          |
+2014-07-04 15:36:31,472 [main] INFO  (DfSql2EntityTask#begin():102) - |                Sql2Entity                |
+2014-07-04 15:36:31,473 [main] INFO  (DfSql2EntityTask#begin():103) - |                                          |
+2014-07-04 15:36:31,473 [main] INFO  (DfSql2EntityTask#begin():104) - +------------------------------------------+
+2014-07-04 15:36:31,510 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2014-07-04 15:36:31,510 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = com.mysql.jdbc.Driver
+2014-07-04 15:36:31,511 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:mysql://localhost:3306/twitter
+2014-07-04 15:36:31,511 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = twitter
+2014-07-04 15:36:31,528 [main] INFO  (DfSql2EntityTask#setupControlTemplate():170) - 
+2014-07-04 15:36:31,529 [main] INFO  (DfSql2EntityTask#setupControlTemplate():171) - ...Using Java control: om/ControlSql2EntityJava.vm
+2014-07-04 15:36:31,535 [main] INFO  (DTDResolver#resolveEntity():197) - ...Resolving XML by database.dtd in same package
+2014-07-04 15:36:31,587 [main] INFO  (DfSqlFileFireMan#fire():90) - {Fired SQL}: success=0 failure=0 (in 0 files)
+2014-07-04 15:36:31,722 [main] INFO  (DfSql2EntityTask#initControlContext():301) - 
+2014-07-04 15:36:31,723 [main] INFO  (DfSql2EntityTask#initControlContext():302) - ...Preparing generation of customize-entities and parameter-beans
+2014-07-04 15:36:31,723 [main] INFO  (DfSql2EntityTask#initControlContext():303) - * * * * * * * * * *
+2014-07-04 15:36:31,724 [main] INFO  (DfSql2EntityTask#initControlContext():304) - * CustomizeEntity *
+2014-07-04 15:36:31,724 [main] INFO  (DfSql2EntityTask#initControlContext():305) - * * * * * * * * * *
+2014-07-04 15:36:31,725 [main] INFO  (DfSql2EntityTask#showParameterBean():879) - * * * * * * * * *
+2014-07-04 15:36:31,726 [main] INFO  (DfSql2EntityTask#showParameterBean():880) - * ParameterBean *
+2014-07-04 15:36:31,726 [main] INFO  (DfSql2EntityTask#showParameterBean():881) - * * * * * * * * *
+2014-07-04 15:36:31,730 [main] INFO  (DfAbstractTexenTask#fireVelocityProcess():255) - generator.parse("om/ControlSql2EntityJava.vm", c);
+2014-07-04 15:36:31,828 [main] INFO  (Database#doEnableSql2EntityOutputDirectory():1164) - ...Setting up sql2EntityOutputDirectory: ../src/main/java
+2014-07-04 15:36:31,832 [main] INFO  (DfOldClassHandler#info():1037) - public void deleteOldCustomizeClass() {
+2014-07-04 15:36:31,845 [main] INFO  (DfOldClassHandler#info():1037) - }
+2014-07-04 15:36:31,846 [main] INFO  (Database#info():2573) - public void parseCustomizeEntity() {
+2014-07-04 15:36:31,849 [main] INFO  (Database#info():2573) - }
+2014-07-04 15:36:31,863 [main] INFO  (DfSql2EntityTask#showTargetSqlFileInformation():293) - 
+/- - - - - - - - - - - - - - - - - - - - - - - -
+Target SQL files: 0
+
+- - - - - - - - - -/
+2014-07-04 15:36:31,868 [main] INFO  (DfRefreshResourceProcess#refreshResources():63) - ...Refreshing: [twitter]
+2014-07-04 15:36:31,877 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():150) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m00s402ms
+
+  DBFLUTE_CLIENT: {twitter}
+    database  = mysql
+    language  = java
+    container = seasar
+    package   = jp.bizreach.twitter.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = com.mysql.jdbc.Driver
+    url    = jdbc:mysql://localhost:3306/twitter
+    schema = {twitter.$$NoNameSchema$$ as main}
+    user   = twitter
+    props  = {}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = twitter
+_/_/_/_/_/_/_/_/_/_/ {Sql2Entity}
+2014-07-04 15:52:21,912 [main] INFO  (DfReplaceSchemaTask#begin():87) - +------------------------------------------+
+2014-07-04 15:52:21,915 [main] INFO  (DfReplaceSchemaTask#begin():88) - |                                          |
+2014-07-04 15:52:21,915 [main] INFO  (DfReplaceSchemaTask#begin():89) - |              ReplaceSchema               |
+2014-07-04 15:52:21,935 [main] INFO  (DfReplaceSchemaTask#begin():97) - |                                          |
+2014-07-04 15:52:21,935 [main] INFO  (DfReplaceSchemaTask#begin():98) - +------------------------------------------+
+2014-07-04 15:52:21,937 [main] INFO  (DfReplaceSchemaTask#waitBeforeReps():329) - ...Waiting for your GO SIGN from stdin before ReplaceSchema:
+2014-07-04 15:52:23,738 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2014-07-04 15:52:23,740 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = com.mysql.jdbc.Driver
+2014-07-04 15:52:23,741 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:mysql://localhost:3306/twitter
+2014-07-04 15:52:23,742 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = twitter
+2014-07-04 15:52:23,752 [main] INFO  (DfDataSourceHandler#createConnection():168) - ...Connecting to database by data source:
+2014-07-04 15:52:23,980 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():235) -   product = MySQL 5.6.17
+2014-07-04 15:52:23,981 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():236) -   driver  = MySQL Connector Java mysql-connector-java-5.1.26 ( Revision: ${bzr.revision-id} ) for JDBC 4.0
+2014-07-04 15:52:23,999 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():207) - 
+2014-07-04 15:52:24,000 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():208) - * * * * * * * * * * *
+2014-07-04 15:52:24,001 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():209) - *                   *
+2014-07-04 15:52:24,001 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():210) - * Initialize Schema *
+2014-07-04 15:52:24,002 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():211) - *                   *
+2014-07-04 15:52:24,003 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():212) - * * * * * * * * * * *
+2014-07-04 15:52:24,019 [main] INFO  (DfTableExtractor#doGetTableList():67) - ...Getting tables:
+2014-07-04 15:52:24,020 [main] INFO  (DfTableExtractor#doGetTableList():68) -   schema = {twitter.$$NoNameSchema$$ as main}
+2014-07-04 15:52:24,021 [main] INFO  (DfTableExtractor#doGetTableList():69) -   types  = [TABLE, VIEW]
+2014-07-04 15:52:24,065 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - truncate table follow
+2014-07-04 15:52:24,105 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - truncate table login
+2014-07-04 15:52:24,139 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - truncate table member_security
+2014-07-04 15:52:24,170 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - truncate table member_withdraw
+2014-07-04 15:52:24,214 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - truncate table tweet
+2014-07-04 15:52:24,249 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - alter table follow drop foreign key follow_ibfk_2
+2014-07-04 15:52:24,268 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - alter table follow drop foreign key follow_ibfk_1
+2014-07-04 15:52:24,289 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - alter table login drop foreign key login_ibfk_1
+2014-07-04 15:52:24,299 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - alter table member_security drop foreign key member_security_ibfk_1
+2014-07-04 15:52:24,313 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - alter table member_withdraw drop foreign key member_withdraw_ibfk_1
+2014-07-04 15:52:24,335 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - alter table tweet drop foreign key tweet_ibfk_1
+2014-07-04 15:52:24,347 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - drop table follow
+2014-07-04 15:52:24,359 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - drop table login
+2014-07-04 15:52:24,371 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - drop table member
+2014-07-04 15:52:24,390 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - drop table member_security
+2014-07-04 15:52:24,406 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - drop table member_withdraw
+2014-07-04 15:52:24,420 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - drop table tweet
+2014-07-04 15:52:24,476 [main] INFO  (DfCreateSchemaProcess#createSchema():244) - 
+2014-07-04 15:52:24,477 [main] INFO  (DfCreateSchemaProcess#createSchema():245) - * * * * * * * * *
+2014-07-04 15:52:24,478 [main] INFO  (DfCreateSchemaProcess#createSchema():246) - *               *
+2014-07-04 15:52:24,479 [main] INFO  (DfCreateSchemaProcess#createSchema():247) - * Create Schema *
+2014-07-04 15:52:24,479 [main] INFO  (DfCreateSchemaProcess#createSchema():248) - *               *
+2014-07-04 15:52:24,480 [main] INFO  (DfCreateSchemaProcess#createSchema():249) - * * * * * * * * *
+2014-07-04 15:52:24,486 [main] INFO  (DfSqlFileFireMan#fire():65) - ...Firing: replace-schema-00-system.sql
+2014-07-04 15:52:24,489 [main] INFO  (DfReplaceSchemaProperties#checkTargetEnvType():277) - ...Checking envType: ut in [ut]
+2014-07-04 15:52:24,490 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+-- #df:checkEnv(ut)#
+
+-- #df:changeUser(system)#
+-- #df:checkUser(mainSchema)#
+create database twitter
+2014-07-04 15:52:24,494 [main] INFO  (DfCreateSchemaProcess$1#dispatch():273) - ...Creating a connection to system
+2014-07-04 15:52:24,496 [main] INFO  (DfReplaceSchemaProperties#createAdditionalUserConnection():514) - ...Creating a connection for additional user: root
+2014-07-04 15:52:24,518 [main] INFO  (DfCreateSchemaProcess$1#dispatch():299) - ...Saying good-bye to the user 'system' because of checked: [mainSchema]
+2014-07-04 15:52:24,519 [main] INFO  (DfCreateSchemaProcess$1#dispatch():301) -  -> Can't create database 'twitter'; database exists
+2014-07-04 15:52:24,521 [main] INFO  (DfCreateSchemaProcess$DfSqlFileRunnerExecuteCreateSchema#isTargetSql():411) - ...Reviving the user 'system' until the end of this SQL file
+2014-07-04 15:52:24,522 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+-- #df:reviveUser()#
+-- #df:checkUser(mainUser, grant)#
+grant all privileges on twitter.*
+  to twitter@localhost identified by 'twitter'
+2014-07-04 15:52:24,526 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - flush privileges
+2014-07-04 15:52:24,528 [main] INFO  (DfSqlFileRunnerBase#traceResult():172) -  -> success=2 failure=0
+2014-07-04 15:52:24,529 [main] INFO  (DfSqlFileFireMan#fire():65) - ...Firing: replace-schema-10-basic.sql
+2014-07-04 15:52:24,530 [main] INFO  (DfCreateSchemaProcess$DfSqlFileRunnerExecuteCreateSchema#restoreRevivedUser():348) - ...Saying good-bye to the user 'system' again
+2014-07-04 15:52:24,531 [main] INFO  (DfCreateSchemaProcess$DfSqlFileRunnerExecuteCreateSchema#restoreRevivedUser():352) - ...Clearing revived users
+2014-07-04 15:52:24,532 [main] INFO  (DfCreateSchemaProcess$DfSqlFileRunnerExecuteCreateSchema#restoreCurrentUser():359) - ...Coming back to the main user from the user 'system'
+2014-07-04 15:52:24,534 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+/* Create Tables */
+
+CREATE TABLE FOLLOW
+(
+	FOLLOW_ID INT(100) NOT NULL UNIQUE AUTO_INCREMENT COMMENT 'フォローID',
+	YOU_ID INT(100) NOT NULL COMMENT 'フォローする人のID : 会員のID
+',
+	MEMBER_ID INT(100) NOT NULL COMMENT 'フォローされる人のID : フォローしている自分のID
+',
+	INS_DATETIME DATETIME NOT NULL COMMENT 'insert日時',
+	UPD_DATETIME DATETIME NOT NULL COMMENT 'UPD_DATETIME',
+	INS_TRACE VARCHAR(256) NOT NULL COMMENT 'Insertトレース',
+	UPD_TRACE VARCHAR(256) NOT NULL COMMENT 'UPD トレース',
+	DEL_FLG CHAR(1) DEFAULT 'N' NOT NULL COMMENT 'DEL_FLG : 削除フラグ Y=削除　N=削除していない',
+	PRIMARY KEY (FOLLOW_ID),
+	UNIQUE (YOU_ID, MEMBER_ID)
+) COMMENT = 'フォロー'
+2014-07-04 15:52:24,578 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE LOGIN
+(
+	LOGIN_ID INT NOT NULL AUTO_INCREMENT COMMENT 'ログインID : ログインした瞬間のID
+',
+	MEMBER_ID INT(100) NOT NULL COMMENT '会員ID : 会員のID
+',
+	INS_DATETIME DATETIME NOT NULL COMMENT 'insert日時',
+	UPD_DATETIME DATETIME NOT NULL COMMENT 'UPD_DATETIME',
+	INS_TRACE VARCHAR(256) NOT NULL COMMENT 'Insertトレース',
+	UPD_TRACE VARCHAR(256) NOT NULL COMMENT 'UPD トレース',
+	PRIMARY KEY (LOGIN_ID)
+) COMMENT = 'ログイン'
+2014-07-04 15:52:24,616 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE MEMBER
+(
+	MEMBER_ID INT(100) NOT NULL UNIQUE AUTO_INCREMENT COMMENT '会員ID : 会員のID
+',
+	EMAIL_ADDRESS VARCHAR(100) NOT NULL UNIQUE COMMENT 'メールアドレス : 会員のメールアドレス',
+	USER_NAME VARCHAR(100) NOT NULL UNIQUE COMMENT '会員ユーザ名 : 会員のユーザ名',
+	BIRTHDATE DATE COMMENT '生年月日 : 会員の生年月日',
+	PROFILE VARCHAR(200) COMMENT 'プロフィール',
+	INS_DATETIME DATETIME NOT NULL COMMENT 'insert日時',
+	UPD_DATETIME DATETIME NOT NULL COMMENT 'UPD_DATETIME',
+	INS_TRACE VARCHAR(256) NOT NULL COMMENT 'Insertトレース',
+	UPD_TRACE VARCHAR(256) NOT NULL COMMENT 'UPD トレース',
+	ACCOUNT_NAME VARCHAR(100) NOT NULL COMMENT 'アカウント名',
+	PRIMARY KEY (MEMBER_ID)
+) COMMENT = '会員'
+2014-07-04 15:52:24,693 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE MEMBER_SECURITY
+(
+	MEMBER_ID INT(100) NOT NULL UNIQUE COMMENT '会員ID : 会員のID
+',
+	PASSWORD VARCHAR(50) NOT NULL COMMENT 'パスワード',
+	INS_DATETIME DATETIME NOT NULL COMMENT 'insert日時',
+	UPD_DATETIME DATETIME NOT NULL COMMENT 'UPD_DATETIME',
+	INS_TRACE VARCHAR(256) NOT NULL COMMENT 'Insertトレース',
+	UPD_TRACE VARCHAR(256) NOT NULL COMMENT 'UPD トレース',
+	PRIMARY KEY (MEMBER_ID)
+) COMMENT = '会員セキュリティ'
+2014-07-04 15:52:24,753 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE MEMBER_WITHDRAW
+(
+	MEMBER_ID INT(100) NOT NULL UNIQUE COMMENT '会員ID : 会員のID
+',
+	WITHDRAWAL_REASON_ID INT COMMENT '退会理由ID : 会員の退会理由ID',
+	WITHDRAWAL_REASON_INPUT_TEXT TEXT COMMENT '退会理由入力テキスト',
+	WITHDRAWAL_DATETIME DATETIME NOT NULL COMMENT 'withdrawal_datetime : 退会日時',
+	PRIMARY KEY (MEMBER_ID)
+) COMMENT = '会員退会'
+2014-07-04 15:52:24,818 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE TWEET
+(
+	TWEET_ID INT NOT NULL UNIQUE AUTO_INCREMENT COMMENT 'TWEET_ID',
+	MEMBER_ID INT(100) NOT NULL COMMENT '会員ID : tweetした人のID',
+	TWEET VARCHAR(140) NOT NULL COMMENT 'TWEET',
+	INS_DATETIME DATETIME NOT NULL COMMENT 'insert日時',
+	UPD_DATETIME DATETIME NOT NULL COMMENT 'UPD_DATETIME',
+	INS_TRACE VARCHAR(256) NOT NULL COMMENT 'Insertトレース',
+	UPD_TRACE VARCHAR(256) NOT NULL COMMENT 'UPD トレース',
+	TWEET_DATETIME VARCHAR(50) NOT NULL COMMENT 'TWEET日時 : ツィートした日時（共通カラムではなく、画面に表示するためのもの）',
+	PRIMARY KEY (TWEET_ID)
+) COMMENT = 'TWEET'
+2014-07-04 15:52:24,879 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+/* Create Foreign Keys */
+
+ALTER TABLE FOLLOW
+	ADD FOREIGN KEY (MEMBER_ID)
+	REFERENCES MEMBER (MEMBER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2014-07-04 15:52:24,974 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE FOLLOW
+	ADD FOREIGN KEY (YOU_ID)
+	REFERENCES MEMBER (MEMBER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2014-07-04 15:52:25,080 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE LOGIN
+	ADD FOREIGN KEY (MEMBER_ID)
+	REFERENCES MEMBER (MEMBER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2014-07-04 15:52:25,179 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE MEMBER_SECURITY
+	ADD FOREIGN KEY (MEMBER_ID)
+	REFERENCES MEMBER (MEMBER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2014-07-04 15:52:25,280 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE MEMBER_WITHDRAW
+	ADD FOREIGN KEY (MEMBER_ID)
+	REFERENCES MEMBER (MEMBER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2014-07-04 15:52:25,374 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE TWEET
+	ADD FOREIGN KEY (MEMBER_ID)
+	REFERENCES MEMBER (MEMBER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2014-07-04 15:52:25,483 [main] INFO  (DfSqlFileRunnerBase#traceResult():172) -  -> success=12 failure=0
+2014-07-04 15:52:25,485 [main] INFO  (DfSqlFileFireMan#fire():90) - {Create Schema}: success=14 failure=0 (in 2 files)
+2014-07-04 15:52:25,487 [main] INFO  (DfCreateSchemaProcess#destroyChangeUserConnection():542) - ...Closing connections to change-users: [system]
+2014-07-04 15:52:25,537 [main] INFO  (DfLoadDataProcess#execute():129) - 
+2014-07-04 15:52:25,537 [main] INFO  (DfLoadDataProcess#execute():130) - * * * * * * * * * * *
+2014-07-04 15:52:25,538 [main] INFO  (DfLoadDataProcess#execute():131) - *                   *
+2014-07-04 15:52:25,538 [main] INFO  (DfLoadDataProcess#execute():132) - * Load Data         *
+2014-07-04 15:52:25,539 [main] INFO  (DfLoadDataProcess#execute():133) - *                   *
+2014-07-04 15:52:25,539 [main] INFO  (DfLoadDataProcess#execute():134) - * * * * * * * * * * *
+2014-07-04 15:52:25,566 [main] INFO  (DfXlsDataHandlerImpl#writeSeveralData():126) - /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+2014-07-04 15:52:25,567 [main] INFO  (DfXlsDataHandlerImpl#writeSeveralData():127) - writeData(playsql\data\ut\xls\20-member.xls)
+2014-07-04 15:52:25,567 [main] INFO  (DfXlsDataHandlerImpl#writeSeveralData():128) - = = = = = = =/
+2014-07-04 15:52:25,860 [main] INFO  (DfTableExtractor#doGetTableList():67) - ...Getting tables:
+2014-07-04 15:52:25,861 [main] INFO  (DfTableExtractor#doGetTableList():68) -   schema = {twitter.$$NoNameSchema$$ as main}
+2014-07-04 15:52:25,862 [main] INFO  (DfTableExtractor#doGetTableList():69) -   types  = [TABLE, VIEW]
+2014-07-04 15:52:25,931 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - MEMBER:{1, Stojkovic@gmail.com, Pixy, Stoiko, 1965/03/03, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0}
+2014-07-04 15:52:25,980 [main] INFO  (DfXlsDataHandlerImpl#doWriteDataTable():210) - ...Skipping the terminal garbage row
+2014-07-04 15:52:25,993 [main] INFO  (DfAbsractDataWriter#noticeLoadedRowSize():1059) -  -> 1 rows are loaded to MEMBER
+2014-07-04 15:52:25,996 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - LOGIN:{1, 1, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0}
+2014-07-04 15:52:25,998 [main] INFO  (DfXlsDataHandlerImpl#doWriteDataTable():210) - ...Skipping the terminal garbage row
+2014-07-04 15:52:26,002 [main] INFO  (DfAbsractDataWriter#noticeLoadedRowSize():1059) -  -> 1 rows are loaded to LOGIN
+2014-07-04 15:52:26,003 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - MEMBER_SECURITY:{1, aaa, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0}
+2014-07-04 15:52:26,006 [main] INFO  (DfXlsDataHandlerImpl#doWriteDataTable():210) - ...Skipping the terminal garbage row
+2014-07-04 15:52:26,009 [main] INFO  (DfAbsractDataWriter#noticeLoadedRowSize():1059) -  -> 1 rows are loaded to MEMBER_SECURITY
+2014-07-04 15:52:26,010 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - TWEET:{1, 1234, 充実した一日だった。, 7月4日　07:04, 7月4日　07:03, 7月4日　07:02, 7月4日　07:01, 7月4日　07:00}
+2014-07-04 15:52:26,031 [main] ERROR (DfDBFluteTaskUtil#logException():161) - Look! Read the message below.
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Failed to execute DBFlute Task 'ReplaceSchema'.
+
+[Advice]
+Check the exception messages and the stack traces.
+
+[Database Product]
+MySQL 5.6.17
+
+[JDBC Driver]
+MySQL Connector Java mysql-connector-java-5.1.26 ( Revision: ${bzr.revision-id} ) for JDBC 4.0
+* * * * * * * * * */
+org.seasar.dbflute.exception.DfXlsDataRegistrationFailureException: Look! Read the message below.
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Failed to register the xls data for ReplaceSchema.
+
+[Advice]
+Please confirm the exception message.
+
+[Data Directory]
+playsql/data/ut/xls
+
+[Xls File]
+playsql\data\ut\xls\20-member.xls
+
+[Table]
+TWEET
+* * * * * * * * * */
+	at org.seasar.dbflute.logic.replaceschema.loaddata.impl.DfXlsDataHandlerImpl.handleXlsDataRegistartionFailureException(DfXlsDataHandlerImpl.java:358)
+	at org.seasar.dbflute.logic.replaceschema.loaddata.impl.DfXlsDataHandlerImpl.doWriteDataTable(DfXlsDataHandlerImpl.java:255)
+	at org.seasar.dbflute.logic.replaceschema.loaddata.impl.DfXlsDataHandlerImpl.doWriteDataSet(DfXlsDataHandlerImpl.java:152)
+	at org.seasar.dbflute.logic.replaceschema.loaddata.impl.DfXlsDataHandlerImpl.writeSeveralData(DfXlsDataHandlerImpl.java:133)
+	at org.seasar.dbflute.logic.replaceschema.process.DfLoadDataProcess.writeDbFromXls(DfLoadDataProcess.java:319)
+	at org.seasar.dbflute.logic.replaceschema.process.DfLoadDataProcess.writeDbFromXls(DfLoadDataProcess.java:307)
+	at org.seasar.dbflute.logic.replaceschema.process.DfLoadDataProcess.writeDbFromXlsAsLoadingTypeData(DfLoadDataProcess.java:291)
+	at org.seasar.dbflute.logic.replaceschema.process.DfLoadDataProcess.execute(DfLoadDataProcess.java:159)
+	at org.seasar.dbflute.task.DfReplaceSchemaTask.loadData(DfReplaceSchemaTask.java:274)
+	at org.seasar.dbflute.task.DfReplaceSchemaTask.doExecuteCoreProcess(DfReplaceSchemaTask.java:238)
+	at org.seasar.dbflute.task.DfReplaceSchemaTask.executeCoreProcess(DfReplaceSchemaTask.java:232)
+	at org.seasar.dbflute.task.DfReplaceSchemaTask.processMain(DfReplaceSchemaTask.java:225)
+	at org.seasar.dbflute.task.DfReplaceSchemaTask.doExecute(DfReplaceSchemaTask.java:153)
+	at org.seasar.dbflute.task.bs.DfAbstractTexenTask$1.callActualExecute(DfAbstractTexenTask.java:130)
+	at org.seasar.dbflute.task.bs.assistant.DfTaskBasicController.doExecute(DfTaskBasicController.java:184)
+	at org.seasar.dbflute.task.bs.assistant.DfTaskBasicController.execute(DfTaskBasicController.java:77)
+	at org.seasar.dbflute.task.bs.DfAbstractTexenTask.execute(DfAbstractTexenTask.java:152)
+	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:288)
+	at sun.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.tools.ant.dispatch.DispatchUtils.execute(DispatchUtils.java:105)
+	at org.apache.tools.ant.Task.perform(Task.java:348)
+	at org.apache.tools.ant.Target.execute(Target.java:357)
+	at org.apache.tools.ant.Target.performTasks(Target.java:385)
+	at org.apache.tools.ant.Project.executeSortedTargets(Project.java:1329)
+	at org.apache.tools.ant.helper.SingleCheckExecutor.executeTargets(SingleCheckExecutor.java:38)
+	at org.apache.tools.ant.Project.executeTargets(Project.java:1181)
+	at org.apache.tools.ant.taskdefs.Ant.execute(Ant.java:416)
+	at org.apache.tools.ant.taskdefs.CallTarget.execute(CallTarget.java:105)
+	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:288)
+	at sun.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.tools.ant.dispatch.DispatchUtils.execute(DispatchUtils.java:105)
+	at org.apache.tools.ant.Task.perform(Task.java:348)
+	at org.apache.tools.ant.Target.execute(Target.java:357)
+	at org.apache.tools.ant.Target.performTasks(Target.java:385)
+	at org.apache.tools.ant.Project.executeSortedTargets(Project.java:1329)
+	at org.apache.tools.ant.Project.executeTarget(Project.java:1298)
+	at org.apache.tools.ant.helper.DefaultExecutor.executeTargets(DefaultExecutor.java:41)
+	at org.apache.tools.ant.Project.executeTargets(Project.java:1181)
+	at org.apache.tools.ant.Main.runBuild(Main.java:698)
+	at org.apache.tools.ant.Main.startAnt(Main.java:199)
+	at org.apache.tools.ant.launch.Launcher.run(Launcher.java:257)
+	at org.apache.tools.ant.launch.Launcher.main(Launcher.java:104)
+Caused by: org.seasar.dbflute.exception.DfLoadDataRegistrationFailureException: Look! Read the message below.
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Failed to bind the value with ValueType for the column type.
+
+[Advice]
+Confirm the nested RuntimeException's message.
+The bound value might not be to match the type.
+
+[Table Name]
+TWEET
+
+[Column Name]
+UPD_DATETIME
+
+[Bind Type]
+class java.sql.Timestamp
+
+[Value Type]
+org.seasar.dbflute.s2dao.valuetype.basic.TimestampType@110910a1
+
+[Bound Value]
+7月4日　07:03
+
+[Row Number]
+1
+
+[RuntimeException]
+class org.seasar.dbflute.util.DfTypeUtil$ParseTimestampException
+Failed to parse the string to timestamp: string=7月4日　07:03 pattern=yyyy-MM-dd HH:mm:ss.SSS
+* * * * * * * * * */
+	at org.seasar.dbflute.logic.replaceschema.loaddata.impl.DfAbsractDataWriter.throwColumnValueBindingFailureException(DfAbsractDataWriter.java:859)
+	at org.seasar.dbflute.logic.replaceschema.loaddata.impl.DfAbsractDataWriter.bindNotNullValueByColumnType(DfAbsractDataWriter.java:830)
+	at org.seasar.dbflute.logic.replaceschema.loaddata.impl.DfAbsractDataWriter.processDate(DfAbsractDataWriter.java:475)
+	at org.seasar.dbflute.logic.replaceschema.loaddata.impl.DfAbsractDataWriter$DateStringProcessor.process(DfAbsractDataWriter.java:344)
+	at org.seasar.dbflute.logic.replaceschema.loaddata.impl.DfAbsractDataWriter.processNotNullString(DfAbsractDataWriter.java:302)
+	at org.seasar.dbflute.logic.replaceschema.loaddata.impl.DfXlsDataHandlerImpl.processBindColumnValue(DfXlsDataHandlerImpl.java:548)
+	at org.seasar.dbflute.logic.replaceschema.loaddata.impl.DfXlsDataHandlerImpl.doWriteDataRow(DfXlsDataHandlerImpl.java:471)
+	at org.seasar.dbflute.logic.replaceschema.loaddata.impl.DfXlsDataHandlerImpl.doWriteDataTable(DfXlsDataHandlerImpl.java:196)
+	... 44 more
+Caused by: org.seasar.dbflute.util.DfTypeUtil$ParseTimestampException: Failed to parse the string to timestamp: string=7月4日　07:03 pattern=yyyy-MM-dd HH:mm:ss.SSS
+	at org.seasar.dbflute.util.DfTypeUtil.toTimestampFromString(DfTypeUtil.java:1694)
+	at org.seasar.dbflute.util.DfTypeUtil.toTimestamp(DfTypeUtil.java:1657)
+	at org.seasar.dbflute.util.DfTypeUtil.toTimestamp(DfTypeUtil.java:1593)
+	at org.seasar.dbflute.s2dao.valuetype.basic.TimestampType.toTimestamp(TimestampType.java:72)
+	at org.seasar.dbflute.s2dao.valuetype.basic.TimestampType.bindValue(TimestampType.java:58)
+	at org.seasar.dbflute.logic.replaceschema.loaddata.impl.DfAbsractDataWriter.bindNotNullValueByColumnType(DfAbsractDataWriter.java:828)
+	... 50 more
+Caused by: java.text.ParseException: Unparseable date: "7月4日　07:03"
+	at java.text.DateFormat.parse(DateFormat.java:357)
+	at org.seasar.dbflute.util.DfTypeUtil.toTimestampFromString(DfTypeUtil.java:1683)
+	... 55 more
+2014-07-04 15:52:26,128 [main] INFO  (DfDataSourceHandler#commit():94) - ...commit()
+2014-07-04 15:52:26,129 [main] INFO  (DfDataSourceHandler#destroy():117) - ...rollback()
+2014-07-04 15:52:26,130 [main] INFO  (DfDataSourceHandler#destroy():121) - ...closeReally()
+2014-07-04 15:52:26,136 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():150) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m04s219ms *Abort
+
+  DBFLUTE_CLIENT: {twitter}
+    database  = mysql (MySQL 5.6.17)
+    language  = java
+    container = seasar
+    package   = jp.bizreach.twitter.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = com.mysql.jdbc.Driver
+    url    = jdbc:mysql://localhost:3306/twitter
+    schema = {twitter.$$NoNameSchema$$ as main}
+    user   = twitter
+    props  = {user=root, password=}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = twitter
+
+ {Create Schema}: success=14 failure=0 (in 2 files)
+  o replace-schema-00-system.sql
+  o replace-schema-10-basic.sql
+
+ {Load Data}: loaded-files=0
+  x (failed: Look at the exception message)
+    * * * * * *
+    * Failure *
+    * * * * * *
+_/_/_/_/_/_/_/_/_/_/ {ReplaceSchema}
+2014-07-04 15:53:54,103 [main] INFO  (DfReplaceSchemaTask#begin():87) - +------------------------------------------+
+2014-07-04 15:53:54,106 [main] INFO  (DfReplaceSchemaTask#begin():88) - |                                          |
+2014-07-04 15:53:54,107 [main] INFO  (DfReplaceSchemaTask#begin():89) - |              ReplaceSchema               |
+2014-07-04 15:53:54,125 [main] INFO  (DfReplaceSchemaTask#begin():97) - |                                          |
+2014-07-04 15:53:54,126 [main] INFO  (DfReplaceSchemaTask#begin():98) - +------------------------------------------+
+2014-07-04 15:53:54,127 [main] INFO  (DfReplaceSchemaTask#waitBeforeReps():329) - ...Waiting for your GO SIGN from stdin before ReplaceSchema:
+2014-07-04 15:53:55,492 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2014-07-04 15:53:55,494 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = com.mysql.jdbc.Driver
+2014-07-04 15:53:55,495 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:mysql://localhost:3306/twitter
+2014-07-04 15:53:55,496 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = twitter
+2014-07-04 15:53:55,511 [main] INFO  (DfDataSourceHandler#createConnection():168) - ...Connecting to database by data source:
+2014-07-04 15:53:55,752 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():235) -   product = MySQL 5.6.17
+2014-07-04 15:53:55,753 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():236) -   driver  = MySQL Connector Java mysql-connector-java-5.1.26 ( Revision: ${bzr.revision-id} ) for JDBC 4.0
+2014-07-04 15:53:55,775 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():207) - 
+2014-07-04 15:53:55,776 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():208) - * * * * * * * * * * *
+2014-07-04 15:53:55,777 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():209) - *                   *
+2014-07-04 15:53:55,777 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():210) - * Initialize Schema *
+2014-07-04 15:53:55,778 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():211) - *                   *
+2014-07-04 15:53:55,778 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():212) - * * * * * * * * * * *
+2014-07-04 15:53:55,796 [main] INFO  (DfTableExtractor#doGetTableList():67) - ...Getting tables:
+2014-07-04 15:53:55,797 [main] INFO  (DfTableExtractor#doGetTableList():68) -   schema = {twitter.$$NoNameSchema$$ as main}
+2014-07-04 15:53:55,798 [main] INFO  (DfTableExtractor#doGetTableList():69) -   types  = [TABLE, VIEW]
+2014-07-04 15:53:55,853 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - truncate table follow
+2014-07-04 15:53:55,894 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - truncate table login
+2014-07-04 15:53:55,932 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - truncate table member_security
+2014-07-04 15:53:55,953 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - truncate table member_withdraw
+2014-07-04 15:53:55,984 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - truncate table tweet
+2014-07-04 15:53:55,995 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - alter table follow drop foreign key follow_ibfk_1
+2014-07-04 15:53:56,010 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - alter table follow drop foreign key follow_ibfk_2
+2014-07-04 15:53:56,021 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - alter table login drop foreign key login_ibfk_1
+2014-07-04 15:53:56,033 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - alter table member_security drop foreign key member_security_ibfk_1
+2014-07-04 15:53:56,042 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - alter table member_withdraw drop foreign key member_withdraw_ibfk_1
+2014-07-04 15:53:56,053 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - alter table tweet drop foreign key tweet_ibfk_1
+2014-07-04 15:53:56,062 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - drop table follow
+2014-07-04 15:53:56,074 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - drop table login
+2014-07-04 15:53:56,090 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - drop table member
+2014-07-04 15:53:56,108 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - drop table member_security
+2014-07-04 15:53:56,121 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - drop table member_withdraw
+2014-07-04 15:53:56,134 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - drop table tweet
+2014-07-04 15:53:56,185 [main] INFO  (DfCreateSchemaProcess#createSchema():244) - 
+2014-07-04 15:53:56,186 [main] INFO  (DfCreateSchemaProcess#createSchema():245) - * * * * * * * * *
+2014-07-04 15:53:56,187 [main] INFO  (DfCreateSchemaProcess#createSchema():246) - *               *
+2014-07-04 15:53:56,187 [main] INFO  (DfCreateSchemaProcess#createSchema():247) - * Create Schema *
+2014-07-04 15:53:56,188 [main] INFO  (DfCreateSchemaProcess#createSchema():248) - *               *
+2014-07-04 15:53:56,189 [main] INFO  (DfCreateSchemaProcess#createSchema():249) - * * * * * * * * *
+2014-07-04 15:53:56,195 [main] INFO  (DfSqlFileFireMan#fire():65) - ...Firing: replace-schema-00-system.sql
+2014-07-04 15:53:56,198 [main] INFO  (DfReplaceSchemaProperties#checkTargetEnvType():277) - ...Checking envType: ut in [ut]
+2014-07-04 15:53:56,200 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+-- #df:checkEnv(ut)#
+
+-- #df:changeUser(system)#
+-- #df:checkUser(mainSchema)#
+create database twitter
+2014-07-04 15:53:56,203 [main] INFO  (DfCreateSchemaProcess$1#dispatch():273) - ...Creating a connection to system
+2014-07-04 15:53:56,205 [main] INFO  (DfReplaceSchemaProperties#createAdditionalUserConnection():514) - ...Creating a connection for additional user: root
+2014-07-04 15:53:56,217 [main] INFO  (DfCreateSchemaProcess$1#dispatch():299) - ...Saying good-bye to the user 'system' because of checked: [mainSchema]
+2014-07-04 15:53:56,219 [main] INFO  (DfCreateSchemaProcess$1#dispatch():301) -  -> Can't create database 'twitter'; database exists
+2014-07-04 15:53:56,220 [main] INFO  (DfCreateSchemaProcess$DfSqlFileRunnerExecuteCreateSchema#isTargetSql():411) - ...Reviving the user 'system' until the end of this SQL file
+2014-07-04 15:53:56,221 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+-- #df:reviveUser()#
+-- #df:checkUser(mainUser, grant)#
+grant all privileges on twitter.*
+  to twitter@localhost identified by 'twitter'
+2014-07-04 15:53:56,225 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - flush privileges
+2014-07-04 15:53:56,227 [main] INFO  (DfSqlFileRunnerBase#traceResult():172) -  -> success=2 failure=0
+2014-07-04 15:53:56,228 [main] INFO  (DfSqlFileFireMan#fire():65) - ...Firing: replace-schema-10-basic.sql
+2014-07-04 15:53:56,229 [main] INFO  (DfCreateSchemaProcess$DfSqlFileRunnerExecuteCreateSchema#restoreRevivedUser():348) - ...Saying good-bye to the user 'system' again
+2014-07-04 15:53:56,229 [main] INFO  (DfCreateSchemaProcess$DfSqlFileRunnerExecuteCreateSchema#restoreRevivedUser():352) - ...Clearing revived users
+2014-07-04 15:53:56,230 [main] INFO  (DfCreateSchemaProcess$DfSqlFileRunnerExecuteCreateSchema#restoreCurrentUser():359) - ...Coming back to the main user from the user 'system'
+2014-07-04 15:53:56,233 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+/* Create Tables */
+
+CREATE TABLE FOLLOW
+(
+	FOLLOW_ID INT(100) NOT NULL UNIQUE AUTO_INCREMENT COMMENT 'フォローID',
+	YOU_ID INT(100) NOT NULL COMMENT 'フォローする人のID : 会員のID
+',
+	MEMBER_ID INT(100) NOT NULL COMMENT 'フォローされる人のID : フォローしている自分のID
+',
+	INS_DATETIME DATETIME NOT NULL COMMENT 'insert日時',
+	UPD_DATETIME DATETIME NOT NULL COMMENT 'UPD_DATETIME',
+	INS_TRACE VARCHAR(256) NOT NULL COMMENT 'Insertトレース',
+	UPD_TRACE VARCHAR(256) NOT NULL COMMENT 'UPD トレース',
+	DEL_FLG CHAR(1) DEFAULT 'N' NOT NULL COMMENT 'DEL_FLG : 削除フラグ Y=削除　N=削除していない',
+	PRIMARY KEY (FOLLOW_ID),
+	UNIQUE (YOU_ID, MEMBER_ID)
+) COMMENT = 'フォロー'
+2014-07-04 15:53:56,301 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE LOGIN
+(
+	LOGIN_ID INT NOT NULL AUTO_INCREMENT COMMENT 'ログインID : ログインした瞬間のID
+',
+	MEMBER_ID INT(100) NOT NULL COMMENT '会員ID : 会員のID
+',
+	INS_DATETIME DATETIME NOT NULL COMMENT 'insert日時',
+	UPD_DATETIME DATETIME NOT NULL COMMENT 'UPD_DATETIME',
+	INS_TRACE VARCHAR(256) NOT NULL COMMENT 'Insertトレース',
+	UPD_TRACE VARCHAR(256) NOT NULL COMMENT 'UPD トレース',
+	PRIMARY KEY (LOGIN_ID)
+) COMMENT = 'ログイン'
+2014-07-04 15:53:56,372 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE MEMBER
+(
+	MEMBER_ID INT(100) NOT NULL UNIQUE AUTO_INCREMENT COMMENT '会員ID : 会員のID
+',
+	EMAIL_ADDRESS VARCHAR(100) NOT NULL UNIQUE COMMENT 'メールアドレス : 会員のメールアドレス',
+	USER_NAME VARCHAR(100) NOT NULL UNIQUE COMMENT '会員ユーザ名 : 会員のユーザ名',
+	BIRTHDATE DATE COMMENT '生年月日 : 会員の生年月日',
+	PROFILE VARCHAR(200) COMMENT 'プロフィール',
+	INS_DATETIME DATETIME NOT NULL COMMENT 'insert日時',
+	UPD_DATETIME DATETIME NOT NULL COMMENT 'UPD_DATETIME',
+	INS_TRACE VARCHAR(256) NOT NULL COMMENT 'Insertトレース',
+	UPD_TRACE VARCHAR(256) NOT NULL COMMENT 'UPD トレース',
+	ACCOUNT_NAME VARCHAR(100) NOT NULL COMMENT 'アカウント名',
+	PRIMARY KEY (MEMBER_ID)
+) COMMENT = '会員'
+2014-07-04 15:53:56,435 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE MEMBER_SECURITY
+(
+	MEMBER_ID INT(100) NOT NULL UNIQUE COMMENT '会員ID : 会員のID
+',
+	PASSWORD VARCHAR(50) NOT NULL COMMENT 'パスワード',
+	INS_DATETIME DATETIME NOT NULL COMMENT 'insert日時',
+	UPD_DATETIME DATETIME NOT NULL COMMENT 'UPD_DATETIME',
+	INS_TRACE VARCHAR(256) NOT NULL COMMENT 'Insertトレース',
+	UPD_TRACE VARCHAR(256) NOT NULL COMMENT 'UPD トレース',
+	PRIMARY KEY (MEMBER_ID)
+) COMMENT = '会員セキュリティ'
+2014-07-04 15:53:56,486 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE MEMBER_WITHDRAW
+(
+	MEMBER_ID INT(100) NOT NULL UNIQUE COMMENT '会員ID : 会員のID
+',
+	WITHDRAWAL_REASON_ID INT COMMENT '退会理由ID : 会員の退会理由ID',
+	WITHDRAWAL_REASON_INPUT_TEXT TEXT COMMENT '退会理由入力テキスト',
+	WITHDRAWAL_DATETIME DATETIME NOT NULL COMMENT 'withdrawal_datetime : 退会日時',
+	PRIMARY KEY (MEMBER_ID)
+) COMMENT = '会員退会'
+2014-07-04 15:53:56,526 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE TWEET
+(
+	TWEET_ID INT NOT NULL UNIQUE AUTO_INCREMENT COMMENT 'TWEET_ID',
+	MEMBER_ID INT(100) NOT NULL COMMENT '会員ID : tweetした人のID',
+	TWEET VARCHAR(140) NOT NULL COMMENT 'TWEET',
+	INS_DATETIME DATETIME NOT NULL COMMENT 'insert日時',
+	UPD_DATETIME DATETIME NOT NULL COMMENT 'UPD_DATETIME',
+	INS_TRACE VARCHAR(256) NOT NULL COMMENT 'Insertトレース',
+	UPD_TRACE VARCHAR(256) NOT NULL COMMENT 'UPD トレース',
+	TWEET_DATETIME VARCHAR(50) NOT NULL COMMENT 'TWEET日時 : ツィートした日時（共通カラムではなく、画面に表示するためのもの）',
+	PRIMARY KEY (TWEET_ID)
+) COMMENT = 'TWEET'
+2014-07-04 15:53:56,584 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+/* Create Foreign Keys */
+
+ALTER TABLE FOLLOW
+	ADD FOREIGN KEY (MEMBER_ID)
+	REFERENCES MEMBER (MEMBER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2014-07-04 15:53:56,667 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE FOLLOW
+	ADD FOREIGN KEY (YOU_ID)
+	REFERENCES MEMBER (MEMBER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2014-07-04 15:53:56,771 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE LOGIN
+	ADD FOREIGN KEY (MEMBER_ID)
+	REFERENCES MEMBER (MEMBER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2014-07-04 15:53:56,863 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE MEMBER_SECURITY
+	ADD FOREIGN KEY (MEMBER_ID)
+	REFERENCES MEMBER (MEMBER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2014-07-04 15:53:56,960 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE MEMBER_WITHDRAW
+	ADD FOREIGN KEY (MEMBER_ID)
+	REFERENCES MEMBER (MEMBER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2014-07-04 15:53:57,028 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE TWEET
+	ADD FOREIGN KEY (MEMBER_ID)
+	REFERENCES MEMBER (MEMBER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2014-07-04 15:53:57,155 [main] INFO  (DfSqlFileRunnerBase#traceResult():172) -  -> success=12 failure=0
+2014-07-04 15:53:57,158 [main] INFO  (DfSqlFileFireMan#fire():90) - {Create Schema}: success=14 failure=0 (in 2 files)
+2014-07-04 15:53:57,161 [main] INFO  (DfCreateSchemaProcess#destroyChangeUserConnection():542) - ...Closing connections to change-users: [system]
+2014-07-04 15:53:57,215 [main] INFO  (DfLoadDataProcess#execute():129) - 
+2014-07-04 15:53:57,216 [main] INFO  (DfLoadDataProcess#execute():130) - * * * * * * * * * * *
+2014-07-04 15:53:57,216 [main] INFO  (DfLoadDataProcess#execute():131) - *                   *
+2014-07-04 15:53:57,217 [main] INFO  (DfLoadDataProcess#execute():132) - * Load Data         *
+2014-07-04 15:53:57,217 [main] INFO  (DfLoadDataProcess#execute():133) - *                   *
+2014-07-04 15:53:57,218 [main] INFO  (DfLoadDataProcess#execute():134) - * * * * * * * * * * *
+2014-07-04 15:53:57,244 [main] INFO  (DfXlsDataHandlerImpl#writeSeveralData():126) - /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+2014-07-04 15:53:57,245 [main] INFO  (DfXlsDataHandlerImpl#writeSeveralData():127) - writeData(playsql\data\ut\xls\20-member.xls)
+2014-07-04 15:53:57,246 [main] INFO  (DfXlsDataHandlerImpl#writeSeveralData():128) - = = = = = = =/
+2014-07-04 15:53:57,550 [main] INFO  (DfTableExtractor#doGetTableList():67) - ...Getting tables:
+2014-07-04 15:53:57,551 [main] INFO  (DfTableExtractor#doGetTableList():68) -   schema = {twitter.$$NoNameSchema$$ as main}
+2014-07-04 15:53:57,551 [main] INFO  (DfTableExtractor#doGetTableList():69) -   types  = [TABLE, VIEW]
+2014-07-04 15:53:57,621 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - MEMBER:{1, Stojkovic@gmail.com, Pixy, Stoiko, 1965/03/03, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0}
+2014-07-04 15:53:57,673 [main] INFO  (DfXlsDataHandlerImpl#doWriteDataTable():210) - ...Skipping the terminal garbage row
+2014-07-04 15:53:57,686 [main] INFO  (DfAbsractDataWriter#noticeLoadedRowSize():1059) -  -> 1 rows are loaded to MEMBER
+2014-07-04 15:53:57,689 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - LOGIN:{1, 1, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0}
+2014-07-04 15:53:57,691 [main] INFO  (DfXlsDataHandlerImpl#doWriteDataTable():210) - ...Skipping the terminal garbage row
+2014-07-04 15:53:57,696 [main] INFO  (DfAbsractDataWriter#noticeLoadedRowSize():1059) -  -> 1 rows are loaded to LOGIN
+2014-07-04 15:53:57,697 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - MEMBER_SECURITY:{1, aaa, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0}
+2014-07-04 15:53:57,699 [main] INFO  (DfXlsDataHandlerImpl#doWriteDataTable():210) - ...Skipping the terminal garbage row
+2014-07-04 15:53:57,703 [main] INFO  (DfAbsractDataWriter#noticeLoadedRowSize():1059) -  -> 1 rows are loaded to MEMBER_SECURITY
+2014-07-04 15:53:57,704 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - TWEET:{1, 1234, 充実した一日だった。, 7月4日　07:04, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0}
+2014-07-04 15:53:57,707 [main] INFO  (DfXlsDataHandlerImpl#doWriteDataTable():210) - ...Skipping the terminal garbage row
+2014-07-04 15:53:57,711 [main] INFO  (DfAbsractDataWriter#noticeLoadedRowSize():1059) -  -> 1 rows are loaded to TWEET
+2014-07-04 15:53:57,712 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - MEMBER_WITHDRAW:{1, 1, 俺はワールドカップでPK外した…, 2006/12/24 23:59:59.123}
+2014-07-04 15:53:57,715 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - MEMBER_WITHDRAW:{2, 1, null, 2007/11/11 16:00:00.456}
+2014-07-04 15:53:57,717 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - MEMBER_WITHDRAW:{3, 2, 左サイドで走りすぎて疲れた, 2006/12/24 05:52:29.789}
+2014-07-04 15:53:57,719 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - MEMBER_WITHDRAW:{4, 3, コバチが２人いるため, 2007/11/13 16:00:00.456}
+2014-07-04 15:53:57,729 [main] INFO  (DfXlsDataHandlerImpl#doWriteDataTable():225) - ...Retrying by suppressing batch update: MEMBER_WITHDRAW
+2014-07-04 15:53:57,740 [main] ERROR (DfDBFluteTaskUtil#logException():161) - Look! Read the message below.
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Failed to execute DBFlute Task 'ReplaceSchema'.
+
+[Advice]
+Check the exception messages and the stack traces.
+
+[Database Product]
+MySQL 5.6.17
+
+[JDBC Driver]
+MySQL Connector Java mysql-connector-java-5.1.26 ( Revision: ${bzr.revision-id} ) for JDBC 4.0
+* * * * * * * * * */
+org.seasar.dbflute.exception.DfXlsDataRegistrationFailureException: Look! Read the message below.
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Failed to register the table data.
+
+[Advice]
+Please confirm the SQLException message.
+
+[Data Directory]
+playsql/data/ut/xls
+
+[Xls File]
+playsql\data\ut\xls\20-member.xls
+
+[Table]
+MEMBER_WITHDRAW
+
+[SQLException]
+java.sql.BatchUpdateException
+Cannot add or update a child row: a foreign key constraint fails (`twitter`.`member_withdraw`, CONSTRAINT `member_withdraw_ibfk_1` FOREIGN KEY (`MEMBER_ID`) REFERENCES `member` (`MEMBER_ID`))
+
+[Non-Batch Retry]
+com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException
+Cannot add or update a child row: a foreign key constraint fails (`twitter`.`member_withdraw`, CONSTRAINT `member_withdraw_ibfk_1` FOREIGN KEY (`MEMBER_ID`) REFERENCES `member` (`MEMBER_ID`))
+[MEMBER_ID, WITHDRAWAL_REASON_ID, WITHDRAWAL_REASON_INPUT_TEXT, WITHDRAWAL_DATETIME]
+{2, 1, null, 2007/11/11 16:00:00.456}
+Row Number: 2
+
+[Bind Type]
+MEMBER_ID = java.lang.Integer
+WITHDRAWAL_REASON_ID = java.lang.Integer
+WITHDRAWAL_REASON_INPUT_TEXT = java.lang.String (RealStringProcessor)
+WITHDRAWAL_DATETIME = java.sql.Timestamp (DateStringProcessor)
+* * * * * * * * * */
+	at org.seasar.dbflute.logic.replaceschema.loaddata.impl.DfXlsDataHandlerImpl.handleWriteTableException(DfXlsDataHandlerImpl.java:373)
+	at org.seasar.dbflute.logic.replaceschema.loaddata.impl.DfXlsDataHandlerImpl.doWriteDataTable(DfXlsDataHandlerImpl.java:258)
+	at org.seasar.dbflute.logic.replaceschema.loaddata.impl.DfXlsDataHandlerImpl.doWriteDataSet(DfXlsDataHandlerImpl.java:152)
+	at org.seasar.dbflute.logic.replaceschema.loaddata.impl.DfXlsDataHandlerImpl.writeSeveralData(DfXlsDataHandlerImpl.java:133)
+	at org.seasar.dbflute.logic.replaceschema.process.DfLoadDataProcess.writeDbFromXls(DfLoadDataProcess.java:319)
+	at org.seasar.dbflute.logic.replaceschema.process.DfLoadDataProcess.writeDbFromXls(DfLoadDataProcess.java:307)
+	at org.seasar.dbflute.logic.replaceschema.process.DfLoadDataProcess.writeDbFromXlsAsLoadingTypeData(DfLoadDataProcess.java:291)
+	at org.seasar.dbflute.logic.replaceschema.process.DfLoadDataProcess.execute(DfLoadDataProcess.java:159)
+	at org.seasar.dbflute.task.DfReplaceSchemaTask.loadData(DfReplaceSchemaTask.java:274)
+	at org.seasar.dbflute.task.DfReplaceSchemaTask.doExecuteCoreProcess(DfReplaceSchemaTask.java:238)
+	at org.seasar.dbflute.task.DfReplaceSchemaTask.executeCoreProcess(DfReplaceSchemaTask.java:232)
+	at org.seasar.dbflute.task.DfReplaceSchemaTask.processMain(DfReplaceSchemaTask.java:225)
+	at org.seasar.dbflute.task.DfReplaceSchemaTask.doExecute(DfReplaceSchemaTask.java:153)
+	at org.seasar.dbflute.task.bs.DfAbstractTexenTask$1.callActualExecute(DfAbstractTexenTask.java:130)
+	at org.seasar.dbflute.task.bs.assistant.DfTaskBasicController.doExecute(DfTaskBasicController.java:184)
+	at org.seasar.dbflute.task.bs.assistant.DfTaskBasicController.execute(DfTaskBasicController.java:77)
+	at org.seasar.dbflute.task.bs.DfAbstractTexenTask.execute(DfAbstractTexenTask.java:152)
+	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:288)
+	at sun.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.tools.ant.dispatch.DispatchUtils.execute(DispatchUtils.java:105)
+	at org.apache.tools.ant.Task.perform(Task.java:348)
+	at org.apache.tools.ant.Target.execute(Target.java:357)
+	at org.apache.tools.ant.Target.performTasks(Target.java:385)
+	at org.apache.tools.ant.Project.executeSortedTargets(Project.java:1329)
+	at org.apache.tools.ant.helper.SingleCheckExecutor.executeTargets(SingleCheckExecutor.java:38)
+	at org.apache.tools.ant.Project.executeTargets(Project.java:1181)
+	at org.apache.tools.ant.taskdefs.Ant.execute(Ant.java:416)
+	at org.apache.tools.ant.taskdefs.CallTarget.execute(CallTarget.java:105)
+	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:288)
+	at sun.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.tools.ant.dispatch.DispatchUtils.execute(DispatchUtils.java:105)
+	at org.apache.tools.ant.Task.perform(Task.java:348)
+	at org.apache.tools.ant.Target.execute(Target.java:357)
+	at org.apache.tools.ant.Target.performTasks(Target.java:385)
+	at org.apache.tools.ant.Project.executeSortedTargets(Project.java:1329)
+	at org.apache.tools.ant.Project.executeTarget(Project.java:1298)
+	at org.apache.tools.ant.helper.DefaultExecutor.executeTargets(DefaultExecutor.java:41)
+	at org.apache.tools.ant.Project.executeTargets(Project.java:1181)
+	at org.apache.tools.ant.Main.runBuild(Main.java:698)
+	at org.apache.tools.ant.Main.startAnt(Main.java:199)
+	at org.apache.tools.ant.launch.Launcher.run(Launcher.java:257)
+	at org.apache.tools.ant.launch.Launcher.main(Launcher.java:104)
+Caused by: java.sql.BatchUpdateException: Cannot add or update a child row: a foreign key constraint fails (`twitter`.`member_withdraw`, CONSTRAINT `member_withdraw_ibfk_1` FOREIGN KEY (`MEMBER_ID`) REFERENCES `member` (`MEMBER_ID`))
+	at com.mysql.jdbc.PreparedStatement.executeBatchSerially(PreparedStatement.java:2056)
+	at com.mysql.jdbc.PreparedStatement.executeBatch(PreparedStatement.java:1467)
+	at org.seasar.dbflute.logic.replaceschema.loaddata.impl.DfXlsDataHandlerImpl.doWriteDataTable(DfXlsDataHandlerImpl.java:216)
+	... 44 more
+Caused by: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Cannot add or update a child row: a foreign key constraint fails (`twitter`.`member_withdraw`, CONSTRAINT `member_withdraw_ibfk_1` FOREIGN KEY (`MEMBER_ID`) REFERENCES `member` (`MEMBER_ID`))
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:57)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:526)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:411)
+	at com.mysql.jdbc.Util.getInstance(Util.java:386)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:1041)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:4190)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:4122)
+	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:2570)
+	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2731)
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2818)
+	at com.mysql.jdbc.PreparedStatement.executeInternal(PreparedStatement.java:2157)
+	at com.mysql.jdbc.PreparedStatement.executeUpdate(PreparedStatement.java:2460)
+	at com.mysql.jdbc.PreparedStatement.executeBatchSerially(PreparedStatement.java:2008)
+	... 46 more
+2014-07-04 15:53:57,808 [main] INFO  (DfDataSourceHandler#commit():94) - ...commit()
+2014-07-04 15:53:57,814 [main] INFO  (DfDataSourceHandler#destroy():117) - ...rollback()
+2014-07-04 15:53:57,815 [main] INFO  (DfDataSourceHandler#destroy():121) - ...closeReally()
+2014-07-04 15:53:57,819 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():150) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m03s713ms *Abort
+
+  DBFLUTE_CLIENT: {twitter}
+    database  = mysql (MySQL 5.6.17)
+    language  = java
+    container = seasar
+    package   = jp.bizreach.twitter.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = com.mysql.jdbc.Driver
+    url    = jdbc:mysql://localhost:3306/twitter
+    schema = {twitter.$$NoNameSchema$$ as main}
+    user   = twitter
+    props  = {user=root, password=}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = twitter
+
+ {Create Schema}: success=14 failure=0 (in 2 files)
+  o replace-schema-00-system.sql
+  o replace-schema-10-basic.sql
+
+ {Load Data}: loaded-files=0
+  x (failed: Look at the exception message)
+    * * * * * *
+    * Failure *
+    * * * * * *
+_/_/_/_/_/_/_/_/_/_/ {ReplaceSchema}
+2014-07-04 15:56:29,887 [main] INFO  (DfReplaceSchemaTask#begin():87) - +------------------------------------------+
+2014-07-04 15:56:29,890 [main] INFO  (DfReplaceSchemaTask#begin():88) - |                                          |
+2014-07-04 15:56:29,891 [main] INFO  (DfReplaceSchemaTask#begin():89) - |              ReplaceSchema               |
+2014-07-04 15:56:29,913 [main] INFO  (DfReplaceSchemaTask#begin():97) - |                                          |
+2014-07-04 15:56:29,914 [main] INFO  (DfReplaceSchemaTask#begin():98) - +------------------------------------------+
+2014-07-04 15:56:29,917 [main] INFO  (DfReplaceSchemaTask#waitBeforeReps():329) - ...Waiting for your GO SIGN from stdin before ReplaceSchema:
+2014-07-04 15:56:31,326 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2014-07-04 15:56:31,327 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = com.mysql.jdbc.Driver
+2014-07-04 15:56:31,328 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:mysql://localhost:3306/twitter
+2014-07-04 15:56:31,330 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = twitter
+2014-07-04 15:56:31,348 [main] INFO  (DfDataSourceHandler#createConnection():168) - ...Connecting to database by data source:
+2014-07-04 15:56:31,589 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():235) -   product = MySQL 5.6.17
+2014-07-04 15:56:31,589 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():236) -   driver  = MySQL Connector Java mysql-connector-java-5.1.26 ( Revision: ${bzr.revision-id} ) for JDBC 4.0
+2014-07-04 15:56:31,609 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():207) - 
+2014-07-04 15:56:31,610 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():208) - * * * * * * * * * * *
+2014-07-04 15:56:31,611 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():209) - *                   *
+2014-07-04 15:56:31,611 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():210) - * Initialize Schema *
+2014-07-04 15:56:31,612 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():211) - *                   *
+2014-07-04 15:56:31,613 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():212) - * * * * * * * * * * *
+2014-07-04 15:56:31,631 [main] INFO  (DfTableExtractor#doGetTableList():67) - ...Getting tables:
+2014-07-04 15:56:31,632 [main] INFO  (DfTableExtractor#doGetTableList():68) -   schema = {twitter.$$NoNameSchema$$ as main}
+2014-07-04 15:56:31,632 [main] INFO  (DfTableExtractor#doGetTableList():69) -   types  = [TABLE, VIEW]
+2014-07-04 15:56:31,679 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - truncate table follow
+2014-07-04 15:56:31,709 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - truncate table login
+2014-07-04 15:56:31,759 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - truncate table member_security
+2014-07-04 15:56:31,801 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - truncate table member_withdraw
+2014-07-04 15:56:31,852 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - truncate table tweet
+2014-07-04 15:56:31,879 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - alter table follow drop foreign key follow_ibfk_1
+2014-07-04 15:56:31,897 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - alter table follow drop foreign key follow_ibfk_2
+2014-07-04 15:56:31,908 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - alter table login drop foreign key login_ibfk_1
+2014-07-04 15:56:31,919 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - alter table member_security drop foreign key member_security_ibfk_1
+2014-07-04 15:56:31,929 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - alter table member_withdraw drop foreign key member_withdraw_ibfk_1
+2014-07-04 15:56:31,939 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - alter table tweet drop foreign key tweet_ibfk_1
+2014-07-04 15:56:31,953 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - drop table follow
+2014-07-04 15:56:31,964 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - drop table login
+2014-07-04 15:56:31,981 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - drop table member
+2014-07-04 15:56:31,992 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - drop table member_security
+2014-07-04 15:56:32,007 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - drop table member_withdraw
+2014-07-04 15:56:32,018 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - drop table tweet
+2014-07-04 15:56:32,061 [main] INFO  (DfCreateSchemaProcess#createSchema():244) - 
+2014-07-04 15:56:32,062 [main] INFO  (DfCreateSchemaProcess#createSchema():245) - * * * * * * * * *
+2014-07-04 15:56:32,063 [main] INFO  (DfCreateSchemaProcess#createSchema():246) - *               *
+2014-07-04 15:56:32,063 [main] INFO  (DfCreateSchemaProcess#createSchema():247) - * Create Schema *
+2014-07-04 15:56:32,064 [main] INFO  (DfCreateSchemaProcess#createSchema():248) - *               *
+2014-07-04 15:56:32,065 [main] INFO  (DfCreateSchemaProcess#createSchema():249) - * * * * * * * * *
+2014-07-04 15:56:32,072 [main] INFO  (DfSqlFileFireMan#fire():65) - ...Firing: replace-schema-00-system.sql
+2014-07-04 15:56:32,076 [main] INFO  (DfReplaceSchemaProperties#checkTargetEnvType():277) - ...Checking envType: ut in [ut]
+2014-07-04 15:56:32,077 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+-- #df:checkEnv(ut)#
+
+-- #df:changeUser(system)#
+-- #df:checkUser(mainSchema)#
+create database twitter
+2014-07-04 15:56:32,081 [main] INFO  (DfCreateSchemaProcess$1#dispatch():273) - ...Creating a connection to system
+2014-07-04 15:56:32,083 [main] INFO  (DfReplaceSchemaProperties#createAdditionalUserConnection():514) - ...Creating a connection for additional user: root
+2014-07-04 15:56:32,098 [main] INFO  (DfCreateSchemaProcess$1#dispatch():299) - ...Saying good-bye to the user 'system' because of checked: [mainSchema]
+2014-07-04 15:56:32,099 [main] INFO  (DfCreateSchemaProcess$1#dispatch():301) -  -> Can't create database 'twitter'; database exists
+2014-07-04 15:56:32,101 [main] INFO  (DfCreateSchemaProcess$DfSqlFileRunnerExecuteCreateSchema#isTargetSql():411) - ...Reviving the user 'system' until the end of this SQL file
+2014-07-04 15:56:32,102 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+-- #df:reviveUser()#
+-- #df:checkUser(mainUser, grant)#
+grant all privileges on twitter.*
+  to twitter@localhost identified by 'twitter'
+2014-07-04 15:56:32,106 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - flush privileges
+2014-07-04 15:56:32,110 [main] INFO  (DfSqlFileRunnerBase#traceResult():172) -  -> success=2 failure=0
+2014-07-04 15:56:32,111 [main] INFO  (DfSqlFileFireMan#fire():65) - ...Firing: replace-schema-10-basic.sql
+2014-07-04 15:56:32,112 [main] INFO  (DfCreateSchemaProcess$DfSqlFileRunnerExecuteCreateSchema#restoreRevivedUser():348) - ...Saying good-bye to the user 'system' again
+2014-07-04 15:56:32,113 [main] INFO  (DfCreateSchemaProcess$DfSqlFileRunnerExecuteCreateSchema#restoreRevivedUser():352) - ...Clearing revived users
+2014-07-04 15:56:32,114 [main] INFO  (DfCreateSchemaProcess$DfSqlFileRunnerExecuteCreateSchema#restoreCurrentUser():359) - ...Coming back to the main user from the user 'system'
+2014-07-04 15:56:32,117 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+/* Create Tables */
+
+CREATE TABLE FOLLOW
+(
+	FOLLOW_ID INT(100) NOT NULL UNIQUE AUTO_INCREMENT COMMENT 'フォローID',
+	YOU_ID INT(100) NOT NULL COMMENT 'フォローする人のID : 会員のID
+',
+	MEMBER_ID INT(100) NOT NULL COMMENT 'フォローされる人のID : フォローしている自分のID
+',
+	INS_DATETIME DATETIME NOT NULL COMMENT 'insert日時',
+	UPD_DATETIME DATETIME NOT NULL COMMENT 'UPD_DATETIME',
+	INS_TRACE VARCHAR(256) NOT NULL COMMENT 'Insertトレース',
+	UPD_TRACE VARCHAR(256) NOT NULL COMMENT 'UPD トレース',
+	DEL_FLG CHAR(1) DEFAULT 'N' NOT NULL COMMENT 'DEL_FLG : 削除フラグ Y=削除　N=削除していない',
+	PRIMARY KEY (FOLLOW_ID),
+	UNIQUE (YOU_ID, MEMBER_ID)
+) COMMENT = 'フォロー'
+2014-07-04 15:56:32,162 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE LOGIN
+(
+	LOGIN_ID INT NOT NULL AUTO_INCREMENT COMMENT 'ログインID : ログインした瞬間のID
+',
+	MEMBER_ID INT(100) NOT NULL COMMENT '会員ID : 会員のID
+',
+	INS_DATETIME DATETIME NOT NULL COMMENT 'insert日時',
+	UPD_DATETIME DATETIME NOT NULL COMMENT 'UPD_DATETIME',
+	INS_TRACE VARCHAR(256) NOT NULL COMMENT 'Insertトレース',
+	UPD_TRACE VARCHAR(256) NOT NULL COMMENT 'UPD トレース',
+	PRIMARY KEY (LOGIN_ID)
+) COMMENT = 'ログイン'
+2014-07-04 15:56:32,196 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE MEMBER
+(
+	MEMBER_ID INT(100) NOT NULL UNIQUE AUTO_INCREMENT COMMENT '会員ID : 会員のID
+',
+	EMAIL_ADDRESS VARCHAR(100) NOT NULL UNIQUE COMMENT 'メールアドレス : 会員のメールアドレス',
+	USER_NAME VARCHAR(100) NOT NULL UNIQUE COMMENT '会員ユーザ名 : 会員のユーザ名',
+	BIRTHDATE DATE COMMENT '生年月日 : 会員の生年月日',
+	PROFILE VARCHAR(200) COMMENT 'プロフィール',
+	INS_DATETIME DATETIME NOT NULL COMMENT 'insert日時',
+	UPD_DATETIME DATETIME NOT NULL COMMENT 'UPD_DATETIME',
+	INS_TRACE VARCHAR(256) NOT NULL COMMENT 'Insertトレース',
+	UPD_TRACE VARCHAR(256) NOT NULL COMMENT 'UPD トレース',
+	ACCOUNT_NAME VARCHAR(100) NOT NULL COMMENT 'アカウント名',
+	PRIMARY KEY (MEMBER_ID)
+) COMMENT = '会員'
+2014-07-04 15:56:32,242 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE MEMBER_SECURITY
+(
+	MEMBER_ID INT(100) NOT NULL UNIQUE COMMENT '会員ID : 会員のID
+',
+	PASSWORD VARCHAR(50) NOT NULL COMMENT 'パスワード',
+	INS_DATETIME DATETIME NOT NULL COMMENT 'insert日時',
+	UPD_DATETIME DATETIME NOT NULL COMMENT 'UPD_DATETIME',
+	INS_TRACE VARCHAR(256) NOT NULL COMMENT 'Insertトレース',
+	UPD_TRACE VARCHAR(256) NOT NULL COMMENT 'UPD トレース',
+	PRIMARY KEY (MEMBER_ID)
+) COMMENT = '会員セキュリティ'
+2014-07-04 15:56:32,292 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE MEMBER_WITHDRAW
+(
+	MEMBER_ID INT(100) NOT NULL UNIQUE COMMENT '会員ID : 会員のID
+',
+	WITHDRAWAL_REASON_ID INT COMMENT '退会理由ID : 会員の退会理由ID',
+	WITHDRAWAL_REASON_INPUT_TEXT TEXT COMMENT '退会理由入力テキスト',
+	WITHDRAWAL_DATETIME DATETIME NOT NULL COMMENT 'withdrawal_datetime : 退会日時',
+	PRIMARY KEY (MEMBER_ID)
+) COMMENT = '会員退会'
+2014-07-04 15:56:32,326 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE TWEET
+(
+	TWEET_ID INT NOT NULL UNIQUE AUTO_INCREMENT COMMENT 'TWEET_ID',
+	MEMBER_ID INT(100) NOT NULL COMMENT '会員ID : tweetした人のID',
+	TWEET VARCHAR(140) NOT NULL COMMENT 'TWEET',
+	INS_DATETIME DATETIME NOT NULL COMMENT 'insert日時',
+	UPD_DATETIME DATETIME NOT NULL COMMENT 'UPD_DATETIME',
+	INS_TRACE VARCHAR(256) NOT NULL COMMENT 'Insertトレース',
+	UPD_TRACE VARCHAR(256) NOT NULL COMMENT 'UPD トレース',
+	TWEET_DATETIME VARCHAR(50) NOT NULL COMMENT 'TWEET日時 : ツィートした日時（共通カラムではなく、画面に表示するためのもの）',
+	PRIMARY KEY (TWEET_ID)
+) COMMENT = 'TWEET'
+2014-07-04 15:56:32,363 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+/* Create Foreign Keys */
+
+ALTER TABLE FOLLOW
+	ADD FOREIGN KEY (MEMBER_ID)
+	REFERENCES MEMBER (MEMBER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2014-07-04 15:56:32,434 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE FOLLOW
+	ADD FOREIGN KEY (YOU_ID)
+	REFERENCES MEMBER (MEMBER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2014-07-04 15:56:32,511 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE LOGIN
+	ADD FOREIGN KEY (MEMBER_ID)
+	REFERENCES MEMBER (MEMBER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2014-07-04 15:56:32,576 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE MEMBER_SECURITY
+	ADD FOREIGN KEY (MEMBER_ID)
+	REFERENCES MEMBER (MEMBER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2014-07-04 15:56:32,653 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE MEMBER_WITHDRAW
+	ADD FOREIGN KEY (MEMBER_ID)
+	REFERENCES MEMBER (MEMBER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2014-07-04 15:56:32,770 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE TWEET
+	ADD FOREIGN KEY (MEMBER_ID)
+	REFERENCES MEMBER (MEMBER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2014-07-04 15:56:32,870 [main] INFO  (DfSqlFileRunnerBase#traceResult():172) -  -> success=12 failure=0
+2014-07-04 15:56:32,872 [main] INFO  (DfSqlFileFireMan#fire():90) - {Create Schema}: success=14 failure=0 (in 2 files)
+2014-07-04 15:56:32,873 [main] INFO  (DfCreateSchemaProcess#destroyChangeUserConnection():542) - ...Closing connections to change-users: [system]
+2014-07-04 15:56:32,939 [main] INFO  (DfLoadDataProcess#execute():129) - 
+2014-07-04 15:56:32,940 [main] INFO  (DfLoadDataProcess#execute():130) - * * * * * * * * * * *
+2014-07-04 15:56:32,940 [main] INFO  (DfLoadDataProcess#execute():131) - *                   *
+2014-07-04 15:56:32,941 [main] INFO  (DfLoadDataProcess#execute():132) - * Load Data         *
+2014-07-04 15:56:32,941 [main] INFO  (DfLoadDataProcess#execute():133) - *                   *
+2014-07-04 15:56:32,942 [main] INFO  (DfLoadDataProcess#execute():134) - * * * * * * * * * * *
+2014-07-04 15:56:32,966 [main] INFO  (DfXlsDataHandlerImpl#writeSeveralData():126) - /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+2014-07-04 15:56:32,967 [main] INFO  (DfXlsDataHandlerImpl#writeSeveralData():127) - writeData(playsql\data\ut\xls\20-member.xls)
+2014-07-04 15:56:32,967 [main] INFO  (DfXlsDataHandlerImpl#writeSeveralData():128) - = = = = = = =/
+2014-07-04 15:56:33,267 [main] ERROR (DfDBFluteTaskUtil#logException():161) - Look! Read the message below.
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Failed to execute DBFlute Task 'ReplaceSchema'.
+
+[Advice]
+Check the exception messages and the stack traces.
+
+[Database Product]
+MySQL 5.6.17
+
+[JDBC Driver]
+MySQL Connector Java mysql-connector-java-5.1.26 ( Revision: ${bzr.revision-id} ) for JDBC 4.0
+* * * * * * * * * */
+org.seasar.dbflute.exception.DfXlsReaderReadFailureException: Look! Read the message below.
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+The first row of the sheet was not column definition.
+
+[Xls File]
+playsql\data\ut\xls\20-member.xls
+
+[Table]
+Sheet1
+* * * * * * * * * */
+	at org.seasar.dbflute.helper.io.xls.DfTableXlsReader.throwXlsReaderFirstRowNotColumnDefinitionException(DfTableXlsReader.java:321)
+	at org.seasar.dbflute.helper.io.xls.DfTableXlsReader.setupTable(DfTableXlsReader.java:283)
+	at org.seasar.dbflute.helper.io.xls.DfTableXlsReader.prepareTable(DfTableXlsReader.java:276)
+	at org.seasar.dbflute.helper.io.xls.DfTableXlsReader.setupWorkbook(DfTableXlsReader.java:164)
+	at org.seasar.dbflute.helper.io.xls.DfTableXlsReader.<init>(DfTableXlsReader.java:128)
+	at org.seasar.dbflute.logic.replaceschema.loaddata.impl.DfXlsDataHandlerImpl.createTableXlsReader(DfXlsDataHandlerImpl.java:560)
+	at org.seasar.dbflute.logic.replaceschema.loaddata.impl.DfXlsDataHandlerImpl.writeSeveralData(DfXlsDataHandlerImpl.java:129)
+	at org.seasar.dbflute.logic.replaceschema.process.DfLoadDataProcess.writeDbFromXls(DfLoadDataProcess.java:319)
+	at org.seasar.dbflute.logic.replaceschema.process.DfLoadDataProcess.writeDbFromXls(DfLoadDataProcess.java:307)
+	at org.seasar.dbflute.logic.replaceschema.process.DfLoadDataProcess.writeDbFromXlsAsLoadingTypeData(DfLoadDataProcess.java:291)
+	at org.seasar.dbflute.logic.replaceschema.process.DfLoadDataProcess.execute(DfLoadDataProcess.java:159)
+	at org.seasar.dbflute.task.DfReplaceSchemaTask.loadData(DfReplaceSchemaTask.java:274)
+	at org.seasar.dbflute.task.DfReplaceSchemaTask.doExecuteCoreProcess(DfReplaceSchemaTask.java:238)
+	at org.seasar.dbflute.task.DfReplaceSchemaTask.executeCoreProcess(DfReplaceSchemaTask.java:232)
+	at org.seasar.dbflute.task.DfReplaceSchemaTask.processMain(DfReplaceSchemaTask.java:225)
+	at org.seasar.dbflute.task.DfReplaceSchemaTask.doExecute(DfReplaceSchemaTask.java:153)
+	at org.seasar.dbflute.task.bs.DfAbstractTexenTask$1.callActualExecute(DfAbstractTexenTask.java:130)
+	at org.seasar.dbflute.task.bs.assistant.DfTaskBasicController.doExecute(DfTaskBasicController.java:184)
+	at org.seasar.dbflute.task.bs.assistant.DfTaskBasicController.execute(DfTaskBasicController.java:77)
+	at org.seasar.dbflute.task.bs.DfAbstractTexenTask.execute(DfAbstractTexenTask.java:152)
+	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:288)
+	at sun.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.tools.ant.dispatch.DispatchUtils.execute(DispatchUtils.java:105)
+	at org.apache.tools.ant.Task.perform(Task.java:348)
+	at org.apache.tools.ant.Target.execute(Target.java:357)
+	at org.apache.tools.ant.Target.performTasks(Target.java:385)
+	at org.apache.tools.ant.Project.executeSortedTargets(Project.java:1329)
+	at org.apache.tools.ant.helper.SingleCheckExecutor.executeTargets(SingleCheckExecutor.java:38)
+	at org.apache.tools.ant.Project.executeTargets(Project.java:1181)
+	at org.apache.tools.ant.taskdefs.Ant.execute(Ant.java:416)
+	at org.apache.tools.ant.taskdefs.CallTarget.execute(CallTarget.java:105)
+	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:288)
+	at sun.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.tools.ant.dispatch.DispatchUtils.execute(DispatchUtils.java:105)
+	at org.apache.tools.ant.Task.perform(Task.java:348)
+	at org.apache.tools.ant.Target.execute(Target.java:357)
+	at org.apache.tools.ant.Target.performTasks(Target.java:385)
+	at org.apache.tools.ant.Project.executeSortedTargets(Project.java:1329)
+	at org.apache.tools.ant.Project.executeTarget(Project.java:1298)
+	at org.apache.tools.ant.helper.DefaultExecutor.executeTargets(DefaultExecutor.java:41)
+	at org.apache.tools.ant.Project.executeTargets(Project.java:1181)
+	at org.apache.tools.ant.Main.runBuild(Main.java:698)
+	at org.apache.tools.ant.Main.startAnt(Main.java:199)
+	at org.apache.tools.ant.launch.Launcher.run(Launcher.java:257)
+	at org.apache.tools.ant.launch.Launcher.main(Launcher.java:104)
+2014-07-04 15:56:33,311 [main] INFO  (DfDataSourceHandler#destroy():121) - ...closeReally()
+2014-07-04 15:56:33,316 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():150) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m03s425ms *Abort
+
+  DBFLUTE_CLIENT: {twitter}
+    database  = mysql (MySQL 5.6.17)
+    language  = java
+    container = seasar
+    package   = jp.bizreach.twitter.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = com.mysql.jdbc.Driver
+    url    = jdbc:mysql://localhost:3306/twitter
+    schema = {twitter.$$NoNameSchema$$ as main}
+    user   = twitter
+    props  = {user=root, password=}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = twitter
+
+ {Create Schema}: success=14 failure=0 (in 2 files)
+  o replace-schema-00-system.sql
+  o replace-schema-10-basic.sql
+
+ {Load Data}: loaded-files=0
+  x (failed: Look at the exception message)
+    * * * * * *
+    * Failure *
+    * * * * * *
+_/_/_/_/_/_/_/_/_/_/ {ReplaceSchema}
+2014-07-04 15:56:53,098 [main] INFO  (DfReplaceSchemaTask#begin():87) - +------------------------------------------+
+2014-07-04 15:56:53,105 [main] INFO  (DfReplaceSchemaTask#begin():88) - |                                          |
+2014-07-04 15:56:53,106 [main] INFO  (DfReplaceSchemaTask#begin():89) - |              ReplaceSchema               |
+2014-07-04 15:56:53,137 [main] INFO  (DfReplaceSchemaTask#begin():97) - |                                          |
+2014-07-04 15:56:53,138 [main] INFO  (DfReplaceSchemaTask#begin():98) - +------------------------------------------+
+2014-07-04 15:56:53,142 [main] INFO  (DfReplaceSchemaTask#waitBeforeReps():329) - ...Waiting for your GO SIGN from stdin before ReplaceSchema:
+2014-07-04 15:56:54,463 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2014-07-04 15:56:54,464 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = com.mysql.jdbc.Driver
+2014-07-04 15:56:54,464 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:mysql://localhost:3306/twitter
+2014-07-04 15:56:54,465 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = twitter
+2014-07-04 15:56:54,473 [main] INFO  (DfDataSourceHandler#createConnection():168) - ...Connecting to database by data source:
+2014-07-04 15:56:54,702 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():235) -   product = MySQL 5.6.17
+2014-07-04 15:56:54,703 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():236) -   driver  = MySQL Connector Java mysql-connector-java-5.1.26 ( Revision: ${bzr.revision-id} ) for JDBC 4.0
+2014-07-04 15:56:54,721 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():207) - 
+2014-07-04 15:56:54,722 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():208) - * * * * * * * * * * *
+2014-07-04 15:56:54,723 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():209) - *                   *
+2014-07-04 15:56:54,723 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():210) - * Initialize Schema *
+2014-07-04 15:56:54,724 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():211) - *                   *
+2014-07-04 15:56:54,725 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():212) - * * * * * * * * * * *
+2014-07-04 15:56:54,743 [main] INFO  (DfTableExtractor#doGetTableList():67) - ...Getting tables:
+2014-07-04 15:56:54,743 [main] INFO  (DfTableExtractor#doGetTableList():68) -   schema = {twitter.$$NoNameSchema$$ as main}
+2014-07-04 15:56:54,744 [main] INFO  (DfTableExtractor#doGetTableList():69) -   types  = [TABLE, VIEW]
+2014-07-04 15:56:54,791 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - truncate table follow
+2014-07-04 15:56:54,826 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - truncate table login
+2014-07-04 15:56:54,867 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - truncate table member_security
+2014-07-04 15:56:54,894 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - truncate table member_withdraw
+2014-07-04 15:56:54,934 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - truncate table tweet
+2014-07-04 15:56:54,960 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - alter table follow drop foreign key follow_ibfk_1
+2014-07-04 15:56:54,977 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - alter table follow drop foreign key follow_ibfk_2
+2014-07-04 15:56:54,987 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - alter table login drop foreign key login_ibfk_1
+2014-07-04 15:56:54,998 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - alter table member_security drop foreign key member_security_ibfk_1
+2014-07-04 15:56:55,007 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - alter table member_withdraw drop foreign key member_withdraw_ibfk_1
+2014-07-04 15:56:55,017 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - alter table tweet drop foreign key tweet_ibfk_1
+2014-07-04 15:56:55,027 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - drop table follow
+2014-07-04 15:56:55,037 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - drop table login
+2014-07-04 15:56:55,053 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - drop table member
+2014-07-04 15:56:55,074 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - drop table member_security
+2014-07-04 15:56:55,092 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - drop table member_withdraw
+2014-07-04 15:56:55,110 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - drop table tweet
+2014-07-04 15:56:55,220 [main] INFO  (DfCreateSchemaProcess#createSchema():244) - 
+2014-07-04 15:56:55,222 [main] INFO  (DfCreateSchemaProcess#createSchema():245) - * * * * * * * * *
+2014-07-04 15:56:55,224 [main] INFO  (DfCreateSchemaProcess#createSchema():246) - *               *
+2014-07-04 15:56:55,226 [main] INFO  (DfCreateSchemaProcess#createSchema():247) - * Create Schema *
+2014-07-04 15:56:55,229 [main] INFO  (DfCreateSchemaProcess#createSchema():248) - *               *
+2014-07-04 15:56:55,231 [main] INFO  (DfCreateSchemaProcess#createSchema():249) - * * * * * * * * *
+2014-07-04 15:56:55,241 [main] INFO  (DfSqlFileFireMan#fire():65) - ...Firing: replace-schema-00-system.sql
+2014-07-04 15:56:55,244 [main] INFO  (DfReplaceSchemaProperties#checkTargetEnvType():277) - ...Checking envType: ut in [ut]
+2014-07-04 15:56:55,246 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+-- #df:checkEnv(ut)#
+
+-- #df:changeUser(system)#
+-- #df:checkUser(mainSchema)#
+create database twitter
+2014-07-04 15:56:55,249 [main] INFO  (DfCreateSchemaProcess$1#dispatch():273) - ...Creating a connection to system
+2014-07-04 15:56:55,251 [main] INFO  (DfReplaceSchemaProperties#createAdditionalUserConnection():514) - ...Creating a connection for additional user: root
+2014-07-04 15:56:55,263 [main] INFO  (DfCreateSchemaProcess$1#dispatch():299) - ...Saying good-bye to the user 'system' because of checked: [mainSchema]
+2014-07-04 15:56:55,265 [main] INFO  (DfCreateSchemaProcess$1#dispatch():301) -  -> Can't create database 'twitter'; database exists
+2014-07-04 15:56:55,267 [main] INFO  (DfCreateSchemaProcess$DfSqlFileRunnerExecuteCreateSchema#isTargetSql():411) - ...Reviving the user 'system' until the end of this SQL file
+2014-07-04 15:56:55,267 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+-- #df:reviveUser()#
+-- #df:checkUser(mainUser, grant)#
+grant all privileges on twitter.*
+  to twitter@localhost identified by 'twitter'
+2014-07-04 15:56:55,271 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - flush privileges
+2014-07-04 15:56:55,274 [main] INFO  (DfSqlFileRunnerBase#traceResult():172) -  -> success=2 failure=0
+2014-07-04 15:56:55,275 [main] INFO  (DfSqlFileFireMan#fire():65) - ...Firing: replace-schema-10-basic.sql
+2014-07-04 15:56:55,276 [main] INFO  (DfCreateSchemaProcess$DfSqlFileRunnerExecuteCreateSchema#restoreRevivedUser():348) - ...Saying good-bye to the user 'system' again
+2014-07-04 15:56:55,276 [main] INFO  (DfCreateSchemaProcess$DfSqlFileRunnerExecuteCreateSchema#restoreRevivedUser():352) - ...Clearing revived users
+2014-07-04 15:56:55,277 [main] INFO  (DfCreateSchemaProcess$DfSqlFileRunnerExecuteCreateSchema#restoreCurrentUser():359) - ...Coming back to the main user from the user 'system'
+2014-07-04 15:56:55,279 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+/* Create Tables */
+
+CREATE TABLE FOLLOW
+(
+	FOLLOW_ID INT(100) NOT NULL UNIQUE AUTO_INCREMENT COMMENT 'フォローID',
+	YOU_ID INT(100) NOT NULL COMMENT 'フォローする人のID : 会員のID
+',
+	MEMBER_ID INT(100) NOT NULL COMMENT 'フォローされる人のID : フォローしている自分のID
+',
+	INS_DATETIME DATETIME NOT NULL COMMENT 'insert日時',
+	UPD_DATETIME DATETIME NOT NULL COMMENT 'UPD_DATETIME',
+	INS_TRACE VARCHAR(256) NOT NULL COMMENT 'Insertトレース',
+	UPD_TRACE VARCHAR(256) NOT NULL COMMENT 'UPD トレース',
+	DEL_FLG CHAR(1) DEFAULT 'N' NOT NULL COMMENT 'DEL_FLG : 削除フラグ Y=削除　N=削除していない',
+	PRIMARY KEY (FOLLOW_ID),
+	UNIQUE (YOU_ID, MEMBER_ID)
+) COMMENT = 'フォロー'
+2014-07-04 15:56:55,323 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE LOGIN
+(
+	LOGIN_ID INT NOT NULL AUTO_INCREMENT COMMENT 'ログインID : ログインした瞬間のID
+',
+	MEMBER_ID INT(100) NOT NULL COMMENT '会員ID : 会員のID
+',
+	INS_DATETIME DATETIME NOT NULL COMMENT 'insert日時',
+	UPD_DATETIME DATETIME NOT NULL COMMENT 'UPD_DATETIME',
+	INS_TRACE VARCHAR(256) NOT NULL COMMENT 'Insertトレース',
+	UPD_TRACE VARCHAR(256) NOT NULL COMMENT 'UPD トレース',
+	PRIMARY KEY (LOGIN_ID)
+) COMMENT = 'ログイン'
+2014-07-04 15:56:55,377 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE MEMBER
+(
+	MEMBER_ID INT(100) NOT NULL UNIQUE AUTO_INCREMENT COMMENT '会員ID : 会員のID
+',
+	EMAIL_ADDRESS VARCHAR(100) NOT NULL UNIQUE COMMENT 'メールアドレス : 会員のメールアドレス',
+	USER_NAME VARCHAR(100) NOT NULL UNIQUE COMMENT '会員ユーザ名 : 会員のユーザ名',
+	BIRTHDATE DATE COMMENT '生年月日 : 会員の生年月日',
+	PROFILE VARCHAR(200) COMMENT 'プロフィール',
+	INS_DATETIME DATETIME NOT NULL COMMENT 'insert日時',
+	UPD_DATETIME DATETIME NOT NULL COMMENT 'UPD_DATETIME',
+	INS_TRACE VARCHAR(256) NOT NULL COMMENT 'Insertトレース',
+	UPD_TRACE VARCHAR(256) NOT NULL COMMENT 'UPD トレース',
+	ACCOUNT_NAME VARCHAR(100) NOT NULL COMMENT 'アカウント名',
+	PRIMARY KEY (MEMBER_ID)
+) COMMENT = '会員'
+2014-07-04 15:56:55,441 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE MEMBER_SECURITY
+(
+	MEMBER_ID INT(100) NOT NULL UNIQUE COMMENT '会員ID : 会員のID
+',
+	PASSWORD VARCHAR(50) NOT NULL COMMENT 'パスワード',
+	INS_DATETIME DATETIME NOT NULL COMMENT 'insert日時',
+	UPD_DATETIME DATETIME NOT NULL COMMENT 'UPD_DATETIME',
+	INS_TRACE VARCHAR(256) NOT NULL COMMENT 'Insertトレース',
+	UPD_TRACE VARCHAR(256) NOT NULL COMMENT 'UPD トレース',
+	PRIMARY KEY (MEMBER_ID)
+) COMMENT = '会員セキュリティ'
+2014-07-04 15:56:55,505 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE MEMBER_WITHDRAW
+(
+	MEMBER_ID INT(100) NOT NULL UNIQUE COMMENT '会員ID : 会員のID
+',
+	WITHDRAWAL_REASON_ID INT COMMENT '退会理由ID : 会員の退会理由ID',
+	WITHDRAWAL_REASON_INPUT_TEXT TEXT COMMENT '退会理由入力テキスト',
+	WITHDRAWAL_DATETIME DATETIME NOT NULL COMMENT 'withdrawal_datetime : 退会日時',
+	PRIMARY KEY (MEMBER_ID)
+) COMMENT = '会員退会'
+2014-07-04 15:56:55,563 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE TWEET
+(
+	TWEET_ID INT NOT NULL UNIQUE AUTO_INCREMENT COMMENT 'TWEET_ID',
+	MEMBER_ID INT(100) NOT NULL COMMENT '会員ID : tweetした人のID',
+	TWEET VARCHAR(140) NOT NULL COMMENT 'TWEET',
+	INS_DATETIME DATETIME NOT NULL COMMENT 'insert日時',
+	UPD_DATETIME DATETIME NOT NULL COMMENT 'UPD_DATETIME',
+	INS_TRACE VARCHAR(256) NOT NULL COMMENT 'Insertトレース',
+	UPD_TRACE VARCHAR(256) NOT NULL COMMENT 'UPD トレース',
+	TWEET_DATETIME VARCHAR(50) NOT NULL COMMENT 'TWEET日時 : ツィートした日時（共通カラムではなく、画面に表示するためのもの）',
+	PRIMARY KEY (TWEET_ID)
+) COMMENT = 'TWEET'
+2014-07-04 15:56:55,619 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+/* Create Foreign Keys */
+
+ALTER TABLE FOLLOW
+	ADD FOREIGN KEY (MEMBER_ID)
+	REFERENCES MEMBER (MEMBER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2014-07-04 15:56:55,686 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE FOLLOW
+	ADD FOREIGN KEY (YOU_ID)
+	REFERENCES MEMBER (MEMBER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2014-07-04 15:56:55,785 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE LOGIN
+	ADD FOREIGN KEY (MEMBER_ID)
+	REFERENCES MEMBER (MEMBER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2014-07-04 15:56:55,881 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE MEMBER_SECURITY
+	ADD FOREIGN KEY (MEMBER_ID)
+	REFERENCES MEMBER (MEMBER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2014-07-04 15:56:55,993 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE MEMBER_WITHDRAW
+	ADD FOREIGN KEY (MEMBER_ID)
+	REFERENCES MEMBER (MEMBER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2014-07-04 15:56:56,106 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE TWEET
+	ADD FOREIGN KEY (MEMBER_ID)
+	REFERENCES MEMBER (MEMBER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2014-07-04 15:56:56,200 [main] INFO  (DfSqlFileRunnerBase#traceResult():172) -  -> success=12 failure=0
+2014-07-04 15:56:56,202 [main] INFO  (DfSqlFileFireMan#fire():90) - {Create Schema}: success=14 failure=0 (in 2 files)
+2014-07-04 15:56:56,204 [main] INFO  (DfCreateSchemaProcess#destroyChangeUserConnection():542) - ...Closing connections to change-users: [system]
+2014-07-04 15:56:56,254 [main] INFO  (DfLoadDataProcess#execute():129) - 
+2014-07-04 15:56:56,255 [main] INFO  (DfLoadDataProcess#execute():130) - * * * * * * * * * * *
+2014-07-04 15:56:56,255 [main] INFO  (DfLoadDataProcess#execute():131) - *                   *
+2014-07-04 15:56:56,256 [main] INFO  (DfLoadDataProcess#execute():132) - * Load Data         *
+2014-07-04 15:56:56,256 [main] INFO  (DfLoadDataProcess#execute():133) - *                   *
+2014-07-04 15:56:56,257 [main] INFO  (DfLoadDataProcess#execute():134) - * * * * * * * * * * *
+2014-07-04 15:56:56,280 [main] INFO  (DfXlsDataHandlerImpl#writeSeveralData():126) - /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+2014-07-04 15:56:56,281 [main] INFO  (DfXlsDataHandlerImpl#writeSeveralData():127) - writeData(playsql\data\ut\xls\20-member.xls)
+2014-07-04 15:56:56,281 [main] INFO  (DfXlsDataHandlerImpl#writeSeveralData():128) - = = = = = = =/
+2014-07-04 15:56:56,577 [main] ERROR (DfDBFluteTaskUtil#logException():161) - Look! Read the message below.
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Failed to execute DBFlute Task 'ReplaceSchema'.
+
+[Advice]
+Check the exception messages and the stack traces.
+
+[Database Product]
+MySQL 5.6.17
+
+[JDBC Driver]
+MySQL Connector Java mysql-connector-java-5.1.26 ( Revision: ${bzr.revision-id} ) for JDBC 4.0
+* * * * * * * * * */
+org.seasar.dbflute.exception.DfXlsReaderReadFailureException: Look! Read the message below.
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+The first row of the sheet was not column definition.
+
+[Xls File]
+playsql\data\ut\xls\20-member.xls
+
+[Table]
+Sheet1
+* * * * * * * * * */
+	at org.seasar.dbflute.helper.io.xls.DfTableXlsReader.throwXlsReaderFirstRowNotColumnDefinitionException(DfTableXlsReader.java:321)
+	at org.seasar.dbflute.helper.io.xls.DfTableXlsReader.setupTable(DfTableXlsReader.java:283)
+	at org.seasar.dbflute.helper.io.xls.DfTableXlsReader.prepareTable(DfTableXlsReader.java:276)
+	at org.seasar.dbflute.helper.io.xls.DfTableXlsReader.setupWorkbook(DfTableXlsReader.java:164)
+	at org.seasar.dbflute.helper.io.xls.DfTableXlsReader.<init>(DfTableXlsReader.java:128)
+	at org.seasar.dbflute.logic.replaceschema.loaddata.impl.DfXlsDataHandlerImpl.createTableXlsReader(DfXlsDataHandlerImpl.java:560)
+	at org.seasar.dbflute.logic.replaceschema.loaddata.impl.DfXlsDataHandlerImpl.writeSeveralData(DfXlsDataHandlerImpl.java:129)
+	at org.seasar.dbflute.logic.replaceschema.process.DfLoadDataProcess.writeDbFromXls(DfLoadDataProcess.java:319)
+	at org.seasar.dbflute.logic.replaceschema.process.DfLoadDataProcess.writeDbFromXls(DfLoadDataProcess.java:307)
+	at org.seasar.dbflute.logic.replaceschema.process.DfLoadDataProcess.writeDbFromXlsAsLoadingTypeData(DfLoadDataProcess.java:291)
+	at org.seasar.dbflute.logic.replaceschema.process.DfLoadDataProcess.execute(DfLoadDataProcess.java:159)
+	at org.seasar.dbflute.task.DfReplaceSchemaTask.loadData(DfReplaceSchemaTask.java:274)
+	at org.seasar.dbflute.task.DfReplaceSchemaTask.doExecuteCoreProcess(DfReplaceSchemaTask.java:238)
+	at org.seasar.dbflute.task.DfReplaceSchemaTask.executeCoreProcess(DfReplaceSchemaTask.java:232)
+	at org.seasar.dbflute.task.DfReplaceSchemaTask.processMain(DfReplaceSchemaTask.java:225)
+	at org.seasar.dbflute.task.DfReplaceSchemaTask.doExecute(DfReplaceSchemaTask.java:153)
+	at org.seasar.dbflute.task.bs.DfAbstractTexenTask$1.callActualExecute(DfAbstractTexenTask.java:130)
+	at org.seasar.dbflute.task.bs.assistant.DfTaskBasicController.doExecute(DfTaskBasicController.java:184)
+	at org.seasar.dbflute.task.bs.assistant.DfTaskBasicController.execute(DfTaskBasicController.java:77)
+	at org.seasar.dbflute.task.bs.DfAbstractTexenTask.execute(DfAbstractTexenTask.java:152)
+	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:288)
+	at sun.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.tools.ant.dispatch.DispatchUtils.execute(DispatchUtils.java:105)
+	at org.apache.tools.ant.Task.perform(Task.java:348)
+	at org.apache.tools.ant.Target.execute(Target.java:357)
+	at org.apache.tools.ant.Target.performTasks(Target.java:385)
+	at org.apache.tools.ant.Project.executeSortedTargets(Project.java:1329)
+	at org.apache.tools.ant.helper.SingleCheckExecutor.executeTargets(SingleCheckExecutor.java:38)
+	at org.apache.tools.ant.Project.executeTargets(Project.java:1181)
+	at org.apache.tools.ant.taskdefs.Ant.execute(Ant.java:416)
+	at org.apache.tools.ant.taskdefs.CallTarget.execute(CallTarget.java:105)
+	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:288)
+	at sun.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.tools.ant.dispatch.DispatchUtils.execute(DispatchUtils.java:105)
+	at org.apache.tools.ant.Task.perform(Task.java:348)
+	at org.apache.tools.ant.Target.execute(Target.java:357)
+	at org.apache.tools.ant.Target.performTasks(Target.java:385)
+	at org.apache.tools.ant.Project.executeSortedTargets(Project.java:1329)
+	at org.apache.tools.ant.Project.executeTarget(Project.java:1298)
+	at org.apache.tools.ant.helper.DefaultExecutor.executeTargets(DefaultExecutor.java:41)
+	at org.apache.tools.ant.Project.executeTargets(Project.java:1181)
+	at org.apache.tools.ant.Main.runBuild(Main.java:698)
+	at org.apache.tools.ant.Main.startAnt(Main.java:199)
+	at org.apache.tools.ant.launch.Launcher.run(Launcher.java:257)
+	at org.apache.tools.ant.launch.Launcher.main(Launcher.java:104)
+2014-07-04 15:56:56,626 [main] INFO  (DfDataSourceHandler#destroy():121) - ...closeReally()
+2014-07-04 15:56:56,641 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():150) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m03s540ms *Abort
+
+  DBFLUTE_CLIENT: {twitter}
+    database  = mysql (MySQL 5.6.17)
+    language  = java
+    container = seasar
+    package   = jp.bizreach.twitter.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = com.mysql.jdbc.Driver
+    url    = jdbc:mysql://localhost:3306/twitter
+    schema = {twitter.$$NoNameSchema$$ as main}
+    user   = twitter
+    props  = {user=root, password=}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = twitter
+
+ {Create Schema}: success=14 failure=0 (in 2 files)
+  o replace-schema-00-system.sql
+  o replace-schema-10-basic.sql
+
+ {Load Data}: loaded-files=0
+  x (failed: Look at the exception message)
+    * * * * * *
+    * Failure *
+    * * * * * *
+_/_/_/_/_/_/_/_/_/_/ {ReplaceSchema}
+2014-07-04 15:57:22,384 [main] INFO  (DfReplaceSchemaTask#begin():87) - +------------------------------------------+
+2014-07-04 15:57:22,386 [main] INFO  (DfReplaceSchemaTask#begin():88) - |                                          |
+2014-07-04 15:57:22,387 [main] INFO  (DfReplaceSchemaTask#begin():89) - |              ReplaceSchema               |
+2014-07-04 15:57:22,407 [main] INFO  (DfReplaceSchemaTask#begin():97) - |                                          |
+2014-07-04 15:57:22,408 [main] INFO  (DfReplaceSchemaTask#begin():98) - +------------------------------------------+
+2014-07-04 15:57:22,410 [main] INFO  (DfReplaceSchemaTask#waitBeforeReps():329) - ...Waiting for your GO SIGN from stdin before ReplaceSchema:
+2014-07-04 15:57:23,880 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2014-07-04 15:57:23,882 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = com.mysql.jdbc.Driver
+2014-07-04 15:57:23,884 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:mysql://localhost:3306/twitter
+2014-07-04 15:57:23,885 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = twitter
+2014-07-04 15:57:23,899 [main] INFO  (DfDataSourceHandler#createConnection():168) - ...Connecting to database by data source:
+2014-07-04 15:57:24,147 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():235) -   product = MySQL 5.6.17
+2014-07-04 15:57:24,148 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():236) -   driver  = MySQL Connector Java mysql-connector-java-5.1.26 ( Revision: ${bzr.revision-id} ) for JDBC 4.0
+2014-07-04 15:57:24,167 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():207) - 
+2014-07-04 15:57:24,168 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():208) - * * * * * * * * * * *
+2014-07-04 15:57:24,168 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():209) - *                   *
+2014-07-04 15:57:24,169 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():210) - * Initialize Schema *
+2014-07-04 15:57:24,170 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():211) - *                   *
+2014-07-04 15:57:24,170 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():212) - * * * * * * * * * * *
+2014-07-04 15:57:24,187 [main] INFO  (DfTableExtractor#doGetTableList():67) - ...Getting tables:
+2014-07-04 15:57:24,188 [main] INFO  (DfTableExtractor#doGetTableList():68) -   schema = {twitter.$$NoNameSchema$$ as main}
+2014-07-04 15:57:24,188 [main] INFO  (DfTableExtractor#doGetTableList():69) -   types  = [TABLE, VIEW]
+2014-07-04 15:57:24,247 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - truncate table follow
+2014-07-04 15:57:24,274 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - truncate table login
+2014-07-04 15:57:24,302 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - truncate table member_security
+2014-07-04 15:57:24,335 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - truncate table member_withdraw
+2014-07-04 15:57:24,376 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - truncate table tweet
+2014-07-04 15:57:24,402 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - alter table follow drop foreign key follow_ibfk_1
+2014-07-04 15:57:24,422 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - alter table follow drop foreign key follow_ibfk_2
+2014-07-04 15:57:24,433 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - alter table login drop foreign key login_ibfk_1
+2014-07-04 15:57:24,443 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - alter table member_security drop foreign key member_security_ibfk_1
+2014-07-04 15:57:24,452 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - alter table member_withdraw drop foreign key member_withdraw_ibfk_1
+2014-07-04 15:57:24,464 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - alter table tweet drop foreign key tweet_ibfk_1
+2014-07-04 15:57:24,473 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - drop table follow
+2014-07-04 15:57:24,484 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - drop table login
+2014-07-04 15:57:24,496 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - drop table member
+2014-07-04 15:57:24,506 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - drop table member_security
+2014-07-04 15:57:24,516 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - drop table member_withdraw
+2014-07-04 15:57:24,533 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - drop table tweet
+2014-07-04 15:57:24,582 [main] INFO  (DfCreateSchemaProcess#createSchema():244) - 
+2014-07-04 15:57:24,582 [main] INFO  (DfCreateSchemaProcess#createSchema():245) - * * * * * * * * *
+2014-07-04 15:57:24,583 [main] INFO  (DfCreateSchemaProcess#createSchema():246) - *               *
+2014-07-04 15:57:24,584 [main] INFO  (DfCreateSchemaProcess#createSchema():247) - * Create Schema *
+2014-07-04 15:57:24,585 [main] INFO  (DfCreateSchemaProcess#createSchema():248) - *               *
+2014-07-04 15:57:24,585 [main] INFO  (DfCreateSchemaProcess#createSchema():249) - * * * * * * * * *
+2014-07-04 15:57:24,592 [main] INFO  (DfSqlFileFireMan#fire():65) - ...Firing: replace-schema-00-system.sql
+2014-07-04 15:57:24,596 [main] INFO  (DfReplaceSchemaProperties#checkTargetEnvType():277) - ...Checking envType: ut in [ut]
+2014-07-04 15:57:24,597 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+-- #df:checkEnv(ut)#
+
+-- #df:changeUser(system)#
+-- #df:checkUser(mainSchema)#
+create database twitter
+2014-07-04 15:57:24,600 [main] INFO  (DfCreateSchemaProcess$1#dispatch():273) - ...Creating a connection to system
+2014-07-04 15:57:24,602 [main] INFO  (DfReplaceSchemaProperties#createAdditionalUserConnection():514) - ...Creating a connection for additional user: root
+2014-07-04 15:57:24,617 [main] INFO  (DfCreateSchemaProcess$1#dispatch():299) - ...Saying good-bye to the user 'system' because of checked: [mainSchema]
+2014-07-04 15:57:24,619 [main] INFO  (DfCreateSchemaProcess$1#dispatch():301) -  -> Can't create database 'twitter'; database exists
+2014-07-04 15:57:24,622 [main] INFO  (DfCreateSchemaProcess$DfSqlFileRunnerExecuteCreateSchema#isTargetSql():411) - ...Reviving the user 'system' until the end of this SQL file
+2014-07-04 15:57:24,625 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+-- #df:reviveUser()#
+-- #df:checkUser(mainUser, grant)#
+grant all privileges on twitter.*
+  to twitter@localhost identified by 'twitter'
+2014-07-04 15:57:24,629 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - flush privileges
+2014-07-04 15:57:24,632 [main] INFO  (DfSqlFileRunnerBase#traceResult():172) -  -> success=2 failure=0
+2014-07-04 15:57:24,633 [main] INFO  (DfSqlFileFireMan#fire():65) - ...Firing: replace-schema-10-basic.sql
+2014-07-04 15:57:24,634 [main] INFO  (DfCreateSchemaProcess$DfSqlFileRunnerExecuteCreateSchema#restoreRevivedUser():348) - ...Saying good-bye to the user 'system' again
+2014-07-04 15:57:24,635 [main] INFO  (DfCreateSchemaProcess$DfSqlFileRunnerExecuteCreateSchema#restoreRevivedUser():352) - ...Clearing revived users
+2014-07-04 15:57:24,636 [main] INFO  (DfCreateSchemaProcess$DfSqlFileRunnerExecuteCreateSchema#restoreCurrentUser():359) - ...Coming back to the main user from the user 'system'
+2014-07-04 15:57:24,639 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+/* Create Tables */
+
+CREATE TABLE FOLLOW
+(
+	FOLLOW_ID INT(100) NOT NULL UNIQUE AUTO_INCREMENT COMMENT 'フォローID',
+	YOU_ID INT(100) NOT NULL COMMENT 'フォローする人のID : 会員のID
+',
+	MEMBER_ID INT(100) NOT NULL COMMENT 'フォローされる人のID : フォローしている自分のID
+',
+	INS_DATETIME DATETIME NOT NULL COMMENT 'insert日時',
+	UPD_DATETIME DATETIME NOT NULL COMMENT 'UPD_DATETIME',
+	INS_TRACE VARCHAR(256) NOT NULL COMMENT 'Insertトレース',
+	UPD_TRACE VARCHAR(256) NOT NULL COMMENT 'UPD トレース',
+	DEL_FLG CHAR(1) DEFAULT 'N' NOT NULL COMMENT 'DEL_FLG : 削除フラグ Y=削除　N=削除していない',
+	PRIMARY KEY (FOLLOW_ID),
+	UNIQUE (YOU_ID, MEMBER_ID)
+) COMMENT = 'フォロー'
+2014-07-04 15:57:24,688 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE LOGIN
+(
+	LOGIN_ID INT NOT NULL AUTO_INCREMENT COMMENT 'ログインID : ログインした瞬間のID
+',
+	MEMBER_ID INT(100) NOT NULL COMMENT '会員ID : 会員のID
+',
+	INS_DATETIME DATETIME NOT NULL COMMENT 'insert日時',
+	UPD_DATETIME DATETIME NOT NULL COMMENT 'UPD_DATETIME',
+	INS_TRACE VARCHAR(256) NOT NULL COMMENT 'Insertトレース',
+	UPD_TRACE VARCHAR(256) NOT NULL COMMENT 'UPD トレース',
+	PRIMARY KEY (LOGIN_ID)
+) COMMENT = 'ログイン'
+2014-07-04 15:57:24,729 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE MEMBER
+(
+	MEMBER_ID INT(100) NOT NULL UNIQUE AUTO_INCREMENT COMMENT '会員ID : 会員のID
+',
+	EMAIL_ADDRESS VARCHAR(100) NOT NULL UNIQUE COMMENT 'メールアドレス : 会員のメールアドレス',
+	USER_NAME VARCHAR(100) NOT NULL UNIQUE COMMENT '会員ユーザ名 : 会員のユーザ名',
+	BIRTHDATE DATE COMMENT '生年月日 : 会員の生年月日',
+	PROFILE VARCHAR(200) COMMENT 'プロフィール',
+	INS_DATETIME DATETIME NOT NULL COMMENT 'insert日時',
+	UPD_DATETIME DATETIME NOT NULL COMMENT 'UPD_DATETIME',
+	INS_TRACE VARCHAR(256) NOT NULL COMMENT 'Insertトレース',
+	UPD_TRACE VARCHAR(256) NOT NULL COMMENT 'UPD トレース',
+	ACCOUNT_NAME VARCHAR(100) NOT NULL COMMENT 'アカウント名',
+	PRIMARY KEY (MEMBER_ID)
+) COMMENT = '会員'
+2014-07-04 15:57:24,801 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE MEMBER_SECURITY
+(
+	MEMBER_ID INT(100) NOT NULL UNIQUE COMMENT '会員ID : 会員のID
+',
+	PASSWORD VARCHAR(50) NOT NULL COMMENT 'パスワード',
+	INS_DATETIME DATETIME NOT NULL COMMENT 'insert日時',
+	UPD_DATETIME DATETIME NOT NULL COMMENT 'UPD_DATETIME',
+	INS_TRACE VARCHAR(256) NOT NULL COMMENT 'Insertトレース',
+	UPD_TRACE VARCHAR(256) NOT NULL COMMENT 'UPD トレース',
+	PRIMARY KEY (MEMBER_ID)
+) COMMENT = '会員セキュリティ'
+2014-07-04 15:57:24,837 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE MEMBER_WITHDRAW
+(
+	MEMBER_ID INT(100) NOT NULL UNIQUE COMMENT '会員ID : 会員のID
+',
+	WITHDRAWAL_REASON_ID INT COMMENT '退会理由ID : 会員の退会理由ID',
+	WITHDRAWAL_REASON_INPUT_TEXT TEXT COMMENT '退会理由入力テキスト',
+	WITHDRAWAL_DATETIME DATETIME NOT NULL COMMENT 'withdrawal_datetime : 退会日時',
+	PRIMARY KEY (MEMBER_ID)
+) COMMENT = '会員退会'
+2014-07-04 15:57:24,877 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE TWEET
+(
+	TWEET_ID INT NOT NULL UNIQUE AUTO_INCREMENT COMMENT 'TWEET_ID',
+	MEMBER_ID INT(100) NOT NULL COMMENT '会員ID : tweetした人のID',
+	TWEET VARCHAR(140) NOT NULL COMMENT 'TWEET',
+	INS_DATETIME DATETIME NOT NULL COMMENT 'insert日時',
+	UPD_DATETIME DATETIME NOT NULL COMMENT 'UPD_DATETIME',
+	INS_TRACE VARCHAR(256) NOT NULL COMMENT 'Insertトレース',
+	UPD_TRACE VARCHAR(256) NOT NULL COMMENT 'UPD トレース',
+	TWEET_DATETIME VARCHAR(50) NOT NULL COMMENT 'TWEET日時 : ツィートした日時（共通カラムではなく、画面に表示するためのもの）',
+	PRIMARY KEY (TWEET_ID)
+) COMMENT = 'TWEET'
+2014-07-04 15:57:24,924 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+/* Create Foreign Keys */
+
+ALTER TABLE FOLLOW
+	ADD FOREIGN KEY (MEMBER_ID)
+	REFERENCES MEMBER (MEMBER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2014-07-04 15:57:25,009 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE FOLLOW
+	ADD FOREIGN KEY (YOU_ID)
+	REFERENCES MEMBER (MEMBER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2014-07-04 15:57:25,072 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE LOGIN
+	ADD FOREIGN KEY (MEMBER_ID)
+	REFERENCES MEMBER (MEMBER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2014-07-04 15:57:25,149 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE MEMBER_SECURITY
+	ADD FOREIGN KEY (MEMBER_ID)
+	REFERENCES MEMBER (MEMBER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2014-07-04 15:57:25,251 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE MEMBER_WITHDRAW
+	ADD FOREIGN KEY (MEMBER_ID)
+	REFERENCES MEMBER (MEMBER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2014-07-04 15:57:25,332 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE TWEET
+	ADD FOREIGN KEY (MEMBER_ID)
+	REFERENCES MEMBER (MEMBER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2014-07-04 15:57:25,429 [main] INFO  (DfSqlFileRunnerBase#traceResult():172) -  -> success=12 failure=0
+2014-07-04 15:57:25,431 [main] INFO  (DfSqlFileFireMan#fire():90) - {Create Schema}: success=14 failure=0 (in 2 files)
+2014-07-04 15:57:25,433 [main] INFO  (DfCreateSchemaProcess#destroyChangeUserConnection():542) - ...Closing connections to change-users: [system]
+2014-07-04 15:57:25,477 [main] INFO  (DfLoadDataProcess#execute():129) - 
+2014-07-04 15:57:25,478 [main] INFO  (DfLoadDataProcess#execute():130) - * * * * * * * * * * *
+2014-07-04 15:57:25,479 [main] INFO  (DfLoadDataProcess#execute():131) - *                   *
+2014-07-04 15:57:25,479 [main] INFO  (DfLoadDataProcess#execute():132) - * Load Data         *
+2014-07-04 15:57:25,480 [main] INFO  (DfLoadDataProcess#execute():133) - *                   *
+2014-07-04 15:57:25,480 [main] INFO  (DfLoadDataProcess#execute():134) - * * * * * * * * * * *
+2014-07-04 15:57:25,503 [main] INFO  (DfXlsDataHandlerImpl#writeSeveralData():126) - /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+2014-07-04 15:57:25,504 [main] INFO  (DfXlsDataHandlerImpl#writeSeveralData():127) - writeData(playsql\data\ut\xls\20-member.xls)
+2014-07-04 15:57:25,504 [main] INFO  (DfXlsDataHandlerImpl#writeSeveralData():128) - = = = = = = =/
+2014-07-04 15:57:25,789 [main] ERROR (DfDBFluteTaskUtil#logException():161) - Look! Read the message below.
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Failed to execute DBFlute Task 'ReplaceSchema'.
+
+[Advice]
+Check the exception messages and the stack traces.
+
+[Database Product]
+MySQL 5.6.17
+
+[JDBC Driver]
+MySQL Connector Java mysql-connector-java-5.1.26 ( Revision: ${bzr.revision-id} ) for JDBC 4.0
+* * * * * * * * * */
+org.seasar.dbflute.exception.DfXlsReaderReadFailureException: Look! Read the message below.
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+The first row of the sheet was not column definition.
+
+[Xls File]
+playsql\data\ut\xls\20-member.xls
+
+[Table]
+Sheet1
+* * * * * * * * * */
+	at org.seasar.dbflute.helper.io.xls.DfTableXlsReader.throwXlsReaderFirstRowNotColumnDefinitionException(DfTableXlsReader.java:321)
+	at org.seasar.dbflute.helper.io.xls.DfTableXlsReader.setupTable(DfTableXlsReader.java:283)
+	at org.seasar.dbflute.helper.io.xls.DfTableXlsReader.prepareTable(DfTableXlsReader.java:276)
+	at org.seasar.dbflute.helper.io.xls.DfTableXlsReader.setupWorkbook(DfTableXlsReader.java:164)
+	at org.seasar.dbflute.helper.io.xls.DfTableXlsReader.<init>(DfTableXlsReader.java:128)
+	at org.seasar.dbflute.logic.replaceschema.loaddata.impl.DfXlsDataHandlerImpl.createTableXlsReader(DfXlsDataHandlerImpl.java:560)
+	at org.seasar.dbflute.logic.replaceschema.loaddata.impl.DfXlsDataHandlerImpl.writeSeveralData(DfXlsDataHandlerImpl.java:129)
+	at org.seasar.dbflute.logic.replaceschema.process.DfLoadDataProcess.writeDbFromXls(DfLoadDataProcess.java:319)
+	at org.seasar.dbflute.logic.replaceschema.process.DfLoadDataProcess.writeDbFromXls(DfLoadDataProcess.java:307)
+	at org.seasar.dbflute.logic.replaceschema.process.DfLoadDataProcess.writeDbFromXlsAsLoadingTypeData(DfLoadDataProcess.java:291)
+	at org.seasar.dbflute.logic.replaceschema.process.DfLoadDataProcess.execute(DfLoadDataProcess.java:159)
+	at org.seasar.dbflute.task.DfReplaceSchemaTask.loadData(DfReplaceSchemaTask.java:274)
+	at org.seasar.dbflute.task.DfReplaceSchemaTask.doExecuteCoreProcess(DfReplaceSchemaTask.java:238)
+	at org.seasar.dbflute.task.DfReplaceSchemaTask.executeCoreProcess(DfReplaceSchemaTask.java:232)
+	at org.seasar.dbflute.task.DfReplaceSchemaTask.processMain(DfReplaceSchemaTask.java:225)
+	at org.seasar.dbflute.task.DfReplaceSchemaTask.doExecute(DfReplaceSchemaTask.java:153)
+	at org.seasar.dbflute.task.bs.DfAbstractTexenTask$1.callActualExecute(DfAbstractTexenTask.java:130)
+	at org.seasar.dbflute.task.bs.assistant.DfTaskBasicController.doExecute(DfTaskBasicController.java:184)
+	at org.seasar.dbflute.task.bs.assistant.DfTaskBasicController.execute(DfTaskBasicController.java:77)
+	at org.seasar.dbflute.task.bs.DfAbstractTexenTask.execute(DfAbstractTexenTask.java:152)
+	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:288)
+	at sun.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.tools.ant.dispatch.DispatchUtils.execute(DispatchUtils.java:105)
+	at org.apache.tools.ant.Task.perform(Task.java:348)
+	at org.apache.tools.ant.Target.execute(Target.java:357)
+	at org.apache.tools.ant.Target.performTasks(Target.java:385)
+	at org.apache.tools.ant.Project.executeSortedTargets(Project.java:1329)
+	at org.apache.tools.ant.helper.SingleCheckExecutor.executeTargets(SingleCheckExecutor.java:38)
+	at org.apache.tools.ant.Project.executeTargets(Project.java:1181)
+	at org.apache.tools.ant.taskdefs.Ant.execute(Ant.java:416)
+	at org.apache.tools.ant.taskdefs.CallTarget.execute(CallTarget.java:105)
+	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:288)
+	at sun.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.tools.ant.dispatch.DispatchUtils.execute(DispatchUtils.java:105)
+	at org.apache.tools.ant.Task.perform(Task.java:348)
+	at org.apache.tools.ant.Target.execute(Target.java:357)
+	at org.apache.tools.ant.Target.performTasks(Target.java:385)
+	at org.apache.tools.ant.Project.executeSortedTargets(Project.java:1329)
+	at org.apache.tools.ant.Project.executeTarget(Project.java:1298)
+	at org.apache.tools.ant.helper.DefaultExecutor.executeTargets(DefaultExecutor.java:41)
+	at org.apache.tools.ant.Project.executeTargets(Project.java:1181)
+	at org.apache.tools.ant.Main.runBuild(Main.java:698)
+	at org.apache.tools.ant.Main.startAnt(Main.java:199)
+	at org.apache.tools.ant.launch.Launcher.run(Launcher.java:257)
+	at org.apache.tools.ant.launch.Launcher.main(Launcher.java:104)
+2014-07-04 15:57:25,830 [main] INFO  (DfDataSourceHandler#destroy():121) - ...closeReally()
+2014-07-04 15:57:25,835 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():150) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m03s448ms *Abort
+
+  DBFLUTE_CLIENT: {twitter}
+    database  = mysql (MySQL 5.6.17)
+    language  = java
+    container = seasar
+    package   = jp.bizreach.twitter.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = com.mysql.jdbc.Driver
+    url    = jdbc:mysql://localhost:3306/twitter
+    schema = {twitter.$$NoNameSchema$$ as main}
+    user   = twitter
+    props  = {user=root, password=}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = twitter
+
+ {Create Schema}: success=14 failure=0 (in 2 files)
+  o replace-schema-00-system.sql
+  o replace-schema-10-basic.sql
+
+ {Load Data}: loaded-files=0
+  x (failed: Look at the exception message)
+    * * * * * *
+    * Failure *
+    * * * * * *
+_/_/_/_/_/_/_/_/_/_/ {ReplaceSchema}
+2014-07-04 15:57:52,759 [main] INFO  (DfReplaceSchemaTask#begin():87) - +------------------------------------------+
+2014-07-04 15:57:52,762 [main] INFO  (DfReplaceSchemaTask#begin():88) - |                                          |
+2014-07-04 15:57:52,763 [main] INFO  (DfReplaceSchemaTask#begin():89) - |              ReplaceSchema               |
+2014-07-04 15:57:52,782 [main] INFO  (DfReplaceSchemaTask#begin():97) - |                                          |
+2014-07-04 15:57:52,782 [main] INFO  (DfReplaceSchemaTask#begin():98) - +------------------------------------------+
+2014-07-04 15:57:52,784 [main] INFO  (DfReplaceSchemaTask#waitBeforeReps():329) - ...Waiting for your GO SIGN from stdin before ReplaceSchema:
+2014-07-04 15:57:53,925 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2014-07-04 15:57:53,926 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = com.mysql.jdbc.Driver
+2014-07-04 15:57:53,927 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:mysql://localhost:3306/twitter
+2014-07-04 15:57:53,928 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = twitter
+2014-07-04 15:57:53,937 [main] INFO  (DfDataSourceHandler#createConnection():168) - ...Connecting to database by data source:
+2014-07-04 15:57:54,169 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():235) -   product = MySQL 5.6.17
+2014-07-04 15:57:54,170 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():236) -   driver  = MySQL Connector Java mysql-connector-java-5.1.26 ( Revision: ${bzr.revision-id} ) for JDBC 4.0
+2014-07-04 15:57:54,189 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():207) - 
+2014-07-04 15:57:54,190 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():208) - * * * * * * * * * * *
+2014-07-04 15:57:54,190 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():209) - *                   *
+2014-07-04 15:57:54,191 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():210) - * Initialize Schema *
+2014-07-04 15:57:54,191 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():211) - *                   *
+2014-07-04 15:57:54,192 [main] INFO  (DfCreateSchemaProcess#initializeSchemaMainDrop():212) - * * * * * * * * * * *
+2014-07-04 15:57:54,209 [main] INFO  (DfTableExtractor#doGetTableList():67) - ...Getting tables:
+2014-07-04 15:57:54,210 [main] INFO  (DfTableExtractor#doGetTableList():68) -   schema = {twitter.$$NoNameSchema$$ as main}
+2014-07-04 15:57:54,211 [main] INFO  (DfTableExtractor#doGetTableList():69) -   types  = [TABLE, VIEW]
+2014-07-04 15:57:54,257 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - truncate table follow
+2014-07-04 15:57:54,292 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - truncate table login
+2014-07-04 15:57:54,331 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - truncate table member_security
+2014-07-04 15:57:54,369 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - truncate table member_withdraw
+2014-07-04 15:57:54,421 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - truncate table tweet
+2014-07-04 15:57:54,458 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - alter table follow drop foreign key follow_ibfk_1
+2014-07-04 15:57:54,478 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - alter table follow drop foreign key follow_ibfk_2
+2014-07-04 15:57:54,488 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - alter table login drop foreign key login_ibfk_1
+2014-07-04 15:57:54,499 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - alter table member_security drop foreign key member_security_ibfk_1
+2014-07-04 15:57:54,509 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - alter table member_withdraw drop foreign key member_withdraw_ibfk_1
+2014-07-04 15:57:54,520 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - alter table tweet drop foreign key tweet_ibfk_1
+2014-07-04 15:57:54,535 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - drop table follow
+2014-07-04 15:57:54,547 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - drop table login
+2014-07-04 15:57:54,567 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - drop table member
+2014-07-04 15:57:54,592 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - drop table member_security
+2014-07-04 15:57:54,611 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - drop table member_withdraw
+2014-07-04 15:57:54,634 [main] INFO  (DfSchemaInitializerJdbc#logReplaceSql():576) - drop table tweet
+2014-07-04 15:57:54,691 [main] INFO  (DfCreateSchemaProcess#createSchema():244) - 
+2014-07-04 15:57:54,692 [main] INFO  (DfCreateSchemaProcess#createSchema():245) - * * * * * * * * *
+2014-07-04 15:57:54,692 [main] INFO  (DfCreateSchemaProcess#createSchema():246) - *               *
+2014-07-04 15:57:54,693 [main] INFO  (DfCreateSchemaProcess#createSchema():247) - * Create Schema *
+2014-07-04 15:57:54,694 [main] INFO  (DfCreateSchemaProcess#createSchema():248) - *               *
+2014-07-04 15:57:54,695 [main] INFO  (DfCreateSchemaProcess#createSchema():249) - * * * * * * * * *
+2014-07-04 15:57:54,703 [main] INFO  (DfSqlFileFireMan#fire():65) - ...Firing: replace-schema-00-system.sql
+2014-07-04 15:57:54,707 [main] INFO  (DfReplaceSchemaProperties#checkTargetEnvType():277) - ...Checking envType: ut in [ut]
+2014-07-04 15:57:54,708 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+-- #df:checkEnv(ut)#
+
+-- #df:changeUser(system)#
+-- #df:checkUser(mainSchema)#
+create database twitter
+2014-07-04 15:57:54,713 [main] INFO  (DfCreateSchemaProcess$1#dispatch():273) - ...Creating a connection to system
+2014-07-04 15:57:54,715 [main] INFO  (DfReplaceSchemaProperties#createAdditionalUserConnection():514) - ...Creating a connection for additional user: root
+2014-07-04 15:57:54,730 [main] INFO  (DfCreateSchemaProcess$1#dispatch():299) - ...Saying good-bye to the user 'system' because of checked: [mainSchema]
+2014-07-04 15:57:54,732 [main] INFO  (DfCreateSchemaProcess$1#dispatch():301) -  -> Can't create database 'twitter'; database exists
+2014-07-04 15:57:54,734 [main] INFO  (DfCreateSchemaProcess$DfSqlFileRunnerExecuteCreateSchema#isTargetSql():411) - ...Reviving the user 'system' until the end of this SQL file
+2014-07-04 15:57:54,736 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+-- #df:reviveUser()#
+-- #df:checkUser(mainUser, grant)#
+grant all privileges on twitter.*
+  to twitter@localhost identified by 'twitter'
+2014-07-04 15:57:54,741 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - flush privileges
+2014-07-04 15:57:54,744 [main] INFO  (DfSqlFileRunnerBase#traceResult():172) -  -> success=2 failure=0
+2014-07-04 15:57:54,745 [main] INFO  (DfSqlFileFireMan#fire():65) - ...Firing: replace-schema-10-basic.sql
+2014-07-04 15:57:54,747 [main] INFO  (DfCreateSchemaProcess$DfSqlFileRunnerExecuteCreateSchema#restoreRevivedUser():348) - ...Saying good-bye to the user 'system' again
+2014-07-04 15:57:54,748 [main] INFO  (DfCreateSchemaProcess$DfSqlFileRunnerExecuteCreateSchema#restoreRevivedUser():352) - ...Clearing revived users
+2014-07-04 15:57:54,749 [main] INFO  (DfCreateSchemaProcess$DfSqlFileRunnerExecuteCreateSchema#restoreCurrentUser():359) - ...Coming back to the main user from the user 'system'
+2014-07-04 15:57:54,753 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+/* Create Tables */
+
+CREATE TABLE FOLLOW
+(
+	FOLLOW_ID INT(100) NOT NULL UNIQUE AUTO_INCREMENT COMMENT 'フォローID',
+	YOU_ID INT(100) NOT NULL COMMENT 'フォローする人のID : 会員のID
+',
+	MEMBER_ID INT(100) NOT NULL COMMENT 'フォローされる人のID : フォローしている自分のID
+',
+	INS_DATETIME DATETIME NOT NULL COMMENT 'insert日時',
+	UPD_DATETIME DATETIME NOT NULL COMMENT 'UPD_DATETIME',
+	INS_TRACE VARCHAR(256) NOT NULL COMMENT 'Insertトレース',
+	UPD_TRACE VARCHAR(256) NOT NULL COMMENT 'UPD トレース',
+	DEL_FLG CHAR(1) DEFAULT 'N' NOT NULL COMMENT 'DEL_FLG : 削除フラグ Y=削除　N=削除していない',
+	PRIMARY KEY (FOLLOW_ID),
+	UNIQUE (YOU_ID, MEMBER_ID)
+) COMMENT = 'フォロー'
+2014-07-04 15:57:54,816 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE LOGIN
+(
+	LOGIN_ID INT NOT NULL AUTO_INCREMENT COMMENT 'ログインID : ログインした瞬間のID
+',
+	MEMBER_ID INT(100) NOT NULL COMMENT '会員ID : 会員のID
+',
+	INS_DATETIME DATETIME NOT NULL COMMENT 'insert日時',
+	UPD_DATETIME DATETIME NOT NULL COMMENT 'UPD_DATETIME',
+	INS_TRACE VARCHAR(256) NOT NULL COMMENT 'Insertトレース',
+	UPD_TRACE VARCHAR(256) NOT NULL COMMENT 'UPD トレース',
+	PRIMARY KEY (LOGIN_ID)
+) COMMENT = 'ログイン'
+2014-07-04 15:57:54,888 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE MEMBER
+(
+	MEMBER_ID INT(100) NOT NULL UNIQUE AUTO_INCREMENT COMMENT '会員ID : 会員のID
+',
+	EMAIL_ADDRESS VARCHAR(100) NOT NULL UNIQUE COMMENT 'メールアドレス : 会員のメールアドレス',
+	USER_NAME VARCHAR(100) NOT NULL UNIQUE COMMENT '会員ユーザ名 : 会員のユーザ名',
+	BIRTHDATE DATE COMMENT '生年月日 : 会員の生年月日',
+	PROFILE VARCHAR(200) COMMENT 'プロフィール',
+	INS_DATETIME DATETIME NOT NULL COMMENT 'insert日時',
+	UPD_DATETIME DATETIME NOT NULL COMMENT 'UPD_DATETIME',
+	INS_TRACE VARCHAR(256) NOT NULL COMMENT 'Insertトレース',
+	UPD_TRACE VARCHAR(256) NOT NULL COMMENT 'UPD トレース',
+	ACCOUNT_NAME VARCHAR(100) NOT NULL COMMENT 'アカウント名',
+	PRIMARY KEY (MEMBER_ID)
+) COMMENT = '会員'
+2014-07-04 15:57:54,983 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE MEMBER_SECURITY
+(
+	MEMBER_ID INT(100) NOT NULL UNIQUE COMMENT '会員ID : 会員のID
+',
+	PASSWORD VARCHAR(50) NOT NULL COMMENT 'パスワード',
+	INS_DATETIME DATETIME NOT NULL COMMENT 'insert日時',
+	UPD_DATETIME DATETIME NOT NULL COMMENT 'UPD_DATETIME',
+	INS_TRACE VARCHAR(256) NOT NULL COMMENT 'Insertトレース',
+	UPD_TRACE VARCHAR(256) NOT NULL COMMENT 'UPD トレース',
+	PRIMARY KEY (MEMBER_ID)
+) COMMENT = '会員セキュリティ'
+2014-07-04 15:57:55,046 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE MEMBER_WITHDRAW
+(
+	MEMBER_ID INT(100) NOT NULL UNIQUE COMMENT '会員ID : 会員のID
+',
+	WITHDRAWAL_REASON_ID INT COMMENT '退会理由ID : 会員の退会理由ID',
+	WITHDRAWAL_REASON_INPUT_TEXT TEXT COMMENT '退会理由入力テキスト',
+	WITHDRAWAL_DATETIME DATETIME NOT NULL COMMENT 'withdrawal_datetime : 退会日時',
+	PRIMARY KEY (MEMBER_ID)
+) COMMENT = '会員退会'
+2014-07-04 15:57:55,089 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+CREATE TABLE TWEET
+(
+	TWEET_ID INT NOT NULL UNIQUE AUTO_INCREMENT COMMENT 'TWEET_ID',
+	MEMBER_ID INT(100) NOT NULL COMMENT '会員ID : tweetした人のID',
+	TWEET VARCHAR(140) NOT NULL COMMENT 'TWEET',
+	INS_DATETIME DATETIME NOT NULL COMMENT 'insert日時',
+	UPD_DATETIME DATETIME NOT NULL COMMENT 'UPD_DATETIME',
+	INS_TRACE VARCHAR(256) NOT NULL COMMENT 'Insertトレース',
+	UPD_TRACE VARCHAR(256) NOT NULL COMMENT 'UPD トレース',
+	TWEET_DATETIME VARCHAR(50) NOT NULL COMMENT 'TWEET日時 : ツィートした日時（共通カラムではなく、画面に表示するためのもの）',
+	PRIMARY KEY (TWEET_ID)
+) COMMENT = 'TWEET'
+2014-07-04 15:57:55,130 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+/* Create Foreign Keys */
+
+ALTER TABLE FOLLOW
+	ADD FOREIGN KEY (MEMBER_ID)
+	REFERENCES MEMBER (MEMBER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2014-07-04 15:57:55,220 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE FOLLOW
+	ADD FOREIGN KEY (YOU_ID)
+	REFERENCES MEMBER (MEMBER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2014-07-04 15:57:55,325 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE LOGIN
+	ADD FOREIGN KEY (MEMBER_ID)
+	REFERENCES MEMBER (MEMBER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2014-07-04 15:57:55,426 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE MEMBER_SECURITY
+	ADD FOREIGN KEY (MEMBER_ID)
+	REFERENCES MEMBER (MEMBER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2014-07-04 15:57:55,523 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE MEMBER_WITHDRAW
+	ADD FOREIGN KEY (MEMBER_ID)
+	REFERENCES MEMBER (MEMBER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2014-07-04 15:57:55,626 [main] INFO  (DfSqlFileRunnerBase#traceSql():168) - 
+ALTER TABLE TWEET
+	ADD FOREIGN KEY (MEMBER_ID)
+	REFERENCES MEMBER (MEMBER_ID)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+2014-07-04 15:57:55,755 [main] INFO  (DfSqlFileRunnerBase#traceResult():172) -  -> success=12 failure=0
+2014-07-04 15:57:55,759 [main] INFO  (DfSqlFileFireMan#fire():90) - {Create Schema}: success=14 failure=0 (in 2 files)
+2014-07-04 15:57:55,761 [main] INFO  (DfCreateSchemaProcess#destroyChangeUserConnection():542) - ...Closing connections to change-users: [system]
+2014-07-04 15:57:55,808 [main] INFO  (DfLoadDataProcess#execute():129) - 
+2014-07-04 15:57:55,809 [main] INFO  (DfLoadDataProcess#execute():130) - * * * * * * * * * * *
+2014-07-04 15:57:55,810 [main] INFO  (DfLoadDataProcess#execute():131) - *                   *
+2014-07-04 15:57:55,810 [main] INFO  (DfLoadDataProcess#execute():132) - * Load Data         *
+2014-07-04 15:57:55,811 [main] INFO  (DfLoadDataProcess#execute():133) - *                   *
+2014-07-04 15:57:55,811 [main] INFO  (DfLoadDataProcess#execute():134) - * * * * * * * * * * *
+2014-07-04 15:57:55,840 [main] INFO  (DfXlsDataHandlerImpl#writeSeveralData():126) - /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+2014-07-04 15:57:55,841 [main] INFO  (DfXlsDataHandlerImpl#writeSeveralData():127) - writeData(playsql\data\ut\xls\20-member.xls)
+2014-07-04 15:57:55,841 [main] INFO  (DfXlsDataHandlerImpl#writeSeveralData():128) - = = = = = = =/
+2014-07-04 15:57:56,196 [main] INFO  (DfTableExtractor#doGetTableList():67) - ...Getting tables:
+2014-07-04 15:57:56,197 [main] INFO  (DfTableExtractor#doGetTableList():68) -   schema = {twitter.$$NoNameSchema$$ as main}
+2014-07-04 15:57:56,198 [main] INFO  (DfTableExtractor#doGetTableList():69) -   types  = [TABLE, VIEW]
+2014-07-04 15:57:56,267 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - MEMBER:{1, Stojkovic@gmail.com, Pixy, Stoiko, 1965/03/03, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0}
+2014-07-04 15:57:56,319 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - MEMBER:{2, adf@dsa.fdsg, dsg, sgf, null, 2014-06-25 00:00:00.0, 2014-06-26 00:00:00.0, 2014-06-27 00:00:00.0, 2014-06-28 00:00:00.0}
+2014-07-04 15:57:56,321 [main] INFO  (DfXlsDataHandlerImpl#doWriteDataTable():210) - ...Skipping the terminal garbage row
+2014-07-04 15:57:56,331 [main] INFO  (DfAbsractDataWriter#noticeLoadedRowSize():1059) -  -> 2 rows are loaded to MEMBER
+2014-07-04 15:57:56,335 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - LOGIN:{1, 1, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0}
+2014-07-04 15:57:56,336 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - LOGIN:{2, 2, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0}
+2014-07-04 15:57:56,337 [main] INFO  (DfXlsDataHandlerImpl#doWriteDataTable():210) - ...Skipping the terminal garbage row
+2014-07-04 15:57:56,344 [main] INFO  (DfAbsractDataWriter#noticeLoadedRowSize():1059) -  -> 2 rows are loaded to LOGIN
+2014-07-04 15:57:56,346 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - MEMBER_SECURITY:{1, aaa, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0}
+2014-07-04 15:57:56,347 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - MEMBER_SECURITY:{2, bbb, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0}
+2014-07-04 15:57:56,348 [main] INFO  (DfXlsDataHandlerImpl#doWriteDataTable():210) - ...Skipping the terminal garbage row
+2014-07-04 15:57:56,353 [main] INFO  (DfAbsractDataWriter#noticeLoadedRowSize():1059) -  -> 2 rows are loaded to MEMBER_SECURITY
+2014-07-04 15:57:56,354 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - TWEET:{1, 1234, 充実した一日だった。, 7月4日　07:04, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0}
+2014-07-04 15:57:56,358 [main] INFO  (DfXlsDataHandlerImpl#doWriteDataTable():210) - ...Skipping the terminal garbage row
+2014-07-04 15:57:56,361 [main] INFO  (DfAbsractDataWriter#noticeLoadedRowSize():1059) -  -> 1 rows are loaded to TWEET
+2014-07-04 15:57:56,362 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - MEMBER_WITHDRAW:{1, 1, 俺はワールドカップでPK外した…, 2006/12/24 23:59:59.123}
+2014-07-04 15:57:56,365 [main] INFO  (DfXlsDataHandlerImpl#doWriteDataTable():210) - ...Skipping the terminal garbage row
+2014-07-04 15:57:56,369 [main] INFO  (DfAbsractDataWriter#noticeLoadedRowSize():1059) -  -> 1 rows are loaded to MEMBER_WITHDRAW
+2014-07-04 15:57:56,370 [main] INFO  (DfAbsractDataWriter#handleLoggingInsert():1043) - FOLLOW:{1, 1, 2, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, 2014-06-24 00:00:00.0, n}
+2014-07-04 15:57:56,372 [main] INFO  (DfXlsDataHandlerImpl#doWriteDataTable():210) - ...Skipping the terminal garbage row
+2014-07-04 15:57:56,375 [main] INFO  (DfAbsractDataWriter#noticeLoadedRowSize():1059) -  -> 1 rows are loaded to FOLLOW
+2014-07-04 15:57:56,379 [main] INFO  (DfLoadDataProcess#lazyCheckLoadedClassifiaction():379) - ...Checking implicit set of classification
+2014-07-04 15:57:56,393 [main] INFO  (DfTakeFinallyProcess#takeFinally():221) - 
+2014-07-04 15:57:56,394 [main] INFO  (DfTakeFinallyProcess#takeFinally():222) - * * * * * * * **
+2014-07-04 15:57:56,394 [main] INFO  (DfTakeFinallyProcess#takeFinally():223) - *              *
+2014-07-04 15:57:56,395 [main] INFO  (DfTakeFinallyProcess#takeFinally():224) - * Take Finally *
+2014-07-04 15:57:56,395 [main] INFO  (DfTakeFinallyProcess#takeFinally():225) - *              *
+2014-07-04 15:57:56,396 [main] INFO  (DfTakeFinallyProcess#takeFinally():226) - * * * * * * * **
+2014-07-04 15:57:56,405 [main] INFO  (DfSqlFileFireMan#fire():65) - ...Firing: take-finally.sql
+2014-07-04 15:57:56,410 [main] INFO  (DfSqlFileRunnerBase#traceResult():172) -  -> success=0 failure=0
+2014-07-04 15:57:56,411 [main] INFO  (DfSqlFileFireMan#fire():90) - {Take Finally}: success=0 failure=0 (in 1 files)
+2014-07-04 15:57:56,413 [main] INFO  (DfDataSourceHandler#destroy():121) - ...closeReally()
+2014-07-04 15:57:56,417 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():150) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m03s654ms
+
+  DBFLUTE_CLIENT: {twitter}
+    database  = mysql (MySQL 5.6.17)
+    language  = java
+    container = seasar
+    package   = jp.bizreach.twitter.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = com.mysql.jdbc.Driver
+    url    = jdbc:mysql://localhost:3306/twitter
+    schema = {twitter.$$NoNameSchema$$ as main}
+    user   = twitter
+    props  = {user=root, password=}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = twitter
+
+ {Create Schema}: success=14 failure=0 (in 2 files)
+  o replace-schema-00-system.sql
+  o replace-schema-10-basic.sql
+
+ {Load Data}: loaded-files=1
+  (ut)
+  o 20-member.xls
+
+ {Take Finally}: success=0 failure=0 (in 1 files)
+  o take-finally.sql
+_/_/_/_/_/_/_/_/_/_/ {ReplaceSchema}
+2014-07-04 15:57:57,312 [main] INFO  (TorqueJDBCTransformTask#begin():100) - +------------------------------------------+
+2014-07-04 15:57:57,314 [main] INFO  (TorqueJDBCTransformTask#begin():101) - |                                          |
+2014-07-04 15:57:57,315 [main] INFO  (TorqueJDBCTransformTask#begin():102) - |                   JDBC                   |
+2014-07-04 15:57:57,315 [main] INFO  (TorqueJDBCTransformTask#begin():103) - |                                          |
+2014-07-04 15:57:57,316 [main] INFO  (TorqueJDBCTransformTask#begin():104) - +------------------------------------------+
+2014-07-04 15:57:57,356 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2014-07-04 15:57:57,356 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = com.mysql.jdbc.Driver
+2014-07-04 15:57:57,357 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:mysql://localhost:3306/twitter
+2014-07-04 15:57:57,357 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = twitter
+2014-07-04 15:57:57,401 [main] INFO  (DfSchemaXmlSerializer#serialize():286) - 
+2014-07-04 15:57:57,401 [main] INFO  (DfSchemaXmlSerializer#serialize():287) - ...Starting to process JDBC to SchemaXML
+2014-07-04 15:57:57,402 [main] INFO  (DfSchemaXmlSerializer#doLoadPreviousSchema():1469) - ...Loading previous schema (schema diff process)
+2014-07-04 15:57:57,411 [main] INFO  (DTDResolver#resolveEntity():197) - ...Resolving XML by database.dtd in same package
+2014-07-04 15:57:57,477 [main] INFO  (DfSchemaXmlSerializer#generateXML():361) - ...Getting DB connection
+2014-07-04 15:57:57,481 [main] INFO  (DfDataSourceHandler#createConnection():168) - ...Connecting to database by data source:
+2014-07-04 15:57:57,661 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():235) -   product = MySQL 5.6.17
+2014-07-04 15:57:57,662 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():236) -   driver  = MySQL Connector Java mysql-connector-java-5.1.26 ( Revision: ${bzr.revision-id} ) for JDBC 4.0
+2014-07-04 15:57:57,665 [main] INFO  (DfSchemaXmlSerializer#generateXML():364) - ...Getting DB meta data
+2014-07-04 15:57:57,667 [main] INFO  (DfTableExtractor#doGetTableList():67) - ...Getting tables:
+2014-07-04 15:57:57,668 [main] INFO  (DfTableExtractor#doGetTableList():68) -   schema = {twitter.$$NoNameSchema$$ as main}
+2014-07-04 15:57:57,668 [main] INFO  (DfTableExtractor#doGetTableList():69) -   types  = [TABLE, VIEW]
+2014-07-04 15:57:57,678 [main] INFO  (DfDbCommentExtractorBase#doSelectUserTabComments():121) - select table_type as OBJECT_TYPE, table_name as TABLE_NAME, table_comment as COMMENTS from information_schema.tables where table_schema = 'twitter' order by table_name asc
+2014-07-04 15:57:57,681 [main] INFO  (DfDbCommentExtractorBase#doSelectUserColComments():168) - select table_name as TABLE_NAME, column_name as COLUMN_NAME, column_comment as COMMENTS from information_schema.columns where table_schema = 'twitter' order by table_name asc, column_name asc
+2014-07-04 15:57:57,695 [main] INFO  (DfSchemaXmlSerializer#processTable():421) - 
+2014-07-04 15:57:57,696 [main] INFO  (DfSchemaXmlSerializer#processTable():422) - $ /= = = = = = = = = = = = = = = = = = = = = = = = = =
+2014-07-04 15:57:57,697 [main] INFO  (DfSchemaXmlSerializer#processTable():423) - $ [Table List]
+2014-07-04 15:57:57,698 [main] INFO  (DfSchemaXmlSerializer#doProcessTable():506) - $ twitter.follow(TABLE) // フォロー
+2014-07-04 15:57:57,736 [main] INFO  (DfSchemaXmlSerializer#doProcessTable():506) - $ twitter.login(TABLE) // ログイン
+2014-07-04 15:57:57,751 [main] INFO  (DfSchemaXmlSerializer#doProcessTable():506) - $ twitter.member(TABLE) // 会員
+2014-07-04 15:57:57,767 [main] INFO  (DfSchemaXmlSerializer#doProcessTable():506) - $ twitter.member_security(TABLE) // 会員セキュリティ
+2014-07-04 15:57:57,782 [main] INFO  (DfSchemaXmlSerializer#doProcessTable():506) - $ twitter.member_withdraw(TABLE) // 会員退会
+2014-07-04 15:57:57,797 [main] INFO  (DfSchemaXmlSerializer#doProcessTable():506) - $ twitter.tweet(TABLE) // TWEET
+2014-07-04 15:57:57,813 [main] INFO  (DfSchemaXmlSerializer#processTable():435) - $ 
+2014-07-04 15:57:57,814 [main] INFO  (DfSchemaXmlSerializer#processTable():436) - $ [Table Count]
+2014-07-04 15:57:57,815 [main] INFO  (DfSchemaXmlSerializer#processTable():437) - $ 6
+2014-07-04 15:57:57,816 [main] INFO  (DfSchemaXmlSerializer#processTable():438) - $ = = = = = = = = = =/
+2014-07-04 15:57:57,816 [main] INFO  (DfSchemaXmlSerializer#processTable():439) - 
+2014-07-04 15:57:57,819 [main] INFO  (DfSchemaXmlSerializer#processSequence():799) - ...Getting sequences
+2014-07-04 15:57:57,823 [main] INFO  (DfSchemaXmlSerializer#serialize():301) - ...Serializing XML:
+2014-07-04 15:57:57,824 [main] INFO  (DfSchemaXmlSerializer#serialize():302) -   filePath = ./schema/project-schema-twitter.xml
+2014-07-04 15:57:57,824 [main] INFO  (DfSchemaXmlSerializer#serialize():303) -   encoding = UTF-8
+2014-07-04 15:57:57,839 [main] INFO  (DfSchemaXmlSerializer#doLoadNextSchema():1487) - ...Loading next schema (schema diff process)
+2014-07-04 15:57:57,841 [main] INFO  (DTDResolver#resolveEntity():197) - ...Resolving XML by database.dtd in same package
+2014-07-04 15:57:57,890 [main] INFO  (DfSchemaXmlSerializer#doLoadNextSchema():1492) -  -> different from previous (schema diff)
+2014-07-04 15:57:57,892 [main] INFO  (DfSchemaXmlSerializer#doLoadNextSchema():1494) - ...Serializing schema-diff:
+2014-07-04 15:57:57,893 [main] INFO  (DfSchemaXmlSerializer#doLoadNextSchema():1495) -   filePath = ./schema/project-history-twitter.diffmap
+2014-07-04 15:57:57,953 [main] INFO  (DfDataSourceHandler#destroy():121) - ...closeReally()
+2014-07-04 15:57:57,959 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():150) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m00s643ms
+
+  DBFLUTE_CLIENT: {twitter}
+    database  = mysql (MySQL 5.6.17)
+    language  = java
+    container = seasar
+    package   = jp.bizreach.twitter.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = com.mysql.jdbc.Driver
+    url    = jdbc:mysql://localhost:3306/twitter
+    schema = {twitter.$$NoNameSchema$$ as main}
+    user   = twitter
+    props  = {}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = twitter
+_/_/_/_/_/_/_/_/_/_/ {JDBC}
+2014-07-04 15:57:58,855 [main] INFO  (TorqueDocumentationTask#begin():171) - +------------------------------------------+
+2014-07-04 15:57:58,858 [main] INFO  (TorqueDocumentationTask#begin():172) - |                                          |
+2014-07-04 15:57:58,858 [main] INFO  (TorqueDocumentationTask#begin():173) - |                   Doc                    |
+2014-07-04 15:57:58,859 [main] INFO  (TorqueDocumentationTask#begin():181) - |                                          |
+2014-07-04 15:57:58,860 [main] INFO  (TorqueDocumentationTask#begin():182) - +------------------------------------------+
+2014-07-04 15:57:58,905 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2014-07-04 15:57:58,906 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = com.mysql.jdbc.Driver
+2014-07-04 15:57:58,907 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:mysql://localhost:3306/twitter
+2014-07-04 15:57:58,908 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = twitter
+2014-07-04 15:57:58,912 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():242) - 
+2014-07-04 15:57:58,913 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():243) - * * * * * * * * * * *
+2014-07-04 15:57:58,914 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():244) - *                   *
+2014-07-04 15:57:58,915 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():245) - *    Schema HTML    *
+2014-07-04 15:57:58,915 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():246) - *                   *
+2014-07-04 15:57:58,916 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():247) - * * * * * * * * * * *
+2014-07-04 15:57:59,123 [main] INFO  (DTDResolver#resolveEntity():197) - ...Resolving XML by database.dtd in same package
+2014-07-04 15:57:59,190 [main] INFO  (DfAbstractTexenTask#fireVelocityProcess():255) - generator.parse("doc/ControlDocument.vm", c);
+2014-07-04 15:57:59,246 [main] INFO  (Database#doEnableDocumentOutputDirectory():1180) - ...Setting up documentOutputDirectory: ./output/doc
+2014-07-04 15:57:59,256 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():62) - /=======================================
+2014-07-04 15:57:59,256 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():63) - ...Initializing additional primary keys.
+2014-07-04 15:57:59,258 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():88) - ==========/
+2014-07-04 15:57:59,260 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():62) - /=======================================
+2014-07-04 15:57:59,260 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():63) - ...Initializing additional unique keys.
+2014-07-04 15:57:59,262 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():83) - ==========/
+2014-07-04 15:57:59,264 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():67) - /=======================================
+2014-07-04 15:57:59,264 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():68) - ...Initializing additional foreign keys.
+2014-07-04 15:57:59,267 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():85) - ==========/
+2014-07-04 15:57:59,278 [main] INFO  (DfDocumentSelector#doLoadSchemaHistory():150) - ...Loading schema history
+2014-07-04 15:57:59,386 [main] INFO  (DfDocumentSelector#doLoadSchemaHistory():154) -  -> found history: count=28
+2014-07-04 15:57:59,651 [main] INFO  (DfRefreshResourceProcess#refreshResources():63) - ...Refreshing: [twitter]
+2014-07-04 15:57:59,663 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():150) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m00s805ms
+
+  DBFLUTE_CLIENT: {twitter}
+    database  = mysql
+    language  = java
+    container = seasar
+    package   = jp.bizreach.twitter.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = com.mysql.jdbc.Driver
+    url    = jdbc:mysql://localhost:3306/twitter
+    schema = {twitter.$$NoNameSchema$$ as main}
+    user   = twitter
+    props  = {}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = twitter
+_/_/_/_/_/_/_/_/_/_/ {Doc}
+2014-07-04 15:58:02,678 [main] INFO  (TorqueDataModelTask#begin():105) - +------------------------------------------+
+2014-07-04 15:58:02,681 [main] INFO  (TorqueDataModelTask#begin():106) - |                                          |
+2014-07-04 15:58:02,681 [main] INFO  (TorqueDataModelTask#begin():107) - |                 Generate                 |
+2014-07-04 15:58:02,682 [main] INFO  (TorqueDataModelTask#begin():108) - |                                          |
+2014-07-04 15:58:02,683 [main] INFO  (TorqueDataModelTask#begin():109) - +------------------------------------------+
+2014-07-04 15:58:02,720 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2014-07-04 15:58:02,721 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = com.mysql.jdbc.Driver
+2014-07-04 15:58:02,721 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:mysql://localhost:3306/twitter
+2014-07-04 15:58:02,722 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = twitter
+2014-07-04 15:58:02,741 [main] INFO  (TorqueDataModelTask#setupControlTemplate():160) - 
+2014-07-04 15:58:02,742 [main] INFO  (TorqueDataModelTask#setupControlTemplate():161) - ...Using Java control: om/ControlGenerateJava.vm
+2014-07-04 15:58:02,889 [main] INFO  (DTDResolver#resolveEntity():197) - ...Resolving XML by database.dtd in same package
+2014-07-04 15:58:02,951 [main] INFO  (DfAbstractTexenTask#fireVelocityProcess():255) - generator.parse("om/ControlGenerateJava.vm", c);
+2014-07-04 15:58:03,061 [main] INFO  (Database#doEnableGenerateOutputDirectory():1148) - ...Setting up generateOutputDirectory: ../src/main/java
+2014-07-04 15:58:03,073 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():62) - /=======================================
+2014-07-04 15:58:03,075 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():63) - ...Initializing additional primary keys.
+2014-07-04 15:58:03,078 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():88) - ==========/
+2014-07-04 15:58:03,080 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():62) - /=======================================
+2014-07-04 15:58:03,081 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():63) - ...Initializing additional unique keys.
+2014-07-04 15:58:03,084 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():83) - ==========/
+2014-07-04 15:58:03,088 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():67) - /=======================================
+2014-07-04 15:58:03,089 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():68) - ...Initializing additional foreign keys.
+2014-07-04 15:58:03,092 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():85) - ==========/
+2014-07-04 15:58:03,112 [main] INFO  (DfIncludeQueryInitializer#initializeIncludeQuery():59) - /=============================
+2014-07-04 15:58:03,113 [main] INFO  (DfIncludeQueryInitializer#initializeIncludeQuery():60) - ...Initializing include query.
+2014-07-04 15:58:03,114 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():83) - String
+2014-07-04 15:58:03,114 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():83) - Number
+2014-07-04 15:58:03,115 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():83) - Date
+2014-07-04 15:58:03,115 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():88) -   NotEqual -> []
+2014-07-04 15:58:03,116 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():88) -   InScope -> []
+2014-07-04 15:58:03,116 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():88) -   NotInScope -> []
+2014-07-04 15:58:03,117 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():83) - OrderBy
+2014-07-04 15:58:03,117 [main] INFO  (DfIncludeQueryInitializer#initializeIncludeQuery():62) - ========/
+2014-07-04 15:58:03,131 [main] INFO  (Database#info():2573) - public void parseAllCommon() {
+2014-07-04 15:58:03,133 [main] INFO  (Database#info():2573) -     parse('DBCurrent');
+2014-07-04 15:58:03,140 [main] INFO  (Database#info():2573) -     parse('DBFluteConfig');
+2014-07-04 15:58:03,163 [main] INFO  (Database#info():2573) -     parse('DBFluteInitializer');
+2014-07-04 15:58:03,170 [main] INFO  (Database#info():2573) -     parse('DBMetaInstanceHandler');
+2014-07-04 15:58:03,191 [main] INFO  (Database#info():2573) -     parse('EntityDefinedCommonColumn');
+2014-07-04 15:58:03,199 [main] INFO  (Database#info():2573) -     parse('ImplementedBehaviorSelector');
+2014-07-04 15:58:03,206 [main] INFO  (Database#info():2573) -     parse('ImplementedCommonColumnAutoSetupper');
+2014-07-04 15:58:03,214 [main] INFO  (Database#info():2573) -     parse('ImplementedInvokerAssistant');
+2014-07-04 15:58:03,217 [main] INFO  (Database#info():2573) -     parse('ImplementedSqlClauseCreator');
+2014-07-04 15:58:03,221 [main] INFO  (Database#info():2573) - }
+2014-07-04 15:58:03,221 [main] INFO  (Database#info():2573) - public void parseContainerConfig() {
+2014-07-04 15:58:03,223 [main] INFO  (Database#info():2573) -     parse('../resources/dbflute.dicon')
+2014-07-04 15:58:03,229 [main] INFO  (Database#info():2573) - }
+2014-07-04 15:58:03,234 [main] INFO  (DfOldClassHandler#info():1037) - public void deleteOldTableClass() {
+2014-07-04 15:58:03,256 [main] INFO  (DfOldClassHandler#info():1037) - }
+2014-07-04 15:58:03,257 [main] INFO  (Database#info():2573) - public void parseTableClass() {
+2014-07-04 15:58:03,258 [main] INFO  (Database#info():2573) -     parse('follow');
+2014-07-04 15:58:03,632 [main] INFO  (Database#info():2573) -     parse('login');
+2014-07-04 15:58:03,789 [main] INFO  (Database#info():2573) -     parse('member');
+2014-07-04 15:58:04,086 [main] INFO  (Database#info():2573) -     parse('member_security');
+2014-07-04 15:58:04,224 [main] INFO  (Database#info():2573) -     parse('member_withdraw');
+2014-07-04 15:58:04,336 [main] INFO  (Database#info():2573) -     parse('tweet');
+2014-07-04 15:58:04,446 [main] INFO  (Database#info():2573) - }
+2014-07-04 15:58:04,447 [main] INFO  (Database#info():2573) -  
+2014-07-04 15:58:04,477 [main] INFO  (DfRefreshResourceProcess#refreshResources():63) - ...Refreshing: [twitter]
+2014-07-04 15:58:04,485 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():150) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m01s802ms
+
+  DBFLUTE_CLIENT: {twitter}
+    database  = mysql
+    language  = java
+    container = seasar
+    package   = jp.bizreach.twitter.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = com.mysql.jdbc.Driver
+    url    = jdbc:mysql://localhost:3306/twitter
+    schema = {twitter.$$NoNameSchema$$ as main}
+    user   = twitter
+    props  = {}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = twitter
+_/_/_/_/_/_/_/_/_/_/ {Generate}
+2014-07-04 15:58:05,739 [main] INFO  (DfOutsideSqlTestTask#begin():72) - +------------------------------------------+
+2014-07-04 15:58:05,744 [main] INFO  (DfOutsideSqlTestTask#begin():73) - |                                          |
+2014-07-04 15:58:05,745 [main] INFO  (DfOutsideSqlTestTask#begin():74) - |              OutsideSqlTest              |
+2014-07-04 15:58:05,761 [main] INFO  (DfOutsideSqlTestTask#begin():75) - |                                          |
+2014-07-04 15:58:05,763 [main] INFO  (DfOutsideSqlTestTask#begin():76) - +------------------------------------------+
+2014-07-04 15:58:05,824 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2014-07-04 15:58:05,825 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = com.mysql.jdbc.Driver
+2014-07-04 15:58:05,826 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:mysql://localhost:3306/twitter
+2014-07-04 15:58:05,827 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = twitter
+2014-07-04 15:58:05,876 [main] INFO  (DfSqlFileFireMan#fire():90) - {Fired SQL}: success=0 failure=0 (in 0 files)
+2014-07-04 15:58:05,883 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():150) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m00s139ms
+
+  DBFLUTE_CLIENT: {twitter}
+    database  = mysql
+    language  = java
+    container = seasar
+    package   = jp.bizreach.twitter.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = com.mysql.jdbc.Driver
+    url    = jdbc:mysql://localhost:3306/twitter
+    schema = {twitter.$$NoNameSchema$$ as main}
+    user   = twitter
+    props  = {}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = twitter
+
+ {Checked SQL}
+_/_/_/_/_/_/_/_/_/_/ {OutsideSqlTest}
+2014-07-04 15:58:06,951 [main] INFO  (DfSql2EntityTask#begin():100) - +------------------------------------------+
+2014-07-04 15:58:06,953 [main] INFO  (DfSql2EntityTask#begin():101) - |                                          |
+2014-07-04 15:58:06,954 [main] INFO  (DfSql2EntityTask#begin():102) - |                Sql2Entity                |
+2014-07-04 15:58:06,954 [main] INFO  (DfSql2EntityTask#begin():103) - |                                          |
+2014-07-04 15:58:06,955 [main] INFO  (DfSql2EntityTask#begin():104) - +------------------------------------------+
+2014-07-04 15:58:06,994 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2014-07-04 15:58:06,994 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = com.mysql.jdbc.Driver
+2014-07-04 15:58:06,995 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:mysql://localhost:3306/twitter
+2014-07-04 15:58:06,995 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = twitter
+2014-07-04 15:58:07,012 [main] INFO  (DfSql2EntityTask#setupControlTemplate():170) - 
+2014-07-04 15:58:07,013 [main] INFO  (DfSql2EntityTask#setupControlTemplate():171) - ...Using Java control: om/ControlSql2EntityJava.vm
+2014-07-04 15:58:07,020 [main] INFO  (DTDResolver#resolveEntity():197) - ...Resolving XML by database.dtd in same package
+2014-07-04 15:58:07,072 [main] INFO  (DfSqlFileFireMan#fire():90) - {Fired SQL}: success=0 failure=0 (in 0 files)
+2014-07-04 15:58:07,220 [main] INFO  (DfSql2EntityTask#initControlContext():301) - 
+2014-07-04 15:58:07,221 [main] INFO  (DfSql2EntityTask#initControlContext():302) - ...Preparing generation of customize-entities and parameter-beans
+2014-07-04 15:58:07,221 [main] INFO  (DfSql2EntityTask#initControlContext():303) - * * * * * * * * * *
+2014-07-04 15:58:07,222 [main] INFO  (DfSql2EntityTask#initControlContext():304) - * CustomizeEntity *
+2014-07-04 15:58:07,222 [main] INFO  (DfSql2EntityTask#initControlContext():305) - * * * * * * * * * *
+2014-07-04 15:58:07,223 [main] INFO  (DfSql2EntityTask#showParameterBean():879) - * * * * * * * * *
+2014-07-04 15:58:07,223 [main] INFO  (DfSql2EntityTask#showParameterBean():880) - * ParameterBean *
+2014-07-04 15:58:07,224 [main] INFO  (DfSql2EntityTask#showParameterBean():881) - * * * * * * * * *
+2014-07-04 15:58:07,229 [main] INFO  (DfAbstractTexenTask#fireVelocityProcess():255) - generator.parse("om/ControlSql2EntityJava.vm", c);
+2014-07-04 15:58:07,335 [main] INFO  (Database#doEnableSql2EntityOutputDirectory():1164) - ...Setting up sql2EntityOutputDirectory: ../src/main/java
+2014-07-04 15:58:07,338 [main] INFO  (DfOldClassHandler#info():1037) - public void deleteOldCustomizeClass() {
+2014-07-04 15:58:07,349 [main] INFO  (DfOldClassHandler#info():1037) - }
+2014-07-04 15:58:07,350 [main] INFO  (Database#info():2573) - public void parseCustomizeEntity() {
+2014-07-04 15:58:07,353 [main] INFO  (Database#info():2573) - }
+2014-07-04 15:58:07,367 [main] INFO  (DfSql2EntityTask#showTargetSqlFileInformation():293) - 
+/- - - - - - - - - - - - - - - - - - - - - - - -
+Target SQL files: 0
+
+- - - - - - - - - -/
+2014-07-04 15:58:07,373 [main] INFO  (DfRefreshResourceProcess#refreshResources():63) - ...Refreshing: [twitter]
+2014-07-04 15:58:07,380 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():150) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m00s424ms
+
+  DBFLUTE_CLIENT: {twitter}
+    database  = mysql
+    language  = java
+    container = seasar
+    package   = jp.bizreach.twitter.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = com.mysql.jdbc.Driver
+    url    = jdbc:mysql://localhost:3306/twitter
+    schema = {twitter.$$NoNameSchema$$ as main}
+    user   = twitter
+    props  = {}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = twitter
+_/_/_/_/_/_/_/_/_/_/ {Sql2Entity}

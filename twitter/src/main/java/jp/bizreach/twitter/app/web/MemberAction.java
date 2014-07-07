@@ -51,6 +51,10 @@ public class MemberAction {
     //                                          Display Data
     //                                          ------------
     public ArrayList<TweetDto> timeLine = new ArrayList<>();
+    public ArrayList<MemberDto> followMemberList = new ArrayList<>();
+    public ArrayList<MemberDto> followerMemberList = new ArrayList<>();
+    public String noFollow;
+    public String noFollower;
     public String account;
     public String alreadyFollowingError;
     public String relationship;
@@ -70,7 +74,7 @@ public class MemberAction {
         Member member = memberBhv.selectEntity(memberCb);
         //        member.getBirthdate();
         //        member.getProfile();
-        account = memberForm.yourName;
+        account = (member.getAccountName() + "@" + member.getUserName());
         /* ツィートタイムラインを表示　*/
         TweetCB tweetCb = new TweetCB();
         tweetCb.setupSelect_Member();
@@ -79,7 +83,9 @@ public class MemberAction {
         ListResultBean<Tweet> tweetList = tweetBhv.selectList(tweetCb);
         for (Tweet tweet : tweetList) {
             TweetDto tweetDto = new TweetDto();
-            tweetDto.memberName = tweet.getMember().getUserName();
+            LOG.debug("****************************************" + tweet.getMember().getAccountName());
+            tweetDto.accountName = tweet.getMember().getAccountName();
+            tweetDto.username = tweet.getMember().getUserName();
             tweetDto.tweet = tweet.getTweet();
             tweetDto.tweetTime = tweet.getTweetDatetime();
             timeLine.add(tweetDto);
@@ -157,6 +163,43 @@ public class MemberAction {
         follow.setDelFlg("Y");
         followBhv.update(follow);
         return "/member/" + memberForm.yourName + "/?redirect=true";
+    }
+
+    /* このアカウントのフォロー・フォロワーの一覧を見る */
+    @Execute(validator = false, urlPattern = "{yourName}/followingMember")
+    public String followingMember() {
+        Member member = selectMember();
+        FollowCB followCB = new FollowCB();
+        followCB.setupSelect_MemberByYouId();
+        followCB.query().setMemberId_Equal(member.getMemberId());
+        followCB.query().setDelFlg_Equal("N");
+        ListResultBean<Follow> selectFollowList = followBhv.selectList(followCB);
+        for (Follow follow : selectFollowList) {
+            MemberDto memberDto = new MemberDto();
+            memberDto.userName = follow.getMemberByYouId().getUserName();
+            memberDto.accountName = follow.getMemberByYouId().getAccountName();
+            memberDto.memberId = follow.getYouId();
+            LOG.debug("***" + follow);
+            followMemberList.add(memberDto);
+        }
+        FollowCB followerCB = new FollowCB();
+        followerCB.setupSelect_MemberByMemberId();
+        followerCB.query().setYouId_Equal(member.getMemberId());
+        ListResultBean<Follow> followerList = followBhv.selectList(followerCB);
+        for (Follow follow : followerList) {
+            MemberDto memberDto = new MemberDto();
+            memberDto.userName = follow.getMemberByMemberId().getUserName();
+            memberDto.accountName = follow.getMemberByMemberId().getAccountName();
+            memberDto.memberId = follow.getMemberId();
+            followerMemberList.add(memberDto);
+        }
+        if (followMemberList.isEmpty()) {
+            noFollow = "Not following yet";
+        }
+        if (followerMemberList.isEmpty()) {
+            noFollower = "No followers yet";
+        }
+        return "/twitter/followlist.jsp";
     }
 
     private Member selectMember() {

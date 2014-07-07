@@ -21,20 +21,20 @@ public class FollowNss {
     //                                                                     ===============
     /**
      * With nested relation columns to select clause. <br />
-     * member by my YOU_ID, named 'memberByYouId'.
-     * @return The set-upper of more nested relation. {...with[nested-relation].with[more-nested-relation]} (NotNull)
-     */
-    public MemberNss withMemberByYouId() {
-        _query.doNss(new FollowCQ.NssCall() { public ConditionQuery qf() { return _query.queryMemberByYouId(); }});
-        return new MemberNss(_query.queryMemberByYouId());
-    }
-    /**
-     * With nested relation columns to select clause. <br />
      * member by my MEMBER_ID, named 'memberByMemberId'.
      * @return The set-upper of more nested relation. {...with[nested-relation].with[more-nested-relation]} (NotNull)
      */
     public MemberNss withMemberByMemberId() {
         _query.doNss(new FollowCQ.NssCall() { public ConditionQuery qf() { return _query.queryMemberByMemberId(); }});
         return new MemberNss(_query.queryMemberByMemberId());
+    }
+    /**
+     * With nested relation columns to select clause. <br />
+     * member by my YOU_ID, named 'memberByYouId'.
+     * @return The set-upper of more nested relation. {...with[nested-relation].with[more-nested-relation]} (NotNull)
+     */
+    public MemberNss withMemberByYouId() {
+        _query.doNss(new FollowCQ.NssCall() { public ConditionQuery qf() { return _query.queryMemberByYouId(); }});
+        return new MemberNss(_query.queryMemberByYouId());
     }
 }

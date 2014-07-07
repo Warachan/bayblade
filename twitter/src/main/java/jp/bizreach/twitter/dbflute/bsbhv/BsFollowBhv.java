@@ -42,7 +42,7 @@ import jp.bizreach.twitter.dbflute.cbean.*;
  *     
  *
  * [foreign property]
- *     memberByYouId, memberByMemberId
+ *     memberByMemberId, memberByYouId
  *
  * [referrer property]
  *     
@@ -233,6 +233,32 @@ public abstract class BsFollowBhv extends AbstractBehaviorWritable {
     protected FollowCB xprepareCBAsPK(Integer followId) {
         assertObjectNotNull("followId", followId);
         return newConditionBean().acceptPK(followId);
+    }
+
+    /**
+     * Select the entity by the unique-key value.
+     * @param youId : UQ+, NotNull, INT(10), FK to member. (NotNull)
+     * @param memberId : +UQ, IX, NotNull, INT(10), FK to member. (NotNull)
+     * @return The optional entity selected by the unique key. (NotNull: if no data, empty entity)
+     * @exception EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
+     * @exception EntityDuplicatedException When the entity has been duplicated.
+     * @exception SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
+     */
+    public OptionalEntity<Follow> selectByUniqueOf(Integer youId, Integer memberId) {
+        return facadeSelectByUniqueOf(youId, memberId);
+    }
+
+    protected OptionalEntity<Follow> facadeSelectByUniqueOf(Integer youId, Integer memberId) {
+        return doSelectByUniqueOf(youId, memberId, typeOfSelectedEntity());
+    }
+
+    protected <ENTITY extends Follow> OptionalEntity<ENTITY> doSelectByUniqueOf(Integer youId, Integer memberId, Class<ENTITY> tp) {
+        return createOptionalEntity(doSelectEntity(xprepareCBAsUniqueOf(youId, memberId), tp), youId, memberId);
+    }
+
+    protected FollowCB xprepareCBAsUniqueOf(Integer youId, Integer memberId) {
+        assertObjectNotNull("youId", youId);assertObjectNotNull("memberId", memberId);
+        return newConditionBean().acceptUniqueOf(youId, memberId);
     }
 
     // ===================================================================================
@@ -464,16 +490,16 @@ public abstract class BsFollowBhv extends AbstractBehaviorWritable {
      * @param followList The list of follow. (NotNull, EmptyAllowed)
      * @return The list of foreign table. (NotNull, EmptyAllowed, NotNullElement)
      */
-    public List<Member> pulloutMemberByYouId(List<Follow> followList)
-    { return helpPulloutInternally(followList, "memberByYouId"); }
+    public List<Member> pulloutMemberByMemberId(List<Follow> followList)
+    { return helpPulloutInternally(followList, "memberByMemberId"); }
 
     /**
      * Pull out the list of foreign table 'Member'.
      * @param followList The list of follow. (NotNull, EmptyAllowed)
      * @return The list of foreign table. (NotNull, EmptyAllowed, NotNullElement)
      */
-    public List<Member> pulloutMemberByMemberId(List<Follow> followList)
-    { return helpPulloutInternally(followList, "memberByMemberId"); }
+    public List<Member> pulloutMemberByYouId(List<Follow> followList)
+    { return helpPulloutInternally(followList, "memberByYouId"); }
 
     // ===================================================================================
     //                                                                      Extract Column
