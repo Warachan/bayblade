@@ -379,14 +379,14 @@ public class BsMemberCQ extends AbstractBsMemberCQ {
 
     /** 
      * Add order-by as ascend. <br />
-     * RECRUITING_NUMBER: {INT(10)}
+     * RECRUITING_NUMBER: {VARCHAR(20)}
      * @return this. (NotNull)
      */
     public BsMemberCQ addOrderBy_RecruitingNumber_Asc() { regOBA("RECRUITING_NUMBER"); return this; }
 
     /**
      * Add order-by as descend. <br />
-     * RECRUITING_NUMBER: {INT(10)}
+     * RECRUITING_NUMBER: {VARCHAR(20)}
      * @return this. (NotNull)
      */
     public BsMemberCQ addOrderBy_RecruitingNumber_Desc() { regOBD("RECRUITING_NUMBER"); return this; }

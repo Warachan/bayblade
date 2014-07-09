@@ -69,8 +69,6 @@ public class SignupAction {
     public String missingError;
     protected String digestedPass;
 
-    // public ArrayList<Integer> yearList = new ArrayList<>();
-
     // TODO mayuko.sakaba signup.jspにて、なぜゲッターメソッドがなかったのにValue=""をいれたら直ったか調べること。
     // TODO mayuko.sakaba indexActionForm に対する定義が見つかりません →　これなに？
     // ===================================================================================
@@ -169,6 +167,15 @@ public class SignupAction {
         if (signupForm.accountName == "") {
             errors.add("accountName", new ActionMessage("名前が未入力です。", false));
         }
+        if (signupForm.accountName.length() > 20) {
+            errors.add("accountName", new ActionMessage("名前が長すぎます。20文字以内で記入してください。", false));
+        }
+        String wordPtn = "[\\\"\\\':;,]+";
+        Pattern ptnCheck = Pattern.compile(wordPtn);
+        Matcher wordMatcher = ptnCheck.matcher(signupForm.accountName);
+        if (signupForm.accountName == "" || wordMatcher.matches()) {
+            errors.add("accountName", new ActionMessage("不正な文字が含まれています。", false));
+        }
         /* username */
         String usernamePtn = "[\\w\\.\\-]+";
         Pattern ptn2 = Pattern.compile(usernamePtn);
@@ -185,10 +192,10 @@ public class SignupAction {
             if (nameCount > 0) {
                 errors.add("username", new ActionMessage("このユーザ名はすでに使われています。", false));
             }
+            if (signupForm.username.length() < 5 || signupForm.username.length() > 100) {
+                errors.add("username", new ActionMessage("ユーザ名は5文字以上、100文字以内で入力してください。", false));
+            }
         }
-        //        if (signupForm.username.length() < 5) {
-        //            errors.add("username", new ActionMessage("Username should be more than 5 characters.", false));
-        //        }
         /* status */
         if (signupForm.status == "") {
             errors.add("status", new ActionMessage("どちらか選択してください。", false));
@@ -196,6 +203,15 @@ public class SignupAction {
         /* group */
         if (signupForm.groupName == "") {
             errors.add("groupName", new ActionMessage("所属企業か所属大学名が未入力です。", false));
+        }
+        if (signupForm.groupName.length() > 100) {
+            errors.add("groupName", new ActionMessage("記入事項が長すぎます。", false));
+        }
+        String wordPtn2 = "[\\\"\\\':;,]+";
+        Pattern ptnCheck2 = Pattern.compile(wordPtn2);
+        Matcher wordMatcher2 = ptnCheck2.matcher(signupForm.groupName);
+        if (signupForm.groupName == "" || wordMatcher2.matches()) {
+            errors.add("groupName", new ActionMessage("不正な文字が含まれています。", false));
         }
         /*　password */
         String pswdPtn = "[\\w]+";

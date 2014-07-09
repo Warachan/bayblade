@@ -7,23 +7,24 @@
 	<link href='http://fonts.googleapis.com/css?family=Libre+Baskerville' rel='stylesheet' type='text/css'>
 </head>
 <div class = "wrapper">
-	<div class="header">
+		<div class ="header">
+		<p>Pocketer</p>
 	</div>
 	<ul class = "global-navigation">
-		<li><a href= "http:/twitter/profile/">Profile</a></li>
-		<li id="home"><a href= "http:/twitter/home/">Home</a></li>
-		<li id="search">
-			<s:form action="/home/">
-				<html:text property="searchWord" size ="30" value="" styleClass = "searchBox"/>
-				<s:submit property="search" value="Search" styleClass = "searchButton"/>
-			</s:form>
-		</li>
-		<li id="logout">
-			<s:form action="/logout/"  styleClass = "logoutForm">
-				<s:submit property="index" value="Logout" styleClass = "logoutButton"/>
-			</s:form>
-		</li>
-	</ul>
+			<li><a id="profile" href= "http:/twitter/profile/">Profile</a></li>
+			<li id="home"><a id="homeButton" href= "http:/twitter/home/">Home</a></li>
+				<li id="search">
+					<s:form action="/home/">
+						<html:text property="searchWord" size ="30" value="" styleClass = "searchBox"/>
+						<s:submit property="search" value="Search" styleClass = "searchButton"/>
+					</s:form>
+				</li>
+				<li id="logout">
+					<s:form action="/logout/"  styleClass = "logoutForm">
+						<s:submit property="index" value="Logout" styleClass = "logoutButton"/>
+					</s:form>
+				</li>
+		</ul>
 <body>
 	<div class = "member-main">
 			<div class = "member-top">
@@ -38,7 +39,7 @@
 									</c:when>
 									<c:otherwise>
 										<input type="hidden" name="yourName" value="${f:h(yourName)}"/>
-										<s:link href="/member/${f:h(yourName)}/unfollow"styleClass = "followLink">unfollow?</s:link>
+										<s:link href="/member/${f:h(yourName)}/unfollow" styleClass = "followLink">unfollow?</s:link>
 									</c:otherwise>
 								</c:choose>
 								<div class = "myProfile">
@@ -96,6 +97,9 @@
 					</div>
 				</div>
 		</div>
+		<div class="footer">
+			<p>©2014 Annie Wara Pocket</p>
+	</div>
 	</body>
 </div>
 </html>

@@ -11,6 +11,6 @@ public class ProfileForm {
     public String updateEmail;
     public String updateStatus;
     public Integer graduationYear;
-    public Integer recruitingNumber;
+    public String recruitingNumber;
     public String interestedIndustry;
 }

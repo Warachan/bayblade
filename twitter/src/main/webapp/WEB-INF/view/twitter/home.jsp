@@ -8,13 +8,12 @@
 </head>
 <body>
 <div class = "wrapper">
-	<!--<div class ="header">
-		<p>Connect with your fellow job hunters!</p>
-	</div>-->
+	<div class ="header">
+		<p>Pocketer</p>
+	</div>
 		<ul class = "global-navigation">
-			<li><a href= "http:/twitter/profile/">Profile</a></li>
-			<li id="home"><a href= "http:/twitter/home/">Home</a></li>
-			<!--<span class ="search"><s:form action="/home/" styleClass = "searchForm">-->
+			<li><a id="profile" href= "http:/twitter/profile/">Profile</a></li>
+			<li id="home"><a id="homeButton" href= "http:/twitter/home/">Home</a></li>
 				<li id="search">
 					<s:form action="/home/">
 						<html:text property="searchWord" size ="30" value="" styleClass = "searchBox"/>
@@ -72,7 +71,7 @@
 			<s:form action ="/home/">
 				<div class ="main-bottom-tweetForm">
 				<div class = "main-bottom-tweetBox">
-					<html:textarea property ="inputTweet"  cols="50" rows="6" styleClass="tweetBox"/><br>
+					<html:textarea property ="inputTweet"  cols="50" rows="6" styleClass="tweetBox" value=""/><br>
 					<html:errors property="inputTweet"/>
 				</div>
 					<s:submit property="tweet" value="Tweet" styleClass="tweetButton"/>
@@ -83,8 +82,8 @@
 				<!--${f:h (items.accountName)}@${f:h(items.username)} ${items.tweetTime}<br>-->
 					<li id="tweetList">
 					<dl>
-						<dt id="name">${f:h(items.tweetTime)}  <s:link href="/member/${f:h(items.userName)}">${f:h(items.accountName)}@${f:h(items.username)}</s:link></dt>
-						<dd id="tweet">${items.tweet}</dd>
+						<dt id="name">${f:h(items.tweetTime)}  <s:link href="/member/${f:h(items.userName)}">${f:h(items.accountName)}</s:link>@${f:h(items.username)}</dt>
+						<dd id="tweet">${f:h(items.tweet)}</dd>
 					</dl>
 					</li>
 						</c:forEach>
@@ -105,9 +104,11 @@
 					</s:form>
 					</c:forEach>
 				</ul>
-			</s:form>
 		</div>
 	</div>
 </div>
+	<div class="footer">
+			<p>©2014 Annie Wara Pocket</p>
+	</div>
 </body>
 </html>

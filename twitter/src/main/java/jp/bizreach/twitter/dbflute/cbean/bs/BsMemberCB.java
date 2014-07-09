@@ -426,7 +426,7 @@ public class BsMemberCB extends AbstractConditionBean {
          */
         public HpSpecifiedColumn columnUpdTrace() { return doColumn("UPD_TRACE"); }
         /**
-         * RECRUITING_NUMBER: {INT(10)}
+         * RECRUITING_NUMBER: {VARCHAR(20)}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnRecruitingNumber() { return doColumn("RECRUITING_NUMBER"); }

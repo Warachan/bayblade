@@ -96,7 +96,7 @@ public class MemberDbm extends AbstractDBMeta {
     }
     public static class EpgRecruitingNumber implements PropertyGateway {
         public Object read(Entity et) { return ((Member)et).getRecruitingNumber(); }
-        public void write(Entity et, Object vl) { ((Member)et).setRecruitingNumber(cti(vl)); }
+        public void write(Entity et, Object vl) { ((Member)et).setRecruitingNumber((String)vl); }
     }
     public static class EpgInterestedIndustry implements PropertyGateway {
         public Object read(Entity et) { return ((Member)et).getInterestedIndustry(); }
@@ -162,7 +162,7 @@ public class MemberDbm extends AbstractDBMeta {
     protected final ColumnInfo _columnUpdDatetime = cci("UPD_DATETIME", "UPD_DATETIME", null, null, java.sql.Timestamp.class, "updDatetime", null, false, false, true, "DATETIME", 19, 0, null, false, null, null, null, null, null);
     protected final ColumnInfo _columnInsTrace = cci("INS_TRACE", "INS_TRACE", null, null, String.class, "insTrace", null, false, false, true, "VARCHAR", 256, 0, null, false, null, null, null, null, null);
     protected final ColumnInfo _columnUpdTrace = cci("UPD_TRACE", "UPD_TRACE", null, null, String.class, "updTrace", null, false, false, true, "VARCHAR", 256, 0, null, false, null, null, null, null, null);
-    protected final ColumnInfo _columnRecruitingNumber = cci("RECRUITING_NUMBER", "RECRUITING_NUMBER", null, null, Integer.class, "recruitingNumber", null, false, false, false, "INT", 10, 0, null, false, null, null, null, null, null);
+    protected final ColumnInfo _columnRecruitingNumber = cci("RECRUITING_NUMBER", "RECRUITING_NUMBER", null, null, String.class, "recruitingNumber", null, false, false, false, "VARCHAR", 20, 0, null, false, null, null, null, null, null);
     protected final ColumnInfo _columnInterestedIndustry = cci("INTERESTED_INDUSTRY", "INTERESTED_INDUSTRY", null, null, String.class, "interestedIndustry", null, false, false, false, "VARCHAR", 100, 0, null, false, null, null, null, null, null);
     protected final ColumnInfo _columnGraduationYear = cci("GRADUATION_YEAR", "GRADUATION_YEAR", null, null, Integer.class, "graduationYear", null, false, false, false, "INT", 10, 0, null, false, null, null, null, null, null);
     protected final ColumnInfo _columnBirthdate = cci("BIRTHDATE", "BIRTHDATE", null, null, java.util.Date.class, "birthdate", null, false, false, false, "DATE", 10, 0, null, false, null, null, null, null, null);
@@ -219,7 +219,7 @@ public class MemberDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnUpdTrace() { return _columnUpdTrace; }
     /**
-     * RECRUITING_NUMBER: {INT(10)}
+     * RECRUITING_NUMBER: {VARCHAR(20)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnRecruitingNumber() { return _columnRecruitingNumber; }

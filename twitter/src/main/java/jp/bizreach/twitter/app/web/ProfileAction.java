@@ -81,6 +81,11 @@ public class ProfileAction {
 
     @Execute(validator = false)
     public String index() {
+        if (sessionDto.status.equals(1)) {
+            status = new Boolean(true);
+        } else if (sessionDto.status.equals(2)) {
+            status = new Boolean(false);
+        }
         return "/profile.jsp";
     }
 
@@ -97,6 +102,8 @@ public class ProfileAction {
         /* validationに引っかからなかったら、プロフィール編集する */
         Member member = new Member();
         member.setMemberId(sessionDto.myId);
+        member.setMemberStatusCode(sessionDto.status);
+        LOG.debug("**************************************************" + sessionDto.status);
         if (email != "") {
             member.setEmailAddress(email);
             memberBhv.update(member);
@@ -111,17 +118,6 @@ public class ProfileAction {
             member.setGroupName(profileForm.updateGroup);
             memberBhv.update(member);
         }
-        if (profileForm.updateStatus != "") {
-            if (profileForm.updateStatus.equals("student")) {
-                member.setMemberStatusCode(1);
-                memberBhv.update(member);
-                sessionDto.status = member.getMemberStatusCode();
-            } else if (profileForm.updateStatus.equals("company")) {
-                member.setMemberStatusCode(2);
-                memberBhv.update(member);
-                sessionDto.status = member.getMemberStatusCode();
-            }
-        }
         if (password != "") {
             MemberSecurity security = new MemberSecurity();
             security.setMemberId(sessionDto.myId);
@@ -130,21 +126,20 @@ public class ProfileAction {
             LOG.debug("***" + sessionDto.myId);
         }
         if (sessionDto.status.equals(1)) {
-            status = new Boolean(true);
-        } else if (sessionDto.status.equals(2)) {
-            status = new Boolean(false);
+            if (profileForm.interestedIndustry != "") {
+                member.setInterestedIndustry(profileForm.interestedIndustry);
+                memberBhv.update(member);
+            }
+            if (profileForm.graduationYear != null) {
+                member.setGraduationYear(profileForm.graduationYear);
+                memberBhv.update(member);
+            }
         }
-        if (profileForm.interestedIndustry != "") {
-            member.setInterestedIndustry(profileForm.interestedIndustry);
-            memberBhv.update(member);
-        }
-        if (profileForm.graduationYear != null) {
-            member.setGraduationYear(profileForm.graduationYear);
-            memberBhv.update(member);
-        }
-        if (profileForm.recruitingNumber != null) {
-            member.setRecruitingNumber(profileForm.recruitingNumber);
-            memberBhv.update(member);
+        if (sessionDto.status.equals(2)) {
+            if (profileForm.recruitingNumber != "") {
+                member.setRecruitingNumber(profileForm.recruitingNumber);
+                memberBhv.update(member);
+            }
         }
         return "/profile/?redirect=true";
     }
@@ -171,23 +166,41 @@ public class ProfileAction {
             }
         }
         /* accountName */
-        // TODO mayuko.sakaba 入力に許される文字列の指定がまだです。
+        // TODO mayuko.sakaba 入力に許される文字列の指定がかなりあいまいです。
         if (profileForm.updateName != "") {
-            if (profileForm.updateName.length() > 100) {
+            if (profileForm.updateName.length() > 20) {
                 errors.add("updateName", new ActionMessage("このアカウント名は長すぎます。", false));
             }
-        }
-        /* recruitingNumber */
-        if (sessionDto.status.equals(2)) {
-            if (profileForm.recruitingNumber > 1000) {
-                errors.add("recrutingNumber", new ActionMessage("人数が多すぎます。", false));
+            String wordPtn = "[\\\"\\\':;,]+";
+            Pattern ptnCheck = Pattern.compile(wordPtn);
+            Matcher wordMatcher = ptnCheck.matcher(profileForm.updateName);
+            if (profileForm.updateName == "" || wordMatcher.matches()) {
+                errors.add("updatetName", new ActionMessage("不正な文字が含まれています。", false));
             }
         }
         /* interestedIndustry */
         if (sessionDto.status.equals(1)) {
-            if (profileForm.interestedIndustry.length() > 100) {
-                errors.add("interestedIndustry", new ActionMessage("文字制限以上入力されました。", false));
+            if (profileForm.interestedIndustry != null) {
+                if (profileForm.interestedIndustry.length() > 50) {
+                    errors.add("interestedIndustry", new ActionMessage("文字制限以上入力されました。", false));
+                }
+                String wordPtn3 = "[\\\"\\\':;,]+";
+                Pattern ptnCheck3 = Pattern.compile(wordPtn3);
+                Matcher wordMatcher3 = ptnCheck3.matcher(profileForm.updateGroup);
+                if (profileForm.interestedIndustry == "" || wordMatcher3.matches()) {
+                    errors.add("interestedIndustry", new ActionMessage("不正な文字が含まれています。", false));
+                }
             }
+        }
+        /* group name */
+        if (profileForm.updateGroup.length() > 100) {
+            errors.add("updateGroup", new ActionMessage("所属企業名、もしくは学校名が長すぎます", false));
+        }
+        String wordPtn2 = "[\\\"\\\':;,]+";
+        Pattern ptnCheck2 = Pattern.compile(wordPtn2);
+        Matcher wordMatcher2 = ptnCheck2.matcher(profileForm.updateGroup);
+        if (profileForm.updateGroup == "" || wordMatcher2.matches()) {
+            errors.add("updateGroup", new ActionMessage("不正な文字が含まれています。", false));
         }
         /*　password */
         String pswdPtn = "[\\w]+";

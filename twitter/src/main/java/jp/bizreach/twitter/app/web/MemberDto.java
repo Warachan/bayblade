@@ -11,8 +11,7 @@ public class MemberDto {
     public String accountName;
     public String status;
     public String groupName;
-    public String profile;
-    public Integer acceptedCompany;
+    public String interestedIndustry;
     public Integer recruitingNumber;
 
     public String getUserName() {

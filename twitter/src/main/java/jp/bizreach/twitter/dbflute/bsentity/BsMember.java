@@ -54,7 +54,7 @@ import jp.bizreach.twitter.dbflute.exentity.*;
  * java.sql.Timestamp updDatetime = entity.getUpdDatetime();
  * String insTrace = entity.getInsTrace();
  * String updTrace = entity.getUpdTrace();
- * Integer recruitingNumber = entity.getRecruitingNumber();
+ * String recruitingNumber = entity.getRecruitingNumber();
  * String interestedIndustry = entity.getInterestedIndustry();
  * Integer graduationYear = entity.getGraduationYear();
  * java.util.Date birthdate = entity.getBirthdate();
@@ -122,8 +122,8 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     /** UPD_TRACE: {NotNull, VARCHAR(256)} */
     protected String _updTrace;
 
-    /** RECRUITING_NUMBER: {INT(10)} */
-    protected Integer _recruitingNumber;
+    /** RECRUITING_NUMBER: {VARCHAR(20)} */
+    protected String _recruitingNumber;
 
     /** INTERESTED_INDUSTRY: {VARCHAR(100)} */
     protected String _interestedIndustry;
@@ -732,20 +732,20 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [get] RECRUITING_NUMBER: {INT(10)} <br />
+     * [get] RECRUITING_NUMBER: {VARCHAR(20)} <br />
      * 採用数 : 企業の採用予定数
      * @return The value of the column 'RECRUITING_NUMBER'. (NullAllowed even if selected: for no constraint)
      */
-    public Integer getRecruitingNumber() {
+    public String getRecruitingNumber() {
         return _recruitingNumber;
     }
 
     /**
-     * [set] RECRUITING_NUMBER: {INT(10)} <br />
+     * [set] RECRUITING_NUMBER: {VARCHAR(20)} <br />
      * 採用数 : 企業の採用予定数
      * @param recruitingNumber The value of the column 'RECRUITING_NUMBER'. (NullAllowed: null update allowed for no constraint)
      */
-    public void setRecruitingNumber(Integer recruitingNumber) {
+    public void setRecruitingNumber(String recruitingNumber) {
         __modifiedProperties.addPropertyName("recruitingNumber");
         _recruitingNumber = recruitingNumber;
     }

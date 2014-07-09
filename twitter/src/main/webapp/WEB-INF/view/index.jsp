@@ -7,7 +7,8 @@
 	<link href='http://fonts.googleapis.com/css?family=Libre+Baskerville' rel='stylesheet' type='text/css'>
 </head>
 <div class="wrapper">
-	<div class ="header">
+		<div class ="header">
+		<p>Pocketer</p>
 	</div>
 <body>
 <div class ="top-main">
@@ -38,6 +39,9 @@
 	</s:form>
 </div>
 		</div>
+		<div class="footer">
+			<p>©2014 Annie Wara Pocket</p>
+	</div>
 </body>
 </div>
 </html>

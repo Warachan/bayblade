@@ -1720,117 +1720,141 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     protected void regUpdTrace(ConditionKey ky, Object vl) { regQ(ky, vl, getCValueUpdTrace(), "UPD_TRACE"); }
     protected abstract ConditionValue getCValueUpdTrace();
-    
+
     /**
-     * Equal(=). And NullIgnored, OnlyOnceRegistered. <br />
-     * RECRUITING_NUMBER: {INT(10)}
-     * @param recruitingNumber The value of recruitingNumber as equal. (NullAllowed: if null, no condition)
+     * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
+     * RECRUITING_NUMBER: {VARCHAR(20)}
+     * @param recruitingNumber The value of recruitingNumber as equal. (NullAllowed: if null (or empty), no condition)
      */
-    public void setRecruitingNumber_Equal(Integer recruitingNumber) {
-        doSetRecruitingNumber_Equal(recruitingNumber);
+    public void setRecruitingNumber_Equal(String recruitingNumber) {
+        doSetRecruitingNumber_Equal(fRES(recruitingNumber));
     }
 
-    protected void doSetRecruitingNumber_Equal(Integer recruitingNumber) {
+    protected void doSetRecruitingNumber_Equal(String recruitingNumber) {
         regRecruitingNumber(CK_EQ, recruitingNumber);
     }
 
     /**
-     * NotEqual(&lt;&gt;). And NullIgnored, OnlyOnceRegistered. <br />
-     * RECRUITING_NUMBER: {INT(10)}
-     * @param recruitingNumber The value of recruitingNumber as notEqual. (NullAllowed: if null, no condition)
+     * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
+     * RECRUITING_NUMBER: {VARCHAR(20)}
+     * @param recruitingNumber The value of recruitingNumber as notEqual. (NullAllowed: if null (or empty), no condition)
      */
-    public void setRecruitingNumber_NotEqual(Integer recruitingNumber) {
-        doSetRecruitingNumber_NotEqual(recruitingNumber);
+    public void setRecruitingNumber_NotEqual(String recruitingNumber) {
+        doSetRecruitingNumber_NotEqual(fRES(recruitingNumber));
     }
 
-    protected void doSetRecruitingNumber_NotEqual(Integer recruitingNumber) {
+    protected void doSetRecruitingNumber_NotEqual(String recruitingNumber) {
         regRecruitingNumber(CK_NES, recruitingNumber);
     }
 
     /**
-     * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br />
-     * RECRUITING_NUMBER: {INT(10)}
-     * @param recruitingNumber The value of recruitingNumber as greaterThan. (NullAllowed: if null, no condition)
+     * GreaterThan(&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
+     * RECRUITING_NUMBER: {VARCHAR(20)}
+     * @param recruitingNumber The value of recruitingNumber as greaterThan. (NullAllowed: if null (or empty), no condition)
      */
-    public void setRecruitingNumber_GreaterThan(Integer recruitingNumber) {
-        regRecruitingNumber(CK_GT, recruitingNumber);
+    public void setRecruitingNumber_GreaterThan(String recruitingNumber) {
+        regRecruitingNumber(CK_GT, fRES(recruitingNumber));
     }
 
     /**
-     * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br />
-     * RECRUITING_NUMBER: {INT(10)}
-     * @param recruitingNumber The value of recruitingNumber as lessThan. (NullAllowed: if null, no condition)
+     * LessThan(&lt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
+     * RECRUITING_NUMBER: {VARCHAR(20)}
+     * @param recruitingNumber The value of recruitingNumber as lessThan. (NullAllowed: if null (or empty), no condition)
      */
-    public void setRecruitingNumber_LessThan(Integer recruitingNumber) {
-        regRecruitingNumber(CK_LT, recruitingNumber);
+    public void setRecruitingNumber_LessThan(String recruitingNumber) {
+        regRecruitingNumber(CK_LT, fRES(recruitingNumber));
     }
 
     /**
-     * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br />
-     * RECRUITING_NUMBER: {INT(10)}
-     * @param recruitingNumber The value of recruitingNumber as greaterEqual. (NullAllowed: if null, no condition)
+     * GreaterEqual(&gt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
+     * RECRUITING_NUMBER: {VARCHAR(20)}
+     * @param recruitingNumber The value of recruitingNumber as greaterEqual. (NullAllowed: if null (or empty), no condition)
      */
-    public void setRecruitingNumber_GreaterEqual(Integer recruitingNumber) {
-        regRecruitingNumber(CK_GE, recruitingNumber);
+    public void setRecruitingNumber_GreaterEqual(String recruitingNumber) {
+        regRecruitingNumber(CK_GE, fRES(recruitingNumber));
     }
 
     /**
-     * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br />
-     * RECRUITING_NUMBER: {INT(10)}
-     * @param recruitingNumber The value of recruitingNumber as lessEqual. (NullAllowed: if null, no condition)
+     * LessEqual(&lt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
+     * RECRUITING_NUMBER: {VARCHAR(20)}
+     * @param recruitingNumber The value of recruitingNumber as lessEqual. (NullAllowed: if null (or empty), no condition)
      */
-    public void setRecruitingNumber_LessEqual(Integer recruitingNumber) {
-        regRecruitingNumber(CK_LE, recruitingNumber);
+    public void setRecruitingNumber_LessEqual(String recruitingNumber) {
+        regRecruitingNumber(CK_LE, fRES(recruitingNumber));
     }
 
     /**
-     * RangeOf with various options. (versatile) <br />
-     * {(default) minNumber &lt;= column &lt;= maxNumber} <br />
-     * And NullIgnored, OnlyOnceRegistered. <br />
-     * RECRUITING_NUMBER: {INT(10)}
-     * @param minNumber The min number of recruitingNumber. (NullAllowed: if null, no from-condition)
-     * @param maxNumber The max number of recruitingNumber. (NullAllowed: if null, no to-condition)
-     * @param rangeOfOption The option of range-of. (NotNull)
-     */
-    public void setRecruitingNumber_RangeOf(Integer minNumber, Integer maxNumber, RangeOfOption rangeOfOption) {
-        regROO(minNumber, maxNumber, getCValueRecruitingNumber(), "RECRUITING_NUMBER", rangeOfOption);
-    }
-
-    /**
-     * InScope {in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br />
-     * RECRUITING_NUMBER: {INT(10)}
+     * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br />
+     * RECRUITING_NUMBER: {VARCHAR(20)}
      * @param recruitingNumberList The collection of recruitingNumber as inScope. (NullAllowed: if null (or empty), no condition)
      */
-    public void setRecruitingNumber_InScope(Collection<Integer> recruitingNumberList) {
+    public void setRecruitingNumber_InScope(Collection<String> recruitingNumberList) {
         doSetRecruitingNumber_InScope(recruitingNumberList);
     }
 
-    protected void doSetRecruitingNumber_InScope(Collection<Integer> recruitingNumberList) {
+    public void doSetRecruitingNumber_InScope(Collection<String> recruitingNumberList) {
         regINS(CK_INS, cTL(recruitingNumberList), getCValueRecruitingNumber(), "RECRUITING_NUMBER");
     }
 
     /**
-     * NotInScope {not in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br />
-     * RECRUITING_NUMBER: {INT(10)}
+     * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br />
+     * RECRUITING_NUMBER: {VARCHAR(20)}
      * @param recruitingNumberList The collection of recruitingNumber as notInScope. (NullAllowed: if null (or empty), no condition)
      */
-    public void setRecruitingNumber_NotInScope(Collection<Integer> recruitingNumberList) {
+    public void setRecruitingNumber_NotInScope(Collection<String> recruitingNumberList) {
         doSetRecruitingNumber_NotInScope(recruitingNumberList);
     }
 
-    protected void doSetRecruitingNumber_NotInScope(Collection<Integer> recruitingNumberList) {
+    public void doSetRecruitingNumber_NotInScope(Collection<String> recruitingNumberList) {
         regINS(CK_NINS, cTL(recruitingNumberList), getCValueRecruitingNumber(), "RECRUITING_NUMBER");
     }
 
     /**
+     * PrefixSearch {like 'xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br />
+     * RECRUITING_NUMBER: {VARCHAR(20)}
+     * @param recruitingNumber The value of recruitingNumber as prefixSearch. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setRecruitingNumber_PrefixSearch(String recruitingNumber) {
+        setRecruitingNumber_LikeSearch(recruitingNumber, cLSOP());
+    }
+
+    /**
+     * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br />
+     * RECRUITING_NUMBER: {VARCHAR(20)} <br />
+     * <pre>e.g. setRecruitingNumber_LikeSearch("xxx", new <span style="color: #DD4747">LikeSearchOption</span>().likeContain());</pre>
+     * @param recruitingNumber The value of recruitingNumber as likeSearch. (NullAllowed: if null (or empty), no condition)
+     * @param likeSearchOption The option of like-search. (NotNull)
+     */
+    public void setRecruitingNumber_LikeSearch(String recruitingNumber, LikeSearchOption likeSearchOption) {
+        regLSQ(CK_LS, fRES(recruitingNumber), getCValueRecruitingNumber(), "RECRUITING_NUMBER", likeSearchOption);
+    }
+
+    /**
+     * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br />
+     * And NullOrEmptyIgnored, SeveralRegistered. <br />
+     * RECRUITING_NUMBER: {VARCHAR(20)}
+     * @param recruitingNumber The value of recruitingNumber as notLikeSearch. (NullAllowed: if null (or empty), no condition)
+     * @param likeSearchOption The option of not-like-search. (NotNull)
+     */
+    public void setRecruitingNumber_NotLikeSearch(String recruitingNumber, LikeSearchOption likeSearchOption) {
+        regLSQ(CK_NLS, fRES(recruitingNumber), getCValueRecruitingNumber(), "RECRUITING_NUMBER", likeSearchOption);
+    }
+
+    /**
      * IsNull {is null}. And OnlyOnceRegistered. <br />
-     * RECRUITING_NUMBER: {INT(10)}
+     * RECRUITING_NUMBER: {VARCHAR(20)}
      */
     public void setRecruitingNumber_IsNull() { regRecruitingNumber(CK_ISN, DOBJ); }
 
     /**
+     * IsNullOrEmpty {is null or empty}. And OnlyOnceRegistered. <br />
+     * RECRUITING_NUMBER: {VARCHAR(20)}
+     */
+    public void setRecruitingNumber_IsNullOrEmpty() { regRecruitingNumber(CK_ISNOE, DOBJ); }
+
+    /**
      * IsNotNull {is not null}. And OnlyOnceRegistered. <br />
-     * RECRUITING_NUMBER: {INT(10)}
+     * RECRUITING_NUMBER: {VARCHAR(20)}
      */
     public void setRecruitingNumber_IsNotNull() { regRecruitingNumber(CK_ISNN, DOBJ); }
 

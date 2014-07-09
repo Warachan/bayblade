@@ -7,21 +7,24 @@
 	<link href='http://fonts.googleapis.com/css?family=Libre+Baskerville' rel='stylesheet' type='text/css'>
 </head>
 <div class = "wrapper">
+		<div class ="header">
+		<p>Pocketer</p>
+	</div>
 	<ul class = "global-navigation">
-		<li><a href= "http:/twitter/profile/">Profile</a></li>
-		<li id="home"><a href= "http:/twitter/home/">Home</a></li>
-		<li id="search">
-			<s:form action="/home/">
-				<html:text property="searchWord" size ="30" value="" styleClass = "searchBox"/>
-				<s:submit property="search" value="Search" styleClass = "searchButton"/>
-			</s:form>
-		</li>
-		<li id="logout">
-			<s:form action="/logout/"  styleClass = "logoutForm">
-				<s:submit property="index" value="Logout" styleClass = "logoutButton"/>
-			</s:form>
-		</li>
-	</ul>
+			<li><a id="profile" href= "http:/twitter/profile/">Profile</a></li>
+			<li id="home"><a id="homeButton" href= "http:/twitter/home/">Home</a></li>
+				<li id="search">
+					<s:form action="/home/">
+						<html:text property="searchWord" size ="30" value="" styleClass = "searchBox"/>
+						<s:submit property="search" value="Search" styleClass = "searchButton"/>
+					</s:form>
+				</li>
+				<li id="logout">
+					<s:form action="/logout/"  styleClass = "logoutForm">
+						<s:submit property="index" value="Logout" styleClass = "logoutButton"/>
+					</s:form>
+				</li>
+		</ul>
 <body>
 	<div class="profile-main">
 		<div class="profile-box">
@@ -42,21 +45,13 @@
 					</div>
 				</div>
 			<div class="profile">
-				<div class="status">
-					<h4>School or Company</h4>
-					<html:select property="updateStatus">
-    　						<html:option value=""></html:option>
-    　						<html:option value="student">Student</html:option>
-    　						<html:option value="company">Company</html:option>
-					</html:select>
-				</div>
 				<div class = "group">
 					<h4>School/Company Name</h4>
 					<html:text property="updateGroup"  size="60" styleClass = "textBox"/><br>
 				</div>
 				<div class = "recrutingNumber">
 					<c:choose>
-						<c:when test="status">
+						<c:when test="${status}">
 							<div class = "graduationYear">
 								<h4>Graduating Year</h4>
 								<html:select property="graduationYear">
@@ -80,7 +75,16 @@
 						<c:otherwise>
 							<div class ="recruit">
 							<h4>Recruiting Number</h4>
-							<html:text property="recruitingNumber" size ="60"/>
+							<html:select property="recruitingNumber">
+    　									<dl><html:option value=""></html:option><dl>
+    　									<dl><html:option value="10人未満">10人未満</html:option><dl>
+    　									<dl><html:option value="10～29人">10～29人</html:option><dl>
+    　									<dl><html:option value="30~49人">30~49人</html:option><dl>
+    　									<dl><html:option value="50~99人">50~99人</html:option><dl>
+    　									<dl><html:option value="100~299人">100~299人</html:option><dl>
+    　									<dl><html:option value="300~499人">300~499人</html:option><dl>
+    　									<dl><html:option value="500人以上">500人以上</html:option><dl>
+							</html:select>
 							<html:errors property="recruitingNumber"/>
 							</div>
 						</c:otherwise>
@@ -99,6 +103,9 @@
 				<s:submit property="editProfile" styleClass="register"/><br>
 			</s:form>
 		</div>
+	</div>
+	<div class="footer">
+			<p>©2014 Annie Wara Pocket</p>
 	</div>
 </body>
 </div>

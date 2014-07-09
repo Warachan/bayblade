@@ -4,6 +4,8 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.annotation.Resource;
 
@@ -67,11 +69,10 @@ public class HomeAction {
     public ArrayList<MemberDto> candidateList = new ArrayList<>();
     public String nameResult;
     public String tweetResult;
-    public String profile;
     public Integer graduationYear;
     public Integer status;
     public String interestedIndustry;
-    public Integer recruitingNumber;
+    public String recruitingNumber;
     public String groupName;
     public String noMatchUsers;
     public String noMatchTweets;
@@ -102,15 +103,14 @@ public class HomeAction {
         Member me = memberBhv.selectEntity(myCb);
         LOG.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + me.getAccountName());
         status = me.getMemberStatusCode();
-        profile = me.getProfile();
         groupName = me.getGroupName();
-        //interestedIndustry = me.getAcceptedCompany();
-        recruitingNumber = me.getRecruitingNumber();
-        graduationYear = me.getGraduationYear();
         if (status.equals(1)) {
             recruitStatus = new Boolean(true);
+            interestedIndustry = me.getInterestedIndustry();
+            graduationYear = me.getGraduationYear();
         } else if (status.equals(2)) {
             recruitStatus = new Boolean(false);
+            recruitingNumber = me.getRecruitingNumber();
         }
 
         /* フォローしている相手を検索　*/
@@ -233,23 +233,17 @@ public class HomeAction {
         return "/home/?redirect = true";
     }
 
-    /* ツィートについてのvalidation */
-    public ActionMessages validate() {
-        ActionMessages errors = new ActionMessages();
-        if (homeForm.inputTweet.length() >= 140) {
-            errors.add("inputTweet", new ActionMessage("140文字以上は入力できません。", false));
-        }
-        if (homeForm.inputTweet == "") {
-            errors.add("inputTweet", new ActionMessage("なにも入力されていませんよー！", false));
-        }
-        return errors;
-    }
-
     @Execute(validator = false)
     public String search() {
         /* 検索ワードが含まれるyユーザーを検索　*/
         MemberCB memberCB = new MemberCB();
-        memberCB.query().setUserName_LikeSearch(homeForm.searchWord, new LikeSearchOption().likeContain());
+        memberCB.orScopeQuery(new OrQuery<MemberCB>() {
+            @Override
+            public void query(MemberCB orCB) {
+                orCB.query().setAccountName_LikeSearch(homeForm.searchWord, new LikeSearchOption().likeContain());
+                orCB.query().setUserName_LikeSearch(homeForm.searchWord, new LikeSearchOption().likeContain());
+            }
+        });
         memberCB.query().setMemberId_NotEqual(sessionDto.myId);
         memberCB.query().addOrderBy_MemberId_Asc();
         LOG.debug("***" + homeForm.searchWord);
@@ -260,10 +254,7 @@ public class HomeAction {
             memberDto.userName = member.getUserName();
             memberDto.memberId = member.getMemberId();
             LOG.debug("***" + sessionDto.myId + "," + member.getMemberId());
-            nameResult = member.getUserName();
-            String userName = member.getUserName();
             candidateList.add(memberDto);
-            LOG.debug("***" + nameResult);
         }
         /* 検索ワードが含まれるツィートを検索 */
         TweetCB tweetCB = new TweetCB();
@@ -276,7 +267,7 @@ public class HomeAction {
             LOG.debug("***" + sessionDto.myId);
             TweetDto tweetDto = new TweetDto();
             tweetDto.tweet = tweet.getTweet();
-            tweetDto.accountName = tweet.getMember().getUpdTrace();
+            tweetDto.accountName = tweet.getMember().getAccountName();
             tweetDto.username = tweet.getMember().getUserName();
             tweetDto.tweetTime = tweet.getTweetDatetime();
             resultList.add(tweetDto);
@@ -290,9 +281,27 @@ public class HomeAction {
             noMatchTweets = "検索ワードと一致するツィートはありません。";
             LOG.debug("hit2" + resultList);
         }
-        if (homeForm.searchWord == "") {
+        String searchWordPtn = "[\\\"\\\':;]+";
+        Pattern ptn = Pattern.compile(searchWordPtn);
+        Matcher searchWordMatcher = ptn.matcher(homeForm.searchWord);
+        if (homeForm.searchWord == "" || searchWordMatcher.matches()) {
             return "/home/?redirect=true";
         }
         return "/twitter/searchresult.jsp";
+    }
+
+    // ===================================================================================
+    //                                                                          Validation
+    //                                                                          ==========
+    public ActionMessages validate() {
+        /* ツィートについてのvalidation */
+        ActionMessages errors = new ActionMessages();
+        if (homeForm.inputTweet.length() >= 140) {
+            errors.add("inputTweet", new ActionMessage("140文字以上は入力できません。", false));
+        }
+        if (homeForm.inputTweet == "") {
+            errors.add("inputTweet", new ActionMessage("なにも入力されていませんよー！", false));
+        }
+        return errors;
     }
 }

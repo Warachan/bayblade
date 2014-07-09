@@ -1,4 +1,46 @@
 map:{
+    ; 2014/07/09 14:00:08 = map:{
+        ; diffDate = 2014/07/09 14:00:08
+        ; tableDiff = map:{
+            ; member = map:{
+                ; tableName = member
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; RECRUITING_NUMBER = map:{
+                        ; columnName = RECRUITING_NUMBER
+                        ; diffType = CHANGE
+                        ; columnSizeDiff = map:{
+                            ; next = 20
+                            ; previous = 4
+                        }
+                    }
+                }
+            }
+        }
+    }
+    ; 2014/07/09 13:14:23 = map:{
+        ; diffDate = 2014/07/09 13:14:23
+        ; tableDiff = map:{
+            ; member = map:{
+                ; tableName = member
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; RECRUITING_NUMBER = map:{
+                        ; columnName = RECRUITING_NUMBER
+                        ; diffType = CHANGE
+                        ; dbTypeDiff = map:{
+                            ; next = VARCHAR
+                            ; previous = INT
+                        }
+                        ; columnSizeDiff = map:{
+                            ; next = 4
+                            ; previous = 10
+                        }
+                    }
+                }
+            }
+        }
+    }
     ; 2014/07/07 19:17:20 = map:{
         ; diffDate = 2014/07/07 19:17:20
         ; tableDiff = map:{

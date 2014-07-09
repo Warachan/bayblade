@@ -94,8 +94,8 @@
             name="INS_TRACE" required="true" size="256" type="VARCHAR"/>
         <column comment="UPD トレース" dbType="VARCHAR" javaType="String"
             name="UPD_TRACE" required="true" size="256" type="VARCHAR"/>
-        <column comment="採用数 : 企業の採用予定数" dbType="INT" javaType="Integer"
-            name="RECRUITING_NUMBER" size="10" type="INTEGER"/>
+        <column comment="採用数 : 企業の採用予定数" dbType="VARCHAR"
+            javaType="String" name="RECRUITING_NUMBER" size="20" type="VARCHAR"/>
         <column comment="希望業界 : 学生が希望している業界。" dbType="VARCHAR"
             javaType="String" name="INTERESTED_INDUSTRY" size="100" type="VARCHAR"/>
         <column comment="卒業年 : 卒業年もしくは卒業予定年" dbType="INT"

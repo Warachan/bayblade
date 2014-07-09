@@ -61,7 +61,7 @@ public class MemberAction {
     public String profile;
     public Integer status;
     public String interestedIndustry;
-    public Integer recruitingNumber;
+    public String recruitingNumber;
     public String relationship;
     public boolean followStatus;
     public boolean recruitStatus;
@@ -77,17 +77,20 @@ public class MemberAction {
         LOG.debug("nameCheck:" + memberForm.yourName);
         memberCb.query().setUserName_Equal(memberForm.yourName);
         Member member = memberBhv.selectEntity(memberCb);
+        if (member.getMemberId().equals(sessionDto.myId)) {
+            return "/home/?redirect=true";
+        }
         status = member.getMemberStatusCode();
         profile = member.getProfile();
         groupName = member.getGroupName();
-        interestedIndustry = member.getInterestedIndustry();
-        recruitingNumber = member.getRecruitingNumber();
-        graduationYear = member.getGraduationYear();
         LOG.debug("*******************************************************************************");
         if (status.equals(1)) {
             recruitStatus = new Boolean(true);
+            interestedIndustry = member.getInterestedIndustry();
+            graduationYear = member.getGraduationYear();
         } else if (status.equals(2)) {
             recruitStatus = new Boolean(false);
+            recruitingNumber = member.getRecruitingNumber();
         }
         account = (member.getAccountName() + "@" + member.getUserName());
         /* ツィートタイムラインを表示　*/

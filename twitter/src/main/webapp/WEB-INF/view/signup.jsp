@@ -7,8 +7,11 @@
 	<link href='http://fonts.googleapis.com/css?family=Libre+Baskerville' rel='stylesheet' type='text/css'>
 </head>
 <div class = "wrapper">
+	<div class ="header">
+		<p>Pocketer</p>
+	</div>
 	<ul class = "global-navigation">
-			<li id="loginButton"><a href= "http:/twitter/">Login</a></li>
+			<li id="loginButton"><a id ="signupToLogin" href= "http:/twitter/">Login</a></li>
 	</ul>
 <body>
 	<div class="signup-main">
@@ -64,6 +67,9 @@
 				<s:submit property="Regester" styleClass="register"/><br>
 	</div>
 	</s:form>
+	</div>
+	<div class="footer">
+			<p>©2014 Annie Wara Pocket</p>
 	</div>
 </body>
 </div>
