@@ -6,51 +6,54 @@
 	<link rel="stylesheet" type="text/css" href="${f:url('/css/twitterHome.css')}" />
 	<link href='http://fonts.googleapis.com/css?family=Libre+Baskerville' rel='stylesheet' type='text/css'>
 </head>
-<!--<h1>Follow/Follower</h1>-->
 <div class = "wrapper">
 	<div class="header">
 	</div>
 	<ul class = "global-navigation">
-			<li><a href= "http:/twitter/profile/">Profile</a></li>
-			<li><a href= "http:/twitter/home/">Home</a></li>
-			<span><s:form action="/home/" styleClass = "searchForm">
+		<li><a href= "http:/twitter/profile/">Profile</a></li>
+		<li id="home"><a href= "http:/twitter/home/">Home</a></li>
+		<li id="search">
+			<s:form action="/home/">
 				<html:text property="searchWord" size ="30" value="" styleClass = "searchBox"/>
 				<s:submit property="search" value="Search" styleClass = "searchButton"/>
-			</s:form></span>
-			<span class><s:form action="/logout/"  styleClass = "logoutForm">
+			</s:form>
+		</li>
+		<li id="logout">
+			<s:form action="/logout/"  styleClass = "logoutForm">
 				<s:submit property="index" value="Logout" styleClass = "logoutButton"/>
-			</s:form></span>
-		</ul>
+			</s:form>
+		</li>
+	</ul>
 <body>
 	<div class ="follow-main">
-	<s:form action ="/home/">
-		<div class = "following">
-		<h3>Following</h3>
-			<div class ="followingList">
-			${noFollow}
-			<ul>
-			<c:forEach items="${followMemberList}" var="memberName" varStatus="status">
-				<dl>
-				<dt><s:link href="/member/${f:h(memberName.username)}">${f:h(memberName.accountName)}</s:link>@${f:h(memberName.userName)}</dt>
-				<dl>
-			</c:forEach>
-			</ul>
+		<s:form action ="/home/" >
+			<div class = "following">
+			<h3>Following</h3>
+				<div class ="followingList">
+					<ul>
+							<div class="error">${noFollow}</div>
+						<c:forEach items="${followMemberList}" var="memberName" varStatus="status">
+							<dl>
+								<dt id="name"><s:link href="/member/${f:h(memberName.username)}">${f:h(memberName.accountName)}</s:link>@${f:h(memberName.userName)}</dt>
+							<dl>
+						</c:forEach>
+					</ul>
+				</div>
 			</div>
-		</div>
-		<div class ="follower">
-		<h3>Follower</h3>
-			<div class = "followerList">
-			${noFollower}
-			<ul>
-				<c:forEach items="${followerMemberList}" var="followerName" varStatus="status">
-				<dl>
-				<dt><s:link href="/member/${f:h(followerName.username)}">${f:h(followerName.accountName)}</s:link>@${f:h(followerName.userName)}</dt>
-				</dl>
-				</c:forEach>
-			</ul>
+			<div class ="follower">
+			<h3>Follower</h3>
+				<div class = "followerList">
+					<ul>
+							<div class="error">${noFollower}</div>
+						<c:forEach items="${followerMemberList}" var="followerName" varStatus="status">
+							<dl>
+								<dt id="name"><s:link href="/member/${f:h(followerName.username)}">${f:h(followerName.accountName)}</s:link>@${f:h(followerName.userName)}</dt>
+							</dl>
+						</c:forEach>
+					</ul>
+				</div>
 			</div>
-		</div>
-	</s:form>
+		</s:form>
 	</div>
 </body>
 </div>

@@ -73,7 +73,6 @@ public class MemberAction {
     @Execute(validator = false, urlPattern = "{yourName}")
     public String index() {
         /*　アカウント名を表示する */
-        // TODO mayuko.sakaba  このアカウントのユーザーのプロフィールを表示できるようにする。
         MemberCB memberCb = new MemberCB();
         LOG.debug("nameCheck:" + memberForm.yourName);
         memberCb.query().setUserName_Equal(memberForm.yourName);
@@ -84,6 +83,7 @@ public class MemberAction {
         interestedIndustry = member.getInterestedIndustry();
         recruitingNumber = member.getRecruitingNumber();
         graduationYear = member.getGraduationYear();
+        LOG.debug("*******************************************************************************");
         if (status.equals(1)) {
             recruitStatus = new Boolean(true);
         } else if (status.equals(2)) {
@@ -98,7 +98,6 @@ public class MemberAction {
         ListResultBean<Tweet> tweetList = tweetBhv.selectList(tweetCb);
         for (Tweet tweet : tweetList) {
             TweetDto tweetDto = new TweetDto();
-            LOG.debug("****************************************" + tweet.getMember().getAccountName());
             tweetDto.accountName = tweet.getMember().getAccountName();
             tweetDto.username = tweet.getMember().getUserName();
             tweetDto.tweet = tweet.getTweet();

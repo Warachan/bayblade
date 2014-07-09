@@ -8,9 +8,9 @@
 </head>
 <body>
 <div class = "wrapper">
-	<div class="header">
-		<!--<h1>Tweet your everyday life!</h1>-->
-	</div>
+	<!--<div class ="header">
+		<p>Connect with your fellow job hunters!</p>
+	</div>-->
 		<ul class = "global-navigation">
 			<li><a href= "http:/twitter/profile/">Profile</a></li>
 			<li id="home"><a href= "http:/twitter/home/">Home</a></li>
@@ -36,12 +36,20 @@
 					<div class = "myProfile">
 						<c:choose>
 							<c:when test="${recruitStatus}">
-								所属大学:${f:h(groupName)} （卒業年： ${f:h(graduationYear)}年）<br>
-								希望業界:${f:h(interestedIndustry)}
+								<ul>
+									<li id="tweetList">
+										<dt id="status">所属大学:${f:h(groupName)} （卒業年： ${f:h(graduationYear)}年）</dt>
+										<dt id="status">希望業界:${f:h(interestedIndustry)}</dt>
+									</li>
+								</ul>
 							</c:when>
 							<c:otherwise>
-								所属企業：  ${f:h(groupName)}<br>
-								予定採用人数: ${f:h(recruitingNumber)}
+								<ul>
+									<li id="tweetList">
+										<dt id="status">所属企業：  ${f:h(groupName)}</dt>
+										<dt id="status">予定採用人数: ${f:h(recruitingNumber)}</dt>
+									</li>
+								</ul>
 							</c:otherwise>
 						</c:choose>
 					</div>
@@ -50,10 +58,10 @@
 			<figure class ="main-top-eyecatch">
 			<c:choose>
 				<c:when test="${recruitStatus}">
-						<img src="../img/syuukatu.jpg">
+						<img src="/twitter/img/syuukatu.jpg">
 				</c:when>
 				<c:otherwise>
-						<img src="../img/kigyou.jpg">
+						<img src="/twitter/img/kigyou.jpg">
 				</c:otherwise>
 			</c:choose>
 			</figure>
@@ -64,7 +72,7 @@
 			<s:form action ="/home/">
 				<div class ="main-bottom-tweetForm">
 				<div class = "main-bottom-tweetBox">
-					<html:textarea property ="inputTweet"  cols="35" rows="4" styleClass="tweetBox"/><br>
+					<html:textarea property ="inputTweet"  cols="50" rows="6" styleClass="tweetBox"/><br>
 					<html:errors property="inputTweet"/>
 				</div>
 					<s:submit property="tweet" value="Tweet" styleClass="tweetButton"/>
@@ -73,9 +81,9 @@
 					<ul>
 						<c:forEach items="${timeLine}" var="items" varStatus="status">
 				<!--${f:h (items.accountName)}@${f:h(items.username)} ${items.tweetTime}<br>-->
-					<li>
+					<li id="tweetList">
 					<dl>
-						<dt>${f:h(items.tweetTime)}  <s:link href="/member/${f:h(items.userName)}">${f:h(items.accountName)}@${f:h(items.username)}</s:link></dt>
+						<dt id="name">${f:h(items.tweetTime)}  <s:link href="/member/${f:h(items.userName)}">${f:h(items.accountName)}@${f:h(items.username)}</s:link></dt>
 						<dd id="tweet">${items.tweet}</dd>
 					</dl>
 					</li>
@@ -90,7 +98,7 @@
 					<c:forEach items="${followSuggestionList}" var="suggest" varStatus="status">
 					<s:form action ="/home/">
 						<dl>
-							<dt><s:link href="/member/${f:h(suggest.userName)}">${f:h(suggest.accountName)}</s:link>@${f:h(suggest.username)}</dt>
+							<dt id="name"><s:link href="/member/${f:h(suggest.userName)}">${f:h(suggest.accountName)}</s:link>@${f:h(suggest.username)}</dt>
 								<input type="hidden" name="suggestFollowId" value="${f:h(suggest.memberId)}"/>
 							<dt><s:submit property="addFollow" value="Follow?" styleClass = "suggestFollow"/></dt>
 						</dl>

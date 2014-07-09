@@ -10,24 +10,27 @@
 	<div class="header">
 	</div>
 	<ul class = "global-navigation">
-			<li><a href= "http:/twitter/profile/">Profile</a></li>
-			<li><a href= "http:/twitter/home/">Home</a></li>
-			<span><s:form action="/home/" styleClass = "searchForm">
+		<li><a href= "http:/twitter/profile/">Profile</a></li>
+		<li id="home"><a href= "http:/twitter/home/">Home</a></li>
+		<li id="search">
+			<s:form action="/home/">
 				<html:text property="searchWord" size ="30" value="" styleClass = "searchBox"/>
 				<s:submit property="search" value="Search" styleClass = "searchButton"/>
-			</s:form></span>
-			<span class><s:form action="/logout/"  styleClass = "logoutForm">
+			</s:form>
+		</li>
+		<li id="logout">
+			<s:form action="/logout/"  styleClass = "logoutForm">
 				<s:submit property="index" value="Logout" styleClass = "logoutButton"/>
-			</s:form></span>
-		</ul>
-	<body>
-			<div class = "member-main">
-				<div class = "main-top">
-					<s:form action="/member/" styleClass="followOrUnfollow">
+			</s:form>
+		</li>
+	</ul>
+<body>
+	<div class = "member-main">
+			<div class = "member-top">
 					<div class = "member-top-profile">
+						<s:form action="/member/" styleClass="followOrUnfollow">
 						<h2> ${(account)}'s Page</h2>
-							<span class="followStatus">
-							${f:h(relationship)}</span>
+							<span class="followStatus">${f:h(relationship)}</span>
 								<c:choose>
 									<c:when test="${f:h(followStatus)}">
 										<input type="hidden" name="yourName" value="${f:h(yourName)}"/>
@@ -41,41 +44,49 @@
 								<div class = "myProfile">
 									<s:link href="/member/${f:h(yourName)}/followingMember" styleClass="memberFollowStatus">Following and Followers</s:link><br>
 										<div class ="recruitStatus">
-										<c:choose>
-											<c:when test="${recruitStatus}">
-												所属大学：  ${f:h(groupName)}　（卒業年：${f:h(graduationYear)}年）<br>
-												希望業界: ${f:h(interestedIndustry)}
-											</c:when>
-											<c:otherwise>
-												所属企業:${f:h(groupName)}<br>
-												採用予定人数:${f:h(recruitingNumber)}
-											</c:otherwise>
-										</c:choose>
+											<c:choose>
+												<c:when test="${recruitStatus}">
+													<ul>
+														<li id="tweetList">
+															<dt id="status">所属大学:${f:h(groupName)} （卒業年： ${f:h(graduationYear)}年）</dt>
+															<dt id="status">希望業界:${f:h(interestedIndustry)}</dt>
+														</li>
+													</ul>
+												</c:when>
+												<c:otherwise>
+													<ul>
+														<li id="tweetList">
+															<dt id="status">所属企業：  ${f:h(groupName)}</dt>
+															<dt id="status">予定採用人数: ${f:h(recruitingNumber)}</dt>
+														</li>
+													</ul>
+												</c:otherwise>
+											</c:choose>
 										</div>
 								</div>
 						</s:form>
 					</div>
-					<figure class ="main-top-eyecatch">
+					<figure class ="member-top-eyecatch">
 							<c:choose>
 								<c:when test="${recruitStatus}">
-									<img src="../img/syuukatu.jpg">
+									<img src="/twitter/img/syuukatu.jpg">
 								</c:when>
 								<c:otherwise>
-									<img src="../img/kigyou.jpg">
+									<img src="/twitter/img/kigyou.jpg">
 								</c:otherwise>
 							</c:choose>
 					</figure>
-					</div>
-					<div class ="fixBlock"></div>
-				<div class="main-bottom">
+				</div>
+				<div class ="fixBlock"></div>
+				<div class="member-bottom">
 					<div class="main-bottom-timeline">
 						<s:form action="/member/" styleClass="memberTimeline">
 							<h3>Tweets</h3>
 								<ul>
 									<c:forEach items="${timeLine}" var="items" varStatus="status">
-										<li>
+										<li id="tweetList">
 										<dl>
-											<dt>${f:h(items.tweetTime)} ${f:h(items.accountName)}@${f:h(items.username)}</dt>
+											<dt id="name">${f:h(items.tweetTime)} ${f:h(items.accountName)}@${f:h(items.username)}</dt>
 											<dd id="tweet">${f:h(items.tweet)}</dd>
 										</dl>
 										</li>
@@ -84,7 +95,7 @@
 						</s:form>
 					</div>
 				</div>
-			</div>
+		</div>
 	</body>
 </div>
 </html>

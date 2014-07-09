@@ -9,18 +9,24 @@
 <div class = "wrapper">
 	<div class="header">
 	</div>
-	<ul class = "global-navigation">
-			<li><a href= "http:/twitter/profile/">Profile</a></li>
-			<li><a href= "http:/twitter/home/">Home</a></li>
-			<span><s:form action="/home/" styleClass = "searchForm">
+		<ul class = "global-navigation">
+		<li><a href= "http:/twitter/profile/">Profile</a></li>
+		<li id="home"><a href= "http:/twitter/home/">Home</a></li>
+		<li id="search">
+			<s:form action="/home/">
 				<html:text property="searchWord" size ="30" value="" styleClass = "searchBox"/>
 				<s:submit property="search" value="Search" styleClass = "searchButton"/>
-			</s:form></span>
-			<span class><s:form action="/logout/"  styleClass = "logoutForm">
+			</s:form>
+		</li>
+		<li id="logout">
+			<s:form action="/logout/"  styleClass = "logoutForm">
 				<s:submit property="index" value="Logout" styleClass = "logoutButton"/>
-			</s:form></span>
+			</s:form>
+		</li>
 	</ul>
 <body>
+	<div class = "searchResultPage">
+		<div class="searchResultBox">
 	<div class = "member-main">
 			<s:form action="/home/" styleClass="searchResult">
 			<div class = "userList">
@@ -28,7 +34,7 @@
 					${f:h(noMatchUsers)}
 					<c:forEach items="${candidateList}" var="items" varStatus="status">
 						<dl>
-							<dt><s:link href="/member/${f:h(items.userName)}">${f:h(items.accountName)}</s:link>@${f:h(items.userName)}</dt>
+							<dt id="name"><s:link href="/member/${f:h(items.userName)}">${f:h(items.accountName)}</s:link>@${f:h(items.userName)}</dt>
 						</dl>
        				</c:forEach>
 			</div>
@@ -41,14 +47,16 @@
 				<s:form action="/member/" styleClass="memberTimeline">
 						<c:forEach items="${resultList}" var="items" varStatus="status">
 					<dl>
-						<dt>${f:h(items.tweetTime)}  <s:link href = "/member/${f:h(items.username)}">${f:h(items.accountName)}@${f:h(items.username)} </s:link></dt>
-						<dd>${f:h(items.tweet)}</dd>
+						<dt id="name">${f:h(items.tweetTime)}  <s:link href = "/member/${f:h(items.username)}">${f:h(items.accountName)}@${f:h(items.username)} </s:link></dt>
+						<dd id="tweet">${f:h(items.tweet)}</dd>
 					</dl>
 						</c:forEach>
 				</s:form>
 			</div>
 	</div>
 	</s:form>
+	</div>
+	</div>
 	</div>
 </body>
 </div>

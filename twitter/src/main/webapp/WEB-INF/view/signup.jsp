@@ -8,7 +8,7 @@
 </head>
 <div class = "wrapper">
 	<ul class = "global-navigation">
-			<li><a href= "http:/twitter/">Login</a></li>
+			<li id="loginButton"><a href= "http:/twitter/">Login</a></li>
 	</ul>
 <body>
 	<div class="signup-main">
