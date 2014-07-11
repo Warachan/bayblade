@@ -8,6 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import jp.bizreach.twitter.dbflute.cbean.FollowCB;
 import jp.bizreach.twitter.dbflute.cbean.MemberCB;
@@ -24,11 +25,13 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
+import org.apache.struts.util.TokenProcessor;
 import org.seasar.dbflute.cbean.ListResultBean;
 import org.seasar.dbflute.cbean.OrQuery;
 import org.seasar.dbflute.cbean.coption.LikeSearchOption;
 import org.seasar.struts.annotation.ActionForm;
 import org.seasar.struts.annotation.Execute;
+import org.seasar.struts.exception.ActionMessagesException;
 
 /**
  * @author mayuko.sakaba
@@ -60,6 +63,8 @@ public class HomeAction {
     protected MessageBhv messageBhv;
     @Resource
     protected SessionDto sessionDto;
+    @Resource
+    protected HttpServletRequest request;
 
     // -----------------------------------------------------
     //                                          Display Data
@@ -90,8 +95,6 @@ public class HomeAction {
 
     // 【時間があればtodo】
     // TODO mayuko.sakaba 検索でcolumQueryを使うか判断する→久保さんに確認
-    // TODO mayuko.sakaba 他の会員検索を別のactionクラスに分ける
-    // TODO mayuko.sakaba 誕生日登録がまだですよー！
     // TODO mayuko.sakaba MM,ddとすると、月や日付が一桁のときに0始まりで表示されてしまう。(→JSONを使う？、そもそも表示する必要があるのか？)
 
     // ===================================================================================
@@ -99,6 +102,8 @@ public class HomeAction {
     //                                                                             =======
     @Execute(validator = false)
     public String index() {
+        /* トランザクショントークン */
+        TokenProcessor.getInstance().saveToken(request);
         /* 自分の名前を表示させる（確認用）後に削除 */
         account = sessionDto.accountName + "@" + sessionDto.username;
         /*  自分のプロフィールを取得　*/
@@ -106,7 +111,7 @@ public class HomeAction {
         myCb.setupSelect_MemberStatus();
         myCb.query().setMemberId_Equal(sessionDto.myId);
         Member me = memberBhv.selectEntity(myCb);
-        status = me.getMemberStatusCode();
+        status = sessionDto.status;
         groupName = me.getGroupName();
         if (status.equals(1)) {
             recruitStatus = new Boolean(true);
@@ -116,7 +121,6 @@ public class HomeAction {
             recruitStatus = new Boolean(false);
             recruitingNumber = me.getRecruitingNumber();
         }
-
         /* フォローしている相手を検索　*/
         selectFollowList();
         /* フォローする候補者を自動で表示 */
@@ -133,29 +137,6 @@ public class HomeAction {
             followSuggestionList.add(memberDto);
         }
         showTimeline();
-        //        /* 自分の受信メッセージ一覧を表示する　*/
-        //        MessageCB messageCb = new MessageCB();
-        //        messageCb.setupSelect_MemberByReceiverId();
-        //        messageCb.query().setReceiverId_Equal(sessionDto.myId);
-        //        ListResultBean<Message> messageList = messageBhv.selectList(messageCb);
-        //        for (Message message : messageList) {
-        //            MessageDto messageDto = new MessageDto();
-        //            messageDto.receiver = message.getMemberByReceiverId().getAccountName();
-        //            messageDto.identifier = message.getMemberByReceiverId().getUserName();
-        //            receiveMessageList.add(messageDto);
-        //        }
-        //        /* 自分の受信メッセージ一覧を表示する　*/
-        //        MessageCB messageCb2 = new MessageCB();
-        //        messageCb2.setupSelect_MemberBySenderId();
-        //        messageCb2.query().setSenderId_Equal(sessionDto.myId);
-        //        ListResultBean<Message> messageList2 = messageBhv.selectList(messageCb);
-        //        for (Message message : messageList2) {
-        //            MessageDto messageDto = new MessageDto();
-        //            messageDto.receiver = message.getMemberBySenderId().getAccountName();
-        //            messageDto.identifier = message.getMemberBySenderId().getUserName();
-        //            receiveMessageList.add(messageDto);
-        //        }
-        // message action のほうで一覧をだしては？
         return "/twitter/home.jsp";
     }
 
@@ -243,6 +224,9 @@ public class HomeAction {
     @Execute(validate = "validate", input = "/home/?redirect =true")
     /* ツィートと、ツィート時間を新しく追加 */
     public String tweet() {
+        if (!TokenProcessor.getInstance().isTokenValid(request, true)) {
+            throw new ActionMessagesException("不正なリクエストです", false);
+        }
         Date date = new Date();
         Timestamp tweetTime = new Timestamp(date.getTime());
         String formatTweetTime = new SimpleDateFormat("MM月dd日 HH時mm分").format(tweetTime);

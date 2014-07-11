@@ -48,7 +48,7 @@
 				<s:form action="/member/" styleClass="memberTimeline">
 						<c:forEach items="${resultList}" var="items" varStatus="status">
 					<dl>
-						<dt id="name">${f:h(items.tweetTime)}  <s:link href = "/member/${f:h(items.username)}">${f:h(items.accountName)}@${f:h(items.username)} </s:link></dt>
+						<dt id="tweetInf">${f:h(items.tweetTime)}  <s:link href = "/member/${f:h(items.username)}">${f:h(items.accountName)}@${f:h(items.username)} </s:link></dt>
 						<dd id="tweet">${f:h(items.tweet)}</dd>
 					</dl>
 						</c:forEach>

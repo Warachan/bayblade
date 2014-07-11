@@ -37,7 +37,7 @@
 							<c:when test="${recruitStatus}">
 								<ul>
 									<li id="tweetList">
-										<dt id="status">所属大学:${f:h(groupName)} （卒業年： ${f:h(graduationYear)}年）</dt>
+										<dt id="status">所属大学:${f:h(groupName)} （卒業年：${f:h(graduationYear)}年）</dt>
 										<dt id="status">希望業界:${f:h(interestedIndustry)}</dt>
 									</li>
 								</ul>
@@ -81,7 +81,7 @@
 						<c:forEach items="${timeLine}" var="items" varStatus="status">
 					<li id="tweetList">
 					<dl>
-						<dt id="name">${f:h(items.tweetTime)}  <s:link href="/member/${f:h(items.userName)}">${f:h(items.accountName)}</s:link>@${f:h(items.username)}</dt>
+						<dt id="tweetInf">${f:h(items.tweetTime)}  <s:link href="/member/${f:h(items.userName)}">${f:h(items.accountName)}</s:link>@${f:h(items.username)}</dt>
 						<dd id="tweet">${f:h(items.tweet)}</dd>
 					</dl>
 					</li>
@@ -103,38 +103,7 @@
 					</s:form>
 					</c:forEach>
 				</ul>
-			<!--	<h4>My Sent Messages</h4>
-				<ul>
-					<c:forEach items ="${receiveMessageList}" var ="items" varStatus="status">
-					<s:form action ="/home/">
-						<!--<li id="messageList">-->
-							<dl>
-                                <dt id ="info">With:<s:link href="/message/${f:h(items.identifier)}">${f:h(items.receiver)}</s:link></dt>
-								<dt id ="info">With:<s:link href="/message/">${f:h(items.sender)}</s:link></dt>
-							</dl>
-						<!--</li>-->
-					</s:form>
-					</c:forEach>
-				</ul>
-				</ul>
-				<h4>My Received Messages</h4>
-				<ul>
-					<c:forEach items ="${sentMessageList}" var ="items" varStatus="status">
-					<s:form action ="/home/">
-						<!--<li id="messageList">-->
-							<dl>
-                                <dt id ="info">With:<s:link href="/message/${f:h(items.identifier)}">${f:h(items.receiver)}</s:link></dt>
-								<dt id ="info">With:<s:link href="/message/">${f:h(items.sender)}</s:link></dt>
-							</dl>
-						<!--</li>-->
-					</s:form>
-					</c:forEach>
-				</ul>
-	-->
 		</div>
-		<!--<div class ="fixBlock"></div>
-			<div class ="main-right-message">-->
-			<!--</div>-->
 	</div>
 		<div class ="fixBlock"></div>
 </div>

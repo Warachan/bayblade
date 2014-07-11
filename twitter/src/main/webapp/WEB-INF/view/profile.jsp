@@ -30,13 +30,6 @@
 		<div class="profile-box">
 			<h2>Edit your profile</h2>
 			<s:form action="/profile/editProfile/" styleClass="profileForm">
-				<!--<div class="email">
-					<h4>Email</h4>
-						<html:text property ="updateEmail" size="60" styleClass="textBox"/>
-					<div class = "emailError">
-						<html:errors property="updateEmail"/>
-					</div>
-				</div>-->
 				<div class="name">
 					<h4>Name</h4>
 						<html:text property="updateName"  size="60" styleClass = "textBox"/>
@@ -60,7 +53,6 @@
     　									<dl><html:option value="2015">${f:h(2015)}</html:option><dl>
     　									<dl><html:option value="2016">${f:h(2016)}</html:option><dl>
     　									<dl><html:option value="2017">${f:h(2017)}</html:option><dl>
-    　									<dl><html:option value="2018">${f:h(2018)}</html:option><dl>
     　									<dl><html:option value="2019">${f:h(2019)}</html:option><dl>
     　									<dl><html:option value="2020">${f:h(2020)}</html:option><dl>
     　									<dl><html:option value="2021">${f:h(2021)}</html:option><dl>

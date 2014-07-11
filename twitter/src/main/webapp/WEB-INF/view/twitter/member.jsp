@@ -92,7 +92,7 @@
 									<c:forEach items="${timeLine}" var="items" varStatus="status">
 										<li id="tweetList">
 										<dl>
-											<dt id="name">${f:h(items.tweetTime)} ${f:h(items.accountName)}@${f:h(items.username)}</dt>
+											<dt id="tweetInf">${f:h(items.tweetTime)} ${f:h(items.accountName)}@${f:h(items.username)}</dt>
 											<dd id="tweet">${f:h(items.tweet)}</dd>
 										</dl>
 										</li>

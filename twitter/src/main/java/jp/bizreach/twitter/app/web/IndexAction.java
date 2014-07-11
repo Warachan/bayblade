@@ -85,6 +85,7 @@ public class IndexAction {
         return "index.jsp";
     }
 
+    /* ログインする */
     @Execute(validate = "validate", input = "index.jsp")
     public String gotoLogin() {
         LOG.debug("***" + indexForm);
@@ -97,7 +98,6 @@ public class IndexAction {
         login.setInsTrace(indexForm.loginKey);
         login.setUpdTrace(indexForm.loginKey);
         loginBhv.insert(login);
-        LOG.debug("***" + sessionDto.username);
         return "/home/?redirect=true";
     }
 

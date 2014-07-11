@@ -497,6 +497,13 @@ h3, h4{
 	white-space: nowrap;
 	text-overflow: ellipsis;
 }
+#tweetInf{
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	font-size:15px;
+	font-weight:bold;
+}
 #tweetList{
 	list-style:none;
 }
@@ -606,6 +613,10 @@ width:900px;
 	width:50px;
 	height:25px;
 	margin-left:1000px;
+}
+.messageError li{
+	list-style:none;
+	margin-left:10px;
 }
 .messages{
 	margin-top:10px;
