@@ -39,7 +39,6 @@ public class MemberDbm extends AbstractDBMeta {
     protected final Map<String, PropertyGateway> _epgMap = newHashMap();
     {
         setupEpg(_epgMap, new EpgMemberId(), "memberId");
-        setupEpg(_epgMap, new EpgEmailAddress(), "emailAddress");
         setupEpg(_epgMap, new EpgMemberStatusCode(), "memberStatusCode");
         setupEpg(_epgMap, new EpgUserName(), "userName");
         setupEpg(_epgMap, new EpgAccountName(), "accountName");
@@ -51,16 +50,10 @@ public class MemberDbm extends AbstractDBMeta {
         setupEpg(_epgMap, new EpgRecruitingNumber(), "recruitingNumber");
         setupEpg(_epgMap, new EpgInterestedIndustry(), "interestedIndustry");
         setupEpg(_epgMap, new EpgGraduationYear(), "graduationYear");
-        setupEpg(_epgMap, new EpgBirthdate(), "birthdate");
-        setupEpg(_epgMap, new EpgProfile(), "profile");
     }
     public static class EpgMemberId implements PropertyGateway {
         public Object read(Entity et) { return ((Member)et).getMemberId(); }
         public void write(Entity et, Object vl) { ((Member)et).setMemberId(cti(vl)); }
-    }
-    public static class EpgEmailAddress implements PropertyGateway {
-        public Object read(Entity et) { return ((Member)et).getEmailAddress(); }
-        public void write(Entity et, Object vl) { ((Member)et).setEmailAddress((String)vl); }
     }
     public static class EpgMemberStatusCode implements PropertyGateway {
         public Object read(Entity et) { return ((Member)et).getMemberStatusCode(); }
@@ -106,14 +99,6 @@ public class MemberDbm extends AbstractDBMeta {
         public Object read(Entity et) { return ((Member)et).getGraduationYear(); }
         public void write(Entity et, Object vl) { ((Member)et).setGraduationYear(cti(vl)); }
     }
-    public static class EpgBirthdate implements PropertyGateway {
-        public Object read(Entity et) { return ((Member)et).getBirthdate(); }
-        public void write(Entity et, Object vl) { ((Member)et).setBirthdate((java.util.Date)vl); }
-    }
-    public static class EpgProfile implements PropertyGateway {
-        public Object read(Entity et) { return ((Member)et).getProfile(); }
-        public void write(Entity et, Object vl) { ((Member)et).setProfile((String)vl); }
-    }
     public PropertyGateway findPropertyGateway(String prop)
     { return doFindEpg(_epgMap, prop); }
 
@@ -152,32 +137,24 @@ public class MemberDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnMemberId = cci("MEMBER_ID", "MEMBER_ID", null, null, Integer.class, "memberId", null, true, true, true, "INT", 10, 0, null, false, null, null, null, "followByYouIdList,followByMemberIdList,loginList,tweetList", null);
-    protected final ColumnInfo _columnEmailAddress = cci("EMAIL_ADDRESS", "EMAIL_ADDRESS", null, null, String.class, "emailAddress", null, false, false, true, "VARCHAR", 100, 0, null, false, null, null, null, null, null);
+    protected final ColumnInfo _columnMemberId = cci("MEMBER_ID", "MEMBER_ID", null, null, Integer.class, "memberId", null, true, true, true, "INT", 10, 0, null, false, null, null, null, "followByYouIdList,followByMemberIdList,loginList,messageBySenderIdList,messageByReceiverIdList,tweetList", null);
     protected final ColumnInfo _columnMemberStatusCode = cci("MEMBER_STATUS_CODE", "MEMBER_STATUS_CODE", null, null, Integer.class, "memberStatusCode", null, false, false, true, "INT", 10, 0, null, false, null, null, "memberStatus", null, null);
     protected final ColumnInfo _columnUserName = cci("USER_NAME", "USER_NAME", null, null, String.class, "userName", null, false, false, true, "VARCHAR", 100, 0, null, false, null, null, null, null, null);
-    protected final ColumnInfo _columnAccountName = cci("ACCOUNT_NAME", "ACCOUNT_NAME", null, null, String.class, "accountName", null, false, false, true, "VARCHAR", 100, 0, null, false, null, null, null, null, null);
+    protected final ColumnInfo _columnAccountName = cci("ACCOUNT_NAME", "ACCOUNT_NAME", null, null, String.class, "accountName", null, false, false, true, "VARCHAR", 20, 0, null, false, null, null, null, null, null);
     protected final ColumnInfo _columnGroupName = cci("GROUP_NAME", "GROUP_NAME", null, null, String.class, "groupName", null, false, false, true, "VARCHAR", 100, 0, null, false, null, null, null, null, null);
     protected final ColumnInfo _columnInsDatetime = cci("INS_DATETIME", "INS_DATETIME", null, null, java.sql.Timestamp.class, "insDatetime", null, false, false, true, "DATETIME", 19, 0, null, false, null, null, null, null, null);
     protected final ColumnInfo _columnUpdDatetime = cci("UPD_DATETIME", "UPD_DATETIME", null, null, java.sql.Timestamp.class, "updDatetime", null, false, false, true, "DATETIME", 19, 0, null, false, null, null, null, null, null);
     protected final ColumnInfo _columnInsTrace = cci("INS_TRACE", "INS_TRACE", null, null, String.class, "insTrace", null, false, false, true, "VARCHAR", 256, 0, null, false, null, null, null, null, null);
     protected final ColumnInfo _columnUpdTrace = cci("UPD_TRACE", "UPD_TRACE", null, null, String.class, "updTrace", null, false, false, true, "VARCHAR", 256, 0, null, false, null, null, null, null, null);
     protected final ColumnInfo _columnRecruitingNumber = cci("RECRUITING_NUMBER", "RECRUITING_NUMBER", null, null, String.class, "recruitingNumber", null, false, false, false, "VARCHAR", 20, 0, null, false, null, null, null, null, null);
-    protected final ColumnInfo _columnInterestedIndustry = cci("INTERESTED_INDUSTRY", "INTERESTED_INDUSTRY", null, null, String.class, "interestedIndustry", null, false, false, false, "VARCHAR", 100, 0, null, false, null, null, null, null, null);
+    protected final ColumnInfo _columnInterestedIndustry = cci("INTERESTED_INDUSTRY", "INTERESTED_INDUSTRY", null, null, String.class, "interestedIndustry", null, false, false, false, "VARCHAR", 50, 0, null, false, null, null, null, null, null);
     protected final ColumnInfo _columnGraduationYear = cci("GRADUATION_YEAR", "GRADUATION_YEAR", null, null, Integer.class, "graduationYear", null, false, false, false, "INT", 10, 0, null, false, null, null, null, null, null);
-    protected final ColumnInfo _columnBirthdate = cci("BIRTHDATE", "BIRTHDATE", null, null, java.util.Date.class, "birthdate", null, false, false, false, "DATE", 10, 0, null, false, null, null, null, null, null);
-    protected final ColumnInfo _columnProfile = cci("PROFILE", "PROFILE", null, null, String.class, "profile", null, false, false, false, "VARCHAR", 200, 0, null, false, null, null, null, null, null);
 
     /**
      * MEMBER_ID: {PK, ID, NotNull, INT(10)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnMemberId() { return _columnMemberId; }
-    /**
-     * EMAIL_ADDRESS: {UQ, NotNull, VARCHAR(100)}
-     * @return The information object of specified column. (NotNull)
-     */
-    public ColumnInfo columnEmailAddress() { return _columnEmailAddress; }
     /**
      * MEMBER_STATUS_CODE: {IX, NotNull, INT(10), FK to member_status}
      * @return The information object of specified column. (NotNull)
@@ -189,7 +166,7 @@ public class MemberDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnUserName() { return _columnUserName; }
     /**
-     * ACCOUNT_NAME: {NotNull, VARCHAR(100)}
+     * ACCOUNT_NAME: {NotNull, VARCHAR(20)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnAccountName() { return _columnAccountName; }
@@ -224,7 +201,7 @@ public class MemberDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnRecruitingNumber() { return _columnRecruitingNumber; }
     /**
-     * INTERESTED_INDUSTRY: {VARCHAR(100)}
+     * INTERESTED_INDUSTRY: {VARCHAR(50)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnInterestedIndustry() { return _columnInterestedIndustry; }
@@ -233,21 +210,10 @@ public class MemberDbm extends AbstractDBMeta {
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnGraduationYear() { return _columnGraduationYear; }
-    /**
-     * BIRTHDATE: {DATE(10)}
-     * @return The information object of specified column. (NotNull)
-     */
-    public ColumnInfo columnBirthdate() { return _columnBirthdate; }
-    /**
-     * PROFILE: {VARCHAR(200)}
-     * @return The information object of specified column. (NotNull)
-     */
-    public ColumnInfo columnProfile() { return _columnProfile; }
 
     protected List<ColumnInfo> ccil() {
         List<ColumnInfo> ls = newArrayList();
         ls.add(columnMemberId());
-        ls.add(columnEmailAddress());
         ls.add(columnMemberStatusCode());
         ls.add(columnUserName());
         ls.add(columnAccountName());
@@ -259,8 +225,6 @@ public class MemberDbm extends AbstractDBMeta {
         ls.add(columnRecruitingNumber());
         ls.add(columnInterestedIndustry());
         ls.add(columnGraduationYear());
-        ls.add(columnBirthdate());
-        ls.add(columnProfile());
         return ls;
     }
 
@@ -327,6 +291,22 @@ public class MemberDbm extends AbstractDBMeta {
     public ReferrerInfo referrerLoginList() {
         Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnMemberId(), LoginDbm.getInstance().columnMemberId());
         return cri("login_ibfk_1", "loginList", this, LoginDbm.getInstance(), mp, false, "member");
+    }
+    /**
+     * message by SENDER_ID, named 'messageBySenderIdList'.
+     * @return The information object of referrer property. (NotNull)
+     */
+    public ReferrerInfo referrerMessageBySenderIdList() {
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnMemberId(), MessageDbm.getInstance().columnSenderId());
+        return cri("message_ibfk_1", "messageBySenderIdList", this, MessageDbm.getInstance(), mp, false, "memberBySenderId");
+    }
+    /**
+     * message by RECEIVER_ID, named 'messageByReceiverIdList'.
+     * @return The information object of referrer property. (NotNull)
+     */
+    public ReferrerInfo referrerMessageByReceiverIdList() {
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnMemberId(), MessageDbm.getInstance().columnReceiverId());
+        return cri("message_ibfk_2", "messageByReceiverIdList", this, MessageDbm.getInstance(), mp, false, "memberByReceiverId");
     }
     /**
      * tweet by MEMBER_ID, named 'tweetList'.

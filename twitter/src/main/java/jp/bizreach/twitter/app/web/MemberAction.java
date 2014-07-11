@@ -55,10 +55,10 @@ public class MemberAction {
     public ArrayList<MemberDto> followerMemberList = new ArrayList<>();
     public String noFollow;
     public String noFollower;
+    public String receiver;
     public String account;
     public String groupName;
     public Integer graduationYear;
-    public String profile;
     public Integer status;
     public String interestedIndustry;
     public String recruitingNumber;
@@ -81,7 +81,6 @@ public class MemberAction {
             return "/home/?redirect=true";
         }
         status = member.getMemberStatusCode();
-        profile = member.getProfile();
         groupName = member.getGroupName();
         LOG.debug("*******************************************************************************");
         if (status.equals(1)) {
@@ -217,6 +216,17 @@ public class MemberAction {
             noFollower = "No followers yet";
         }
         return "/twitter/followlist.jsp";
+    }
+
+    /* このアカウント保持者にメッセージを送る */
+    @Execute(validator = false, urlPattern = "{yourName}/contact")
+    public String contact() {
+        //        MemberCB cb = new MemberCB();
+        //        cb.query().setUserName_Equal(memberForm.yourName);
+        //        Member member = memberBhv.selectEntity(cb);
+        //        memberForm.receiver = member.getUserName();
+        //        receiver = memberForm.receiver;
+        return "/message/?redirect=true";
     }
 
     private Member selectMember() {

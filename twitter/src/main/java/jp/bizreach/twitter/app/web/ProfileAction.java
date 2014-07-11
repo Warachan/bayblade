@@ -6,7 +6,6 @@ import java.util.regex.Pattern;
 
 import javax.annotation.Resource;
 
-import jp.bizreach.twitter.dbflute.cbean.MemberCB;
 import jp.bizreach.twitter.dbflute.exbhv.LoginBhv;
 import jp.bizreach.twitter.dbflute.exbhv.MemberBhv;
 import jp.bizreach.twitter.dbflute.exbhv.MemberSecurityBhv;
@@ -60,7 +59,7 @@ public class ProfileAction {
     // -----------------------------------------------------
     //                                          Display Data
     //                                          ------------
-    public String email;
+    // public String email;
     public String accountName;
     public String groupName;
     public String password;
@@ -81,6 +80,7 @@ public class ProfileAction {
 
     @Execute(validator = false)
     public String index() {
+        LOG.debug("##############################################" + sessionDto.status);
         if (sessionDto.status.equals(1)) {
             status = new Boolean(true);
         } else if (sessionDto.status.equals(2)) {
@@ -92,7 +92,7 @@ public class ProfileAction {
     @Execute(validate = "validate", input = "/profile.jsp")
     /* プロフィール編集メソッド */
     public String editProfile() throws NoSuchAlgorithmException {
-        email = profileForm.updateEmail;
+        //  email = profileForm.updateEmail;
         password = profileForm.updatePassword;
         confirmPass = profileForm.confirmPass;
         accountName = profileForm.updateName;
@@ -103,12 +103,11 @@ public class ProfileAction {
         Member member = new Member();
         member.setMemberId(sessionDto.myId);
         member.setMemberStatusCode(sessionDto.status);
-        LOG.debug("**************************************************" + sessionDto.status);
-        if (email != "") {
-            member.setEmailAddress(email);
-            memberBhv.update(member);
-            sessionDto.email = email;
-        }
+        //        if (email != "") {
+        //            member.setEmailAddress(email);
+        //            memberBhv.update(member);
+        //            sessionDto.email = email;
+        //        }
         if (accountName != "") {
             member.setAccountName(accountName);
             memberBhv.update(member);
@@ -131,6 +130,7 @@ public class ProfileAction {
                 memberBhv.update(member);
             }
             if (profileForm.graduationYear != null) {
+                LOG.debug("**************************************************************");
                 member.setGraduationYear(profileForm.graduationYear);
                 memberBhv.update(member);
             }
@@ -147,14 +147,14 @@ public class ProfileAction {
     /* 会員登録画面　Validation */
     public ActionMessages validate() {
         ActionMessages errors = new ActionMessages();
-        /* Email */
-        String emailPtn = "[\\w\\.\\-+]+@(?:[\\w\\-]+\\.)+[\\w\\-]+";
-        Pattern ptn = Pattern.compile(emailPtn);
-        Matcher emailMatcher = ptn.matcher(profileForm.updateEmail);
-        MemberCB cb = new MemberCB();
-        cb.query().setEmailAddress_Equal(profileForm.updateEmail);
-        int count = memberBhv.selectCount(cb);
+        /* Email
         if (profileForm.updateEmail != "") {
+            String emailPtn = "[\\w\\.\\-+]+@(?:[\\w\\-]+\\.)+[\\w\\-]+";
+            Pattern ptn = Pattern.compile(emailPtn);
+            Matcher emailMatcher = ptn.matcher(profileForm.updateEmail);
+            MemberCB cb = new MemberCB();
+            cb.query().setEmailAddress_Equal(profileForm.updateEmail);
+            int count = memberBhv.selectCount(cb);
             if (!emailMatcher.matches()) {
                 errors.add("updateEmail", new ActionMessage("メールアドレスが不正です。", false));
             }
@@ -164,7 +164,7 @@ public class ProfileAction {
             if (count > 0) {
                 errors.add("updateEmail", new ActionMessage("このメールアドレスはすでに登録されています。", false));
             }
-        }
+        }*/
         /* accountName */
         // TODO mayuko.sakaba 入力に許される文字列の指定がかなりあいまいです。
         if (profileForm.updateName != "") {
@@ -174,39 +174,41 @@ public class ProfileAction {
             String wordPtn = "[\\\"\\\':;,]+";
             Pattern ptnCheck = Pattern.compile(wordPtn);
             Matcher wordMatcher = ptnCheck.matcher(profileForm.updateName);
-            if (profileForm.updateName == "" || wordMatcher.matches()) {
+            if (wordMatcher.matches()) {
                 errors.add("updatetName", new ActionMessage("不正な文字が含まれています。", false));
             }
         }
         /* interestedIndustry */
         if (sessionDto.status.equals(1)) {
-            if (profileForm.interestedIndustry != null) {
+            if (profileForm.interestedIndustry != "") {
                 if (profileForm.interestedIndustry.length() > 50) {
                     errors.add("interestedIndustry", new ActionMessage("文字制限以上入力されました。", false));
                 }
                 String wordPtn3 = "[\\\"\\\':;,]+";
                 Pattern ptnCheck3 = Pattern.compile(wordPtn3);
                 Matcher wordMatcher3 = ptnCheck3.matcher(profileForm.updateGroup);
-                if (profileForm.interestedIndustry == "" || wordMatcher3.matches()) {
+                if (wordMatcher3.matches()) {
                     errors.add("interestedIndustry", new ActionMessage("不正な文字が含まれています。", false));
                 }
             }
         }
         /* group name */
-        if (profileForm.updateGroup.length() > 100) {
-            errors.add("updateGroup", new ActionMessage("所属企業名、もしくは学校名が長すぎます", false));
-        }
-        String wordPtn2 = "[\\\"\\\':;,]+";
-        Pattern ptnCheck2 = Pattern.compile(wordPtn2);
-        Matcher wordMatcher2 = ptnCheck2.matcher(profileForm.updateGroup);
-        if (profileForm.updateGroup == "" || wordMatcher2.matches()) {
-            errors.add("updateGroup", new ActionMessage("不正な文字が含まれています。", false));
+        if (profileForm.updateGroup != "") {
+            if (profileForm.updateGroup.length() > 100) {
+                errors.add("updateGroup", new ActionMessage("所属企業名、もしくは学校名が長すぎます", false));
+            }
+            String wordPtn2 = "[\\\"\\\':;,\\s]+";
+            Pattern ptnCheck2 = Pattern.compile(wordPtn2);
+            Matcher wordMatcher2 = ptnCheck2.matcher(profileForm.updateGroup);
+            if (profileForm.updateGroup == "" || wordMatcher2.matches()) {
+                errors.add("updateGroup", new ActionMessage("不正な文字が含まれています。", false));
+            }
         }
         /*　password */
-        String pswdPtn = "[\\w]+";
-        Pattern ptn3 = Pattern.compile(pswdPtn);
-        Matcher pswdMatcher = ptn3.matcher(profileForm.updatePassword);
         if (profileForm.updatePassword != "") {
+            String pswdPtn = "[\\w]+";
+            Pattern ptn3 = Pattern.compile(pswdPtn);
+            Matcher pswdMatcher = ptn3.matcher(profileForm.updatePassword);
             if (!pswdMatcher.matches()) {
                 errors.add("updatePassword", new ActionMessage("アルファベットか数字を入力してください。", false));
             }

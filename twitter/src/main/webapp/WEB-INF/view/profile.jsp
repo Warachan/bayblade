@@ -7,9 +7,6 @@
 	<link href='http://fonts.googleapis.com/css?family=Libre+Baskerville' rel='stylesheet' type='text/css'>
 </head>
 <div class = "wrapper">
-		<div class ="header">
-		<p>Pocketer</p>
-	</div>
 	<ul class = "global-navigation">
 			<li><a id="profile" href= "http:/twitter/profile/">Profile</a></li>
 			<li id="home"><a id="homeButton" href= "http:/twitter/home/">Home</a></li>
@@ -25,18 +22,21 @@
 					</s:form>
 				</li>
 		</ul>
+	<div class ="header">
+		<p>Pocketer</p>
+	</div>
 <body>
 	<div class="profile-main">
 		<div class="profile-box">
 			<h2>Edit your profile</h2>
 			<s:form action="/profile/editProfile/" styleClass="profileForm">
-				<div class="email">
+				<!--<div class="email">
 					<h4>Email</h4>
 						<html:text property ="updateEmail" size="60" styleClass="textBox"/>
 					<div class = "emailError">
 						<html:errors property="updateEmail"/>
 					</div>
-				</div>
+				</div>-->
 				<div class="name">
 					<h4>Name</h4>
 						<html:text property="updateName"  size="60" styleClass = "textBox"/>
@@ -56,14 +56,14 @@
 								<h4>Graduating Year</h4>
 								<html:select property="graduationYear">
     　									<dl><html:option value=""></html:option><dl>
-    　									<dl><html:option value="2014">2014</html:option><dl>
-    　									<dl><html:option value="2015">2015</html:option><dl>
-    　									<dl><html:option value="2016">2016</html:option><dl>
-    　									<dl><html:option value="2017">2017</html:option><dl>
-    　									<dl><html:option value="2018">2018</html:option><dl>
-    　									<dl><html:option value="2019">2019</html:option><dl>
-    　									<dl><html:option value="2020">2020</html:option><dl>
-    　									<dl><html:option value="2021">2021</html:option><dl>
+    　									<dl><html:option value="2014">${f:h(2014)}</html:option><dl>
+    　									<dl><html:option value="2015">${f:h(2015)}</html:option><dl>
+    　									<dl><html:option value="2016">${f:h(2016)}</html:option><dl>
+    　									<dl><html:option value="2017">${f:h(2017)}</html:option><dl>
+    　									<dl><html:option value="2018">${f:h(2018)}</html:option><dl>
+    　									<dl><html:option value="2019">${f:h(2019)}</html:option><dl>
+    　									<dl><html:option value="2020">${f:h(2020)}</html:option><dl>
+    　									<dl><html:option value="2021">${f:h(2021)}</html:option><dl>
 								</html:select>
 							</div>
 							<div class ="industry">
@@ -77,15 +77,15 @@
 							<h4>Recruiting Number</h4>
 							<html:select property="recruitingNumber">
     　									<dl><html:option value=""></html:option><dl>
-    　									<dl><html:option value="10人未満">10人未満</html:option><dl>
-    　									<dl><html:option value="10～29人">10～29人</html:option><dl>
-    　									<dl><html:option value="30~49人">30~49人</html:option><dl>
-    　									<dl><html:option value="50~99人">50~99人</html:option><dl>
-    　									<dl><html:option value="100~299人">100~299人</html:option><dl>
-    　									<dl><html:option value="300~499人">300~499人</html:option><dl>
-    　									<dl><html:option value="500人以上">500人以上</html:option><dl>
+    　									<dl><html:option value="10人未満">${f:h("10人未満")}</html:option><dl>
+    　									<dl><html:option value="10～29人">${f:h("10~29人")}</html:option><dl>
+    　									<dl><html:option value="30~49人">${f:h("30~49人")}</html:option><dl>
+    　									<dl><html:option value="50~99人">${f:h("50~99人")}</html:option><dl>
+    　									<dl><html:option value="100~299人">${f:h("100~299人")}</html:option><dl>
+    　									<dl><html:option value="300~499人">${f:h("300~499人")}</html:option><dl>
+    　									<dl><html:option value="500人以上">${f:h("500人以上")}</html:option><dl>
 							</html:select>
-							<html:errors property="recruitingNumber"/>
+							<!--<html:errors property="recruitingNumber"/>-->
 							</div>
 						</c:otherwise>
 					</c:choose>

@@ -14,6 +14,7 @@ import jp.bizreach.twitter.dbflute.cbean.MemberCB;
 import jp.bizreach.twitter.dbflute.cbean.TweetCB;
 import jp.bizreach.twitter.dbflute.exbhv.FollowBhv;
 import jp.bizreach.twitter.dbflute.exbhv.MemberBhv;
+import jp.bizreach.twitter.dbflute.exbhv.MessageBhv;
 import jp.bizreach.twitter.dbflute.exbhv.TweetBhv;
 import jp.bizreach.twitter.dbflute.exentity.Follow;
 import jp.bizreach.twitter.dbflute.exentity.Member;
@@ -56,6 +57,8 @@ public class HomeAction {
     @Resource
     protected FollowBhv followBhv;
     @Resource
+    protected MessageBhv messageBhv;
+    @Resource
     protected SessionDto sessionDto;
 
     // -----------------------------------------------------
@@ -67,6 +70,8 @@ public class HomeAction {
     public ArrayList<Integer> followIdList = new ArrayList<Integer>();
     public ArrayList<TweetDto> resultList = new ArrayList<TweetDto>();
     public ArrayList<MemberDto> candidateList = new ArrayList<>();
+    public ArrayList<MessageDto> sentMessageList = new ArrayList<>();
+    public ArrayList<MessageDto> receiveMessageList = new ArrayList<>();
     public String nameResult;
     public String tweetResult;
     public Integer graduationYear;
@@ -101,7 +106,6 @@ public class HomeAction {
         myCb.setupSelect_MemberStatus();
         myCb.query().setMemberId_Equal(sessionDto.myId);
         Member me = memberBhv.selectEntity(myCb);
-        LOG.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + me.getAccountName());
         status = me.getMemberStatusCode();
         groupName = me.getGroupName();
         if (status.equals(1)) {
@@ -129,6 +133,29 @@ public class HomeAction {
             followSuggestionList.add(memberDto);
         }
         showTimeline();
+        //        /* 自分の受信メッセージ一覧を表示する　*/
+        //        MessageCB messageCb = new MessageCB();
+        //        messageCb.setupSelect_MemberByReceiverId();
+        //        messageCb.query().setReceiverId_Equal(sessionDto.myId);
+        //        ListResultBean<Message> messageList = messageBhv.selectList(messageCb);
+        //        for (Message message : messageList) {
+        //            MessageDto messageDto = new MessageDto();
+        //            messageDto.receiver = message.getMemberByReceiverId().getAccountName();
+        //            messageDto.identifier = message.getMemberByReceiverId().getUserName();
+        //            receiveMessageList.add(messageDto);
+        //        }
+        //        /* 自分の受信メッセージ一覧を表示する　*/
+        //        MessageCB messageCb2 = new MessageCB();
+        //        messageCb2.setupSelect_MemberBySenderId();
+        //        messageCb2.query().setSenderId_Equal(sessionDto.myId);
+        //        ListResultBean<Message> messageList2 = messageBhv.selectList(messageCb);
+        //        for (Message message : messageList2) {
+        //            MessageDto messageDto = new MessageDto();
+        //            messageDto.receiver = message.getMemberBySenderId().getAccountName();
+        //            messageDto.identifier = message.getMemberBySenderId().getUserName();
+        //            receiveMessageList.add(messageDto);
+        //        }
+        // message action のほうで一覧をだしては？
         return "/twitter/home.jsp";
     }
 
@@ -235,7 +262,7 @@ public class HomeAction {
 
     @Execute(validator = false)
     public String search() {
-        /* 検索ワードが含まれるyユーザーを検索　*/
+        /* 検索ワードが含まれるユーザーを検索　*/
         MemberCB memberCB = new MemberCB();
         memberCB.orScopeQuery(new OrQuery<MemberCB>() {
             @Override
@@ -260,7 +287,7 @@ public class HomeAction {
         TweetCB tweetCB = new TweetCB();
         tweetCB.setupSelect_Member();
         tweetCB.query().setTweet_LikeSearch(homeForm.searchWord, new LikeSearchOption().likeContain());
-        tweetCB.query().setMemberId_NotEqual(sessionDto.myId);
+        // tweetCB.query().setMemberId_NotEqual(sessionDto.myId);
         tweetCB.query().addOrderBy_TweetId_Asc();
         ListResultBean<Tweet> tweetList = tweetBhv.selectList(tweetCB);
         for (Tweet tweet : tweetList) {

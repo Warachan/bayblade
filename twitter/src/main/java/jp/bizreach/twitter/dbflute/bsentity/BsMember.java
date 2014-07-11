@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Set;
-import java.util.Date;
 
 import org.seasar.dbflute.Entity;
 import org.seasar.dbflute.dbmeta.DBMeta;
@@ -19,7 +18,7 @@ import jp.bizreach.twitter.dbflute.exentity.*;
  *     MEMBER_ID
  * 
  * [column]
- *     MEMBER_ID, EMAIL_ADDRESS, MEMBER_STATUS_CODE, USER_NAME, ACCOUNT_NAME, GROUP_NAME, INS_DATETIME, UPD_DATETIME, INS_TRACE, UPD_TRACE, RECRUITING_NUMBER, INTERESTED_INDUSTRY, GRADUATION_YEAR, BIRTHDATE, PROFILE
+ *     MEMBER_ID, MEMBER_STATUS_CODE, USER_NAME, ACCOUNT_NAME, GROUP_NAME, INS_DATETIME, UPD_DATETIME, INS_TRACE, UPD_TRACE, RECRUITING_NUMBER, INTERESTED_INDUSTRY, GRADUATION_YEAR
  * 
  * [sequence]
  *     
@@ -34,18 +33,17 @@ import jp.bizreach.twitter.dbflute.exentity.*;
  *     member_status, member_security(AsOne)
  * 
  * [referrer table]
- *     follow, login, tweet, member_security
+ *     follow, login, message, tweet, member_security
  * 
  * [foreign property]
  *     memberStatus, memberSecurityAsOne
  * 
  * [referrer property]
- *     followByYouIdList, followByMemberIdList, loginList, tweetList
+ *     followByYouIdList, followByMemberIdList, loginList, messageBySenderIdList, messageByReceiverIdList, tweetList
  * 
  * [get/set template]
  * /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
  * Integer memberId = entity.getMemberId();
- * String emailAddress = entity.getEmailAddress();
  * Integer memberStatusCode = entity.getMemberStatusCode();
  * String userName = entity.getUserName();
  * String accountName = entity.getAccountName();
@@ -57,10 +55,7 @@ import jp.bizreach.twitter.dbflute.exentity.*;
  * String recruitingNumber = entity.getRecruitingNumber();
  * String interestedIndustry = entity.getInterestedIndustry();
  * Integer graduationYear = entity.getGraduationYear();
- * java.util.Date birthdate = entity.getBirthdate();
- * String profile = entity.getProfile();
  * entity.setMemberId(memberId);
- * entity.setEmailAddress(emailAddress);
  * entity.setMemberStatusCode(memberStatusCode);
  * entity.setUserName(userName);
  * entity.setAccountName(accountName);
@@ -72,8 +67,6 @@ import jp.bizreach.twitter.dbflute.exentity.*;
  * entity.setRecruitingNumber(recruitingNumber);
  * entity.setInterestedIndustry(interestedIndustry);
  * entity.setGraduationYear(graduationYear);
- * entity.setBirthdate(birthdate);
- * entity.setProfile(profile);
  * = = = = = = = = = =/
  * </pre>
  * @author DBFlute(AutoGenerator)
@@ -95,16 +88,13 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     /** MEMBER_ID: {PK, ID, NotNull, INT(10)} */
     protected Integer _memberId;
 
-    /** EMAIL_ADDRESS: {UQ, NotNull, VARCHAR(100)} */
-    protected String _emailAddress;
-
     /** MEMBER_STATUS_CODE: {IX, NotNull, INT(10), FK to member_status} */
     protected Integer _memberStatusCode;
 
     /** USER_NAME: {UQ, NotNull, VARCHAR(100)} */
     protected String _userName;
 
-    /** ACCOUNT_NAME: {NotNull, VARCHAR(100)} */
+    /** ACCOUNT_NAME: {NotNull, VARCHAR(20)} */
     protected String _accountName;
 
     /** GROUP_NAME: {NotNull, VARCHAR(100)} */
@@ -125,17 +115,11 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     /** RECRUITING_NUMBER: {VARCHAR(20)} */
     protected String _recruitingNumber;
 
-    /** INTERESTED_INDUSTRY: {VARCHAR(100)} */
+    /** INTERESTED_INDUSTRY: {VARCHAR(50)} */
     protected String _interestedIndustry;
 
     /** GRADUATION_YEAR: {INT(10)} */
     protected Integer _graduationYear;
-
-    /** BIRTHDATE: {DATE(10)} */
-    protected java.util.Date _birthdate;
-
-    /** PROFILE: {VARCHAR(200)} */
-    protected String _profile;
 
     // -----------------------------------------------------
     //                                              Internal
@@ -190,20 +174,9 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     /**
      * To be unique by the unique column. <br />
      * You can update the entity by the key when entity update (NOT batch update).
-     * @param emailAddress : UQ, NotNull, VARCHAR(100). (NotNull)
-     */
-    public void uniqueByEmailAddress(String emailAddress) {
-        __uniqueDrivenProperties.clear();
-        __uniqueDrivenProperties.addPropertyName("emailAddress");
-        setEmailAddress(emailAddress);
-    }
-
-    /**
-     * To be unique by the unique column. <br />
-     * You can update the entity by the key when entity update (NOT batch update).
      * @param userName : UQ, NotNull, VARCHAR(100). (NotNull)
      */
-    public void uniqueByUserName(String userName) {
+    public void uniqueBy(String userName) {
         __uniqueDrivenProperties.clear();
         __uniqueDrivenProperties.addPropertyName("userName");
         setUserName(userName);
@@ -322,6 +295,46 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
      */
     public void setLoginList(List<Login> loginList) {
         _loginList = loginList;
+    }
+
+    /** message by SENDER_ID, named 'messageBySenderIdList'. */
+    protected List<Message> _messageBySenderIdList;
+
+    /**
+     * [get] message by SENDER_ID, named 'messageBySenderIdList'.
+     * @return The entity list of referrer property 'messageBySenderIdList'. (NotNull: even if no loading, returns empty list)
+     */
+    public List<Message> getMessageBySenderIdList() {
+        if (_messageBySenderIdList == null) { _messageBySenderIdList = newReferrerList(); }
+        return _messageBySenderIdList;
+    }
+
+    /**
+     * [set] message by SENDER_ID, named 'messageBySenderIdList'.
+     * @param messageBySenderIdList The entity list of referrer property 'messageBySenderIdList'. (NullAllowed)
+     */
+    public void setMessageBySenderIdList(List<Message> messageBySenderIdList) {
+        _messageBySenderIdList = messageBySenderIdList;
+    }
+
+    /** message by RECEIVER_ID, named 'messageByReceiverIdList'. */
+    protected List<Message> _messageByReceiverIdList;
+
+    /**
+     * [get] message by RECEIVER_ID, named 'messageByReceiverIdList'.
+     * @return The entity list of referrer property 'messageByReceiverIdList'. (NotNull: even if no loading, returns empty list)
+     */
+    public List<Message> getMessageByReceiverIdList() {
+        if (_messageByReceiverIdList == null) { _messageByReceiverIdList = newReferrerList(); }
+        return _messageByReceiverIdList;
+    }
+
+    /**
+     * [set] message by RECEIVER_ID, named 'messageByReceiverIdList'.
+     * @param messageByReceiverIdList The entity list of referrer property 'messageByReceiverIdList'. (NullAllowed)
+     */
+    public void setMessageByReceiverIdList(List<Message> messageByReceiverIdList) {
+        _messageByReceiverIdList = messageByReceiverIdList;
     }
 
     /** tweet by MEMBER_ID, named 'tweetList'. */
@@ -458,6 +471,10 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
         { if (et != null) { sb.append(li).append(xbRDS(et, "followByMemberIdList")); } } }
         if (_loginList != null) { for (Entity et : _loginList)
         { if (et != null) { sb.append(li).append(xbRDS(et, "loginList")); } } }
+        if (_messageBySenderIdList != null) { for (Entity et : _messageBySenderIdList)
+        { if (et != null) { sb.append(li).append(xbRDS(et, "messageBySenderIdList")); } } }
+        if (_messageByReceiverIdList != null) { for (Entity et : _messageByReceiverIdList)
+        { if (et != null) { sb.append(li).append(xbRDS(et, "messageByReceiverIdList")); } } }
         if (_tweetList != null) { for (Entity et : _tweetList)
         { if (et != null) { sb.append(li).append(xbRDS(et, "tweetList")); } } }
         return sb.toString();
@@ -481,7 +498,6 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
         StringBuilder sb = new StringBuilder();
         String dm = ", ";
         sb.append(dm).append(getMemberId());
-        sb.append(dm).append(getEmailAddress());
         sb.append(dm).append(getMemberStatusCode());
         sb.append(dm).append(getUserName());
         sb.append(dm).append(getAccountName());
@@ -493,19 +509,11 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
         sb.append(dm).append(getRecruitingNumber());
         sb.append(dm).append(getInterestedIndustry());
         sb.append(dm).append(getGraduationYear());
-        sb.append(dm).append(xfUD(getBirthdate()));
-        sb.append(dm).append(getProfile());
         if (sb.length() > dm.length()) {
             sb.delete(0, dm.length());
         }
         sb.insert(0, "{").append("}");
         return sb.toString();
-    }
-    protected String xfUD(Date date) { // formatUtilDate()
-        return FunCustodial.toString(date, xgDP());
-    }
-    protected String xgDP() { // getDatePattern
-        return "yyyy-MM-dd";
     }
     protected String buildRelationString() {
         StringBuilder sb = new StringBuilder();
@@ -518,6 +526,10 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
         { sb.append(cm).append("followByMemberIdList"); }
         if (_loginList != null && !_loginList.isEmpty())
         { sb.append(cm).append("loginList"); }
+        if (_messageBySenderIdList != null && !_messageBySenderIdList.isEmpty())
+        { sb.append(cm).append("messageBySenderIdList"); }
+        if (_messageByReceiverIdList != null && !_messageByReceiverIdList.isEmpty())
+        { sb.append(cm).append("messageByReceiverIdList"); }
         if (_tweetList != null && !_tweetList.isEmpty())
         { sb.append(cm).append("tweetList"); }
         if (sb.length() > cm.length()) {
@@ -561,25 +573,6 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [get] EMAIL_ADDRESS: {UQ, NotNull, VARCHAR(100)} <br />
-     * メールアドレス : 会員のメールアドレス
-     * @return The value of the column 'EMAIL_ADDRESS'. (basically NotNull if selected: for the constraint)
-     */
-    public String getEmailAddress() {
-        return _emailAddress;
-    }
-
-    /**
-     * [set] EMAIL_ADDRESS: {UQ, NotNull, VARCHAR(100)} <br />
-     * メールアドレス : 会員のメールアドレス
-     * @param emailAddress The value of the column 'EMAIL_ADDRESS'. (basically NotNull if update: for the constraint)
-     */
-    public void setEmailAddress(String emailAddress) {
-        __modifiedProperties.addPropertyName("emailAddress");
-        _emailAddress = emailAddress;
-    }
-
-    /**
      * [get] MEMBER_STATUS_CODE: {IX, NotNull, INT(10), FK to member_status} <br />
      * メンバーステータスコード : 企業か学生か
      * @return The value of the column 'MEMBER_STATUS_CODE'. (basically NotNull if selected: for the constraint)
@@ -618,7 +611,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [get] ACCOUNT_NAME: {NotNull, VARCHAR(100)} <br />
+     * [get] ACCOUNT_NAME: {NotNull, VARCHAR(20)} <br />
      * アカウント名
      * @return The value of the column 'ACCOUNT_NAME'. (basically NotNull if selected: for the constraint)
      */
@@ -627,7 +620,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [set] ACCOUNT_NAME: {NotNull, VARCHAR(100)} <br />
+     * [set] ACCOUNT_NAME: {NotNull, VARCHAR(20)} <br />
      * アカウント名
      * @param accountName The value of the column 'ACCOUNT_NAME'. (basically NotNull if update: for the constraint)
      */
@@ -751,7 +744,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [get] INTERESTED_INDUSTRY: {VARCHAR(100)} <br />
+     * [get] INTERESTED_INDUSTRY: {VARCHAR(50)} <br />
      * 希望業界 : 学生が希望している業界。
      * @return The value of the column 'INTERESTED_INDUSTRY'. (NullAllowed even if selected: for no constraint)
      */
@@ -760,7 +753,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [set] INTERESTED_INDUSTRY: {VARCHAR(100)} <br />
+     * [set] INTERESTED_INDUSTRY: {VARCHAR(50)} <br />
      * 希望業界 : 学生が希望している業界。
      * @param interestedIndustry The value of the column 'INTERESTED_INDUSTRY'. (NullAllowed: null update allowed for no constraint)
      */
@@ -786,43 +779,5 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     public void setGraduationYear(Integer graduationYear) {
         __modifiedProperties.addPropertyName("graduationYear");
         _graduationYear = graduationYear;
-    }
-
-    /**
-     * [get] BIRTHDATE: {DATE(10)} <br />
-     * 生年月日 : 会員の生年月日
-     * @return The value of the column 'BIRTHDATE'. (NullAllowed even if selected: for no constraint)
-     */
-    public java.util.Date getBirthdate() {
-        return _birthdate;
-    }
-
-    /**
-     * [set] BIRTHDATE: {DATE(10)} <br />
-     * 生年月日 : 会員の生年月日
-     * @param birthdate The value of the column 'BIRTHDATE'. (NullAllowed: null update allowed for no constraint)
-     */
-    public void setBirthdate(java.util.Date birthdate) {
-        __modifiedProperties.addPropertyName("birthdate");
-        _birthdate = birthdate;
-    }
-
-    /**
-     * [get] PROFILE: {VARCHAR(200)} <br />
-     * プロフィール
-     * @return The value of the column 'PROFILE'. (NullAllowed even if selected: for no constraint)
-     */
-    public String getProfile() {
-        return _profile;
-    }
-
-    /**
-     * [set] PROFILE: {VARCHAR(200)} <br />
-     * プロフィール
-     * @param profile The value of the column 'PROFILE'. (NullAllowed: null update allowed for no constraint)
-     */
-    public void setProfile(String profile) {
-        __modifiedProperties.addPropertyName("profile");
-        _profile = profile;
     }
 }

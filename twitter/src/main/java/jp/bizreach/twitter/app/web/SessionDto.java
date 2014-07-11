@@ -9,7 +9,7 @@ import org.seasar.framework.container.annotation.tiger.InstanceType;
 public class SessionDto implements Serializable {
     public static final long serialVersionUID = 1L;
     public Integer myId;
-    public String email;
+    // public String email;
     public String username;
     public String accountName;
     public Integer status;

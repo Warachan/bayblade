@@ -17,7 +17,7 @@
 		<div class = "login">
 		<h3>Login</h3>
 			<div class ="loginId">
-			<h4>E-mail address or username</h4>
+			<h4>Username</h4>
 				<html:text property ="loginKey" styleClass="inputBox"/><br>
 			</div>
 			<div class="loginPass">
@@ -39,8 +39,8 @@
 	</s:form>
 </div>
 		</div>
-		<div class="footer">
-			<p>©2014 Annie Wara Pocket</p>
+	<div class="footer">
+		<p>©2014 Annie Wara Pocket</p>
 	</div>
 </body>
 </div>

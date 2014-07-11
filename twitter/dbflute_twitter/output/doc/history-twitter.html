@@ -118,11 +118,92 @@ p.tablecount {
 </div>
 
 <div class="section">
+	<h2><span class="dt">Diff Date: </span>2014/07/10 20:25:21</h2>
+
+	<h3>Change Table</h3>
+	<div class="table-content">
+		<h4><a href="./schema-twitter.html#message">message</a></h4>
+		<div class="change-table-content">
+			<h5>Delete UQ</h5>
+			<ul class="column-content">
+				<li>message_pair</li>
+			</ul>
+			<h5>Add Index</h5>
+			<ul class="column-content">
+				<li>SENDER_ID</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="section">
+	<h2><span class="dt">Diff Date: </span>2014/07/10 15:46:26</h2>
+
+	<h3>Change Table</h3>
+	<div class="table-content">
+		<h4>message</h4>
+		<div class="change-table-content">
+			<h5>Add Column</h5>
+			<ul class="column-content">
+				<li>SENDER_ID</li>
+			</ul>
+			<h5>Delete Column</h5>
+			<ul class="column-content">
+				<li>MESSENGER_ID</li>
+			</ul>
+			<h5>Add FK</h5>
+			<ul class="column-content">
+				<li>message_ibfk_2(new)</li>
+			</ul>
+			<h5>Delete FK</h5>
+			<ul class="column-content">
+				<li>message_ibfk_1(old)</li>
+			</ul>
+			<h5>Change UQ</h5>
+			<dl class="column-content">
+				<dt>message_pair</dt>
+				<dd><span>Column</span>MESSENGER_ID,&nbsp;RECEIVER_ID&nbsp;-&gt;&nbsp;SENDER_ID,&nbsp;RECEIVER_ID</dd>
+			</dl>
+		</div>
+	</div>
+</div>
+<div class="section">
+	<h2><span class="dt">Diff Date: </span>2014/07/10 15:14:16</h2>
+	<p class="tablecount"><span class="dt">table count: </span>6&nbsp;-&gt;&nbsp;7</p>
+
+	<h3>Add Table</h3>
+	<ul class="table-content">
+		<li>message</li>
+	</ul>
+	<h3>Change Table</h3>
+	<div class="table-content">
+		<h4>member</h4>
+		<div class="change-table-content">
+			<h5>Change Column</h5>
+			<dl class="column-content">
+				<dt>ACCOUNT_NAME</dt>
+				<dd><span>Size</span>100&nbsp;-&gt;&nbsp;20</dd>
+				<dt>INTERESTED_INDUSTRY</dt>
+				<dd><span>Size</span>100&nbsp;-&gt;&nbsp;50</dd>
+			</dl>
+			<h5>Delete Column</h5>
+			<ul class="column-content">
+				<li>EMAIL_ADDRESS</li>
+				<li>BIRTHDATE</li>
+				<li>PROFILE</li>
+			</ul>
+			<h5>Delete UQ</h5>
+			<ul class="column-content">
+				<li>EMAIL_ADDRESS</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="section">
 	<h2><span class="dt">Diff Date: </span>2014/07/09 14:00:08</h2>
 
 	<h3>Change Table</h3>
 	<div class="table-content">
-		<h4><a href="./schema-twitter.html#member">member</a></h4>
+		<h4>member</h4>
 		<div class="change-table-content">
 			<h5>Change Column</h5>
 			<dl class="column-content">

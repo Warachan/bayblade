@@ -15,7 +15,7 @@ import jp.bizreach.twitter.dbflute.cbean.*;
  *     MEMBER_ID
  *
  * [column]
- *     MEMBER_ID, EMAIL_ADDRESS, MEMBER_STATUS_CODE, USER_NAME, ACCOUNT_NAME, GROUP_NAME, INS_DATETIME, UPD_DATETIME, INS_TRACE, UPD_TRACE, RECRUITING_NUMBER, INTERESTED_INDUSTRY, GRADUATION_YEAR, BIRTHDATE, PROFILE
+ *     MEMBER_ID, MEMBER_STATUS_CODE, USER_NAME, ACCOUNT_NAME, GROUP_NAME, INS_DATETIME, UPD_DATETIME, INS_TRACE, UPD_TRACE, RECRUITING_NUMBER, INTERESTED_INDUSTRY, GRADUATION_YEAR
  *
  * [sequence]
  *     
@@ -30,13 +30,13 @@ import jp.bizreach.twitter.dbflute.cbean.*;
  *     member_status, member_security(AsOne)
  *
  * [referrer table]
- *     follow, login, tweet, member_security
+ *     follow, login, message, tweet, member_security
  *
  * [foreign property]
  *     memberStatus, memberSecurityAsOne
  *
  * [referrer property]
- *     followByYouIdList, followByMemberIdList, loginList, tweetList
+ *     followByYouIdList, followByMemberIdList, loginList, messageBySenderIdList, messageByReceiverIdList, tweetList
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
@@ -93,6 +93,30 @@ public class LoaderOfMember {
         return new NestedReferrerLoaderGateway<LoaderOfLogin>() {
             public void withNestedReferrer(ReferrerLoaderHandler<LoaderOfLogin> handler) {
                 handler.handle(new LoaderOfLogin().ready(_referrerLoginList, _selector));
+            }
+        };
+    }
+
+    protected List<Message> _referrerMessageBySenderIdList;
+    public NestedReferrerLoaderGateway<LoaderOfMessage> loadMessageBySenderIdList(ConditionBeanSetupper<MessageCB> setupper) {
+        myBhv().loadMessageBySenderIdList(_selectedList, setupper).withNestedReferrer(new ReferrerListHandler<Message>() {
+            public void handle(List<Message> referrerList) { _referrerMessageBySenderIdList = referrerList; }
+        });
+        return new NestedReferrerLoaderGateway<LoaderOfMessage>() {
+            public void withNestedReferrer(ReferrerLoaderHandler<LoaderOfMessage> handler) {
+                handler.handle(new LoaderOfMessage().ready(_referrerMessageBySenderIdList, _selector));
+            }
+        };
+    }
+
+    protected List<Message> _referrerMessageByReceiverIdList;
+    public NestedReferrerLoaderGateway<LoaderOfMessage> loadMessageByReceiverIdList(ConditionBeanSetupper<MessageCB> setupper) {
+        myBhv().loadMessageByReceiverIdList(_selectedList, setupper).withNestedReferrer(new ReferrerListHandler<Message>() {
+            public void handle(List<Message> referrerList) { _referrerMessageByReceiverIdList = referrerList; }
+        });
+        return new NestedReferrerLoaderGateway<LoaderOfMessage>() {
+            public void withNestedReferrer(ReferrerLoaderHandler<LoaderOfMessage> handler) {
+                handler.handle(new LoaderOfMessage().ready(_referrerMessageByReceiverIdList, _selector));
             }
         };
     }

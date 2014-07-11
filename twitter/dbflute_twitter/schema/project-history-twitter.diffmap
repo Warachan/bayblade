@@ -1,4 +1,117 @@
 map:{
+    ; 2014/07/10 20:25:21 = map:{
+        ; diffDate = 2014/07/10 20:25:21
+        ; tableDiff = map:{
+            ; message = map:{
+                ; tableName = message
+                ; diffType = CHANGE
+                ; uniqueKeyDiff = map:{
+                    ; message_pair = map:{
+                        ; constraintName = message_pair
+                        ; diffType = DELETE
+                    }
+                }
+                ; indexDiff = map:{
+                    ; SENDER_ID = map:{
+                        ; constraintName = SENDER_ID
+                        ; diffType = ADD
+                    }
+                }
+            }
+        }
+    }
+    ; 2014/07/10 15:46:26 = map:{
+        ; diffDate = 2014/07/10 15:46:26
+        ; tableDiff = map:{
+            ; message = map:{
+                ; tableName = message
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; SENDER_ID = map:{
+                        ; columnName = SENDER_ID
+                        ; diffType = ADD
+                    }
+                    ; MESSENGER_ID = map:{
+                        ; columnName = MESSENGER_ID
+                        ; diffType = DELETE
+                    }
+                }
+                ; foreignKeyDiff = map:{
+                    ; message_ibfk_2(new) = map:{
+                        ; constraintName = message_ibfk_2(new)
+                        ; diffType = ADD
+                    }
+                    ; message_ibfk_1(old) = map:{
+                        ; constraintName = message_ibfk_1(old)
+                        ; diffType = DELETE
+                    }
+                }
+                ; uniqueKeyDiff = map:{
+                    ; message_pair = map:{
+                        ; constraintName = message_pair
+                        ; diffType = CHANGE
+                        ; columnDiff = map:{
+                            ; next = SENDER_ID, RECEIVER_ID
+                            ; previous = MESSENGER_ID, RECEIVER_ID
+                        }
+                    }
+                }
+            }
+        }
+    }
+    ; 2014/07/10 15:14:16 = map:{
+        ; diffDate = 2014/07/10 15:14:16
+        ; tableCount = map:{
+            ; next = 7
+            ; previous = 6
+        }
+        ; tableDiff = map:{
+            ; message = map:{
+                ; tableName = message
+                ; diffType = ADD
+            }
+            ; member = map:{
+                ; tableName = member
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; ACCOUNT_NAME = map:{
+                        ; columnName = ACCOUNT_NAME
+                        ; diffType = CHANGE
+                        ; columnSizeDiff = map:{
+                            ; next = 20
+                            ; previous = 100
+                        }
+                    }
+                    ; INTERESTED_INDUSTRY = map:{
+                        ; columnName = INTERESTED_INDUSTRY
+                        ; diffType = CHANGE
+                        ; columnSizeDiff = map:{
+                            ; next = 50
+                            ; previous = 100
+                        }
+                    }
+                    ; EMAIL_ADDRESS = map:{
+                        ; columnName = EMAIL_ADDRESS
+                        ; diffType = DELETE
+                    }
+                    ; BIRTHDATE = map:{
+                        ; columnName = BIRTHDATE
+                        ; diffType = DELETE
+                    }
+                    ; PROFILE = map:{
+                        ; columnName = PROFILE
+                        ; diffType = DELETE
+                    }
+                }
+                ; uniqueKeyDiff = map:{
+                    ; EMAIL_ADDRESS = map:{
+                        ; constraintName = EMAIL_ADDRESS
+                        ; diffType = DELETE
+                    }
+                }
+            }
+        }
+    }
     ; 2014/07/09 14:00:08 = map:{
         ; diffDate = 2014/07/09 14:00:08
         ; tableDiff = map:{

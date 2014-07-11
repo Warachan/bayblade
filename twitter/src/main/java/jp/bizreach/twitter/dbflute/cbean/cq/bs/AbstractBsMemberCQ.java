@@ -236,6 +236,50 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * Set up ExistsReferrer (correlated sub-query). <br />
+     * {exists (select SENDER_ID from message where ...)} <br />
+     * message by SENDER_ID, named 'messageBySenderIdAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #DD4747">existsMessageBySenderIdList</span>(new SubQuery&lt;MessageCB&gt;() {
+     *     public void query(MessageCB subCB) {
+     *         subCB.query().setXxx...
+     *     }
+     * });
+     * </pre>
+     * @param subQuery The sub-query of MessageBySenderIdList for 'exists'. (NotNull)
+     */
+    public void existsMessageBySenderIdList(SubQuery<MessageCB> subQuery) {
+        assertObjectNotNull("subQuery", subQuery);
+        MessageCB cb = new MessageCB(); cb.xsetupForExistsReferrer(this);
+        try { lock(); subQuery.query(cb); } finally { unlock(); }
+        String pp = keepMemberId_ExistsReferrer_MessageBySenderIdList(cb.query());
+        registerExistsReferrer(cb.query(), "MEMBER_ID", "SENDER_ID", pp, "messageBySenderIdList");
+    }
+    public abstract String keepMemberId_ExistsReferrer_MessageBySenderIdList(MessageCQ sq);
+
+    /**
+     * Set up ExistsReferrer (correlated sub-query). <br />
+     * {exists (select RECEIVER_ID from message where ...)} <br />
+     * message by RECEIVER_ID, named 'messageByReceiverIdAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #DD4747">existsMessageByReceiverIdList</span>(new SubQuery&lt;MessageCB&gt;() {
+     *     public void query(MessageCB subCB) {
+     *         subCB.query().setXxx...
+     *     }
+     * });
+     * </pre>
+     * @param subQuery The sub-query of MessageByReceiverIdList for 'exists'. (NotNull)
+     */
+    public void existsMessageByReceiverIdList(SubQuery<MessageCB> subQuery) {
+        assertObjectNotNull("subQuery", subQuery);
+        MessageCB cb = new MessageCB(); cb.xsetupForExistsReferrer(this);
+        try { lock(); subQuery.query(cb); } finally { unlock(); }
+        String pp = keepMemberId_ExistsReferrer_MessageByReceiverIdList(cb.query());
+        registerExistsReferrer(cb.query(), "MEMBER_ID", "RECEIVER_ID", pp, "messageByReceiverIdList");
+    }
+    public abstract String keepMemberId_ExistsReferrer_MessageByReceiverIdList(MessageCQ sq);
+
+    /**
+     * Set up ExistsReferrer (correlated sub-query). <br />
      * {exists (select MEMBER_ID from tweet where ...)} <br />
      * tweet by MEMBER_ID, named 'tweetAsOne'.
      * <pre>
@@ -346,6 +390,50 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * Set up NotExistsReferrer (correlated sub-query). <br />
+     * {not exists (select SENDER_ID from message where ...)} <br />
+     * message by SENDER_ID, named 'messageBySenderIdAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #DD4747">notExistsMessageBySenderIdList</span>(new SubQuery&lt;MessageCB&gt;() {
+     *     public void query(MessageCB subCB) {
+     *         subCB.query().setXxx...
+     *     }
+     * });
+     * </pre>
+     * @param subQuery The sub-query of MemberId_NotExistsReferrer_MessageBySenderIdList for 'not exists'. (NotNull)
+     */
+    public void notExistsMessageBySenderIdList(SubQuery<MessageCB> subQuery) {
+        assertObjectNotNull("subQuery", subQuery);
+        MessageCB cb = new MessageCB(); cb.xsetupForExistsReferrer(this);
+        try { lock(); subQuery.query(cb); } finally { unlock(); }
+        String pp = keepMemberId_NotExistsReferrer_MessageBySenderIdList(cb.query());
+        registerNotExistsReferrer(cb.query(), "MEMBER_ID", "SENDER_ID", pp, "messageBySenderIdList");
+    }
+    public abstract String keepMemberId_NotExistsReferrer_MessageBySenderIdList(MessageCQ sq);
+
+    /**
+     * Set up NotExistsReferrer (correlated sub-query). <br />
+     * {not exists (select RECEIVER_ID from message where ...)} <br />
+     * message by RECEIVER_ID, named 'messageByReceiverIdAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #DD4747">notExistsMessageByReceiverIdList</span>(new SubQuery&lt;MessageCB&gt;() {
+     *     public void query(MessageCB subCB) {
+     *         subCB.query().setXxx...
+     *     }
+     * });
+     * </pre>
+     * @param subQuery The sub-query of MemberId_NotExistsReferrer_MessageByReceiverIdList for 'not exists'. (NotNull)
+     */
+    public void notExistsMessageByReceiverIdList(SubQuery<MessageCB> subQuery) {
+        assertObjectNotNull("subQuery", subQuery);
+        MessageCB cb = new MessageCB(); cb.xsetupForExistsReferrer(this);
+        try { lock(); subQuery.query(cb); } finally { unlock(); }
+        String pp = keepMemberId_NotExistsReferrer_MessageByReceiverIdList(cb.query());
+        registerNotExistsReferrer(cb.query(), "MEMBER_ID", "RECEIVER_ID", pp, "messageByReceiverIdList");
+    }
+    public abstract String keepMemberId_NotExistsReferrer_MessageByReceiverIdList(MessageCQ sq);
+
+    /**
+     * Set up NotExistsReferrer (correlated sub-query). <br />
      * {not exists (select MEMBER_ID from tweet where ...)} <br />
      * tweet by MEMBER_ID, named 'tweetAsOne'.
      * <pre>
@@ -428,6 +516,36 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * Set up InScopeRelation (sub-query). <br />
+     * {in (select SENDER_ID from message where ...)} <br />
+     * message by SENDER_ID, named 'messageBySenderIdAsOne'.
+     * @param subQuery The sub-query of MessageBySenderIdList for 'in-scope'. (NotNull)
+     */
+    public void inScopeMessageBySenderIdList(SubQuery<MessageCB> subQuery) {
+        assertObjectNotNull("subQuery", subQuery);
+        MessageCB cb = new MessageCB(); cb.xsetupForInScopeRelation(this);
+        try { lock(); subQuery.query(cb); } finally { unlock(); }
+        String pp = keepMemberId_InScopeRelation_MessageBySenderIdList(cb.query());
+        registerInScopeRelation(cb.query(), "MEMBER_ID", "SENDER_ID", pp, "messageBySenderIdList");
+    }
+    public abstract String keepMemberId_InScopeRelation_MessageBySenderIdList(MessageCQ sq);
+
+    /**
+     * Set up InScopeRelation (sub-query). <br />
+     * {in (select RECEIVER_ID from message where ...)} <br />
+     * message by RECEIVER_ID, named 'messageByReceiverIdAsOne'.
+     * @param subQuery The sub-query of MessageByReceiverIdList for 'in-scope'. (NotNull)
+     */
+    public void inScopeMessageByReceiverIdList(SubQuery<MessageCB> subQuery) {
+        assertObjectNotNull("subQuery", subQuery);
+        MessageCB cb = new MessageCB(); cb.xsetupForInScopeRelation(this);
+        try { lock(); subQuery.query(cb); } finally { unlock(); }
+        String pp = keepMemberId_InScopeRelation_MessageByReceiverIdList(cb.query());
+        registerInScopeRelation(cb.query(), "MEMBER_ID", "RECEIVER_ID", pp, "messageByReceiverIdList");
+    }
+    public abstract String keepMemberId_InScopeRelation_MessageByReceiverIdList(MessageCQ sq);
+
+    /**
+     * Set up InScopeRelation (sub-query). <br />
      * {in (select MEMBER_ID from tweet where ...)} <br />
      * tweet by MEMBER_ID, named 'tweetAsOne'.
      * @param subQuery The sub-query of TweetList for 'in-scope'. (NotNull)
@@ -503,6 +621,36 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * Set up NotInScopeRelation (sub-query). <br />
+     * {not in (select SENDER_ID from message where ...)} <br />
+     * message by SENDER_ID, named 'messageBySenderIdAsOne'.
+     * @param subQuery The sub-query of MessageBySenderIdList for 'not in-scope'. (NotNull)
+     */
+    public void notInScopeMessageBySenderIdList(SubQuery<MessageCB> subQuery) {
+        assertObjectNotNull("subQuery", subQuery);
+        MessageCB cb = new MessageCB(); cb.xsetupForInScopeRelation(this);
+        try { lock(); subQuery.query(cb); } finally { unlock(); }
+        String pp = keepMemberId_NotInScopeRelation_MessageBySenderIdList(cb.query());
+        registerNotInScopeRelation(cb.query(), "MEMBER_ID", "SENDER_ID", pp, "messageBySenderIdList");
+    }
+    public abstract String keepMemberId_NotInScopeRelation_MessageBySenderIdList(MessageCQ sq);
+
+    /**
+     * Set up NotInScopeRelation (sub-query). <br />
+     * {not in (select RECEIVER_ID from message where ...)} <br />
+     * message by RECEIVER_ID, named 'messageByReceiverIdAsOne'.
+     * @param subQuery The sub-query of MessageByReceiverIdList for 'not in-scope'. (NotNull)
+     */
+    public void notInScopeMessageByReceiverIdList(SubQuery<MessageCB> subQuery) {
+        assertObjectNotNull("subQuery", subQuery);
+        MessageCB cb = new MessageCB(); cb.xsetupForInScopeRelation(this);
+        try { lock(); subQuery.query(cb); } finally { unlock(); }
+        String pp = keepMemberId_NotInScopeRelation_MessageByReceiverIdList(cb.query());
+        registerNotInScopeRelation(cb.query(), "MEMBER_ID", "RECEIVER_ID", pp, "messageByReceiverIdList");
+    }
+    public abstract String keepMemberId_NotInScopeRelation_MessageByReceiverIdList(MessageCQ sq);
+
+    /**
+     * Set up NotInScopeRelation (sub-query). <br />
      * {not in (select MEMBER_ID from tweet where ...)} <br />
      * tweet by MEMBER_ID, named 'tweetAsOne'.
      * @param subQuery The sub-query of TweetList for 'not in-scope'. (NotNull)
@@ -542,6 +690,24 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
         registerSpecifyDerivedReferrer(fn, cb.query(), "MEMBER_ID", "MEMBER_ID", pp, "loginList", al, op);
     }
     public abstract String keepMemberId_SpecifyDerivedReferrer_LoginList(LoginCQ sq);
+
+    public void xsderiveMessageBySenderIdList(String fn, SubQuery<MessageCB> sq, String al, DerivedReferrerOption op) {
+        assertObjectNotNull("subQuery", sq);
+        MessageCB cb = new MessageCB(); cb.xsetupForDerivedReferrer(this);
+        try { lock(); sq.query(cb); } finally { unlock(); }
+        String pp = keepMemberId_SpecifyDerivedReferrer_MessageBySenderIdList(cb.query());
+        registerSpecifyDerivedReferrer(fn, cb.query(), "MEMBER_ID", "SENDER_ID", pp, "messageBySenderIdList", al, op);
+    }
+    public abstract String keepMemberId_SpecifyDerivedReferrer_MessageBySenderIdList(MessageCQ sq);
+
+    public void xsderiveMessageByReceiverIdList(String fn, SubQuery<MessageCB> sq, String al, DerivedReferrerOption op) {
+        assertObjectNotNull("subQuery", sq);
+        MessageCB cb = new MessageCB(); cb.xsetupForDerivedReferrer(this);
+        try { lock(); sq.query(cb); } finally { unlock(); }
+        String pp = keepMemberId_SpecifyDerivedReferrer_MessageByReceiverIdList(cb.query());
+        registerSpecifyDerivedReferrer(fn, cb.query(), "MEMBER_ID", "RECEIVER_ID", pp, "messageByReceiverIdList", al, op);
+    }
+    public abstract String keepMemberId_SpecifyDerivedReferrer_MessageByReceiverIdList(MessageCQ sq);
 
     public void xsderiveTweetList(String fn, SubQuery<TweetCB> sq, String al, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
@@ -656,6 +822,74 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * Prepare for (Query)DerivedReferrer (correlated sub-query). <br />
+     * {FOO &lt;= (select max(BAR) from message where ...)} <br />
+     * message by SENDER_ID, named 'messageBySenderIdAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #DD4747">derivedMessageBySenderIdList()</span>.<span style="color: #DD4747">max</span>(new SubQuery&lt;MessageCB&gt;() {
+     *     public void query(MessageCB subCB) {
+     *         subCB.specify().<span style="color: #DD4747">columnFoo...</span> <span style="color: #3F7E5E">// derived column by function</span>
+     *         subCB.query().setBar... <span style="color: #3F7E5E">// referrer condition</span>
+     *     }
+     * }).<span style="color: #DD4747">greaterEqual</span>(123); <span style="color: #3F7E5E">// condition to derived column</span>
+     * </pre>
+     * @return The object to set up a function for referrer table. (NotNull)
+     */
+    public HpQDRFunction<MessageCB> derivedMessageBySenderIdList() {
+        return xcreateQDRFunctionMessageBySenderIdList();
+    }
+    protected HpQDRFunction<MessageCB> xcreateQDRFunctionMessageBySenderIdList() {
+        return new HpQDRFunction<MessageCB>(new HpQDRSetupper<MessageCB>() {
+            public void setup(String fn, SubQuery<MessageCB> sq, String rd, Object vl, DerivedReferrerOption op) {
+                xqderiveMessageBySenderIdList(fn, sq, rd, vl, op);
+            }
+        });
+    }
+    public void xqderiveMessageBySenderIdList(String fn, SubQuery<MessageCB> sq, String rd, Object vl, DerivedReferrerOption op) {
+        assertObjectNotNull("subQuery", sq);
+        MessageCB cb = new MessageCB(); cb.xsetupForDerivedReferrer(this);
+        try { lock(); sq.query(cb); } finally { unlock(); }
+        String sqpp = keepMemberId_QueryDerivedReferrer_MessageBySenderIdList(cb.query()); String prpp = keepMemberId_QueryDerivedReferrer_MessageBySenderIdListParameter(vl);
+        registerQueryDerivedReferrer(fn, cb.query(), "MEMBER_ID", "SENDER_ID", sqpp, "messageBySenderIdList", rd, vl, prpp, op);
+    }
+    public abstract String keepMemberId_QueryDerivedReferrer_MessageBySenderIdList(MessageCQ sq);
+    public abstract String keepMemberId_QueryDerivedReferrer_MessageBySenderIdListParameter(Object vl);
+
+    /**
+     * Prepare for (Query)DerivedReferrer (correlated sub-query). <br />
+     * {FOO &lt;= (select max(BAR) from message where ...)} <br />
+     * message by RECEIVER_ID, named 'messageByReceiverIdAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #DD4747">derivedMessageByReceiverIdList()</span>.<span style="color: #DD4747">max</span>(new SubQuery&lt;MessageCB&gt;() {
+     *     public void query(MessageCB subCB) {
+     *         subCB.specify().<span style="color: #DD4747">columnFoo...</span> <span style="color: #3F7E5E">// derived column by function</span>
+     *         subCB.query().setBar... <span style="color: #3F7E5E">// referrer condition</span>
+     *     }
+     * }).<span style="color: #DD4747">greaterEqual</span>(123); <span style="color: #3F7E5E">// condition to derived column</span>
+     * </pre>
+     * @return The object to set up a function for referrer table. (NotNull)
+     */
+    public HpQDRFunction<MessageCB> derivedMessageByReceiverIdList() {
+        return xcreateQDRFunctionMessageByReceiverIdList();
+    }
+    protected HpQDRFunction<MessageCB> xcreateQDRFunctionMessageByReceiverIdList() {
+        return new HpQDRFunction<MessageCB>(new HpQDRSetupper<MessageCB>() {
+            public void setup(String fn, SubQuery<MessageCB> sq, String rd, Object vl, DerivedReferrerOption op) {
+                xqderiveMessageByReceiverIdList(fn, sq, rd, vl, op);
+            }
+        });
+    }
+    public void xqderiveMessageByReceiverIdList(String fn, SubQuery<MessageCB> sq, String rd, Object vl, DerivedReferrerOption op) {
+        assertObjectNotNull("subQuery", sq);
+        MessageCB cb = new MessageCB(); cb.xsetupForDerivedReferrer(this);
+        try { lock(); sq.query(cb); } finally { unlock(); }
+        String sqpp = keepMemberId_QueryDerivedReferrer_MessageByReceiverIdList(cb.query()); String prpp = keepMemberId_QueryDerivedReferrer_MessageByReceiverIdListParameter(vl);
+        registerQueryDerivedReferrer(fn, cb.query(), "MEMBER_ID", "RECEIVER_ID", sqpp, "messageByReceiverIdList", rd, vl, prpp, op);
+    }
+    public abstract String keepMemberId_QueryDerivedReferrer_MessageByReceiverIdList(MessageCQ sq);
+    public abstract String keepMemberId_QueryDerivedReferrer_MessageByReceiverIdListParameter(Object vl);
+
+    /**
+     * Prepare for (Query)DerivedReferrer (correlated sub-query). <br />
      * {FOO &lt;= (select max(BAR) from tweet where ...)} <br />
      * tweet by MEMBER_ID, named 'tweetAsOne'.
      * <pre>
@@ -702,128 +936,6 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     protected void regMemberId(ConditionKey ky, Object vl) { regQ(ky, vl, getCValueMemberId(), "MEMBER_ID"); }
     protected abstract ConditionValue getCValueMemberId();
-
-    /**
-     * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
-     * EMAIL_ADDRESS: {UQ, NotNull, VARCHAR(100)}
-     * @param emailAddress The value of emailAddress as equal. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setEmailAddress_Equal(String emailAddress) {
-        doSetEmailAddress_Equal(fRES(emailAddress));
-    }
-
-    protected void doSetEmailAddress_Equal(String emailAddress) {
-        regEmailAddress(CK_EQ, emailAddress);
-    }
-
-    /**
-     * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
-     * EMAIL_ADDRESS: {UQ, NotNull, VARCHAR(100)}
-     * @param emailAddress The value of emailAddress as notEqual. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setEmailAddress_NotEqual(String emailAddress) {
-        doSetEmailAddress_NotEqual(fRES(emailAddress));
-    }
-
-    protected void doSetEmailAddress_NotEqual(String emailAddress) {
-        regEmailAddress(CK_NES, emailAddress);
-    }
-
-    /**
-     * GreaterThan(&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
-     * EMAIL_ADDRESS: {UQ, NotNull, VARCHAR(100)}
-     * @param emailAddress The value of emailAddress as greaterThan. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setEmailAddress_GreaterThan(String emailAddress) {
-        regEmailAddress(CK_GT, fRES(emailAddress));
-    }
-
-    /**
-     * LessThan(&lt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
-     * EMAIL_ADDRESS: {UQ, NotNull, VARCHAR(100)}
-     * @param emailAddress The value of emailAddress as lessThan. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setEmailAddress_LessThan(String emailAddress) {
-        regEmailAddress(CK_LT, fRES(emailAddress));
-    }
-
-    /**
-     * GreaterEqual(&gt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
-     * EMAIL_ADDRESS: {UQ, NotNull, VARCHAR(100)}
-     * @param emailAddress The value of emailAddress as greaterEqual. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setEmailAddress_GreaterEqual(String emailAddress) {
-        regEmailAddress(CK_GE, fRES(emailAddress));
-    }
-
-    /**
-     * LessEqual(&lt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
-     * EMAIL_ADDRESS: {UQ, NotNull, VARCHAR(100)}
-     * @param emailAddress The value of emailAddress as lessEqual. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setEmailAddress_LessEqual(String emailAddress) {
-        regEmailAddress(CK_LE, fRES(emailAddress));
-    }
-
-    /**
-     * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br />
-     * EMAIL_ADDRESS: {UQ, NotNull, VARCHAR(100)}
-     * @param emailAddressList The collection of emailAddress as inScope. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setEmailAddress_InScope(Collection<String> emailAddressList) {
-        doSetEmailAddress_InScope(emailAddressList);
-    }
-
-    public void doSetEmailAddress_InScope(Collection<String> emailAddressList) {
-        regINS(CK_INS, cTL(emailAddressList), getCValueEmailAddress(), "EMAIL_ADDRESS");
-    }
-
-    /**
-     * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br />
-     * EMAIL_ADDRESS: {UQ, NotNull, VARCHAR(100)}
-     * @param emailAddressList The collection of emailAddress as notInScope. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setEmailAddress_NotInScope(Collection<String> emailAddressList) {
-        doSetEmailAddress_NotInScope(emailAddressList);
-    }
-
-    public void doSetEmailAddress_NotInScope(Collection<String> emailAddressList) {
-        regINS(CK_NINS, cTL(emailAddressList), getCValueEmailAddress(), "EMAIL_ADDRESS");
-    }
-
-    /**
-     * PrefixSearch {like 'xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br />
-     * EMAIL_ADDRESS: {UQ, NotNull, VARCHAR(100)}
-     * @param emailAddress The value of emailAddress as prefixSearch. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setEmailAddress_PrefixSearch(String emailAddress) {
-        setEmailAddress_LikeSearch(emailAddress, cLSOP());
-    }
-
-    /**
-     * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br />
-     * EMAIL_ADDRESS: {UQ, NotNull, VARCHAR(100)} <br />
-     * <pre>e.g. setEmailAddress_LikeSearch("xxx", new <span style="color: #DD4747">LikeSearchOption</span>().likeContain());</pre>
-     * @param emailAddress The value of emailAddress as likeSearch. (NullAllowed: if null (or empty), no condition)
-     * @param likeSearchOption The option of like-search. (NotNull)
-     */
-    public void setEmailAddress_LikeSearch(String emailAddress, LikeSearchOption likeSearchOption) {
-        regLSQ(CK_LS, fRES(emailAddress), getCValueEmailAddress(), "EMAIL_ADDRESS", likeSearchOption);
-    }
-
-    /**
-     * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br />
-     * And NullOrEmptyIgnored, SeveralRegistered. <br />
-     * EMAIL_ADDRESS: {UQ, NotNull, VARCHAR(100)}
-     * @param emailAddress The value of emailAddress as notLikeSearch. (NullAllowed: if null (or empty), no condition)
-     * @param likeSearchOption The option of not-like-search. (NotNull)
-     */
-    public void setEmailAddress_NotLikeSearch(String emailAddress, LikeSearchOption likeSearchOption) {
-        regLSQ(CK_NLS, fRES(emailAddress), getCValueEmailAddress(), "EMAIL_ADDRESS", likeSearchOption);
-    }
-
-    protected void regEmailAddress(ConditionKey ky, Object vl) { regQ(ky, vl, getCValueEmailAddress(), "EMAIL_ADDRESS"); }
-    protected abstract ConditionValue getCValueEmailAddress();
     
     /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br />
@@ -1083,7 +1195,7 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
-     * ACCOUNT_NAME: {NotNull, VARCHAR(100)}
+     * ACCOUNT_NAME: {NotNull, VARCHAR(20)}
      * @param accountName The value of accountName as equal. (NullAllowed: if null (or empty), no condition)
      */
     public void setAccountName_Equal(String accountName) {
@@ -1096,7 +1208,7 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
-     * ACCOUNT_NAME: {NotNull, VARCHAR(100)}
+     * ACCOUNT_NAME: {NotNull, VARCHAR(20)}
      * @param accountName The value of accountName as notEqual. (NullAllowed: if null (or empty), no condition)
      */
     public void setAccountName_NotEqual(String accountName) {
@@ -1109,7 +1221,7 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * GreaterThan(&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
-     * ACCOUNT_NAME: {NotNull, VARCHAR(100)}
+     * ACCOUNT_NAME: {NotNull, VARCHAR(20)}
      * @param accountName The value of accountName as greaterThan. (NullAllowed: if null (or empty), no condition)
      */
     public void setAccountName_GreaterThan(String accountName) {
@@ -1118,7 +1230,7 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * LessThan(&lt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
-     * ACCOUNT_NAME: {NotNull, VARCHAR(100)}
+     * ACCOUNT_NAME: {NotNull, VARCHAR(20)}
      * @param accountName The value of accountName as lessThan. (NullAllowed: if null (or empty), no condition)
      */
     public void setAccountName_LessThan(String accountName) {
@@ -1127,7 +1239,7 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * GreaterEqual(&gt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
-     * ACCOUNT_NAME: {NotNull, VARCHAR(100)}
+     * ACCOUNT_NAME: {NotNull, VARCHAR(20)}
      * @param accountName The value of accountName as greaterEqual. (NullAllowed: if null (or empty), no condition)
      */
     public void setAccountName_GreaterEqual(String accountName) {
@@ -1136,7 +1248,7 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * LessEqual(&lt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
-     * ACCOUNT_NAME: {NotNull, VARCHAR(100)}
+     * ACCOUNT_NAME: {NotNull, VARCHAR(20)}
      * @param accountName The value of accountName as lessEqual. (NullAllowed: if null (or empty), no condition)
      */
     public void setAccountName_LessEqual(String accountName) {
@@ -1145,7 +1257,7 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br />
-     * ACCOUNT_NAME: {NotNull, VARCHAR(100)}
+     * ACCOUNT_NAME: {NotNull, VARCHAR(20)}
      * @param accountNameList The collection of accountName as inScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setAccountName_InScope(Collection<String> accountNameList) {
@@ -1158,7 +1270,7 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br />
-     * ACCOUNT_NAME: {NotNull, VARCHAR(100)}
+     * ACCOUNT_NAME: {NotNull, VARCHAR(20)}
      * @param accountNameList The collection of accountName as notInScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setAccountName_NotInScope(Collection<String> accountNameList) {
@@ -1171,7 +1283,7 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * PrefixSearch {like 'xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br />
-     * ACCOUNT_NAME: {NotNull, VARCHAR(100)}
+     * ACCOUNT_NAME: {NotNull, VARCHAR(20)}
      * @param accountName The value of accountName as prefixSearch. (NullAllowed: if null (or empty), no condition)
      */
     public void setAccountName_PrefixSearch(String accountName) {
@@ -1180,7 +1292,7 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br />
-     * ACCOUNT_NAME: {NotNull, VARCHAR(100)} <br />
+     * ACCOUNT_NAME: {NotNull, VARCHAR(20)} <br />
      * <pre>e.g. setAccountName_LikeSearch("xxx", new <span style="color: #DD4747">LikeSearchOption</span>().likeContain());</pre>
      * @param accountName The value of accountName as likeSearch. (NullAllowed: if null (or empty), no condition)
      * @param likeSearchOption The option of like-search. (NotNull)
@@ -1192,7 +1304,7 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br />
      * And NullOrEmptyIgnored, SeveralRegistered. <br />
-     * ACCOUNT_NAME: {NotNull, VARCHAR(100)}
+     * ACCOUNT_NAME: {NotNull, VARCHAR(20)}
      * @param accountName The value of accountName as notLikeSearch. (NullAllowed: if null (or empty), no condition)
      * @param likeSearchOption The option of not-like-search. (NotNull)
      */
@@ -1863,7 +1975,7 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
-     * INTERESTED_INDUSTRY: {VARCHAR(100)}
+     * INTERESTED_INDUSTRY: {VARCHAR(50)}
      * @param interestedIndustry The value of interestedIndustry as equal. (NullAllowed: if null (or empty), no condition)
      */
     public void setInterestedIndustry_Equal(String interestedIndustry) {
@@ -1876,7 +1988,7 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
-     * INTERESTED_INDUSTRY: {VARCHAR(100)}
+     * INTERESTED_INDUSTRY: {VARCHAR(50)}
      * @param interestedIndustry The value of interestedIndustry as notEqual. (NullAllowed: if null (or empty), no condition)
      */
     public void setInterestedIndustry_NotEqual(String interestedIndustry) {
@@ -1889,7 +2001,7 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * GreaterThan(&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
-     * INTERESTED_INDUSTRY: {VARCHAR(100)}
+     * INTERESTED_INDUSTRY: {VARCHAR(50)}
      * @param interestedIndustry The value of interestedIndustry as greaterThan. (NullAllowed: if null (or empty), no condition)
      */
     public void setInterestedIndustry_GreaterThan(String interestedIndustry) {
@@ -1898,7 +2010,7 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * LessThan(&lt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
-     * INTERESTED_INDUSTRY: {VARCHAR(100)}
+     * INTERESTED_INDUSTRY: {VARCHAR(50)}
      * @param interestedIndustry The value of interestedIndustry as lessThan. (NullAllowed: if null (or empty), no condition)
      */
     public void setInterestedIndustry_LessThan(String interestedIndustry) {
@@ -1907,7 +2019,7 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * GreaterEqual(&gt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
-     * INTERESTED_INDUSTRY: {VARCHAR(100)}
+     * INTERESTED_INDUSTRY: {VARCHAR(50)}
      * @param interestedIndustry The value of interestedIndustry as greaterEqual. (NullAllowed: if null (or empty), no condition)
      */
     public void setInterestedIndustry_GreaterEqual(String interestedIndustry) {
@@ -1916,7 +2028,7 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * LessEqual(&lt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
-     * INTERESTED_INDUSTRY: {VARCHAR(100)}
+     * INTERESTED_INDUSTRY: {VARCHAR(50)}
      * @param interestedIndustry The value of interestedIndustry as lessEqual. (NullAllowed: if null (or empty), no condition)
      */
     public void setInterestedIndustry_LessEqual(String interestedIndustry) {
@@ -1925,7 +2037,7 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br />
-     * INTERESTED_INDUSTRY: {VARCHAR(100)}
+     * INTERESTED_INDUSTRY: {VARCHAR(50)}
      * @param interestedIndustryList The collection of interestedIndustry as inScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setInterestedIndustry_InScope(Collection<String> interestedIndustryList) {
@@ -1938,7 +2050,7 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br />
-     * INTERESTED_INDUSTRY: {VARCHAR(100)}
+     * INTERESTED_INDUSTRY: {VARCHAR(50)}
      * @param interestedIndustryList The collection of interestedIndustry as notInScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setInterestedIndustry_NotInScope(Collection<String> interestedIndustryList) {
@@ -1951,7 +2063,7 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * PrefixSearch {like 'xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br />
-     * INTERESTED_INDUSTRY: {VARCHAR(100)}
+     * INTERESTED_INDUSTRY: {VARCHAR(50)}
      * @param interestedIndustry The value of interestedIndustry as prefixSearch. (NullAllowed: if null (or empty), no condition)
      */
     public void setInterestedIndustry_PrefixSearch(String interestedIndustry) {
@@ -1960,7 +2072,7 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br />
-     * INTERESTED_INDUSTRY: {VARCHAR(100)} <br />
+     * INTERESTED_INDUSTRY: {VARCHAR(50)} <br />
      * <pre>e.g. setInterestedIndustry_LikeSearch("xxx", new <span style="color: #DD4747">LikeSearchOption</span>().likeContain());</pre>
      * @param interestedIndustry The value of interestedIndustry as likeSearch. (NullAllowed: if null (or empty), no condition)
      * @param likeSearchOption The option of like-search. (NotNull)
@@ -1972,7 +2084,7 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br />
      * And NullOrEmptyIgnored, SeveralRegistered. <br />
-     * INTERESTED_INDUSTRY: {VARCHAR(100)}
+     * INTERESTED_INDUSTRY: {VARCHAR(50)}
      * @param interestedIndustry The value of interestedIndustry as notLikeSearch. (NullAllowed: if null (or empty), no condition)
      * @param likeSearchOption The option of not-like-search. (NotNull)
      */
@@ -1982,19 +2094,19 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * IsNull {is null}. And OnlyOnceRegistered. <br />
-     * INTERESTED_INDUSTRY: {VARCHAR(100)}
+     * INTERESTED_INDUSTRY: {VARCHAR(50)}
      */
     public void setInterestedIndustry_IsNull() { regInterestedIndustry(CK_ISN, DOBJ); }
 
     /**
      * IsNullOrEmpty {is null or empty}. And OnlyOnceRegistered. <br />
-     * INTERESTED_INDUSTRY: {VARCHAR(100)}
+     * INTERESTED_INDUSTRY: {VARCHAR(50)}
      */
     public void setInterestedIndustry_IsNullOrEmpty() { regInterestedIndustry(CK_ISNOE, DOBJ); }
 
     /**
      * IsNotNull {is not null}. And OnlyOnceRegistered. <br />
-     * INTERESTED_INDUSTRY: {VARCHAR(100)}
+     * INTERESTED_INDUSTRY: {VARCHAR(50)}
      */
     public void setInterestedIndustry_IsNotNull() { regInterestedIndustry(CK_ISNN, DOBJ); }
 
@@ -2116,234 +2228,6 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     protected void regGraduationYear(ConditionKey ky, Object vl) { regQ(ky, vl, getCValueGraduationYear(), "GRADUATION_YEAR"); }
     protected abstract ConditionValue getCValueGraduationYear();
-
-    /**
-     * Equal(=). And NullIgnored, OnlyOnceRegistered. <br />
-     * BIRTHDATE: {DATE(10)}
-     * @param birthdate The value of birthdate as equal. (NullAllowed: if null, no condition)
-     */
-    public void setBirthdate_Equal(java.util.Date birthdate) {
-        regBirthdate(CK_EQ,  fCTPD(birthdate));
-    }
-
-    /**
-     * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br />
-     * BIRTHDATE: {DATE(10)}
-     * @param birthdate The value of birthdate as greaterThan. (NullAllowed: if null, no condition)
-     */
-    public void setBirthdate_GreaterThan(java.util.Date birthdate) {
-        regBirthdate(CK_GT,  fCTPD(birthdate));
-    }
-
-    /**
-     * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br />
-     * BIRTHDATE: {DATE(10)}
-     * @param birthdate The value of birthdate as lessThan. (NullAllowed: if null, no condition)
-     */
-    public void setBirthdate_LessThan(java.util.Date birthdate) {
-        regBirthdate(CK_LT,  fCTPD(birthdate));
-    }
-
-    /**
-     * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br />
-     * BIRTHDATE: {DATE(10)}
-     * @param birthdate The value of birthdate as greaterEqual. (NullAllowed: if null, no condition)
-     */
-    public void setBirthdate_GreaterEqual(java.util.Date birthdate) {
-        regBirthdate(CK_GE,  fCTPD(birthdate));
-    }
-
-    /**
-     * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br />
-     * BIRTHDATE: {DATE(10)}
-     * @param birthdate The value of birthdate as lessEqual. (NullAllowed: if null, no condition)
-     */
-    public void setBirthdate_LessEqual(java.util.Date birthdate) {
-        regBirthdate(CK_LE, fCTPD(birthdate));
-    }
-
-    /**
-     * FromTo with various options. (versatile) {(default) fromDatetime &lt;= column &lt;= toDatetime} <br />
-     * And NullIgnored, OnlyOnceRegistered. <br />
-     * BIRTHDATE: {DATE(10)}
-     * <pre>e.g. setBirthdate_FromTo(fromDate, toDate, new <span style="color: #DD4747">FromToOption</span>().compareAsDate());</pre>
-     * @param fromDatetime The from-datetime(yyyy/MM/dd HH:mm:ss.SSS) of birthdate. (NullAllowed: if null, no from-condition)
-     * @param toDatetime The to-datetime(yyyy/MM/dd HH:mm:ss.SSS) of birthdate. (NullAllowed: if null, no to-condition)
-     * @param fromToOption The option of from-to. (NotNull)
-     */
-    public void setBirthdate_FromTo(Date fromDatetime, Date toDatetime, FromToOption fromToOption) {
-        regFTQ(fCTPD(fromDatetime), fCTPD(toDatetime), getCValueBirthdate(), "BIRTHDATE", fromToOption);
-    }
-
-    /**
-     * DateFromTo. (Date means yyyy/MM/dd) {fromDate &lt;= column &lt; toDate + 1 day} <br />
-     * And NullIgnored, OnlyOnceRegistered. <br />
-     * BIRTHDATE: {DATE(10)}
-     * <pre>
-     * e.g. from:{2007/04/10 08:24:53} to:{2007/04/16 14:36:29}
-     *  column &gt;= '2007/04/10 00:00:00' and column <span style="color: #DD4747">&lt; '2007/04/17 00:00:00'</span>
-     * </pre>
-     * @param fromDate The from-date(yyyy/MM/dd) of birthdate. (NullAllowed: if null, no from-condition)
-     * @param toDate The to-date(yyyy/MM/dd) of birthdate. (NullAllowed: if null, no to-condition)
-     */
-    public void setBirthdate_DateFromTo(Date fromDate, Date toDate) {
-        setBirthdate_FromTo(fromDate, toDate, new FromToOption().compareAsDate());
-    }
-
-    /**
-     * IsNull {is null}. And OnlyOnceRegistered. <br />
-     * BIRTHDATE: {DATE(10)}
-     */
-    public void setBirthdate_IsNull() { regBirthdate(CK_ISN, DOBJ); }
-
-    /**
-     * IsNotNull {is not null}. And OnlyOnceRegistered. <br />
-     * BIRTHDATE: {DATE(10)}
-     */
-    public void setBirthdate_IsNotNull() { regBirthdate(CK_ISNN, DOBJ); }
-
-    protected void regBirthdate(ConditionKey ky, Object vl) { regQ(ky, vl, getCValueBirthdate(), "BIRTHDATE"); }
-    protected abstract ConditionValue getCValueBirthdate();
-
-    /**
-     * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
-     * PROFILE: {VARCHAR(200)}
-     * @param profile The value of profile as equal. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setProfile_Equal(String profile) {
-        doSetProfile_Equal(fRES(profile));
-    }
-
-    protected void doSetProfile_Equal(String profile) {
-        regProfile(CK_EQ, profile);
-    }
-
-    /**
-     * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
-     * PROFILE: {VARCHAR(200)}
-     * @param profile The value of profile as notEqual. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setProfile_NotEqual(String profile) {
-        doSetProfile_NotEqual(fRES(profile));
-    }
-
-    protected void doSetProfile_NotEqual(String profile) {
-        regProfile(CK_NES, profile);
-    }
-
-    /**
-     * GreaterThan(&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
-     * PROFILE: {VARCHAR(200)}
-     * @param profile The value of profile as greaterThan. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setProfile_GreaterThan(String profile) {
-        regProfile(CK_GT, fRES(profile));
-    }
-
-    /**
-     * LessThan(&lt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
-     * PROFILE: {VARCHAR(200)}
-     * @param profile The value of profile as lessThan. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setProfile_LessThan(String profile) {
-        regProfile(CK_LT, fRES(profile));
-    }
-
-    /**
-     * GreaterEqual(&gt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
-     * PROFILE: {VARCHAR(200)}
-     * @param profile The value of profile as greaterEqual. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setProfile_GreaterEqual(String profile) {
-        regProfile(CK_GE, fRES(profile));
-    }
-
-    /**
-     * LessEqual(&lt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
-     * PROFILE: {VARCHAR(200)}
-     * @param profile The value of profile as lessEqual. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setProfile_LessEqual(String profile) {
-        regProfile(CK_LE, fRES(profile));
-    }
-
-    /**
-     * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br />
-     * PROFILE: {VARCHAR(200)}
-     * @param profileList The collection of profile as inScope. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setProfile_InScope(Collection<String> profileList) {
-        doSetProfile_InScope(profileList);
-    }
-
-    public void doSetProfile_InScope(Collection<String> profileList) {
-        regINS(CK_INS, cTL(profileList), getCValueProfile(), "PROFILE");
-    }
-
-    /**
-     * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br />
-     * PROFILE: {VARCHAR(200)}
-     * @param profileList The collection of profile as notInScope. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setProfile_NotInScope(Collection<String> profileList) {
-        doSetProfile_NotInScope(profileList);
-    }
-
-    public void doSetProfile_NotInScope(Collection<String> profileList) {
-        regINS(CK_NINS, cTL(profileList), getCValueProfile(), "PROFILE");
-    }
-
-    /**
-     * PrefixSearch {like 'xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br />
-     * PROFILE: {VARCHAR(200)}
-     * @param profile The value of profile as prefixSearch. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setProfile_PrefixSearch(String profile) {
-        setProfile_LikeSearch(profile, cLSOP());
-    }
-
-    /**
-     * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br />
-     * PROFILE: {VARCHAR(200)} <br />
-     * <pre>e.g. setProfile_LikeSearch("xxx", new <span style="color: #DD4747">LikeSearchOption</span>().likeContain());</pre>
-     * @param profile The value of profile as likeSearch. (NullAllowed: if null (or empty), no condition)
-     * @param likeSearchOption The option of like-search. (NotNull)
-     */
-    public void setProfile_LikeSearch(String profile, LikeSearchOption likeSearchOption) {
-        regLSQ(CK_LS, fRES(profile), getCValueProfile(), "PROFILE", likeSearchOption);
-    }
-
-    /**
-     * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br />
-     * And NullOrEmptyIgnored, SeveralRegistered. <br />
-     * PROFILE: {VARCHAR(200)}
-     * @param profile The value of profile as notLikeSearch. (NullAllowed: if null (or empty), no condition)
-     * @param likeSearchOption The option of not-like-search. (NotNull)
-     */
-    public void setProfile_NotLikeSearch(String profile, LikeSearchOption likeSearchOption) {
-        regLSQ(CK_NLS, fRES(profile), getCValueProfile(), "PROFILE", likeSearchOption);
-    }
-
-    /**
-     * IsNull {is null}. And OnlyOnceRegistered. <br />
-     * PROFILE: {VARCHAR(200)}
-     */
-    public void setProfile_IsNull() { regProfile(CK_ISN, DOBJ); }
-
-    /**
-     * IsNullOrEmpty {is null or empty}. And OnlyOnceRegistered. <br />
-     * PROFILE: {VARCHAR(200)}
-     */
-    public void setProfile_IsNullOrEmpty() { regProfile(CK_ISNOE, DOBJ); }
-
-    /**
-     * IsNotNull {is not null}. And OnlyOnceRegistered. <br />
-     * PROFILE: {VARCHAR(200)}
-     */
-    public void setProfile_IsNotNull() { regProfile(CK_ISNN, DOBJ); }
-
-    protected void regProfile(ConditionKey ky, Object vl) { regQ(ky, vl, getCValueProfile(), "PROFILE"); }
-    protected abstract ConditionValue getCValueProfile();
 
     // ===================================================================================
     //                                                                     ScalarCondition

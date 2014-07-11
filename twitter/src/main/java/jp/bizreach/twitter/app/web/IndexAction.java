@@ -20,6 +20,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import jp.bizreach.twitter.dbflute.cbean.MemberCB;
 import jp.bizreach.twitter.dbflute.exbhv.LoginBhv;
@@ -31,7 +32,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
-import org.seasar.dbflute.cbean.OrQuery;
 import org.seasar.struts.annotation.ActionForm;
 import org.seasar.struts.annotation.Execute;
 import org.seasar.struts.util.RequestUtil;
@@ -64,6 +64,8 @@ public class IndexAction {
     protected LoginBhv loginBhv;
     @Resource
     protected PassDigestLogic passDigestLogic;
+    @Resource
+    protected HttpServletRequest request;
     // -----------------------------------------------------
     //                                          Display Data
     //                                          ------------
@@ -86,15 +88,14 @@ public class IndexAction {
     @Execute(validate = "validate", input = "index.jsp")
     public String gotoLogin() {
         LOG.debug("***" + indexForm);
-        String inputEmail = indexForm.loginKey;
         Login login = new Login();
         Date loginDate = new Date();
         Timestamp loginTime = new Timestamp(loginDate.getTime());
         login.setMemberId(sessionDto.myId);
         login.setInsDatetime(loginTime);
         login.setUpdDatetime(loginTime);
-        login.setInsTrace(inputEmail);
-        login.setUpdTrace(inputEmail);
+        login.setInsTrace(indexForm.loginKey);
+        login.setUpdTrace(indexForm.loginKey);
         loginBhv.insert(login);
         LOG.debug("***" + sessionDto.username);
         return "/home/?redirect=true";
@@ -105,26 +106,19 @@ public class IndexAction {
         ActionMessages errors = new ActionMessages();
         String digestedPass = passDigestLogic.build(indexForm.loginPassword);
         if (indexForm.loginKey == "" || indexForm.loginPassword == "") {
-            errors.add("loginKey", new ActionMessage("ログインIDもしくはパスワードが未入力です。", false));
+            errors.add("loginKey", new ActionMessage("ユーザ名もしくはパスワードが未入力です。", false));
         } else {
             MemberCB cb = new MemberCB();
-            cb.orScopeQuery(new OrQuery<MemberCB>() {
-                @Override
-                public void query(MemberCB orCB) {
-                    orCB.query().setEmailAddress_Equal(indexForm.loginKey);
-                    orCB.query().setUserName_Equal(indexForm.loginKey);
-                }
-            });
+            cb.query().setUserName_Equal(indexForm.loginKey);
             cb.query().queryMemberSecurityAsOne().setPassword_Equal(digestedPass);
             Member member = memberBhv.selectEntity(cb);
             if (member != null) {
                 sessionDto.myId = member.getMemberId();
-                sessionDto.email = member.getEmailAddress();
                 sessionDto.username = member.getUserName();
                 sessionDto.accountName = member.getAccountName();
                 sessionDto.status = member.getMemberStatusCode();
             } else {
-                errors.add("loginKey", new ActionMessage("ログインIDもしくはパスワードが間違っています。", false));
+                errors.add("loginKey", new ActionMessage("ユーザ名もしくはパスワードが間違っています。", false));
             }
         }
         return errors;

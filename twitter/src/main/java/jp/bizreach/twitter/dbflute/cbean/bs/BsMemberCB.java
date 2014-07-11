@@ -102,22 +102,10 @@ public class BsMemberCB extends AbstractConditionBean {
 
     /**
      * Accept the query condition of unique key as equal.
-     * @param emailAddress : UQ, NotNull, VARCHAR(100). (NotNull)
-     * @return this. (NotNull)
-     */
-    public MemberCB acceptUniqueOfEmailAddress(String emailAddress) {
-        assertObjectNotNull("emailAddress", emailAddress);
-        BsMemberCB cb = this;
-        cb.query().setEmailAddress_Equal(emailAddress);
-        return (MemberCB)this;
-    }
-
-    /**
-     * Accept the query condition of unique key as equal.
      * @param userName : UQ, NotNull, VARCHAR(100). (NotNull)
      * @return this. (NotNull)
      */
-    public MemberCB acceptUniqueOfUserName(String userName) {
+    public MemberCB acceptUniqueOf(String userName) {
         assertObjectNotNull("userName", userName);
         BsMemberCB cb = this;
         cb.query().setUserName_Equal(userName);
@@ -381,11 +369,6 @@ public class BsMemberCB extends AbstractConditionBean {
          */
         public HpSpecifiedColumn columnMemberId() { return doColumn("MEMBER_ID"); }
         /**
-         * EMAIL_ADDRESS: {UQ, NotNull, VARCHAR(100)}
-         * @return The information object of specified column. (NotNull)
-         */
-        public HpSpecifiedColumn columnEmailAddress() { return doColumn("EMAIL_ADDRESS"); }
-        /**
          * MEMBER_STATUS_CODE: {IX, NotNull, INT(10), FK to member_status}
          * @return The information object of specified column. (NotNull)
          */
@@ -396,7 +379,7 @@ public class BsMemberCB extends AbstractConditionBean {
          */
         public HpSpecifiedColumn columnUserName() { return doColumn("USER_NAME"); }
         /**
-         * ACCOUNT_NAME: {NotNull, VARCHAR(100)}
+         * ACCOUNT_NAME: {NotNull, VARCHAR(20)}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnAccountName() { return doColumn("ACCOUNT_NAME"); }
@@ -431,7 +414,7 @@ public class BsMemberCB extends AbstractConditionBean {
          */
         public HpSpecifiedColumn columnRecruitingNumber() { return doColumn("RECRUITING_NUMBER"); }
         /**
-         * INTERESTED_INDUSTRY: {VARCHAR(100)}
+         * INTERESTED_INDUSTRY: {VARCHAR(50)}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnInterestedIndustry() { return doColumn("INTERESTED_INDUSTRY"); }
@@ -440,16 +423,6 @@ public class BsMemberCB extends AbstractConditionBean {
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnGraduationYear() { return doColumn("GRADUATION_YEAR"); }
-        /**
-         * BIRTHDATE: {DATE(10)}
-         * @return The information object of specified column. (NotNull)
-         */
-        public HpSpecifiedColumn columnBirthdate() { return doColumn("BIRTHDATE"); }
-        /**
-         * PROFILE: {VARCHAR(200)}
-         * @return The information object of specified column. (NotNull)
-         */
-        public HpSpecifiedColumn columnProfile() { return doColumn("PROFILE"); }
         public void everyColumn() { doEveryColumn(); }
         public void exceptRecordMetaColumn() { doExceptRecordMetaColumn(); }
         @Override
@@ -563,6 +536,46 @@ public class BsMemberCB extends AbstractConditionBean {
             return new HpSDRFunction<LoginCB, MemberCQ>(_baseCB, _qyCall.qy(), new HpSDRSetupper<LoginCB, MemberCQ>() {
                 public void setup(String fn, SubQuery<LoginCB> sq, MemberCQ cq, String al, DerivedReferrerOption op) {
                     cq.xsderiveLoginList(fn, sq, al, op); } }, _dbmetaProvider);
+        }
+        /**
+         * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br />
+         * {select max(FOO) from message where ...) as FOO_MAX} <br />
+         * message by SENDER_ID, named 'messageBySenderIdList'.
+         * <pre>
+         * cb.specify().<span style="color: #DD4747">derivedMessageBySenderIdList()</span>.<span style="color: #DD4747">max</span>(new SubQuery&lt;MessageCB&gt;() {
+         *     public void query(MessageCB subCB) {
+         *         subCB.specify().<span style="color: #DD4747">columnFoo...</span> <span style="color: #3F7E5E">// derived column by function</span>
+         *         subCB.query().setBar... <span style="color: #3F7E5E">// referrer condition</span>
+         *     }
+         * }, Message.<span style="color: #DD4747">ALIAS_foo...</span>);
+         * </pre>
+         * @return The object to set up a function for referrer table. (NotNull)
+         */
+        public HpSDRFunction<MessageCB, MemberCQ> derivedMessageBySenderIdList() {
+            assertDerived("messageBySenderIdList"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
+            return new HpSDRFunction<MessageCB, MemberCQ>(_baseCB, _qyCall.qy(), new HpSDRSetupper<MessageCB, MemberCQ>() {
+                public void setup(String fn, SubQuery<MessageCB> sq, MemberCQ cq, String al, DerivedReferrerOption op) {
+                    cq.xsderiveMessageBySenderIdList(fn, sq, al, op); } }, _dbmetaProvider);
+        }
+        /**
+         * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br />
+         * {select max(FOO) from message where ...) as FOO_MAX} <br />
+         * message by RECEIVER_ID, named 'messageByReceiverIdList'.
+         * <pre>
+         * cb.specify().<span style="color: #DD4747">derivedMessageByReceiverIdList()</span>.<span style="color: #DD4747">max</span>(new SubQuery&lt;MessageCB&gt;() {
+         *     public void query(MessageCB subCB) {
+         *         subCB.specify().<span style="color: #DD4747">columnFoo...</span> <span style="color: #3F7E5E">// derived column by function</span>
+         *         subCB.query().setBar... <span style="color: #3F7E5E">// referrer condition</span>
+         *     }
+         * }, Message.<span style="color: #DD4747">ALIAS_foo...</span>);
+         * </pre>
+         * @return The object to set up a function for referrer table. (NotNull)
+         */
+        public HpSDRFunction<MessageCB, MemberCQ> derivedMessageByReceiverIdList() {
+            assertDerived("messageByReceiverIdList"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
+            return new HpSDRFunction<MessageCB, MemberCQ>(_baseCB, _qyCall.qy(), new HpSDRSetupper<MessageCB, MemberCQ>() {
+                public void setup(String fn, SubQuery<MessageCB> sq, MemberCQ cq, String al, DerivedReferrerOption op) {
+                    cq.xsderiveMessageByReceiverIdList(fn, sq, al, op); } }, _dbmetaProvider);
         }
         /**
          * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br />

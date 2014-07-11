@@ -70,9 +70,6 @@
         <column autoIncrement="true" comment="会員ID : 会員のID&#xa;"
             dbType="INT" javaType="Integer" name="MEMBER_ID"
             pkName="PRIMARY" primaryKey="true" required="true" size="10" type="INTEGER"/>
-        <column comment="メールアドレス : 会員のメールアドレス" dbType="VARCHAR"
-            javaType="String" name="EMAIL_ADDRESS" required="true"
-            size="100" type="VARCHAR"/>
         <column comment="メンバーステータスコード : 企業か学生か" dbType="INT"
             javaType="Integer" name="MEMBER_STATUS_CODE" required="true"
             size="10" type="INTEGER"/>
@@ -80,7 +77,7 @@
             javaType="String" name="USER_NAME" required="true"
             size="100" type="VARCHAR"/>
         <column comment="アカウント名" dbType="VARCHAR" javaType="String"
-            name="ACCOUNT_NAME" required="true" size="100" type="VARCHAR"/>
+            name="ACCOUNT_NAME" required="true" size="20" type="VARCHAR"/>
         <column comment="所属団体名 : 学校、もしくは企業名を登録" dbType="VARCHAR"
             javaType="String" name="GROUP_NAME" required="true"
             size="100" type="VARCHAR"/>
@@ -97,20 +94,13 @@
         <column comment="採用数 : 企業の採用予定数" dbType="VARCHAR"
             javaType="String" name="RECRUITING_NUMBER" size="20" type="VARCHAR"/>
         <column comment="希望業界 : 学生が希望している業界。" dbType="VARCHAR"
-            javaType="String" name="INTERESTED_INDUSTRY" size="100" type="VARCHAR"/>
+            javaType="String" name="INTERESTED_INDUSTRY" size="50" type="VARCHAR"/>
         <column comment="卒業年 : 卒業年もしくは卒業予定年" dbType="INT"
             javaType="Integer" name="GRADUATION_YEAR" size="10" type="INTEGER"/>
-        <column comment="生年月日 : 会員の生年月日" dbType="DATE"
-            javaType="java.util.Date" name="BIRTHDATE" size="10" type="DATE"/>
-        <column comment="プロフィール" dbType="VARCHAR" javaType="String"
-            name="PROFILE" size="200" type="VARCHAR"/>
         <foreign-key foreignSchema="twitter.$$NoNameSchema$$"
             foreignTable="member_status" name="member_ibfk_1">
             <reference foreign="MEMBER_STATUS_CODE" local="MEMBER_STATUS_CODE"/>
         </foreign-key>
-        <unique name="EMAIL_ADDRESS">
-            <unique-column name="EMAIL_ADDRESS" position="1"/>
-        </unique>
         <unique name="USER_NAME">
             <unique-column name="USER_NAME" position="1"/>
         </unique>
@@ -147,6 +137,46 @@
             pkName="PRIMARY" primaryKey="true" required="true" size="10" type="INTEGER"/>
         <column comment="会員ステータス名" dbType="VARCHAR" javaType="String"
             name="MEMBER_STATUS_NAME" required="true" size="20" type="VARCHAR"/>
+    </table>
+    <table comment="メッセージテーブル" name="message"
+        schema="twitter.$$NoNameSchema$$" type="TABLE">
+        <column autoIncrement="true" comment="メッセージID" dbType="INT"
+            javaType="Integer" name="MESSAGE_ID" pkName="PRIMARY"
+            primaryKey="true" required="true" size="10" type="INTEGER"/>
+        <column comment="送信者ID : メッセー送信する会員のID&#xa;" dbType="INT"
+            javaType="Integer" name="SENDER_ID" required="true"
+            size="10" type="INTEGER"/>
+        <column comment="受信者ID : 受信する会員のID&#xa;" dbType="INT"
+            javaType="Integer" name="RECEIVER_ID" required="true"
+            size="10" type="INTEGER"/>
+        <column comment="送信受信時間" dbType="VARCHAR" javaType="String"
+            name="MESSAGE_TIME" required="true" size="100" type="VARCHAR"/>
+        <column comment="message : メッセージ" dbType="VARCHAR"
+            javaType="String" name="MESSAGE" required="true" size="255" type="VARCHAR"/>
+        <column comment="insert日時" dbType="DATETIME"
+            javaType="java.sql.Timestamp" name="INS_DATETIME"
+            required="true" size="19" type="TIMESTAMP"/>
+        <column comment="UPD_DATETIME" dbType="DATETIME"
+            javaType="java.sql.Timestamp" name="UPD_DATETIME"
+            required="true" size="19" type="TIMESTAMP"/>
+        <column comment="Insertトレース" dbType="VARCHAR" javaType="String"
+            name="INS_TRACE" required="true" size="256" type="VARCHAR"/>
+        <column comment="UPD トレース" dbType="VARCHAR" javaType="String"
+            name="UPD_TRACE" required="true" size="256" type="VARCHAR"/>
+        <foreign-key foreignSchema="twitter.$$NoNameSchema$$"
+            foreignTable="member" name="message_ibfk_1">
+            <reference foreign="MEMBER_ID" local="SENDER_ID"/>
+        </foreign-key>
+        <foreign-key foreignSchema="twitter.$$NoNameSchema$$"
+            foreignTable="member" name="message_ibfk_2">
+            <reference foreign="MEMBER_ID" local="RECEIVER_ID"/>
+        </foreign-key>
+        <index name="RECEIVER_ID">
+            <index-column name="RECEIVER_ID" position="1"/>
+        </index>
+        <index name="SENDER_ID">
+            <index-column name="SENDER_ID" position="1"/>
+        </index>
     </table>
     <table comment="TWEET" name="tweet"
         schema="twitter.$$NoNameSchema$$" type="TABLE">

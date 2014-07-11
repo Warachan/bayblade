@@ -7,24 +7,24 @@
 	<link href='http://fonts.googleapis.com/css?family=Libre+Baskerville' rel='stylesheet' type='text/css'>
 </head>
 <div class = "wrapper">
-	<div class ="header">
-		<p>Pocketer</p>
-	</div>
 	<ul class = "global-navigation">
 			<li id="loginButton"><a id ="signupToLogin" href= "http:/twitter/">Login</a></li>
 	</ul>
+	<div class ="header">
+		<p>Pocketer</p>
+	</div>
 <body>
 	<div class="signup-main">
 		<div class="signup-box">
 		<h2>Signup on Twitter!</h2>
 		<s:form action="/signup/regester/" styleClass="signupForm">
-			<div class="email">
+			<!--<div class="email">
 				<h4>Email</h4>
 				<html:text property ="newEmail" size="60" styleClass="emailBox"/>
 					<div class = "emailError">
 						<html:errors property="newEmail"/>
 					</div>
-			</div>
+			</div>-->
 			<div class="name">
 				<h4>Name</h4>
 				<html:text property="accountName"  size="60" styleClass = "nameBox"/>
@@ -34,6 +34,7 @@
 			</div>
 			<div class="username">
 				<h4>Username</h4>
+				*5文字以上・100文字以内で、英数字を入力してください。
 				<html:text property="username"  size="60" styleClass = "usernameBox"/><br>
 					<div class = "usernameError">
 						<html:errors property="username"/>

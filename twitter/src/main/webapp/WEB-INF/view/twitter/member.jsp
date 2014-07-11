@@ -7,9 +7,6 @@
 	<link href='http://fonts.googleapis.com/css?family=Libre+Baskerville' rel='stylesheet' type='text/css'>
 </head>
 <div class = "wrapper">
-		<div class ="header">
-		<p>Pocketer</p>
-	</div>
 	<ul class = "global-navigation">
 			<li><a id="profile" href= "http:/twitter/profile/">Profile</a></li>
 			<li id="home"><a id="homeButton" href= "http:/twitter/home/">Home</a></li>
@@ -25,6 +22,9 @@
 					</s:form>
 				</li>
 		</ul>
+	<div class ="header">
+		<p>Pocketer</p>
+	</div>
 <body>
 	<div class = "member-main">
 			<div class = "member-top">
@@ -42,8 +42,13 @@
 										<s:link href="/member/${f:h(yourName)}/unfollow" styleClass = "followLink">unfollow?</s:link>
 									</c:otherwise>
 								</c:choose>
+						</s:form>
+						<s:form action="/member/" styleClass="followOrUnfollow">
 								<div class = "myProfile">
-									<s:link href="/member/${f:h(yourName)}/followingMember" styleClass="memberFollowStatus">Following and Followers</s:link><br>
+									<s:link href="/member/${f:h(yourName)}/followingMember" styleClass="memberFollowStatus">Following and Followers</s:link>
+									<s:link href="/message/${f:h(yourName)}" styleClass="contactLink">Contact?</s:link>
+						</s:form>
+						<s:form action="/member/" styleClass="followOrUnfollow">
 										<div class ="recruitStatus">
 											<c:choose>
 												<c:when test="${recruitStatus}">

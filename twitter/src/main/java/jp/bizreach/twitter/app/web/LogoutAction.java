@@ -17,7 +17,9 @@ public class LogoutAction {
     @RemoveSession(name = "sessionDto")
     public String index() {
         sessionDto.myId = null;
-        sessionDto.email = null;
+        sessionDto.username = null;
+        sessionDto.accountName = null;
+        //    sessionDto.email = null;
         return "/?redirect=true";
     }
 }

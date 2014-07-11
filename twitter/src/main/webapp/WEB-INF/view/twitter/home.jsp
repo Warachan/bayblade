@@ -8,9 +8,6 @@
 </head>
 <body>
 <div class = "wrapper">
-	<div class ="header">
-		<p>Pocketer</p>
-	</div>
 		<ul class = "global-navigation">
 			<li><a id="profile" href= "http:/twitter/profile/">Profile</a></li>
 			<li id="home"><a id="homeButton" href= "http:/twitter/home/">Home</a></li>
@@ -26,6 +23,9 @@
 					</s:form>
 				</li>
 		</ul>
+	<div class ="header">
+		<p>Pocketer</p>
+	</div>
 	<div class = "main">
 		<div class = "main-top">
 			<div class = "main-top-profile">
@@ -79,7 +79,6 @@
 				<div class = "main-bottom-timeline">
 					<ul>
 						<c:forEach items="${timeLine}" var="items" varStatus="status">
-				<!--${f:h (items.accountName)}@${f:h(items.username)} ${items.tweetTime}<br>-->
 					<li id="tweetList">
 					<dl>
 						<dt id="name">${f:h(items.tweetTime)}  <s:link href="/member/${f:h(items.userName)}">${f:h(items.accountName)}</s:link>@${f:h(items.username)}</dt>
@@ -104,8 +103,40 @@
 					</s:form>
 					</c:forEach>
 				</ul>
+			<!--	<h4>My Sent Messages</h4>
+				<ul>
+					<c:forEach items ="${receiveMessageList}" var ="items" varStatus="status">
+					<s:form action ="/home/">
+						<!--<li id="messageList">-->
+							<dl>
+                                <dt id ="info">With:<s:link href="/message/${f:h(items.identifier)}">${f:h(items.receiver)}</s:link></dt>
+								<dt id ="info">With:<s:link href="/message/">${f:h(items.sender)}</s:link></dt>
+							</dl>
+						<!--</li>-->
+					</s:form>
+					</c:forEach>
+				</ul>
+				</ul>
+				<h4>My Received Messages</h4>
+				<ul>
+					<c:forEach items ="${sentMessageList}" var ="items" varStatus="status">
+					<s:form action ="/home/">
+						<!--<li id="messageList">-->
+							<dl>
+                                <dt id ="info">With:<s:link href="/message/${f:h(items.identifier)}">${f:h(items.receiver)}</s:link></dt>
+								<dt id ="info">With:<s:link href="/message/">${f:h(items.sender)}</s:link></dt>
+							</dl>
+						<!--</li>-->
+					</s:form>
+					</c:forEach>
+				</ul>
+	-->
 		</div>
+		<!--<div class ="fixBlock"></div>
+			<div class ="main-right-message">-->
+			<!--</div>-->
 	</div>
+		<div class ="fixBlock"></div>
 </div>
 	<div class="footer">
 			<p>©2014 Annie Wara Pocket</p>

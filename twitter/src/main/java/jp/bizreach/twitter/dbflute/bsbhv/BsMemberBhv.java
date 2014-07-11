@@ -24,7 +24,7 @@ import jp.bizreach.twitter.dbflute.cbean.*;
  *     MEMBER_ID
  *
  * [column]
- *     MEMBER_ID, EMAIL_ADDRESS, MEMBER_STATUS_CODE, USER_NAME, ACCOUNT_NAME, GROUP_NAME, INS_DATETIME, UPD_DATETIME, INS_TRACE, UPD_TRACE, RECRUITING_NUMBER, INTERESTED_INDUSTRY, GRADUATION_YEAR, BIRTHDATE, PROFILE
+ *     MEMBER_ID, MEMBER_STATUS_CODE, USER_NAME, ACCOUNT_NAME, GROUP_NAME, INS_DATETIME, UPD_DATETIME, INS_TRACE, UPD_TRACE, RECRUITING_NUMBER, INTERESTED_INDUSTRY, GRADUATION_YEAR
  *
  * [sequence]
  *     
@@ -39,13 +39,13 @@ import jp.bizreach.twitter.dbflute.cbean.*;
  *     member_status, member_security(AsOne)
  *
  * [referrer table]
- *     follow, login, tweet, member_security
+ *     follow, login, message, tweet, member_security
  *
  * [foreign property]
  *     memberStatus, memberSecurityAsOne
  *
  * [referrer property]
- *     followByYouIdList, followByMemberIdList, loginList, tweetList
+ *     followByYouIdList, followByMemberIdList, loginList, messageBySenderIdList, messageByReceiverIdList, tweetList
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
@@ -237,52 +237,27 @@ public abstract class BsMemberBhv extends AbstractBehaviorWritable {
 
     /**
      * Select the entity by the unique-key value.
-     * @param emailAddress : UQ, NotNull, VARCHAR(100). (NotNull)
-     * @return The optional entity selected by the unique key. (NotNull: if no data, empty entity)
-     * @exception EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
-     * @exception EntityDuplicatedException When the entity has been duplicated.
-     * @exception SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
-     */
-    public OptionalEntity<Member> selectByUniqueOfEmailAddress(String emailAddress) {
-        return facadeSelectByUniqueOfEmailAddress(emailAddress);
-    }
-
-    protected OptionalEntity<Member> facadeSelectByUniqueOfEmailAddress(String emailAddress) {
-        return doSelectByUniqueOfEmailAddress(emailAddress, typeOfSelectedEntity());
-    }
-
-    protected <ENTITY extends Member> OptionalEntity<ENTITY> doSelectByUniqueOfEmailAddress(String emailAddress, Class<ENTITY> tp) {
-        return createOptionalEntity(doSelectEntity(xprepareCBAsUniqueOfEmailAddress(emailAddress), tp), emailAddress);
-    }
-
-    protected MemberCB xprepareCBAsUniqueOfEmailAddress(String emailAddress) {
-        assertObjectNotNull("emailAddress", emailAddress);
-        return newConditionBean().acceptUniqueOfEmailAddress(emailAddress);
-    }
-
-    /**
-     * Select the entity by the unique-key value.
      * @param userName : UQ, NotNull, VARCHAR(100). (NotNull)
      * @return The optional entity selected by the unique key. (NotNull: if no data, empty entity)
      * @exception EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @exception EntityDuplicatedException When the entity has been duplicated.
      * @exception SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
-    public OptionalEntity<Member> selectByUniqueOfUserName(String userName) {
-        return facadeSelectByUniqueOfUserName(userName);
+    public OptionalEntity<Member> selectByUniqueOf(String userName) {
+        return facadeSelectByUniqueOf(userName);
     }
 
-    protected OptionalEntity<Member> facadeSelectByUniqueOfUserName(String userName) {
-        return doSelectByUniqueOfUserName(userName, typeOfSelectedEntity());
+    protected OptionalEntity<Member> facadeSelectByUniqueOf(String userName) {
+        return doSelectByUniqueOf(userName, typeOfSelectedEntity());
     }
 
-    protected <ENTITY extends Member> OptionalEntity<ENTITY> doSelectByUniqueOfUserName(String userName, Class<ENTITY> tp) {
-        return createOptionalEntity(doSelectEntity(xprepareCBAsUniqueOfUserName(userName), tp), userName);
+    protected <ENTITY extends Member> OptionalEntity<ENTITY> doSelectByUniqueOf(String userName, Class<ENTITY> tp) {
+        return createOptionalEntity(doSelectEntity(xprepareCBAsUniqueOf(userName), tp), userName);
     }
 
-    protected MemberCB xprepareCBAsUniqueOfUserName(String userName) {
+    protected MemberCB xprepareCBAsUniqueOf(String userName) {
         assertObjectNotNull("userName", userName);
-        return newConditionBean().acceptUniqueOfUserName(userName);
+        return newConditionBean().acceptUniqueOf(userName);
     }
 
     // ===================================================================================
@@ -783,6 +758,190 @@ public abstract class BsMemberBhv extends AbstractBehaviorWritable {
     }
 
     /**
+     * Load referrer of messageBySenderIdList by the set-upper of referrer. <br />
+     * message by SENDER_ID, named 'messageBySenderIdList'.
+     * <pre>
+     * memberBhv.<span style="color: #DD4747">loadMessageBySenderIdList</span>(memberList, new ConditionBeanSetupper&lt;MessageCB&gt;() {
+     *     public void setup(MessageCB cb) {
+     *         cb.setupSelect...();
+     *         cb.query().setFoo...(value);
+     *         cb.query().addOrderBy_Bar...();
+     *     }
+     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
+     * <span style="color: #3F7E5E">//}).withNestedList(referrerList -&gt {</span>
+     * <span style="color: #3F7E5E">//    ...</span>
+     * <span style="color: #3F7E5E">//});</span>
+     * for (Member member : memberList) {
+     *     ... = member.<span style="color: #DD4747">getMessageBySenderIdList()</span>;
+     * }
+     * </pre>
+     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br />
+     * The condition-bean, which the set-upper provides, has settings before callback as follows:
+     * <pre>
+     * cb.query().setSenderId_InScope(pkList);
+     * cb.query().addOrderBy_SenderId_Asc();
+     * </pre>
+     * @param memberList The entity list of member. (NotNull)
+     * @param setupper The callback to set up referrer condition-bean for loading referrer. (NotNull)
+     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
+     */
+    public NestedReferrerListGateway<Message> loadMessageBySenderIdList(List<Member> memberList, ConditionBeanSetupper<MessageCB> setupper) {
+        xassLRArg(memberList, setupper);
+        return doLoadMessageBySenderIdList(memberList, new LoadReferrerOption<MessageCB, Message>().xinit(setupper));
+    }
+
+    /**
+     * Load referrer of messageBySenderIdList by the set-upper of referrer. <br />
+     * message by SENDER_ID, named 'messageBySenderIdList'.
+     * <pre>
+     * memberBhv.<span style="color: #DD4747">loadMessageBySenderIdList</span>(memberList, new ConditionBeanSetupper&lt;MessageCB&gt;() {
+     *     public void setup(MessageCB cb) {
+     *         cb.setupSelect...();
+     *         cb.query().setFoo...(value);
+     *         cb.query().addOrderBy_Bar...();
+     *     }
+     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
+     * <span style="color: #3F7E5E">//}).withNestedList(referrerList -&gt {</span>
+     * <span style="color: #3F7E5E">//    ...</span>
+     * <span style="color: #3F7E5E">//});</span>
+     * ... = member.<span style="color: #DD4747">getMessageBySenderIdList()</span>;
+     * </pre>
+     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br />
+     * The condition-bean, which the set-upper provides, has settings before callback as follows:
+     * <pre>
+     * cb.query().setSenderId_InScope(pkList);
+     * cb.query().addOrderBy_SenderId_Asc();
+     * </pre>
+     * @param member The entity of member. (NotNull)
+     * @param setupper The callback to set up referrer condition-bean for loading referrer. (NotNull)
+     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
+     */
+    public NestedReferrerListGateway<Message> loadMessageBySenderIdList(Member member, ConditionBeanSetupper<MessageCB> setupper) {
+        xassLRArg(member, setupper);
+        return doLoadMessageBySenderIdList(xnewLRLs(member), new LoadReferrerOption<MessageCB, Message>().xinit(setupper));
+    }
+
+    /**
+     * {Refer to overload method that has an argument of the list of entity.} #beforejava8
+     * @param member The entity of member. (NotNull)
+     * @param loadReferrerOption The option of load-referrer. (NotNull)
+     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
+     */
+    public NestedReferrerListGateway<Message> loadMessageBySenderIdList(Member member, LoadReferrerOption<MessageCB, Message> loadReferrerOption) {
+        xassLRArg(member, loadReferrerOption);
+        return loadMessageBySenderIdList(xnewLRLs(member), loadReferrerOption);
+    }
+
+    /**
+     * {Refer to overload method that has an argument of condition-bean setupper.} #beforejava8
+     * @param memberList The entity list of member. (NotNull)
+     * @param loadReferrerOption The option of load-referrer. (NotNull)
+     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
+     */
+    @SuppressWarnings("unchecked")
+    public NestedReferrerListGateway<Message> loadMessageBySenderIdList(List<Member> memberList, LoadReferrerOption<MessageCB, Message> loadReferrerOption) {
+        xassLRArg(memberList, loadReferrerOption);
+        if (memberList.isEmpty()) { return (NestedReferrerListGateway<Message>)EMPTY_NREF_LGWAY; }
+        return doLoadMessageBySenderIdList(memberList, loadReferrerOption);
+    }
+
+    protected NestedReferrerListGateway<Message> doLoadMessageBySenderIdList(List<Member> memberList, LoadReferrerOption<MessageCB, Message> option) {
+        return helpLoadReferrerInternally(memberList, option, "messageBySenderIdList");
+    }
+
+    /**
+     * Load referrer of messageByReceiverIdList by the set-upper of referrer. <br />
+     * message by RECEIVER_ID, named 'messageByReceiverIdList'.
+     * <pre>
+     * memberBhv.<span style="color: #DD4747">loadMessageByReceiverIdList</span>(memberList, new ConditionBeanSetupper&lt;MessageCB&gt;() {
+     *     public void setup(MessageCB cb) {
+     *         cb.setupSelect...();
+     *         cb.query().setFoo...(value);
+     *         cb.query().addOrderBy_Bar...();
+     *     }
+     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
+     * <span style="color: #3F7E5E">//}).withNestedList(referrerList -&gt {</span>
+     * <span style="color: #3F7E5E">//    ...</span>
+     * <span style="color: #3F7E5E">//});</span>
+     * for (Member member : memberList) {
+     *     ... = member.<span style="color: #DD4747">getMessageByReceiverIdList()</span>;
+     * }
+     * </pre>
+     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br />
+     * The condition-bean, which the set-upper provides, has settings before callback as follows:
+     * <pre>
+     * cb.query().setReceiverId_InScope(pkList);
+     * cb.query().addOrderBy_ReceiverId_Asc();
+     * </pre>
+     * @param memberList The entity list of member. (NotNull)
+     * @param setupper The callback to set up referrer condition-bean for loading referrer. (NotNull)
+     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
+     */
+    public NestedReferrerListGateway<Message> loadMessageByReceiverIdList(List<Member> memberList, ConditionBeanSetupper<MessageCB> setupper) {
+        xassLRArg(memberList, setupper);
+        return doLoadMessageByReceiverIdList(memberList, new LoadReferrerOption<MessageCB, Message>().xinit(setupper));
+    }
+
+    /**
+     * Load referrer of messageByReceiverIdList by the set-upper of referrer. <br />
+     * message by RECEIVER_ID, named 'messageByReceiverIdList'.
+     * <pre>
+     * memberBhv.<span style="color: #DD4747">loadMessageByReceiverIdList</span>(memberList, new ConditionBeanSetupper&lt;MessageCB&gt;() {
+     *     public void setup(MessageCB cb) {
+     *         cb.setupSelect...();
+     *         cb.query().setFoo...(value);
+     *         cb.query().addOrderBy_Bar...();
+     *     }
+     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
+     * <span style="color: #3F7E5E">//}).withNestedList(referrerList -&gt {</span>
+     * <span style="color: #3F7E5E">//    ...</span>
+     * <span style="color: #3F7E5E">//});</span>
+     * ... = member.<span style="color: #DD4747">getMessageByReceiverIdList()</span>;
+     * </pre>
+     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br />
+     * The condition-bean, which the set-upper provides, has settings before callback as follows:
+     * <pre>
+     * cb.query().setReceiverId_InScope(pkList);
+     * cb.query().addOrderBy_ReceiverId_Asc();
+     * </pre>
+     * @param member The entity of member. (NotNull)
+     * @param setupper The callback to set up referrer condition-bean for loading referrer. (NotNull)
+     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
+     */
+    public NestedReferrerListGateway<Message> loadMessageByReceiverIdList(Member member, ConditionBeanSetupper<MessageCB> setupper) {
+        xassLRArg(member, setupper);
+        return doLoadMessageByReceiverIdList(xnewLRLs(member), new LoadReferrerOption<MessageCB, Message>().xinit(setupper));
+    }
+
+    /**
+     * {Refer to overload method that has an argument of the list of entity.} #beforejava8
+     * @param member The entity of member. (NotNull)
+     * @param loadReferrerOption The option of load-referrer. (NotNull)
+     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
+     */
+    public NestedReferrerListGateway<Message> loadMessageByReceiverIdList(Member member, LoadReferrerOption<MessageCB, Message> loadReferrerOption) {
+        xassLRArg(member, loadReferrerOption);
+        return loadMessageByReceiverIdList(xnewLRLs(member), loadReferrerOption);
+    }
+
+    /**
+     * {Refer to overload method that has an argument of condition-bean setupper.} #beforejava8
+     * @param memberList The entity list of member. (NotNull)
+     * @param loadReferrerOption The option of load-referrer. (NotNull)
+     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
+     */
+    @SuppressWarnings("unchecked")
+    public NestedReferrerListGateway<Message> loadMessageByReceiverIdList(List<Member> memberList, LoadReferrerOption<MessageCB, Message> loadReferrerOption) {
+        xassLRArg(memberList, loadReferrerOption);
+        if (memberList.isEmpty()) { return (NestedReferrerListGateway<Message>)EMPTY_NREF_LGWAY; }
+        return doLoadMessageByReceiverIdList(memberList, loadReferrerOption);
+    }
+
+    protected NestedReferrerListGateway<Message> doLoadMessageByReceiverIdList(List<Member> memberList, LoadReferrerOption<MessageCB, Message> option) {
+        return helpLoadReferrerInternally(memberList, option, "messageByReceiverIdList");
+    }
+
+    /**
      * Load referrer of tweetList by the set-upper of referrer. <br />
      * tweet by MEMBER_ID, named 'tweetList'.
      * <pre>
@@ -903,14 +1062,6 @@ public abstract class BsMemberBhv extends AbstractBehaviorWritable {
      */
     public List<Integer> extractMemberIdList(List<Member> memberList)
     { return helpExtractListInternally(memberList, "memberId"); }
-
-    /**
-     * Extract the value list of (single) unique key emailAddress.
-     * @param memberList The list of member. (NotNull, EmptyAllowed)
-     * @return The list of the column value. (NotNull, EmptyAllowed, NotNullElement)
-     */
-    public List<String> extractEmailAddressList(List<Member> memberList)
-    { return helpExtractListInternally(memberList, "emailAddress"); }
 
     /**
      * Extract the value list of (single) unique key userName.

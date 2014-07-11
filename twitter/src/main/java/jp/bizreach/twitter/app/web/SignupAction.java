@@ -84,7 +84,7 @@ public class SignupAction {
     /* 会員登録メソッド */
     public String regester() throws NoSuchAlgorithmException {
 
-        newEmail = signupForm.newEmail;
+        // newEmail = signupForm.newEmail;
         password = signupForm.password;
         confirmPass = signupForm.confirmPass;
         username = signupForm.username;
@@ -97,15 +97,15 @@ public class SignupAction {
         /* validationに引っかからなかったら、会員登録する */
         Date date = new Date();
         Timestamp timestamp = new Timestamp(date.getTime());
-        sessionDto.email = newEmail;
+        // sessionDto.email = newEmail;
         Member member = new Member();
-        member.setEmailAddress(sessionDto.email);
+        // member.setEmailAddress(sessionDto.email);
         member.setUserName(username);
         member.setAccountName(accountName);
         member.setInsDatetime(timestamp);
         member.setUpdDatetime(timestamp);
-        member.setInsTrace("signedup");
-        member.setUpdTrace("signedup");
+        member.setInsTrace(username);
+        member.setUpdTrace(username);
         member.setGroupName(groupName);
         if (signupForm.status.equals("student")) {
             member.setMemberStatusCode(1);
@@ -123,8 +123,8 @@ public class SignupAction {
         security.setPassword(digestedPass);
         security.setInsDatetime(timestamp);
         security.setUpdDatetime(timestamp);
-        security.setInsTrace("signedup");
-        security.setUpdTrace("signedup");
+        security.setInsTrace(member.getUserName());
+        security.setUpdTrace(member.getUserName());
         memberSecurityBhv.insert(security);
         LOG.debug("***" + sessionDto.myId);
 
@@ -132,8 +132,8 @@ public class SignupAction {
         login.setMemberId(sessionDto.myId);
         login.setInsDatetime(timestamp);
         login.setUpdDatetime(timestamp);
-        login.setInsTrace(sessionDto.email);
-        login.setUpdTrace(sessionDto.email);
+        login.setInsTrace(sessionDto.username);
+        login.setUpdTrace(sessionDto.username);
         loginBhv.insert(login);
 
         return "/home/?redirect =true";
@@ -142,7 +142,7 @@ public class SignupAction {
     /* 会員登録画面　Validation */
     public ActionMessages validate() {
         ActionMessages errors = new ActionMessages();
-        /* Email */
+        /* Email
         String emailPtn = "[\\w\\.\\-+]+@(?:[\\w\\-]+\\.)+[\\w\\-]+";
         Pattern ptn = Pattern.compile(emailPtn);
         Matcher emailMatcher = ptn.matcher(signupForm.newEmail);
@@ -161,7 +161,8 @@ public class SignupAction {
             if (count > 0) {
                 errors.add("newEmail", new ActionMessage("このメールアドレスはすでに登録されています。", false));
             }
-        }
+        } */
+
         /* accountName */
         // TODO mayuko.sakaba 入力に許される文字列の指定がまだです。
         if (signupForm.accountName == "") {
