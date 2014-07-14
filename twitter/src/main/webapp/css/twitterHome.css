@@ -546,7 +546,7 @@ width:900px;
 .main-right{
 	width:165px;
 	height:auto;
-	position:fixed;
+	position:absolute;
 	left:auto;
 	top: 119px;
 	margin-left:1035px;
@@ -566,15 +566,6 @@ width:900px;
 	margin-top:10px;
 	font-size:22px;
 }
-/*.main-right-message{
-	width:170px;
-	float:right;
-	padding: 20px;
-	border:2px solid #3EBA2B;
-}
-.main-right-message h3{
-	font-size: 24px;
-}*/
 .suggestFollow{
 	border-style:none;
 	width: 80px;

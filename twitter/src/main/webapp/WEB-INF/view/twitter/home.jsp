@@ -90,6 +90,7 @@
 				</div>
 			</s:form>
 		</div>
+		<div class ="fixBlock"></div>
 		<div class = "main-right">
 			<h3>Follow?</h3>
 				<ul>
@@ -104,8 +105,8 @@
 					</c:forEach>
 				</ul>
 		</div>
-	</div>
 		<div class ="fixBlock"></div>
+	</div>
 </div>
 	<div class="footer">
 			<p>©2014 Annie Wara Pocket</p>

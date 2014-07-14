@@ -142,26 +142,6 @@ public class SignupAction {
     /* 会員登録画面　Validation */
     public ActionMessages validate() {
         ActionMessages errors = new ActionMessages();
-        /* Email
-        String emailPtn = "[\\w\\.\\-+]+@(?:[\\w\\-]+\\.)+[\\w\\-]+";
-        Pattern ptn = Pattern.compile(emailPtn);
-        Matcher emailMatcher = ptn.matcher(signupForm.newEmail);
-        MemberCB cb = new MemberCB();
-        cb.query().setEmailAddress_Equal(signupForm.newEmail);
-        int count = memberBhv.selectCount(cb);
-        if (signupForm.newEmail == "") {
-            errors.add("newEmail", new ActionMessage("メールアドレスが未入力です。", false));
-        } else {
-            if (!emailMatcher.matches()) {
-                errors.add("newEmail", new ActionMessage("メールアドレスが不正です。", false));
-            }
-            if (signupForm.newEmail.length() > 128) { // 数はv4やregionupの登録文字数を参考にして
-                errors.add("newEmail", new ActionMessage("メールアドレスが長すぎます。", false));
-            }
-            if (count > 0) {
-                errors.add("newEmail", new ActionMessage("このメールアドレスはすでに登録されています。", false));
-            }
-        } */
 
         /* accountName */
         // TODO mayuko.sakaba 入力に許される文字列の指定がまだです。
@@ -178,7 +158,7 @@ public class SignupAction {
             errors.add("accountName", new ActionMessage("不正な文字が含まれています。", false));
         }
         /* username */
-        String usernamePtn = "[\\w\\.\\-]+";
+        String usernamePtn = "[//w]+";
         Pattern ptn2 = Pattern.compile(usernamePtn);
         Matcher usernameMatcher = ptn2.matcher(signupForm.username);
         MemberCB check = new MemberCB();
