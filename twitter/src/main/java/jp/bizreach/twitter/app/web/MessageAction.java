@@ -80,6 +80,7 @@ public class MessageAction {
         MessageCB messageCb = new MessageCB();
         messageCb.query().setSenderId_Equal(memberId);
         messageCb.query().setReceiverId_Equal(sessionDto.myId);
+        messageCb.query().addOrderBy_MessageId_Desc();
         ListResultBean<Message> selectMessageList = messageBhv.selectList(messageCb);
         for (Message message : selectMessageList) {
             MessageDto messageDto = new MessageDto();
@@ -91,6 +92,7 @@ public class MessageAction {
         MessageCB messageToCb = new MessageCB();
         messageToCb.query().setReceiverId_Equal(memberId);
         messageToCb.query().setSenderId_Equal(sessionDto.myId);
+        messageToCb.query().addOrderBy_MessageId_Desc();
         ListResultBean<Message> messageToList = messageBhv.selectList(messageToCb);
         for (Message message : messageToList) {
             MessageDto messageDto = new MessageDto();

@@ -96,7 +96,7 @@ public class MemberAction {
         TweetCB tweetCb = new TweetCB();
         tweetCb.setupSelect_Member();
         tweetCb.query().setMemberId_Equal(member.getMemberId());
-        tweetCb.query().addOrderBy_MemberId_Desc();
+        tweetCb.query().addOrderBy_TweetId_Desc();
         ListResultBean<Tweet> tweetList = tweetBhv.selectList(tweetCb);
         for (Tweet tweet : tweetList) {
             TweetDto tweetDto = new TweetDto();
