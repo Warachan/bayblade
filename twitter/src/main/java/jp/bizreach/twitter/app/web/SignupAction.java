@@ -158,7 +158,7 @@ public class SignupAction {
             errors.add("accountName", new ActionMessage("不正な文字が含まれています。", false));
         }
         /* username */
-        String usernamePtn = "[//w]+";
+        String usernamePtn = "[\\w]+";
         Pattern ptn2 = Pattern.compile(usernamePtn);
         Matcher usernameMatcher = ptn2.matcher(signupForm.username);
         MemberCB check = new MemberCB();

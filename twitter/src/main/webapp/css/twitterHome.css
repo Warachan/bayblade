@@ -284,7 +284,10 @@ h3, h4{
 	border-radius: 20px;
 	border-style:none;
 }
-
+#warning{
+	color:red;
+	font-size: 11px;
+}
 /*---profile page ---*/
 .profile-main{
 	clear:left;
@@ -311,7 +314,11 @@ h3, h4{
 .profile-box h4{
 	margin-top: 20px;
 }
-
+.profile-main p{
+	font-size: 17px;
+	text-align:center;
+	margin-top: 5px;
+}
 .register{
 	color:#FFFFFF;
 	background-color: #68CFC3;
@@ -552,6 +559,9 @@ width:900px;
 	margin-left:1035px;
 	padding: 23px;
 	border:2px solid #3EBA2B;
+}
+#followComment{
+	font-size: 13px;
 }
 @media screen and (max-width:1250px){
 	.main-right{

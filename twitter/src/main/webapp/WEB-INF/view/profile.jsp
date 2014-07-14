@@ -29,6 +29,7 @@
 	<div class="profile-main">
 		<div class="profile-box">
 			<h2>Edit your profile</h2>
+			<p id="comment">☆編集したい項目に入力してください☆</p>
 			<s:form action="/profile/editProfile/" styleClass="profileForm">
 				<div class="name">
 					<h4>Name</h4>

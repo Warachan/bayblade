@@ -89,6 +89,7 @@ public class HomeAction {
     public String account;
     public String followed;
     public boolean recruitStatus;
+    public String followSuggestion;
 
     // 【要確認todo】
     // TODO mayuko.sakaba 共通カラム使っているのに、フォローステータスを更新するたびに更新されていない。
@@ -135,6 +136,9 @@ public class HomeAction {
             memberDto.accountName = member.getAccountName();
             memberDto.userName = member.getUserName();
             followSuggestionList.add(memberDto);
+        }
+        if (followSuggestionList.isEmpty()) {
+            followSuggestion = "全員フォローしてますね！すごい！";
         }
         showTimeline();
         return "/twitter/home.jsp";

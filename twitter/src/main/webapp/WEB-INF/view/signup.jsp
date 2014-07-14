@@ -43,11 +43,13 @@
 			<div class="profile">
 				<div class ="status">
 					<h4>Student or Company?</h4>
+					<p id="comment">あなたは学生？それとも会社の方？</p>
 						<html:select property="status">
 							<html:option value=""></html:option>
     　							<html:option value="student">Student</html:option>
     　							<html:option value="company">Company</html:option>
 						</html:select>
+						<p id="warning">*この項目は後で変更できません！
 						<html:errors property="status"/>
 				</div>
 				<div class = "group">

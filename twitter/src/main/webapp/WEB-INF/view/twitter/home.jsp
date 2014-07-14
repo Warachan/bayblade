@@ -94,6 +94,7 @@
 		<div class = "main-right">
 			<h3>Follow?</h3>
 				<ul>
+					<span id="followComment">${f:h(followSuggestion)}</span>
 					<c:forEach items="${followSuggestionList}" var="suggest" varStatus="status">
 					<s:form action ="/home/">
 						<dl>
