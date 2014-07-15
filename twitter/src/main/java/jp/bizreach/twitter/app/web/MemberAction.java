@@ -1,5 +1,6 @@
 package jp.bizreach.twitter.app.web;
 
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,6 +22,7 @@ import org.apache.commons.logging.LogFactory;
 import org.seasar.dbflute.cbean.ListResultBean;
 import org.seasar.struts.annotation.ActionForm;
 import org.seasar.struts.annotation.Execute;
+import org.seasar.struts.util.ResponseUtil;
 
 public class MemberAction {
 
@@ -77,12 +79,20 @@ public class MemberAction {
         LOG.debug("nameCheck:" + memberForm.yourName);
         memberCb.query().setUserName_Equal(memberForm.yourName);
         Member member = memberBhv.selectEntity(memberCb);
+
+        if (member == null) {
+            try {
+                ResponseUtil.getResponse().sendError(404);
+            } catch (IOException e) {
+            }
+            return null;
+        }
         if (member.getMemberId().equals(sessionDto.myId)) {
             return "/home/?redirect=true";
         }
+        LOG.debug("*******************************************************************************");
         status = member.getMemberStatusCode();
         groupName = member.getGroupName();
-        LOG.debug("*******************************************************************************");
         if (status.equals(1)) {
             recruitStatus = new Boolean(true);
             interestedIndustry = member.getInterestedIndustry();

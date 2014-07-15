@@ -8,12 +8,12 @@
 </head>
 <body>
 <div class = "wrapper">
-		<ul class = "global-navigation">
+			<ul class = "global-navigation">
 			<li><a id="profile" href= "http:/twitter/profile/">Profile</a></li>
 			<li id="home"><a id="homeButton" href= "http:/twitter/home/">Home</a></li>
 				<li id="search">
 					<s:form action="/home/">
-						<html:text property="searchWord" size ="30" value="" styleClass = "searchBox"/>
+						<html:text property="searchWord" size ="30" styleClass = "searchBox"/>
 						<s:submit property="search" value="Search" styleClass = "searchButton"/>
 					</s:form>
 				</li>
@@ -57,10 +57,10 @@
 			<figure class ="main-top-eyecatch">
 			<c:choose>
 				<c:when test="${recruitStatus}">
-						<img src="/twitter/img/syuukatu.jpg">
+						<img src="/twitter/img/syuukatu2.jpg">
 				</c:when>
 				<c:otherwise>
-						<img src="/twitter/img/kigyou.jpg">
+						<img src="/twitter/img/nikusyoku.jpg">
 				</c:otherwise>
 			</c:choose>
 			</figure>
@@ -71,7 +71,7 @@
 			<s:form action ="/home/">
 				<div class ="main-bottom-tweetForm">
 				<div class = "main-bottom-tweetBox">
-					<html:textarea property ="inputTweet"  cols="50" rows="6" styleClass="tweetBox" value=""/><br>
+					<html:textarea property ="inputTweet"  cols="50" rows="6" styleClass="tweetBox"/><br>
 					<html:errors property="inputTweet"/>
 				</div>
 					<s:submit property="tweet" value="Tweet" styleClass="tweetButton"/>

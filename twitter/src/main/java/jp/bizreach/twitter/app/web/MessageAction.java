@@ -109,7 +109,7 @@ public class MessageAction {
         return "/message.jsp";
     }
 
-    @Execute(validate = "validate", input = "/message/.jsp")
+    @Execute(validate = "validate", input = "/message.jsp")
     public String editMessage() {
         if (!TokenProcessor.getInstance().isTokenValid(request, true)) {
             throw new ActionMessagesException("不正なリクエストです", false);
@@ -138,7 +138,7 @@ public class MessageAction {
     public ActionMessages validate() {
         ActionMessages errors = new ActionMessages();
         if (messageForm.message.length() > 200) {
-            errors.add("message", new ActionMessage("文字制限を超えています。", false));
+            errors.add("message", new ActionMessage("文字制限(200文字）を超えています。", false));
         }
         return errors;
     }

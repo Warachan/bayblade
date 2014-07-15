@@ -7,12 +7,12 @@
 	<link href='http://fonts.googleapis.com/css?family=Libre+Baskerville' rel='stylesheet' type='text/css'>
 </head>
 <div class = "wrapper">
-	<ul class = "global-navigation">
+<ul class = "global-navigation">
 			<li><a id="profile" href= "http:/twitter/profile/">Profile</a></li>
 			<li id="home"><a id="homeButton" href= "http:/twitter/home/">Home</a></li>
 				<li id="search">
 					<s:form action="/home/">
-						<html:text property="searchWord" size ="30" value="" styleClass = "searchBox"/>
+						<html:text property="searchWord" size ="30" styleClass = "searchBox"/>
 						<s:submit property="search" value="Search" styleClass = "searchButton"/>
 					</s:form>
 				</li>

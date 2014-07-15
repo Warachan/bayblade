@@ -18,13 +18,6 @@
 		<div class="signup-box">
 		<h2>Signup on Twitter!</h2>
 		<s:form action="/signup/regester/" styleClass="signupForm">
-			<!--<div class="email">
-				<h4>Email</h4>
-				<html:text property ="newEmail" size="60" styleClass="emailBox"/>
-					<div class = "emailError">
-						<html:errors property="newEmail"/>
-					</div>
-			</div>-->
 			<div class="name">
 				<h4>Name</h4>
 				<html:text property="accountName"  size="60" styleClass = "nameBox"/>

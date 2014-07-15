@@ -30,7 +30,7 @@
 								<h3>To:@${f:h(receiver)}</h3>
 							</div>
 							<div class="message">
-								<html:textarea property ="message"  cols="100" rows="15" styleClass="messageBox" value=""/><br>
+								<html:textarea property ="message" cols="100" rows="15" styleClass="messageBox" value=""/><br>
 							</div>
 								<input type="hidden" name="receiver" value="${receiver}"/>
 								<s:submit property="editMessage" value="Send" styleClass="sendButton"/><br>

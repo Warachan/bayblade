@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import jp.bizreach.twitter.dbflute.cbean.MemberCB;
 import jp.bizreach.twitter.dbflute.exbhv.LoginBhv;
 import jp.bizreach.twitter.dbflute.exbhv.MemberBhv;
 import jp.bizreach.twitter.dbflute.exbhv.MemberSecurityBhv;
@@ -64,7 +65,6 @@ public class ProfileAction {
     // -----------------------------------------------------
     //                                          Display Data
     //                                          ------------
-    // public String email;
     public String accountName;
     public String groupName;
     public String password;
@@ -76,6 +76,12 @@ public class ProfileAction {
     public String missingError;
     protected String digestedPass;
     public boolean status;
+    public String interestedIndustry;
+    public String recruitingNumber;
+    public Integer graduationYear;
+    public boolean recruitStatus;
+    public Integer seeStatus;
+    public String account;
 
     // TODO mayuko.sakaba signup.jspにて、なぜゲッターメソッドがなかったのにValue=""をいれたら直ったか調べること。
     // TODO mayuko.sakaba indexActionForm に対する定義が見つかりません →　これなに？
@@ -90,6 +96,21 @@ public class ProfileAction {
             status = new Boolean(true);
         } else if (sessionDto.status.equals(2)) {
             status = new Boolean(false);
+        }
+        account = sessionDto.accountName + "@" + sessionDto.username;
+        MemberCB myCb = new MemberCB();
+        myCb.setupSelect_MemberStatus();
+        myCb.query().setMemberId_Equal(sessionDto.myId);
+        Member me = memberBhv.selectEntity(myCb);
+        seeStatus = sessionDto.status;
+        groupName = me.getGroupName();
+        if (seeStatus.equals(1)) {
+            recruitStatus = new Boolean(true);
+            interestedIndustry = me.getInterestedIndustry();
+            graduationYear = me.getGraduationYear();
+        } else if (seeStatus.equals(2)) {
+            recruitStatus = new Boolean(false);
+            recruitingNumber = me.getRecruitingNumber();
         }
         return "/profile.jsp";
     }

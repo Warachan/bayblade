@@ -97,9 +97,7 @@ public class SignupAction {
         /* validationに引っかからなかったら、会員登録する */
         Date date = new Date();
         Timestamp timestamp = new Timestamp(date.getTime());
-        // sessionDto.email = newEmail;
         Member member = new Member();
-        // member.setEmailAddress(sessionDto.email);
         member.setUserName(username);
         member.setAccountName(accountName);
         member.setInsDatetime(timestamp);
@@ -151,10 +149,10 @@ public class SignupAction {
         if (signupForm.accountName.length() > 20) {
             errors.add("accountName", new ActionMessage("名前が長すぎます。20文字以内で記入してください。", false));
         }
-        String wordPtn = "[\\\"\\\':;,]+";
+        String wordPtn = "[\\\"\\\':;,\\s]+";
         Pattern ptnCheck = Pattern.compile(wordPtn);
         Matcher wordMatcher = ptnCheck.matcher(signupForm.accountName);
-        if (signupForm.accountName == "" || wordMatcher.matches()) {
+        if (wordMatcher.matches()) {
             errors.add("accountName", new ActionMessage("不正な文字が含まれています。", false));
         }
         /* username */
@@ -188,10 +186,10 @@ public class SignupAction {
         if (signupForm.groupName.length() > 100) {
             errors.add("groupName", new ActionMessage("記入事項が長すぎます。", false));
         }
-        String wordPtn2 = "[\\\"\\\':;,]+";
+        String wordPtn2 = "[\\\"\\\':;,\\s]+";
         Pattern ptnCheck2 = Pattern.compile(wordPtn2);
         Matcher wordMatcher2 = ptnCheck2.matcher(signupForm.groupName);
-        if (signupForm.groupName == "" || wordMatcher2.matches()) {
+        if (wordMatcher2.matches()) {
             errors.add("groupName", new ActionMessage("不正な文字が含まれています。", false));
         }
         /*　password */

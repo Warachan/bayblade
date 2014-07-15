@@ -31,7 +31,6 @@ import org.seasar.dbflute.cbean.OrQuery;
 import org.seasar.dbflute.cbean.coption.LikeSearchOption;
 import org.seasar.struts.annotation.ActionForm;
 import org.seasar.struts.annotation.Execute;
-import org.seasar.struts.exception.ActionMessagesException;
 
 /**
  * @author mayuko.sakaba
@@ -228,13 +227,12 @@ public class HomeAction {
     @Execute(validate = "validate", input = "/home/?redirect =true")
     /* ツィートと、ツィート時間を新しく追加 */
     public String tweet() {
-        if (!TokenProcessor.getInstance().isTokenValid(request, true)) {
-            throw new ActionMessagesException("不正なリクエストです", false);
-        }
+        //        if (!TokenProcessor.getInstance().isTokenValid(request, true)) {
+        //            throw new ActionMessagesException("不正なリクエストです", false);
+        //        }
         Date date = new Date();
         Timestamp tweetTime = new Timestamp(date.getTime());
         String formatTweetTime = new SimpleDateFormat("MM月dd日 HH時mm分").format(tweetTime);
-        LOG.debug("**@" + formatTweetTime);
         String inputTweet = homeForm.inputTweet;
         Tweet tweet = new Tweet();
         tweet.setMemberId(sessionDto.myId);
@@ -245,7 +243,7 @@ public class HomeAction {
         tweet.setUpdDatetime(tweetTime);
         tweet.setUpdTrace(inputTweet);
         tweetBhv.insert(tweet);
-        return "/home/?redirect = true";
+        return "/home/?redirect=true";
     }
 
     @Execute(validator = false)
@@ -311,7 +309,8 @@ public class HomeAction {
     public ActionMessages validate() {
         /* ツィートについてのvalidation */
         ActionMessages errors = new ActionMessages();
-        if (homeForm.inputTweet.length() >= 140) {
+        if (homeForm.inputTweet.length() >= 141) {
+            LOG.debug("***********************************************" + homeForm.inputTweet.length());
             errors.add("inputTweet", new ActionMessage("140文字以上は入力できません。", false));
         }
         if (homeForm.inputTweet == "") {

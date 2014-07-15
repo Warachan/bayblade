@@ -12,7 +12,7 @@
 			<li id="home"><a id="homeButton" href= "http:/twitter/home/">Home</a></li>
 				<li id="search">
 					<s:form action="/home/">
-						<html:text property="searchWord" size ="30" value="" styleClass = "searchBox"/>
+						<html:text property="searchWord" size ="30" styleClass = "searchBox"/>
 						<s:submit property="search" value="Search" styleClass = "searchButton"/>
 					</s:form>
 				</li>
@@ -27,6 +27,34 @@
 	</div>
 <body>
 	<div class="profile-main">
+		<div class = "profile-main-top">
+		<h1>☆My current Profile ☆</h1>
+		<div class = "profile-top">
+				<h2>${f:h(account)}</h2>
+				<s:form action = "/profile/">
+					<div class = "currentStatus">
+						<c:choose>
+							<c:when test="${recruitStatus}">
+								<ul>
+									<li id="tweetList">
+										<dt id="status">所属大学:${f:h(groupName)} （卒業年：${f:h(graduationYear)}年）</dt>
+										<dt id="status">希望業界:${f:h(interestedIndustry)}</dt>
+									</li>
+								</ul>
+							</c:when>
+							<c:otherwise>
+								<ul>
+									<li id="tweetList">
+										<dt id="status">所属企業：  ${f:h(groupName)}</dt>
+										<dt id="status">予定採用人数: ${f:h(recruitingNumber)}</dt>
+									</li>
+								</ul>
+							</c:otherwise>
+						</c:choose>
+					</div>
+				</s:form>
+		</div>
+		</div>
 		<div class="profile-box">
 			<h2>Edit your profile</h2>
 			<p id="comment">☆編集したい項目に入力してください☆</p>
@@ -42,6 +70,7 @@
 				<div class = "group">
 					<h4>School/Company Name</h4>
 					<html:text property="updateGroup"  size="60" styleClass = "textBox"/><br>
+					<html:errors property ="groupName"/>
 				</div>
 				<div class = "recrutingNumber">
 					<c:choose>
@@ -78,7 +107,6 @@
     　									<dl><html:option value="300~499人">${f:h("300~499人")}</html:option><dl>
     　									<dl><html:option value="500人以上">${f:h("500人以上")}</html:option><dl>
 							</html:select>
-							<!--<html:errors property="recruitingNumber"/>-->
 							</div>
 						</c:otherwise>
 					</c:choose>

@@ -12,7 +12,7 @@
 			<li id="home"><a id="homeButton" href= "http:/twitter/home/">Home</a></li>
 				<li id="search">
 					<s:form action="/home/">
-						<html:text property="searchWord" size ="30" value="" styleClass = "searchBox"/>
+						<html:text property="searchWord" size ="30" styleClass = "searchBox"/>
 						<s:submit property="search" value="Search" styleClass = "searchButton"/>
 					</s:form>
 				</li>
@@ -75,10 +75,10 @@
 					<figure class ="member-top-eyecatch">
 							<c:choose>
 								<c:when test="${recruitStatus}">
-									<img src="/twitter/img/syuukatu.jpg">
+									<img src="/twitter/img/syuukatu2.jpg">
 								</c:when>
 								<c:otherwise>
-									<img src="/twitter/img/kigyou.jpg">
+									<img src="/twitter/img/nikusyoku.jpg">
 								</c:otherwise>
 							</c:choose>
 					</figure>
