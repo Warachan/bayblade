@@ -118,11 +118,11 @@ h3, h4{
 }
 #messageButton:hover{
 	background-color: #FFFFFF;
-	color:#F9DB57;
+	color:#CAE7F2;
 }
 #search{
 	width: 350px;
-	margin-left:30px;
+	margin-left:40px;
 }
 .searchForm{
 	display:inline-block;
