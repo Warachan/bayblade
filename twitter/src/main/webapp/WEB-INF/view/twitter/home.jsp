@@ -8,21 +8,7 @@
 </head>
 <body>
 <div class = "wrapper">
-			<ul class = "global-navigation">
-			<li><a id="profile" href= "http:/twitter/profile/">Profile</a></li>
-			<li id="home"><a id="homeButton" href= "http:/twitter/home/">Home</a></li>
-				<li id="search">
-					<s:form action="/home/">
-						<html:text property="searchWord" size ="30" styleClass = "searchBox"/>
-						<s:submit property="search" value="Search" styleClass = "searchButton"/>
-					</s:form>
-				</li>
-				<li id="logout">
-					<s:form action="/logout/"  styleClass = "logoutForm">
-						<s:submit property="index" value="Logout" styleClass = "logoutButton"/>
-					</s:form>
-				</li>
-		</ul>
+		<jsp:include page="/WEB-INF/view/glonavi.jsp"/>
 	<div class ="header">
 		<p>Pocketer</p>
 	</div>
@@ -57,10 +43,10 @@
 			<figure class ="main-top-eyecatch">
 			<c:choose>
 				<c:when test="${recruitStatus}">
-						<img src="/twitter/img/syuukatu2.jpg">
+						<img src="/twitter/img/syuukatu.jpg">
 				</c:when>
 				<c:otherwise>
-						<img src="/twitter/img/nikusyoku.jpg">
+						<img src="/twitter/img/kigyou.jpg">
 				</c:otherwise>
 			</c:choose>
 			</figure>
@@ -80,17 +66,27 @@
 					<ul>
 						<c:forEach items="${timeLine}" var="items" varStatus="status">
 					<li id="tweetList">
+					<dl id="icon">
+							<c:choose>
+								<c:when test="${items.status}">
+									<img src="/twitter/img/syuukatu.jpg">
+								</c:when>
+								<c:otherwise>
+									<img src="/twitter/img/kigyou.jpg">
+								</c:otherwise>
+							</c:choose>
+					</dl>
 					<dl>
 						<dt id="tweetInf">${f:h(items.tweetTime)}  <s:link href="/member/${f:h(items.userName)}">${f:h(items.accountName)}</s:link>@${f:h(items.username)}</dt>
 						<dd id="tweet">${f:h(items.tweet)}</dd>
 					</dl>
 					</li>
+		<div class ="fixBlock"></div>
 						</c:forEach>
 					</ul>
 				</div>
 			</s:form>
 		</div>
-		<div class ="fixBlock"></div>
 		<div class = "main-right">
 			<h3>Follow?</h3>
 				<ul>
@@ -110,7 +106,7 @@
 	</div>
 </div>
 	<div class="footer">
-			<p>©2014 Annie Wara Pocket</p>
+			<p>©2014 AnnieWaraPocket All Rights Reserved</p>
 	</div>
 </body>
 </html>

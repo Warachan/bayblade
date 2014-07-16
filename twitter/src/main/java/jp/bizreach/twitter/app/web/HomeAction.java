@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import jp.bizreach.twitter.dbflute.cbean.FollowCB;
 import jp.bizreach.twitter.dbflute.cbean.MemberCB;
+import jp.bizreach.twitter.dbflute.cbean.MessageCB;
 import jp.bizreach.twitter.dbflute.cbean.TweetCB;
 import jp.bizreach.twitter.dbflute.exbhv.FollowBhv;
 import jp.bizreach.twitter.dbflute.exbhv.MemberBhv;
@@ -19,6 +20,7 @@ import jp.bizreach.twitter.dbflute.exbhv.MessageBhv;
 import jp.bizreach.twitter.dbflute.exbhv.TweetBhv;
 import jp.bizreach.twitter.dbflute.exentity.Follow;
 import jp.bizreach.twitter.dbflute.exentity.Member;
+import jp.bizreach.twitter.dbflute.exentity.Message;
 import jp.bizreach.twitter.dbflute.exentity.Tweet;
 
 import org.apache.commons.logging.Log;
@@ -31,6 +33,7 @@ import org.seasar.dbflute.cbean.OrQuery;
 import org.seasar.dbflute.cbean.coption.LikeSearchOption;
 import org.seasar.struts.annotation.ActionForm;
 import org.seasar.struts.annotation.Execute;
+import org.seasar.struts.exception.ActionMessagesException;
 
 /**
  * @author mayuko.sakaba
@@ -88,7 +91,9 @@ public class HomeAction {
     public String account;
     public String followed;
     public boolean recruitStatus;
+    public boolean timeLineStatus;
     public String followSuggestion;
+    public String messageComment;
 
     // 【要確認todo】
     // TODO mayuko.sakaba 共通カラム使っているのに、フォローステータスを更新するたびに更新されていない。
@@ -125,17 +130,7 @@ public class HomeAction {
         selectFollowList();
         /* フォローする候補者を自動で表示 */
         followIdList.add(sessionDto.myId);
-        MemberCB memberCb = new MemberCB();
-        memberCb.query().setMemberId_NotInScope(followIdList);
-        memberCb.paging(5, 1);
-        ListResultBean<Member> selectList = memberBhv.selectList(memberCb);
-        for (Member member : selectList) {
-            MemberDto memberDto = new MemberDto();
-            memberDto.memberId = member.getMemberId();
-            memberDto.accountName = member.getAccountName();
-            memberDto.userName = member.getUserName();
-            followSuggestionList.add(memberDto);
-        }
+        suggestFollow();
         if (followSuggestionList.isEmpty()) {
             followSuggestion = "全員フォローしてますね！すごい！";
         }
@@ -156,6 +151,20 @@ public class HomeAction {
         }
     }
 
+    private void suggestFollow() {
+        MemberCB memberCb = new MemberCB();
+        memberCb.query().setMemberId_NotInScope(followIdList);
+        memberCb.paging(5, 1);
+        ListResultBean<Member> selectList = memberBhv.selectList(memberCb);
+        for (Member member : selectList) {
+            MemberDto memberDto = new MemberDto();
+            memberDto.memberId = member.getMemberId();
+            memberDto.accountName = member.getAccountName();
+            memberDto.userName = member.getUserName();
+            followSuggestionList.add(memberDto);
+        }
+    }
+
     private void showTimeline() {
         TweetCB tweetCB = new TweetCB();
         tweetCB.setupSelect_Member();
@@ -166,6 +175,7 @@ public class HomeAction {
                 orCB.query().setMemberId_InScope(followIdList);
             }
         });
+        // tweetCB.paging(10, 1);
         LOG.debug("***" + followIdList);
         LOG.debug("***" + tweetCB.toDisplaySql());
         tweetCB.query().addOrderBy_TweetId_Desc();
@@ -175,6 +185,12 @@ public class HomeAction {
             TweetDto tweetDto = new TweetDto();
             tweetDto.accountName = tweet.getMember().getAccountName();
             tweetDto.username = tweet.getMember().getUserName();
+            tweetDto.statusCode = tweet.getMember().getMemberStatusCode();
+            if (tweetDto.statusCode.equals(1)) {
+                tweetDto.status = new Boolean(true);
+            } else if (tweetDto.statusCode.equals(2)) {
+                tweetDto.status = new Boolean(false);
+            }
             tweetDto.tweetTime = tweet.getTweetDatetime();
             tweetDto.tweet = tweet.getTweet();
             timeLine.add(tweetDto);
@@ -227,9 +243,9 @@ public class HomeAction {
     @Execute(validate = "validate", input = "/home/?redirect =true")
     /* ツィートと、ツィート時間を新しく追加 */
     public String tweet() {
-        //        if (!TokenProcessor.getInstance().isTokenValid(request, true)) {
-        //            throw new ActionMessagesException("不正なリクエストです", false);
-        //        }
+        if (!TokenProcessor.getInstance().isTokenValid(request, true)) {
+            throw new ActionMessagesException("不正なリクエストです", false);
+        }
         Date date = new Date();
         Timestamp tweetTime = new Timestamp(date.getTime());
         String formatTweetTime = new SimpleDateFormat("MM月dd日 HH時mm分").format(tweetTime);
@@ -259,40 +275,40 @@ public class HomeAction {
         });
         memberCB.query().setMemberId_NotEqual(sessionDto.myId);
         memberCB.query().addOrderBy_MemberId_Asc();
-        LOG.debug("***" + homeForm.searchWord);
         ListResultBean<Member> memberList = memberBhv.selectList(memberCB);
         for (Member member : memberList) {
             MemberDto memberDto = new MemberDto();
             memberDto.accountName = member.getAccountName();
             memberDto.userName = member.getUserName();
             memberDto.memberId = member.getMemberId();
-            LOG.debug("***" + sessionDto.myId + "," + member.getMemberId());
             candidateList.add(memberDto);
         }
         /* 検索ワードが含まれるツィートを検索 */
         TweetCB tweetCB = new TweetCB();
         tweetCB.setupSelect_Member();
         tweetCB.query().setTweet_LikeSearch(homeForm.searchWord, new LikeSearchOption().likeContain());
-        // tweetCB.query().setMemberId_NotEqual(sessionDto.myId);
         tweetCB.query().addOrderBy_TweetId_Asc();
         ListResultBean<Tweet> tweetList = tweetBhv.selectList(tweetCB);
         for (Tweet tweet : tweetList) {
-            LOG.debug("***" + sessionDto.myId);
             TweetDto tweetDto = new TweetDto();
             tweetDto.tweet = tweet.getTweet();
             tweetDto.accountName = tweet.getMember().getAccountName();
             tweetDto.username = tweet.getMember().getUserName();
+            tweetDto.statusCode = tweet.getMember().getMemberStatusCode();
+            if (tweetDto.statusCode.equals(1)) {
+                tweetDto.status = new Boolean(true);
+            } else if (tweetDto.statusCode.equals(2)) {
+                tweetDto.status = new Boolean(false);
+            }
             tweetDto.tweetTime = tweet.getTweetDatetime();
             resultList.add(tweetDto);
         }
         /* 該当する検索結果がなかった場合の処理 */
         if (candidateList.isEmpty()) {
             noMatchUsers = "検索ワードと一致するユーザーはいません。";
-            LOG.debug("hit" + candidateList);
         }
         if (resultList.isEmpty()) {
             noMatchTweets = "検索ワードと一致するツィートはありません。";
-            LOG.debug("hit2" + resultList);
         }
         String searchWordPtn = "[\\\"\\\':;]+";
         Pattern ptn = Pattern.compile(searchWordPtn);
@@ -301,6 +317,31 @@ public class HomeAction {
             return "/home/?redirect=true";
         }
         return "/twitter/searchresult.jsp";
+    }
+
+    @Execute(validator = false)
+    /*　自分宛メッセージ一覧を出す */
+    // TODO mayuko.sakaba pagingができていない。
+    // TODO mayuko.sakaba メッセージを送ってくれたメンバーの最新メッセージ一覧にしたい。。。
+    public String myMessage() {
+        MessageCB messageCb = new MessageCB();
+        messageCb.setupSelect_MemberBySenderId();
+        messageCb.query().setReceiverId_Equal(sessionDto.myId);
+        messageCb.query().addOrderBy_MessageId_Desc();
+        // messageCb.paging(10, 1);
+        ListResultBean<Message> messageList = messageBhv.selectList(messageCb);
+        for (Message message : messageList) {
+            MessageDto messageDto = new MessageDto();
+            messageDto.accountname = message.getMemberBySenderId().getAccountName();
+            messageDto.username = message.getMemberBySenderId().getUserName();
+            messageDto.messageTime = message.getMessageTime();
+            messageDto.message = message.getMessage();
+            receiveMessageList.add(messageDto);
+        }
+        if (receiveMessageList.isEmpty()) {
+            messageComment = "まだメッセージはありません。。。";
+        }
+        return "/myMessage.jsp";
     }
 
     // ===================================================================================

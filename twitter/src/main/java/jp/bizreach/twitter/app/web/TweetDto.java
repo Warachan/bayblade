@@ -8,6 +8,8 @@ public class TweetDto {
     public String accountName;
     public String tweetTime;
     public String tweet;
+    public Integer statusCode;
+    public boolean status;
 
     public String getUsername() {
         return username;

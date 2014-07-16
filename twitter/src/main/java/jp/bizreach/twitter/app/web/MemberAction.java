@@ -112,6 +112,12 @@ public class MemberAction {
             TweetDto tweetDto = new TweetDto();
             tweetDto.accountName = tweet.getMember().getAccountName();
             tweetDto.username = tweet.getMember().getUserName();
+            tweetDto.statusCode = tweet.getMember().getMemberStatusCode();
+            if (tweetDto.statusCode.equals(1)) {
+                tweetDto.status = new Boolean(true);
+            } else if (tweetDto.statusCode.equals(2)) {
+                tweetDto.status = new Boolean(false);
+            }
             tweetDto.tweet = tweet.getTweet();
             tweetDto.tweetTime = tweet.getTweetDatetime();
             timeLine.add(tweetDto);

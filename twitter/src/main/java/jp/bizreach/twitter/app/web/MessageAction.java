@@ -77,18 +77,13 @@ public class MessageAction {
         Integer memberId = member.getMemberId();
 
         /* 相手からメッセージ一覧を表示する　*/
-        MessageCB messageCb = new MessageCB();
-        messageCb.query().setSenderId_Equal(memberId);
-        messageCb.query().setReceiverId_Equal(sessionDto.myId);
-        messageCb.query().addOrderBy_MessageId_Desc();
-        ListResultBean<Message> selectMessageList = messageBhv.selectList(messageCb);
-        for (Message message : selectMessageList) {
-            MessageDto messageDto = new MessageDto();
-            messageDto.message = message.getMessage();
-            messageDto.messageTime = message.getMessageTime();
-            sentMessageList.add(messageDto);
-        }
+        receivedMessages(memberId);
         /* 自分からのメッセージ一覧を表示する　*/
+        sentMessages(memberId);
+        return "/message.jsp";
+    }
+
+    private void sentMessages(Integer memberId) {
         MessageCB messageToCb = new MessageCB();
         messageToCb.query().setReceiverId_Equal(memberId);
         messageToCb.query().setSenderId_Equal(sessionDto.myId);
@@ -100,16 +95,30 @@ public class MessageAction {
             messageDto.messageTime = message.getMessageTime();
             receiveMessageList.add(messageDto);
         }
-        if (sentMessageList.isEmpty()) {
-            noSentMessages = "No Messages yet";
-        }
         if (receiveMessageList.isEmpty()) {
             noMessages = "No Messages yet";
         }
-        return "/message.jsp";
     }
 
-    @Execute(validate = "validate", input = "/message.jsp")
+    private void receivedMessages(Integer memberId) {
+        MessageCB messageCb = new MessageCB();
+        messageCb.query().setSenderId_Equal(memberId);
+        messageCb.query().setReceiverId_Equal(sessionDto.myId);
+        messageCb.query().addOrderBy_MessageId_Desc();
+        ListResultBean<Message> selectMessageList = messageBhv.selectList(messageCb);
+        for (Message message : selectMessageList) {
+            MessageDto messageDto = new MessageDto();
+            messageDto.message = message.getMessage();
+            messageDto.messageTime = message.getMessageTime();
+            sentMessageList.add(messageDto);
+        }
+        if (sentMessageList.isEmpty()) {
+            noSentMessages = "No Messages yet";
+        }
+    }
+
+    @Execute(validate = "validate", input = "/message/{receiver}/")
+    /* メッセージを書く */
     public String editMessage() {
         if (!TokenProcessor.getInstance().isTokenValid(request, true)) {
             throw new ActionMessagesException("不正なリクエストです", false);
@@ -137,8 +146,10 @@ public class MessageAction {
 
     public ActionMessages validate() {
         ActionMessages errors = new ActionMessages();
-        if (messageForm.message.length() > 200) {
-            errors.add("message", new ActionMessage("文字制限(200文字）を超えています。", false));
+        if (messageForm.message == "") {
+            errors.add("message", new ActionMessage("何も入力されていません。", false));
+        } else if (messageForm.message.length() >= 256) {
+            errors.add("message", new ActionMessage("文字制限(255文字）を超えています。", false));
         }
         return errors;
     }

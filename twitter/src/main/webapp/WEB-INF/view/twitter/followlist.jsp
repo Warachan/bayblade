@@ -7,21 +7,7 @@
 	<link href='http://fonts.googleapis.com/css?family=Libre+Baskerville' rel='stylesheet' type='text/css'>
 </head>
 <div class = "wrapper">
-<ul class = "global-navigation">
-			<li><a id="profile" href= "http:/twitter/profile/">Profile</a></li>
-			<li id="home"><a id="homeButton" href= "http:/twitter/home/">Home</a></li>
-				<li id="search">
-					<s:form action="/home/">
-						<html:text property="searchWord" size ="30" styleClass = "searchBox"/>
-						<s:submit property="search" value="Search" styleClass = "searchButton"/>
-					</s:form>
-				</li>
-				<li id="logout">
-					<s:form action="/logout/"  styleClass = "logoutForm">
-						<s:submit property="index" value="Logout" styleClass = "logoutButton"/>
-					</s:form>
-				</li>
-		</ul>
+		<jsp:include page="/WEB-INF/view/glonavi.jsp"/>
 	<div class ="header">
 		<p>Pocketer</p>
 	</div>
@@ -59,7 +45,7 @@
 	</div>
 </body>
 	<div class="footer">
-			<p>©2014 Annie Wara Pocket</p>
+			<p>©2014 AnnieWaraPocket All Rights Reserved</p>
 	</div>
 </div>
 </html>

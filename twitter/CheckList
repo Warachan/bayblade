@@ -10,3 +10,7 @@ css file change margin-left of receive to 49px;
 validation check message 周り、profile action にて、スペースキーをサブミットすると、画面が切り替わるなぞ過ぎる挙動
 
 サーバ上の時間を変えなければならない。
+
+StringUtilの仕様について確認
+
+ｸﾞﾛﾅﾋﾞ割合直す。

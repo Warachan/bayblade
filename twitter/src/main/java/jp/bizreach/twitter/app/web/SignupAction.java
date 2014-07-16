@@ -20,6 +20,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
+import org.seasar.framework.util.StringUtil;
 import org.seasar.struts.annotation.ActionForm;
 import org.seasar.struts.annotation.Execute;
 
@@ -62,6 +63,7 @@ public class SignupAction {
     public String password;
     public String confirmPass;
     public String groupName;
+    public String status;
     public String matchError;
     public String overlapsError;
     public String characterError;
@@ -82,9 +84,7 @@ public class SignupAction {
 
     @Execute(validate = "validate", input = "/signup.jsp")
     /* 会員登録メソッド */
-    public String regester() throws NoSuchAlgorithmException {
-
-        // newEmail = signupForm.newEmail;
+    public String register() throws NoSuchAlgorithmException {
         password = signupForm.password;
         confirmPass = signupForm.confirmPass;
         username = signupForm.username;
@@ -134,78 +134,88 @@ public class SignupAction {
         login.setUpdTrace(sessionDto.username);
         loginBhv.insert(login);
 
-        return "/home/?redirect =true";
+        return "/home/?redirect=true";
     }
 
+    // ===================================================================================
+    //                                                                          Validation
+    //                                                                          ==========
     /* 会員登録画面　Validation */
     public ActionMessages validate() {
+        password = signupForm.password;
+        confirmPass = signupForm.confirmPass;
+        username = signupForm.username;
+        accountName = signupForm.accountName;
+        groupName = signupForm.groupName;
+        status = signupForm.status;
         ActionMessages errors = new ActionMessages();
 
         /* accountName */
-        // TODO mayuko.sakaba 入力に許される文字列の指定がまだです。
-        if (signupForm.accountName == "") {
+        if (StringUtil.isEmpty(accountName)) {
             errors.add("accountName", new ActionMessage("名前が未入力です。", false));
-        }
-        if (signupForm.accountName.length() > 20) {
-            errors.add("accountName", new ActionMessage("名前が長すぎます。20文字以内で記入してください。", false));
-        }
-        String wordPtn = "[\\\"\\\':;,\\s]+";
-        Pattern ptnCheck = Pattern.compile(wordPtn);
-        Matcher wordMatcher = ptnCheck.matcher(signupForm.accountName);
-        if (wordMatcher.matches()) {
-            errors.add("accountName", new ActionMessage("不正な文字が含まれています。", false));
+        } else {
+            if (accountName.length() > 20) {
+                errors.add("accountName", new ActionMessage("名前が長すぎます。20文字以内で記入してください。", false));
+            }
+            String wordPtn = "[\\\"\\\':;,\\s]+";
+            Pattern ptnCheck = Pattern.compile(wordPtn);
+            Matcher wordMatcher = ptnCheck.matcher(accountName);
+            if (wordMatcher.matches()) {
+                errors.add("accountName", new ActionMessage("不正な文字が含まれています。", false));
+            }
         }
         /* username */
-        String usernamePtn = "[\\w]+";
-        Pattern ptn2 = Pattern.compile(usernamePtn);
-        Matcher usernameMatcher = ptn2.matcher(signupForm.username);
-        MemberCB check = new MemberCB();
-        check.query().setUserName_Equal(signupForm.username);
-        int nameCount = memberBhv.selectCount(check);
-        if (signupForm.username == "") {
+        if (StringUtil.isEmpty(username)) {
             errors.add("username", new ActionMessage("ユーザ名が未入力です。", false));
         } else {
+            String usernamePtn = "[A-Za-z0-9]+";
+            Pattern ptn2 = Pattern.compile(usernamePtn);
+            Matcher usernameMatcher = ptn2.matcher(username);
             if (!usernameMatcher.matches()) {
                 errors.add("username", new ActionMessage("ユーザ名に不正な文字が含まれています。", false));
             }
+            MemberCB check = new MemberCB();
+            check.query().setUserName_Equal(username);
+            int nameCount = memberBhv.selectCount(check);
             if (nameCount > 0) {
                 errors.add("username", new ActionMessage("このユーザ名はすでに使われています。", false));
             }
-            if (signupForm.username.length() < 5 || signupForm.username.length() > 100) {
+            if (username.length() < 5 || username.length() > 100) {
                 errors.add("username", new ActionMessage("ユーザ名は5文字以上、100文字以内で入力してください。", false));
             }
         }
         /* status */
-        if (signupForm.status == "") {
+        if (StringUtil.isEmpty(status)) {
             errors.add("status", new ActionMessage("どちらか選択してください。", false));
         }
         /* group */
-        if (signupForm.groupName == "") {
+        if (StringUtil.isEmpty(groupName)) {
             errors.add("groupName", new ActionMessage("所属企業か所属大学名が未入力です。", false));
-        }
-        if (signupForm.groupName.length() > 100) {
-            errors.add("groupName", new ActionMessage("記入事項が長すぎます。", false));
-        }
-        String wordPtn2 = "[\\\"\\\':;,\\s]+";
-        Pattern ptnCheck2 = Pattern.compile(wordPtn2);
-        Matcher wordMatcher2 = ptnCheck2.matcher(signupForm.groupName);
-        if (wordMatcher2.matches()) {
-            errors.add("groupName", new ActionMessage("不正な文字が含まれています。", false));
+        } else {
+            if (groupName.length() > 100) {
+                errors.add("groupName", new ActionMessage("記入事項が長すぎます。", false));
+            }
+            String wordPtn2 = "[\\\"\\\':;,\\s]+";
+            Pattern ptnCheck2 = Pattern.compile(wordPtn2);
+            Matcher wordMatcher2 = ptnCheck2.matcher(groupName);
+            if (wordMatcher2.matches()) {
+                errors.add("groupName", new ActionMessage("不正な文字が含まれています。", false));
+            }
         }
         /*　password */
-        String pswdPtn = "[\\w]+";
-        Pattern ptn3 = Pattern.compile(pswdPtn);
-        Matcher pswdMatcher = ptn3.matcher(signupForm.password);
-        if (signupForm.password == "") {
+        if (StringUtil.isEmpty(password)) {
             errors.add("password", new ActionMessage("パスワードが未入力です。", false));
         } else {
+            String pswdPtn = "[A-Za-z0-9]+";
+            Pattern ptn3 = Pattern.compile(pswdPtn);
+            Matcher pswdMatcher = ptn3.matcher(password);
             if (!pswdMatcher.matches()) {
                 errors.add("password", new ActionMessage("アルファベットか数字を入力してください。", false));
             }
-            if (signupForm.password.length() > 20 || signupForm.password.length() < 8) {
+            if (password.length() > 20 || password.length() < 8) {
                 errors.add("password", new ActionMessage("パスワードは8文字以上、20文字以下にしてください。", false));
             }
-            if (!signupForm.password.equals(signupForm.confirmPass)) {
+            if (!password.equals(signupForm.confirmPass)) {
                 errors.add("password", new ActionMessage("パスワードが一致しません。", false));
             }
         }

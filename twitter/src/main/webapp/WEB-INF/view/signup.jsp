@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 	<meta charset = "utf-8">
-	<title>Home</title>
+	<title>Pocketer</title>
 	<link rel="stylesheet" type="text/css" href="${f:url('/css/twitterHome.css')}" />
 	<link href='http://fonts.googleapis.com/css?family=Libre+Baskerville' rel='stylesheet' type='text/css'>
 </head>
@@ -17,7 +17,7 @@
 	<div class="signup-main">
 		<div class="signup-box">
 		<h2>Signup on Twitter!</h2>
-		<s:form action="/signup/regester/" styleClass="signupForm">
+		<s:form action="/signup/register/" styleClass="signupForm">
 			<div class="name">
 				<h4>Name</h4>
 				<html:text property="accountName"  size="60" styleClass = "nameBox"/>
@@ -29,6 +29,7 @@
 				<h4>Username</h4>
 				*5文字以上・100文字以内で、英数字を入力してください。
 				<html:text property="username"  size="60" styleClass = "usernameBox"/><br>
+					<p id="warning">*この項目は後で変更できません！
 					<div class = "usernameError">
 						<html:errors property="username"/>
 					</div>
@@ -36,7 +37,7 @@
 			<div class="profile">
 				<div class ="status">
 					<h4>Student or Company?</h4>
-					<p id="comment">あなたは学生？それとも会社の方？</p>
+					<p id="topComment">あなたは学生？それとも会社の方？</p>
 						<html:select property="status">
 							<html:option value=""></html:option>
     　							<html:option value="student">Student</html:option>
@@ -47,7 +48,7 @@
 				</div>
 				<div class = "group">
 					<h4>School/Company Name</h4>
-						<html:text property="groupName"/>
+						<html:text property="groupName" size="60"/>
 						<html:errors property="groupName"/>
 				</div>
 			</div>
@@ -65,7 +66,7 @@
 	</s:form>
 	</div>
 	<div class="footer">
-			<p>©2014 Annie Wara Pocket</p>
+			<p>©2014 AnnieWaraPocket All Rights Reserved</p>
 	</div>
 </body>
 </div>
