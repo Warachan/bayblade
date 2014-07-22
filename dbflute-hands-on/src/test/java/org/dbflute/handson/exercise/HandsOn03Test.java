@@ -42,6 +42,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
     protected PurchaseBhv purchaseBhv;
 
     /**
+     * ☆ Done
      * [1] 会員名称がSで始まる1968年1月1日以前に生まれた会員を検索
      * 会員ステータスも取得する
      * 生年月日の昇順で並べる
@@ -81,7 +82,9 @@ public class HandsOn03Test extends UnitContainerTestCase {
         }
     }
 
-    /**[2] 会員ステータスと会員セキュリティ情報も取得して会員を検索
+    /**
+     * ☆　Done
+     * [2] 会員ステータスと会員セキュリティ情報も取得して会員を検索
      * 若い順で並べる。生年月日がない人は会員IDの昇順で並ぶようにする
      * 会員ステータスと会員セキュリティ情報が存在することをアサート
      */
@@ -138,6 +141,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
     }
 
     /**
+     * ☆ Done
      * [3] 会員セキュリティ情報のリマインダ質問で2という文字が含まれている会員を検索
      * 会員セキュリティ情報のデータ自体は要らない
      * リマインダ質問に2が含まれていることをアサート
@@ -259,12 +263,12 @@ public class HandsOn03Test extends UnitContainerTestCase {
                 assertTrue(statusCode.equals("PRV"));
             }
             log(memberName, memberId);
-            // TODO mayuko.sakaba statusごとに固まっていることをアサート →　もう少し効率の良いやりかたを探せないか。。。
+            // TODO mayuko.sakaba statusごとに固まっていることをアサート →　コレでアサーとできているのか微妙なところ。もう少し効率の良いやりかたを探せないか。。。
         }
     }
 
     /**
-     *
+     *　☆Done
      * [5] 生年月日が存在する会員の購入を検索
      * 会員名称と会員ステータス名称と商品名も一緒に取得(ログ出力)
      * 購入日時の降順、購入価格の降順、商品IDの昇順、会員IDの昇順で並べる
@@ -319,12 +323,12 @@ public class HandsOn03Test extends UnitContainerTestCase {
 
         // ## Arrange ##
         MemberCB cb = new MemberCB();
-        cb.getConditionQuery().getMemberName();
+        // TODO mayuko.sakaba memberStatus nameのみの検索 副問い合わせの書き方を調べ中
+        cb.query().queryMemberStatus().getMemberStatusName();
         Date beginDate = new HandyDate("2005/10/01").getDate();
         Date endDate = new HandyDate("2005/10/03").getDate();
         cb.query().setFormalizedDatetime_DateFromTo(beginDate, endDate);
         cb.query().setMemberName_LikeSearch("vi", new LikeSearchOption().likeContain());
-        // TODO mayuko.sakaba memberStatus nameのみの検索
 
         // ## Act ##
         ListResultBean<Member> memberList = memberBhv.selectList(cb);
@@ -333,7 +337,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
         for (Member member : memberList) {
             String name = member.getMemberName();
             Timestamp datetime = member.getFormalizedDatetime();
-            // String statusName = member.getMemberStatus().getMemberStatusName();
+            // MemberStatus status = member.getMemberStatus();
             assertContains(name, "vi");
             Date assertBeginDate = new HandyDate("2005/09/30").getDate();
             Date assertEndDate = new HandyDate("2005/10/04").getDate();
@@ -345,22 +349,20 @@ public class HandsOn03Test extends UnitContainerTestCase {
     }
 
     /**
-     * [7] todo 正式会員になってから一週間以内の購入を検索
+     * [7] 正式会員になってから一週間以内の購入を検索
      * 会員と会員ステータス、会員セキュリティ情報も一緒に取得
      * 商品と商品ステータス、商品カテゴリ、さらに上位の商品カテゴリも一緒に取得
-     * todo 上位の商品カテゴリ名が取得できていることをアサート
-     * todo 購入日時が正式会員になってから一週間以内であることをアサート
+     * 上位の商品カテゴリ名が取得できていることをアサート
+     * 購入日時が正式会員になってから一週間以内であることをアサート
      * ※ログ出力と書いてなくても、テストの動作を確認するためにも(自由に)ログ出力すると良い。
-     * ※todo 実装できたら、こんどはスーパークラスのメソッド adjustPurchase_PurchaseDatetime_...() を呼び出し、
+     * ※実装できたら、こんどはスーパークラスのメソッド adjustPurchase_PurchaseDatetime_...() を呼び出し、
      *   調整されたデータによって検索結果が一件増えるかどうか確認してみましょう。 もし増えないなら、なぜ増えないのか..
      */
     public void test_07() throws Exception {
         // ## Arrange ##
-        //        Date beginDate = new HandyDate("2014/07/13").getDate();
-        //        Date endDate = new HandyDate("2014/07/20").getDate();
         PurchaseCB cb = new PurchaseCB();
         // TODO mayuko.sakaba 一週間以内の購入という指定を考える。
-        // cb.query().setRegisterDatetime_DateFromTo(beginDate, endDate);
+        // TODO mayuko.sakaba 上位の商品ンカテゴリの検索を考える。
         cb.setupSelect_Member().withMemberSecurityAsOne();
         cb.setupSelect_Member().withMemberStatus();
         cb.setupSelect_Product().withProductCategory();
@@ -379,6 +381,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
             MemberStatus memberStatus = purchase.getMember().getMemberStatus();
             Timestamp registerDatetime = purchase.getRegisterDatetime();
             log(product, productStatus, category, security, memberStatus, registerDatetime);
+            // TODO mayuko.sakaba 米印以降がまだできていない。
         }
     }
 
@@ -446,10 +449,6 @@ public class HandsOn03Test extends UnitContainerTestCase {
      */
     public void test_09() throws Exception {
         // ## Arrange ##
-        MemberCB cb = new MemberCB();
-        cb.query().setBirthdate_IsNull();
-        cb.query().setMemberName_Equal(null);
-        cb.query().setMemberAccount_Equal("");
 
         // ## Act ##
 
