@@ -22,7 +22,6 @@ public class HandsOn02Test extends UnitContainerTestCase {
     protected MemberBhv memberBhv;
 
     public void test_firstSelect() throws Exception {
-
         // ## Arrange ##
         MemberCB cb = new MemberCB();
         cb.query().setMemberName_PrefixSearch("S");
@@ -31,7 +30,8 @@ public class HandsOn02Test extends UnitContainerTestCase {
         ListResultBean<Member> memberList = memberBhv.selectList(cb);
 
         // ## Assert ##
-        // TODO warachan 素通り防止、assertHasAny...() をここでも入れておきましょう by jflute
+        // warachan 素通り防止、assertHasAny...() をここでも入れておきましょう by jflute
+        assertHasAnyElement(memberList);
         for (Member member : memberList) {
             log(member.getMemberName());
         }
@@ -47,7 +47,6 @@ public class HandsOn02Test extends UnitContainerTestCase {
      * @throws Exception
      */
     public void test_omake() throws Exception {
-
         // ## Arrange ##
         MemberCB cb = new MemberCB();
         cb.setupSelect_MemberStatus(); // 関連しているテーブルからカラムを取ってきて欲しい
@@ -76,14 +75,14 @@ public class HandsOn02Test extends UnitContainerTestCase {
      * 会員IDが 1 であることをアサート
      */
     public void test_IDisOne() throws Exception {
-        // TODO warachan 【直しました】他のエクササイズでは、Act や Assert の上に空行を入れているので、ここでも空けよう (全体的に統一ね) by jflute
-
         // ## Arrange ##
         MemberCB cb = new MemberCB();
         cb.query().setMemberId_Equal(1);
+
         // ## Act ##
         Member member = memberBhv.selectEntityWithDeletedCheck(cb);
         // 必ずデータがあるのか、それともない可能性があるのか、ないことがありえるなら、ないことを想定したプログラムをかかなければならない
+
         // ## Assert ##
         String memberName = member.getMemberName();
         Integer memberId = member.getMemberId();
@@ -103,14 +102,13 @@ public class HandsOn02Test extends UnitContainerTestCase {
      * 生年月日がないことをアサート
      */
     public void test_NoBirthDate() throws Exception {
-
         // ## Arrange ##
         MemberCB cb = new MemberCB();
         cb.query().setBirthdate_IsNull();
         cb.query().addOrderBy_FormalizedDatetime_Desc();
 
         // ## Act ##
-        // TODO warachan 【直しました】テーブル名 + List という名前を心がけよう、e.g. memberList by jflute
+        // warachan 【直しました】テーブル名 + List という名前を心がけよう、e.g. memberList by jflute
         // 直すときは、変数を選択して ctrl + 1 -> enter で rename できるよ
         ListResultBean<Member> memberList = memberBhv.selectList(cb);
 
@@ -132,7 +130,7 @@ public class HandsOn02Test extends UnitContainerTestCase {
             Date birthdate = member.getBirthdate();
             log(memberName, formalizedDatetime, birthdate);
             assertNull(birthdate);
-            assertTrue(member.getBirthdate() == null);
+            assertTrue(birthdate == null);
             // もしこのデータが必ず生年月日が全員にあるとどうなる？
             // 空リストを帰ってくる
             // →空リストが帰ってきた場合、素通りになる

@@ -50,12 +50,11 @@ public class HandsOn03Test extends UnitContainerTestCase {
      * 「以前」の解釈は日付によってしっかり確認すること
      * @throws Exception
      */
-    // TODO warachan sectionのまちがいかな？ by jflute
+    // warachan sectionのまちがいかな？ by jflute
     public void test_number1() throws Exception {
-
         // ## Arrange ##
         MemberCB cb = new MemberCB();
-        // TODO warachan 基準の日付、対象の日付的なニュアンスの変数名がほしいかな、targetDateとか by jflute
+        // warachan 基準の日付、対象の日付的なニュアンスの変数名がほしいかな、targetDateとか by jflute
         Date targetDate = new HandyDate("1968/1/1").getDate();
         cb.setupSelect_MemberStatus();
         cb.query().setMemberName_PrefixSearch("S");
@@ -66,14 +65,15 @@ public class HandsOn03Test extends UnitContainerTestCase {
         ListResultBean<Member> memberList = memberBhv.selectList(cb);
 
         // ## Assert ##
+        assertHasAnyElement(memberList);
         for (Member member : memberList) {
             MemberStatus status = member.getMemberStatus();
             Date birthdate = member.getBirthdate();
             log(status, birthdate);
             // Q.コレだとdateを変えるとそのまま適応されてしまうのでは？ →　すみません勘違いでした＞＜かなり前に納得したものがそのまま残っていました。
-            // TODO warachan　【確認済】"dateを変える" とは？？？ by jflute
+            // warachan　【確認済】"dateを変える" とは？？？ by jflute
             assertTrue(birthdate.before(targetDate) || birthdate.equals(targetDate));
-            // TODO warachan 【直しました】すらすらコメント微調整、// の後ろに空白を一つ入れる、二つ入ってるのもあるよ by jflute
+            // warachan 【直しました】すらすらコメント微調整、// の後ろに空白を一つ入れる、二つ入ってるのもあるよ by jflute
             /* そのほかのやり方 */
             assertFalse(birthdate.after(targetDate)); // コレだと含まない選択肢があっても、未来ではない、といっているのだから以前を考えなくていい。
             assertTrue(birthdate.compareTo(targetDate) <= 0); // このメソッドはintegerを返してくる
@@ -89,7 +89,6 @@ public class HandsOn03Test extends UnitContainerTestCase {
      * 会員ステータスと会員セキュリティ情報が存在することをアサート
      */
     public void test_number2() throws Exception {
-
         // ## Arrange ##
         MemberCB cb = new MemberCB();
         cb.setupSelect_MemberStatus();
@@ -105,8 +104,8 @@ public class HandsOn03Test extends UnitContainerTestCase {
         for (Member member : memberList) {
             MemberStatus status = member.getMemberStatus();
             MemberSecurity security = member.getMemberSecurityAsOne();
-            assertNotNull(status);
-            assertNotNull(security);
+            assertNotNull(status); // →notNull制約・FK制約のカラムだから必すsetupSelectが存在するといえる。many to oneなので、物理的制約がある。
+            assertNotNull(security); // カージナリティ的に"1対必ず1"だから（黒ぽちがない）必ず存在するといえる。（物理制約はない）
             assertTrue(status != null && security != null);
             Date birthdate = member.getBirthdate();
             log(status, security, birthdate);
@@ -119,7 +118,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
             // assertNotNull(status, security);
 
             // 【久保さんコメント】
-            // TODO warachan "(両方同時にnull) というわけではない" というassertだと、片方nullのケースが検出できない by jflute
+            // warachan "(両方同時にnull) というわけではない" というassertだと、片方nullのケースが検出できない by jflute
             // assertFalse(status == null && security == null);
             //  -> "(両方同時にnull) というわけではない" つまり 片方は null でも大丈夫になっちゃう
             // なので、
@@ -127,13 +126,13 @@ public class HandsOn03Test extends UnitContainerTestCase {
             // という感じで "両方ともnullではない" ならOK。
             // というか、assertNotNull(status); assertNotNull(security); でOK。
             // ちなみに、assertNotNullの第一引数はメッセージを入れるところなので、assertNotNull(status, security);は間違い
-            // TODO warachan と、ここまで書いたけど、そもそもチェックしたいのは、getMemberStatusName()とgetRegisterUser()ではない by jflute
+            // warachan と、ここまで書いたけど、そもそもチェックしたいのは、getMemberStatusName()とgetRegisterUser()ではない by jflute
             // setupSelectをしたかどうかを証明するなら、getMemberStatus(), getMemberSecurityAsOne()の方をチェックすべし
 
             /* statusがなぜ必ずデータが存在するといえるか。*/
             // →notNull制約・FK制約のカラムだから必すsetupSelectが存在するといえる。many to oneなので、物理的制約がある。
             /* securityがなぜ必ずデータがあるといえるか。 */
-            // カージナリティ的に"1対必ず1"だから（黒ぽちがある）必ず存在するといえる。（物理制約はない）
+            // カージナリティ的に"1対必ず1"だから（黒ぽちがない）必ず存在するといえる。（物理制約はない）
             // 論理的制約、論理的には制約があるけど、実際、物理的にそうとは限らない。業務制約ともいう。
             // * null が存在しうる制約をnullableと呼ぶ。
             // 必ず存在するかどうかについて、テーブルのschemaを読むのもあり。（そのテーブルが信用できるものなら）
@@ -148,7 +147,6 @@ public class HandsOn03Test extends UnitContainerTestCase {
      * アサートするために別途検索処理を入れても誰も文句は言わない
      */
     public void test_number3() throws Exception {
-
         // ## Arrange ##
         MemberCB cb = new MemberCB();
         // 子テーブルのカラムを利用して絞り込む。
@@ -173,6 +171,8 @@ public class HandsOn03Test extends UnitContainerTestCase {
         // 何ができないかではなく、何ができなければならないのかをまず考えなければ正解を見出しにくい。
         // topdown, buttomup どっちもできるようにすること
         List<Integer> memberIDList = new ArrayList<Integer>();
+        // こうも書ける ユニークキーもしくはpkのときに使える。
+        // List<Integer> idList = memberBhv.extractMemberIdList(memberList);
         for (Member member : memberList) {
             Integer memberId = member.getMemberId();
             memberIDList.add(memberId);
@@ -191,7 +191,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
                 }
             }
         }
-        // TODO warachan 【直しました】HashMapをnewしたときの変数の型は、Mapインターフェースで。メモだけどしっかり直しておこう by jflute
+        // warachan 【直しました】HashMapをnewしたときの変数の型は、Mapインターフェースで。メモだけどしっかり直しておこう by jflute
         //  ***************************** Mapを使った場合。************************************************
         //        MemberSecurityCB securityCB = new MemberSecurityCB();
         //        securityCB.query().setMemberId_InScope(memberIDList);
@@ -205,7 +205,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
         //            MemberSecurity security = securityMap.get(memberId);
         //            log(member.getMemberName(), security.getReminderQuestion());
         //        }
-        //*********************************************************************************************
+        //　*********************************************************************************************
     }
 
     //　思い出 setupSelectをしてないからできない。
@@ -234,7 +234,6 @@ public class HandsOn03Test extends UnitContainerTestCase {
      * 会員が会員ステータスごとに固まって並んでいることをアサート
      */
     public void test_No4() throws Exception {
-
         // ## Arrange ##
         MemberCB cb = new MemberCB();
         cb.query().queryMemberStatus().addOrderBy_DisplayOrder_Asc();
@@ -277,7 +276,6 @@ public class HandsOn03Test extends UnitContainerTestCase {
      * ※ログ出力は、スーパークラスの log() メソッドが利用できる。可変長引数でカンマ区切り出力になる。
      */
     public void test_No5() throws Exception {
-
         // ## Arrange ##
         PurchaseCB cb = new PurchaseCB();
         cb.setupSelect_Product();
@@ -295,15 +293,15 @@ public class HandsOn03Test extends UnitContainerTestCase {
         assertHasAnyElement(purchaseList);
         for (Purchase purchase : purchaseList) {
             Integer price = purchase.getPurchasePrice();
-            // TODO warachan 【直しました】getMember()が三回呼ばれているので、ctrl + 1 で助けてあげてくださいs by jflute
+            // warachan 【直しました】getMember()が三回呼ばれているので、ctrl + 1 で助けてあげてくださいs by jflute
             Member member = purchase.getMember();
             String statusName = member.getMemberStatus().getMemberStatusName();
-            String name = member.getMemberName();
+            String memberName = member.getMemberName();
             Date birthdate = member.getBirthdate();
             assertNotNull(birthdate);
-            log(price, statusName, name, birthdate);
-            // TODO mayuko.sakaba ログに普通に出力されているだけだけどいいのか？
-            // TODO warachan 【確認済み】うん！ログ出力せよと言われたら、目視で確認でOK by jflute
+            log(price, statusName, memberName, birthdate);
+            // mayuko.sakaba ログに普通に出力されているだけだけどいいのか？
+            // warachan 【確認済み】うん！ログ出力せよと言われたら、目視で確認でOK by jflute
         }
     }
 
@@ -320,7 +318,6 @@ public class HandsOn03Test extends UnitContainerTestCase {
      *   もともと一件しかなかった検索結果が「二件」になるはずです。
      */
     public void test_No6() throws Exception {
-
         // ## Arrange ##
         MemberCB cb = new MemberCB();
         // TODO mayuko.sakaba memberStatus nameのみの検索 副問い合わせの書き方を調べ中
