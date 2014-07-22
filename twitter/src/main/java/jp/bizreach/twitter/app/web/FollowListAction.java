@@ -71,6 +71,9 @@ public class FollowListAction {
             LOG.debug("***" + follow);
             followMemberList.add(memberDto);
         }
+        if (followMemberList.isEmpty()) {
+            noFollow = "Not following yet";
+        }
         FollowCB followerCB = new FollowCB();
         followerCB.setupSelect_MemberByMemberId();
         followerCB.query().setYouId_Equal(sessionDto.myId);
@@ -81,9 +84,6 @@ public class FollowListAction {
             memberDto.accountName = follow.getMemberByMemberId().getAccountName();
             memberDto.memberId = follow.getMemberId();
             followerMemberList.add(memberDto);
-        }
-        if (followMemberList.isEmpty()) {
-            noFollow = "Not following yet";
         }
         if (followerMemberList.isEmpty()) {
             noFollower = "No followers yet";

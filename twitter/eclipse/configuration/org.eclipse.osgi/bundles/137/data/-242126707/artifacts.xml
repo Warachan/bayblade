@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?artifactRepository version='1.1.0'?>
+<repository name='C:\projects\codebreak\eclipse\dropins\emecha' type='org.eclipse.equinox.p2.artifact.repository.simpleRepository' version='1.0.0'>
+  <properties size='1'>
+    <property name='p2.timestamp' value='1375142005705'/>
+  </properties>
+  <mappings size='3'>
+    <rule filter='(&amp; (classifier=osgi.bundle))' output='${repoUrl}/plugins/${id}_${version}.jar'/>
+    <rule filter='(&amp; (classifier=binary))' output='${repoUrl}/binary/${id}_${version}'/>
+    <rule filter='(&amp; (classifier=org.eclipse.update.feature))' output='${repoUrl}/features/${id}_${version}.jar'/>
+  </mappings>
+  <artifacts size='4'>
+    <artifact classifier='osgi.bundle' id='org.seasar.dbflute.emecha.eclipse.plugin' version='0.5.2.9'>
+      <properties size='2'>
+        <property name='artifact.size' value='125570'/>
+        <property name='download.size' value='125570'/>
+      </properties>
+      <repositoryProperties size='2'>
+        <property name='artifact.reference' value='file:/C:/projects/codebreak/eclipse/dropins/emecha/eclipse/plugins/org.seasar.dbflute.emecha.eclipse.plugin_0.5.2.9.jar'/>
+        <property name='file.name' value='C:\projects\codebreak\eclipse\dropins\emecha\eclipse\plugins\org.seasar.dbflute.emecha.eclipse.plugin_0.5.2.9.jar'/>
+      </repositoryProperties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='org.seasar.dbflute.emecha.eclipse.feature' version='0.5.2.9'>
+      <properties size='3'>
+        <property name='artifact.size' value='0'/>
+        <property name='download.size' value='0'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+      <repositoryProperties size='3'>
+        <property name='artifact.folder' value='true'/>
+        <property name='artifact.reference' value='file:/C:/projects/codebreak/eclipse/dropins/emecha/eclipse/features/org.seasar.dbflute.emecha.eclipse.feature_0.5.2.9/'/>
+        <property name='file.name' value='C:\projects\codebreak\eclipse\dropins\emecha\eclipse\features\org.seasar.dbflute.emecha.eclipse.feature_0.5.2.9'/>
+      </repositoryProperties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.seasar.dbflute.emecha.eclipse.plugin.emsql' version='0.0.1.07'>
+      <properties size='2'>
+        <property name='artifact.size' value='37903'/>
+        <property name='download.size' value='37903'/>
+      </properties>
+      <repositoryProperties size='2'>
+        <property name='artifact.reference' value='file:/C:/projects/codebreak/eclipse/dropins/emecha/eclipse/plugins/org.seasar.dbflute.emecha.eclipse.plugin.emsql_0.0.1.07.jar'/>
+        <property name='file.name' value='C:\projects\codebreak\eclipse\dropins\emecha\eclipse\plugins\org.seasar.dbflute.emecha.eclipse.plugin.emsql_0.0.1.07.jar'/>
+      </repositoryProperties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.seasar.dbflute.emecha.eclipse.plugin.dfeditor' version='0.0.2'>
+      <properties size='2'>
+        <property name='artifact.size' value='37056'/>
+        <property name='download.size' value='37056'/>
+      </properties>
+      <repositoryProperties size='2'>
+        <property name='artifact.reference' value='file:/C:/projects/codebreak/eclipse/dropins/emecha/eclipse/plugins/org.seasar.dbflute.emecha.eclipse.plugin.dfeditor_0.0.2.jar'/>
+        <property name='file.name' value='C:\projects\codebreak\eclipse\dropins\emecha\eclipse\plugins\org.seasar.dbflute.emecha.eclipse.plugin.dfeditor_0.0.2.jar'/>
+      </repositoryProperties>
+    </artifact>
+  </artifacts>
+</repository>

@@ -12,7 +12,8 @@ public class MemberDto {
     public String status;
     public String groupName;
     public String interestedIndustry;
-    public Integer recruitingNumber;
+    public String recruitingNumber;
+    public Integer graduationNumber;
 
     public String getUserName() {
         return userName;

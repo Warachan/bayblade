@@ -13,7 +13,7 @@
 <body>
 	<div class ="top-background">
 	<div class ="top-main">
-		<p class ="intro">就活ツィッターPocketerをようこそ</p>
+		<p class ="intro">就活ツィッターPocketerへようこそ</p>
 			<div class="loginForm">
 				<s:form method="post">
 					<div class = "login">

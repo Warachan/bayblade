@@ -12,14 +12,12 @@ public class LogoutAction {
     @Resource
     protected SessionDto sessionDto;
 
-    // TODO mayuko.sakaba  interceptor を追加したので不必要な処理は消す。
     @Execute(validator = false)
     @RemoveSession(name = "sessionDto")
     public String index() {
         sessionDto.myId = null;
         sessionDto.username = null;
         sessionDto.accountName = null;
-        //    sessionDto.email = null;
         return "/?redirect=true";
     }
 }

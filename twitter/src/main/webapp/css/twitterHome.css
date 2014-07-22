@@ -529,6 +529,11 @@ h3, h4{
 	height:53px;
 	margin-left:23px;
 }
+#tweetComment{
+	margin-left:30px;
+	margin-right:30px;
+	text-align:center;
+}
 .main-bottom-tweetForm{
 	padding-bottom:10px;
 }
@@ -563,7 +568,8 @@ whitespace:hp-pre-wrap;
 whitespace:-o-pre-wrap;
 whitespace:pre-wrap;
 word-wrap:break-word;
-width:900px;
+width:830px;
+margin-left:70px;
 }
 .tweetButton{
 	border-style:none;
@@ -594,6 +600,7 @@ width:900px;
 	height:65px;
 	border-style:none;
 	margin-right:2px;
+	margin-bottom:auto;
 }
 #icon img{
 	width:50px;

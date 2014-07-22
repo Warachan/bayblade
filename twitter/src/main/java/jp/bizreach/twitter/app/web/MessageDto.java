@@ -5,14 +5,8 @@ package jp.bizreach.twitter.app.web;
  */
 public class MessageDto {
     public String message;
-    //    public String sender;
-    //    public String receiver;
     public String username;
     public String accountname;
-    //    public String receiverUsername;
-    //    public String receiverAccountname;
-    //    public Integer senderId;
-    //    public Integer receiverId;
     public String messageTime;
     public String identifier;
 }

@@ -1,5 +1,6 @@
 package org.dbflute.handson.exercise;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,9 +16,14 @@ import org.dbflute.handson.dbflute.exbhv.PurchaseBhv;
 import org.dbflute.handson.dbflute.exentity.Member;
 import org.dbflute.handson.dbflute.exentity.MemberSecurity;
 import org.dbflute.handson.dbflute.exentity.MemberStatus;
+import org.dbflute.handson.dbflute.exentity.MemberWithdrawal;
+import org.dbflute.handson.dbflute.exentity.Product;
+import org.dbflute.handson.dbflute.exentity.ProductCategory;
+import org.dbflute.handson.dbflute.exentity.ProductStatus;
 import org.dbflute.handson.dbflute.exentity.Purchase;
 import org.dbflute.handson.unit.UnitContainerTestCase;
 import org.seasar.dbflute.cbean.ListResultBean;
+import org.seasar.dbflute.cbean.OrQuery;
 import org.seasar.dbflute.cbean.coption.LikeSearchOption;
 import org.seasar.dbflute.helper.HandyDate;
 
@@ -240,8 +246,20 @@ public class HandsOn03Test extends UnitContainerTestCase {
             Integer memberId = member.getMemberId();
             MemberStatus status = member.getMemberStatus();
             assertNull(status);
+            ArrayList<String> orderList1 = new ArrayList<String>();
+            ArrayList<String> orderList2 = new ArrayList<String>();
+            ArrayList<String> orderList3 = new ArrayList<String>();
+            String statusCode = member.getMemberStatusCode();
+            if (statusCode.equals("FML")) {
+                orderList1.add(statusCode);
+            } else if (statusCode.equals("WDL")) {
+                orderList2.add(statusCode);
+            } else {
+                orderList3.add(statusCode);
+                assertTrue(statusCode.equals("PRV"));
+            }
             log(memberName, memberId);
-            // TODO mayuko.sakaba statusごとに固まっていることをアサート
+            // TODO mayuko.sakaba statusごとに固まっていることをアサート →　もう少し効率の良いやりかたを探せないか。。。
         }
     }
 
@@ -301,15 +319,140 @@ public class HandsOn03Test extends UnitContainerTestCase {
 
         // ## Arrange ##
         MemberCB cb = new MemberCB();
-        // cb.setupSelect_MemberStatus()cb;
-        // cb.getConditionQuery().getMemberName().
+        cb.getConditionQuery().getMemberName();
         Date beginDate = new HandyDate("2005/10/01").getDate();
         Date endDate = new HandyDate("2005/10/03").getDate();
         cb.query().setFormalizedDatetime_DateFromTo(beginDate, endDate);
+        cb.query().setMemberName_LikeSearch("vi", new LikeSearchOption().likeContain());
+        // TODO mayuko.sakaba memberStatus nameのみの検索
+
+        // ## Act ##
+        ListResultBean<Member> memberList = memberBhv.selectList(cb);
+
+        // ## Assert ##
+        for (Member member : memberList) {
+            String name = member.getMemberName();
+            Timestamp datetime = member.getFormalizedDatetime();
+            // String statusName = member.getMemberStatus().getMemberStatusName();
+            assertContains(name, "vi");
+            Date assertBeginDate = new HandyDate("2005/09/30").getDate();
+            Date assertEndDate = new HandyDate("2005/10/04").getDate();
+            assertTrue(datetime.after(assertBeginDate) && datetime.before(assertEndDate));
+            // TODO mayuko.sakaba 日程について、もう少し効率の良いアサーションを考えてみる。
+            log(name, datetime);
+            // TODO mayuko.sakaba 米印以降がまだできていない。
+        }
+    }
+
+    /**
+     * [7] todo 正式会員になってから一週間以内の購入を検索
+     * 会員と会員ステータス、会員セキュリティ情報も一緒に取得
+     * 商品と商品ステータス、商品カテゴリ、さらに上位の商品カテゴリも一緒に取得
+     * todo 上位の商品カテゴリ名が取得できていることをアサート
+     * todo 購入日時が正式会員になってから一週間以内であることをアサート
+     * ※ログ出力と書いてなくても、テストの動作を確認するためにも(自由に)ログ出力すると良い。
+     * ※todo 実装できたら、こんどはスーパークラスのメソッド adjustPurchase_PurchaseDatetime_...() を呼び出し、
+     *   調整されたデータによって検索結果が一件増えるかどうか確認してみましょう。 もし増えないなら、なぜ増えないのか..
+     */
+    public void test_07() throws Exception {
+        // ## Arrange ##
+        //        Date beginDate = new HandyDate("2014/07/13").getDate();
+        //        Date endDate = new HandyDate("2014/07/20").getDate();
+        PurchaseCB cb = new PurchaseCB();
+        // TODO mayuko.sakaba 一週間以内の購入という指定を考える。
+        // cb.query().setRegisterDatetime_DateFromTo(beginDate, endDate);
+        cb.setupSelect_Member().withMemberSecurityAsOne();
+        cb.setupSelect_Member().withMemberStatus();
+        cb.setupSelect_Product().withProductCategory();
+        cb.setupSelect_Product().withProductStatus();
+        cb.query().queryProduct().addOrderBy_ProductCategoryCode_Desc();
+
+        // ## Act ##
+        ListResultBean<Purchase> purchaseList = purchaseBhv.selectList(cb);
+
+        // ## Assert ##
+        for (Purchase purchase : purchaseList) {
+            Product product = purchase.getProduct();
+            ProductStatus productStatus = purchase.getProduct().getProductStatus();
+            ProductCategory category = purchase.getProduct().getProductCategory();
+            MemberSecurity security = purchase.getMember().getMemberSecurityAsOne();
+            MemberStatus memberStatus = purchase.getMember().getMemberStatus();
+            Timestamp registerDatetime = purchase.getRegisterDatetime();
+            log(product, productStatus, category, security, memberStatus, registerDatetime);
+        }
+    }
+
+    /**
+     * [8] 1974年までに生まれた、もしくは不明の会員を検索
+     * 会員ステータス名称、リマインダ質問と回答、退会理由入力テキストも取得(ログ出力)
+     * 若い順だが生年月日が null のデータを最初に並べる
+     * 生年月日が指定された条件に合致することをアサート
+     * 1974年生まれの人が含まれていることをアサート
+     * 生まれが不明の会員が先頭になっていることをアサート
+     */
+    public void test_08() throws Exception {
+        // ## Arrange ##
+        MemberCB cb = new MemberCB();
+        cb.setupSelect_MemberSecurityAsOne();
+        cb.setupSelect_MemberStatus();
+        cb.setupSelect_MemberWithdrawalAsOne();
+        // TODO mayuko.sakaba setupselect しない検索方法を考えてみる。
+        final Date date = new HandyDate("1974/12/31").getDate();
+        cb.orScopeQuery(new OrQuery<MemberCB>() {
+
+            @Override
+            public void query(MemberCB orCB) {
+                orCB.query().setBirthdate_LessEqual(date);
+                orCB.query().setBirthdate_IsNull();
+            }
+        });
+        // TODO mayuko.sakaba nullを後に指定したい場合にどのようにしたいか確認したい。
+        // 今は何もしなくても自動的にnullがはじめに来る。
+        cb.query().addOrderBy_Birthdate_Asc();
+
+        // ## Act ##
+        ListResultBean<Member> memberList = memberBhv.selectList(cb);
+
+        // ## Assert ##
+        for (Member member : memberList) {
+            String name = member.getMemberName();
+            Date birthdate = member.getBirthdate();
+            String status = member.getMemberStatus().getMemberStatusName();
+            String question = member.getMemberSecurityAsOne().getReminderQuestion();
+            MemberWithdrawal withdrawal = member.getMemberWithdrawalAsOne();
+            if (withdrawal != null) {
+                String inputText = member.getMemberWithdrawalAsOne().getWithdrawalReasonInputText();
+                log("************:" + inputText);
+            }
+            if (birthdate != null) {
+                assertTrue(birthdate.before(date) || birthdate.equals(date));
+            } else {
+                assertTrue(birthdate == null);
+            }
+            log(birthdate, name, status, question);
+            // TODO mayuko.sakaba 最後のアサート二つがまだできていない。
+        }
+    }
+
+    /**
+     * [9] 無効な条件は無視されることを確認しつつ生年月日のない会員を検索
+     * 会員名称の等値条件に null を設定
+     * 会員アカウントの等値条件に空文字を設定
+     * 生年月日がない、という条件を設定
+     * 2005年6月に正式会員になった会員は先にして、会員IDの降順で並べる
+     * 会員名称や会員アカウントの条件がないことをログで確認すること
+     * 検索された会員の生年月日が存在しないことをアサート
+     * 2005年6月に正式会員になった会員が先に並んでいることをアサート
+     */
+    public void test_09() throws Exception {
+        // ## Arrange ##
+        MemberCB cb = new MemberCB();
+        cb.query().setBirthdate_IsNull();
+        cb.query().setMemberName_Equal(null);
+        cb.query().setMemberAccount_Equal("");
 
         // ## Act ##
 
         // ## Assert ##
     }
-
 }

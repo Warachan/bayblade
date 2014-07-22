@@ -20,7 +20,6 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
 import jp.bizreach.twitter.dbflute.cbean.MemberCB;
 import jp.bizreach.twitter.dbflute.exbhv.LoginBhv;
@@ -59,20 +58,14 @@ public class IndexAction {
     @Resource
     public SessionDto sessionDto;
     @Resource
+    protected PassDigestLogic passDigestLogic;
+    @Resource
     protected MemberBhv memberBhv;
     @Resource
     protected LoginBhv loginBhv;
-    @Resource
-    protected PassDigestLogic passDigestLogic;
-    @Resource
-    protected HttpServletRequest request;
-    // -----------------------------------------------------
-    //                                          Display Data
-    //                                          ------------
 
-    public String error;
-    public String overlapsError;
-    public String regesterationError;
+    //    @Resource
+    //    protected HttpServletRequest request;
 
     // ===================================================================================
     //                                                                             Execute
@@ -85,10 +78,22 @@ public class IndexAction {
         return "index.jsp";
     }
 
-    /* ログインする */
     @Execute(validate = "validate", input = "index.jsp")
     public String gotoLogin() {
-        LOG.debug("***" + indexForm);
+        loginWhenMatch();
+        return "/home/?redirect=true";
+    }
+
+    @Execute(validator = false)
+    public String gotoSignup() {
+        return "/signup/?redirect=true";
+    }
+
+    // ===================================================================================
+    //                                                                    Extracted Method
+    //                                                                            ========
+    /* ログインする */
+    private void loginWhenMatch() {
         Login login = new Login();
         Date loginDate = new Date();
         Timestamp loginTime = new Timestamp(loginDate.getTime());
@@ -98,9 +103,11 @@ public class IndexAction {
         login.setInsTrace(indexForm.loginKey);
         login.setUpdTrace(indexForm.loginKey);
         loginBhv.insert(login);
-        return "/home/?redirect=true";
     }
 
+    // ===================================================================================
+    //                                                                          Validation
+    //                                                                            ========
     /* ログイン validation */
     public ActionMessages validate() throws NoSuchAlgorithmException {
         ActionMessages errors = new ActionMessages();
@@ -124,8 +131,4 @@ public class IndexAction {
         return errors;
     }
 
-    @Execute(validator = false)
-    public String gotoSignup() {
-        return "/signup/?redirect=true";
-    }
 }

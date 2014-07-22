@@ -14,3 +14,12 @@ validation check message 周り、profile action にて、スペースキーを�
 StringUtilの仕様について確認
 
 ｸﾞﾛﾅﾋﾞ割合直す。
+
+    // 【要確認todo】
+    // TODO mayuko.sakaba 共通カラム使っているのに、フォローステータスを更新するたびに更新されていない。
+
+    // 【時間があればtodo】
+    // TODO mayuko.sakaba 検索でcolumQueryを使うか判断する→久保さんに確認
+    // TODO mayuko.sakaba MM,ddとすると、月や日付が一桁のときに0始まりで表示されてしまう。(→JSONを使う？、そもそも表示する必要があるのか？)
+        // TODO mayuko.sakaba signup.jspにて、なぜゲッターメソッドがなかったのにValue=""をいれたら直ったか調べること。
+    // TODO mayuko.sakaba indexActionForm に対する定義が見つかりません →　これなに？

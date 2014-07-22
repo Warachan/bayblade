@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?artifactRepository version='1.1.0'?>
+<repository name='C:\projects\training\eclipse\dropins\ERMaster' type='org.eclipse.equinox.p2.artifact.repository.simpleRepository' version='1.0.0'>
+  <properties size='1'>
+    <property name='p2.timestamp' value='1405306318778'/>
+  </properties>
+  <mappings size='3'>
+    <rule filter='(&amp; (classifier=osgi.bundle))' output='${repoUrl}/plugins/${id}_${version}.jar'/>
+    <rule filter='(&amp; (classifier=binary))' output='${repoUrl}/binary/${id}_${version}'/>
+    <rule filter='(&amp; (classifier=org.eclipse.update.feature))' output='${repoUrl}/features/${id}_${version}.jar'/>
+  </mappings>
+  <artifacts size='2'>
+    <artifact classifier='osgi.bundle' id='org.insightech.er.ant' version='1.0.3'>
+      <properties size='2'>
+        <property name='artifact.size' value='15552'/>
+        <property name='download.size' value='15552'/>
+      </properties>
+      <repositoryProperties size='2'>
+        <property name='artifact.reference' value='file:/C:/projects/training/eclipse/dropins/ERMaster/eclipse/plugins/org.insightech.er.ant_1.0.3.jar'/>
+        <property name='file.name' value='C:\projects\training\eclipse\dropins\ERMaster\eclipse\plugins\org.insightech.er.ant_1.0.3.jar'/>
+      </repositoryProperties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.insightech.er' version='1.5.0.2'>
+      <properties size='2'>
+        <property name='artifact.size' value='5221895'/>
+        <property name='download.size' value='5221895'/>
+      </properties>
+      <repositoryProperties size='2'>
+        <property name='artifact.reference' value='file:/C:/projects/training/eclipse/dropins/ERMaster/eclipse/plugins/org.insightech.er_1.5.0.2.jar'/>
+        <property name='file.name' value='C:\projects\training\eclipse\dropins\ERMaster\eclipse\plugins\org.insightech.er_1.5.0.2.jar'/>
+      </repositoryProperties>
+    </artifact>
+  </artifacts>
+</repository>

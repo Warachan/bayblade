@@ -16,11 +16,11 @@ import jp.bizreach.twitter.dbflute.exentity.Login;
 import jp.bizreach.twitter.dbflute.exentity.Member;
 import jp.bizreach.twitter.dbflute.exentity.MemberSecurity;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
-import org.seasar.framework.util.StringUtil;
 import org.seasar.struts.annotation.ActionForm;
 import org.seasar.struts.annotation.Execute;
 
@@ -57,6 +57,7 @@ public class SignupAction {
     // -----------------------------------------------------
     //                                          Display Data
     //                                          ------------
+    protected String digestedPass;
     public String newEmail;
     public String username;
     public String accountName;
@@ -64,37 +65,33 @@ public class SignupAction {
     public String confirmPass;
     public String groupName;
     public String status;
-    public String matchError;
-    public String overlapsError;
-    public String characterError;
-    public String userError;
-    public String missingError;
-    protected String digestedPass;
 
-    // TODO mayuko.sakaba signup.jspにて、なぜゲッターメソッドがなかったのにValue=""をいれたら直ったか調べること。
-    // TODO mayuko.sakaba indexActionForm に対する定義が見つかりません →　これなに？
     // ===================================================================================
     //                                                                             Execute
     //                                                                             =======
     @Execute(validator = false)
-    /* signup画面表示 */
     public String index() {
         return "/signup.jsp";
     }
 
     @Execute(validate = "validate", input = "/signup.jsp")
-    /* 会員登録メソッド */
     public String register() throws NoSuchAlgorithmException {
         password = signupForm.password;
         confirmPass = signupForm.confirmPass;
         username = signupForm.username;
         accountName = signupForm.accountName;
         groupName = signupForm.groupName;
-
         /* パスワード不可逆暗号化　*/
         digestedPass = passDigestLogic.build(password);
+        newRegister();
+        return "/home/?redirect=true";
+    }
 
-        /* validationに引っかからなかったら、会員登録する */
+    // ===================================================================================
+    //                                                                    Extracted Method
+    //                                                                            ========
+    /* validationに引っかからなかったら、会員登録する */
+    private void newRegister() {
         Date date = new Date();
         Timestamp timestamp = new Timestamp(date.getTime());
         Member member = new Member();
@@ -133,8 +130,6 @@ public class SignupAction {
         login.setInsTrace(sessionDto.username);
         login.setUpdTrace(sessionDto.username);
         loginBhv.insert(login);
-
-        return "/home/?redirect=true";
     }
 
     // ===================================================================================
@@ -151,7 +146,7 @@ public class SignupAction {
         ActionMessages errors = new ActionMessages();
 
         /* accountName */
-        if (StringUtil.isEmpty(accountName)) {
+        if (StringUtils.isEmpty(accountName)) {
             errors.add("accountName", new ActionMessage("名前が未入力です。", false));
         } else {
             if (accountName.length() > 20) {
@@ -165,7 +160,7 @@ public class SignupAction {
             }
         }
         /* username */
-        if (StringUtil.isEmpty(username)) {
+        if (StringUtils.isEmpty(username)) {
             errors.add("username", new ActionMessage("ユーザ名が未入力です。", false));
         } else {
             String usernamePtn = "[A-Za-z0-9]+";
@@ -185,11 +180,11 @@ public class SignupAction {
             }
         }
         /* status */
-        if (StringUtil.isEmpty(status)) {
+        if (StringUtils.isEmpty(status)) {
             errors.add("status", new ActionMessage("どちらか選択してください。", false));
         }
         /* group */
-        if (StringUtil.isEmpty(groupName)) {
+        if (StringUtils.isEmpty(groupName)) {
             errors.add("groupName", new ActionMessage("所属企業か所属大学名が未入力です。", false));
         } else {
             if (groupName.length() > 100) {
@@ -203,7 +198,7 @@ public class SignupAction {
             }
         }
         /*　password */
-        if (StringUtil.isEmpty(password)) {
+        if (StringUtils.isEmpty(password)) {
             errors.add("password", new ActionMessage("パスワードが未入力です。", false));
         } else {
             String pswdPtn = "[A-Za-z0-9]+";

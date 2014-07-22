@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?artifactRepository version='1.1.0'?>
+<repository name='C:\eclipsev4\eclipse\dropins\ntail' type='org.eclipse.equinox.p2.artifact.repository.simpleRepository' version='1.0.0'>
+  <properties size='1'>
+    <property name='p2.timestamp' value='1355969567812'/>
+  </properties>
+  <mappings size='3'>
+    <rule filter='(&amp; (classifier=osgi.bundle))' output='${repoUrl}/plugins/${id}_${version}.jar'/>
+    <rule filter='(&amp; (classifier=binary))' output='${repoUrl}/binary/${id}_${version}'/>
+    <rule filter='(&amp; (classifier=org.eclipse.update.feature))' output='${repoUrl}/features/${id}_${version}.jar'/>
+  </mappings>
+  <artifacts size='2'>
+    <artifact classifier='osgi.bundle' id='net.certiv.ntail' version='1.3.0.201006150903'>
+      <properties size='2'>
+        <property name='artifact.size' value='94271'/>
+        <property name='download.size' value='94271'/>
+      </properties>
+      <repositoryProperties size='2'>
+        <property name='artifact.reference' value='file:/C:/eclipsev4/eclipse/dropins/ntail/eclipse/plugins/net.certiv.ntail_1.3.0.201006150903.jar'/>
+        <property name='file.name' value='C:\eclipsev4\eclipse\dropins\ntail\eclipse\plugins\net.certiv.ntail_1.3.0.201006150903.jar'/>
+      </repositoryProperties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='net.certiv.ntail.feature' version='1.3.0.201006150903'>
+      <properties size='3'>
+        <property name='artifact.size' value='0'/>
+        <property name='download.size' value='0'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+      <repositoryProperties size='3'>
+        <property name='artifact.folder' value='true'/>
+        <property name='artifact.reference' value='file:/C:/eclipsev4/eclipse/dropins/ntail/eclipse/features/net.certiv.ntail.feature_1.3.0.201006150903/'/>
+        <property name='file.name' value='C:\eclipsev4\eclipse\dropins\ntail\eclipse\features\net.certiv.ntail.feature_1.3.0.201006150903'/>
+      </repositoryProperties>
+    </artifact>
+  </artifacts>
+</repository>

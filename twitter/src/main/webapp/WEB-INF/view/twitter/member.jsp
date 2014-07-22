@@ -16,7 +16,7 @@
 			<div class = "member-top">
 					<div class = "member-top-profile">
 						<s:form action="/member/" styleClass="followOrUnfollow">
-						<h2> ${(account)}'s Page</h2>
+						<h2> ${f:h(account)}'s Page</h2>
 							<span class="followStatus">${f:h(relationship)}</span>
 								<c:choose>
 									<c:when test="${f:h(followStatus)}">
@@ -74,6 +74,7 @@
 					<div class="main-bottom-timeline">
 						<s:form action="/member/" styleClass="memberTimeline">
 							<h3>Tweets</h3>
+							<div id="tweetComment">${f:h(tweetComment)}</div>
 								<ul>
 									<c:forEach items="${timeLine}" var="items" varStatus="status">
 										<li id="tweetList">

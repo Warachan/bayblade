@@ -1,11 +1,11 @@
 package jp.bizreach.twitter.app.web;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
 import jp.bizreach.twitter.dbflute.cbean.MemberCB;
 import jp.bizreach.twitter.dbflute.exbhv.LoginBhv;
@@ -14,25 +14,17 @@ import jp.bizreach.twitter.dbflute.exbhv.MemberSecurityBhv;
 import jp.bizreach.twitter.dbflute.exentity.Member;
 import jp.bizreach.twitter.dbflute.exentity.MemberSecurity;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
-import org.apache.struts.util.TokenProcessor;
-import org.seasar.framework.util.StringUtil;
 import org.seasar.struts.annotation.ActionForm;
 import org.seasar.struts.annotation.Execute;
 
 /**
- * プロフィール登録
- * 誕生日登録
- * 学歴、職歴登録
- * （団体登録）
- * パスワード変更
- * メールアドレス変更
- *
+ * プロフィール編集
  * @author mayuko.sakaba
- *
  */
 public class ProfileAction {
 
@@ -60,63 +52,52 @@ public class ProfileAction {
     protected LoginBhv loginBhv;
     @Resource
     protected PassDigestLogic passDigestLogic;
-    @Resource
-    protected HttpServletRequest request;
+    //    @Resource
+    //    protected HttpServletRequest request;
     // -----------------------------------------------------
     //                                          Display Data
     //                                          ------------
+    protected String digestedPass;
     public String accountName;
+    public String interestedIndustry;
+    public Integer graduationYear;
+    public String recruitingNumber;
     public String groupName;
     public String password;
     public String confirmPass;
-    public String matchError;
-    public String overlapsError;
-    public String characterError;
-    public String userError;
-    public String missingError;
-    protected String digestedPass;
-    public String interestedIndustry;
-    public String recruitingNumber;
-    public Integer graduationYear;
     public Integer seeStatus;
     public String account;
+    public String currentName;
+    public String currentGroup;
+    public String currentInterest;
     public boolean status;
     public boolean recruitStatus;
+    public ArrayList<MemberDto> yearList = new ArrayList<>();
 
-    // TODO mayuko.sakaba signup.jspにて、なぜゲッターメソッドがなかったのにValue=""をいれたら直ったか調べること。
-    // TODO mayuko.sakaba indexActionForm に対する定義が見つかりません →　これなに？
     // ===================================================================================
     //                                                                             Execute
     //                                                                             =======
-
     @Execute(validator = false)
     public String index() {
-        TokenProcessor.getInstance().saveToken(request);
+        //        TokenProcessor.getInstance().saveToken(request);
+        // 自分が学生か企業化判断する。
         if (sessionDto.status.equals(1)) {
             status = new Boolean(true);
         } else if (sessionDto.status.equals(2)) {
             status = new Boolean(false);
         }
         account = sessionDto.accountName + "@" + sessionDto.username;
-        MemberCB myCb = new MemberCB();
-        myCb.setupSelect_MemberStatus();
-        myCb.query().setMemberId_Equal(sessionDto.myId);
-        Member me = memberBhv.selectEntity(myCb);
-        seeStatus = sessionDto.status;
-        groupName = me.getGroupName();
-        if (seeStatus.equals(1)) {
-            recruitStatus = new Boolean(true);
-            interestedIndustry = me.getInterestedIndustry();
-            graduationYear = me.getGraduationYear();
-        } else if (seeStatus.equals(2)) {
-            recruitStatus = new Boolean(false);
-            recruitingNumber = me.getRecruitingNumber();
+        // 卒業年数を表示する
+        for (int i = 2014; i <= 2023; i++) {
+            MemberDto memberDto = new MemberDto();
+            memberDto.graduationNumber = i;
+            yearList.add(memberDto);
         }
+        selectMyProfile();
         return "/profile.jsp";
     }
 
     @Execute(validate = "validate", input = "/profile/")
-    /* プロフィール編集メソッド */
     public String editProfile() throws NoSuchAlgorithmException {
         //        if (!TokenProcessor.getInstance().isTokenValid(request, true)) {
         //            throw new ActionMessagesException("不正なリクエストです", false);
@@ -130,7 +111,33 @@ public class ProfileAction {
         recruitingNumber = profileForm.recruitingNumber;
         /* パスワード不可逆暗号化　*/
         digestedPass = passDigestLogic.build(password);
-        /* validationに引っかからなかったら、プロフィール編集する */
+        editMyProfile();
+        return "/home/?redirect=true";
+    }
+
+    // ===================================================================================
+    //                                                                    Extracted Method
+    //                                                                            ========
+    private void selectMyProfile() {
+        MemberCB myCb = new MemberCB();
+        myCb.setupSelect_MemberStatus();
+        myCb.query().setMemberId_Equal(sessionDto.myId);
+        Member me = memberBhv.selectEntity(myCb);
+        seeStatus = sessionDto.status;
+        groupName = me.getGroupName();
+        currentName = me.getAccountName();
+        if (seeStatus.equals(1)) {
+            recruitStatus = new Boolean(true);
+            interestedIndustry = me.getInterestedIndustry();
+            graduationYear = me.getGraduationYear();
+        } else if (seeStatus.equals(2)) {
+            recruitStatus = new Boolean(false);
+            recruitingNumber = me.getRecruitingNumber();
+        }
+    }
+
+    /* validationに引っかからなかったら、プロフィール編集する */
+    private void editMyProfile() {
         Member member = new Member();
         member.setMemberId(sessionDto.myId);
         member.setMemberStatusCode(sessionDto.status);
@@ -162,10 +169,11 @@ public class ProfileAction {
             member.setRecruitingNumber(recruitingNumber);
             memberBhv.update(member);
         }
-        return "/profile/?redirect=true";
     }
 
-    /* 会員登録画面　Validation */
+    // ===================================================================================
+    //                                                                          Validation
+    //                                                                          ==========
     public ActionMessages validate() {
         ActionMessages errors = new ActionMessages();
         password = profileForm.updatePassword;
@@ -176,9 +184,9 @@ public class ProfileAction {
         graduationYear = profileForm.graduationYear;
         recruitingNumber = profileForm.recruitingNumber;
         /* accountName */
-        if (!StringUtil.isEmpty(accountName)) {
-            if (StringUtil.isBlank(accountName)) {
-                errors.add("updateName", new ActionMessage("空白は入力できません。", false));
+        if (!StringUtils.isEmpty(accountName)) {
+            if (StringUtils.isWhitespace(accountName)) {
+                errors.add("updateName", new ActionMessage("空白のみは入力できません。", false));
             }
             if (accountName.length() > 20) {
                 errors.add("updateName", new ActionMessage("このアカウント名は長すぎます。", false));
@@ -186,9 +194,9 @@ public class ProfileAction {
         }
         /* interestedIndustry */
         if (sessionDto.status.equals(1)) {
-            if (!StringUtil.isEmpty(interestedIndustry)) {
-                if (StringUtil.isBlank(interestedIndustry)) {
-                    errors.add("interestedIndustry", new ActionMessage("空白は入力できません。", false));
+            if (!StringUtils.isEmpty(interestedIndustry)) {
+                if (StringUtils.isWhitespace(interestedIndustry)) {
+                    errors.add("interestedIndustry", new ActionMessage("空白のみは入力できません。", false));
                 }
                 if (profileForm.interestedIndustry.length() > 50) {
                     errors.add("interestedIndustry", new ActionMessage("文字制限(50文字）以上入力されました。", false));
@@ -202,16 +210,16 @@ public class ProfileAction {
             }
         }
         /* group name */
-        if (!StringUtil.isEmpty(groupName)) {
-            if (StringUtil.isBlank(groupName)) {
-                errors.add("updateGroup", new ActionMessage("空白は入力できません。", false));
+        if (!StringUtils.isEmpty(groupName)) {
+            if (StringUtils.isWhitespace(groupName)) {
+                errors.add("updateGroup", new ActionMessage("空白のみは入力できません。", false));
             }
             if (groupName.length() > 100) {
                 errors.add("updateGroup", new ActionMessage("所属企業名、もしくは学校名が長すぎます", false));
             }
         }
         /*　password */
-        if (!StringUtil.isEmpty(password)) {
+        if (!StringUtils.isEmpty(password)) {
             String pswdPtn = "[\\w]+";
             Pattern ptn3 = Pattern.compile(pswdPtn);
             Matcher pswdMatcher = ptn3.matcher(profileForm.updatePassword);

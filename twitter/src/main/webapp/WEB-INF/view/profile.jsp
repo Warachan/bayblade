@@ -47,7 +47,7 @@
 			<s:form action="/profile/editProfile/" styleClass="profileForm">
 				<div class="name">
 					<h4>Name</h4>
-						<html:text property="updateName"  size="60" styleClass = "textBox"/>
+						<html:text property="updateName"  size="60" value="${f:h(currentName)}" styleClass = "textBox"/>
 					<div class="nameError">
 						<html:errors property="updateName"/>
 					</div>
@@ -55,7 +55,7 @@
 			<div class="profile">
 				<div class = "group">
 					<h4>School/Company Name</h4>
-					<html:text property="updateGroup"  size="60" styleClass = "textBox"/><br>
+					<html:text property="updateGroup"  size="60" value="${f:h(groupName)}" styleClass = "textBox"/><br>
 					<html:errors property ="updateGroup"/>
 				</div>
 				<div class = "recrutingNumber">
@@ -64,8 +64,12 @@
 							<div class = "graduationYear">
 								<h4>Graduating Year</h4>
 								<html:select property="graduationYear">
-    　									<dl><html:option value=""></html:option><dl>
-    　									<dl><html:option value="2014">${f:h(2014)}</html:option><dl>
+    　								 <!--<dl><html:option value="graduationYear">${f:h(graduationYear)}</html:option><dl>-->
+    　								 <dl><html:option value=""></html:option><dl>
+				                 <c:forEach items="${yearList}" var="items" varStatus="status">
+						            <dl><html:option value="${f:h(items.graduationNumber)}">${f:h(items.graduationNumber)}</html:option></dl>
+				                 </c:forEach>
+    　									<!--<dl><html:option value="2014">${f:h(2014)}</html:option><dl>
     　									<dl><html:option value="2015">${f:h(2015)}</html:option><dl>
     　									<dl><html:option value="2016">${f:h(2016)}</html:option><dl>
     　									<dl><html:option value="2017">${f:h(2017)}</html:option><dl>
@@ -73,12 +77,13 @@
     　									<dl><html:option value="2020">${f:h(2020)}</html:option><dl>
     　									<dl><html:option value="2021">${f:h(2021)}</html:option><dl>
     　									<dl><html:option value="2022">${f:h(2022)}</html:option><dl>
-    　									<dl><html:option value="2023">${f:h(2023)}</html:option><dl>
+    　									<dl><html:option value="2023">${f:h(2023)}</html:option><dl>-->
 								</html:select>
 							</div>
+
 							<div class ="industry">
 								<h4>Interested Industry</h4>
-								<html:text property="interestedIndustry" size="60"/>
+								<html:text property="interestedIndustry" value="${f:h(interestedIndustry)}" size="60"/>
 								<html:errors property="interestedIndustry"/>
 							</div>
 						</c:when>
@@ -86,6 +91,7 @@
 							<div class ="recruit">
 							<h4>Recruiting Number</h4>
 							<html:select property="recruitingNumber">
+    　									<!--<dl><html:option value="recruitingNumber">${f:h(recruitingNumber)}</html:option><dl>-->
     　									<dl><html:option value=""></html:option><dl>
     　									<dl><html:option value="10人未満">${f:h("10人未満")}</html:option><dl>
     　									<dl><html:option value="10～29人">${f:h("10~29人")}</html:option><dl>

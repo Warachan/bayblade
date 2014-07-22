@@ -65,6 +65,7 @@ public class MemberAction {
     public String interestedIndustry;
     public String recruitingNumber;
     public String relationship;
+    public String tweetComment;
     public boolean followStatus;
     public boolean recruitStatus;
 
@@ -76,10 +77,9 @@ public class MemberAction {
     public String index() {
         /*　アカウント名を表示する */
         MemberCB memberCb = new MemberCB();
-        LOG.debug("nameCheck:" + memberForm.yourName);
         memberCb.query().setUserName_Equal(memberForm.yourName);
         Member member = memberBhv.selectEntity(memberCb);
-
+        // URL編集された場合に404エラーを飛ばす。
         if (member == null) {
             try {
                 ResponseUtil.getResponse().sendError(404);
@@ -87,10 +87,12 @@ public class MemberAction {
             }
             return null;
         }
+        // もし自分のページだったら、ホームページに移動する。
         if (member.getMemberId().equals(sessionDto.myId)) {
             return "/home/?redirect=true";
         }
-        LOG.debug("*******************************************************************************");
+        // プロフィールを表示
+        account = (member.getAccountName() + "@" + member.getUserName());
         status = member.getMemberStatusCode();
         groupName = member.getGroupName();
         if (status.equals(1)) {
@@ -101,8 +103,49 @@ public class MemberAction {
             recruitStatus = new Boolean(false);
             recruitingNumber = member.getRecruitingNumber();
         }
-        account = (member.getAccountName() + "@" + member.getUserName());
-        /* ツィートタイムラインを表示　*/
+        showTimeLine(member);
+        seeFollowStatus(member);
+        return "/twitter/member.jsp";
+    }
+
+    @Execute(validator = false, urlPattern = "{yourName}/follow")
+    public String follow() {
+        /* 自分をフォローしない制約 */
+        Member member = selectMember();
+        Integer memberId = member.getMemberId();
+        if (memberId.equals(sessionDto.myId)) {
+            return "/home/?redirect=true";
+        }
+        follow(member);
+        return "/member/" + memberForm.yourName + "/?redirect=true";
+    }
+
+    @Execute(validator = false, urlPattern = "{yourName}/unfollow")
+    public String unfollow() {
+        /* アカウント保有者のメンバーID検索 */
+        Member member = selectMember();
+        selectMemberUnfollow(member);
+        return "/member/" + memberForm.yourName + "/?redirect=true";
+    }
+
+    @Execute(validator = false, urlPattern = "{yourName}/followingMember")
+    public String followingMember() {
+        Member member = selectMember();
+        selectFollowMember(member);
+        selectFollowerMember(member);
+        return "/twitter/followlist.jsp";
+    }
+
+    @Execute(validator = false, urlPattern = "{yourName}/contact")
+    public String contact() {
+        return "/message/?redirect=true";
+    }
+
+    // ===================================================================================
+    //                                                                    Extracted Method
+    //                                                                            ========
+    /* ツィートタイムラインを表示　*/
+    private void showTimeLine(Member member) {
         TweetCB tweetCb = new TweetCB();
         tweetCb.setupSelect_Member();
         tweetCb.query().setMemberId_Equal(member.getMemberId());
@@ -122,7 +165,13 @@ public class MemberAction {
             tweetDto.tweetTime = tweet.getTweetDatetime();
             timeLine.add(tweetDto);
         }
-        /* フォローできる相手か判断する */
+        if (timeLine.isEmpty()) {
+            tweetComment = "No tweets yet.";
+        }
+    }
+
+    /* フォローできる相手か判断する */
+    private void seeFollowStatus(Member member) {
         FollowCB followCb = new FollowCB();
         followCb.query().setMemberId_Equal(sessionDto.myId);
         followCb.query().setYouId_Equal(member.getMemberId());
@@ -135,19 +184,9 @@ public class MemberAction {
             followStatus = new Boolean(false);
             relationship = "Following";
         }
-        return "/twitter/member.jsp";
     }
 
-    /* このアカウントの会員をフォロー　*/
-    @Execute(validator = false, urlPattern = "{yourName}/follow")
-    public String follow() {
-        /* 自分をフォローしない制約 */
-        Member member = selectMember();
-        Integer memberId = member.getMemberId();
-        if (memberId.equals(sessionDto.myId)) {
-            return "/home/?redirect=true";
-        }
-        /* フォローしたことのない相手を新しくフォローする */
+    private void follow(Member member) {
         FollowCB followCb = new FollowCB();
         followCb.query().setYouId_Equal(member.getMemberId());
         followCb.query().setMemberId_Equal(sessionDto.myId);
@@ -172,17 +211,16 @@ public class MemberAction {
             follow.setDelFlg("N");
             followBhv.update(follow);
         }
-        //        if (selectFollow.getYouId().equals(selectFollow.getMemberId())) {
-        //            return "/home/?redirect=true";
-        //        }
-        return "/member/" + memberForm.yourName + "/?redirect=true";
     }
 
-    /* このアカウント保有者をアンフォロー */
-    @Execute(validator = false, urlPattern = "{yourName}/unfollow")
-    public String unfollow() {
-        /* アカウント保有者のメンバーID検索 */
-        Member member = selectMember();
+    private Member selectMember() {
+        MemberCB cb = new MemberCB();
+        cb.query().setUserName_Equal(memberForm.yourName);
+        Member member = memberBhv.selectEntity(cb);
+        return member;
+    }
+
+    private void selectMemberUnfollow(Member member) {
         FollowCB followCb = new FollowCB();
         followCb.query().setYouId_Equal(member.getMemberId());
         followCb.query().setMemberId_Equal(sessionDto.myId);
@@ -194,13 +232,9 @@ public class MemberAction {
         follow.setYouId(member.getMemberId());
         follow.setDelFlg("Y");
         followBhv.update(follow);
-        return "/member/" + memberForm.yourName + "/?redirect=true";
     }
 
-    /* このアカウントのフォロー・フォロワーの一覧を見る */
-    @Execute(validator = false, urlPattern = "{yourName}/followingMember")
-    public String followingMember() {
-        Member member = selectMember();
+    private void selectFollowMember(Member member) {
         FollowCB followCB = new FollowCB();
         followCB.setupSelect_MemberByYouId();
         followCB.query().setMemberId_Equal(member.getMemberId());
@@ -214,6 +248,12 @@ public class MemberAction {
             LOG.debug("***" + follow);
             followMemberList.add(memberDto);
         }
+        if (followMemberList.isEmpty()) {
+            noFollow = "Not following yet";
+        }
+    }
+
+    private void selectFollowerMember(Member member) {
         FollowCB followerCB = new FollowCB();
         followerCB.setupSelect_MemberByMemberId();
         followerCB.query().setYouId_Equal(member.getMemberId());
@@ -225,31 +265,9 @@ public class MemberAction {
             memberDto.memberId = follow.getMemberId();
             followerMemberList.add(memberDto);
         }
-        if (followMemberList.isEmpty()) {
-            noFollow = "Not following yet";
-        }
         if (followerMemberList.isEmpty()) {
             noFollower = "No followers yet";
         }
-        return "/twitter/followlist.jsp";
     }
 
-    /* このアカウント保持者にメッセージを送る */
-    @Execute(validator = false, urlPattern = "{yourName}/contact")
-    public String contact() {
-        //        MemberCB cb = new MemberCB();
-        //        cb.query().setUserName_Equal(memberForm.yourName);
-        //        Member member = memberBhv.selectEntity(cb);
-        //        memberForm.receiver = member.getUserName();
-        //        receiver = memberForm.receiver;
-        return "/message/?redirect=true";
-    }
-
-    private Member selectMember() {
-        MemberCB cb = new MemberCB();
-        cb.query().setUserName_Equal(memberForm.yourName);
-        LOG.debug("seeUsername" + memberForm.yourName);
-        Member member = memberBhv.selectEntity(cb);
-        return member;
-    }
 }

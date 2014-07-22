@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
 import jp.bizreach.twitter.dbflute.cbean.MemberCB;
 import jp.bizreach.twitter.dbflute.cbean.MessageCB;
@@ -15,15 +14,14 @@ import jp.bizreach.twitter.dbflute.exbhv.MessageBhv;
 import jp.bizreach.twitter.dbflute.exentity.Member;
 import jp.bizreach.twitter.dbflute.exentity.Message;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
-import org.apache.struts.util.TokenProcessor;
 import org.seasar.dbflute.cbean.ListResultBean;
 import org.seasar.struts.annotation.ActionForm;
 import org.seasar.struts.annotation.Execute;
-import org.seasar.struts.exception.ActionMessagesException;
 
 /**
  * @author mayuko.sakaba
@@ -47,59 +45,53 @@ public class MessageAction {
     @Resource
     public SessionDto sessionDto;
     @Resource
+    protected PassDigestLogic passDigestLogic;
+    @Resource
     protected MemberBhv memberBhv;
     @Resource
     protected MessageBhv messageBhv;
-    @Resource
-    protected PassDigestLogic passDigestLogic;
-    @Resource
-    protected HttpServletRequest request;
+    //    @Resource
+    //    protected HttpServletRequest request;
     // -----------------------------------------------------
     //                                          Display Data
     //                                          ------------
-    //public ArrayList<MessageDto> messageList = new ArrayList<>();
     public ArrayList<MessageDto> sentMessageList = new ArrayList<>();
     public ArrayList<MessageDto> receiveMessageList = new ArrayList<>();
     public Integer memberId;
     public String noMessages;
     public String noSentMessages;
 
-    // TODO mayuko.sakaba  返信機能は難しくてまだつけれていないです。代わりに各メッセージ一覧を表示しています。
     // ===================================================================================
     //                                                                             Execute
     //                                                                             =======
     @Execute(validator = false, urlPattern = "{receiver}")
     public String index() {
-        TokenProcessor.getInstance().saveToken(request);
+        //        TokenProcessor.getInstance().saveToken(request);
+        /* メッセージやり取りしている相手を検索　*/
         MemberCB memberCb = new MemberCB();
         memberCb.query().setUserName_Equal(messageForm.receiver);
         Member member = memberBhv.selectEntity(memberCb);
         Integer memberId = member.getMemberId();
 
-        /* 相手からメッセージ一覧を表示する　*/
         receivedMessages(memberId);
-        /* 自分からのメッセージ一覧を表示する　*/
         sentMessages(memberId);
         return "/message.jsp";
     }
 
-    private void sentMessages(Integer memberId) {
-        MessageCB messageToCb = new MessageCB();
-        messageToCb.query().setReceiverId_Equal(memberId);
-        messageToCb.query().setSenderId_Equal(sessionDto.myId);
-        messageToCb.query().addOrderBy_MessageId_Desc();
-        ListResultBean<Message> messageToList = messageBhv.selectList(messageToCb);
-        for (Message message : messageToList) {
-            MessageDto messageDto = new MessageDto();
-            messageDto.message = message.getMessage();
-            messageDto.messageTime = message.getMessageTime();
-            receiveMessageList.add(messageDto);
-        }
-        if (receiveMessageList.isEmpty()) {
-            noMessages = "No Messages yet";
-        }
+    @Execute(validate = "validate", input = "/message/{receiver}/")
+    // TODO mayuko.sakaba 頭の空文字を取る仕様をしてもいいかも？→時間切れ
+    public String editMessage() {
+        //        if (!TokenProcessor.getInstance().isTokenValid(request, true)) {
+        //            throw new ActionMessagesException("不正なリクエストです", false);
+        //        }
+        writeMessage();
+        return "/message/" + messageForm.receiver + "/?redirect=true";
     }
 
+    // ===================================================================================
+    //                                                                    Extracted Method
+    //                                                                            ========
+    /* 相手からメッセージ一覧を表示する　*/
     private void receivedMessages(Integer memberId) {
         MessageCB messageCb = new MessageCB();
         messageCb.query().setSenderId_Equal(memberId);
@@ -117,12 +109,26 @@ public class MessageAction {
         }
     }
 
-    @Execute(validate = "validate", input = "/message/{receiver}/")
-    /* メッセージを書く */
-    public String editMessage() {
-        if (!TokenProcessor.getInstance().isTokenValid(request, true)) {
-            throw new ActionMessagesException("不正なリクエストです", false);
+    /* 自分からのメッセージ一覧を表示する　*/
+    private void sentMessages(Integer memberId) {
+        MessageCB messageToCb = new MessageCB();
+        messageToCb.query().setReceiverId_Equal(memberId);
+        messageToCb.query().setSenderId_Equal(sessionDto.myId);
+        messageToCb.query().addOrderBy_MessageId_Desc();
+        ListResultBean<Message> messageToList = messageBhv.selectList(messageToCb);
+        for (Message message : messageToList) {
+            MessageDto messageDto = new MessageDto();
+            messageDto.message = message.getMessage();
+            messageDto.messageTime = message.getMessageTime();
+            receiveMessageList.add(messageDto);
         }
+        if (receiveMessageList.isEmpty()) {
+            noMessages = "No Messages yet";
+        }
+    }
+
+    /* メッセージを書く */
+    private void writeMessage() {
         Date date = new Date();
         Timestamp messageTime = new Timestamp(date.getTime());
         String formatMessageTime = new SimpleDateFormat("MM月dd日 HH時mm分").format(messageTime);
@@ -141,12 +147,14 @@ public class MessageAction {
         message.setUpdDatetime(messageTime);
         message.setUpdTrace(formatMessageTime);
         messageBhv.insert(message);
-        return "/message/" + messageForm.receiver + "/?redirect=true";
     }
 
+    // ===================================================================================
+    //                                                                          Validation
+    //                                                                          ==========
     public ActionMessages validate() {
         ActionMessages errors = new ActionMessages();
-        if (messageForm.message == "") {
+        if (StringUtils.isEmpty(messageForm.message) || StringUtils.isWhitespace(messageForm.message)) {
             errors.add("message", new ActionMessage("何も入力されていません。", false));
         } else if (messageForm.message.length() >= 256) {
             errors.add("message", new ActionMessage("文字制限(255文字）を超えています。", false));

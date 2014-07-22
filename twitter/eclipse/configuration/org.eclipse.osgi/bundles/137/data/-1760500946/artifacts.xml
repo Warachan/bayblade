@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?artifactRepository version='1.1.0'?>
+<repository name='C:\projects\codebreak\eclipse\dropins\v4' type='org.eclipse.equinox.p2.artifact.repository.simpleRepository' version='1.0.0'>
+  <properties size='1'>
+    <property name='p2.timestamp' value='1375142006154'/>
+  </properties>
+  <mappings size='3'>
+    <rule filter='(&amp; (classifier=osgi.bundle))' output='${repoUrl}/plugins/${id}_${version}.jar'/>
+    <rule filter='(&amp; (classifier=binary))' output='${repoUrl}/binary/${id}_${version}'/>
+    <rule filter='(&amp; (classifier=org.eclipse.update.feature))' output='${repoUrl}/features/${id}_${version}.jar'/>
+  </mappings>
+  <artifacts size='4'>
+    <artifact classifier='osgi.bundle' id='jp.bizreach.v4.eclipse' version='1.9.3'>
+      <properties size='2'>
+        <property name='artifact.size' value='459042'/>
+        <property name='download.size' value='459042'/>
+      </properties>
+      <repositoryProperties size='2'>
+        <property name='artifact.reference' value='file:/C:/projects/codebreak/eclipse/dropins/v4/eclipse/plugins/jp.bizreach.v4.eclipse_1.9.3.jar'/>
+        <property name='file.name' value='C:\projects\codebreak\eclipse\dropins\v4\eclipse\plugins\jp.bizreach.v4.eclipse_1.9.3.jar'/>
+      </repositoryProperties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='jp.bizreach.b2.eclipse' version='1.2.5'>
+      <properties size='2'>
+        <property name='artifact.size' value='789060'/>
+        <property name='download.size' value='789060'/>
+      </properties>
+      <repositoryProperties size='2'>
+        <property name='artifact.reference' value='file:/C:/projects/codebreak/eclipse/dropins/v4/eclipse/plugins/jp.bizreach.b2.eclipse_1.2.5.jar'/>
+        <property name='file.name' value='C:\projects\codebreak\eclipse\dropins\v4\eclipse\plugins\jp.bizreach.b2.eclipse_1.2.5.jar'/>
+      </repositoryProperties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='jp.bizreach.b2.eclipse' version='1.2.4'>
+      <properties size='2'>
+        <property name='artifact.size' value='789053'/>
+        <property name='download.size' value='789053'/>
+      </properties>
+      <repositoryProperties size='2'>
+        <property name='artifact.reference' value='file:/C:/projects/codebreak/eclipse/dropins/v4/eclipse/plugins/jp.bizreach.b2.eclipse_1.2.4.jar'/>
+        <property name='file.name' value='C:\projects\codebreak\eclipse\dropins\v4\eclipse\plugins\jp.bizreach.b2.eclipse_1.2.4.jar'/>
+      </repositoryProperties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='jp.bizreach.b2.eclipse' version='1.2.6'>
+      <properties size='2'>
+        <property name='artifact.size' value='789066'/>
+        <property name='download.size' value='789066'/>
+      </properties>
+      <repositoryProperties size='2'>
+        <property name='artifact.reference' value='file:/C:/projects/codebreak/eclipse/dropins/v4/eclipse/plugins/jp.bizreach.b2.eclipse_1.2.6.jar'/>
+        <property name='file.name' value='C:\projects\codebreak\eclipse\dropins\v4\eclipse\plugins\jp.bizreach.b2.eclipse_1.2.6.jar'/>
+      </repositoryProperties>
+    </artifact>
+  </artifacts>
+</repository>

@@ -1,0 +1,32 @@
+#This is a generated file; do not edit.
+#Tue Feb 05 12:58:17 JST 2013
+de.babe.eclipse.plugins.QuickREx=de.babe.eclipse.plugins.QuickREx\n3.5.0
+org.eclipse.rap.ui.intro=org.eclipse.rap.ui.intro\n1.4.2.20120213-1325
+org.eclipse.wst.sse.doc.user=org.eclipse.wst.sse.doc.user\n1.1.100.v201005192212
+org.eclipse.m2e.core.ui=org.eclipse.m2e.core.ui\n1.0.100.20110804-1717
+org.eclipse.help.base=org.eclipse.help.base\n3.6.2.v201202080800
+org.eclipse.team.svn=org.eclipse.team.svn\n0.7.9.I20110318-1700
+org.eclipse.mylyn.help.ui=org.eclipse.mylyn.help.ui\n3.8.2.v20120916-1200
+org.eclipse.epp.mpc.ui=org.eclipse.epp.mpc.ui\n1.1.1.I20110907-0947
+org.eclipse.wst.xmleditor.doc.user=org.eclipse.wst.xmleditor.doc.user\n1.0.700.v201005192212
+org.eclipse.jdt=org.eclipse.jdt\n3.7.2.v201202080800
+org.eclipse.jdt.doc.user=org.eclipse.jdt.doc.user\n3.7.1.r372_v20111103
+org.eclipse.rap.help=org.eclipse.rap.help\n1.4.1.20120213-1325
+org.eclipse.egit.doc=org.eclipse.egit.doc\n2.1.0.201209190230-r
+org.eclipse.ui.cheatsheets=org.eclipse.ui.cheatsheets\n3.4.100.v20110425
+org.eclipse.wst.xsdeditor.doc.user=org.eclipse.wst.xsdeditor.doc.user\n1.0.800.v201005192212
+net.sf.eclipsecs.doc=net.sf.eclipsecs.doc\n5.5.0.201111092104
+org.eclipse.epp.usagedata.ui=org.eclipse.epp.usagedata.ui\n1.3.1.R201106061540
+tk.eclipse.plugin.htmleditor=tk.eclipse.plugin.htmleditor\n2.2.7
+org.eclipse.ui.intro=org.eclipse.ui.intro\n3.4.100.v20110425
+org.eclipse.help=org.eclipse.help\n3.5.100.v20110426
+org.eclipse.platform.doc.isv=org.eclipse.platform.doc.isv\n3.7.2.v20120120-1417
+org.eclipse.mylyn.wikitext.help.ui=org.eclipse.mylyn.wikitext.help.ui\n1.5.1.v20110720-0100
+org.eclipse.epp.mpc.help.ui=org.eclipse.epp.mpc.help.ui\n1.1.1.I20110907-0947
+org.eclipse.pde.doc.user=org.eclipse.pde.doc.user\n3.7.2.v20120120-1417
+org.eclipse.platform=org.eclipse.platform\n3.7.2.v201202080800
+org.eclipse.team.svn.help=org.eclipse.team.svn.help\n0.7.9.I20120210-1700
+org.eclipse.pde=org.eclipse.pde\n3.7.2.v201202080800
+org.eclipse.wst.dtdeditor.doc.user=org.eclipse.wst.dtdeditor.doc.user\n1.0.700.v201008112018
+org.eclipse.platform.doc.user=org.eclipse.platform.doc.user\n3.7.1.r372_v20111202
+org.eclipse.ui.intro.universal=org.eclipse.ui.intro.universal\n3.2.500.v20110510

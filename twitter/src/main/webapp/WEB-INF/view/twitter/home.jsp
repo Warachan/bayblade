@@ -57,11 +57,12 @@
 			<s:form action ="/home/">
 				<div class ="main-bottom-tweetForm">
 				<div class = "main-bottom-tweetBox">
-					<html:textarea property ="inputTweet"  cols="50" rows="6" styleClass="tweetBox"/><br>
+					<html:textarea property ="inputTweet"  cols="50" rows="4" styleClass="tweetBox"/><br>
 					<html:errors property="inputTweet"/>
 				</div>
 					<s:submit property="tweet" value="Tweet" styleClass="tweetButton"/>
 				</div>
+							<div id="tweetComment">${f:h(tweetComment)}</div>
 				<div class = "main-bottom-timeline">
 					<ul>
 						<c:forEach items="${timeLine}" var="items" varStatus="status">

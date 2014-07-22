@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?artifactRepository version='1.1.0'?>
+<repository name='C:\eclipsev4\eclipse\dropins\checkstyle' type='org.eclipse.equinox.p2.artifact.repository.simpleRepository' version='1.0.0'>
+  <properties size='1'>
+    <property name='p2.timestamp' value='1355969567745'/>
+  </properties>
+  <mappings size='3'>
+    <rule filter='(&amp; (classifier=osgi.bundle))' output='${repoUrl}/plugins/${id}_${version}.jar'/>
+    <rule filter='(&amp; (classifier=binary))' output='${repoUrl}/binary/${id}_${version}'/>
+    <rule filter='(&amp; (classifier=org.eclipse.update.feature))' output='${repoUrl}/features/${id}_${version}.jar'/>
+  </mappings>
+  <artifacts size='6'>
+    <artifact classifier='osgi.bundle' id='net.sf.eclipsecs.ui' version='5.5.0.201111092104'>
+      <properties size='2'>
+        <property name='artifact.size' value='3809954'/>
+        <property name='download.size' value='3809954'/>
+      </properties>
+      <repositoryProperties size='2'>
+        <property name='artifact.reference' value='file:/C:/eclipsev4/eclipse/dropins/checkstyle/eclipse/plugins/net.sf.eclipsecs.ui_5.5.0.201111092104.jar'/>
+        <property name='file.name' value='C:\eclipsev4\eclipse\dropins\checkstyle\eclipse\plugins\net.sf.eclipsecs.ui_5.5.0.201111092104.jar'/>
+      </repositoryProperties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='net.sf.eclipsecs.checkstyle' version='5.5.0.201111092104'>
+      <properties size='2'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='4096'/>
+      </properties>
+      <repositoryProperties size='3'>
+        <property name='artifact.folder' value='true'/>
+        <property name='artifact.reference' value='file:/C:/eclipsev4/eclipse/dropins/checkstyle/eclipse/plugins/net.sf.eclipsecs.checkstyle_5.5.0.201111092104/'/>
+        <property name='file.name' value='C:\eclipsev4\eclipse\dropins\checkstyle\eclipse\plugins\net.sf.eclipsecs.checkstyle_5.5.0.201111092104'/>
+      </repositoryProperties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='net.sf.eclipsecs.doc' version='5.5.0.201111092104'>
+      <properties size='2'>
+        <property name='artifact.size' value='3770145'/>
+        <property name='download.size' value='3770145'/>
+      </properties>
+      <repositoryProperties size='2'>
+        <property name='artifact.reference' value='file:/C:/eclipsev4/eclipse/dropins/checkstyle/eclipse/plugins/net.sf.eclipsecs.doc_5.5.0.201111092104.jar'/>
+        <property name='file.name' value='C:\eclipsev4\eclipse\dropins\checkstyle\eclipse\plugins\net.sf.eclipsecs.doc_5.5.0.201111092104.jar'/>
+      </repositoryProperties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='net.sf.eclipsecs.core' version='5.5.0.201111092104'>
+      <properties size='2'>
+        <property name='artifact.size' value='803927'/>
+        <property name='download.size' value='803927'/>
+      </properties>
+      <repositoryProperties size='2'>
+        <property name='artifact.reference' value='file:/C:/eclipsev4/eclipse/dropins/checkstyle/eclipse/plugins/net.sf.eclipsecs.core_5.5.0.201111092104.jar'/>
+        <property name='file.name' value='C:\eclipsev4\eclipse\dropins\checkstyle\eclipse\plugins\net.sf.eclipsecs.core_5.5.0.201111092104.jar'/>
+      </repositoryProperties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='net.sf.eclipsecs.branding' version='5.5.0.201111092104'>
+      <properties size='2'>
+        <property name='artifact.size' value='3646'/>
+        <property name='download.size' value='3646'/>
+      </properties>
+      <repositoryProperties size='2'>
+        <property name='artifact.reference' value='file:/C:/eclipsev4/eclipse/dropins/checkstyle/eclipse/plugins/net.sf.eclipsecs.branding_5.5.0.201111092104.jar'/>
+        <property name='file.name' value='C:\eclipsev4\eclipse\dropins\checkstyle\eclipse\plugins\net.sf.eclipsecs.branding_5.5.0.201111092104.jar'/>
+      </repositoryProperties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='net.sf.eclipsecs' version='5.5.0.201111092104'>
+      <properties size='3'>
+        <property name='artifact.size' value='4096'/>
+        <property name='download.size' value='4096'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+      <repositoryProperties size='3'>
+        <property name='artifact.folder' value='true'/>
+        <property name='artifact.reference' value='file:/C:/eclipsev4/eclipse/dropins/checkstyle/eclipse/features/net.sf.eclipsecs_5.5.0.201111092104/'/>
+        <property name='file.name' value='C:\eclipsev4\eclipse\dropins\checkstyle\eclipse\features\net.sf.eclipsecs_5.5.0.201111092104'/>
+      </repositoryProperties>
+    </artifact>
+  </artifacts>
+</repository>
