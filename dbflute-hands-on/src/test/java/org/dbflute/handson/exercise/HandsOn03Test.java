@@ -24,6 +24,8 @@ import org.dbflute.handson.dbflute.exentity.Purchase;
 import org.dbflute.handson.unit.UnitContainerTestCase;
 import org.seasar.dbflute.cbean.ListResultBean;
 import org.seasar.dbflute.cbean.OrQuery;
+import org.seasar.dbflute.cbean.SpecifyQuery;
+import org.seasar.dbflute.cbean.coption.ColumnConversionOption;
 import org.seasar.dbflute.cbean.coption.LikeSearchOption;
 import org.seasar.dbflute.helper.HandyDate;
 
@@ -244,7 +246,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
 
         // ## Assert ##
         for (Member member : memberList) {
-            // TODO warachan 【直しました】IDがmemberIdにするのであれば、NAMEはmemberNameかな by jflute
+            // warachan 【直しました】IDがmemberIdにするのであれば、NAMEはmemberNameかな by jflute
             String memberName = member.getMemberName();
             Integer memberId = member.getMemberId();
             MemberStatus status = member.getMemberStatus();
@@ -253,6 +255,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
             ArrayList<String> orderList2 = new ArrayList<String>();
             ArrayList<String> orderList3 = new ArrayList<String>();
             String statusCode = member.getMemberStatusCode();
+            // TODO mayuko.sakaba assert が不完全。
             if (statusCode.equals("FML")) {
                 orderList1.add(statusCode);
             } else if (statusCode.equals("WDL")) {
@@ -320,8 +323,8 @@ public class HandsOn03Test extends UnitContainerTestCase {
     public void test_No6() throws Exception {
         // ## Arrange ##
         MemberCB cb = new MemberCB();
-        // TODO mayuko.sakaba memberStatus nameのみの検索 副問い合わせの書き方を調べ中
-        cb.query().queryMemberStatus().getMemberStatusName();
+        cb.setupSelect_MemberStatus();
+        cb.specify().specifyMemberStatus().columnMemberStatusName();
         Date beginDate = new HandyDate("2005/10/01").getDate();
         Date endDate = new HandyDate("2005/10/03").getDate();
         cb.query().setFormalizedDatetime_DateFromTo(beginDate, endDate);
@@ -334,13 +337,13 @@ public class HandsOn03Test extends UnitContainerTestCase {
         for (Member member : memberList) {
             String name = member.getMemberName();
             Timestamp datetime = member.getFormalizedDatetime();
-            // MemberStatus status = member.getMemberStatus();
+            MemberStatus status = member.getMemberStatus();
             assertContains(name, "vi");
+            assertTrue(status.getDescription() == null && status.getDisplayOrder() == null);
             Date assertBeginDate = new HandyDate("2005/09/30").getDate();
             Date assertEndDate = new HandyDate("2005/10/04").getDate();
             assertTrue(datetime.after(assertBeginDate) && datetime.before(assertEndDate));
-            // TODO mayuko.sakaba 日程について、もう少し効率の良いアサーションを考えてみる。
-            log(name, datetime);
+            log(name, datetime, status);
             // TODO mayuko.sakaba 米印以降がまだできていない。
         }
     }
@@ -358,12 +361,23 @@ public class HandsOn03Test extends UnitContainerTestCase {
     public void test_07() throws Exception {
         // ## Arrange ##
         PurchaseCB cb = new PurchaseCB();
-        // TODO mayuko.sakaba 一週間以内の購入という指定を考える。
-        // TODO mayuko.sakaba 上位の商品ンカテゴリの検索を考える。
         cb.setupSelect_Member().withMemberSecurityAsOne();
         cb.setupSelect_Member().withMemberStatus();
-        cb.setupSelect_Product().withProductCategory();
+        cb.setupSelect_Product().withProductCategory().withProductCategorySelf();
         cb.setupSelect_Product().withProductStatus();
+        cb.columnQuery(new SpecifyQuery<PurchaseCB>() {
+
+            @Override
+            public void specify(PurchaseCB cb) {
+                cb.specify().columnPurchaseDatetime();
+            }
+        }).lessEqual(new SpecifyQuery<PurchaseCB>() {
+
+            @Override
+            public void specify(PurchaseCB cb) {
+                cb.specify().columnRegisterDatetime();
+            }
+        }).convert(new ColumnConversionOption().addDay(7));
         cb.query().queryProduct().addOrderBy_ProductCategoryCode_Desc();
 
         // ## Act ##
@@ -374,10 +388,14 @@ public class HandsOn03Test extends UnitContainerTestCase {
             Product product = purchase.getProduct();
             ProductStatus productStatus = purchase.getProduct().getProductStatus();
             ProductCategory category = purchase.getProduct().getProductCategory();
+            ProductCategory parentCategory = category.getProductCategorySelf();
             MemberSecurity security = purchase.getMember().getMemberSecurityAsOne();
             MemberStatus memberStatus = purchase.getMember().getMemberStatus();
             Timestamp registerDatetime = purchase.getRegisterDatetime();
-            log(product, productStatus, category, security, memberStatus, registerDatetime);
+            Timestamp purchaseDatetime = purchase.getPurchaseDatetime();
+            long oneDateTime = 1000 * 60 * 60 * 24;
+            // TODO mayuko.sakaba アサートがまだできていない。
+            log(product, productStatus, category, security, memberStatus, registerDatetime, parentCategory);
             // TODO mayuko.sakaba 米印以降がまだできていない。
         }
     }
@@ -406,9 +424,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
                 orCB.query().setBirthdate_IsNull();
             }
         });
-        // TODO mayuko.sakaba nullを後に指定したい場合にどのようにしたいか確認したい。
-        // 今は何もしなくても自動的にnullがはじめに来る。
-        cb.query().addOrderBy_Birthdate_Asc();
+        cb.query().addOrderBy_Birthdate_Asc().withNullsFirst();
 
         // ## Act ##
         ListResultBean<Member> memberList = memberBhv.selectList(cb);
