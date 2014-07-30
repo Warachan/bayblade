@@ -23,6 +23,7 @@ import org.dbflute.handson.dbflute.exentity.ProductStatus;
 import org.dbflute.handson.dbflute.exentity.Purchase;
 import org.dbflute.handson.unit.UnitContainerTestCase;
 import org.seasar.dbflute.cbean.ListResultBean;
+import org.seasar.dbflute.cbean.ManualOrderBean;
 import org.seasar.dbflute.cbean.OrQuery;
 import org.seasar.dbflute.cbean.SpecifyQuery;
 import org.seasar.dbflute.cbean.coption.ColumnConversionOption;
@@ -238,35 +239,47 @@ public class HandsOn03Test extends UnitContainerTestCase {
     public void test_No4() throws Exception {
         // ## Arrange ##
         MemberCB cb = new MemberCB();
-        cb.query().queryMemberStatus().addOrderBy_DisplayOrder_Asc();
+        //cb.query().queryMemberStatus().addOrderBy_DisplayOrder_Asc();
         cb.query().addOrderBy_MemberId_Desc();
 
         // ## Act ##
         ListResultBean<Member> memberList = memberBhv.selectList(cb);
 
         // ## Assert ##
+        int count = 0;
+        int count2 = 0;
+        int count3 = 0;
+        String statusCode = "";
+        ArrayList<String> orderList = new ArrayList<String>();
         for (Member member : memberList) {
             // warachan 【直しました】IDがmemberIdにするのであれば、NAMEはmemberNameかな by jflute
             String memberName = member.getMemberName();
             Integer memberId = member.getMemberId();
             MemberStatus status = member.getMemberStatus();
             assertNull(status);
-            ArrayList<String> orderList1 = new ArrayList<String>();
-            ArrayList<String> orderList2 = new ArrayList<String>();
-            ArrayList<String> orderList3 = new ArrayList<String>();
-            String statusCode = member.getMemberStatusCode();
+            statusCode = member.getMemberStatusCode();
             // TODO mayuko.sakaba assert が不完全。
             if (statusCode.equals("FML")) {
-                orderList1.add(statusCode);
+                count++;
             } else if (statusCode.equals("WDL")) {
-                orderList2.add(statusCode);
-            } else {
-                orderList3.add(statusCode);
-                assertTrue(statusCode.equals("PRV"));
+                count2++;
+            } else if (statusCode.equals("PRV")) {
+                count3++;
             }
-            log(memberName, memberId);
+            log(memberName, memberId, statusCode);
             // TODO mayuko.sakaba statusごとに固まっていることをアサート →　コレでアサーとできているのか微妙なところ。もう少し効率の良いやりかたを探せないか。。。
         }
+        if (statusCode.equals("FML")) {
+            orderList.add(statusCode);
+            count--;
+        } else if (count == 0 && statusCode.equals("WDL")) {
+            orderList.add(statusCode);
+            count2--;
+        } else if (count2 == 0 && statusCode.equals("PRV")) {
+            orderList.add(statusCode);
+            assertFalse(statusCode.equals("FML") || statusCode.equals("WDL"));
+        }
+        log(statusCode, count, count2, count3);
     }
 
     /**
@@ -322,11 +335,12 @@ public class HandsOn03Test extends UnitContainerTestCase {
      */
     public void test_No6() throws Exception {
         // ## Arrange ##
+        Date beginDate = new HandyDate("2005/10/01").getDate();
+        Date endDate = new HandyDate("2005/10/03").getDate();
+        adjustMember_FormalizedDatetime_FirstOnly(beginDate, "vi");
         MemberCB cb = new MemberCB();
         cb.setupSelect_MemberStatus();
         cb.specify().specifyMemberStatus().columnMemberStatusName();
-        Date beginDate = new HandyDate("2005/10/01").getDate();
-        Date endDate = new HandyDate("2005/10/03").getDate();
         cb.query().setFormalizedDatetime_DateFromTo(beginDate, endDate);
         cb.query().setMemberName_LikeSearch("vi", new LikeSearchOption().likeContain());
 
@@ -344,7 +358,6 @@ public class HandsOn03Test extends UnitContainerTestCase {
             Date assertEndDate = new HandyDate("2005/10/04").getDate();
             assertTrue(datetime.after(assertBeginDate) && datetime.before(assertEndDate));
             log(name, datetime, status);
-            // TODO mayuko.sakaba 米印以降がまだできていない。
         }
     }
 
@@ -361,6 +374,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
     public void test_07() throws Exception {
         // ## Arrange ##
         PurchaseCB cb = new PurchaseCB();
+        adjustPurchase_PurchaseDatetime_fromFormalizedDatetimeInWeek();
         cb.setupSelect_Member().withMemberSecurityAsOne();
         cb.setupSelect_Member().withMemberStatus();
         cb.setupSelect_Product().withProductCategory().withProductCategorySelf();
@@ -393,7 +407,10 @@ public class HandsOn03Test extends UnitContainerTestCase {
             MemberStatus memberStatus = purchase.getMember().getMemberStatus();
             Timestamp registerDatetime = purchase.getRegisterDatetime();
             Timestamp purchaseDatetime = purchase.getPurchaseDatetime();
-            long oneDateTime = 1000 * 60 * 60 * 24;
+            long registerTime = registerDatetime.getTime();
+            long purchaseTime = purchaseDatetime.getTime();
+            long weekTime = 1000 * 60 * 60 * 24 * 7;
+            assertTrue(purchaseTime + weekTime <= registerTime);
             // TODO mayuko.sakaba アサートがまだできていない。
             log(product, productStatus, category, security, memberStatus, registerDatetime, parentCategory);
             // TODO mayuko.sakaba 米印以降がまだできていない。
@@ -414,7 +431,6 @@ public class HandsOn03Test extends UnitContainerTestCase {
         cb.setupSelect_MemberSecurityAsOne();
         cb.setupSelect_MemberStatus();
         cb.setupSelect_MemberWithdrawalAsOne();
-        // TODO mayuko.sakaba setupselect しない検索方法を考えてみる。
         final Date date = new HandyDate("1974/12/31").getDate();
         cb.orScopeQuery(new OrQuery<MemberCB>() {
 
@@ -462,7 +478,82 @@ public class HandsOn03Test extends UnitContainerTestCase {
      */
     public void test_09() throws Exception {
         // ## Arrange ##
+        Timestamp beginDate = new HandyDate("2005/06/01").getTimestamp();
+        Timestamp endDate = new HandyDate("2005/06/30").getTimestamp();
+        MemberCB cb = new MemberCB();
+        cb.query().setMemberName_Equal(null);
+        cb.query().setMemberAccount_Equal("");
+        cb.query().setBirthdate_IsNull();
+        ManualOrderBean mob = new ManualOrderBean();
+        mob.when_DateFromTo(beginDate, endDate);
+        cb.query().addOrderBy_MemberId_Desc().withManualOrder(mob);
 
+        // ## Act ##
+        ListResultBean<Member> memberList = memberBhv.selectList(cb);
+
+        // ## Assert ##
+        for (Member member : memberList) {
+            String name = member.getMemberName();
+            String account = member.getMemberAccount();
+            log(name, account);
+            Date birthdate = member.getBirthdate();
+            assertTrue(birthdate == null);
+            // TODO mayuko.sakaba 先に並んでいるアサートを考える。
+        }
+    }
+
+    /**
+     * 全ての会員をページング検索
+     * 会員ステータス名称も取得
+     * 会員IDの昇順で並べる
+     * ページサイズは 3、ページ番号は 1 で検索すること
+     * 会員ID、会員名称、会員ステータス名称をログに出力
+     * SQLのログでカウント検索時と実データ検索時の違いを確認
+     * 総レコード件数が会員テーブルの全件であることをアサート
+     * 総ページ数が期待通りのページ数(計算で導出)であることをアサート
+     * 検索結果のページサイズ、ページ番号が指定されたものであることをアサート
+     * 検索結果が指定されたページサイズ分のデータだけであることをアサート
+     * PageRangeを 3 にして PageNumberList を取得し、[1, 2, 3, 4]であることをアサート
+     * 前のページが存在しないことをアサート
+     * 次のページが存在することをアサート
+     */
+    public void test_paging() throws Exception {
+        // ## Arrange ##
+        MemberCB cb = new MemberCB();
+        cb.setupSelect_MemberStatus();
+        cb.query().addOrderBy_MemberId_Asc();
+        cb.paging(3, 1);
+
+        // ## Act ##
+        ListResultBean<Member> memberList = memberBhv.selectList(cb);
+
+        // ## Assert ##
+        for (Member member : memberList) {
+            Integer memberId = member.getMemberId();
+            String memberName = member.getMemberName();
+            String statusName = member.getMemberStatus().getMemberStatusName();
+            log(memberId, memberName, statusName);
+
+        }
+    }
+
+    /**
+     * 会員ステータスの表示順カラムで会員を並べてカーソル検索
+     * 会員ステータスの "表示順" カラムの昇順で並べる
+     * 会員ステータスのデータも取得
+     * その次には、会員の会員IDの降順で並べる
+     * 会員ステータスが取れていることをアサート
+     * 会員が会員ステータスごとに固まって並んでいることをアサート
+     * 検索したデータをまるごとメモリ上に持ってはいけない
+     * (要は、検索結果レコード件数と同サイズのリストや配列の作成はダメ)
+     */
+    public void test_cursor() throws Exception {
+        // ## Arrange ##
+        MemberCB cb = new MemberCB();
+        cb.setupSelect_MemberStatus();
+        cb.query().queryMemberStatus().addOrderBy_DisplayOrder_Asc();
+        cb.query().addOrderBy_MemberId_Desc();
+        cb.addOrderBy_PK_Desc();
         // ## Act ##
 
         // ## Assert ##
