@@ -25,6 +25,7 @@ import org.dbflute.handson.unit.UnitContainerTestCase;
 import org.seasar.dbflute.cbean.ListResultBean;
 import org.seasar.dbflute.cbean.ManualOrderBean;
 import org.seasar.dbflute.cbean.OrQuery;
+import org.seasar.dbflute.cbean.PagingResultBean;
 import org.seasar.dbflute.cbean.SpecifyQuery;
 import org.seasar.dbflute.cbean.coption.ColumnConversionOption;
 import org.seasar.dbflute.cbean.coption.LikeSearchOption;
@@ -229,6 +230,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
     //        }
 
     /**
+     * ☆ On hold
      * [4] 会員ステータスの表示順カラムで会員を並べて検索
      * 会員ステータスの "表示順" カラムの昇順で並べる
      * 会員ステータスのデータ自体は要らない
@@ -239,14 +241,15 @@ public class HandsOn03Test extends UnitContainerTestCase {
     public void test_No4() throws Exception {
         // ## Arrange ##
         MemberCB cb = new MemberCB();
-        //cb.query().queryMemberStatus().addOrderBy_DisplayOrder_Asc();
+        cb.query().queryMemberStatus().addOrderBy_DisplayOrder_Asc();
         cb.query().addOrderBy_MemberId_Desc();
 
         // ## Act ##
         ListResultBean<Member> memberList = memberBhv.selectList(cb);
 
         // ## Assert ##
-        // TODO wara プレゼンイベントやりましょう by jflute 
+        assertHasAnyElement(memberList);
+        // TODO wara プレゼンイベントやりましょう by jflute
         // わらちゃんが、固まって並んでいることをチェックする画期的な機能を実装した。
         // 営業さんが、お客様に説明するときに「そんなことどうやってるの？」と聞かれそう。
         // 納得してもらうためにも、そのロジックを説明したいので営業さんに説明する。
@@ -352,20 +355,21 @@ public class HandsOn03Test extends UnitContainerTestCase {
         ListResultBean<Member> memberList = memberBhv.selectList(cb);
 
         // ## Assert ##
-        // TODO wara 素通り防止を忘れている by jflute 
+        // TODO wara 素通り防止を忘れている by jflute
+        assertHasAnyElement(memberList);
+        Date assertBeginDate = new HandyDate(beginDate).addDay(-1).getDate();
+        Date assertEndDate = new HandyDate(endDate).addDay(1).getDate();
         for (Member member : memberList) {
             String name = member.getMemberName();
             Timestamp datetime = member.getFormalizedDatetime();
             MemberStatus status = member.getMemberStatus();
+            log(name, datetime, status);
             assertContains(name, "vi");
             assertTrue(status.getDescription() == null && status.getDisplayOrder() == null);
-            // TODO wara ハードコードせずにやってみよう by jflute 
-            // TODO wara あと、for文の外でいいんじゃない？ by jflute 
-            Date assertBeginDate = new HandyDate("2005/09/30").getDate();
-            Date assertEndDate = new HandyDate("2005/10/04").getDate();
+            // TODO 【修正しました】wara ハードコードせずにやってみよう by jflute
+            // TODO 【修正しました】wara あと、for文の外でいいんじゃない？ by jflute
             assertTrue(datetime.after(assertBeginDate) && datetime.before(assertEndDate));
-            // TODO wara ログはできるだけアサートの前のほうがいい (落ちたときに見られないから) by jflute
-            log(name, datetime, status);
+            // TODO 【修正しました】wara ログはできるだけアサートの前のほうがいい (落ちたときに見られないから) by jflute
         }
     }
 
@@ -387,43 +391,49 @@ public class HandsOn03Test extends UnitContainerTestCase {
         cb.setupSelect_Member().withMemberStatus();
         cb.setupSelect_Product().withProductCategory().withProductCategorySelf();
         cb.setupSelect_Product().withProductStatus();
-        // TODO wara 空行削除しちゃってOK。@Overrideも消しちゃってOK by jflute 
+        // TODO 【消しましたー！！】wara 空行削除しちゃってOK。@Overrideも消しちゃってOK by jflute
         cb.columnQuery(new SpecifyQuery<PurchaseCB>() {
-
-            @Override
             public void specify(PurchaseCB cb) {
                 cb.specify().columnPurchaseDatetime();
             }
         }).lessEqual(new SpecifyQuery<PurchaseCB>() {
-
-            @Override
             public void specify(PurchaseCB cb) {
-                cb.specify().columnRegisterDatetime();
+                cb.specify().specifyMember().columnFormalizedDatetime();
             }
         }).convert(new ColumnConversionOption().addDay(7));
+        cb.columnQuery(new SpecifyQuery<PurchaseCB>() {
+            public void specify(PurchaseCB cb) {
+                cb.specify().columnPurchaseDatetime();
+            }
+        }).greaterEqual(new SpecifyQuery<PurchaseCB>() {
+            public void specify(PurchaseCB cb) {
+                cb.specify().specifyMember().columnFormalizedDatetime();
+            }
+        });
         cb.query().queryProduct().addOrderBy_ProductCategoryCode_Desc();
 
         // ## Act ##
         ListResultBean<Purchase> purchaseList = purchaseBhv.selectList(cb);
 
         // ## Assert ##
+        assertHasAnyElement(purchaseList);
         for (Purchase purchase : purchaseList) {
             Product product = purchase.getProduct();
             ProductStatus productStatus = purchase.getProduct().getProductStatus();
             ProductCategory category = purchase.getProduct().getProductCategory();
             ProductCategory parentCategory = category.getProductCategorySelf();
             MemberStatus memberStatus = purchase.getMember().getMemberStatus();
-            Timestamp registerDatetime = purchase.getRegisterDatetime();
+            Timestamp formalizedDatetime = purchase.getMember().getFormalizedDatetime();
             Timestamp purchaseDatetime = purchase.getPurchaseDatetime();
-            long registerTime = registerDatetime.getTime();
+            long formalizeTime = formalizedDatetime.getTime();
             long purchaseTime = purchaseDatetime.getTime();
             long weekTime = 1000 * 60 * 60 * 24 * 7;
-            assertTrue(purchaseTime + weekTime <= registerTime);
-            // TODO mayuko.sakaba アサートがまだできていない。
-            log(purchaseDatetime, registerDatetime, product.getProductName(), productStatus.getProductStatusName(),
+            log(purchaseDatetime, formalizedDatetime, product.getProductName(), productStatus.getProductStatusName(),
                     category.getProductCategoryName(), parentCategory.getProductCategoryName(),
                     memberStatus.getMemberStatusName());
-            // TODO mayuko.sakaba 米印以降がまだできていない。
+            assertTrue(formalizeTime + weekTime >= purchaseTime && purchaseTime >= formalizeTime);
+            assertNotNull(parentCategory);
+            // TODO mayuko.sakaba 米印以降がまだ考えられていない。
         }
     }
 
@@ -441,41 +451,49 @@ public class HandsOn03Test extends UnitContainerTestCase {
         cb.setupSelect_MemberSecurityAsOne();
         cb.setupSelect_MemberStatus();
         cb.setupSelect_MemberWithdrawalAsOne();
-        // TODO wara 修行++: 1974/01/01 という文字列が画面から飛んで来たと想定してみましょう by jflute 
+        // TODO wara 修行++: 1974/01/01 という文字列が画面から飛んで来たと想定してみましょう by jflute
         // Arrange内での日付操作禁止。ヒント６番
         String input = "1974/01/01";
-        final Date date = new HandyDate(input).getDate();
+        final Date targetDate = new HandyDate(input).moveToYearTerminal().getDate();
+        // こっちもやってみた。→動いた
+        //        final Date date = new HandyDate(input).addYear(1).addDay(-1).getDate();
         cb.orScopeQuery(new OrQuery<MemberCB>() {
-
-            @Override
             public void query(MemberCB orCB) {
-                orCB.query().setBirthdate_LessEqual(date);
+                orCB.query().setBirthdate_LessEqual(targetDate);
                 orCB.query().setBirthdate_IsNull();
             }
         });
-        cb.query().addOrderBy_Birthdate_Asc().withNullsFirst();
+        cb.query().addOrderBy_Birthdate_Desc().withNullsFirst();
 
         // ## Act ##
         ListResultBean<Member> memberList = memberBhv.selectList(cb);
 
         // ## Assert ##
+        assertHasAnyElement(memberList);
+        Date assertFirstDate = new HandyDate(input).addDay(-1).getDate();
+        Date assertLastDate = new HandyDate(targetDate).addDay(1).getDate();
+        boolean previousValue = false;
         for (Member member : memberList) {
             String name = member.getMemberName();
             Date birthdate = member.getBirthdate();
             String status = member.getMemberStatus().getMemberStatusName();
             String question = member.getMemberSecurityAsOne().getReminderQuestion();
             MemberWithdrawal withdrawal = member.getMemberWithdrawalAsOne();
+            log(birthdate, name, status, question);
             if (withdrawal != null) {
                 String inputText = member.getMemberWithdrawalAsOne().getWithdrawalReasonInputText();
                 log("************:" + inputText);
             }
             if (birthdate != null) {
-                assertTrue(birthdate.before(date) || birthdate.equals(date));
+                previousValue = true;
+                assertTrue(birthdate.before(targetDate) || birthdate.equals(targetDate));
+                if (birthdate.before(assertLastDate) && birthdate.after(assertFirstDate)) {
+                    int assertBirthYear = new HandyDate(birthdate).getYear();
+                    assertTrue(assertBirthYear == 1974);
+                }
             } else {
-                assertTrue(birthdate == null);
+                assertFalse(previousValue);
             }
-            log(birthdate, name, status, question);
-            // TODO mayuko.sakaba 最後のアサート二つがまだできていない。
         }
     }
 
@@ -492,27 +510,42 @@ public class HandsOn03Test extends UnitContainerTestCase {
     public void test_09() throws Exception {
         // ## Arrange ##
         // TODO wara 修行++: 2005/06/01 だけで実現してみよう(endDate禁止)。ヒント６番 by jflute
-        Timestamp beginDate = new HandyDate("2005/06/01").getTimestamp();
-        Timestamp endDate = new HandyDate("2005/06/30").getTimestamp();
+        String input = "2005/06/01";
+        Date beginDate = new HandyDate(input).getDate();
+        Date endDate = new HandyDate(input).moveToMonthTerminal().getDate();
+        //        Timestamp endDate = new HandyDate("2005/06/30").getTimestamp();
         MemberCB cb = new MemberCB();
         cb.query().setMemberName_Equal(null);
         cb.query().setMemberAccount_Equal("");
         cb.query().setBirthdate_IsNull();
         ManualOrderBean mob = new ManualOrderBean();
         mob.when_DateFromTo(beginDate, endDate);
-        cb.query().addOrderBy_MemberId_Desc().withManualOrder(mob);
+        cb.query().addOrderBy_FormalizedDatetime_Asc().withManualOrder(mob);
+        cb.query().addOrderBy_MemberId_Desc();
 
         // ## Act ##
         ListResultBean<Member> memberList = memberBhv.selectList(cb);
 
         // ## Assert ##
+        Date assertBeginDate = new HandyDate(beginDate).addDay(-1).getDate();
+        Date assertEndDate = new HandyDate(endDate).addDay(1).getDate();
+        assertHasAnyElement(memberList);
+        boolean formalizedJune = false;
         for (Member member : memberList) {
+            Integer id = member.getMemberId();
             String name = member.getMemberName();
             String account = member.getMemberAccount();
-            log(name, account);
+            Timestamp formalizedDatetime = member.getFormalizedDatetime();
+            log(formalizedDatetime, id, name, account);
             Date birthdate = member.getBirthdate();
             assertTrue(birthdate == null);
-            // TODO mayuko.sakaba 先に並んでいるアサートを考える。
+            if (formalizedDatetime == null) {
+                formalizedJune = true;
+            } else if (!(formalizedDatetime.after(assertBeginDate) && formalizedDatetime.before(assertEndDate))) {
+                formalizedJune = true;
+            } else {
+                assertFalse(formalizedJune);
+            }
         }
     }
 
@@ -539,16 +572,27 @@ public class HandsOn03Test extends UnitContainerTestCase {
         cb.paging(3, 1);
 
         // ## Act ##
-        ListResultBean<Member> memberList = memberBhv.selectList(cb);
+        PagingResultBean<Member> page = memberBhv.selectPage(cb);
 
         // ## Assert ##
-        for (Member member : memberList) {
-            Integer memberId = member.getMemberId();
-            String memberName = member.getMemberName();
-            String statusName = member.getMemberStatus().getMemberStatusName();
-            log(memberId, memberName, statusName);
+        int allRecordCount = page.getAllRecordCount(); // 総レコード数
+        int allPageCount = page.getAllPageCount(); // 総ページ数
+        int pageSize = page.getPageSize();
+        int pageNumber = page.getCurrentPageNumber();
+        boolean isExistPrePage = page.isExistPrePage(); // 前のページがあるか？
+        boolean isExistNextPage = page.isExistNextPage(); // 次のページがあるか？
+        int pageCount = 0;
+        for (Member member : page) { // 実データのループ(java.util.Listの実装型
+            pageCount++;
 
         }
+        log(pageCount, pageSize);
+        log(allRecordCount, allPageCount, isExistPrePage, isExistNextPage);
+        assertTrue(pageCount == pageSize);
+        assertTrue(allRecordCount == 20);
+        assertTrue(allPageCount == 7);
+        assertFalse(isExistPrePage);
+        assertTrue(isExistNextPage);
     }
 
     /**
