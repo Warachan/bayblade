@@ -272,12 +272,12 @@ public class HandsOn03Test extends UnitContainerTestCase {
         if (statusCode.equals("FML")) {
             orderList.add(statusCode);
             count--;
+            assertFalse(count != 0);
         } else if (count == 0 && statusCode.equals("WDL")) {
             orderList.add(statusCode);
             count2--;
         } else if (count2 == 0 && statusCode.equals("PRV")) {
             orderList.add(statusCode);
-            assertFalse(statusCode.equals("FML") || statusCode.equals("WDL"));
         }
         log(statusCode, count, count2, count3);
     }
