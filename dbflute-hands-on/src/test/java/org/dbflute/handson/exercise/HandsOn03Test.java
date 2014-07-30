@@ -246,6 +246,10 @@ public class HandsOn03Test extends UnitContainerTestCase {
         ListResultBean<Member> memberList = memberBhv.selectList(cb);
 
         // ## Assert ##
+        // TODO wara プレゼンイベントやりましょう by jflute 
+        // わらちゃんが、固まって並んでいることをチェックする画期的な機能を実装した。
+        // 営業さんが、お客様に説明するときに「そんなことどうやってるの？」と聞かれそう。
+        // 納得してもらうためにも、そのロジックを説明したいので営業さんに説明する。
         int count = 0;
         int count2 = 0;
         int count3 = 0;
@@ -340,23 +344,27 @@ public class HandsOn03Test extends UnitContainerTestCase {
         adjustMember_FormalizedDatetime_FirstOnly(beginDate, "vi");
         MemberCB cb = new MemberCB();
         cb.setupSelect_MemberStatus();
-        cb.specify().specifyMemberStatus().columnMemberStatusName();
-        cb.query().setFormalizedDatetime_DateFromTo(beginDate, endDate);
+        cb.specify().specifyMemberStatus().columnMemberStatusName(); // できるってことだけわかっていればOK by jflute
         cb.query().setMemberName_LikeSearch("vi", new LikeSearchOption().likeContain());
+        cb.query().setFormalizedDatetime_DateFromTo(beginDate, endDate);
 
         // ## Act ##
         ListResultBean<Member> memberList = memberBhv.selectList(cb);
 
         // ## Assert ##
+        // TODO wara 素通り防止を忘れている by jflute 
         for (Member member : memberList) {
             String name = member.getMemberName();
             Timestamp datetime = member.getFormalizedDatetime();
             MemberStatus status = member.getMemberStatus();
             assertContains(name, "vi");
             assertTrue(status.getDescription() == null && status.getDisplayOrder() == null);
+            // TODO wara ハードコードせずにやってみよう by jflute 
+            // TODO wara あと、for文の外でいいんじゃない？ by jflute 
             Date assertBeginDate = new HandyDate("2005/09/30").getDate();
             Date assertEndDate = new HandyDate("2005/10/04").getDate();
             assertTrue(datetime.after(assertBeginDate) && datetime.before(assertEndDate));
+            // TODO wara ログはできるだけアサートの前のほうがいい (落ちたときに見られないから) by jflute
             log(name, datetime, status);
         }
     }
@@ -379,6 +387,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
         cb.setupSelect_Member().withMemberStatus();
         cb.setupSelect_Product().withProductCategory().withProductCategorySelf();
         cb.setupSelect_Product().withProductStatus();
+        // TODO wara 空行削除しちゃってOK。@Overrideも消しちゃってOK by jflute 
         cb.columnQuery(new SpecifyQuery<PurchaseCB>() {
 
             @Override
@@ -403,7 +412,6 @@ public class HandsOn03Test extends UnitContainerTestCase {
             ProductStatus productStatus = purchase.getProduct().getProductStatus();
             ProductCategory category = purchase.getProduct().getProductCategory();
             ProductCategory parentCategory = category.getProductCategorySelf();
-            MemberSecurity security = purchase.getMember().getMemberSecurityAsOne();
             MemberStatus memberStatus = purchase.getMember().getMemberStatus();
             Timestamp registerDatetime = purchase.getRegisterDatetime();
             Timestamp purchaseDatetime = purchase.getPurchaseDatetime();
@@ -412,7 +420,9 @@ public class HandsOn03Test extends UnitContainerTestCase {
             long weekTime = 1000 * 60 * 60 * 24 * 7;
             assertTrue(purchaseTime + weekTime <= registerTime);
             // TODO mayuko.sakaba アサートがまだできていない。
-            log(product, productStatus, category, security, memberStatus, registerDatetime, parentCategory);
+            log(purchaseDatetime, registerDatetime, product.getProductName(), productStatus.getProductStatusName(),
+                    category.getProductCategoryName(), parentCategory.getProductCategoryName(),
+                    memberStatus.getMemberStatusName());
             // TODO mayuko.sakaba 米印以降がまだできていない。
         }
     }
@@ -431,7 +441,10 @@ public class HandsOn03Test extends UnitContainerTestCase {
         cb.setupSelect_MemberSecurityAsOne();
         cb.setupSelect_MemberStatus();
         cb.setupSelect_MemberWithdrawalAsOne();
-        final Date date = new HandyDate("1974/12/31").getDate();
+        // TODO wara 修行++: 1974/01/01 という文字列が画面から飛んで来たと想定してみましょう by jflute 
+        // Arrange内での日付操作禁止。ヒント６番
+        String input = "1974/01/01";
+        final Date date = new HandyDate(input).getDate();
         cb.orScopeQuery(new OrQuery<MemberCB>() {
 
             @Override
@@ -478,6 +491,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
      */
     public void test_09() throws Exception {
         // ## Arrange ##
+        // TODO wara 修行++: 2005/06/01 だけで実現してみよう(endDate禁止)。ヒント６番 by jflute
         Timestamp beginDate = new HandyDate("2005/06/01").getTimestamp();
         Timestamp endDate = new HandyDate("2005/06/30").getTimestamp();
         MemberCB cb = new MemberCB();
