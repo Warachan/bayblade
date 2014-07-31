@@ -575,22 +575,27 @@ public class HandsOn03Test extends UnitContainerTestCase {
         PagingResultBean<Member> page = memberBhv.selectPage(cb);
 
         // ## Assert ##
+        assertHasAnyElement(page);
         int allRecordCount = page.getAllRecordCount(); // 総レコード数
         int allPageCount = page.getAllPageCount(); // 総ページ数
         int pageSize = page.getPageSize();
         int pageNumber = page.getCurrentPageNumber();
         boolean isExistPrePage = page.isExistPrePage(); // 前のページがあるか？
         boolean isExistNextPage = page.isExistNextPage(); // 次のページがあるか？
+        boolean assertPageNumer = false;
         int pageCount = 0;
         for (Member member : page) { // 実データのループ(java.util.Listの実装型
             pageCount++;
-
+            if (pageNumber == 1) {
+                assertPageNumer = true;
+            }
         }
-        log(pageCount, pageSize);
-        log(allRecordCount, allPageCount, isExistPrePage, isExistNextPage);
+        log(pageCount, pageSize, pageNumber);
+        log(assertPageNumer, allRecordCount, allPageCount, isExistPrePage, isExistNextPage);
+        assertTrue(assertPageNumer);
         assertTrue(pageCount == pageSize);
-        assertTrue(allRecordCount == 20);
-        assertTrue(allPageCount == 7);
+        //        assertTrue(allRecordCount == 20);
+        assertTrue(allPageCount == allRecordCount / 3 + 1);
         assertFalse(isExistPrePage);
         assertTrue(isExistNextPage);
     }
