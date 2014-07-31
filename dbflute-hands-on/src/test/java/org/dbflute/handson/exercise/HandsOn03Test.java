@@ -651,15 +651,17 @@ public class HandsOn03Test extends UnitContainerTestCase {
         // ## Act ##
         memberBhv.selectCursor(cb, new EntityRowHandler<Member>() {
             public void handle(Member entity) {
-                ArrayList<String> statusList = new ArrayList<String>();
                 boolean previousStatus = false;
                 MemberStatus memberStatus = entity.getMemberStatus();
                 assertNotNull(memberStatus);
                 String statusCode = entity.getMemberStatus().getMemberStatusCode();
+                ArrayList<String> statusList = new ArrayList<String>();
+                statusList.add(statusCode);
+                log("*********************" + statusList);
                 for (String status : statusList) {
-                    if ((!status.equals(statusCode))) {
+                    log(status, statusCode);
+                    if ((status.equals(statusCode))) {
                         previousStatus = true;
-                        statusList.add(statusCode);
                     } else {
                         assertFalse(previousStatus);
                     }
