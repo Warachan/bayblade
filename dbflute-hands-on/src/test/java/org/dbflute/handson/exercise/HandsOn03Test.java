@@ -647,14 +647,24 @@ public class HandsOn03Test extends UnitContainerTestCase {
         cb.setupSelect_MemberStatus();
         cb.query().queryMemberStatus().addOrderBy_DisplayOrder_Asc();
         cb.query().addOrderBy_MemberId_Desc();
+
         // ## Act ##
         memberBhv.selectCursor(cb, new EntityRowHandler<Member>() {
             public void handle(Member entity) {
+                ArrayList<String> statusList = new ArrayList<String>();
+                boolean previousStatus = false;
                 MemberStatus memberStatus = entity.getMemberStatus();
                 assertNotNull(memberStatus);
-                //                entity.get
+                String statusCode = entity.getMemberStatus().getMemberStatusCode();
+                for (String status : statusList) {
+                    if ((!status.equals(statusCode))) {
+                        previousStatus = true;
+                        statusList.add(statusCode);
+                    } else {
+                        assertFalse(previousStatus);
+                    }
+                }
             }
         });
-        // ## Assert ##
     }
 }
