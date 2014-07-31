@@ -22,6 +22,7 @@ import org.dbflute.handson.dbflute.exentity.ProductCategory;
 import org.dbflute.handson.dbflute.exentity.ProductStatus;
 import org.dbflute.handson.dbflute.exentity.Purchase;
 import org.dbflute.handson.unit.UnitContainerTestCase;
+import org.seasar.dbflute.cbean.EntityRowHandler;
 import org.seasar.dbflute.cbean.ListResultBean;
 import org.seasar.dbflute.cbean.ManualOrderBean;
 import org.seasar.dbflute.cbean.OrQuery;
@@ -29,6 +30,8 @@ import org.seasar.dbflute.cbean.PagingResultBean;
 import org.seasar.dbflute.cbean.SpecifyQuery;
 import org.seasar.dbflute.cbean.coption.ColumnConversionOption;
 import org.seasar.dbflute.cbean.coption.LikeSearchOption;
+import org.seasar.dbflute.cbean.pagenavi.PageNumberLink;
+import org.seasar.dbflute.cbean.pagenavi.PageNumberLinkSetupper;
 import org.seasar.dbflute.helper.HandyDate;
 
 /**
@@ -265,7 +268,6 @@ public class HandsOn03Test extends UnitContainerTestCase {
             MemberStatus status = member.getMemberStatus();
             assertNull(status);
             statusCode = member.getMemberStatusCode();
-            // TODO mayuko.sakaba assert が不完全。
             if (statusCode.equals("FML")) {
                 count++;
             } else if (statusCode.equals("WDL")) {
@@ -274,7 +276,6 @@ public class HandsOn03Test extends UnitContainerTestCase {
                 count3++;
             }
             log(memberName, memberId, statusCode);
-            // TODO mayuko.sakaba statusごとに固まっていることをアサート →　コレでアサーとできているのか微妙なところ。もう少し効率の良いやりかたを探せないか。。。
         }
         if (statusCode.equals("FML")) {
             orderList.add(statusCode);
@@ -355,7 +356,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
         ListResultBean<Member> memberList = memberBhv.selectList(cb);
 
         // ## Assert ##
-        // TODO wara 素通り防止を忘れている by jflute
+        // TODO 【いれましたー!】wara 素通り防止を忘れている by jflute
         assertHasAnyElement(memberList);
         Date assertBeginDate = new HandyDate(beginDate).addDay(-1).getDate();
         Date assertEndDate = new HandyDate(endDate).addDay(1).getDate();
@@ -366,10 +367,10 @@ public class HandsOn03Test extends UnitContainerTestCase {
             log(name, datetime, status);
             assertContains(name, "vi");
             assertTrue(status.getDescription() == null && status.getDisplayOrder() == null);
-            // TODO 【修正しました】wara ハードコードせずにやってみよう by jflute
-            // TODO 【修正しました】wara あと、for文の外でいいんじゃない？ by jflute
+            // TODO 【修正しました－！】wara ハードコードせずにやってみよう by jflute
+            // TODO 【修正しましたー！】wara あと、for文の外でいいんじゃない？ by jflute
             assertTrue(datetime.after(assertBeginDate) && datetime.before(assertEndDate));
-            // TODO 【修正しました】wara ログはできるだけアサートの前のほうがいい (落ちたときに見られないから) by jflute
+            // TODO 【修正しましたー！】wara ログはできるだけアサートの前のほうがいい (落ちたときに見られないから) by jflute
         }
     }
 
@@ -433,7 +434,6 @@ public class HandsOn03Test extends UnitContainerTestCase {
                     memberStatus.getMemberStatusName());
             assertTrue(formalizeTime + weekTime >= purchaseTime && purchaseTime >= formalizeTime);
             assertNotNull(parentCategory);
-            // TODO mayuko.sakaba 米印以降がまだ考えられていない。
         }
     }
 
@@ -451,7 +451,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
         cb.setupSelect_MemberSecurityAsOne();
         cb.setupSelect_MemberStatus();
         cb.setupSelect_MemberWithdrawalAsOne();
-        // TODO wara 修行++: 1974/01/01 という文字列が画面から飛んで来たと想定してみましょう by jflute
+        // TODO 【やってみましたー!】wara 修行++: 1974/01/01 という文字列が画面から飛んで来たと想定してみましょう by jflute
         // Arrange内での日付操作禁止。ヒント６番
         String input = "1974/01/01";
         final Date targetDate = new HandyDate(input).moveToYearTerminal().getDate();
@@ -509,7 +509,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
      */
     public void test_09() throws Exception {
         // ## Arrange ##
-        // TODO wara 修行++: 2005/06/01 だけで実現してみよう(endDate禁止)。ヒント６番 by jflute
+        // TODO　【やってみましたー!でもあっているか不安。。。】 wara 修行++: 2005/06/01 だけで実現してみよう(endDate禁止)。ヒント６番 by jflute
         String input = "2005/06/01";
         Date beginDate = new HandyDate(input).getDate();
         Date endDate = new HandyDate(input).moveToMonthTerminal().getDate();
@@ -572,32 +572,63 @@ public class HandsOn03Test extends UnitContainerTestCase {
         cb.paging(3, 1);
 
         // ## Act ##
-        PagingResultBean<Member> page = memberBhv.selectPage(cb);
+        PagingResultBean<Member> memberPage = memberBhv.selectPage(cb);
+        MemberCB checkTables = new MemberCB();
+        int selectRecordCount = memberBhv.selectCount(checkTables);
 
         // ## Assert ##
-        assertHasAnyElement(page);
-        int allRecordCount = page.getAllRecordCount(); // 総レコード数
-        int allPageCount = page.getAllPageCount(); // 総ページ数
-        int pageSize = page.getPageSize();
-        int pageNumber = page.getCurrentPageNumber();
-        boolean isExistPrePage = page.isExistPrePage(); // 前のページがあるか？
-        boolean isExistNextPage = page.isExistNextPage(); // 次のページがあるか？
-        boolean assertPageNumer = false;
-        int pageCount = 0;
-        for (Member member : page) { // 実データのループ(java.util.Listの実装型
-            pageCount++;
+        assertHasAnyElement(memberPage);
+        int allRecordCount = memberPage.getAllRecordCount(); // 総レコード数
+        int allPageCount = memberPage.getAllPageCount(); // 総ページ数
+        int pageSize = memberPage.getPageSize();
+        int pageNumber = memberPage.getCurrentPageNumber();
+        boolean existPrePage = memberPage.isExistPrePage(); // 前のページがあるか？
+        boolean existNextPage = memberPage.isExistNextPage(); // 次のページがあるか？
+        boolean assertPageNumber = false;
+        boolean assertRecordCount = false;
+        int memberCount = 0;
+        int pageRange = memberPage.getPageRangeSize();
+        if (selectRecordCount != allRecordCount) {
+            assertRecordCount = true;
+        } else {
+            log(selectRecordCount, allRecordCount);
+            assertFalse(assertRecordCount);
+        }
+        for (Member member : memberPage) { // 実データのループ(java.util.Listの実装型
+            memberCount++;
             if (pageNumber == 1) {
-                assertPageNumer = true;
+                assertPageNumber = true;
             }
         }
-        log(pageCount, pageSize, pageNumber);
-        log(assertPageNumer, allRecordCount, allPageCount, isExistPrePage, isExistNextPage);
-        assertTrue(assertPageNumer);
-        assertTrue(pageCount == pageSize);
-        //        assertTrue(allRecordCount == 20);
-        assertTrue(allPageCount == allRecordCount / 3 + 1);
-        assertFalse(isExistPrePage);
-        assertTrue(isExistNextPage);
+        memberPage.setPageRangeSize(3);
+        boolean checkPageRange = false;
+        List<PageNumberLink> linkList = memberPage.pageRange().buildPageNumberLinkList(
+                new PageNumberLinkSetupper<PageNumberLink>() {
+                    public PageNumberLink setup(int pageNumberElement, boolean current) {
+                        String href = "/test/link/";
+                        return new PageNumberLink().initialize(pageNumberElement, current, href);
+                    }
+                });
+        for (PageNumberLink link : linkList) {
+            int numberElement = link.getPageNumberElement();
+            if (numberElement > 4) {
+                checkPageRange = true;
+            } else {
+                for (int i = numberElement; i <= 4;) {
+                    log(numberElement, i);
+                    break;
+                }
+            }
+            assertFalse(checkPageRange);
+        }
+        log(pageRange, memberCount, pageSize, pageNumber);
+        log(assertPageNumber, allRecordCount, allPageCount, existPrePage, existNextPage);
+        assertTrue(assertPageNumber);
+        assertTrue(memberCount == pageSize);
+        assertTrue(allPageCount == allRecordCount / memberCount + 1);
+        assertFalse(existPrePage);
+        assertTrue(existNextPage);
+        // TODO mayuko.sakaba ページ番号が指定されたものであることをアサート, 会員テーブル全権であることをアサート、
     }
 
     /**
@@ -616,9 +647,14 @@ public class HandsOn03Test extends UnitContainerTestCase {
         cb.setupSelect_MemberStatus();
         cb.query().queryMemberStatus().addOrderBy_DisplayOrder_Asc();
         cb.query().addOrderBy_MemberId_Desc();
-        cb.addOrderBy_PK_Desc();
         // ## Act ##
-
+        memberBhv.selectCursor(cb, new EntityRowHandler<Member>() {
+            public void handle(Member entity) {
+                MemberStatus memberStatus = entity.getMemberStatus();
+                assertNotNull(memberStatus);
+                //                entity.get
+            }
+        });
         // ## Assert ##
     }
 }
