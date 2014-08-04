@@ -511,7 +511,8 @@ public class HandsOn03Test extends UnitContainerTestCase {
      */
     public void test_09() throws Exception {
         // ## Arrange ##
-        // TODO　【やってみましたー!でもあっているか不安。。。】 wara 修行++: 2005/06/01 だけで実現してみよう(endDate禁止)。ヒント６番 by jflute
+        // 【やってみましたー!でもあっているか不安。。。】 wara 修行++: 2005/06/01 だけで実現してみよう(endDate禁止)。ヒント６番 by jflute
+        // TODO wara 修行+++: 日付操作、moveToMonthTerminal()は禁止で by jflute 
         String input = "2005/06/01";
         Date beginDate = new HandyDate(input).getDate();
         Date endDate = new HandyDate(input).moveToMonthTerminal().getDate();
@@ -648,16 +649,22 @@ public class HandsOn03Test extends UnitContainerTestCase {
         // ## Arrange ##
         MemberCB cb = new MemberCB();
         cb.setupSelect_MemberStatus();
+        // TODO wara ？？？バラバラに並べるのに試したまんまコミットしちゃったかな？ by jflute
         //cb.query().queryMemberStatus().addOrderBy_DisplayOrder_Asc();
         cb.query().addOrderBy_MemberId_Desc();
 
         // ## Act ##
+        // TODO wara 検索結果が０件のときの素通り防止を入れよう by jflute
         memberBhv.selectCursor(cb, new EntityRowHandler<Member>() {
 
+            // TODO wara private付けちゃおう。ここはインスタンス変数だから by jflute
+            // TODO wara 受けの型はインターフェース型を習慣に。つまり、List<String> by jflute
             ArrayList<String> statusList = new ArrayList<String>();
+            // TODO wara ここはインスタンス変数だから、デフォルトがfalseなので、= false なしでいいよ by jflute
             boolean previousStatus = false;
 
             public void handle(Member entity) {
+                // TODO wara スコープ短いし、statusって短い名前にしちゃおう。というか、entity.getMemberStatus()二回やってる!? by jflute
                 MemberStatus memberStatus = entity.getMemberStatus();
                 assertNotNull(memberStatus);
                 String statusCode = entity.getMemberStatus().getMemberStatusCode();
