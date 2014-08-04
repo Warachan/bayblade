@@ -356,7 +356,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
         ListResultBean<Member> memberList = memberBhv.selectList(cb);
 
         // ## Assert ##
-        // 【いれましたー!】wara 素通り防止を忘れている by jflute
+        // TODO 【いれましたー!】wara 素通り防止を忘れている by jflute
         assertHasAnyElement(memberList);
         Date assertBeginDate = new HandyDate(beginDate).addDay(-1).getDate();
         Date assertEndDate = new HandyDate(endDate).addDay(1).getDate();
@@ -367,11 +367,10 @@ public class HandsOn03Test extends UnitContainerTestCase {
             log(name, datetime, status);
             assertContains(name, "vi");
             assertTrue(status.getDescription() == null && status.getDisplayOrder() == null);
-            // 【修正しました－！】wara ハードコードせずにやってみよう by jflute
-            // 【修正しましたー！】wara あと、for文の外でいいんじゃない？ by jflute
-            // TODO wara 10/01.add(-1) => 9/30 より後、だと9/30の10時のデータもOKになっちゃうよ by jflute 
+            // TODO 【修正しました－！】wara ハードコードせずにやってみよう by jflute
+            // TODO 【修正しましたー！】wara あと、for文の外でいいんじゃない？ by jflute
             assertTrue(datetime.after(assertBeginDate) && datetime.before(assertEndDate));
-            // 【修正しましたー！】wara ログはできるだけアサートの前のほうがいい (落ちたときに見られないから) by jflute
+            // TODO 【修正しましたー！】wara ログはできるだけアサートの前のほうがいい (落ちたときに見られないから) by jflute
         }
     }
 
@@ -393,7 +392,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
         cb.setupSelect_Member().withMemberStatus();
         cb.setupSelect_Product().withProductCategory().withProductCategorySelf();
         cb.setupSelect_Product().withProductStatus();
-        // 【消しましたー！！】wara 空行削除しちゃってOK。@Overrideも消しちゃってOK by jflute
+        // TODO 【消しましたー！！】wara 空行削除しちゃってOK。@Overrideも消しちゃってOK by jflute
         cb.columnQuery(new SpecifyQuery<PurchaseCB>() {
             public void specify(PurchaseCB cb) {
                 cb.specify().columnPurchaseDatetime();
@@ -452,10 +451,9 @@ public class HandsOn03Test extends UnitContainerTestCase {
         cb.setupSelect_MemberSecurityAsOne();
         cb.setupSelect_MemberStatus();
         cb.setupSelect_MemberWithdrawalAsOne();
-        // 【やってみましたー!】wara 修行++: 1974/01/01 という文字列が画面から飛んで来たと想定してみましょう by jflute
+        // TODO 【やってみましたー!】wara 修行++: 1974/01/01 という文字列が画面から飛んで来たと想定してみましょう by jflute
         // Arrange内での日付操作禁止。ヒント６番
         String input = "1974/01/01";
-        // TODO wara 日付操作しちゃってる。moveToYearTerminal()は無しで実現してみよう、ヒント６番 (まで検索) by jflute 
         final Date targetDate = new HandyDate(input).moveToYearTerminal().getDate();
         // こっちもやってみた。→動いた
         //        final Date date = new HandyDate(input).addYear(1).addDay(-1).getDate();
