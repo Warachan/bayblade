@@ -580,25 +580,27 @@ public class HandsOn03Test extends UnitContainerTestCase {
 
         // ## Assert ##
         assertHasAnyElement(memberPage);
-        int allRecordCount = memberPage.getAllRecordCount(); // 総レコード数
-        int allPageCount = memberPage.getAllPageCount(); // 総ページ数
+        int allRecordCount = memberPage.getAllRecordCount();
+        int allPageCount = memberPage.getAllPageCount();
         int pageSize = memberPage.getPageSize();
         int pageNumber = memberPage.getCurrentPageNumber();
-        boolean existPrePage = memberPage.isExistPrePage(); // 前のページがあるか？
-        boolean existNextPage = memberPage.isExistNextPage(); // 次のページがあるか？
+        boolean existPrePage = memberPage.isExistPrePage();
+        boolean existNextPage = memberPage.isExistNextPage();
         boolean assertPageNumber = false;
         boolean assertRecordCount = false;
-        int memberCount = 0;
-        int pageRange = memberPage.getPageRangeSize();
+        ArrayList<Member> memberList = new ArrayList<Member>();
+        // int pageRange = memberPage.getPageRangeSize();
+        int memberListSize = 0;
         if (selectRecordCount != allRecordCount) {
             assertRecordCount = true;
         } else {
             log(selectRecordCount, allRecordCount);
             assertFalse(assertRecordCount);
         }
-        for (Member member : memberPage) { // 実データのループ(java.util.Listの実装型
-            memberCount++;
-            if (pageNumber == 1) {
+        for (Member member : memberPage) {
+            memberList.add(member);
+            memberListSize = memberList.size();
+            if (pageNumber != 1) {
                 assertPageNumber = true;
             }
         }
@@ -623,14 +625,13 @@ public class HandsOn03Test extends UnitContainerTestCase {
             }
             assertFalse(checkPageRange);
         }
-        log(pageRange, memberCount, pageSize, pageNumber);
-        log(assertPageNumber, allRecordCount, allPageCount, existPrePage, existNextPage);
-        assertTrue(assertPageNumber);
-        assertTrue(memberCount == pageSize);
-        assertTrue(allPageCount == allRecordCount / memberCount + 1);
+        log(assertPageNumber, memberListSize, allPageCount, existPrePage, existNextPage);
+        assertFalse(assertPageNumber);
+        assertTrue(memberListSize == 3);
+        assertTrue(memberListSize == pageSize);
+        assertTrue(allPageCount == selectRecordCount / memberList.size() + 1);
         assertFalse(existPrePage);
         assertTrue(existNextPage);
-        // TODO mayuko.sakaba ページ番号が指定されたものであることをアサート
     }
 
     /**
@@ -647,25 +648,33 @@ public class HandsOn03Test extends UnitContainerTestCase {
         // ## Arrange ##
         MemberCB cb = new MemberCB();
         cb.setupSelect_MemberStatus();
-        cb.query().queryMemberStatus().addOrderBy_DisplayOrder_Asc();
+        //cb.query().queryMemberStatus().addOrderBy_DisplayOrder_Asc();
         cb.query().addOrderBy_MemberId_Desc();
 
         // ## Act ##
         memberBhv.selectCursor(cb, new EntityRowHandler<Member>() {
+
+            ArrayList<String> statusList = new ArrayList<String>();
+            boolean previousStatus = false;
+
             public void handle(Member entity) {
-                boolean previousStatus = false;
                 MemberStatus memberStatus = entity.getMemberStatus();
                 assertNotNull(memberStatus);
                 String statusCode = entity.getMemberStatus().getMemberStatusCode();
-                ArrayList<String> statusList = new ArrayList<String>();
-                statusList.add(statusCode);
-                log("*********************" + statusList);
-                for (String status : statusList) {
-                    log(status, statusCode);
-                    if ((status.equals(statusCode))) {
-                        previousStatus = true;
-                    } else {
-                        assertFalse(previousStatus);
+                if (statusList.isEmpty()) {
+                    statusList.add(statusCode);
+                } else {
+                    for (String status : statusList) {
+                        log(status, statusCode);
+                        if (status.equals(statusCode)) {
+                            assertFalse(previousStatus);
+                        } else if (!(status.equals(statusCode)) && statusList.contains(statusCode)) {
+                            previousStatus = true;
+                        } else {
+                            log("*********************" + statusList);
+                            statusList.add(statusCode);
+                        }
+                        break;
                     }
                 }
             }
