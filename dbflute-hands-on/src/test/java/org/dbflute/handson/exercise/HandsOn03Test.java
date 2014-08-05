@@ -369,7 +369,8 @@ public class HandsOn03Test extends UnitContainerTestCase {
             assertTrue(status.getDescription() == null && status.getDisplayOrder() == null);
             // 【修正しました－！】wara ハードコードせずにやってみよう by jflute
             // 【修正しましたー！】wara あと、for文の外でいいんじゃない？ by jflute
-            // TODO 【おっしゃるとおりでございます。】wara 10/01.add(-1) => 9/30 より後、だと9/30の10時のデータもOKになっちゃうよ by jflute
+            // 【おっしゃるとおりでございます。】wara 10/01.add(-1) => 9/30 より後、だと9/30の10時のデータもOKになっちゃうよ by jflute
+            // TODO wara 10/01ぴったりが入らないでございます by jflute 
             assertTrue(datetime.after(beginDate) && datetime.before(assertEndDate));
             // 【修正しましたー！】wara ログはできるだけアサートの前のほうがいい (落ちたときに見られないから) by jflute
         }
@@ -388,6 +389,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
     public void test_07() throws Exception {
         // ## Arrange ##
         PurchaseCB cb = new PurchaseCB();
+        // TODO wara 増えない理由をしっかり考えて来ましょう by jflute
         adjustPurchase_PurchaseDatetime_fromFormalizedDatetimeInWeek();
         cb.setupSelect_Member().withMemberSecurityAsOne();
         cb.setupSelect_Member().withMemberStatus();
@@ -412,7 +414,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
                 cb.specify().specifyMember().columnFormalizedDatetime();
             }
         });
-        cb.query().queryProduct().addOrderBy_ProductCategoryCode_Desc();
+        cb.query().queryProduct().addOrderBy_ProductCategoryCode_Desc(); // まあOK
 
         // ## Act ##
         ListResultBean<Purchase> purchaseList = purchaseBhv.selectList(cb);
@@ -455,10 +457,12 @@ public class HandsOn03Test extends UnitContainerTestCase {
         // wara 修行++: 1974/01/01 という文字列が画面から飛んで来たと想定してみましょう by jflute
         // Arrange内での日付操作禁止。ヒント６番
         String input = "1974/01/01";
+        HandyDate inputHandy = new HandyDate(input);
         // TODO wara 日付操作しちゃってる。moveToYearTerminal()は無しで実現してみよう、ヒント６番 (まで検索) by jflute
-        final Date targetDate = new HandyDate(input).moveToYearTerminal().getDate();
+        final Date targetDate = inputHandy.moveToYearTerminal().getDate();
         // こっちもやってみた。→動いた
         //        final Date date = new HandyDate(input).addYear(1).addDay(-1).getDate();
+        // TODO wara OrScopeQueryも禁止。ヒント、その前のtodoの機能 by jflute 
         cb.orScopeQuery(new OrQuery<MemberCB>() {
             public void query(MemberCB orCB) {
                 orCB.query().setBirthdate_LessEqual(targetDate);
@@ -472,8 +476,9 @@ public class HandsOn03Test extends UnitContainerTestCase {
 
         // ## Assert ##
         assertHasAnyElement(memberList);
-        Date assertFirstDate = new HandyDate(input).addDay(-1).getDate();
-        Date assertLastDate = new HandyDate(targetDate).addDay(1).getDate();
+        Date assertFirstDate = new HandyDate(input).addDay(-1).getDate(); // e.g. 1973/12/31
+        Date assertLastDate = new HandyDate(targetDate).addDay(1).getDate(); // e.g. 1975/01/01
+        // TODO wara わかりやすい名前にリファクタリング by jflute 
         boolean previousValue = false;
         for (Member member : memberList) {
             String name = member.getMemberName();
@@ -491,7 +496,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
                 assertTrue(birthdate.before(targetDate) || birthdate.equals(targetDate));
                 if (birthdate.before(assertLastDate) && birthdate.after(assertFirstDate)) {
                     int assertBirthYear = new HandyDate(birthdate).getYear();
-                    assertTrue(assertBirthYear == 1974);
+                    assertTrue(assertBirthYear == inputHandy.getYear());
                 }
             } else {
                 assertFalse(previousValue);
@@ -530,9 +535,10 @@ public class HandsOn03Test extends UnitContainerTestCase {
         ListResultBean<Member> memberList = memberBhv.selectList(cb);
 
         // ## Assert ##
-        Date assertBeginDate = new HandyDate(beginDate).addDay(-1).getDate();
-        Date assertEndDate = new HandyDate(endDate).addDay(1).getDate();
+        Date assertBeginDate = new HandyDate(beginDate).addDay(-1).getDate(); // 2005/06/01
+        Date assertEndDate = new HandyDate(endDate).addDay(1).getDate(); // 2005/07/01
         assertHasAnyElement(memberList);
+        // TODO wara いま逆なイメージ。まあ、いい感じの名前の変更 by jflute 
         boolean formalizedJune = false;
         for (Member member : memberList) {
             Integer id = member.getMemberId();
@@ -541,6 +547,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
             Timestamp formalizedDatetime = member.getFormalizedDatetime();
             log(formalizedDatetime, id, name, account);
             Date birthdate = member.getBirthdate();
+            // TODO wara assertNull()を使ってみよう by jflute 
             assertTrue(birthdate == null);
             if (formalizedDatetime == null) {
                 formalizedJune = true;
@@ -589,18 +596,24 @@ public class HandsOn03Test extends UnitContainerTestCase {
         boolean existNextPage = memberPage.isExistNextPage();
         boolean assertPageNumber = false;
         boolean assertRecordCount = false;
+        // TODO wara 受けの型は List<Member> by jflute 
         ArrayList<Member> memberList = new ArrayList<Member>();
+        // TODO wara コメントアウトにはコメントを。もしくは、完全に不要なら削除 by jflute 
         // int pageRange = memberPage.getPageRangeSize();
         int memberListSize = 0;
         if (selectRecordCount != allRecordCount) {
+            // TODO wara ちょっとへん by jflute 
             assertRecordCount = true;
         } else {
             log(selectRecordCount, allRecordCount);
             assertFalse(assertRecordCount);
         }
         for (Member member : memberPage) {
+            // TODO wara memberListは、サイズだけのためであれば、普通にint型の++countでOK by jflute 
+            // そもそも、memberPage.size()でOK
             memberList.add(member);
             memberListSize = memberList.size();
+            // TODO wara for文の中でやる必要なし by jflute 
             if (pageNumber != 1) {
                 assertPageNumber = true;
             }
@@ -614,11 +627,19 @@ public class HandsOn03Test extends UnitContainerTestCase {
                         return new PageNumberLink().initialize(pageNumberElement, current, href);
                     }
                 });
+        // wara こんなかんじでも構わない by jflute
+        //assertEquals(4, linkList.size());
+        //assertEquals(1, linkList.get(0));
+        //assertEquals(2, linkList.get(1));
+        //assertEquals(3, linkList.get(2));
+        //assertEquals(4, linkList.get(3));
         for (PageNumberLink link : linkList) {
             int numberElement = link.getPageNumberElement();
+            // TODO wara numberElement <= 4 でOK。というか、checkPageRangeという名前がわかりづらい (e.g. outOfRangeとか) by jflute
             if (numberElement > 4) {
                 checkPageRange = true;
             } else {
+                // TODO wara 絶対に一ループしかしないfor文 by jflute
                 for (int i = numberElement; i <= 4;) {
                     log(numberElement, i);
                     break;
@@ -649,7 +670,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
         // ## Arrange ##
         MemberCB cb = new MemberCB();
         cb.setupSelect_MemberStatus();
-        // TODO 【すみません、そのとおりでございます。】wara ？？？バラバラに並べるのに試したまんまコミットしちゃったかな？ by jflute
+        // 【すみません、そのとおりでございます。】wara ？？？バラバラに並べるのに試したまんまコミットしちゃったかな？ by jflute
         cb.query().queryMemberStatus().addOrderBy_DisplayOrder_Asc();
         cb.query().addOrderBy_MemberId_Desc();
 
@@ -657,10 +678,10 @@ public class HandsOn03Test extends UnitContainerTestCase {
         // TODO 【どうしよう、括弧の中になにをいれたらいいのだ。。。】wara 検索結果が０件のときの素通り防止を入れよう by jflute
         //   assertHasAnyElement(notEmptyList);
         memberBhv.selectCursor(cb, new EntityRowHandler<Member>() {
-            // TODO 【つけましたー】wara private付けちゃおう。ここはインスタンス変数だから by jflute
-            // TODO 【Listにしましたー】wara 受けの型はインターフェース型を習慣に。つまり、List<String> by jflute
+            // 【つけましたー】wara private付けちゃおう。ここはインスタンス変数だから by jflute
+            // 【Listにしましたー】wara 受けの型はインターフェース型を習慣に。つまり、List<String> by jflute
             private List<String> statusList = new ArrayList<String>();
-            // TODO 【消しましたー】wara ここはインスタンス変数だから、デフォルトがfalseなので、= false なしでいいよ by jflute
+            // 【消しましたー】wara ここはインスタンス変数だから、デフォルトがfalseなので、= false なしでいいよ by jflute
             private boolean previousStatus;
 
             public void handle(Member entity) {
