@@ -358,7 +358,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
         // ## Assert ##
         // 【いれましたー!】wara 素通り防止を忘れている by jflute
         assertHasAnyElement(memberList);
-        Date assertBeginDate = new HandyDate(beginDate).addDay(-1).getDate();
+        //   Date assertBeginDate = new HandyDate(beginDate).addDay(-1).getDate();
         Date assertEndDate = new HandyDate(endDate).addDay(1).getDate();
         for (Member member : memberList) {
             String name = member.getMemberName();
@@ -369,8 +369,8 @@ public class HandsOn03Test extends UnitContainerTestCase {
             assertTrue(status.getDescription() == null && status.getDisplayOrder() == null);
             // 【修正しました－！】wara ハードコードせずにやってみよう by jflute
             // 【修正しましたー！】wara あと、for文の外でいいんじゃない？ by jflute
-            // TODO wara 10/01.add(-1) => 9/30 より後、だと9/30の10時のデータもOKになっちゃうよ by jflute
-            assertTrue(datetime.after(assertBeginDate) && datetime.before(assertEndDate));
+            // TODO 【変更しています】wara 10/01.add(-1) => 9/30 より後、だと9/30の10時のデータもOKになっちゃうよ by jflute
+            assertTrue(datetime.after(beginDate) && datetime.before(assertEndDate));
             // 【修正しましたー！】wara ログはできるだけアサートの前のほうがいい (落ちたときに見られないから) by jflute
         }
     }
@@ -512,7 +512,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
     public void test_09() throws Exception {
         // ## Arrange ##
         // 【やってみましたー!でもあっているか不安。。。】 wara 修行++: 2005/06/01 だけで実現してみよう(endDate禁止)。ヒント６番 by jflute
-        // TODO wara 修行+++: 日付操作、moveToMonthTerminal()は禁止で by jflute 
+        // TODO wara 修行+++: 日付操作、moveToMonthTerminal()は禁止で by jflute
         String input = "2005/06/01";
         Date beginDate = new HandyDate(input).getDate();
         Date endDate = new HandyDate(input).moveToMonthTerminal().getDate();
@@ -649,25 +649,25 @@ public class HandsOn03Test extends UnitContainerTestCase {
         // ## Arrange ##
         MemberCB cb = new MemberCB();
         cb.setupSelect_MemberStatus();
-        // TODO wara ？？？バラバラに並べるのに試したまんまコミットしちゃったかな？ by jflute
-        //cb.query().queryMemberStatus().addOrderBy_DisplayOrder_Asc();
+        // TODO 【すみません、そのとおりでございます。】wara ？？？バラバラに並べるのに試したまんまコミットしちゃったかな？ by jflute
+        cb.query().queryMemberStatus().addOrderBy_DisplayOrder_Asc();
         cb.query().addOrderBy_MemberId_Desc();
 
         // ## Act ##
-        // TODO wara 検索結果が０件のときの素通り防止を入れよう by jflute
+        // TODO 【どうしよう、どこにつけよう】wara 検索結果が０件のときの素通り防止を入れよう by jflute
         memberBhv.selectCursor(cb, new EntityRowHandler<Member>() {
-
-            // TODO wara private付けちゃおう。ここはインスタンス変数だから by jflute
-            // TODO wara 受けの型はインターフェース型を習慣に。つまり、List<String> by jflute
-            ArrayList<String> statusList = new ArrayList<String>();
-            // TODO wara ここはインスタンス変数だから、デフォルトがfalseなので、= false なしでいいよ by jflute
-            boolean previousStatus = false;
+            // TODO 【つけましたー】wara private付けちゃおう。ここはインスタンス変数だから by jflute
+            // TODO 【Listにしましたー】wara 受けの型はインターフェース型を習慣に。つまり、List<String> by jflute
+            private List<String> statusList = new ArrayList<String>();
+            // TODO 【消しましたー】wara ここはインスタンス変数だから、デフォルトがfalseなので、= false なしでいいよ by jflute
+            private boolean previousStatus;
 
             public void handle(Member entity) {
                 // TODO wara スコープ短いし、statusって短い名前にしちゃおう。というか、entity.getMemberStatus()二回やってる!? by jflute
+                // →　for文の中のstatusとかぶってしまうので一旦保留しています。
                 MemberStatus memberStatus = entity.getMemberStatus();
                 assertNotNull(memberStatus);
-                String statusCode = entity.getMemberStatus().getMemberStatusCode();
+                String statusCode = memberStatus.getMemberStatusCode();
                 if (statusList.isEmpty()) {
                     statusList.add(statusCode);
                 } else {
