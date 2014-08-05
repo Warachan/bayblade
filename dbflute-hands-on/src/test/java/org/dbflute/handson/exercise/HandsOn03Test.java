@@ -369,7 +369,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
             assertTrue(status.getDescription() == null && status.getDisplayOrder() == null);
             // 【修正しました－！】wara ハードコードせずにやってみよう by jflute
             // 【修正しましたー！】wara あと、for文の外でいいんじゃない？ by jflute
-            // TODO 【変更しています】wara 10/01.add(-1) => 9/30 より後、だと9/30の10時のデータもOKになっちゃうよ by jflute
+            // TODO 【おっしゃるとおりでございます。】wara 10/01.add(-1) => 9/30 より後、だと9/30の10時のデータもOKになっちゃうよ by jflute
             assertTrue(datetime.after(beginDate) && datetime.before(assertEndDate));
             // 【修正しましたー！】wara ログはできるだけアサートの前のほうがいい (落ちたときに見られないから) by jflute
         }
@@ -452,7 +452,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
         cb.setupSelect_MemberSecurityAsOne();
         cb.setupSelect_MemberStatus();
         cb.setupSelect_MemberWithdrawalAsOne();
-        // 【やってみましたー!】wara 修行++: 1974/01/01 という文字列が画面から飛んで来たと想定してみましょう by jflute
+        // wara 修行++: 1974/01/01 という文字列が画面から飛んで来たと想定してみましょう by jflute
         // Arrange内での日付操作禁止。ヒント６番
         String input = "1974/01/01";
         // TODO wara 日付操作しちゃってる。moveToYearTerminal()は無しで実現してみよう、ヒント６番 (まで検索) by jflute
@@ -654,7 +654,8 @@ public class HandsOn03Test extends UnitContainerTestCase {
         cb.query().addOrderBy_MemberId_Desc();
 
         // ## Act ##
-        // TODO 【どうしよう、どこにつけよう】wara 検索結果が０件のときの素通り防止を入れよう by jflute
+        // TODO 【どうしよう、括弧の中になにをいれたらいいのだ。。。】wara 検索結果が０件のときの素通り防止を入れよう by jflute
+        //   assertHasAnyElement(notEmptyList);
         memberBhv.selectCursor(cb, new EntityRowHandler<Member>() {
             // TODO 【つけましたー】wara private付けちゃおう。ここはインスタンス変数だから by jflute
             // TODO 【Listにしましたー】wara 受けの型はインターフェース型を習慣に。つまり、List<String> by jflute
