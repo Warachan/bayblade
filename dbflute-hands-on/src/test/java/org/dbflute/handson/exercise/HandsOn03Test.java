@@ -358,6 +358,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
         // ## Assert ##
         // 【いれましたー!】wara 素通り防止を忘れている by jflute
         assertHasAnyElement(memberList);
+        // TODO wara コメントアウトにコメントを by jflute 
         //   Date assertBeginDate = new HandyDate(beginDate).addDay(-1).getDate();
         Date assertEndDate = new HandyDate(endDate).addDay(1).getDate();
         for (Member member : memberList) {
@@ -370,7 +371,8 @@ public class HandsOn03Test extends UnitContainerTestCase {
             // 【修正しました－！】wara ハードコードせずにやってみよう by jflute
             // 【修正しましたー！】wara あと、for文の外でいいんじゃない？ by jflute
             // 【おっしゃるとおりでございます。】wara 10/01.add(-1) => 9/30 より後、だと9/30の10時のデータもOKになっちゃうよ by jflute
-            // TODO 【修正したつもりでございます】wara 10/01ぴったりが入らないでございます by jflute
+            // 【修正したつもりでございます】wara 10/01ぴったりが入らないでございます by jflute
+            // TODO wara 「10/01とぴったり同じ、もしくは、10/04 より前」ってロジック変じゃない？(。´･ω･)? by jflute 
             assertTrue(datetime.equals(beginDate) || datetime.before(assertEndDate));
             // 【修正しましたー！】wara ログはできるだけアサートの前のほうがいい (落ちたときに見られないから) by jflute
         }
@@ -459,10 +461,10 @@ public class HandsOn03Test extends UnitContainerTestCase {
         String input = "1974/01/01";
         HandyDate inputHandy = new HandyDate(input);
         final Date targetDate = new HandyDate(input).getDate();
-        // TODO 【やってみた】wara 日付操作しちゃってる。moveToYearTerminal()は無しで実現してみよう、ヒント６番 (まで検索) by jflute
+        // 【やってみた】wara 日付操作しちゃってる。moveToYearTerminal()は無しで実現してみよう、ヒント６番 (まで検索) by jflute
         // こっちもやってみた。→動いた
         //final Date date = new HandyDate(input).addYear(1).addDay(-1).getDate();
-        // TODO 【やってみました】wara OrScopeQueryも禁止。ヒント、その前のtodoの機能 by jflute
+        // 【やってみました】wara OrScopeQueryも禁止。ヒント、その前のtodoの機能 by jflute
         //        cb.orScopeQuery(new OrQuery<MemberCB>() {
         //            public void query(MemberCB orCB) {
         //                //                orCB.query().setBirthdate_LessEqual(date);
@@ -482,7 +484,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
         Date assertDate = inputHandy.moveToYearTerminal().getDate();
         Date assertFirstDate = new HandyDate(input).addDay(-1).getDate(); // e.g. 1973/12/31
         Date assertLastDate = new HandyDate(assertDate).addDay(1).getDate(); // e.g. 1975/01/01
-        // TODO 【passedBorderに変更しました】wara わかりやすい名前にリファクタリング by jflute
+        // 【passedBorderに変更しました】wara わかりやすい名前にリファクタリング by jflute
         boolean passedBorder = false;
         for (Member member : memberList) {
             String name = member.getMemberName();
@@ -521,7 +523,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
     public void test_09() throws Exception {
         // ## Arrange ##
         // wara 修行++: 2005/06/01 だけで実現してみよう(endDate禁止)。ヒント６番 by jflute
-        // TODO 【やってみました】wara 修行+++: 日付操作、moveToMonthTerminal()は禁止で by jflute
+        // 【やってみました】wara 修行+++: 日付操作、moveToMonthTerminal()は禁止で by jflute
         String input = "2005/06/01";
         Date beginDate = new HandyDate(input).getDate();
         // 思い出
@@ -544,7 +546,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
         Date assertBeginDate = new HandyDate(beginDate).addDay(-1).getDate(); // 2005/06/01
         Date assertEndDate = new HandyDate(input).moveToMonthJustAdded(1).getDate(); // 2005/07/01
         assertHasAnyElement(memberList);
-        // TODO 【結局passedBorder。統一したほうがわかりやすくなりました。。。】wara いま逆なイメージ。まあ、いい感じの名前の変更 by jflute
+        // 【結局passedBorder。統一したほうがわかりやすくなりました。。。】wara いま逆なイメージ。まあ、いい感じの名前の変更 by jflute
         boolean passedBorder = false;
         for (Member member : memberList) {
             Integer id = member.getMemberId();
@@ -553,7 +555,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
             Timestamp formalizedDatetime = member.getFormalizedDatetime();
             log(formalizedDatetime, id, name, account);
             Date birthdate = member.getBirthdate();
-            // TODO 【使いましたー！】wara assertNull()を使ってみよう by jflute
+            // 【使いましたー！】wara assertNull()を使ってみよう by jflute
             assertNull(birthdate);
             if (formalizedDatetime == null) {
                 passedBorder = true;
@@ -602,22 +604,22 @@ public class HandsOn03Test extends UnitContainerTestCase {
         boolean existNextPage = memberPage.isExistNextPage();
         boolean assertPageNumber = false;
         boolean assertRecordCount = false;
-        // TODO 【Listにしましたー！】wara 受けの型は List<Member> by jflute
+        // 【Listにしましたー！】wara 受けの型は List<Member> by jflute
         // 思い出でございまする
         // List<Member> memberList = new ArrayList<Member>();
-        // TODO 【いらないので削除しちゃいました】wara コメントアウトにはコメントを。もしくは、完全に不要なら削除 by jflute
-        // TODO 【アサート外に出しました。else文も消していいのですがログ用にひとまず残します】wara ちょっとへん by jflute
+        // 【いらないので削除しちゃいました】wara コメントアウトにはコメントを。もしくは、完全に不要なら削除 by jflute
+        // 【アサート外に出しました。else文も消していいのですがログ用にひとまず残します】wara ちょっとへん by jflute
         if (selectRecordCount != allRecordCount) {
             assertRecordCount = true;
         } else {
             log(selectRecordCount, allRecordCount);
         }
         //        for (Member member : memberPage) {
-        //            // TODO 【memberPage.size()にしました】wara memberListは、サイズだけのためであれば、普通にint型の++countでOK by jflute
+        //            // 【memberPage.size()にしました】wara memberListは、サイズだけのためであれば、普通にint型の++countでOK by jflute
         //            // そもそも、memberPage.size()でOK
         //            memberList.add(member);
         //            memberListSize = memberList.size();
-        //            // TODO 【外に出しました】wara for文の中でやる必要なし by jflute
+        //            // 【外に出しました】wara for文の中でやる必要なし by jflute
         //        }
         int memberPageSize = memberPage.size();
         if (pageNumber != 1) {
@@ -640,12 +642,13 @@ public class HandsOn03Test extends UnitContainerTestCase {
         //assertEquals(4, linkList.get(3));
         for (PageNumberLink link : linkList) {
             int numberElement = link.getPageNumberElement();
-            // TODO 【<= 4だと含まれるべきページまではじかれてしまう気がするのですが私の勘違いでしょうか】wara numberElement <= 4 でOK。というか、checkPageRangeという名前がわかりづらい (e.g. outOfRangeとか) by jflute
+            // 【<= 4だと含まれるべきページまではじかれてしまう気がするのですが私の勘違いでしょうか】wara numberElement <= 4 でOK。というか、checkPageRangeという名前がわかりづらい (e.g. outOfRangeとか) by jflute
+            //  -> おっとすまん、範囲外だったら印を付けるってことか。であれば、numberElement > 4 でOKOK
             if (numberElement > 4) {
                 outOfRange = true;
                 // 思い出
                 //            } else {
-                //                // TODO wara 絶対に一ループしかしないfor文 by jflute
+                //                // wara 絶対に一ループしかしないfor文 by jflute
                 //                for (int i = numberElement; i <= 4;) {
                 //                    log(numberElement, i);
                 //                    break;
@@ -658,6 +661,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
         assertFalse(assertPageNumber);
         assertTrue(memberPageSize == 3);
         assertTrue(memberPageSize == pageSize);
+        // TODO wara 今回の場合は大丈夫だけど、割り切れる場合+1しないので、割り切れてなかったら+1するってロジックを by jflute 
         assertTrue(allPageCount == selectRecordCount / memberPageSize + 1);
         assertFalse(existPrePage);
         assertTrue(existNextPage);
@@ -693,7 +697,9 @@ public class HandsOn03Test extends UnitContainerTestCase {
             public void handle(Member entity) {
                 // TODO wara スコープ短いし、statusって短い名前にしちゃおう。というか、entity.getMemberStatus()二回やってる!? by jflute
                 // 【→　for文の中のstatusとかぶってしまうので一旦保留しています。】
-                // TODO 【こっちにいれてみました。】wara 検索結果が０件のときの素通り防止を入れよう by jflute
+                // 【こっちにいれてみました。】wara 検索結果が０件のときの素通り防止を入れよう by jflute
+                // TODO wara 残念ながら素通り防止になっていないでござりまする by jflute
+                // というか、でたらめな絞り込み条件とか入れて試してみたかな？(確認大事)
                 assertNotNull(entity);
                 MemberStatus memberStatus = entity.getMemberStatus();
                 assertNotNull(memberStatus);
