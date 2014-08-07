@@ -358,8 +358,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
         // ## Assert ##
         // 【いれましたー!】wara 素通り防止を忘れている by jflute
         assertHasAnyElement(memberList);
-        // TODO wara コメントアウトにコメントを by jflute 
-        //   Date assertBeginDate = new HandyDate(beginDate).addDay(-1).getDate();
+        // TODO 【いらないので消しちゃいます】wara コメントアウトにコメントを by jflute
         Date assertEndDate = new HandyDate(endDate).addDay(1).getDate();
         for (Member member : memberList) {
             String name = member.getMemberName();
@@ -372,7 +371,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
             // 【修正しましたー！】wara あと、for文の外でいいんじゃない？ by jflute
             // 【おっしゃるとおりでございます。】wara 10/01.add(-1) => 9/30 より後、だと9/30の10時のデータもOKになっちゃうよ by jflute
             // 【修正したつもりでございます】wara 10/01ぴったりが入らないでございます by jflute
-            // TODO wara 「10/01とぴったり同じ、もしくは、10/04 より前」ってロジック変じゃない？(。´･ω･)? by jflute 
+            // TODO wara 「10/01とぴったり同じ、もしくは、10/04 より前」ってロジック変じゃない？(。´･ω･)? by jflute
             assertTrue(datetime.equals(beginDate) || datetime.before(assertEndDate));
             // 【修正しましたー！】wara ログはできるだけアサートの前のほうがいい (落ちたときに見られないから) by jflute
         }
@@ -661,8 +660,9 @@ public class HandsOn03Test extends UnitContainerTestCase {
         assertFalse(assertPageNumber);
         assertTrue(memberPageSize == 3);
         assertTrue(memberPageSize == pageSize);
-        // TODO wara 今回の場合は大丈夫だけど、割り切れる場合+1しないので、割り切れてなかったら+1するってロジックを by jflute 
-        assertTrue(allPageCount == selectRecordCount / memberPageSize + 1);
+        // TODO wara 今回の場合は大丈夫だけど、割り切れる場合+1しないので、割り切れてなかったら+1するってロジックを by jflute
+        // やりかけ
+        // assertFalse(allPageCount == (selectRecordCount % memberPageSize) ? 0 : +1);
         assertFalse(existPrePage);
         assertTrue(existNextPage);
     }
@@ -686,7 +686,6 @@ public class HandsOn03Test extends UnitContainerTestCase {
         cb.query().addOrderBy_MemberId_Desc();
 
         // ## Act ##
-
         memberBhv.selectCursor(cb, new EntityRowHandler<Member>() {
             // 【つけましたー】wara private付けちゃおう。ここはインスタンス変数だから by jflute
             // 【Listにしましたー】wara 受けの型はインターフェース型を習慣に。つまり、List<String> by jflute
