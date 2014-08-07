@@ -358,7 +358,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
         // ## Assert ##
         // 【いれましたー!】wara 素通り防止を忘れている by jflute
         assertHasAnyElement(memberList);
-        // TODO 【使いなおします。】wara コメントアウトにコメントを by jflute
+        // 【使いなおします。】wara コメントアウトにコメントを by jflute
         Date assertBeginDate = new HandyDate("2005/09/30").moveToDayTerminal().getDate();
         // 冗長すぎるので却下
         //  Date assertBeginDate = new HandyDate(beginDate).beginDay_Hour(toDate("2005/09/30 23:59:59")).getDate();
@@ -374,8 +374,13 @@ public class HandsOn03Test extends UnitContainerTestCase {
             // 【修正しましたー！】wara あと、for文の外でいいんじゃない？ by jflute
             // 【おっしゃるとおりでございます。】wara 10/01.add(-1) => 9/30 より後、だと9/30の10時のデータもOKになっちゃうよ by jflute
             // 【修正したつもりでございます】wara 10/01ぴったりが入らないでございます by jflute
-            // TODO 【微妙ですみません。。。まだしっくりくるものを考えられていないです。】wara 「10/01とぴったり同じ、もしくは、10/04 より前」ってロジック変じゃない？(。´･ω･)? by jflute
-            assertTrue(datetime.after(assertBeginDate) || datetime.before(assertEndDate));
+            // 【微妙ですみません。。。まだしっくりくるものを考えられていないです。】wara 「10/01とぴったり同じ、もしくは、10/04 より前」ってロジック変じゃない？(。´･ω･)? by jflute
+            assertTrue(datetime.after(assertBeginDate) && datetime.before(assertEndDate));
+
+            // もし、assertBeginDateが10/1だったら、こんなかんじだよーん by jflute
+            assertTrue((datetime.after(assertBeginDate) || datetime.equals(assertBeginDate))
+                    && datetime.before(assertEndDate));
+
             // 【修正しましたー！】wara ログはできるだけアサートの前のほうがいい (落ちたときに見られないから) by jflute
         }
     }
@@ -393,7 +398,9 @@ public class HandsOn03Test extends UnitContainerTestCase {
     public void test_07() throws Exception {
         // ## Arrange ##
         PurchaseCB cb = new PurchaseCB();
-        // TODO wara 増えない理由をしっかり考えて来ましょう by jflute
+        // wara 増えない理由をしっかり考えて来ましょう by jflute
+        // TODO wara 増えない理由をここに書いてみて (漠然読みの成果) by jflute
+        // TODO wara 絞り込み条件を変えて増やしてみましょう by jflute
         adjustPurchase_PurchaseDatetime_fromFormalizedDatetimeInWeek();
         cb.setupSelect_Member().withMemberSecurityAsOne();
         cb.setupSelect_Member().withMemberStatus();
@@ -682,6 +689,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
      */
     public void test_cursor() throws Exception {
         // ## Arrange ##
+        // TODO wara カーソル検索の小話後半どこかで by jflute 
         MemberCB cb = new MemberCB();
         cb.setupSelect_MemberStatus();
         // 【すみません、そのとおりでございます。】wara ？？？バラバラに並べるのに試したまんまコミットしちゃったかな？ by jflute
@@ -689,40 +697,42 @@ public class HandsOn03Test extends UnitContainerTestCase {
         cb.query().addOrderBy_MemberId_Desc();
 
         // ## Act ##
+        // 【つけましたー】wara private付けちゃおう。ここはインスタンス変数だから by jflute
+        // 【Listにしましたー】wara 受けの型はインターフェース型を習慣に。つまり、List<String> by jflute
+        // finalは、statusListの中のインスタンスを差し替えることができないだけで、そのインスタンスが保持している変数は別に変更できる
+        final List<String> statusList = new ArrayList<String>();
         memberBhv.selectCursor(cb, new EntityRowHandler<Member>() {
-            // 【つけましたー】wara private付けちゃおう。ここはインスタンス変数だから by jflute
-            // 【Listにしましたー】wara 受けの型はインターフェース型を習慣に。つまり、List<String> by jflute
-            private List<String> statusList = new ArrayList<String>();
             // 【消しましたー】wara ここはインスタンス変数だから、デフォルトがfalseなので、= false なしでいいよ by jflute
             private boolean previousStatus;
 
             public void handle(Member entity) {
-                // TODO wara スコープ短いし、statusって短い名前にしちゃおう。というか、entity.getMemberStatus()二回やってる!? by jflute
+                // wara スコープ短いし、statusって短い名前にしちゃおう。というか、entity.getMemberStatus()二回やってる!? by jflute
                 // 【→　for文の中のstatusとかぶってしまうので一旦保留しています。】
                 // 【こっちにいれてみました。】wara 検索結果が０件のときの素通り防止を入れよう by jflute
-                // TODO wara 残念ながら素通り防止になっていないでござりまする by jflute
+                // wara 残念ながら素通り防止になっていないでござりまする by jflute
                 // というか、でたらめな絞り込み条件とか入れて試してみたかな？(確認大事)
                 assertNotNull(entity);
-                MemberStatus memberStatus = entity.getMemberStatus();
-                assertNotNull(memberStatus);
-                String statusCode = memberStatus.getMemberStatusCode();
+                MemberStatus status = entity.getMemberStatus();
+                assertNotNull(status);
+                String currentStatusCode = status.getMemberStatusCode();
                 if (statusList.isEmpty()) {
-                    statusList.add(statusCode);
+                    statusList.add(currentStatusCode);
                 } else {
-                    for (String status : statusList) {
-                        log(status, statusCode);
-                        if (status.equals(statusCode)) {
+                    for (String statusCode : statusList) {
+                        log(statusCode, currentStatusCode);
+                        if (statusCode.equals(currentStatusCode)) {
                             assertFalse(previousStatus);
-                        } else if (!(status.equals(statusCode)) && statusList.contains(statusCode)) {
+                        } else if (!(statusCode.equals(currentStatusCode)) && statusList.contains(currentStatusCode)) {
                             previousStatus = true;
                         } else {
                             log("*********************" + statusList);
-                            statusList.add(statusCode);
+                            statusList.add(currentStatusCode);
                         }
                         break;
                     }
                 }
             }
         });
+        assertHasAnyElement(statusList);
     }
 }

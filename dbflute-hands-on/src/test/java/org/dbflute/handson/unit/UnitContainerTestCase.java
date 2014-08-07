@@ -8,19 +8,18 @@ import java.util.Date;
 
 import javax.sql.DataSource;
 
-import org.seasar.dbflute.cbean.ListResultBean;
-import org.seasar.dbflute.cbean.SpecifyQuery;
-import org.seasar.dbflute.cbean.SubQuery;
-import org.seasar.dbflute.cbean.coption.LikeSearchOption;
-import org.seasar.dbflute.helper.HandyDate;
-import org.seasar.dbflute.unit.seasar.ContainerTestCase;
-
 import org.dbflute.handson.dbflute.cbean.MemberCB;
 import org.dbflute.handson.dbflute.cbean.PurchaseCB;
 import org.dbflute.handson.dbflute.exbhv.MemberBhv;
 import org.dbflute.handson.dbflute.exbhv.PurchaseBhv;
 import org.dbflute.handson.dbflute.exentity.Member;
 import org.dbflute.handson.dbflute.exentity.Purchase;
+import org.seasar.dbflute.cbean.ListResultBean;
+import org.seasar.dbflute.cbean.SpecifyQuery;
+import org.seasar.dbflute.cbean.SubQuery;
+import org.seasar.dbflute.cbean.coption.LikeSearchOption;
+import org.seasar.dbflute.helper.HandyDate;
+import org.seasar.dbflute.unit.seasar.ContainerTestCase;
 
 /**
  * The base class of unit test cases with DI container. <br />
@@ -109,7 +108,7 @@ public abstract class UnitContainerTestCase extends ContainerTestCase {
         }
 
         HandyDate handyDate = new HandyDate(adjustedMember.getFormalizedDatetime());
-        Timestamp movedDatetime = handyDate.addDay(7).moveToDayTerminal().getTimestamp();
+        Timestamp movedDatetime = handyDate.addDay(7).moveToDayTerminal().moveToSecondJust().getTimestamp();
         for (Purchase purchase : updatedPurchaseList) {
             purchase.setPurchaseDatetime(movedDatetime);
         }
