@@ -359,7 +359,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
         // 【いれましたー!】wara 素通り防止を忘れている by jflute
         assertHasAnyElement(memberList);
         // TODO 【使いなおします。】wara コメントアウトにコメントを by jflute
-        Date assertBeginDate = new HandyDate("2005/09/30 23:59:59").getDate();
+        Date assertBeginDate = new HandyDate("2005/09/30").moveToDayTerminal().getDate();
         // 冗長すぎるので却下
         //  Date assertBeginDate = new HandyDate(beginDate).beginDay_Hour(toDate("2005/09/30 23:59:59")).getDate();
         Date assertEndDate = new HandyDate(endDate).addDay(1).getDate();
