@@ -358,7 +358,10 @@ public class HandsOn03Test extends UnitContainerTestCase {
         // ## Assert ##
         // 【いれましたー!】wara 素通り防止を忘れている by jflute
         assertHasAnyElement(memberList);
-        // TODO 【いらないので消しちゃいます】wara コメントアウトにコメントを by jflute
+        // TODO 【使いなおします。】wara コメントアウトにコメントを by jflute
+        Date assertBeginDate = new HandyDate("2005/09/30 23:59:59").getDate();
+        // 冗長すぎるので却下
+        //  Date assertBeginDate = new HandyDate(beginDate).beginDay_Hour(toDate("2005/09/30 23:59:59")).getDate();
         Date assertEndDate = new HandyDate(endDate).addDay(1).getDate();
         for (Member member : memberList) {
             String name = member.getMemberName();
@@ -371,8 +374,8 @@ public class HandsOn03Test extends UnitContainerTestCase {
             // 【修正しましたー！】wara あと、for文の外でいいんじゃない？ by jflute
             // 【おっしゃるとおりでございます。】wara 10/01.add(-1) => 9/30 より後、だと9/30の10時のデータもOKになっちゃうよ by jflute
             // 【修正したつもりでございます】wara 10/01ぴったりが入らないでございます by jflute
-            // TODO wara 「10/01とぴったり同じ、もしくは、10/04 より前」ってロジック変じゃない？(。´･ω･)? by jflute
-            assertTrue(datetime.equals(beginDate) || datetime.before(assertEndDate));
+            // TODO 【微妙ですみません。。。まだしっくりくるものを考えられていないです。】wara 「10/01とぴったり同じ、もしくは、10/04 より前」ってロジック変じゃない？(。´･ω･)? by jflute
+            assertTrue(datetime.after(assertBeginDate) || datetime.before(assertEndDate));
             // 【修正しましたー！】wara ログはできるだけアサートの前のほうがいい (落ちたときに見られないから) by jflute
         }
     }
