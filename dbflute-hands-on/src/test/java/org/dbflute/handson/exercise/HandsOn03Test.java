@@ -400,6 +400,14 @@ public class HandsOn03Test extends UnitContainerTestCase {
         PurchaseCB cb = new PurchaseCB();
         // wara 増えない理由をしっかり考えて来ましょう by jflute
         // TODO wara 増えない理由をここに書いてみて (漠然読みの成果) by jflute
+        // 指定された範囲内でpurchase dateを持つ最初のメンバーをセレクトし、
+        // そのメンバーのformalizedDatetimeに7日分足して更にもっとも新しい日付の23:59:999まで移動した日時に変更する。
+        // その後、purchaseDatetimeに、変更後のfomalizedDatetimeを設定しする。
+        // この変更後のpurchasedDatetimeと、メンバーのもともとのformalizedDatetimeを比較した場合、
+        // 比較時の絞り込み条件はformalizedDatetimeに7日分たした時間以内にpurchasedDatetimeが存在した場合なので、
+        // formalizedDatetimeの時間が23:59:999でない限り、purchasedDatetimeが一週間以内に存在することはありません。
+        // つまりformalizedDatetimeの時間から23:59:999までの時分秒が余分に足されている状態。
+
         // TODO wara 絞り込み条件を変えて増やしてみましょう by jflute
         adjustPurchase_PurchaseDatetime_fromFormalizedDatetimeInWeek();
         cb.setupSelect_Member().withMemberSecurityAsOne();
@@ -411,11 +419,12 @@ public class HandsOn03Test extends UnitContainerTestCase {
             public void specify(PurchaseCB cb) {
                 cb.specify().columnPurchaseDatetime();
             }
-        }).lessEqual(new SpecifyQuery<PurchaseCB>() {
+        }).lessThan(new SpecifyQuery<PurchaseCB>() {
             public void specify(PurchaseCB cb) {
                 cb.specify().specifyMember().columnFormalizedDatetime();
             }
-        }).convert(new ColumnConversionOption().addDay(7));
+        }).convert(new ColumnConversionOption().addDay(8).truncTime());
+
         cb.columnQuery(new SpecifyQuery<PurchaseCB>() {
             public void specify(PurchaseCB cb) {
                 cb.specify().columnPurchaseDatetime();
@@ -671,8 +680,11 @@ public class HandsOn03Test extends UnitContainerTestCase {
         assertTrue(memberPageSize == 3);
         assertTrue(memberPageSize == pageSize);
         // TODO wara 今回の場合は大丈夫だけど、割り切れる場合+1しないので、割り切れてなかったら+1するってロジックを by jflute
-        // やりかけ
-        // assertFalse(allPageCount == (selectRecordCount % memberPageSize) ? 0 : +1);
+        if (selectRecordCount % memberPageSize == 0) {
+            assertTrue(allPageCount == selectRecordCount / memberPageSize);
+        } else {
+            assertTrue(allPageCount == selectRecordCount / memberPageSize + 1);
+        }
         assertFalse(existPrePage);
         assertTrue(existNextPage);
     }
@@ -689,7 +701,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
      */
     public void test_cursor() throws Exception {
         // ## Arrange ##
-        // TODO wara カーソル検索の小話後半どこかで by jflute 
+        // TODO wara カーソル検索の小話後半どこかで by jflute
         MemberCB cb = new MemberCB();
         cb.setupSelect_MemberStatus();
         // 【すみません、そのとおりでございます。】wara ？？？バラバラに並べるのに試したまんまコミットしちゃったかな？ by jflute
