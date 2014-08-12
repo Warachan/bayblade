@@ -252,10 +252,11 @@ public class HandsOn03Test extends UnitContainerTestCase {
 
         // ## Assert ##
         assertHasAnyElement(memberList);
-        // TODO wara プレゼンイベントやりましょう by jflute
+        // wara プレゼンイベントやりましょう by jflute
         // わらちゃんが、固まって並んでいることをチェックする画期的な機能を実装した。
         // 営業さんが、お客様に説明するときに「そんなことどうやってるの？」と聞かれそう。
         // 納得してもらうためにも、そのロジックを説明したいので営業さんに説明する。
+        // TODO wara プレゼンイベント２、リベンジ！ by jflute
         int count = 0;
         int count2 = 0;
         int count3 = 0;
@@ -288,6 +289,25 @@ public class HandsOn03Test extends UnitContainerTestCase {
             orderList.add(statusCode);
         }
         log(statusCode, count, count2, count3);
+        // こうしたかったんじゃない？ by jflute
+        //for (Member member : memberList) {
+        //    statusCode = member.getMemberStatusCode();
+        //    if (statusCode.equals("FML")) {
+        //        orderList.add(statusCode);
+        //        count--;
+        //        //assertFalse(count != 0);
+        //    } else if (count == 0 && statusCode.equals("WDL")) {
+        //        orderList.add(statusCode);
+        //        count2--;
+        //    } else if (count2 == 0 && statusCode.equals("PRV")) {
+        //        orderList.add(statusCode);
+        //        count3--;
+        //    }
+        //}
+        //log(statusCode, count, count2, count3);
+        //assertTrue(count == 0);
+        //assertTrue(count2 == 0);
+        //assertTrue(count3 == 0);
     }
 
     /**
@@ -399,7 +419,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
         // ## Arrange ##
         PurchaseCB cb = new PurchaseCB();
         // wara 増えない理由をしっかり考えて来ましょう by jflute
-        // TODO wara 増えない理由をここに書いてみて (漠然読みの成果) by jflute
+        // wara 増えない理由をここに書いてみて (漠然読みの成果) by jflute
         // 指定された範囲内でpurchase dateを持つ最初のメンバーをセレクトし、
         // そのメンバーのformalizedDatetimeに7日分足して更にもっとも新しい日付の23:59:999まで移動した日時に変更する。
         // その後、purchaseDatetimeに、変更後のfomalizedDatetimeを設定しする。
@@ -408,7 +428,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
         // formalizedDatetimeの時間が23:59:999でない限り、purchasedDatetimeが一週間以内に存在することはありません。
         // つまりformalizedDatetimeの時間から23:59:999までの時分秒が余分に足されている状態。
 
-        // TODO wara 絞り込み条件を変えて増やしてみましょう by jflute
+        // wara 絞り込み条件を変えて増やしてみましょう by jflute
         adjustPurchase_PurchaseDatetime_fromFormalizedDatetimeInWeek();
         cb.setupSelect_Member().withMemberSecurityAsOne();
         cb.setupSelect_Member().withMemberStatus();
@@ -440,6 +460,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
         ListResultBean<Purchase> purchaseList = purchaseBhv.selectList(cb);
 
         // ## Assert ##
+        // TODO wara 修正したら、テストをもう一回実行する習慣を by jflute
         assertHasAnyElement(purchaseList);
         for (Purchase purchase : purchaseList) {
             Product product = purchase.getProduct();
@@ -679,7 +700,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
         assertFalse(assertPageNumber);
         assertTrue(memberPageSize == 3);
         assertTrue(memberPageSize == pageSize);
-        // TODO wara 今回の場合は大丈夫だけど、割り切れる場合+1しないので、割り切れてなかったら+1するってロジックを by jflute
+        // wara 今回の場合は大丈夫だけど、割り切れる場合+1しないので、割り切れてなかったら+1するってロジックを by jflute
         if (selectRecordCount % memberPageSize == 0) {
             assertTrue(allPageCount == selectRecordCount / memberPageSize);
         } else {
