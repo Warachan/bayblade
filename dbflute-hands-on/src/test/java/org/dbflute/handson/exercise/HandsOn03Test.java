@@ -257,58 +257,84 @@ public class HandsOn03Test extends UnitContainerTestCase {
         // 営業さんが、お客様に説明するときに「そんなことどうやってるの？」と聞かれそう。
         // 納得してもらうためにも、そのロジックを説明したいので営業さんに説明する。
         // TODO wara プレゼンイベント２、リベンジ！ by jflute
-        int count = 0;
-        int count2 = 0;
-        int count3 = 0;
-        String statusCode = "";
-        ArrayList<String> orderList = new ArrayList<String>();
+        ArrayList<String> statusList = new ArrayList<String>();
+        boolean previousStatus = false;
         for (Member member : memberList) {
             // warachan 【直しました】IDがmemberIdにするのであれば、NAMEはmemberNameかな by jflute
-            String memberName = member.getMemberName();
-            Integer memberId = member.getMemberId();
             MemberStatus status = member.getMemberStatus();
+            String statusCode = member.getMemberStatusCode();
             assertNull(status);
-            statusCode = member.getMemberStatusCode();
-            if (statusCode.equals("FML")) {
-                count++;
-            } else if (statusCode.equals("WDL")) {
-                count2++;
-            } else if (statusCode.equals("PRV")) {
-                count3++;
+            log("Check : " + previousStatus);
+            if (statusList.isEmpty()) {
+                statusList.add(statusCode);
+                log("0　:　" + statusCode);
+            } else {
+                //                for (String order : orderList) {
+                String lastStatus = statusList.get(statusList.size() - 1);
+                if (!lastStatus.equals(statusCode)) {
+                    assertFalse(statusList.contains(statusCode));
+                    statusList.add(statusCode);
+                }
+                // 思い出
+                //                if (!lastStatus.equals(statusCode)) {
+                //                    if (statusList.contains(statusCode)) {
+                //                        log("2　:　" + lastStatus, statusCode);
+                //                        log("*********ERROR ERROR ERROR ERROR******************");
+                //                        previousStatus = true;
+                //                        assertFalse(previousStatus);
+                //                    } else {
+                //                        log("3　:　" + lastStatus, statusCode);
+                //                        log("orderList : " + statusList);
+                //                        statusList.add(statusCode);
+                //                    }
             }
-            log(memberName, memberId, statusCode);
         }
-        if (statusCode.equals("FML")) {
-            orderList.add(statusCode);
-            count--;
-            assertFalse(count != 0);
-        } else if (count == 0 && statusCode.equals("WDL")) {
-            orderList.add(statusCode);
-            count2--;
-        } else if (count2 == 0 && statusCode.equals("PRV")) {
-            orderList.add(statusCode);
-        }
-        log(statusCode, count, count2, count3);
-        // こうしたかったんじゃない？ by jflute
-        //for (Member member : memberList) {
-        //    statusCode = member.getMemberStatusCode();
-        //    if (statusCode.equals("FML")) {
-        //        orderList.add(statusCode);
-        //        count--;
-        //        //assertFalse(count != 0);
-        //    } else if (count == 0 && statusCode.equals("WDL")) {
-        //        orderList.add(statusCode);
-        //        count2--;
-        //    } else if (count2 == 0 && statusCode.equals("PRV")) {
-        //        orderList.add(statusCode);
-        //        count3--;
-        //    }
-        //}
-        //log(statusCode, count, count2, count3);
-        //assertTrue(count == 0);
-        //assertTrue(count2 == 0);
-        //assertTrue(count3 == 0);
     }
+
+    // 思い出
+    // String statusCode = "";
+    //            int count = 0;
+    //            int count2 = 0;
+    //            int count3 = 0;
+    //            statusCode = member.getMemberStatusCode();
+    //            if (statusCode.equals("FML")) {
+    //                count++;
+    //            } else if (statusCode.equals("WDL")) {
+    //                count2++;
+    //            } else if (statusCode.equals("PRV")) {
+    //                count3++;
+    //            }
+    //        }
+    //        if (statusCode.equals("FML")) {
+    //            orderList.add(statusCode);
+    //            count--;
+    //            assertFalse(count != 0);
+    //        } else if (count == 0 && statusCode.equals("WDL")) {
+    //            orderList.add(statusCode);
+    //            count2--;
+    //        } else if (count2 == 0 && statusCode.equals("PRV")) {
+    //            orderList.add(statusCode);
+    //        }
+    //        log(statusCode, count, count2, count3);
+    // こうしたかったんじゃない？ by jflute
+    //for (Member member : memberList) {
+    //    statusCode = member.getMemberStatusCode();
+    //    if (statusCode.equals("FML")) {
+    //        orderList.add(statusCode);
+    //        count--;
+    //        //assertFalse(count != 0);
+    //    } else if (count == 0 && statusCode.equals("WDL")) {
+    //        orderList.add(statusCode);
+    //        count2--;
+    //    } else if (count2 == 0 && statusCode.equals("PRV")) {
+    //        orderList.add(statusCode);
+    //        count3--;
+    //    }
+    //}
+    //log(statusCode, count, count2, count3);
+    //assertTrue(count == 0);
+    //assertTrue(count2 == 0);
+    //assertTrue(count3 == 0);
 
     /**
      *　☆Done
@@ -460,7 +486,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
         ListResultBean<Purchase> purchaseList = purchaseBhv.selectList(cb);
 
         // ## Assert ##
-        // TODO wara 修正したら、テストをもう一回実行する習慣を by jflute
+        // TODO 【増やしました】wara 修正したら、テストをもう一回実行する習慣を by jflute
         assertHasAnyElement(purchaseList);
         for (Purchase purchase : purchaseList) {
             Product product = purchase.getProduct();
@@ -468,16 +494,25 @@ public class HandsOn03Test extends UnitContainerTestCase {
             ProductCategory category = purchase.getProduct().getProductCategory();
             ProductCategory parentCategory = category.getProductCategorySelf();
             MemberStatus memberStatus = purchase.getMember().getMemberStatus();
-            Timestamp formalizedDatetime = purchase.getMember().getFormalizedDatetime();
-            Timestamp purchaseDatetime = purchase.getPurchaseDatetime();
-            long formalizeTime = formalizedDatetime.getTime();
-            long purchaseTime = purchaseDatetime.getTime();
-            long weekTime = 1000 * 60 * 60 * 24 * 7;
-            log(purchaseDatetime, formalizedDatetime, product.getProductName(), productStatus.getProductStatusName(),
-                    category.getProductCategoryName(), parentCategory.getProductCategoryName(),
-                    memberStatus.getMemberStatusName());
-            assertTrue(formalizeTime + weekTime >= purchaseTime && purchaseTime >= formalizeTime);
+            log(product.getProductName(), productStatus.getProductStatusName(), category.getProductCategoryName(),
+                    parentCategory.getProductCategoryName(), memberStatus.getMemberStatusName());
+
+            String forDateStr = purchase.getMember().getFormalizedDatetime().toString();
+            String purDateStr = purchase.getPurchaseDatetime().toString();
+            Date originalformalizedDate = new HandyDate(forDateStr).getDate();
+            Date handyformalizedDate = new HandyDate(forDateStr).addDay(8).getDate();
+            Date handyPurchaseDate = new HandyDate(purDateStr).getDate();
+            log(handyformalizedDate, handyPurchaseDate, originalformalizedDate);
+            assertTrue((handyPurchaseDate.after(originalformalizedDate) || handyPurchaseDate
+                    .equals(originalformalizedDate)) && handyPurchaseDate.before(handyformalizedDate));
             assertNotNull(parentCategory);
+            //            long formalizeTime = formalizedDatetime.getTime();
+            //            long purchaseTime = purchaseDatetime.getTime();
+            //            long weekTime = 1000 * 60 * 60 * 24 * 7;
+            //            log(purchaseDatetime, formalizedDatetime, product.getProductName(), productStatus.getProductStatusName(),
+            //                    category.getProductCategoryName(), parentCategory.getProductCategoryName(),
+            //                    memberStatus.getMemberStatusName());
+            //            assertTrue(formalizeTime + weekTime >= purchaseTime && purchaseTime >= formalizeTime);
         }
     }
 
@@ -754,10 +789,13 @@ public class HandsOn03Test extends UnitContainerTestCase {
                     for (String statusCode : statusList) {
                         log(statusCode, currentStatusCode);
                         if (statusCode.equals(currentStatusCode)) {
+                            log("1　:　" + statusCode);
                             assertFalse(previousStatus);
                         } else if (!(statusCode.equals(currentStatusCode)) && statusList.contains(currentStatusCode)) {
+                            log("2　:　" + statusCode);
                             previousStatus = true;
                         } else {
+                            log("3　:　" + statusCode);
                             log("*********************" + statusList);
                             statusList.add(currentStatusCode);
                         }
