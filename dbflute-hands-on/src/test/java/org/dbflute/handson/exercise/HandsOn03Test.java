@@ -273,28 +273,28 @@ public class HandsOn03Test extends UnitContainerTestCase {
                 if (!lastStatus.equals(currentStatus)) { // 違ったら
                     assertFalse(statusList.contains(currentStatus));
                 }
-                // おもいで (↑こうなった)
-                //if (!lastStatus.equals(statusCode)) {
-                //    assertFalse(statusList.contains(statusCode));
-                //    statusList.add(statusCode);
-                //} else if (lastStatus.equals(statusCode)) {
-                //    statusList.add(statusCode);
-                //}
-                // 思い出
-                // boolean error = false;
-                //                if (!lastStatus.equals(statusCode)) {
-                //                    if (statusList.contains(statusCode)) {
-                //                        log("2　:　" + lastStatus, statusCode);
-                //                        log("*********ERROR ERROR ERROR ERROR******************");
-                //                        error = true;
-                //                        assertFalse(previousStatus);
-                //                    } else {
-                //                        log("3　:　" + lastStatus, statusCode);
-                //                        log("orderList : " + statusList);
-                //                        statusList.add(statusCode);
-                //                    }
             }
             statusList.add(currentStatus);
+            // おもいで (↑こうなった)
+            //if (!lastStatus.equals(statusCode)) {
+            //    assertFalse(statusList.contains(statusCode));
+            //    statusList.add(statusCode);
+            //} else if (lastStatus.equals(statusCode)) {
+            //    statusList.add(statusCode);
+            //}
+            // 思い出
+            // boolean error = false;
+            //                if (!lastStatus.equals(statusCode)) {
+            //                    if (statusList.contains(statusCode)) {
+            //                        log("2　:　" + lastStatus, statusCode);
+            //                        log("*********ERROR ERROR ERROR ERROR******************");
+            //                        error = true;
+            //                        assertFalse(previousStatus);
+            //                    } else {
+            //                        log("3　:　" + lastStatus, statusCode);
+            //                        log("orderList : " + statusList);
+            //                        statusList.add(statusCode);
+            //                    }
         }
     }
 
@@ -785,8 +785,6 @@ public class HandsOn03Test extends UnitContainerTestCase {
         final List<String> statusList = new ArrayList<String>();
         memberBhv.selectCursor(cb, new EntityRowHandler<Member>() {
             // 【消しましたー】wara ここはインスタンス変数だから、デフォルトがfalseなので、= false なしでいいよ by jflute
-            private boolean previousStatus;
-
             public void handle(Member entity) {
                 // wara スコープ短いし、statusって短い名前にしちゃおう。というか、entity.getMemberStatus()二回やってる!? by jflute
                 // 【→　for文の中のstatusとかぶってしまうので一旦保留しています。】
@@ -796,31 +794,40 @@ public class HandsOn03Test extends UnitContainerTestCase {
                 assertNotNull(entity);
                 MemberStatus status = entity.getMemberStatus();
                 assertNotNull(status);
-                String currentStatusCode = status.getMemberStatusCode();
-                if (statusList.isEmpty()) {
-                    statusList.add(currentStatusCode);
-                } else {
-                    for (String statusCode : statusList) {
-                        log(statusCode, currentStatusCode);
-                        if (statusCode.equals(currentStatusCode)) {
-                            log("1　:　" + statusCode);
-                            assertFalse(previousStatus);
-                        } else if (!(statusCode.equals(currentStatusCode)) && statusList.contains(currentStatusCode)) {
-                            log("2　:　" + statusCode);
-                            previousStatus = true;
-                        } else {
-                            log("3　:　" + statusCode);
-                            log("*********************" + statusList);
-                            statusList.add(currentStatusCode);
-                        }
-                        break;
+                String currentStatus = status.getMemberStatusCode();
+                if (!statusList.isEmpty()) { // 2ループ目以降
+                    // 思い出
+                    //                for (String order : orderList) {
+                    log(statusList.size());
+                    String lastStatus = statusList.get(statusList.size() - 1);
+                    if (!lastStatus.equals(currentStatus)) { // 違ったら
+                        assertFalse(statusList.contains(currentStatus));
                     }
                 }
+                statusList.add(currentStatus);
             }
         });
         assertHasAnyElement(statusList);
     }
-
-    // TODO wara 読み物課題 by jflute 
-    // http://dbflute.seasar.org/ja/manual/function/ormapper/conditionbean/sidebar/innerjoinautodetect.html
 }
+//                if (statusList.isEmpty()) {
+//                    statusList.add(currentStatusCode);
+//                } else {
+//                    for (String statusCode : statusList) {
+//                        log(statusCode, currentStatusCode);
+//                        if (statusCode.equals(currentStatusCode)) {
+//                            log("1　:　" + statusCode);
+//                            assertFalse(previousStatus);
+//                        } else if (!(statusCode.equals(currentStatusCode)) && statusList.contains(currentStatusCode)) {
+//                            log("2　:　" + statusCode);
+//                            previousStatus = true;
+//                        } else {
+//                            log("3　:　" + statusCode);
+//                            log("*********************" + statusList);
+//                            statusList.add(currentStatusCode);
+//                        }
+//                        break;
+//                    }
+
+// TODO wara 読み物課題 by jflute
+// http://dbflute.seasar.org/ja/manual/function/ormapper/conditionbean/sidebar/innerjoinautodetect.html
