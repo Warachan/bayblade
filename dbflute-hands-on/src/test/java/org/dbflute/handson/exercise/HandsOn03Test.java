@@ -258,17 +258,18 @@ public class HandsOn03Test extends UnitContainerTestCase {
         // 納得してもらうためにも、そのロジックを説明したいので営業さんに説明する。
         // TODO wara プレゼンイベント２、リベンジ！ by jflute
         ArrayList<String> statusList = new ArrayList<String>();
-        boolean previousStatus = false;
+        boolean error = false;
         for (Member member : memberList) {
             // warachan 【直しました】IDがmemberIdにするのであれば、NAMEはmemberNameかな by jflute
             MemberStatus status = member.getMemberStatus();
             String statusCode = member.getMemberStatusCode();
             assertNull(status);
-            log("Check : " + previousStatus);
+            log("Check : " + error);
             if (statusList.isEmpty()) {
                 statusList.add(statusCode);
                 log("0　:　" + statusCode);
             } else {
+                // 思い出
                 //                for (String order : orderList) {
                 String lastStatus = statusList.get(statusList.size() - 1);
                 if (!lastStatus.equals(statusCode)) {
@@ -422,7 +423,6 @@ public class HandsOn03Test extends UnitContainerTestCase {
             // 【修正したつもりでございます】wara 10/01ぴったりが入らないでございます by jflute
             // 【微妙ですみません。。。まだしっくりくるものを考えられていないです。】wara 「10/01とぴったり同じ、もしくは、10/04 より前」ってロジック変じゃない？(。´･ω･)? by jflute
             assertTrue(datetime.after(assertBeginDate) && datetime.before(assertEndDate));
-
             // もし、assertBeginDateが10/1だったら、こんなかんじだよーん by jflute
             assertTrue((datetime.after(assertBeginDate) || datetime.equals(assertBeginDate))
                     && datetime.before(assertEndDate));
@@ -488,12 +488,15 @@ public class HandsOn03Test extends UnitContainerTestCase {
         // ## Assert ##
         // TODO 【増やしました】wara 修正したら、テストをもう一回実行する習慣を by jflute
         assertHasAnyElement(purchaseList);
+
         for (Purchase purchase : purchaseList) {
             Product product = purchase.getProduct();
             ProductStatus productStatus = purchase.getProduct().getProductStatus();
             ProductCategory category = purchase.getProduct().getProductCategory();
             ProductCategory parentCategory = category.getProductCategorySelf();
+
             MemberStatus memberStatus = purchase.getMember().getMemberStatus();
+
             log(product.getProductName(), productStatus.getProductStatusName(), category.getProductCategoryName(),
                     parentCategory.getProductCategoryName(), memberStatus.getMemberStatusName());
 
@@ -502,10 +505,13 @@ public class HandsOn03Test extends UnitContainerTestCase {
             Date originalformalizedDate = new HandyDate(forDateStr).getDate();
             Date handyformalizedDate = new HandyDate(forDateStr).addDay(8).getDate();
             Date handyPurchaseDate = new HandyDate(purDateStr).getDate();
+
             log(handyformalizedDate, handyPurchaseDate, originalformalizedDate);
+
             assertTrue((handyPurchaseDate.after(originalformalizedDate) || handyPurchaseDate
                     .equals(originalformalizedDate)) && handyPurchaseDate.before(handyformalizedDate));
             assertNotNull(parentCategory);
+            // 思い出
             //            long formalizeTime = formalizedDatetime.getTime();
             //            long purchaseTime = purchaseDatetime.getTime();
             //            long weekTime = 1000 * 60 * 60 * 24 * 7;
@@ -555,6 +561,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
 
         // ## Assert ##
         assertHasAnyElement(memberList);
+
         Date assertDate = inputHandy.moveToYearTerminal().getDate();
         Date assertFirstDate = new HandyDate(input).addDay(-1).getDate(); // e.g. 1973/12/31
         Date assertLastDate = new HandyDate(assertDate).addDay(1).getDate(); // e.g. 1975/01/01
