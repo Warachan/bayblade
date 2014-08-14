@@ -258,30 +258,32 @@ public class HandsOn03Test extends UnitContainerTestCase {
         // 納得してもらうためにも、そのロジックを説明したいので営業さんに説明する。
         // TODO wara プレゼンイベント２、リベンジ！ by jflute
         ArrayList<String> statusList = new ArrayList<String>();
-        boolean error = false;
         for (Member member : memberList) {
             // warachan 【直しました】IDがmemberIdにするのであれば、NAMEはmemberNameかな by jflute
             MemberStatus status = member.getMemberStatus();
             String statusCode = member.getMemberStatusCode();
             assertNull(status);
-            log("Check : " + error);
             if (statusList.isEmpty()) {
                 statusList.add(statusCode);
                 log("0　:　" + statusCode);
             } else {
                 // 思い出
                 //                for (String order : orderList) {
+                log(statusList.size());
                 String lastStatus = statusList.get(statusList.size() - 1);
                 if (!lastStatus.equals(statusCode)) {
                     assertFalse(statusList.contains(statusCode));
                     statusList.add(statusCode);
+                } else if (lastStatus.equals(statusCode)) {
+                    statusList.add(statusCode);
                 }
                 // 思い出
+                // boolean error = false;
                 //                if (!lastStatus.equals(statusCode)) {
                 //                    if (statusList.contains(statusCode)) {
                 //                        log("2　:　" + lastStatus, statusCode);
                 //                        log("*********ERROR ERROR ERROR ERROR******************");
-                //                        previousStatus = true;
+                //                        error = true;
                 //                        assertFalse(previousStatus);
                 //                    } else {
                 //                        log("3　:　" + lastStatus, statusCode);
