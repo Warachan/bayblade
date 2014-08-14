@@ -256,27 +256,30 @@ public class HandsOn03Test extends UnitContainerTestCase {
         // わらちゃんが、固まって並んでいることをチェックする画期的な機能を実装した。
         // 営業さんが、お客様に説明するときに「そんなことどうやってるの？」と聞かれそう。
         // 納得してもらうためにも、そのロジックを説明したいので営業さんに説明する。
-        // TODO wara プレゼンイベント２、リベンジ！ by jflute
-        ArrayList<String> statusList = new ArrayList<String>();
+        // wara プレゼンイベント２、リベンジ！ by jflute
+        // 一個前というのを、String previousStatusとするやり方もあるよ by jflute
+        // すると、ListじゃなくてSetでもOKになる by jflute
+        List<String> statusList = new ArrayList<String>();
         for (Member member : memberList) {
             // warachan 【直しました】IDがmemberIdにするのであれば、NAMEはmemberNameかな by jflute
             MemberStatus status = member.getMemberStatus();
-            String statusCode = member.getMemberStatusCode();
             assertNull(status);
-            if (statusList.isEmpty()) {
-                statusList.add(statusCode);
-                log("0　:　" + statusCode);
-            } else {
+            String currentStatus = member.getMemberStatusCode();
+            if (!statusList.isEmpty()) { // 2ループ目以降
                 // 思い出
                 //                for (String order : orderList) {
                 log(statusList.size());
                 String lastStatus = statusList.get(statusList.size() - 1);
-                if (!lastStatus.equals(statusCode)) {
-                    assertFalse(statusList.contains(statusCode));
-                    statusList.add(statusCode);
-                } else if (lastStatus.equals(statusCode)) {
-                    statusList.add(statusCode);
+                if (!lastStatus.equals(currentStatus)) { // 違ったら
+                    assertFalse(statusList.contains(currentStatus));
                 }
+                // おもいで (↑こうなった)
+                //if (!lastStatus.equals(statusCode)) {
+                //    assertFalse(statusList.contains(statusCode));
+                //    statusList.add(statusCode);
+                //} else if (lastStatus.equals(statusCode)) {
+                //    statusList.add(statusCode);
+                //}
                 // 思い出
                 // boolean error = false;
                 //                if (!lastStatus.equals(statusCode)) {
@@ -291,6 +294,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
                 //                        statusList.add(statusCode);
                 //                    }
             }
+            statusList.add(currentStatus);
         }
     }
 
@@ -488,7 +492,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
         ListResultBean<Purchase> purchaseList = purchaseBhv.selectList(cb);
 
         // ## Assert ##
-        // TODO 【増やしました】wara 修正したら、テストをもう一回実行する習慣を by jflute
+        // 【増やしました】wara 修正したら、テストをもう一回実行する習慣を by jflute
         assertHasAnyElement(purchaseList);
 
         for (Purchase purchase : purchaseList) {
@@ -766,7 +770,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
      */
     public void test_cursor() throws Exception {
         // ## Arrange ##
-        // TODO wara カーソル検索の小話後半どこかで by jflute
+        // wara カーソル検索の小話後半どこかで by jflute
         MemberCB cb = new MemberCB();
         cb.setupSelect_MemberStatus();
         // 【すみません、そのとおりでございます。】wara ？？？バラバラに並べるのに試したまんまコミットしちゃったかな？ by jflute
@@ -774,6 +778,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
         cb.query().addOrderBy_MemberId_Desc();
 
         // ## Act ##
+        // TODO wara リファクタリングしてみて by jflute
         // 【つけましたー】wara private付けちゃおう。ここはインスタンス変数だから by jflute
         // 【Listにしましたー】wara 受けの型はインターフェース型を習慣に。つまり、List<String> by jflute
         // finalは、statusListの中のインスタンスを差し替えることができないだけで、そのインスタンスが保持している変数は別に変更できる
@@ -815,4 +820,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
         });
         assertHasAnyElement(statusList);
     }
+
+    // TODO wara 読み物課題 by jflute 
+    // http://dbflute.seasar.org/ja/manual/function/ormapper/conditionbean/sidebar/innerjoinautodetect.html
 }
