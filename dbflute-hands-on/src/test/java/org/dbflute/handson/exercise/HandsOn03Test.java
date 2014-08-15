@@ -778,7 +778,7 @@ public class HandsOn03Test extends UnitContainerTestCase {
         cb.query().addOrderBy_MemberId_Desc();
 
         // ## Act ##
-        // TODO wara リファクタリングしてみて by jflute
+        // wara リファクタリングしてみて by jflute
         // 【つけましたー】wara private付けちゃおう。ここはインスタンス変数だから by jflute
         // 【Listにしましたー】wara 受けの型はインターフェース型を習慣に。つまり、List<String> by jflute
         // finalは、statusListの中のインスタンスを差し替えることができないだけで、そのインスタンスが保持している変数は別に変更できる
@@ -829,5 +829,6 @@ public class HandsOn03Test extends UnitContainerTestCase {
 //                        break;
 //                    }
 
-// TODO wara 読み物課題 by jflute
+// wara 読み物課題 by jflute
 // http://dbflute.seasar.org/ja/manual/function/ormapper/conditionbean/sidebar/innerjoinautodetect.html
+// 理解しました by jflute
