@@ -79,7 +79,7 @@ public class BsRegionCB extends AbstractConditionBean {
     //                                                                 ===================
     /**
      * Accept the query condition of primary key as equal.
-     * @param regionId : PK, NotNull, INT(10). (NotNull)
+     * @param regionId : PK, NotNull, INT(10), classification=Region. (NotNull)
      * @return this. (NotNull)
      */
     public RegionCB acceptPK(Integer regionId) {
@@ -91,7 +91,7 @@ public class BsRegionCB extends AbstractConditionBean {
 
     /**
      * Accept the query condition of primary key as equal. (old style)
-     * @param regionId : PK, NotNull, INT(10). (NotNull)
+     * @param regionId : PK, NotNull, INT(10), classification=Region. (NotNull)
      */
     public void acceptPrimaryKey(Integer regionId) {
         assertObjectNotNull("regionId", regionId);
@@ -306,7 +306,7 @@ public class BsRegionCB extends AbstractConditionBean {
                              , HpCBPurpose purpose, DBMetaProvider dbmetaProvider)
         { super(baseCB, qyCall, purpose, dbmetaProvider); }
         /**
-         * REGION_ID: {PK, NotNull, INT(10)}
+         * REGION_ID: {PK, NotNull, INT(10), classification=Region}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnRegionId() { return doColumn("REGION_ID"); }

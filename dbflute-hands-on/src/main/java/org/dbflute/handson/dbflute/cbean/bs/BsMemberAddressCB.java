@@ -394,7 +394,7 @@ public class BsMemberAddressCB extends AbstractConditionBean {
          */
         public HpSpecifiedColumn columnAddress() { return doColumn("ADDRESS"); }
         /**
-         * REGION_ID: {IX, NotNull, INT(10), FK to region}
+         * REGION_ID: {IX, NotNull, INT(10), FK to region, classification=Region}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnRegionId() { return doColumn("REGION_ID"); }

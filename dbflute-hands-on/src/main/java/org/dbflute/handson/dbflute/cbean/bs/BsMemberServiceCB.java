@@ -363,7 +363,7 @@ public class BsMemberServiceCB extends AbstractConditionBean {
          */
         public HpSpecifiedColumn columnAkirakaniOkashiiKaramuMei() { return doColumn("AKIRAKANI_OKASHII_KARAMU_MEI"); }
         /**
-         * SERVICE_RANK_CODE: {IX, NotNull, CHAR(3), FK to service_rank}
+         * SERVICE_RANK_CODE: {IX, NotNull, CHAR(3), FK to service_rank, classification=ServiceRank}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnServiceRankCode() { return doColumn("SERVICE_RANK_CODE"); }

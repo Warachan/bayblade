@@ -193,7 +193,7 @@ public abstract class BsMemberStatusBhv extends AbstractBehaviorWritable {
 
     /**
      * Select the entity by the primary-key value.
-     * @param memberStatusCode : PK, NotNull, CHAR(3). (NotNull)
+     * @param memberStatusCode : PK, NotNull, CHAR(3), classification=MemberStatus. (NotNull)
      * @return The entity selected by the PK. (NullAllowed: if no data, it returns null)
      * @exception EntityDuplicatedException When the entity has been duplicated.
      * @exception SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
@@ -216,7 +216,7 @@ public abstract class BsMemberStatusBhv extends AbstractBehaviorWritable {
 
     /**
      * Select the entity by the primary-key value with deleted check.
-     * @param memberStatusCode : PK, NotNull, CHAR(3). (NotNull)
+     * @param memberStatusCode : PK, NotNull, CHAR(3), classification=MemberStatus. (NotNull)
      * @return The entity selected by the PK. (NotNull: if no data, throws exception)
      * @exception EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @exception EntityDuplicatedException When the entity has been duplicated.

@@ -358,7 +358,7 @@ public class BsMemberWithdrawalCB extends AbstractConditionBean {
          */
         public HpSpecifiedColumn columnMemberId() { return doColumn("MEMBER_ID"); }
         /**
-         * WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason}
+         * WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason, classification=WithdrawalReason}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnWithdrawalReasonCode() { return doColumn("WITHDRAWAL_REASON_CODE"); }

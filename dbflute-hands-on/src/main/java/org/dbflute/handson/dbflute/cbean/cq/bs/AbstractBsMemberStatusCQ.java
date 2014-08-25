@@ -47,11 +47,45 @@ public abstract class AbstractBsMemberStatusCQ extends AbstractConditionQuery {
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
-     * MEMBER_STATUS_CODE: {PK, NotNull, CHAR(3)}
+     * MEMBER_STATUS_CODE: {PK, NotNull, CHAR(3), classification=MemberStatus}
      * @param memberStatusCode The value of memberStatusCode as equal. (NullAllowed: if null (or empty), no condition)
      */
     public void setMemberStatusCode_Equal(String memberStatusCode) {
         doSetMemberStatusCode_Equal(fRES(memberStatusCode));
+    }
+
+    /**
+     * Equal(=). As MemberStatus. And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
+     * MEMBER_STATUS_CODE: {PK, NotNull, CHAR(3), classification=MemberStatus} <br />
+     * 入会から退会までの会員のステータスを示す
+     * @param cdef The instance of classification definition (as ENUM type). (NullAllowed: if null, no condition)
+     */
+    public void setMemberStatusCode_Equal_AsMemberStatus(CDef.MemberStatus cdef) {
+        doSetMemberStatusCode_Equal(cdef != null ? cdef.code() : null);
+    }
+
+    /**
+     * Equal(=). As 正式会員 (FML). And OnlyOnceRegistered. <br />
+     * 正式会員: 正式な会員としてサイトサービスが利用可能
+     */
+    public void setMemberStatusCode_Equal_正式会員() {
+        setMemberStatusCode_Equal_AsMemberStatus(CDef.MemberStatus.正式会員);
+    }
+
+    /**
+     * Equal(=). As 退会会員 (WDL). And OnlyOnceRegistered. <br />
+     * 退会会員: 退会が確定した会員でサイトサービスはダメ
+     */
+    public void setMemberStatusCode_Equal_退会会員() {
+        setMemberStatusCode_Equal_AsMemberStatus(CDef.MemberStatus.退会会員);
+    }
+
+    /**
+     * Equal(=). As 仮会員 (PRV). And OnlyOnceRegistered. <br />
+     * 仮会員: 入会直後のステータスで一部のサイトサービスが利用可能
+     */
+    public void setMemberStatusCode_Equal_仮会員() {
+        setMemberStatusCode_Equal_AsMemberStatus(CDef.MemberStatus.仮会員);
     }
 
     protected void doSetMemberStatusCode_Equal(String memberStatusCode) {
@@ -60,11 +94,45 @@ public abstract class AbstractBsMemberStatusCQ extends AbstractConditionQuery {
 
     /**
      * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
-     * MEMBER_STATUS_CODE: {PK, NotNull, CHAR(3)}
+     * MEMBER_STATUS_CODE: {PK, NotNull, CHAR(3), classification=MemberStatus}
      * @param memberStatusCode The value of memberStatusCode as notEqual. (NullAllowed: if null (or empty), no condition)
      */
     public void setMemberStatusCode_NotEqual(String memberStatusCode) {
         doSetMemberStatusCode_NotEqual(fRES(memberStatusCode));
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). As MemberStatus. And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
+     * MEMBER_STATUS_CODE: {PK, NotNull, CHAR(3), classification=MemberStatus} <br />
+     * 入会から退会までの会員のステータスを示す
+     * @param cdef The instance of classification definition (as ENUM type). (NullAllowed: if null, no condition)
+     */
+    public void setMemberStatusCode_NotEqual_AsMemberStatus(CDef.MemberStatus cdef) {
+        doSetMemberStatusCode_NotEqual(cdef != null ? cdef.code() : null);
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). As 正式会員 (FML). And OnlyOnceRegistered. <br />
+     * 正式会員: 正式な会員としてサイトサービスが利用可能
+     */
+    public void setMemberStatusCode_NotEqual_正式会員() {
+        setMemberStatusCode_NotEqual_AsMemberStatus(CDef.MemberStatus.正式会員);
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). As 退会会員 (WDL). And OnlyOnceRegistered. <br />
+     * 退会会員: 退会が確定した会員でサイトサービスはダメ
+     */
+    public void setMemberStatusCode_NotEqual_退会会員() {
+        setMemberStatusCode_NotEqual_AsMemberStatus(CDef.MemberStatus.退会会員);
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). As 仮会員 (PRV). And OnlyOnceRegistered. <br />
+     * 仮会員: 入会直後のステータスで一部のサイトサービスが利用可能
+     */
+    public void setMemberStatusCode_NotEqual_仮会員() {
+        setMemberStatusCode_NotEqual_AsMemberStatus(CDef.MemberStatus.仮会員);
     }
 
     protected void doSetMemberStatusCode_NotEqual(String memberStatusCode) {
@@ -72,48 +140,22 @@ public abstract class AbstractBsMemberStatusCQ extends AbstractConditionQuery {
     }
 
     /**
-     * GreaterThan(&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
-     * MEMBER_STATUS_CODE: {PK, NotNull, CHAR(3)}
-     * @param memberStatusCode The value of memberStatusCode as greaterThan. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setMemberStatusCode_GreaterThan(String memberStatusCode) {
-        regMemberStatusCode(CK_GT, fRES(memberStatusCode));
-    }
-
-    /**
-     * LessThan(&lt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
-     * MEMBER_STATUS_CODE: {PK, NotNull, CHAR(3)}
-     * @param memberStatusCode The value of memberStatusCode as lessThan. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setMemberStatusCode_LessThan(String memberStatusCode) {
-        regMemberStatusCode(CK_LT, fRES(memberStatusCode));
-    }
-
-    /**
-     * GreaterEqual(&gt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
-     * MEMBER_STATUS_CODE: {PK, NotNull, CHAR(3)}
-     * @param memberStatusCode The value of memberStatusCode as greaterEqual. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setMemberStatusCode_GreaterEqual(String memberStatusCode) {
-        regMemberStatusCode(CK_GE, fRES(memberStatusCode));
-    }
-
-    /**
-     * LessEqual(&lt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
-     * MEMBER_STATUS_CODE: {PK, NotNull, CHAR(3)}
-     * @param memberStatusCode The value of memberStatusCode as lessEqual. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setMemberStatusCode_LessEqual(String memberStatusCode) {
-        regMemberStatusCode(CK_LE, fRES(memberStatusCode));
-    }
-
-    /**
      * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br />
-     * MEMBER_STATUS_CODE: {PK, NotNull, CHAR(3)}
+     * MEMBER_STATUS_CODE: {PK, NotNull, CHAR(3), classification=MemberStatus}
      * @param memberStatusCodeList The collection of memberStatusCode as inScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setMemberStatusCode_InScope(Collection<String> memberStatusCodeList) {
         doSetMemberStatusCode_InScope(memberStatusCodeList);
+    }
+
+    /**
+     * InScope {in ('a', 'b')}. As MemberStatus. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br />
+     * MEMBER_STATUS_CODE: {PK, NotNull, CHAR(3), classification=MemberStatus} <br />
+     * 入会から退会までの会員のステータスを示す
+     * @param cdefList The list of classification definition (as ENUM type). (NullAllowed: if null (or empty), no condition)
+     */
+    public void setMemberStatusCode_InScope_AsMemberStatus(Collection<CDef.MemberStatus> cdefList) {
+        doSetMemberStatusCode_InScope(cTStrL(cdefList));
     }
 
     public void doSetMemberStatusCode_InScope(Collection<String> memberStatusCodeList) {
@@ -122,46 +164,25 @@ public abstract class AbstractBsMemberStatusCQ extends AbstractConditionQuery {
 
     /**
      * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br />
-     * MEMBER_STATUS_CODE: {PK, NotNull, CHAR(3)}
+     * MEMBER_STATUS_CODE: {PK, NotNull, CHAR(3), classification=MemberStatus}
      * @param memberStatusCodeList The collection of memberStatusCode as notInScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setMemberStatusCode_NotInScope(Collection<String> memberStatusCodeList) {
         doSetMemberStatusCode_NotInScope(memberStatusCodeList);
     }
 
+    /**
+     * NotInScope {not in ('a', 'b')}. As MemberStatus. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br />
+     * MEMBER_STATUS_CODE: {PK, NotNull, CHAR(3), classification=MemberStatus} <br />
+     * 入会から退会までの会員のステータスを示す
+     * @param cdefList The list of classification definition (as ENUM type). (NullAllowed: if null (or empty), no condition)
+     */
+    public void setMemberStatusCode_NotInScope_AsMemberStatus(Collection<CDef.MemberStatus> cdefList) {
+        doSetMemberStatusCode_NotInScope(cTStrL(cdefList));
+    }
+
     public void doSetMemberStatusCode_NotInScope(Collection<String> memberStatusCodeList) {
         regINS(CK_NINS, cTL(memberStatusCodeList), getCValueMemberStatusCode(), "MEMBER_STATUS_CODE");
-    }
-
-    /**
-     * PrefixSearch {like 'xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br />
-     * MEMBER_STATUS_CODE: {PK, NotNull, CHAR(3)}
-     * @param memberStatusCode The value of memberStatusCode as prefixSearch. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setMemberStatusCode_PrefixSearch(String memberStatusCode) {
-        setMemberStatusCode_LikeSearch(memberStatusCode, cLSOP());
-    }
-
-    /**
-     * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br />
-     * MEMBER_STATUS_CODE: {PK, NotNull, CHAR(3)} <br />
-     * <pre>e.g. setMemberStatusCode_LikeSearch("xxx", new <span style="color: #DD4747">LikeSearchOption</span>().likeContain());</pre>
-     * @param memberStatusCode The value of memberStatusCode as likeSearch. (NullAllowed: if null (or empty), no condition)
-     * @param likeSearchOption The option of like-search. (NotNull)
-     */
-    public void setMemberStatusCode_LikeSearch(String memberStatusCode, LikeSearchOption likeSearchOption) {
-        regLSQ(CK_LS, fRES(memberStatusCode), getCValueMemberStatusCode(), "MEMBER_STATUS_CODE", likeSearchOption);
-    }
-
-    /**
-     * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br />
-     * And NullOrEmptyIgnored, SeveralRegistered. <br />
-     * MEMBER_STATUS_CODE: {PK, NotNull, CHAR(3)}
-     * @param memberStatusCode The value of memberStatusCode as notLikeSearch. (NullAllowed: if null (or empty), no condition)
-     * @param likeSearchOption The option of not-like-search. (NotNull)
-     */
-    public void setMemberStatusCode_NotLikeSearch(String memberStatusCode, LikeSearchOption likeSearchOption) {
-        regLSQ(CK_NLS, fRES(memberStatusCode), getCValueMemberStatusCode(), "MEMBER_STATUS_CODE", likeSearchOption);
     }
 
     /**
@@ -400,13 +421,13 @@ public abstract class AbstractBsMemberStatusCQ extends AbstractConditionQuery {
 
     /**
      * IsNull {is null}. And OnlyOnceRegistered. <br />
-     * MEMBER_STATUS_CODE: {PK, NotNull, CHAR(3)}
+     * MEMBER_STATUS_CODE: {PK, NotNull, CHAR(3), classification=MemberStatus}
      */
     public void setMemberStatusCode_IsNull() { regMemberStatusCode(CK_ISN, DOBJ); }
 
     /**
      * IsNotNull {is not null}. And OnlyOnceRegistered. <br />
-     * MEMBER_STATUS_CODE: {PK, NotNull, CHAR(3)}
+     * MEMBER_STATUS_CODE: {PK, NotNull, CHAR(3), classification=MemberStatus}
      */
     public void setMemberStatusCode_IsNotNull() { regMemberStatusCode(CK_ISNN, DOBJ); }
 

@@ -571,11 +571,53 @@ public abstract class AbstractBsMemberAddressCQ extends AbstractConditionQuery {
     
     /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br />
-     * REGION_ID: {IX, NotNull, INT(10), FK to region}
+     * REGION_ID: {IX, NotNull, INT(10), FK to region, classification=Region}
      * @param regionId The value of regionId as equal. (NullAllowed: if null, no condition)
      */
     public void setRegionId_Equal(Integer regionId) {
         doSetRegionId_Equal(regionId);
+    }
+
+    /**
+     * Equal(=). As Region. And NullIgnored, OnlyOnceRegistered. <br />
+     * REGION_ID: {IX, NotNull, INT(10), FK to region, classification=Region} <br />
+     * 主に会員の住んでいる地域を示す
+     * @param cdef The instance of classification definition (as ENUM type). (NullAllowed: if null, no condition)
+     */
+    public void setRegionId_Equal_AsRegion(CDef.Region cdef) {
+        doSetRegionId_Equal(cTNum(cdef != null ? cdef.code() : null, Integer.class));
+    }
+
+    /**
+     * Equal(=). As アメリカ (1). And NullIgnored, OnlyOnceRegistered. <br />
+     * アメリカ
+     */
+    public void setRegionId_Equal_アメリカ() {
+        setRegionId_Equal_AsRegion(CDef.Region.アメリカ);
+    }
+
+    /**
+     * Equal(=). As カナダ (2). And NullIgnored, OnlyOnceRegistered. <br />
+     * カナダ
+     */
+    public void setRegionId_Equal_カナダ() {
+        setRegionId_Equal_AsRegion(CDef.Region.カナダ);
+    }
+
+    /**
+     * Equal(=). As 中国 (3). And NullIgnored, OnlyOnceRegistered. <br />
+     * 中国
+     */
+    public void setRegionId_Equal_中国() {
+        setRegionId_Equal_AsRegion(CDef.Region.中国);
+    }
+
+    /**
+     * Equal(=). As 千葉 (4). And NullIgnored, OnlyOnceRegistered. <br />
+     * 千葉
+     */
+    public void setRegionId_Equal_千葉() {
+        setRegionId_Equal_AsRegion(CDef.Region.千葉);
     }
 
     protected void doSetRegionId_Equal(Integer regionId) {
@@ -584,11 +626,53 @@ public abstract class AbstractBsMemberAddressCQ extends AbstractConditionQuery {
 
     /**
      * NotEqual(&lt;&gt;). And NullIgnored, OnlyOnceRegistered. <br />
-     * REGION_ID: {IX, NotNull, INT(10), FK to region}
+     * REGION_ID: {IX, NotNull, INT(10), FK to region, classification=Region}
      * @param regionId The value of regionId as notEqual. (NullAllowed: if null, no condition)
      */
     public void setRegionId_NotEqual(Integer regionId) {
         doSetRegionId_NotEqual(regionId);
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). As Region. And NullIgnored, OnlyOnceRegistered. <br />
+     * REGION_ID: {IX, NotNull, INT(10), FK to region, classification=Region} <br />
+     * 主に会員の住んでいる地域を示す
+     * @param cdef The instance of classification definition (as ENUM type). (NullAllowed: if null, no condition)
+     */
+    public void setRegionId_NotEqual_AsRegion(CDef.Region cdef) {
+        doSetRegionId_NotEqual(cTNum(cdef != null ? cdef.code() : null, Integer.class));
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). As アメリカ (1). And NullIgnored, OnlyOnceRegistered. <br />
+     * アメリカ
+     */
+    public void setRegionId_NotEqual_アメリカ() {
+        setRegionId_NotEqual_AsRegion(CDef.Region.アメリカ);
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). As カナダ (2). And NullIgnored, OnlyOnceRegistered. <br />
+     * カナダ
+     */
+    public void setRegionId_NotEqual_カナダ() {
+        setRegionId_NotEqual_AsRegion(CDef.Region.カナダ);
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). As 中国 (3). And NullIgnored, OnlyOnceRegistered. <br />
+     * 中国
+     */
+    public void setRegionId_NotEqual_中国() {
+        setRegionId_NotEqual_AsRegion(CDef.Region.中国);
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). As 千葉 (4). And NullIgnored, OnlyOnceRegistered. <br />
+     * 千葉
+     */
+    public void setRegionId_NotEqual_千葉() {
+        setRegionId_NotEqual_AsRegion(CDef.Region.千葉);
     }
 
     protected void doSetRegionId_NotEqual(Integer regionId) {
@@ -596,61 +680,22 @@ public abstract class AbstractBsMemberAddressCQ extends AbstractConditionQuery {
     }
 
     /**
-     * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br />
-     * REGION_ID: {IX, NotNull, INT(10), FK to region}
-     * @param regionId The value of regionId as greaterThan. (NullAllowed: if null, no condition)
-     */
-    public void setRegionId_GreaterThan(Integer regionId) {
-        regRegionId(CK_GT, regionId);
-    }
-
-    /**
-     * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br />
-     * REGION_ID: {IX, NotNull, INT(10), FK to region}
-     * @param regionId The value of regionId as lessThan. (NullAllowed: if null, no condition)
-     */
-    public void setRegionId_LessThan(Integer regionId) {
-        regRegionId(CK_LT, regionId);
-    }
-
-    /**
-     * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br />
-     * REGION_ID: {IX, NotNull, INT(10), FK to region}
-     * @param regionId The value of regionId as greaterEqual. (NullAllowed: if null, no condition)
-     */
-    public void setRegionId_GreaterEqual(Integer regionId) {
-        regRegionId(CK_GE, regionId);
-    }
-
-    /**
-     * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br />
-     * REGION_ID: {IX, NotNull, INT(10), FK to region}
-     * @param regionId The value of regionId as lessEqual. (NullAllowed: if null, no condition)
-     */
-    public void setRegionId_LessEqual(Integer regionId) {
-        regRegionId(CK_LE, regionId);
-    }
-
-    /**
-     * RangeOf with various options. (versatile) <br />
-     * {(default) minNumber &lt;= column &lt;= maxNumber} <br />
-     * And NullIgnored, OnlyOnceRegistered. <br />
-     * REGION_ID: {IX, NotNull, INT(10), FK to region}
-     * @param minNumber The min number of regionId. (NullAllowed: if null, no from-condition)
-     * @param maxNumber The max number of regionId. (NullAllowed: if null, no to-condition)
-     * @param rangeOfOption The option of range-of. (NotNull)
-     */
-    public void setRegionId_RangeOf(Integer minNumber, Integer maxNumber, RangeOfOption rangeOfOption) {
-        regROO(minNumber, maxNumber, getCValueRegionId(), "REGION_ID", rangeOfOption);
-    }
-
-    /**
      * InScope {in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br />
-     * REGION_ID: {IX, NotNull, INT(10), FK to region}
+     * REGION_ID: {IX, NotNull, INT(10), FK to region, classification=Region}
      * @param regionIdList The collection of regionId as inScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setRegionId_InScope(Collection<Integer> regionIdList) {
         doSetRegionId_InScope(regionIdList);
+    }
+
+    /**
+     * InScope {in (1, 2)}. As Region. And NullIgnored, NullElementIgnored, SeveralRegistered. <br />
+     * REGION_ID: {IX, NotNull, INT(10), FK to region, classification=Region} <br />
+     * 主に会員の住んでいる地域を示す
+     * @param cdefList The list of classification definition (as ENUM type). (NullAllowed: if null (or empty), no condition)
+     */
+    public void setRegionId_InScope_AsRegion(Collection<CDef.Region> cdefList) {
+        doSetRegionId_InScope(cTNumL(cdefList, Integer.class));
     }
 
     protected void doSetRegionId_InScope(Collection<Integer> regionIdList) {
@@ -659,11 +704,21 @@ public abstract class AbstractBsMemberAddressCQ extends AbstractConditionQuery {
 
     /**
      * NotInScope {not in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br />
-     * REGION_ID: {IX, NotNull, INT(10), FK to region}
+     * REGION_ID: {IX, NotNull, INT(10), FK to region, classification=Region}
      * @param regionIdList The collection of regionId as notInScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setRegionId_NotInScope(Collection<Integer> regionIdList) {
         doSetRegionId_NotInScope(regionIdList);
+    }
+
+    /**
+     * NotInScope {not in (1, 2)}. As Region. And NullIgnored, NullElementIgnored, SeveralRegistered. <br />
+     * REGION_ID: {IX, NotNull, INT(10), FK to region, classification=Region} <br />
+     * 主に会員の住んでいる地域を示す
+     * @param cdefList The list of classification definition (as ENUM type). (NullAllowed: if null (or empty), no condition)
+     */
+    public void setRegionId_NotInScope_AsRegion(Collection<CDef.Region> cdefList) {
+        doSetRegionId_NotInScope(cTNumL(cdefList, Integer.class));
     }
 
     protected void doSetRegionId_NotInScope(Collection<Integer> regionIdList) {

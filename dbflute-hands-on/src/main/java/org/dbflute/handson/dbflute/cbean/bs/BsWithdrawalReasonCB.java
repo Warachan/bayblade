@@ -79,7 +79,7 @@ public class BsWithdrawalReasonCB extends AbstractConditionBean {
     //                                                                 ===================
     /**
      * Accept the query condition of primary key as equal.
-     * @param withdrawalReasonCode : PK, NotNull, CHAR(3). (NotNull)
+     * @param withdrawalReasonCode : PK, NotNull, CHAR(3), classification=WithdrawalReason. (NotNull)
      * @return this. (NotNull)
      */
     public WithdrawalReasonCB acceptPK(String withdrawalReasonCode) {
@@ -91,7 +91,7 @@ public class BsWithdrawalReasonCB extends AbstractConditionBean {
 
     /**
      * Accept the query condition of primary key as equal. (old style)
-     * @param withdrawalReasonCode : PK, NotNull, CHAR(3). (NotNull)
+     * @param withdrawalReasonCode : PK, NotNull, CHAR(3), classification=WithdrawalReason. (NotNull)
      */
     public void acceptPrimaryKey(String withdrawalReasonCode) {
         assertObjectNotNull("withdrawalReasonCode", withdrawalReasonCode);
@@ -318,7 +318,7 @@ public class BsWithdrawalReasonCB extends AbstractConditionBean {
                              , HpCBPurpose purpose, DBMetaProvider dbmetaProvider)
         { super(baseCB, qyCall, purpose, dbmetaProvider); }
         /**
-         * WITHDRAWAL_REASON_CODE: {PK, NotNull, CHAR(3)}
+         * WITHDRAWAL_REASON_CODE: {PK, NotNull, CHAR(3), classification=WithdrawalReason}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnWithdrawalReasonCode() { return doColumn("WITHDRAWAL_REASON_CODE"); }

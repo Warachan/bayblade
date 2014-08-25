@@ -141,7 +141,7 @@ public class PurchaseDbm extends AbstractDBMeta {
     protected final ColumnInfo _columnPurchaseDatetime = cci("PURCHASE_DATETIME", "PURCHASE_DATETIME", null, null, java.sql.Timestamp.class, "purchaseDatetime", null, false, false, true, "DATETIME", 19, 0, null, false, null, null, null, null, null);
     protected final ColumnInfo _columnPurchaseCount = cci("PURCHASE_COUNT", "PURCHASE_COUNT", null, null, Integer.class, "purchaseCount", null, false, false, true, "INT", 10, 0, null, false, null, null, null, null, null);
     protected final ColumnInfo _columnPurchasePrice = cci("PURCHASE_PRICE", "PURCHASE_PRICE", null, null, Integer.class, "purchasePrice", null, false, false, true, "INT", 10, 0, null, false, null, null, null, null, null);
-    protected final ColumnInfo _columnPaymentCompleteFlg = cci("PAYMENT_COMPLETE_FLG", "PAYMENT_COMPLETE_FLG", null, null, Integer.class, "paymentCompleteFlg", null, false, false, true, "INT", 10, 0, null, false, null, null, null, null, null);
+    protected final ColumnInfo _columnPaymentCompleteFlg = cci("PAYMENT_COMPLETE_FLG", "PAYMENT_COMPLETE_FLG", null, null, Integer.class, "paymentCompleteFlg", null, false, false, true, "INT", 10, 0, null, false, null, null, null, null, CDef.DefMeta.Flg);
     protected final ColumnInfo _columnRegisterDatetime = cci("REGISTER_DATETIME", "REGISTER_DATETIME", null, null, java.sql.Timestamp.class, "registerDatetime", null, false, false, true, "DATETIME", 19, 0, null, false, null, null, null, null, null);
     protected final ColumnInfo _columnRegisterUser = cci("REGISTER_USER", "REGISTER_USER", null, null, String.class, "registerUser", null, false, false, true, "VARCHAR", 200, 0, null, false, null, null, null, null, null);
     protected final ColumnInfo _columnUpdateDatetime = cci("UPDATE_DATETIME", "UPDATE_DATETIME", null, null, java.sql.Timestamp.class, "updateDatetime", null, false, false, true, "DATETIME", 19, 0, null, false, null, null, null, null, null);
@@ -179,7 +179,7 @@ public class PurchaseDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnPurchasePrice() { return _columnPurchasePrice; }
     /**
-     * PAYMENT_COMPLETE_FLG: {NotNull, INT(10)}
+     * PAYMENT_COMPLETE_FLG: {NotNull, INT(10), classification=Flg}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnPaymentCompleteFlg() { return _columnPaymentCompleteFlg; }

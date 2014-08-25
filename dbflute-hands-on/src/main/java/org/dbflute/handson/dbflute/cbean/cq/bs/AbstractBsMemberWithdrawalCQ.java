@@ -193,11 +193,53 @@ public abstract class AbstractBsMemberWithdrawalCQ extends AbstractConditionQuer
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
-     * WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason}
+     * WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason, classification=WithdrawalReason}
      * @param withdrawalReasonCode The value of withdrawalReasonCode as equal. (NullAllowed: if null (or empty), no condition)
      */
     public void setWithdrawalReasonCode_Equal(String withdrawalReasonCode) {
         doSetWithdrawalReasonCode_Equal(fRES(withdrawalReasonCode));
+    }
+
+    /**
+     * Equal(=). As WithdrawalReason. And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
+     * WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason, classification=WithdrawalReason} <br />
+     * 会員の退会理由。なのでちょっとねがてぃぶ
+     * @param cdef The instance of classification definition (as ENUM type). (NullAllowed: if null, no condition)
+     */
+    public void setWithdrawalReasonCode_Equal_AsWithdrawalReason(CDef.WithdrawalReason cdef) {
+        doSetWithdrawalReasonCode_Equal(cdef != null ? cdef.code() : null);
+    }
+
+    /**
+     * Equal(=). As Sit (SIT). And OnlyOnceRegistered. <br />
+     * SIT: サイトが使いにくいから
+     */
+    public void setWithdrawalReasonCode_Equal_Sit() {
+        setWithdrawalReasonCode_Equal_AsWithdrawalReason(CDef.WithdrawalReason.Sit);
+    }
+
+    /**
+     * Equal(=). As Prd (PRD). And OnlyOnceRegistered. <br />
+     * PRD: 商品に魅力がないから
+     */
+    public void setWithdrawalReasonCode_Equal_Prd() {
+        setWithdrawalReasonCode_Equal_AsWithdrawalReason(CDef.WithdrawalReason.Prd);
+    }
+
+    /**
+     * Equal(=). As Frt (FRT). And OnlyOnceRegistered. <br />
+     * FRT: フリテンだから
+     */
+    public void setWithdrawalReasonCode_Equal_Frt() {
+        setWithdrawalReasonCode_Equal_AsWithdrawalReason(CDef.WithdrawalReason.Frt);
+    }
+
+    /**
+     * Equal(=). As Oth (OTH). And OnlyOnceRegistered. <br />
+     * OTH: その他理由
+     */
+    public void setWithdrawalReasonCode_Equal_Oth() {
+        setWithdrawalReasonCode_Equal_AsWithdrawalReason(CDef.WithdrawalReason.Oth);
     }
 
     protected void doSetWithdrawalReasonCode_Equal(String withdrawalReasonCode) {
@@ -206,11 +248,53 @@ public abstract class AbstractBsMemberWithdrawalCQ extends AbstractConditionQuer
 
     /**
      * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
-     * WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason}
+     * WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason, classification=WithdrawalReason}
      * @param withdrawalReasonCode The value of withdrawalReasonCode as notEqual. (NullAllowed: if null (or empty), no condition)
      */
     public void setWithdrawalReasonCode_NotEqual(String withdrawalReasonCode) {
         doSetWithdrawalReasonCode_NotEqual(fRES(withdrawalReasonCode));
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). As WithdrawalReason. And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
+     * WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason, classification=WithdrawalReason} <br />
+     * 会員の退会理由。なのでちょっとねがてぃぶ
+     * @param cdef The instance of classification definition (as ENUM type). (NullAllowed: if null, no condition)
+     */
+    public void setWithdrawalReasonCode_NotEqual_AsWithdrawalReason(CDef.WithdrawalReason cdef) {
+        doSetWithdrawalReasonCode_NotEqual(cdef != null ? cdef.code() : null);
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). As Sit (SIT). And OnlyOnceRegistered. <br />
+     * SIT: サイトが使いにくいから
+     */
+    public void setWithdrawalReasonCode_NotEqual_Sit() {
+        setWithdrawalReasonCode_NotEqual_AsWithdrawalReason(CDef.WithdrawalReason.Sit);
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). As Prd (PRD). And OnlyOnceRegistered. <br />
+     * PRD: 商品に魅力がないから
+     */
+    public void setWithdrawalReasonCode_NotEqual_Prd() {
+        setWithdrawalReasonCode_NotEqual_AsWithdrawalReason(CDef.WithdrawalReason.Prd);
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). As Frt (FRT). And OnlyOnceRegistered. <br />
+     * FRT: フリテンだから
+     */
+    public void setWithdrawalReasonCode_NotEqual_Frt() {
+        setWithdrawalReasonCode_NotEqual_AsWithdrawalReason(CDef.WithdrawalReason.Frt);
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). As Oth (OTH). And OnlyOnceRegistered. <br />
+     * OTH: その他理由
+     */
+    public void setWithdrawalReasonCode_NotEqual_Oth() {
+        setWithdrawalReasonCode_NotEqual_AsWithdrawalReason(CDef.WithdrawalReason.Oth);
     }
 
     protected void doSetWithdrawalReasonCode_NotEqual(String withdrawalReasonCode) {
@@ -218,48 +302,22 @@ public abstract class AbstractBsMemberWithdrawalCQ extends AbstractConditionQuer
     }
 
     /**
-     * GreaterThan(&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
-     * WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason}
-     * @param withdrawalReasonCode The value of withdrawalReasonCode as greaterThan. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setWithdrawalReasonCode_GreaterThan(String withdrawalReasonCode) {
-        regWithdrawalReasonCode(CK_GT, fRES(withdrawalReasonCode));
-    }
-
-    /**
-     * LessThan(&lt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
-     * WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason}
-     * @param withdrawalReasonCode The value of withdrawalReasonCode as lessThan. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setWithdrawalReasonCode_LessThan(String withdrawalReasonCode) {
-        regWithdrawalReasonCode(CK_LT, fRES(withdrawalReasonCode));
-    }
-
-    /**
-     * GreaterEqual(&gt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
-     * WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason}
-     * @param withdrawalReasonCode The value of withdrawalReasonCode as greaterEqual. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setWithdrawalReasonCode_GreaterEqual(String withdrawalReasonCode) {
-        regWithdrawalReasonCode(CK_GE, fRES(withdrawalReasonCode));
-    }
-
-    /**
-     * LessEqual(&lt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
-     * WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason}
-     * @param withdrawalReasonCode The value of withdrawalReasonCode as lessEqual. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setWithdrawalReasonCode_LessEqual(String withdrawalReasonCode) {
-        regWithdrawalReasonCode(CK_LE, fRES(withdrawalReasonCode));
-    }
-
-    /**
      * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br />
-     * WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason}
+     * WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason, classification=WithdrawalReason}
      * @param withdrawalReasonCodeList The collection of withdrawalReasonCode as inScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setWithdrawalReasonCode_InScope(Collection<String> withdrawalReasonCodeList) {
         doSetWithdrawalReasonCode_InScope(withdrawalReasonCodeList);
+    }
+
+    /**
+     * InScope {in ('a', 'b')}. As WithdrawalReason. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br />
+     * WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason, classification=WithdrawalReason} <br />
+     * 会員の退会理由。なのでちょっとねがてぃぶ
+     * @param cdefList The list of classification definition (as ENUM type). (NullAllowed: if null (or empty), no condition)
+     */
+    public void setWithdrawalReasonCode_InScope_AsWithdrawalReason(Collection<CDef.WithdrawalReason> cdefList) {
+        doSetWithdrawalReasonCode_InScope(cTStrL(cdefList));
     }
 
     public void doSetWithdrawalReasonCode_InScope(Collection<String> withdrawalReasonCodeList) {
@@ -268,46 +326,25 @@ public abstract class AbstractBsMemberWithdrawalCQ extends AbstractConditionQuer
 
     /**
      * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br />
-     * WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason}
+     * WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason, classification=WithdrawalReason}
      * @param withdrawalReasonCodeList The collection of withdrawalReasonCode as notInScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setWithdrawalReasonCode_NotInScope(Collection<String> withdrawalReasonCodeList) {
         doSetWithdrawalReasonCode_NotInScope(withdrawalReasonCodeList);
     }
 
+    /**
+     * NotInScope {not in ('a', 'b')}. As WithdrawalReason. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br />
+     * WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason, classification=WithdrawalReason} <br />
+     * 会員の退会理由。なのでちょっとねがてぃぶ
+     * @param cdefList The list of classification definition (as ENUM type). (NullAllowed: if null (or empty), no condition)
+     */
+    public void setWithdrawalReasonCode_NotInScope_AsWithdrawalReason(Collection<CDef.WithdrawalReason> cdefList) {
+        doSetWithdrawalReasonCode_NotInScope(cTStrL(cdefList));
+    }
+
     public void doSetWithdrawalReasonCode_NotInScope(Collection<String> withdrawalReasonCodeList) {
         regINS(CK_NINS, cTL(withdrawalReasonCodeList), getCValueWithdrawalReasonCode(), "WITHDRAWAL_REASON_CODE");
-    }
-
-    /**
-     * PrefixSearch {like 'xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br />
-     * WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason}
-     * @param withdrawalReasonCode The value of withdrawalReasonCode as prefixSearch. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setWithdrawalReasonCode_PrefixSearch(String withdrawalReasonCode) {
-        setWithdrawalReasonCode_LikeSearch(withdrawalReasonCode, cLSOP());
-    }
-
-    /**
-     * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br />
-     * WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason} <br />
-     * <pre>e.g. setWithdrawalReasonCode_LikeSearch("xxx", new <span style="color: #DD4747">LikeSearchOption</span>().likeContain());</pre>
-     * @param withdrawalReasonCode The value of withdrawalReasonCode as likeSearch. (NullAllowed: if null (or empty), no condition)
-     * @param likeSearchOption The option of like-search. (NotNull)
-     */
-    public void setWithdrawalReasonCode_LikeSearch(String withdrawalReasonCode, LikeSearchOption likeSearchOption) {
-        regLSQ(CK_LS, fRES(withdrawalReasonCode), getCValueWithdrawalReasonCode(), "WITHDRAWAL_REASON_CODE", likeSearchOption);
-    }
-
-    /**
-     * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br />
-     * And NullOrEmptyIgnored, SeveralRegistered. <br />
-     * WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason}
-     * @param withdrawalReasonCode The value of withdrawalReasonCode as notLikeSearch. (NullAllowed: if null (or empty), no condition)
-     * @param likeSearchOption The option of not-like-search. (NotNull)
-     */
-    public void setWithdrawalReasonCode_NotLikeSearch(String withdrawalReasonCode, LikeSearchOption likeSearchOption) {
-        regLSQ(CK_NLS, fRES(withdrawalReasonCode), getCValueWithdrawalReasonCode(), "WITHDRAWAL_REASON_CODE", likeSearchOption);
     }
 
     /**
@@ -342,19 +379,19 @@ public abstract class AbstractBsMemberWithdrawalCQ extends AbstractConditionQuer
 
     /**
      * IsNull {is null}. And OnlyOnceRegistered. <br />
-     * WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason}
+     * WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason, classification=WithdrawalReason}
      */
     public void setWithdrawalReasonCode_IsNull() { regWithdrawalReasonCode(CK_ISN, DOBJ); }
 
     /**
      * IsNullOrEmpty {is null or empty}. And OnlyOnceRegistered. <br />
-     * WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason}
+     * WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason, classification=WithdrawalReason}
      */
     public void setWithdrawalReasonCode_IsNullOrEmpty() { regWithdrawalReasonCode(CK_ISNOE, DOBJ); }
 
     /**
      * IsNotNull {is not null}. And OnlyOnceRegistered. <br />
-     * WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason}
+     * WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason, classification=WithdrawalReason}
      */
     public void setWithdrawalReasonCode_IsNotNull() { regWithdrawalReasonCode(CK_ISNN, DOBJ); }
 

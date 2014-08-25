@@ -79,7 +79,7 @@ public class BsProductStatusCB extends AbstractConditionBean {
     //                                                                 ===================
     /**
      * Accept the query condition of primary key as equal.
-     * @param productStatusCode : PK, NotNull, CHAR(3). (NotNull)
+     * @param productStatusCode : PK, NotNull, CHAR(3), classification=ProductStatus. (NotNull)
      * @return this. (NotNull)
      */
     public ProductStatusCB acceptPK(String productStatusCode) {
@@ -91,7 +91,7 @@ public class BsProductStatusCB extends AbstractConditionBean {
 
     /**
      * Accept the query condition of primary key as equal. (old style)
-     * @param productStatusCode : PK, NotNull, CHAR(3). (NotNull)
+     * @param productStatusCode : PK, NotNull, CHAR(3), classification=ProductStatus. (NotNull)
      */
     public void acceptPrimaryKey(String productStatusCode) {
         assertObjectNotNull("productStatusCode", productStatusCode);
@@ -306,7 +306,7 @@ public class BsProductStatusCB extends AbstractConditionBean {
                              , HpCBPurpose purpose, DBMetaProvider dbmetaProvider)
         { super(baseCB, qyCall, purpose, dbmetaProvider); }
         /**
-         * PRODUCT_STATUS_CODE: {PK, NotNull, CHAR(3)}
+         * PRODUCT_STATUS_CODE: {PK, NotNull, CHAR(3), classification=ProductStatus}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnProductStatusCode() { return doColumn("PRODUCT_STATUS_CODE"); }

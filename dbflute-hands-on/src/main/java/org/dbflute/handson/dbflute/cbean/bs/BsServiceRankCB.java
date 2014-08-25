@@ -79,7 +79,7 @@ public class BsServiceRankCB extends AbstractConditionBean {
     //                                                                 ===================
     /**
      * Accept the query condition of primary key as equal.
-     * @param serviceRankCode : PK, NotNull, CHAR(3). (NotNull)
+     * @param serviceRankCode : PK, NotNull, CHAR(3), classification=ServiceRank. (NotNull)
      * @return this. (NotNull)
      */
     public ServiceRankCB acceptPK(String serviceRankCode) {
@@ -91,7 +91,7 @@ public class BsServiceRankCB extends AbstractConditionBean {
 
     /**
      * Accept the query condition of primary key as equal. (old style)
-     * @param serviceRankCode : PK, NotNull, CHAR(3). (NotNull)
+     * @param serviceRankCode : PK, NotNull, CHAR(3), classification=ServiceRank. (NotNull)
      */
     public void acceptPrimaryKey(String serviceRankCode) {
         assertObjectNotNull("serviceRankCode", serviceRankCode);
@@ -318,7 +318,7 @@ public class BsServiceRankCB extends AbstractConditionBean {
                              , HpCBPurpose purpose, DBMetaProvider dbmetaProvider)
         { super(baseCB, qyCall, purpose, dbmetaProvider); }
         /**
-         * SERVICE_RANK_CODE: {PK, NotNull, CHAR(3)}
+         * SERVICE_RANK_CODE: {PK, NotNull, CHAR(3), classification=ServiceRank}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnServiceRankCode() { return doColumn("SERVICE_RANK_CODE"); }
@@ -333,7 +333,7 @@ public class BsServiceRankCB extends AbstractConditionBean {
          */
         public HpSpecifiedColumn columnServicePointIncidence() { return doColumn("SERVICE_POINT_INCIDENCE"); }
         /**
-         * NEW_ACCEPTABLE_FLG: {NotNull, INT(10)}
+         * NEW_ACCEPTABLE_FLG: {NotNull, INT(10), classification=Flg}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnNewAcceptableFlg() { return doColumn("NEW_ACCEPTABLE_FLG"); }

@@ -8,6 +8,7 @@ import java.util.Set;
 import org.seasar.dbflute.Entity;
 import org.seasar.dbflute.dbmeta.DBMeta;
 import org.dbflute.handson.dbflute.allcommon.DBMetaInstanceHandler;
+import org.dbflute.handson.dbflute.allcommon.CDef;
 import org.dbflute.handson.dbflute.exentity.*;
 
 /**
@@ -74,7 +75,7 @@ public abstract class BsServiceRank implements Entity, Serializable, Cloneable {
     // -----------------------------------------------------
     //                                                Column
     //                                                ------
-    /** SERVICE_RANK_CODE: {PK, NotNull, CHAR(3)} */
+    /** SERVICE_RANK_CODE: {PK, NotNull, CHAR(3), classification=ServiceRank} */
     protected String _serviceRankCode;
 
     /** SERVICE_RANK_NAME: {NotNull, VARCHAR(50)} */
@@ -83,7 +84,7 @@ public abstract class BsServiceRank implements Entity, Serializable, Cloneable {
     /** SERVICE_POINT_INCIDENCE: {NotNull, DECIMAL(5, 3)} */
     protected java.math.BigDecimal _servicePointIncidence;
 
-    /** NEW_ACCEPTABLE_FLG: {NotNull, INT(10)} */
+    /** NEW_ACCEPTABLE_FLG: {NotNull, INT(10), classification=Flg} */
     protected Integer _newAcceptableFlg;
 
     /** DESCRIPTION: {NotNull, VARCHAR(200)} */
@@ -162,6 +163,211 @@ public abstract class BsServiceRank implements Entity, Serializable, Cloneable {
 
     protected EntityUniqueDrivenProperties newUniqueDrivenProperties() {
         return new EntityUniqueDrivenProperties();
+    }
+
+    // ===================================================================================
+    //                                                             Classification Property
+    //                                                             =======================
+    /**
+     * Get the value of serviceRankCode as the classification of ServiceRank. <br />
+     * SERVICE_RANK_CODE: {PK, NotNull, CHAR(3), classification=ServiceRank} <br />
+     * 会員が受けられるサービスのランクを示す
+     * <p>It's treated as case insensitive and if the code value is null, it returns null.</p>
+     * @return The instance of classification definition (as ENUM type). (NullAllowed: when the column value is null)
+     */
+    public CDef.ServiceRank getServiceRankCodeAsServiceRank() {
+        return CDef.ServiceRank.codeOf(getServiceRankCode());
+    }
+
+    /**
+     * Set the value of serviceRankCode as the classification of ServiceRank. <br />
+     * SERVICE_RANK_CODE: {PK, NotNull, CHAR(3), classification=ServiceRank} <br />
+     * 会員が受けられるサービスのランクを示す
+     * @param cdef The instance of classification definition (as ENUM type). (NullAllowed: if null, null value is set to the column)
+     */
+    public void setServiceRankCodeAsServiceRank(CDef.ServiceRank cdef) {
+        setServiceRankCode(cdef != null ? cdef.code() : null);
+    }
+
+    /**
+     * Get the value of newAcceptableFlg as the classification of Flg. <br />
+     * NEW_ACCEPTABLE_FLG: {NotNull, INT(10), classification=Flg} <br />
+     * フラグを示す
+     * <p>It's treated as case insensitive and if the code value is null, it returns null.</p>
+     * @return The instance of classification definition (as ENUM type). (NullAllowed: when the column value is null)
+     */
+    public CDef.Flg getNewAcceptableFlgAsFlg() {
+        return CDef.Flg.codeOf(getNewAcceptableFlg());
+    }
+
+    /**
+     * Set the value of newAcceptableFlg as the classification of Flg. <br />
+     * NEW_ACCEPTABLE_FLG: {NotNull, INT(10), classification=Flg} <br />
+     * フラグを示す
+     * @param cdef The instance of classification definition (as ENUM type). (NullAllowed: if null, null value is set to the column)
+     */
+    public void setNewAcceptableFlgAsFlg(CDef.Flg cdef) {
+        setNewAcceptableFlg(cdef != null ? FunCustodial.toNumber(cdef.code(), Integer.class) : null);
+    }
+
+    // ===================================================================================
+    //                                                              Classification Setting
+    //                                                              ======================
+    /**
+     * Set the value of serviceRankCode as Platinum (PLT). <br />
+     * PLATINUM: platinum rank
+     */
+    public void setServiceRankCode_Platinum() {
+        setServiceRankCodeAsServiceRank(CDef.ServiceRank.Platinum);
+    }
+
+    /**
+     * Set the value of serviceRankCode as Gold (GLD). <br />
+     * GOLD: gold rank
+     */
+    public void setServiceRankCode_Gold() {
+        setServiceRankCodeAsServiceRank(CDef.ServiceRank.Gold);
+    }
+
+    /**
+     * Set the value of serviceRankCode as Silver (SIL). <br />
+     * SILVER: silver rank
+     */
+    public void setServiceRankCode_Silver() {
+        setServiceRankCodeAsServiceRank(CDef.ServiceRank.Silver);
+    }
+
+    /**
+     * Set the value of serviceRankCode as Bronze (BRZ). <br />
+     * BRONZE: bronze rank
+     */
+    public void setServiceRankCode_Bronze() {
+        setServiceRankCodeAsServiceRank(CDef.ServiceRank.Bronze);
+    }
+
+    /**
+     * Set the value of serviceRankCode as Plastic (PLS). <br />
+     * PLASTIC: plastic rank
+     */
+    public void setServiceRankCode_Plastic() {
+        setServiceRankCodeAsServiceRank(CDef.ServiceRank.Plastic);
+    }
+
+    /**
+     * Set the value of newAcceptableFlg as True (1). <br />
+     * はい: 有効を示す
+     */
+    public void setNewAcceptableFlg_True() {
+        setNewAcceptableFlgAsFlg(CDef.Flg.True);
+    }
+
+    /**
+     * Set the value of newAcceptableFlg as False (0). <br />
+     * いいえ: 無効を示す
+     */
+    public void setNewAcceptableFlg_False() {
+        setNewAcceptableFlgAsFlg(CDef.Flg.False);
+    }
+
+    // ===================================================================================
+    //                                                        Classification Determination
+    //                                                        ============================
+    /**
+     * Is the value of serviceRankCode Platinum? <br />
+     * PLATINUM: platinum rank
+     * <p>It's treated as case insensitive and if the code value is null, it returns false.</p>
+     * @return The determination, true or false.
+     */
+    public boolean isServiceRankCodePlatinum() {
+        CDef.ServiceRank cdef = getServiceRankCodeAsServiceRank();
+        return cdef != null ? cdef.equals(CDef.ServiceRank.Platinum) : false;
+    }
+
+    /**
+     * Is the value of serviceRankCode Gold? <br />
+     * GOLD: gold rank
+     * <p>It's treated as case insensitive and if the code value is null, it returns false.</p>
+     * @return The determination, true or false.
+     */
+    public boolean isServiceRankCodeGold() {
+        CDef.ServiceRank cdef = getServiceRankCodeAsServiceRank();
+        return cdef != null ? cdef.equals(CDef.ServiceRank.Gold) : false;
+    }
+
+    /**
+     * Is the value of serviceRankCode Silver? <br />
+     * SILVER: silver rank
+     * <p>It's treated as case insensitive and if the code value is null, it returns false.</p>
+     * @return The determination, true or false.
+     */
+    public boolean isServiceRankCodeSilver() {
+        CDef.ServiceRank cdef = getServiceRankCodeAsServiceRank();
+        return cdef != null ? cdef.equals(CDef.ServiceRank.Silver) : false;
+    }
+
+    /**
+     * Is the value of serviceRankCode Bronze? <br />
+     * BRONZE: bronze rank
+     * <p>It's treated as case insensitive and if the code value is null, it returns false.</p>
+     * @return The determination, true or false.
+     */
+    public boolean isServiceRankCodeBronze() {
+        CDef.ServiceRank cdef = getServiceRankCodeAsServiceRank();
+        return cdef != null ? cdef.equals(CDef.ServiceRank.Bronze) : false;
+    }
+
+    /**
+     * Is the value of serviceRankCode Plastic? <br />
+     * PLASTIC: plastic rank
+     * <p>It's treated as case insensitive and if the code value is null, it returns false.</p>
+     * @return The determination, true or false.
+     */
+    public boolean isServiceRankCodePlastic() {
+        CDef.ServiceRank cdef = getServiceRankCodeAsServiceRank();
+        return cdef != null ? cdef.equals(CDef.ServiceRank.Plastic) : false;
+    }
+
+    /**
+     * Is the value of newAcceptableFlg True? <br />
+     * はい: 有効を示す
+     * <p>It's treated as case insensitive and if the code value is null, it returns false.</p>
+     * @return The determination, true or false.
+     */
+    public boolean isNewAcceptableFlgTrue() {
+        CDef.Flg cdef = getNewAcceptableFlgAsFlg();
+        return cdef != null ? cdef.equals(CDef.Flg.True) : false;
+    }
+
+    /**
+     * Is the value of newAcceptableFlg False? <br />
+     * いいえ: 無効を示す
+     * <p>It's treated as case insensitive and if the code value is null, it returns false.</p>
+     * @return The determination, true or false.
+     */
+    public boolean isNewAcceptableFlgFalse() {
+        CDef.Flg cdef = getNewAcceptableFlgAsFlg();
+        return cdef != null ? cdef.equals(CDef.Flg.False) : false;
+    }
+
+    // ===================================================================================
+    //                                                           Classification Name/Alias
+    //                                                           =========================
+    /**
+     * Get the value of the column 'newAcceptableFlg' as classification name.
+     * @return The string of classification name. (NullAllowed: when the column value is null)
+     */
+    public String getNewAcceptableFlgName() {
+        CDef.Flg cdef = getNewAcceptableFlgAsFlg();
+        return cdef != null ? cdef.name() : null;
+    }
+
+    /**
+     * Get the value of the column 'newAcceptableFlg' as classification alias.
+     * @return The string of classification alias. (NullAllowed: when the column value is null)
+     */
+    public String getNewAcceptableFlgAlias() {
+        CDef.Flg cdef = getNewAcceptableFlgAsFlg();
+        return cdef != null ? cdef.alias() : null;
     }
 
     // ===================================================================================
@@ -355,7 +561,7 @@ public abstract class BsServiceRank implements Entity, Serializable, Cloneable {
     //                                                                            Accessor
     //                                                                            ========
     /**
-     * [get] SERVICE_RANK_CODE: {PK, NotNull, CHAR(3)} <br />
+     * [get] SERVICE_RANK_CODE: {PK, NotNull, CHAR(3), classification=ServiceRank} <br />
      * サービスランクコード: サービスランクを識別するコード。
      * @return The value of the column 'SERVICE_RANK_CODE'. (basically NotNull if selected: for the constraint)
      */
@@ -364,7 +570,7 @@ public abstract class BsServiceRank implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [set] SERVICE_RANK_CODE: {PK, NotNull, CHAR(3)} <br />
+     * [set] SERVICE_RANK_CODE: {PK, NotNull, CHAR(3), classification=ServiceRank} <br />
      * サービスランクコード: サービスランクを識別するコード。
      * @param serviceRankCode The value of the column 'SERVICE_RANK_CODE'. (basically NotNull if update: for the constraint)
      */
@@ -416,7 +622,7 @@ public abstract class BsServiceRank implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [get] NEW_ACCEPTABLE_FLG: {NotNull, INT(10)} <br />
+     * [get] NEW_ACCEPTABLE_FLG: {NotNull, INT(10), classification=Flg} <br />
      * 新規受け入れ可能フラグ: このランクへの新規受け入れができるかどうか。
      * @return The value of the column 'NEW_ACCEPTABLE_FLG'. (basically NotNull if selected: for the constraint)
      */
@@ -425,11 +631,12 @@ public abstract class BsServiceRank implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [set] NEW_ACCEPTABLE_FLG: {NotNull, INT(10)} <br />
+     * [set] NEW_ACCEPTABLE_FLG: {NotNull, INT(10), classification=Flg} <br />
      * 新規受け入れ可能フラグ: このランクへの新規受け入れができるかどうか。
      * @param newAcceptableFlg The value of the column 'NEW_ACCEPTABLE_FLG'. (basically NotNull if update: for the constraint)
      */
     public void setNewAcceptableFlg(Integer newAcceptableFlg) {
+        checkImplicitSet("NEW_ACCEPTABLE_FLG", CDef.DefMeta.Flg, newAcceptableFlg);
         __modifiedProperties.addPropertyName("newAcceptableFlg");
         _newAcceptableFlg = newAcceptableFlg;
     }
@@ -466,5 +673,9 @@ public abstract class BsServiceRank implements Entity, Serializable, Cloneable {
     public void setDisplayOrder(Integer displayOrder) {
         __modifiedProperties.addPropertyName("displayOrder");
         _displayOrder = displayOrder;
+    }
+
+    protected void checkImplicitSet(String columnDbName, CDef.DefMeta meta, Object value) {
+        FunCustodial.checkImplicitSet(this, columnDbName, meta, value);
     }
 }

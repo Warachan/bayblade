@@ -8,6 +8,7 @@ import java.util.Set;
 import org.seasar.dbflute.Entity;
 import org.seasar.dbflute.dbmeta.DBMeta;
 import org.dbflute.handson.dbflute.allcommon.DBMetaInstanceHandler;
+import org.dbflute.handson.dbflute.allcommon.CDef;
 import org.dbflute.handson.dbflute.exentity.*;
 
 /**
@@ -80,10 +81,10 @@ public abstract class BsMemberLogin implements Entity, Serializable, Cloneable {
     /** LOGIN_DATETIME: {+UQ, IX, NotNull, DATETIME(19)} */
     protected java.sql.Timestamp _loginDatetime;
 
-    /** MOBILE_LOGIN_FLG: {NotNull, INT(10)} */
+    /** MOBILE_LOGIN_FLG: {NotNull, INT(10), classification=Flg} */
     protected Integer _mobileLoginFlg;
 
-    /** LOGIN_MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to member_status} */
+    /** LOGIN_MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to member_status, classification=MemberStatus} */
     protected String _loginMemberStatusCode;
 
     // -----------------------------------------------------
@@ -158,6 +159,173 @@ public abstract class BsMemberLogin implements Entity, Serializable, Cloneable {
 
     protected EntityUniqueDrivenProperties newUniqueDrivenProperties() {
         return new EntityUniqueDrivenProperties();
+    }
+
+    // ===================================================================================
+    //                                                             Classification Property
+    //                                                             =======================
+    /**
+     * Get the value of mobileLoginFlg as the classification of Flg. <br />
+     * MOBILE_LOGIN_FLG: {NotNull, INT(10), classification=Flg} <br />
+     * フラグを示す
+     * <p>It's treated as case insensitive and if the code value is null, it returns null.</p>
+     * @return The instance of classification definition (as ENUM type). (NullAllowed: when the column value is null)
+     */
+    public CDef.Flg getMobileLoginFlgAsFlg() {
+        return CDef.Flg.codeOf(getMobileLoginFlg());
+    }
+
+    /**
+     * Set the value of mobileLoginFlg as the classification of Flg. <br />
+     * MOBILE_LOGIN_FLG: {NotNull, INT(10), classification=Flg} <br />
+     * フラグを示す
+     * @param cdef The instance of classification definition (as ENUM type). (NullAllowed: if null, null value is set to the column)
+     */
+    public void setMobileLoginFlgAsFlg(CDef.Flg cdef) {
+        setMobileLoginFlg(cdef != null ? FunCustodial.toNumber(cdef.code(), Integer.class) : null);
+    }
+
+    /**
+     * Get the value of loginMemberStatusCode as the classification of MemberStatus. <br />
+     * LOGIN_MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to member_status, classification=MemberStatus} <br />
+     * 入会から退会までの会員のステータスを示す
+     * <p>It's treated as case insensitive and if the code value is null, it returns null.</p>
+     * @return The instance of classification definition (as ENUM type). (NullAllowed: when the column value is null)
+     */
+    public CDef.MemberStatus getLoginMemberStatusCodeAsMemberStatus() {
+        return CDef.MemberStatus.codeOf(getLoginMemberStatusCode());
+    }
+
+    /**
+     * Set the value of loginMemberStatusCode as the classification of MemberStatus. <br />
+     * LOGIN_MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to member_status, classification=MemberStatus} <br />
+     * 入会から退会までの会員のステータスを示す
+     * @param cdef The instance of classification definition (as ENUM type). (NullAllowed: if null, null value is set to the column)
+     */
+    public void setLoginMemberStatusCodeAsMemberStatus(CDef.MemberStatus cdef) {
+        setLoginMemberStatusCode(cdef != null ? cdef.code() : null);
+    }
+
+    // ===================================================================================
+    //                                                              Classification Setting
+    //                                                              ======================
+    /**
+     * Set the value of mobileLoginFlg as True (1). <br />
+     * はい: 有効を示す
+     */
+    public void setMobileLoginFlg_True() {
+        setMobileLoginFlgAsFlg(CDef.Flg.True);
+    }
+
+    /**
+     * Set the value of mobileLoginFlg as False (0). <br />
+     * いいえ: 無効を示す
+     */
+    public void setMobileLoginFlg_False() {
+        setMobileLoginFlgAsFlg(CDef.Flg.False);
+    }
+
+    /**
+     * Set the value of loginMemberStatusCode as 正式会員 (FML). <br />
+     * 正式会員: 正式な会員としてサイトサービスが利用可能
+     */
+    public void setLoginMemberStatusCode_正式会員() {
+        setLoginMemberStatusCodeAsMemberStatus(CDef.MemberStatus.正式会員);
+    }
+
+    /**
+     * Set the value of loginMemberStatusCode as 退会会員 (WDL). <br />
+     * 退会会員: 退会が確定した会員でサイトサービスはダメ
+     */
+    public void setLoginMemberStatusCode_退会会員() {
+        setLoginMemberStatusCodeAsMemberStatus(CDef.MemberStatus.退会会員);
+    }
+
+    /**
+     * Set the value of loginMemberStatusCode as 仮会員 (PRV). <br />
+     * 仮会員: 入会直後のステータスで一部のサイトサービスが利用可能
+     */
+    public void setLoginMemberStatusCode_仮会員() {
+        setLoginMemberStatusCodeAsMemberStatus(CDef.MemberStatus.仮会員);
+    }
+
+    // ===================================================================================
+    //                                                        Classification Determination
+    //                                                        ============================
+    /**
+     * Is the value of mobileLoginFlg True? <br />
+     * はい: 有効を示す
+     * <p>It's treated as case insensitive and if the code value is null, it returns false.</p>
+     * @return The determination, true or false.
+     */
+    public boolean isMobileLoginFlgTrue() {
+        CDef.Flg cdef = getMobileLoginFlgAsFlg();
+        return cdef != null ? cdef.equals(CDef.Flg.True) : false;
+    }
+
+    /**
+     * Is the value of mobileLoginFlg False? <br />
+     * いいえ: 無効を示す
+     * <p>It's treated as case insensitive and if the code value is null, it returns false.</p>
+     * @return The determination, true or false.
+     */
+    public boolean isMobileLoginFlgFalse() {
+        CDef.Flg cdef = getMobileLoginFlgAsFlg();
+        return cdef != null ? cdef.equals(CDef.Flg.False) : false;
+    }
+
+    /**
+     * Is the value of loginMemberStatusCode 正式会員? <br />
+     * 正式会員: 正式な会員としてサイトサービスが利用可能
+     * <p>It's treated as case insensitive and if the code value is null, it returns false.</p>
+     * @return The determination, true or false.
+     */
+    public boolean isLoginMemberStatusCode正式会員() {
+        CDef.MemberStatus cdef = getLoginMemberStatusCodeAsMemberStatus();
+        return cdef != null ? cdef.equals(CDef.MemberStatus.正式会員) : false;
+    }
+
+    /**
+     * Is the value of loginMemberStatusCode 退会会員? <br />
+     * 退会会員: 退会が確定した会員でサイトサービスはダメ
+     * <p>It's treated as case insensitive and if the code value is null, it returns false.</p>
+     * @return The determination, true or false.
+     */
+    public boolean isLoginMemberStatusCode退会会員() {
+        CDef.MemberStatus cdef = getLoginMemberStatusCodeAsMemberStatus();
+        return cdef != null ? cdef.equals(CDef.MemberStatus.退会会員) : false;
+    }
+
+    /**
+     * Is the value of loginMemberStatusCode 仮会員? <br />
+     * 仮会員: 入会直後のステータスで一部のサイトサービスが利用可能
+     * <p>It's treated as case insensitive and if the code value is null, it returns false.</p>
+     * @return The determination, true or false.
+     */
+    public boolean isLoginMemberStatusCode仮会員() {
+        CDef.MemberStatus cdef = getLoginMemberStatusCodeAsMemberStatus();
+        return cdef != null ? cdef.equals(CDef.MemberStatus.仮会員) : false;
+    }
+
+    // ===================================================================================
+    //                                                           Classification Name/Alias
+    //                                                           =========================
+    /**
+     * Get the value of the column 'mobileLoginFlg' as classification name.
+     * @return The string of classification name. (NullAllowed: when the column value is null)
+     */
+    public String getMobileLoginFlgName() {
+        CDef.Flg cdef = getMobileLoginFlgAsFlg();
+        return cdef != null ? cdef.name() : null;
+    }
+
+    /**
+     * Get the value of the column 'mobileLoginFlg' as classification alias.
+     * @return The string of classification alias. (NullAllowed: when the column value is null)
+     */
+    public String getMobileLoginFlgAlias() {
+        CDef.Flg cdef = getMobileLoginFlgAsFlg();
+        return cdef != null ? cdef.alias() : null;
     }
 
     // ===================================================================================
@@ -427,7 +595,7 @@ public abstract class BsMemberLogin implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [get] MOBILE_LOGIN_FLG: {NotNull, INT(10)} <br />
+     * [get] MOBILE_LOGIN_FLG: {NotNull, INT(10), classification=Flg} <br />
      * モバイルログインフラグ: モバイル機器からのログインか否か。
      * @return The value of the column 'MOBILE_LOGIN_FLG'. (basically NotNull if selected: for the constraint)
      */
@@ -436,17 +604,18 @@ public abstract class BsMemberLogin implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [set] MOBILE_LOGIN_FLG: {NotNull, INT(10)} <br />
+     * [set] MOBILE_LOGIN_FLG: {NotNull, INT(10), classification=Flg} <br />
      * モバイルログインフラグ: モバイル機器からのログインか否か。
      * @param mobileLoginFlg The value of the column 'MOBILE_LOGIN_FLG'. (basically NotNull if update: for the constraint)
      */
     public void setMobileLoginFlg(Integer mobileLoginFlg) {
+        checkImplicitSet("MOBILE_LOGIN_FLG", CDef.DefMeta.Flg, mobileLoginFlg);
         __modifiedProperties.addPropertyName("mobileLoginFlg");
         _mobileLoginFlg = mobileLoginFlg;
     }
 
     /**
-     * [get] LOGIN_MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to member_status} <br />
+     * [get] LOGIN_MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to member_status, classification=MemberStatus} <br />
      * ログイン会員ステータスコード: ログイン時の会員ステータス
      * @return The value of the column 'LOGIN_MEMBER_STATUS_CODE'. (basically NotNull if selected: for the constraint)
      */
@@ -455,12 +624,16 @@ public abstract class BsMemberLogin implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [set] LOGIN_MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to member_status} <br />
+     * [set] LOGIN_MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to member_status, classification=MemberStatus} <br />
      * ログイン会員ステータスコード: ログイン時の会員ステータス
      * @param loginMemberStatusCode The value of the column 'LOGIN_MEMBER_STATUS_CODE'. (basically NotNull if update: for the constraint)
      */
     public void setLoginMemberStatusCode(String loginMemberStatusCode) {
         __modifiedProperties.addPropertyName("loginMemberStatusCode");
         _loginMemberStatusCode = loginMemberStatusCode;
+    }
+
+    protected void checkImplicitSet(String columnDbName, CDef.DefMeta meta, Object value) {
+        FunCustodial.checkImplicitSet(this, columnDbName, meta, value);
     }
 }

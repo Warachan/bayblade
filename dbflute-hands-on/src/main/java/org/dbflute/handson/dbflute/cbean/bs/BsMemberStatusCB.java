@@ -79,7 +79,7 @@ public class BsMemberStatusCB extends AbstractConditionBean {
     //                                                                 ===================
     /**
      * Accept the query condition of primary key as equal.
-     * @param memberStatusCode : PK, NotNull, CHAR(3). (NotNull)
+     * @param memberStatusCode : PK, NotNull, CHAR(3), classification=MemberStatus. (NotNull)
      * @return this. (NotNull)
      */
     public MemberStatusCB acceptPK(String memberStatusCode) {
@@ -91,7 +91,7 @@ public class BsMemberStatusCB extends AbstractConditionBean {
 
     /**
      * Accept the query condition of primary key as equal. (old style)
-     * @param memberStatusCode : PK, NotNull, CHAR(3). (NotNull)
+     * @param memberStatusCode : PK, NotNull, CHAR(3), classification=MemberStatus. (NotNull)
      */
     public void acceptPrimaryKey(String memberStatusCode) {
         assertObjectNotNull("memberStatusCode", memberStatusCode);
@@ -318,7 +318,7 @@ public class BsMemberStatusCB extends AbstractConditionBean {
                              , HpCBPurpose purpose, DBMetaProvider dbmetaProvider)
         { super(baseCB, qyCall, purpose, dbmetaProvider); }
         /**
-         * MEMBER_STATUS_CODE: {PK, NotNull, CHAR(3)}
+         * MEMBER_STATUS_CODE: {PK, NotNull, CHAR(3), classification=MemberStatus}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnMemberStatusCode() { return doColumn("MEMBER_STATUS_CODE"); }

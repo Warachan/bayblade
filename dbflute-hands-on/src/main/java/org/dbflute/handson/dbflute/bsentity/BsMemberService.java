@@ -8,6 +8,7 @@ import java.util.Set;
 import org.seasar.dbflute.Entity;
 import org.seasar.dbflute.dbmeta.DBMeta;
 import org.dbflute.handson.dbflute.allcommon.DBMetaInstanceHandler;
+import org.dbflute.handson.dbflute.allcommon.CDef;
 import org.dbflute.handson.dbflute.exentity.*;
 
 /**
@@ -83,7 +84,7 @@ public abstract class BsMemberService implements Entity, Serializable, Cloneable
     /** AKIRAKANI_OKASHII_KARAMU_MEI: {IX, NotNull, INT(10)} */
     protected Integer _akirakaniOkashiiKaramuMei;
 
-    /** SERVICE_RANK_CODE: {IX, NotNull, CHAR(3), FK to service_rank} */
+    /** SERVICE_RANK_CODE: {IX, NotNull, CHAR(3), FK to service_rank, classification=ServiceRank} */
     protected String _serviceRankCode;
 
     /** REGISTER_DATETIME: {NotNull, DATETIME(19)} */
@@ -160,6 +161,131 @@ public abstract class BsMemberService implements Entity, Serializable, Cloneable
 
     protected EntityUniqueDrivenProperties newUniqueDrivenProperties() {
         return new EntityUniqueDrivenProperties();
+    }
+
+    // ===================================================================================
+    //                                                             Classification Property
+    //                                                             =======================
+    /**
+     * Get the value of serviceRankCode as the classification of ServiceRank. <br />
+     * SERVICE_RANK_CODE: {IX, NotNull, CHAR(3), FK to service_rank, classification=ServiceRank} <br />
+     * 会員が受けられるサービスのランクを示す
+     * <p>It's treated as case insensitive and if the code value is null, it returns null.</p>
+     * @return The instance of classification definition (as ENUM type). (NullAllowed: when the column value is null)
+     */
+    public CDef.ServiceRank getServiceRankCodeAsServiceRank() {
+        return CDef.ServiceRank.codeOf(getServiceRankCode());
+    }
+
+    /**
+     * Set the value of serviceRankCode as the classification of ServiceRank. <br />
+     * SERVICE_RANK_CODE: {IX, NotNull, CHAR(3), FK to service_rank, classification=ServiceRank} <br />
+     * 会員が受けられるサービスのランクを示す
+     * @param cdef The instance of classification definition (as ENUM type). (NullAllowed: if null, null value is set to the column)
+     */
+    public void setServiceRankCodeAsServiceRank(CDef.ServiceRank cdef) {
+        setServiceRankCode(cdef != null ? cdef.code() : null);
+    }
+
+    // ===================================================================================
+    //                                                              Classification Setting
+    //                                                              ======================
+    /**
+     * Set the value of serviceRankCode as Platinum (PLT). <br />
+     * PLATINUM: platinum rank
+     */
+    public void setServiceRankCode_Platinum() {
+        setServiceRankCodeAsServiceRank(CDef.ServiceRank.Platinum);
+    }
+
+    /**
+     * Set the value of serviceRankCode as Gold (GLD). <br />
+     * GOLD: gold rank
+     */
+    public void setServiceRankCode_Gold() {
+        setServiceRankCodeAsServiceRank(CDef.ServiceRank.Gold);
+    }
+
+    /**
+     * Set the value of serviceRankCode as Silver (SIL). <br />
+     * SILVER: silver rank
+     */
+    public void setServiceRankCode_Silver() {
+        setServiceRankCodeAsServiceRank(CDef.ServiceRank.Silver);
+    }
+
+    /**
+     * Set the value of serviceRankCode as Bronze (BRZ). <br />
+     * BRONZE: bronze rank
+     */
+    public void setServiceRankCode_Bronze() {
+        setServiceRankCodeAsServiceRank(CDef.ServiceRank.Bronze);
+    }
+
+    /**
+     * Set the value of serviceRankCode as Plastic (PLS). <br />
+     * PLASTIC: plastic rank
+     */
+    public void setServiceRankCode_Plastic() {
+        setServiceRankCodeAsServiceRank(CDef.ServiceRank.Plastic);
+    }
+
+    // ===================================================================================
+    //                                                        Classification Determination
+    //                                                        ============================
+    /**
+     * Is the value of serviceRankCode Platinum? <br />
+     * PLATINUM: platinum rank
+     * <p>It's treated as case insensitive and if the code value is null, it returns false.</p>
+     * @return The determination, true or false.
+     */
+    public boolean isServiceRankCodePlatinum() {
+        CDef.ServiceRank cdef = getServiceRankCodeAsServiceRank();
+        return cdef != null ? cdef.equals(CDef.ServiceRank.Platinum) : false;
+    }
+
+    /**
+     * Is the value of serviceRankCode Gold? <br />
+     * GOLD: gold rank
+     * <p>It's treated as case insensitive and if the code value is null, it returns false.</p>
+     * @return The determination, true or false.
+     */
+    public boolean isServiceRankCodeGold() {
+        CDef.ServiceRank cdef = getServiceRankCodeAsServiceRank();
+        return cdef != null ? cdef.equals(CDef.ServiceRank.Gold) : false;
+    }
+
+    /**
+     * Is the value of serviceRankCode Silver? <br />
+     * SILVER: silver rank
+     * <p>It's treated as case insensitive and if the code value is null, it returns false.</p>
+     * @return The determination, true or false.
+     */
+    public boolean isServiceRankCodeSilver() {
+        CDef.ServiceRank cdef = getServiceRankCodeAsServiceRank();
+        return cdef != null ? cdef.equals(CDef.ServiceRank.Silver) : false;
+    }
+
+    /**
+     * Is the value of serviceRankCode Bronze? <br />
+     * BRONZE: bronze rank
+     * <p>It's treated as case insensitive and if the code value is null, it returns false.</p>
+     * @return The determination, true or false.
+     */
+    public boolean isServiceRankCodeBronze() {
+        CDef.ServiceRank cdef = getServiceRankCodeAsServiceRank();
+        return cdef != null ? cdef.equals(CDef.ServiceRank.Bronze) : false;
+    }
+
+    /**
+     * Is the value of serviceRankCode Plastic? <br />
+     * PLASTIC: plastic rank
+     * <p>It's treated as case insensitive and if the code value is null, it returns false.</p>
+     * @return The determination, true or false.
+     */
+    public boolean isServiceRankCodePlastic() {
+        CDef.ServiceRank cdef = getServiceRankCodeAsServiceRank();
+        return cdef != null ? cdef.equals(CDef.ServiceRank.Plastic) : false;
     }
 
     // ===================================================================================
@@ -415,7 +541,7 @@ public abstract class BsMemberService implements Entity, Serializable, Cloneable
     }
 
     /**
-     * [get] SERVICE_RANK_CODE: {IX, NotNull, CHAR(3), FK to service_rank} <br />
+     * [get] SERVICE_RANK_CODE: {IX, NotNull, CHAR(3), FK to service_rank, classification=ServiceRank} <br />
      * サービスランクコード: サービスランクを参照するコード。<br />
      * どんなランクがあるのかドキドキですね。
      * @return The value of the column 'SERVICE_RANK_CODE'. (basically NotNull if selected: for the constraint)
@@ -425,7 +551,7 @@ public abstract class BsMemberService implements Entity, Serializable, Cloneable
     }
 
     /**
-     * [set] SERVICE_RANK_CODE: {IX, NotNull, CHAR(3), FK to service_rank} <br />
+     * [set] SERVICE_RANK_CODE: {IX, NotNull, CHAR(3), FK to service_rank, classification=ServiceRank} <br />
      * サービスランクコード: サービスランクを参照するコード。<br />
      * どんなランクがあるのかドキドキですね。
      * @param serviceRankCode The value of the column 'SERVICE_RANK_CODE'. (basically NotNull if update: for the constraint)

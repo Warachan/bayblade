@@ -8,6 +8,7 @@ import java.util.Set;
 import org.seasar.dbflute.Entity;
 import org.seasar.dbflute.dbmeta.DBMeta;
 import org.dbflute.handson.dbflute.allcommon.DBMetaInstanceHandler;
+import org.dbflute.handson.dbflute.allcommon.CDef;
 import org.dbflute.handson.dbflute.exentity.*;
 
 /**
@@ -67,7 +68,7 @@ public abstract class BsWithdrawalReason implements Entity, Serializable, Clonea
     // -----------------------------------------------------
     //                                                Column
     //                                                ------
-    /** WITHDRAWAL_REASON_CODE: {PK, NotNull, CHAR(3)} */
+    /** WITHDRAWAL_REASON_CODE: {PK, NotNull, CHAR(3), classification=WithdrawalReason} */
     protected String _withdrawalReasonCode;
 
     /** WITHDRAWAL_REASON_TEXT: {NotNull, TEXT(65535)} */
@@ -146,6 +147,112 @@ public abstract class BsWithdrawalReason implements Entity, Serializable, Clonea
 
     protected EntityUniqueDrivenProperties newUniqueDrivenProperties() {
         return new EntityUniqueDrivenProperties();
+    }
+
+    // ===================================================================================
+    //                                                             Classification Property
+    //                                                             =======================
+    /**
+     * Get the value of withdrawalReasonCode as the classification of WithdrawalReason. <br />
+     * WITHDRAWAL_REASON_CODE: {PK, NotNull, CHAR(3), classification=WithdrawalReason} <br />
+     * 会員の退会理由。なのでちょっとねがてぃぶ
+     * <p>It's treated as case insensitive and if the code value is null, it returns null.</p>
+     * @return The instance of classification definition (as ENUM type). (NullAllowed: when the column value is null)
+     */
+    public CDef.WithdrawalReason getWithdrawalReasonCodeAsWithdrawalReason() {
+        return CDef.WithdrawalReason.codeOf(getWithdrawalReasonCode());
+    }
+
+    /**
+     * Set the value of withdrawalReasonCode as the classification of WithdrawalReason. <br />
+     * WITHDRAWAL_REASON_CODE: {PK, NotNull, CHAR(3), classification=WithdrawalReason} <br />
+     * 会員の退会理由。なのでちょっとねがてぃぶ
+     * @param cdef The instance of classification definition (as ENUM type). (NullAllowed: if null, null value is set to the column)
+     */
+    public void setWithdrawalReasonCodeAsWithdrawalReason(CDef.WithdrawalReason cdef) {
+        setWithdrawalReasonCode(cdef != null ? cdef.code() : null);
+    }
+
+    // ===================================================================================
+    //                                                              Classification Setting
+    //                                                              ======================
+    /**
+     * Set the value of withdrawalReasonCode as Sit (SIT). <br />
+     * SIT: サイトが使いにくいから
+     */
+    public void setWithdrawalReasonCode_Sit() {
+        setWithdrawalReasonCodeAsWithdrawalReason(CDef.WithdrawalReason.Sit);
+    }
+
+    /**
+     * Set the value of withdrawalReasonCode as Prd (PRD). <br />
+     * PRD: 商品に魅力がないから
+     */
+    public void setWithdrawalReasonCode_Prd() {
+        setWithdrawalReasonCodeAsWithdrawalReason(CDef.WithdrawalReason.Prd);
+    }
+
+    /**
+     * Set the value of withdrawalReasonCode as Frt (FRT). <br />
+     * FRT: フリテンだから
+     */
+    public void setWithdrawalReasonCode_Frt() {
+        setWithdrawalReasonCodeAsWithdrawalReason(CDef.WithdrawalReason.Frt);
+    }
+
+    /**
+     * Set the value of withdrawalReasonCode as Oth (OTH). <br />
+     * OTH: その他理由
+     */
+    public void setWithdrawalReasonCode_Oth() {
+        setWithdrawalReasonCodeAsWithdrawalReason(CDef.WithdrawalReason.Oth);
+    }
+
+    // ===================================================================================
+    //                                                        Classification Determination
+    //                                                        ============================
+    /**
+     * Is the value of withdrawalReasonCode Sit? <br />
+     * SIT: サイトが使いにくいから
+     * <p>It's treated as case insensitive and if the code value is null, it returns false.</p>
+     * @return The determination, true or false.
+     */
+    public boolean isWithdrawalReasonCodeSit() {
+        CDef.WithdrawalReason cdef = getWithdrawalReasonCodeAsWithdrawalReason();
+        return cdef != null ? cdef.equals(CDef.WithdrawalReason.Sit) : false;
+    }
+
+    /**
+     * Is the value of withdrawalReasonCode Prd? <br />
+     * PRD: 商品に魅力がないから
+     * <p>It's treated as case insensitive and if the code value is null, it returns false.</p>
+     * @return The determination, true or false.
+     */
+    public boolean isWithdrawalReasonCodePrd() {
+        CDef.WithdrawalReason cdef = getWithdrawalReasonCodeAsWithdrawalReason();
+        return cdef != null ? cdef.equals(CDef.WithdrawalReason.Prd) : false;
+    }
+
+    /**
+     * Is the value of withdrawalReasonCode Frt? <br />
+     * FRT: フリテンだから
+     * <p>It's treated as case insensitive and if the code value is null, it returns false.</p>
+     * @return The determination, true or false.
+     */
+    public boolean isWithdrawalReasonCodeFrt() {
+        CDef.WithdrawalReason cdef = getWithdrawalReasonCodeAsWithdrawalReason();
+        return cdef != null ? cdef.equals(CDef.WithdrawalReason.Frt) : false;
+    }
+
+    /**
+     * Is the value of withdrawalReasonCode Oth? <br />
+     * OTH: その他理由
+     * <p>It's treated as case insensitive and if the code value is null, it returns false.</p>
+     * @return The determination, true or false.
+     */
+    public boolean isWithdrawalReasonCodeOth() {
+        CDef.WithdrawalReason cdef = getWithdrawalReasonCodeAsWithdrawalReason();
+        return cdef != null ? cdef.equals(CDef.WithdrawalReason.Oth) : false;
     }
 
     // ===================================================================================
@@ -336,7 +443,7 @@ public abstract class BsWithdrawalReason implements Entity, Serializable, Clonea
     //                                                                            Accessor
     //                                                                            ========
     /**
-     * [get] WITHDRAWAL_REASON_CODE: {PK, NotNull, CHAR(3)} <br />
+     * [get] WITHDRAWAL_REASON_CODE: {PK, NotNull, CHAR(3), classification=WithdrawalReason} <br />
      * 退会理由コード
      * @return The value of the column 'WITHDRAWAL_REASON_CODE'. (basically NotNull if selected: for the constraint)
      */
@@ -345,7 +452,7 @@ public abstract class BsWithdrawalReason implements Entity, Serializable, Clonea
     }
 
     /**
-     * [set] WITHDRAWAL_REASON_CODE: {PK, NotNull, CHAR(3)} <br />
+     * [set] WITHDRAWAL_REASON_CODE: {PK, NotNull, CHAR(3), classification=WithdrawalReason} <br />
      * 退会理由コード
      * @param withdrawalReasonCode The value of the column 'WITHDRAWAL_REASON_CODE'. (basically NotNull if update: for the constraint)
      */

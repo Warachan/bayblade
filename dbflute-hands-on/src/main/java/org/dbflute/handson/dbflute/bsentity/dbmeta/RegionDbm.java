@@ -66,11 +66,11 @@ public class RegionDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnRegionId = cci("REGION_ID", "REGION_ID", null, null, Integer.class, "regionId", null, true, false, true, "INT", 10, 0, null, false, null, null, null, "memberAddressList", null);
+    protected final ColumnInfo _columnRegionId = cci("REGION_ID", "REGION_ID", null, null, Integer.class, "regionId", null, true, false, true, "INT", 10, 0, null, false, null, null, null, "memberAddressList", CDef.DefMeta.Region);
     protected final ColumnInfo _columnRegionName = cci("REGION_NAME", "REGION_NAME", null, null, String.class, "regionName", null, false, false, true, "VARCHAR", 50, 0, null, false, null, null, null, null, null);
 
     /**
-     * REGION_ID: {PK, NotNull, INT(10)}
+     * REGION_ID: {PK, NotNull, INT(10), classification=Region}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnRegionId() { return _columnRegionId; }
