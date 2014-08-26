@@ -20,6 +20,7 @@ import org.seasar.dbflute.cbean.ListResultBean;
 import org.seasar.dbflute.cbean.SpecifyQuery;
 import org.seasar.dbflute.cbean.SubQuery;
 
+// TODO wara クラス宣言の直下、他のクラスでは空行空けているので、空けましょう by jflute 
 /**
  * @author mayuko.sakaba
  */
@@ -47,7 +48,9 @@ public class HandsOn04Test extends UnitContainerTestCase {
         cb.setupSelect_Member();
         cb.setupSelect_Product();
         cb.query().queryMember().setMemberStatusCode_Equal("WDL");
+        // TODO wara まあ、使ってみたかったとのこと。まあ、それにしても、呼び出し位置は、setupSelectの直下 by jflute
         cb.specify().specifyProduct().columnProductName();
+        // TODO wara orderByは最後にしよう by jflute
         cb.query().addOrderBy_PurchaseDatetime_Desc();
         cb.query().setPaymentCompleteFlg_Equal(0);
 
@@ -77,12 +80,23 @@ public class HandsOn04Test extends UnitContainerTestCase {
         ListResultBean<Member> memberList = memberBhv.selectList(cb);
 
         // ## Assert ##
-        assertHasAnyElement(memberList);
+        assertHasAnyElement(memberList); // 素通り防止
+        // これで相当堅いテストになった。相当事前条件がぶっ壊れてもちゃんと検知できる
+        boolean existsNotWDL = false;
+        boolean existsWDL = false;
         for (Member member : memberList) {
-            if (member.getMemberStatusCode().equals("WDL")) {
+            if (!member.getMemberStatusCode().equals("WDL")) { // 退会会員でないひと
+                assertNull(member.getMemberWithdrawalAsOne());
+                existsNotWDL = true;
+            } else {
+                // setupSelectされていることを保証するアサート
+                // でないと、setupSelect忘れのときに、意味のないassertNull()になってしまうため
                 assertNotNull(member.getMemberWithdrawalAsOne());
+                existsWDL = true; // その保証が動いていることを保証する
             }
         }
+        assertTrue(existsNotWDL);
+        assertTrue(existsWDL);
     }
 
     /**
@@ -96,12 +110,14 @@ public class HandsOn04Test extends UnitContainerTestCase {
         // ## Arrange ##
         MemberCB cb = new MemberCB();
         cb.setupSelect_MemberStatus();
+        // TODO wara 修行++: 以下は思い出にして、同じ生年月日の人がいたら、みんな検索してみよう by jflute
+        // TODO wara orderByは最後 (fetchFirst()の手前) by jflute
         cb.query().addOrderBy_Birthdate_Desc();
         cb.query().setMemberStatusCode_Equal_仮会員();
         cb.fetchFirst(1);
 
         // ## Act ##
-
+        // TODO wara selectEntityWithDeteledCheck()を使おう by jflute
         Member member = memberBhv.selectEntity(cb);
         // 思い出　一回の検索。
         //        ListResultBean<Member> memberList = memberBhv.selectList(cb);
@@ -124,8 +140,12 @@ public class HandsOn04Test extends UnitContainerTestCase {
         cb.setupSelect_Product().withProductStatus();
         cb.setupSelect_Member().withMemberStatus();
         cb.query().setPaymentCompleteFlg_Equal_True();
+        // TODO wara orderByは最後 by jflute
         cb.query().addOrderBy_PurchaseDatetime_Desc();
+        // TODO wara getConditionQueryMemberStatus()は内部メソッドなので、queryMemberStatus()を使って by jflute
+        // TODO wara というか、MemberStatusまで行く必要なし by jflute
         cb.query().queryMember().getConditionQueryMemberStatus().setMemberStatusCode_Equal_正式会員();
+        // TODO wara 一番若いがない。せっかくなので、一つ前のエクササイズと同じく、fetchFirst()なしで by jflute
 
         // ## Act ##
         ListResultBean<Purchase> purchaseList = purchaseBhv.selectList(cb);
@@ -149,6 +169,7 @@ public class HandsOn04Test extends UnitContainerTestCase {
      */
     public void test_05() throws Exception {
         // ## Arrange ##
+        // TODO wara いろいろおなじ by jflute
         PurchaseCB cb = new PurchaseCB();
         cb.setupSelect_Product().withProductStatus();
         cb.query().addOrderBy_PurchasePrice_Desc();
@@ -162,6 +183,7 @@ public class HandsOn04Test extends UnitContainerTestCase {
         for (Purchase purchase : purchaseList) {
             String statusName = purchase.getProduct().getProductStatus().getProductStatusName();
             log(statusName);
+            // TODO wara is... by jflute
             assertTrue(statusName.equals("生産販売可能"));
         }
     }
@@ -176,6 +198,7 @@ public class HandsOn04Test extends UnitContainerTestCase {
      */
     public void test_06() throws Exception {
         // ## Arrange ##
+        // TODO wara いろいろおなじ by jflute
         MemberCB cb = new MemberCB();
         cb.setupSelect_MemberStatus();
         cb.query().queryMemberStatus().addOrderBy_DisplayOrder_Asc();
@@ -195,13 +218,16 @@ public class HandsOn04Test extends UnitContainerTestCase {
 
             assertTrue(member.isMemberStatusCode正式会員() || member.isMemberStatusCode退会会員());
             assertNotNull(member.isMemberStatusCode正式会員() || member.isMemberStatusCode退会会員()); // こっちのほうがしっくりくる？
+            // TODO wara こないよー by jflute
 
             if (member.isMemberStatusCode正式会員()) {
                 member.setMemberStatusCode_退会会員();
                 String changedStatus = member.getMemberStatus().getMemberStatusName();
                 log("変更後：" + changedStatus + member.isMemberStatusCode退会会員());
                 assertTrue(member.isMemberStatusCode退会会員());
-                // TODO mayuko.sakaba 変更が正しくできていないのでは。
+                // mayuko.sakaba 変更が正しくできていないのでは。
+                // wara だいじょうぶ、setMemberStatusCode_退会会員()しても変わるのはコードだけ by jflute
+                // Entityの参照しているMemberStatusは何も変わらない。(データベースも何も変更されない)
             }
         }
     }
@@ -237,6 +263,8 @@ public class HandsOn04Test extends UnitContainerTestCase {
             }
         });
         // TODO mayuko.sakaba これでいいのでしょうか？仕組みがイマイチよくわかっていない。。。
+        // TODO wara 先に、一番若い仮会員のエクササイズやってからだけど、これ by jflute
+        // http://dbflute.seasar.org/ja/manual/function/ormapper/conditionbean/query/scalarcondition.html#outerqueryagain
 
         // ## Act ##
         ListResultBean<Member> memberList = memberBhv.selectList(cb);
@@ -300,6 +328,7 @@ public class HandsOn04Test extends UnitContainerTestCase {
         cb.setupSelect_MemberStatus();
         cb.query().queryMemberStatus().addOrderBy_DisplayOrder_Asc();
         // TODO mayuko.sakaba まだ途中です。区分値がうまく設定されなかったので保留しています。
+        // TODO wara dfpropを綺麗に by jflute
         // ## Act ##
 
         // ## Assert ##
