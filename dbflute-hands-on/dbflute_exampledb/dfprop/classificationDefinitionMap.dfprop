@@ -52,8 +52,8 @@ map:{
     #        ; comment=DESCRIPTION; orderBy=DISPLAY_ORDER
     #    }
     #}
-        ; Flg = list:{
-        ; map:{topComment=フラグを示す; isCheckImplicitSet=true; codeType=Number}
+    ; Flg = list:{
+    	; map:{topComment=フラグを示す; isCheckImplicitSet=true; codeType=Number}
         ; map:{code=1; name=True ; alias=はい  ; comment=有効を示す}
         ; map:{code=0; name=False; alias=いいえ; comment=無効を示す}
     }
@@ -64,8 +64,8 @@ map:{
             ; code=MEMBER_STATUS_CODE; name=MEMBER_STATUS_NAME
             ; comment=DESCRIPTION; orderBy=DISPLAY_ORDER
         }
-}
- ; ServiceRank = list:{
+	}
+ 	; ServiceRank = list:{
         ; map:{topComment=会員が受けられるサービスのランクを示す; codeType=String}
         ; map:{
             ; table=SERVICE_RANK
@@ -92,8 +92,7 @@ map:{
     ; ProductCategory = list:{
         ; map:{topComment=商品のカテゴリ。階層構造である; codeType=String}
         ; map:{
-            ; table=$sql:
- PRODUCT_CATEGORY loc left outer join PRODUCT_CATEGORY rel on loc.PARENT_CATEGORY_CODE = rel.PRODUCT_CATEGORY_CODE
+            ; table=$sql: PRODUCT_CATEGORY loc left outer join PRODUCT_CATEGORY rel on loc.PARENT_CATEGORY_CODE = rel.PRODUCT_CATEGORY_CODE
             ; code=$sql: loc.PRODUCT_CATEGORY_CODE
             ; name=$sql: loc.PRODUCT_CATEGORY_NAME
             ; comment=$sql: 'of ' || rel.PRODUCT_CATEGORY_NAME
@@ -121,5 +120,6 @@ map:{
         ; map:{code=HAN; name=ByHand; alias=手渡し; comment=Face-to-Faceの手渡しで商品と交換}
         ; map:{code=BAK; name=BankTransfer; alias=銀行振込; comment=銀行振込で確認してから商品発送}
         ; map:{code=CRC; name=CreditCard; alias=クレジットカード; comment=クレジットカードの番号を教えてもらう}
-    }}
+    }
+}
 # ----------------/

@@ -14,17 +14,19 @@ import org.dbflute.handson.dbflute.exbhv.MemberBhv;
 import org.dbflute.handson.dbflute.exbhv.MemberSecurityBhv;
 import org.dbflute.handson.dbflute.exbhv.PurchaseBhv;
 import org.dbflute.handson.dbflute.exentity.Member;
+import org.dbflute.handson.dbflute.exentity.ProductStatus;
 import org.dbflute.handson.dbflute.exentity.Purchase;
 import org.dbflute.handson.unit.UnitContainerTestCase;
 import org.seasar.dbflute.cbean.ListResultBean;
 import org.seasar.dbflute.cbean.SpecifyQuery;
 import org.seasar.dbflute.cbean.SubQuery;
 
-// TODO wara クラス宣言の直下、他のクラスでは空行空けているので、空けましょう by jflute 
+// TODO 【チェック!】wara クラス宣言の直下、他のクラスでは空行空けているので、空けましょう by jflute
 /**
  * @author mayuko.sakaba
  */
 public class HandsOn04Test extends UnitContainerTestCase {
+
     @Resource
     protected MemberBhv memberBhv;
 
@@ -47,12 +49,12 @@ public class HandsOn04Test extends UnitContainerTestCase {
         PurchaseCB cb = new PurchaseCB();
         cb.setupSelect_Member();
         cb.setupSelect_Product();
-        cb.query().queryMember().setMemberStatusCode_Equal("WDL");
-        // TODO wara まあ、使ってみたかったとのこと。まあ、それにしても、呼び出し位置は、setupSelectの直下 by jflute
         cb.specify().specifyProduct().columnProductName();
-        // TODO wara orderByは最後にしよう by jflute
-        cb.query().addOrderBy_PurchaseDatetime_Desc();
+        cb.query().queryMember().setMemberStatusCode_Equal("WDL");
+        // TODO 【チェック!】wara まあ、使ってみたかったとのこと。まあ、それにしても、呼び出し位置は、setupSelectの直下 by jflute
+        // TODO 【チェック!】wara orderByは最後にしよう by jflute
         cb.query().setPaymentCompleteFlg_Equal(0);
+        cb.query().addOrderBy_PurchaseDatetime_Desc();
 
         // ## Act ##
         ListResultBean<Purchase> puchaseList = purchaseBhv.selectList(cb);
@@ -110,17 +112,22 @@ public class HandsOn04Test extends UnitContainerTestCase {
         // ## Arrange ##
         MemberCB cb = new MemberCB();
         cb.setupSelect_MemberStatus();
-        // TODO wara 修行++: 以下は思い出にして、同じ生年月日の人がいたら、みんな検索してみよう by jflute
-        // TODO wara orderByは最後 (fetchFirst()の手前) by jflute
-        cb.query().addOrderBy_Birthdate_Desc();
-        cb.query().setMemberStatusCode_Equal_仮会員();
-        cb.fetchFirst(1);
+        cb.query().scalar_Equal().max(new SubQuery<MemberCB>() {
+            public void query(MemberCB subCB) {
+                subCB.specify().columnBirthdate();
+                subCB.query().setMemberStatusCode_Equal_仮会員();
+            }
+        });
+        // TODO 【やってみた！】wara 修行++: 以下は思い出にして、同じ生年月日の人がいたら、みんな検索してみよう by jflute
+        // TODO 【チェック!】wara orderByは最後 (fetchFirst()の手前) by jflute
+        // 思い出
+        // cb.query().setMemberStatusCode_Equal_仮会員();
+        // cb.fetchFirst(1);
+        // cb.query().addOrderBy_Birthdate_Desc();
 
         // ## Act ##
         // TODO wara selectEntityWithDeteledCheck()を使おう by jflute
-        Member member = memberBhv.selectEntity(cb);
-        // 思い出　一回の検索。
-        //        ListResultBean<Member> memberList = memberBhv.selectList(cb);
+        Member member = memberBhv.selectEntityWithDeletedCheck(cb);
 
         // ## Assert ##
         log(member.getMemberStatus().getMemberStatusName());
@@ -137,15 +144,25 @@ public class HandsOn04Test extends UnitContainerTestCase {
     public void test_04() throws Exception {
         // ## Arrange ##
         PurchaseCB cb = new PurchaseCB();
-        cb.setupSelect_Product().withProductStatus();
         cb.setupSelect_Member().withMemberStatus();
+        cb.query().queryMember().scalar_Equal().max(new SubQuery<MemberCB>() {
+            public void query(MemberCB subCB) {
+                subCB.specify().columnBirthdate();
+                subCB.query().setMemberStatusCode_Equal_正式会員();
+                subCB.query().existsPurchaseList(new SubQuery<PurchaseCB>() {
+                    public void query(PurchaseCB subCB) {
+                        subCB.query().setPaymentCompleteFlg_Equal_True();
+                    }
+                });
+            }
+        });
+        cb.query().queryMember().setMemberStatusCode_Equal_正式会員();
         cb.query().setPaymentCompleteFlg_Equal_True();
-        // TODO wara orderByは最後 by jflute
         cb.query().addOrderBy_PurchaseDatetime_Desc();
-        // TODO wara getConditionQueryMemberStatus()は内部メソッドなので、queryMemberStatus()を使って by jflute
-        // TODO wara というか、MemberStatusまで行く必要なし by jflute
-        cb.query().queryMember().getConditionQueryMemberStatus().setMemberStatusCode_Equal_正式会員();
-        // TODO wara 一番若いがない。せっかくなので、一つ前のエクササイズと同じく、fetchFirst()なしで by jflute
+        // TODO 【チェック!】wara orderByは最後 by jflute
+        // TODO 【チェック!】wara getConditionQueryMemberStatus()は内部メソッドなので、queryMemberStatus()を使って by jflute
+        // TODO 【チェック!】wara というか、MemberStatusまで行く必要なし by jflute
+        // TODO 【やってみた！】wara 一番若いがない。せっかくなので、一つ前のエクササイズと同じく、fetchFirst()なしで by jflute
 
         // ## Act ##
         ListResultBean<Purchase> purchaseList = purchaseBhv.selectList(cb);
@@ -154,9 +171,8 @@ public class HandsOn04Test extends UnitContainerTestCase {
         assertHasAnyElement(purchaseList);
         for (Purchase purchase : purchaseList) {
             Member member = purchase.getMember();
-            String productStatusName = purchase.getProduct().getProductStatus().getProductStatusName();
             String memberStatusName = member.getMemberStatus().getMemberStatusName();
-            log(memberStatusName, productStatusName);
+            log(memberStatusName);
             assertTrue(member.isMemberStatusCode正式会員());
         }
     }
@@ -181,10 +197,10 @@ public class HandsOn04Test extends UnitContainerTestCase {
         // ## Assert ##
         assertHasAnyElement(purchaseList);
         for (Purchase purchase : purchaseList) {
-            String statusName = purchase.getProduct().getProductStatus().getProductStatusName();
-            log(statusName);
+            ProductStatus status = purchase.getProduct().getProductStatus();
+            log(status);
             // TODO wara is... by jflute
-            assertTrue(statusName.equals("生産販売可能"));
+            assertTrue(status.isProductStatusCode生産販売可能());
         }
     }
 
@@ -201,11 +217,11 @@ public class HandsOn04Test extends UnitContainerTestCase {
         // TODO wara いろいろおなじ by jflute
         MemberCB cb = new MemberCB();
         cb.setupSelect_MemberStatus();
-        cb.query().queryMemberStatus().addOrderBy_DisplayOrder_Asc();
         List<MemberStatus> statusList = new ArrayList<CDef.MemberStatus>();
         statusList.add(CDef.MemberStatus.正式会員);
         statusList.add(CDef.MemberStatus.退会会員);
         cb.query().setMemberStatusCode_InScope_AsMemberStatus(statusList);
+        cb.query().queryMemberStatus().addOrderBy_DisplayOrder_Asc();
 
         // ## Act ##
         ListResultBean<Member> memberList = memberBhv.selectList(cb);
@@ -213,11 +229,7 @@ public class HandsOn04Test extends UnitContainerTestCase {
         // ## Assert ##
         assertHasAnyElement(memberList);
         for (Member member : memberList) {
-            //　他のアサートに使うかもしれないのでとりあえず残しておく。
-            // String status = member.getMemberStatus().getMemberStatusName();
-
             assertTrue(member.isMemberStatusCode正式会員() || member.isMemberStatusCode退会会員());
-            assertNotNull(member.isMemberStatusCode正式会員() || member.isMemberStatusCode退会会員()); // こっちのほうがしっくりくる？
             // TODO wara こないよー by jflute
 
             if (member.isMemberStatusCode正式会員()) {
@@ -262,6 +274,7 @@ public class HandsOn04Test extends UnitContainerTestCase {
                 cb.specify().columnMemberStatusCode();
             }
         });
+
         // TODO mayuko.sakaba これでいいのでしょうか？仕組みがイマイチよくわかっていない。。。
         // TODO wara 先に、一番若い仮会員のエクササイズやってからだけど、これ by jflute
         // http://dbflute.seasar.org/ja/manual/function/ormapper/conditionbean/query/scalarcondition.html#outerqueryagain
@@ -327,8 +340,8 @@ public class HandsOn04Test extends UnitContainerTestCase {
         MemberCB cb = new MemberCB();
         cb.setupSelect_MemberStatus();
         cb.query().queryMemberStatus().addOrderBy_DisplayOrder_Asc();
-        // TODO mayuko.sakaba まだ途中です。区分値がうまく設定されなかったので保留しています。
-        // TODO wara dfpropを綺麗に by jflute
+        // TODO 【やってみましたー引き続き整理していきます】wara dfpropを綺麗に by jflute
+        // RecruiterStatus
         // ## Act ##
 
         // ## Assert ##
