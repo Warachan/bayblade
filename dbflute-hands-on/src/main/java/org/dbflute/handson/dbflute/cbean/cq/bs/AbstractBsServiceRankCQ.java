@@ -595,8 +595,18 @@ public abstract class AbstractBsServiceRankCQ extends AbstractConditionQuery {
     }
 
     /**
+     * Equal(=). As boolean for Flg. <br />
+     * NEW_ACCEPTABLE_FLG: {NotNull, INT(10), classification=Flg} <br />
+     * フラグを示す
+     * @param determination The determination, true or false. (NullAllowed: if null, no condition)
+     */
+    public void setNewAcceptableFlg_Equal_AsBoolean(Boolean determination) {
+        setNewAcceptableFlg_Equal_AsFlg(CDef.Flg.codeOf(determination));
+    }
+
+    /**
      * Equal(=). As True (1). And NullIgnored, OnlyOnceRegistered. <br />
-     * はい: 有効を示す
+     * Checked: フラグが立っている
      */
     public void setNewAcceptableFlg_Equal_True() {
         setNewAcceptableFlg_Equal_AsFlg(CDef.Flg.True);
@@ -604,7 +614,7 @@ public abstract class AbstractBsServiceRankCQ extends AbstractConditionQuery {
 
     /**
      * Equal(=). As False (0). And NullIgnored, OnlyOnceRegistered. <br />
-     * いいえ: 無効を示す
+     * Unchecked: フラグが立っていない
      */
     public void setNewAcceptableFlg_Equal_False() {
         setNewAcceptableFlg_Equal_AsFlg(CDef.Flg.False);
@@ -635,7 +645,7 @@ public abstract class AbstractBsServiceRankCQ extends AbstractConditionQuery {
 
     /**
      * NotEqual(&lt;&gt;). As True (1). And NullIgnored, OnlyOnceRegistered. <br />
-     * はい: 有効を示す
+     * Checked: フラグが立っている
      */
     public void setNewAcceptableFlg_NotEqual_True() {
         setNewAcceptableFlg_NotEqual_AsFlg(CDef.Flg.True);
@@ -643,7 +653,7 @@ public abstract class AbstractBsServiceRankCQ extends AbstractConditionQuery {
 
     /**
      * NotEqual(&lt;&gt;). As False (0). And NullIgnored, OnlyOnceRegistered. <br />
-     * いいえ: 無効を示す
+     * Unchecked: フラグが立っていない
      */
     public void setNewAcceptableFlg_NotEqual_False() {
         setNewAcceptableFlg_NotEqual_AsFlg(CDef.Flg.False);

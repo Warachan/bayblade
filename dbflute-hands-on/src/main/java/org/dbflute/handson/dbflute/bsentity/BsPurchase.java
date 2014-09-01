@@ -223,12 +223,22 @@ public abstract class BsPurchase implements Entity, Serializable, Cloneable {
         setPaymentCompleteFlg(cdef != null ? FunCustodial.toNumber(cdef.code(), Integer.class) : null);
     }
 
+    /**
+     * Set the value of paymentCompleteFlg as boolean. <br />
+     * PAYMENT_COMPLETE_FLG: {NotNull, INT(10), classification=Flg} <br />
+     * フラグを示す
+     * @param determination The determination, true or false. (NullAllowed: if null, null value is set to the column)
+     */
+    public void setPaymentCompleteFlgAsBoolean(Boolean determination) {
+        setPaymentCompleteFlgAsFlg(CDef.Flg.codeOf(determination));
+    }
+
     // ===================================================================================
     //                                                              Classification Setting
     //                                                              ======================
     /**
      * Set the value of paymentCompleteFlg as True (1). <br />
-     * はい: 有効を示す
+     * Checked: フラグが立っている
      */
     public void setPaymentCompleteFlg_True() {
         setPaymentCompleteFlgAsFlg(CDef.Flg.True);
@@ -236,7 +246,7 @@ public abstract class BsPurchase implements Entity, Serializable, Cloneable {
 
     /**
      * Set the value of paymentCompleteFlg as False (0). <br />
-     * いいえ: 無効を示す
+     * Unchecked: フラグが立っていない
      */
     public void setPaymentCompleteFlg_False() {
         setPaymentCompleteFlgAsFlg(CDef.Flg.False);
@@ -247,7 +257,7 @@ public abstract class BsPurchase implements Entity, Serializable, Cloneable {
     //                                                        ============================
     /**
      * Is the value of paymentCompleteFlg True? <br />
-     * はい: 有効を示す
+     * Checked: フラグが立っている
      * <p>It's treated as case insensitive and if the code value is null, it returns false.</p>
      * @return The determination, true or false.
      */
@@ -258,7 +268,7 @@ public abstract class BsPurchase implements Entity, Serializable, Cloneable {
 
     /**
      * Is the value of paymentCompleteFlg False? <br />
-     * いいえ: 無効を示す
+     * Unchecked: フラグが立っていない
      * <p>It's treated as case insensitive and if the code value is null, it returns false.</p>
      * @return The determination, true or false.
      */

@@ -126,7 +126,7 @@ public class HandsOn04Test extends UnitContainerTestCase {
         // cb.query().addOrderBy_Birthdate_Desc();
 
         // ## Act ##
-        // TODO wara selectEntityWithDeteledCheck()を使おう by jflute
+        // TODO 【使います！】wara selectEntityWithDeteledCheck()を使おう by jflute
         Member member = memberBhv.selectEntityWithDeletedCheck(cb);
 
         // ## Assert ##
@@ -199,7 +199,7 @@ public class HandsOn04Test extends UnitContainerTestCase {
         for (Purchase purchase : purchaseList) {
             ProductStatus status = purchase.getProduct().getProductStatus();
             log(status);
-            // TODO wara is... by jflute
+            // TODO 【isになるです】wara is... by jflute
             assertTrue(status.isProductStatusCode生産販売可能());
         }
     }
@@ -255,7 +255,7 @@ public class HandsOn04Test extends UnitContainerTestCase {
     public void test_07() throws Exception {
         // ## Arrange ##
         MemberCB cb = new MemberCB();
-
+        cb.query().arrangeExistsBankTransferPayment();
         cb.query().scalar_Equal().max(new SubQuery<MemberCB>() {
             public void query(MemberCB subCB) {
                 subCB.specify().columnBirthdate();
@@ -263,7 +263,7 @@ public class HandsOn04Test extends UnitContainerTestCase {
                     public void query(PurchaseCB subCB) {
                         subCB.query().existsPurchasePaymentList(new SubQuery<PurchasePaymentCB>() {
                             public void query(PurchasePaymentCB subCB) {
-                                subCB.query().setPaymentMethodCode_NotEqual_BankTransfer();
+                                subCB.query().setPaymentMethodCode_Equal_BankTransfer();
                             }
                         });
                     }
@@ -274,7 +274,7 @@ public class HandsOn04Test extends UnitContainerTestCase {
                 cb.specify().columnMemberStatusCode();
             }
         });
-
+        // TODO mayuko.sakaba 結局全部arrangeExistsBankTransferPaymentに含んでしまったけどこれはCQにメソッドを作った意味を良くわからない
         // TODO mayuko.sakaba これでいいのでしょうか？仕組みがイマイチよくわかっていない。。。
         // TODO wara 先に、一番若い仮会員のエクササイズやってからだけど、これ by jflute
         // http://dbflute.seasar.org/ja/manual/function/ormapper/conditionbean/query/scalarcondition.html#outerqueryagain
@@ -339,11 +339,89 @@ public class HandsOn04Test extends UnitContainerTestCase {
         // ## Arrange ##
         MemberCB cb = new MemberCB();
         cb.setupSelect_MemberStatus();
+        cb.query().setMemberStatusCode_InScope_ServiceAvailable();
         cb.query().queryMemberStatus().addOrderBy_DisplayOrder_Asc();
         // TODO 【やってみましたー引き続き整理していきます】wara dfpropを綺麗に by jflute
-        // RecruiterStatus
+
         // ## Act ##
+        ListResultBean<Member> memberList = memberBhv.selectList(cb);
+        assertHasAnyElement(memberList);
+        // ## Assert ##
+        for (Member member : memberList) {
+            assertTrue(member.isMemberStatusCode_ServiceAvailable());
+        }
+    }
+
+    /**
+     * 【9】未払い購入のある会員を検索
+     * 姉妹コードの設定によって生成されたメソッドを利用
+     * 正式会員日時の降順(nullを後に並べる)、会員IDの昇順で並べる
+     * 会員が未払いの購入を持っていることをアサート
+     */
+    public void test_09() throws Exception {
+        // ## Arrange ##
+        MemberCB cb = new MemberCB();
+        cb.query().existsPurchaseList(new SubQuery<PurchaseCB>() {
+            public void query(PurchaseCB subCB) {
+                subCB.query().setPaymentCompleteFlg_Equal_AsBoolean(false);
+            }
+        });
+        cb.query().addOrderBy_FormalizedDatetime_Desc().withNullsLast();
+        cb.query().addOrderBy_MemberId_Asc();
+
+        // ## Act ##
+        ListResultBean<Member> memberList = memberBhv.selectList(cb);
 
         // ## Assert ##
+        assertHasAnyElement(memberList);
+        for (Member member : memberList) {
+            List<Purchase> purchaseList = member.getPurchaseList();
+            log("*************************" + member.getPurchaseList());
+            // TODO mayuko.sakaba purchaseListの中身が空！なぜ！？
+            for (Purchase purchase : purchaseList) {
+                assertHasAnyElement(purchaseList);
+                log("*************************" + purchase.getPaymentCompleteFlg());
+                assertFalse(purchase.isPaymentCompleteFlgFalse());
+            }
+        }
+    }
+
+    /**
+     * 【10】会員ステータスの表示順カラムで会員を並べて検索
+     * 会員ステータスの "表示順" カラムの昇順で並べる
+     * 会員ステータスのデータ自体は要らない
+     * その次には、会員の会員IDの降順で並べる
+     * 会員ステータスのデータが取れていないことをアサート
+     * 会員が会員ステータスの表示順ごとに並んでいることをアサート
+     */
+    public void test_10() throws Exception {
+        // ## Arrange ##
+        MemberCB cb = new MemberCB();
+        cb.setupSelect_MemberStatus();
+        // TODO mayuko.sakaba これだと独自の属性を指定した意味がよくわからない感じになっちゃってる
+        cb.specify().specifyMemberStatus().columnDisplayOrder();
+        cb.query().queryMemberStatus().addOrderBy_DisplayOrder_Asc();
+        cb.query().addOrderBy_MemberId_Desc();
+
+        // ## Act ##
+        ListResultBean<Member> memberList = memberBhv.selectList(cb);
+
+        // ## Assert ##
+        int previousOrder = 0; // assertに使いたいのですがそこまで到達せず。
+        assertHasAnyElement(memberList);
+        for (Member member : memberList) {
+            Integer displayOrder = member.getMemberStatus().getDisplayOrder(); //　後で消します。
+            log(displayOrder);
+            // TODO mayuko.sakaba Docsに書いてあるとおりに独自の属性が取得できないよー困ったよーー(T^T)
+            // (String)CDef.MemberStatus.su
+            // CDef.MemberStatus.values().get;
+            // assertになる予定
+            //            int displayOrder = Integer.parseInt(memberStatus);
+            //            if (previousOrder == 0) {
+            //
+            //            }
+            // TODO mayuko.sakaba PKはとってきてしまうのでdisplayorder以外にも不必要な情報を持ってきてしまうっぽい
+            //            assertNull(member.getMemberStatus());
+        }
     }
 }

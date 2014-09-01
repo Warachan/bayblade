@@ -23,11 +23,11 @@ public interface CDef extends Classification {
      * フラグを示す
      */
     public enum Flg implements CDef {
-        /** はい: 有効を示す */
-        True("1", "はい", EMPTY_SISTERS)
+        /** Checked: フラグが立っている */
+        True("1", "Checked", new String[] {"true"})
         ,
-        /** いいえ: 無効を示す */
-        False("0", "いいえ", EMPTY_SISTERS)
+        /** Unchecked: フラグが立っていない */
+        False("0", "Unchecked", new String[] {"false"})
         ;
         private static final Map<String, Flg> _codeValueMap = new HashMap<String, Flg>();
         static {
@@ -109,15 +109,48 @@ public interface CDef extends Classification {
                 for (String sister : value.sisters()) { _codeValueMap.put(sister.toLowerCase(), value); }
             }
         }
+        private static final Map<String, Map<String, Object>> _subItemMapMap = new HashMap<String, Map<String, Object>>();
+        static {
+            {
+                Map<String, Object> subItemMap = new HashMap<String, Object>();
+                subItemMap.put("displayOrder", "1");
+                _subItemMapMap.put(正式会員.code(), Collections.unmodifiableMap(subItemMap));
+            }
+            {
+                Map<String, Object> subItemMap = new HashMap<String, Object>();
+                subItemMap.put("displayOrder", "2");
+                _subItemMapMap.put(退会会員.code(), Collections.unmodifiableMap(subItemMap));
+            }
+            {
+                Map<String, Object> subItemMap = new HashMap<String, Object>();
+                subItemMap.put("displayOrder", "3");
+                _subItemMapMap.put(仮会員.code(), Collections.unmodifiableMap(subItemMap));
+            }
+        }
         private String _code; private String _alias; private String[] _sisters;
         private MemberStatus(String code, String alias, String[] sisters)
         { _code = code; _alias = alias; _sisters = sisters; }
         public String code() { return _code; } public String alias() { return _alias; }
         private String[] sisters() { return _sisters; }
-        public Map<String, Object> subItemMap() { return EMPTY_SUB_ITEM_MAP; }
+        public Map<String, Object> subItemMap() { return _subItemMapMap.get(code()); }
         public ClassificationMeta meta() { return CDef.DefMeta.MemberStatus; }
 
+        public String displayOrder() {
+            return (String)subItemMap().get("displayOrder");
+        }
+
+        /**
+         * Is the classification in the group? <br />
+         * サービスが利用できる会員 <br />
+         * The group elements:[正式会員, 仮会員]
+         * @return The determination, true or false.
+         */
+        public boolean isServiceAvailable() {
+            return 正式会員.equals(this) || 仮会員.equals(this);
+        }
+
         public boolean inGroup(String groupName) {
+            if ("serviceAvailable".equals(groupName)) { return isServiceAvailable(); }
             return false;
         }
 
@@ -151,11 +184,22 @@ public interface CDef extends Classification {
         }
 
         /**
+         * Get the list of group classification elements. (returns new copied list) <br />
+         * サービスが利用できる会員 <br />
+         * The group elements:[正式会員, 仮会員]
+         * @return The list of classification elements in the group. (NotNull)
+         */
+        public static List<MemberStatus> listOfServiceAvailable() {
+            return new ArrayList<MemberStatus>(Arrays.asList(正式会員, 仮会員));
+        }
+
+        /**
          * Get the list of classification elements in the specified group. (returns new copied list) <br />
          * @param groupName The string of group name, which is case-sensitive. (NullAllowed: if null, returns empty list)
          * @return The list of classification elements in the group. (NotNull)
          */
         public static List<MemberStatus> groupOf(String groupName) {
+            if ("serviceAvailable".equals(groupName)) { return listOfServiceAvailable(); }
             return new ArrayList<MemberStatus>(4);
         }
 
@@ -406,11 +450,11 @@ public interface CDef extends Classification {
         /** ハーブ: of 食品 */
         ハーブ("HEB", "ハーブ", EMPTY_SISTERS)
         ,
-        /** 音楽CD: of 音楽 */
-        音楽cd("MCD", "音楽CD", EMPTY_SISTERS)
-        ,
         /** 楽器: of 音楽 */
         楽器("INS", "楽器", EMPTY_SISTERS)
+        ,
+        /** 音楽CD: of 音楽 */
+        音楽cd("MCD", "音楽CD", EMPTY_SISTERS)
         ;
         private static final Map<String, ProductCategory> _codeValueMap = new HashMap<String, ProductCategory>();
         static {

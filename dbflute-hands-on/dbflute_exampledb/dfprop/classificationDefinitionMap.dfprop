@@ -54,17 +54,34 @@ map:{
     #}
     ; Flg = list:{
     	; map:{topComment=フラグを示す; isCheckImplicitSet=true; codeType=Number}
-        ; map:{code=1; name=True ; alias=はい  ; comment=有効を示す}
-        ; map:{code=0; name=False; alias=いいえ; comment=無効を示す}
+    	; map:{
+            ; code=1; name=True; alias=Checked; comment=フラグが立っている
+        	; sisterCode=true
+        }
+        ; map:{
+            ; code=0; name=False; alias=Unchecked; comment=フラグが立っていない
+            ; sisterCode=false
+        }
     }
     ; MemberStatus = list:{
-        ; map:{topComment=入会から退会までの会員のステータスを示す; codeType=String}
+        ; map:{
+        	; topComment=入会から退会までの会員のステータスを示す; codeType=String
+            ; groupingMap = map:{
+                ; serviceAvailable = map:{
+                    ; groupComment = サービスが利用できる会員
+                    ; elementList = list:{正式会員;仮会員}
+                }
+            }
+        }
         ; map:{
             ; table=MEMBER_STATUS
             ; code=MEMBER_STATUS_CODE; name=MEMBER_STATUS_NAME
             ; comment=DESCRIPTION; orderBy=DISPLAY_ORDER
+            ; subItemMap=map:{
+            	; displayOrder=DISPLAY_ORDER;
+            }
         }
-	}
+    }
  	; ServiceRank = list:{
         ; map:{topComment=会員が受けられるサービスのランクを示す; codeType=String}
         ; map:{
@@ -77,7 +94,8 @@ map:{
         ; map:{topComment=主に会員の住んでいる地域を示す; codeType=Number}
         ; map:{
             ; table=REGION
-            ; code=REGION_ID; name=REGION_NAME
+            ; code=REGION_ID
+            ; name=REGION_NAME
             ; orderBy=REGION_ID
         }
     }
@@ -85,8 +103,10 @@ map:{
         ; map:{topComment=会員の退会理由。なのでちょっとねがてぃぶ; codeType=String}
         ; map:{
             ; table=WITHDRAWAL_REASON
-            ; code=WITHDRAWAL_REASON_CODE; name=WITHDRAWAL_REASON_CODE
-            ; comment=WITHDRAWAL_REASON_TEXT; orderBy=DISPLAY_ORDER
+            ; code=WITHDRAWAL_REASON_CODE
+            ; name=WITHDRAWAL_REASON_CODE
+            ; comment=WITHDRAWAL_REASON_TEXT
+            ; orderBy=DISPLAY_ORDER
         }
     }
     ; ProductCategory = list:{
@@ -103,7 +123,8 @@ map:{
         ; map:{topComment=商品ステータス。あんまり面白みのないステータス; codeType=String}
         ; map:{
             ; table=PRODUCT_STATUS
-            ; code=PRODUCT_STATUS_CODE; name=PRODUCT_STATUS_NAME
+            ; code=PRODUCT_STATUS_CODE
+            ; name=PRODUCT_STATUS_NAME
         }
     }
     ; PaymentMethod = list:{

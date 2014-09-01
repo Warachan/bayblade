@@ -186,6 +186,16 @@ public abstract class BsMemberLogin implements Entity, Serializable, Cloneable {
     }
 
     /**
+     * Set the value of mobileLoginFlg as boolean. <br />
+     * MOBILE_LOGIN_FLG: {NotNull, INT(10), classification=Flg} <br />
+     * フラグを示す
+     * @param determination The determination, true or false. (NullAllowed: if null, null value is set to the column)
+     */
+    public void setMobileLoginFlgAsBoolean(Boolean determination) {
+        setMobileLoginFlgAsFlg(CDef.Flg.codeOf(determination));
+    }
+
+    /**
      * Get the value of loginMemberStatusCode as the classification of MemberStatus. <br />
      * LOGIN_MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to member_status, classification=MemberStatus} <br />
      * 入会から退会までの会員のステータスを示す
@@ -211,7 +221,7 @@ public abstract class BsMemberLogin implements Entity, Serializable, Cloneable {
     //                                                              ======================
     /**
      * Set the value of mobileLoginFlg as True (1). <br />
-     * はい: 有効を示す
+     * Checked: フラグが立っている
      */
     public void setMobileLoginFlg_True() {
         setMobileLoginFlgAsFlg(CDef.Flg.True);
@@ -219,7 +229,7 @@ public abstract class BsMemberLogin implements Entity, Serializable, Cloneable {
 
     /**
      * Set the value of mobileLoginFlg as False (0). <br />
-     * いいえ: 無効を示す
+     * Unchecked: フラグが立っていない
      */
     public void setMobileLoginFlg_False() {
         setMobileLoginFlgAsFlg(CDef.Flg.False);
@@ -254,7 +264,7 @@ public abstract class BsMemberLogin implements Entity, Serializable, Cloneable {
     //                                                        ============================
     /**
      * Is the value of mobileLoginFlg True? <br />
-     * はい: 有効を示す
+     * Checked: フラグが立っている
      * <p>It's treated as case insensitive and if the code value is null, it returns false.</p>
      * @return The determination, true or false.
      */
@@ -265,7 +275,7 @@ public abstract class BsMemberLogin implements Entity, Serializable, Cloneable {
 
     /**
      * Is the value of mobileLoginFlg False? <br />
-     * いいえ: 無効を示す
+     * Unchecked: フラグが立っていない
      * <p>It's treated as case insensitive and if the code value is null, it returns false.</p>
      * @return The determination, true or false.
      */
@@ -305,6 +315,16 @@ public abstract class BsMemberLogin implements Entity, Serializable, Cloneable {
     public boolean isLoginMemberStatusCode仮会員() {
         CDef.MemberStatus cdef = getLoginMemberStatusCodeAsMemberStatus();
         return cdef != null ? cdef.equals(CDef.MemberStatus.仮会員) : false;
+    }
+
+    /**
+     * サービスが利用できる会員 <br />
+     * The group elements:[正式会員, 仮会員]
+     * @return The determination, true or false.
+     */
+    public boolean isLoginMemberStatusCode_ServiceAvailable() {
+        CDef.MemberStatus cdef = getLoginMemberStatusCodeAsMemberStatus();
+        return cdef != null && cdef.isServiceAvailable();
     }
 
     // ===================================================================================

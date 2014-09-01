@@ -850,8 +850,18 @@ public abstract class AbstractBsPurchaseCQ extends AbstractConditionQuery {
     }
 
     /**
+     * Equal(=). As boolean for Flg. <br />
+     * PAYMENT_COMPLETE_FLG: {NotNull, INT(10), classification=Flg} <br />
+     * フラグを示す
+     * @param determination The determination, true or false. (NullAllowed: if null, no condition)
+     */
+    public void setPaymentCompleteFlg_Equal_AsBoolean(Boolean determination) {
+        setPaymentCompleteFlg_Equal_AsFlg(CDef.Flg.codeOf(determination));
+    }
+
+    /**
      * Equal(=). As True (1). And NullIgnored, OnlyOnceRegistered. <br />
-     * はい: 有効を示す
+     * Checked: フラグが立っている
      */
     public void setPaymentCompleteFlg_Equal_True() {
         setPaymentCompleteFlg_Equal_AsFlg(CDef.Flg.True);
@@ -859,7 +869,7 @@ public abstract class AbstractBsPurchaseCQ extends AbstractConditionQuery {
 
     /**
      * Equal(=). As False (0). And NullIgnored, OnlyOnceRegistered. <br />
-     * いいえ: 無効を示す
+     * Unchecked: フラグが立っていない
      */
     public void setPaymentCompleteFlg_Equal_False() {
         setPaymentCompleteFlg_Equal_AsFlg(CDef.Flg.False);
@@ -890,7 +900,7 @@ public abstract class AbstractBsPurchaseCQ extends AbstractConditionQuery {
 
     /**
      * NotEqual(&lt;&gt;). As True (1). And NullIgnored, OnlyOnceRegistered. <br />
-     * はい: 有効を示す
+     * Checked: フラグが立っている
      */
     public void setPaymentCompleteFlg_NotEqual_True() {
         setPaymentCompleteFlg_NotEqual_AsFlg(CDef.Flg.True);
@@ -898,7 +908,7 @@ public abstract class AbstractBsPurchaseCQ extends AbstractConditionQuery {
 
     /**
      * NotEqual(&lt;&gt;). As False (0). And NullIgnored, OnlyOnceRegistered. <br />
-     * いいえ: 無効を示す
+     * Unchecked: フラグが立っていない
      */
     public void setPaymentCompleteFlg_NotEqual_False() {
         setPaymentCompleteFlg_NotEqual_AsFlg(CDef.Flg.False);

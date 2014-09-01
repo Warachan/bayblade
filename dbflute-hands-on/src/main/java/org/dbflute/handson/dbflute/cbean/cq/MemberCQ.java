@@ -1,8 +1,13 @@
 package org.dbflute.handson.dbflute.cbean.cq;
 
-import org.seasar.dbflute.cbean.ConditionQuery;
-import org.seasar.dbflute.cbean.sqlclause.SqlClause;
+import org.dbflute.handson.dbflute.cbean.MemberCB;
+import org.dbflute.handson.dbflute.cbean.PurchaseCB;
+import org.dbflute.handson.dbflute.cbean.PurchasePaymentCB;
 import org.dbflute.handson.dbflute.cbean.cq.bs.BsMemberCQ;
+import org.seasar.dbflute.cbean.ConditionQuery;
+import org.seasar.dbflute.cbean.SpecifyQuery;
+import org.seasar.dbflute.cbean.SubQuery;
+import org.seasar.dbflute.cbean.sqlclause.SqlClause;
 
 /**
  * The condition-query of member.
@@ -33,4 +38,24 @@ public class MemberCQ extends BsMemberCQ {
     //                                                                       Arrange Query
     //                                                                       =============
     // You can make your arranged query methods here. e.g. public void arrangeXxx()
+    public void arrangeExistsBankTransferPayment() {
+        scalar_Equal().max(new SubQuery<MemberCB>() {
+            public void query(MemberCB subCB) {
+                subCB.specify().columnBirthdate();
+                existsPurchaseList(new SubQuery<PurchaseCB>() {
+                    public void query(PurchaseCB subCB) {
+                        subCB.query().existsPurchasePaymentList(new SubQuery<PurchasePaymentCB>() {
+                            public void query(PurchasePaymentCB subCB) {
+                                subCB.query().setPaymentMethodCode_Equal_BankTransfer();
+                            }
+                        });
+                    }
+                });
+            }
+        }).partitionBy(new SpecifyQuery<MemberCB>() {
+            public void specify(MemberCB cb) {
+                cb.specify().columnMemberStatusCode();
+            }
+        });
+    }
 }

@@ -210,6 +210,16 @@ public abstract class BsServiceRank implements Entity, Serializable, Cloneable {
         setNewAcceptableFlg(cdef != null ? FunCustodial.toNumber(cdef.code(), Integer.class) : null);
     }
 
+    /**
+     * Set the value of newAcceptableFlg as boolean. <br />
+     * NEW_ACCEPTABLE_FLG: {NotNull, INT(10), classification=Flg} <br />
+     * フラグを示す
+     * @param determination The determination, true or false. (NullAllowed: if null, null value is set to the column)
+     */
+    public void setNewAcceptableFlgAsBoolean(Boolean determination) {
+        setNewAcceptableFlgAsFlg(CDef.Flg.codeOf(determination));
+    }
+
     // ===================================================================================
     //                                                              Classification Setting
     //                                                              ======================
@@ -255,7 +265,7 @@ public abstract class BsServiceRank implements Entity, Serializable, Cloneable {
 
     /**
      * Set the value of newAcceptableFlg as True (1). <br />
-     * はい: 有効を示す
+     * Checked: フラグが立っている
      */
     public void setNewAcceptableFlg_True() {
         setNewAcceptableFlgAsFlg(CDef.Flg.True);
@@ -263,7 +273,7 @@ public abstract class BsServiceRank implements Entity, Serializable, Cloneable {
 
     /**
      * Set the value of newAcceptableFlg as False (0). <br />
-     * いいえ: 無効を示す
+     * Unchecked: フラグが立っていない
      */
     public void setNewAcceptableFlg_False() {
         setNewAcceptableFlgAsFlg(CDef.Flg.False);
@@ -329,7 +339,7 @@ public abstract class BsServiceRank implements Entity, Serializable, Cloneable {
 
     /**
      * Is the value of newAcceptableFlg True? <br />
-     * はい: 有効を示す
+     * Checked: フラグが立っている
      * <p>It's treated as case insensitive and if the code value is null, it returns false.</p>
      * @return The determination, true or false.
      */
@@ -340,7 +350,7 @@ public abstract class BsServiceRank implements Entity, Serializable, Cloneable {
 
     /**
      * Is the value of newAcceptableFlg False? <br />
-     * いいえ: 無効を示す
+     * Unchecked: フラグが立っていない
      * <p>It's treated as case insensitive and if the code value is null, it returns false.</p>
      * @return The determination, true or false.
      */
