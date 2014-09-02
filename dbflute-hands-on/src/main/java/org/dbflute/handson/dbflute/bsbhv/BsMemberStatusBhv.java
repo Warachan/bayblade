@@ -237,7 +237,7 @@ public abstract class BsMemberStatusBhv extends AbstractBehaviorWritable {
 
     /**
      * Select the entity by the unique-key value.
-     * @param displayOrder : UQ, NotNull, INT(10), classification=DisplayOrder. (NotNull)
+     * @param displayOrder : UQ, NotNull, INT(10). (NotNull)
      * @return The optional entity selected by the unique key. (NotNull: if no data, empty entity)
      * @exception EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @exception EntityDuplicatedException When the entity has been duplicated.
@@ -1050,4 +1050,282 @@ public abstract class BsMemberStatusBhv extends AbstractBehaviorWritable {
     { return doQueryUpdate(downcast(et), downcast(cb), downcast(op)); }
 
     /**
-     * Delete the several entities by query
+     * Delete the several entities by query. (NonExclusiveControl)
+     * <pre>
+     * MemberStatusCB cb = new MemberStatusCB();
+     * cb.query().setFoo...(value);
+     * memberStatusBhv.<span style="color: #DD4747">queryDelete</span>(memberStatus, cb);
+     * </pre>
+     * @param cb The condition-bean of MemberStatus. (NotNull)
+     * @return The deleted count.
+     * @exception NonQueryDeleteNotAllowedException When the query has no condition.
+     */
+    public int queryDelete(MemberStatusCB cb) {
+        return doQueryDelete(cb, null);
+    }
+
+    protected int doQueryDelete(MemberStatusCB cb, DeleteOption<MemberStatusCB> op) {
+        assertCBStateValid(cb); prepareDeleteOption(op);
+        return checkCountBeforeQueryUpdateIfNeeds(cb) ? delegateQueryDelete(cb, op) : 0;
+    }
+
+    protected int doRangeRemove(ConditionBean cb, DeleteOption<? extends ConditionBean> op) { return doQueryDelete(downcast(cb), downcast(op)); }
+
+    // ===================================================================================
+    //                                                                      Varying Update
+    //                                                                      ==============
+    // -----------------------------------------------------
+    //                                         Entity Update
+    //                                         -------------
+    /**
+     * Insert the entity with varying requests. <br />
+     * For example, disableCommonColumnAutoSetup(), disablePrimaryKeyIdentity(). <br />
+     * Other specifications are same as insert(entity).
+     * <pre>
+     * MemberStatus memberStatus = new MemberStatus();
+     * <span style="color: #3F7E5E">// if auto-increment, you don't need to set the PK value</span>
+     * memberStatus.setFoo...(value);
+     * memberStatus.setBar...(value);
+     * InsertOption<MemberStatusCB> option = new InsertOption<MemberStatusCB>();
+     * <span style="color: #3F7E5E">// you can insert by your values for common columns</span>
+     * option.disableCommonColumnAutoSetup();
+     * memberStatusBhv.<span style="color: #DD4747">varyingInsert</span>(memberStatus, option);
+     * ... = memberStatus.getPK...(); <span style="color: #3F7E5E">// if auto-increment, you can get the value after</span>
+     * </pre>
+     * @param memberStatus The entity of insert. (NotNull, PrimaryKeyNullAllowed: when auto-increment)
+     * @param option The option of insert for varying requests. (NotNull)
+     * @exception EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
+     */
+    public void varyingInsert(MemberStatus memberStatus, InsertOption<MemberStatusCB> option) {
+        assertInsertOptionNotNull(option);
+        doInsert(memberStatus, option);
+    }
+
+    /**
+     * Update the entity with varying requests modified-only. (ZeroUpdateException, NonExclusiveControl) <br />
+     * For example, self(selfCalculationSpecification), specify(updateColumnSpecification), disableCommonColumnAutoSetup(). <br />
+     * Other specifications are same as update(entity).
+     * <pre>
+     * MemberStatus memberStatus = new MemberStatus();
+     * memberStatus.setPK...(value); <span style="color: #3F7E5E">// required</span>
+     * memberStatus.setOther...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
+     * <span style="color: #3F7E5E">// if exclusive control, the value of concurrency column is required</span>
+     * memberStatus.<span style="color: #DD4747">setVersionNo</span>(value);
+     * try {
+     *     <span style="color: #3F7E5E">// you can update by self calculation values</span>
+     *     UpdateOption&lt;MemberStatusCB&gt; option = new UpdateOption&lt;MemberStatusCB&gt;();
+     *     option.self(new SpecifyQuery&lt;MemberStatusCB&gt;() {
+     *         public void specify(MemberStatusCB cb) {
+     *             cb.specify().<span style="color: #DD4747">columnXxxCount()</span>;
+     *         }
+     *     }).plus(1); <span style="color: #3F7E5E">// XXX_COUNT = XXX_COUNT + 1</span>
+     *     memberStatusBhv.<span style="color: #DD4747">varyingUpdate</span>(memberStatus, option);
+     * } catch (EntityAlreadyUpdatedException e) { <span style="color: #3F7E5E">// if concurrent update</span>
+     *     ...
+     * }
+     * </pre>
+     * @param memberStatus The entity of update. (NotNull, PrimaryKeyNotNull)
+     * @param option The option of update for varying requests. (NotNull)
+     * @exception EntityAlreadyDeletedException When the entity has already been deleted. (not found)
+     * @exception EntityDuplicatedException When the entity has been duplicated.
+     * @exception EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
+     */
+    public void varyingUpdate(MemberStatus memberStatus, UpdateOption<MemberStatusCB> option) {
+        assertUpdateOptionNotNull(option);
+        doUpdate(memberStatus, option);
+    }
+
+    /**
+     * Insert or update the entity with varying requests. (ExclusiveControl: when update) <br />
+     * Other specifications are same as insertOrUpdate(entity).
+     * @param memberStatus The entity of insert or update. (NotNull)
+     * @param insertOption The option of insert for varying requests. (NotNull)
+     * @param updateOption The option of update for varying requests. (NotNull)
+     * @exception EntityAlreadyDeletedException When the entity has already been deleted. (not found)
+     * @exception EntityDuplicatedException When the entity has been duplicated.
+     * @exception EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
+     */
+    public void varyingInsertOrUpdate(MemberStatus memberStatus, InsertOption<MemberStatusCB> insertOption, UpdateOption<MemberStatusCB> updateOption) {
+        assertInsertOptionNotNull(insertOption); assertUpdateOptionNotNull(updateOption);
+        doInsertOrUpdate(memberStatus, insertOption, updateOption);
+    }
+
+    /**
+     * Delete the entity with varying requests. (ZeroUpdateException, NonExclusiveControl) <br />
+     * Now a valid option does not exist. <br />
+     * Other specifications are same as delete(entity).
+     * @param memberStatus The entity of delete. (NotNull, PrimaryKeyNotNull, ConcurrencyColumnNotNull)
+     * @param option The option of update for varying requests. (NotNull)
+     * @exception EntityAlreadyDeletedException When the entity has already been deleted. (not found)
+     * @exception EntityDuplicatedException When the entity has been duplicated.
+     */
+    public void varyingDelete(MemberStatus memberStatus, DeleteOption<MemberStatusCB> option) {
+        assertDeleteOptionNotNull(option);
+        doDelete(memberStatus, option);
+    }
+
+    // -----------------------------------------------------
+    //                                          Batch Update
+    //                                          ------------
+    /**
+     * Batch-insert the list with varying requests. <br />
+     * For example, disableCommonColumnAutoSetup()
+     * , disablePrimaryKeyIdentity(), limitBatchInsertLogging(). <br />
+     * Other specifications are same as batchInsert(entityList).
+     * @param memberStatusList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @param option The option of insert for varying requests. (NotNull)
+     * @return The array of updated count. (NotNull, EmptyAllowed)
+     */
+    public int[] varyingBatchInsert(List<MemberStatus> memberStatusList, InsertOption<MemberStatusCB> option) {
+        assertInsertOptionNotNull(option);
+        return doBatchInsert(memberStatusList, option);
+    }
+
+    /**
+     * Batch-update the list with varying requests. <br />
+     * For example, self(selfCalculationSpecification), specify(updateColumnSpecification)
+     * , disableCommonColumnAutoSetup(), limitBatchUpdateLogging(). <br />
+     * Other specifications are same as batchUpdate(entityList).
+     * @param memberStatusList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @param option The option of update for varying requests. (NotNull)
+     * @return The array of updated count. (NotNull, EmptyAllowed)
+     */
+    public int[] varyingBatchUpdate(List<MemberStatus> memberStatusList, UpdateOption<MemberStatusCB> option) {
+        assertUpdateOptionNotNull(option);
+        return doBatchUpdate(memberStatusList, option);
+    }
+
+    /**
+     * Batch-delete the list with varying requests. <br />
+     * For example, limitBatchDeleteLogging(). <br />
+     * Other specifications are same as batchDelete(entityList).
+     * @param memberStatusList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @param option The option of delete for varying requests. (NotNull)
+     * @return The array of deleted count. (NotNull, EmptyAllowed)
+     */
+    public int[] varyingBatchDelete(List<MemberStatus> memberStatusList, DeleteOption<MemberStatusCB> option) {
+        assertDeleteOptionNotNull(option);
+        return doBatchDelete(memberStatusList, option);
+    }
+
+    // -----------------------------------------------------
+    //                                          Query Update
+    //                                          ------------
+    /**
+     * Insert the several entities by query with varying requests (modified-only for fixed value). <br />
+     * For example, disableCommonColumnAutoSetup(), disablePrimaryKeyIdentity(). <br />
+     * Other specifications are same as queryInsert(entity, setupper).
+     * @param setupper The setup-per of query-insert. (NotNull)
+     * @param option The option of insert for varying requests. (NotNull)
+     * @return The inserted count.
+     */
+    public int varyingQueryInsert(QueryInsertSetupper<MemberStatus, MemberStatusCB> setupper, InsertOption<MemberStatusCB> option) {
+        assertInsertOptionNotNull(option);
+        return doQueryInsert(setupper, option);
+    }
+
+    /**
+     * Update the several entities by query with varying requests non-strictly modified-only. {NonExclusiveControl} <br />
+     * For example, self(selfCalculationSpecification), specify(updateColumnSpecification)
+     * , disableCommonColumnAutoSetup(), allowNonQueryUpdate(). <br />
+     * Other specifications are same as queryUpdate(entity, cb).
+     * <pre>
+     * <span style="color: #3F7E5E">// ex) you can update by self calculation values</span>
+     * MemberStatus memberStatus = new MemberStatus();
+     * <span style="color: #3F7E5E">// you don't need to set PK value</span>
+     * <span style="color: #3F7E5E">//memberStatus.setPK...(value);</span>
+     * memberStatus.setOther...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
+     * <span style="color: #3F7E5E">// you don't need to set a value of concurrency column</span>
+     * <span style="color: #3F7E5E">// (auto-increment for version number is valid though non-exclusive control)</span>
+     * <span style="color: #3F7E5E">//memberStatus.setVersionNo(value);</span>
+     * MemberStatusCB cb = new MemberStatusCB();
+     * cb.query().setFoo...(value);
+     * UpdateOption&lt;MemberStatusCB&gt; option = new UpdateOption&lt;MemberStatusCB&gt;();
+     * option.self(new SpecifyQuery&lt;MemberStatusCB&gt;() {
+     *     public void specify(MemberStatusCB cb) {
+     *         cb.specify().<span style="color: #DD4747">columnFooCount()</span>;
+     *     }
+     * }).plus(1); <span style="color: #3F7E5E">// FOO_COUNT = FOO_COUNT + 1</span>
+     * memberStatusBhv.<span style="color: #DD4747">varyingQueryUpdate</span>(memberStatus, cb, option);
+     * </pre>
+     * @param memberStatus The entity that contains update values. (NotNull) {PrimaryKeyNotRequired}
+     * @param cb The condition-bean of MemberStatus. (NotNull)
+     * @param option The option of update for varying requests. (NotNull)
+     * @return The updated count.
+     * @exception NonQueryUpdateNotAllowedException When the query has no condition (if not allowed).
+     */
+    public int varyingQueryUpdate(MemberStatus memberStatus, MemberStatusCB cb, UpdateOption<MemberStatusCB> option) {
+        assertUpdateOptionNotNull(option);
+        return doQueryUpdate(memberStatus, cb, option);
+    }
+
+    /**
+     * Delete the several entities by query with varying requests non-strictly. <br />
+     * For example, allowNonQueryDelete(). <br />
+     * Other specifications are same as batchUpdateNonstrict(entityList).
+     * @param cb The condition-bean of MemberStatus. (NotNull)
+     * @param option The option of delete for varying requests. (NotNull)
+     * @return The deleted count.
+     * @exception NonQueryDeleteNotAllowedException When the query has no condition (if not allowed).
+     */
+    public int varyingQueryDelete(MemberStatusCB cb, DeleteOption<MemberStatusCB> option) {
+        assertDeleteOptionNotNull(option);
+        return doQueryDelete(cb, option);
+    }
+
+    // ===================================================================================
+    //                                                                          OutsideSql
+    //                                                                          ==========
+    /**
+     * Prepare the basic executor of outside-SQL to execute it. <br />
+     * The invoker of behavior command should be not null when you call this method.
+     * <pre>
+     * You can use the methods for outside-SQL are as follows:
+     * {Basic}
+     *   o selectList()
+     *   o execute()
+     *   o call()
+     *
+     * {Entity}
+     *   o entityHandling().selectEntity()
+     *   o entityHandling().selectEntityWithDeletedCheck()
+     *
+     * {Paging}
+     *   o autoPaging().selectList()
+     *   o autoPaging().selectPage()
+     *   o manualPaging().selectList()
+     *   o manualPaging().selectPage()
+     *
+     * {Cursor}
+     *   o cursorHandling().selectCursor()
+     *
+     * {Option}
+     *   o dynamicBinding().selectList()
+     *   o removeBlockComment().selectList()
+     *   o removeLineComment().selectList()
+     *   o formatSql().selectList()
+     * </pre>
+     * @return The basic executor of outside-SQL. (NotNull)
+     */
+    public OutsideSqlBasicExecutor<MemberStatusBhv> outsideSql() {
+        return doOutsideSql();
+    }
+
+    // ===================================================================================
+    //                                                                       Assist Helper
+    //                                                                       =============
+    protected Class<MemberStatus> typeOfSelectedEntity() { return MemberStatus.class; }
+    protected MemberStatus downcast(Entity et) { return helpEntityDowncastInternally(et, MemberStatus.class); }
+    protected MemberStatusCB downcast(ConditionBean cb) { return helpConditionBeanDowncastInternally(cb, MemberStatusCB.class); }
+    @SuppressWarnings("unchecked")
+    protected List<MemberStatus> downcast(List<? extends Entity> ls) { return (List<MemberStatus>)ls; }
+    @SuppressWarnings("unchecked")
+    protected InsertOption<MemberStatusCB> downcast(InsertOption<? extends ConditionBean> op) { return (InsertOption<MemberStatusCB>)op; }
+    @SuppressWarnings("unchecked")
+    protected UpdateOption<MemberStatusCB> downcast(UpdateOption<? extends ConditionBean> op) { return (UpdateOption<MemberStatusCB>)op; }
+    @SuppressWarnings("unchecked")
+    protected DeleteOption<MemberStatusCB> downcast(DeleteOption<? extends ConditionBean> op) { return (DeleteOption<MemberStatusCB>)op; }
+    @SuppressWarnings("unchecked")
+    protected QueryInsertSetupper<MemberStatus, MemberStatusCB> downcast(QueryInsertSetupper<? extends Entity, ? extends ConditionBean> sp)
+    { return (QueryInsertSetupper<MemberStatus, MemberStatusCB>)sp; }
+}
