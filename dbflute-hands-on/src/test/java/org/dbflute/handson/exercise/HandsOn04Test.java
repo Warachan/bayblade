@@ -1,7 +1,9 @@
 package org.dbflute.handson.exercise;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
@@ -17,6 +19,7 @@ import org.dbflute.handson.dbflute.exentity.Member;
 import org.dbflute.handson.dbflute.exentity.ProductStatus;
 import org.dbflute.handson.dbflute.exentity.Purchase;
 import org.dbflute.handson.unit.UnitContainerTestCase;
+import org.seasar.dbflute.bhv.ConditionBeanSetupper;
 import org.seasar.dbflute.cbean.ListResultBean;
 import org.seasar.dbflute.cbean.SpecifyQuery;
 import org.seasar.dbflute.cbean.SubQuery;
@@ -112,9 +115,10 @@ public class HandsOn04Test extends UnitContainerTestCase {
         // ## Arrange ##
         MemberCB cb = new MemberCB();
         cb.setupSelect_MemberStatus();
-        // TODO wara これだけだと、「仮会員の中で一番若い」生年月日を持った会員を検索になってる by jflute 
+        // TODO 【仮会員検索に指定しました。】wara これだけだと、「仮会員の中で一番若い」生年月日を持った会員を検索になってる by jflute
         // すると、同じ生年月日を持った正式会員も検索されてしまう、ので外側にも絞り込みが必要
         // http://dbflute.seasar.org/ja/manual/function/ormapper/conditionbean/query/scalarcondition.html#outerquery
+        cb.query().setMemberStatusCode_Equal_仮会員();
         cb.query().scalar_Equal().max(new SubQuery<MemberCB>() {
             public void query(MemberCB subCB) {
                 subCB.specify().columnBirthdate();
@@ -130,12 +134,15 @@ public class HandsOn04Test extends UnitContainerTestCase {
 
         // ## Act ##
         // 【使います！】wara selectEntityWithDeteledCheck()を使おう by jflute
-        // TODO wara 同じ生年月日の人もいるかもしれないので、リスト検索だね by jflute
-        Member member = memberBhv.selectEntityWithDeletedCheck(cb);
+        // TODO 【リストに直しましたー】wara 同じ生年月日の人もいるかもしれないので、リスト検索だね by jflute
+        ListResultBean<Member> memberList = memberBhv.selectList(cb);
 
         // ## Assert ##
-        log(member.getMemberStatus().getMemberStatusName());
-        assertTrue(member.isMemberStatusCode仮会員());
+        assertHasAnyElement(memberList);
+        for (Member member : memberList) {
+            log(member.getMemberStatus().getMemberStatusName());
+            assertTrue(member.isMemberStatusCode仮会員());
+        }
     }
 
     /**
@@ -189,11 +196,11 @@ public class HandsOn04Test extends UnitContainerTestCase {
      */
     public void test_05() throws Exception {
         // ## Arrange ##
-        // TODO wara いろいろおなじ by jflute
+        // TODO 【同じにしてみました】wara いろいろおなじ by jflute
         PurchaseCB cb = new PurchaseCB();
         cb.setupSelect_Product().withProductStatus();
-        cb.query().addOrderBy_PurchasePrice_Desc();
         cb.query().queryProduct().getConditionQueryProductStatus().setProductStatusCode_Equal_生産販売可能();
+        cb.query().addOrderBy_PurchasePrice_Desc();
 
         // ## Act ##
         ListResultBean<Purchase> purchaseList = purchaseBhv.selectList(cb);
@@ -280,7 +287,7 @@ public class HandsOn04Test extends UnitContainerTestCase {
         });
         // mayuko.sakaba 結局全部arrangeExistsBankTransferPaymentに含んでしまったけどこれはCQにメソッドを作った意味を良くわからない
         // mayuko.sakaba これでいいのでしょうか？仕組みがイマイチよくわかっていない。。。
-        // TODO wara ひとまず、銀行振込をしたことのない会員でたまたま同じ生年月日の人が同じステータス内にいたら検索されちゃう by jflute
+        // TODO 【変更して見ました】wara ひとまず、銀行振込をしたことのない会員でたまたま同じ生年月日の人が同じステータス内にいたら検索されちゃう by jflute
         // http://dbflute.seasar.org/ja/manual/function/ormapper/conditionbean/query/scalarcondition.html#outerqueryagain
         // wara 先に、一番若い仮会員のエクササイズやってからだけど、これ by jflute
         // http://dbflute.seasar.org/ja/manual/function/ormapper/conditionbean/query/scalarcondition.html#outerqueryagain
@@ -290,24 +297,17 @@ public class HandsOn04Test extends UnitContainerTestCase {
 
         // ## Assert ##
         assertHasAnyElement(memberList);
-        // TODO wara このcountって、要は memberList.size() じゃない？ by jflute 
-        int count = 0;
-        // TODO wara Setを使うともっと楽かな by jflute 
-        List<String> statusList = new ArrayList<String>();
+        // TODO 【おっしゃるとおりございます】wara このcountって、要は memberList.size() じゃない？ by jflute
+        // TODO 【つかってみましたー！ 】wara Setを使うともっと楽かな by jflute
+        Set<String> statusSet = new HashSet<String>();
         for (Member member : memberList) {
-            count++;
             String status = member.getMemberStatusCode();
-            if (statusList.isEmpty()) {
-                statusList.add(status);
-            } else if (!(statusList.contains(status))) {
-                statusList.add(status);
-            } else {
-                continue;
-            }
+            statusSet.add(status);
+            log(member.getMemberName());
         }
-        int listSize = statusList.size();
-        log(listSize, count);
-        assertTrue(listSize <= count);
+        int setSize = statusSet.size();
+        log(setSize);
+        assertTrue(setSize <= memberList.size());
     }
 
     //    public void test_add_change() throws Exception {
@@ -389,18 +389,21 @@ public class HandsOn04Test extends UnitContainerTestCase {
 
         // ## Act ##
         ListResultBean<Member> memberList = memberBhv.selectList(cb);
-
+        memberBhv.loadPurchaseList(memberList, new ConditionBeanSetupper<PurchaseCB>() {
+            public void setup(PurchaseCB referrerCB) {
+                referrerCB.query().setPaymentCompleteFlg_Equal_AsBoolean(false);
+            }
+        });
         // ## Assert ##
         assertHasAnyElement(memberList);
         for (Member member : memberList) {
             List<Purchase> purchaseList = member.getPurchaseList();
-            log("*************************" + member.getPurchaseList());
-            // TODO mayuko.sakaba purchaseListの中身が空！なぜ！？
+            // TODO 【とってみた】mayuko.sakaba purchaseListの中身が空！なぜ！？
             //  -> 取ってないから by jflute
             for (Purchase purchase : purchaseList) {
                 assertHasAnyElement(purchaseList);
-                log("*************************" + purchase.getPaymentCompleteFlg());
-                assertFalse(purchase.isPaymentCompleteFlgFalse());
+                assertTrue(purchase.isPaymentCompleteFlgFalse());
+                // TODO mayuko.sakaba trueなのにfalseだー
             }
         }
     }
@@ -416,10 +419,8 @@ public class HandsOn04Test extends UnitContainerTestCase {
     public void test_10() throws Exception {
         // ## Arrange ##
         MemberCB cb = new MemberCB();
-        cb.setupSelect_MemberStatus();
-        // TODO mayuko.sakaba これだと独自の属性を指定した意味がよくわからない感じになっちゃってる
+        // TODO 【とってみた】mayuko.sakaba これだと独自の属性を指定した意味がよくわからない感じになっちゃってる
         //  -> まあね。でも、取っちゃいけないからね by jflute
-        cb.specify().specifyMemberStatus().columnDisplayOrder();
         cb.query().queryMemberStatus().addOrderBy_DisplayOrder_Asc();
         cb.query().addOrderBy_MemberId_Desc();
 
@@ -427,22 +428,20 @@ public class HandsOn04Test extends UnitContainerTestCase {
         ListResultBean<Member> memberList = memberBhv.selectList(cb);
 
         // ## Assert ##
-        // TODO wara 整理してみよう by jflute 
-        int previousOrder = 0; // assertに使いたいのですがそこまで到達せず。
+        // TODO 【うーーーーー】wara 整理してみよう by jflute
+        int previousOrder = 0;
         assertHasAnyElement(memberList);
         for (Member member : memberList) {
-            Integer displayOrder = member.getMemberStatus().getDisplayOrder(); //　後で消します。
-            log(displayOrder);
-            // TODO mayuko.sakaba Docsに書いてあるとおりに独自の属性が取得できないよー困ったよーー(T^T)
-            // (String)CDef.MemberStatus.su
-            // CDef.MemberStatus.values().get;
-            // assertになる予定
-            //            int displayOrder = Integer.parseInt(memberStatus);
-            //            if (previousOrder == 0) {
-            //
-            //            }
-            // TODO mayuko.sakaba PKはとってきてしまうのでdisplayorder以外にも不必要な情報を持ってきてしまうっぽい
-            //            assertNull(member.getMemberStatus());
+            assertNull(member.getMemberStatus());
+            String displayOrder = CDef.MemberStatus.codeOf(member.getMemberStatusCode()).displayOrder();
+            log("***********************" + displayOrder);
+            int currentOrder = Integer.parseInt(displayOrder);
+            if (currentOrder > previousOrder) {
+                previousOrder = currentOrder;
+            }
+            log(currentOrder, previousOrder);
+            assertTrue(currentOrder >= previousOrder);
+            assertNull(member.getMemberStatus());
         }
     }
 }
