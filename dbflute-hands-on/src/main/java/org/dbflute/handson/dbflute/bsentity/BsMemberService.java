@@ -556,7 +556,7 @@ public abstract class BsMemberService implements Entity, Serializable, Cloneable
      * どんなランクがあるのかドキドキですね。
      * @param serviceRankCode The value of the column 'SERVICE_RANK_CODE'. (basically NotNull if update: for the constraint)
      */
-    public void setServiceRankCode(String serviceRankCode) {
+    protected void setServiceRankCode(String serviceRankCode) {
         __modifiedProperties.addPropertyName("serviceRankCode");
         _serviceRankCode = serviceRankCode;
     }

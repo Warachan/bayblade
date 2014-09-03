@@ -515,7 +515,7 @@ public abstract class BsMemberWithdrawal implements Entity, Serializable, Clonea
      * 何も言わずに退会する会員もいるので必須項目ではない。
      * @param withdrawalReasonCode The value of the column 'WITHDRAWAL_REASON_CODE'. (NullAllowed: null update allowed for no constraint)
      */
-    public void setWithdrawalReasonCode(String withdrawalReasonCode) {
+    protected void setWithdrawalReasonCode(String withdrawalReasonCode) {
         __modifiedProperties.addPropertyName("withdrawalReasonCode");
         _withdrawalReasonCode = withdrawalReasonCode;
     }

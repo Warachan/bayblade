@@ -584,7 +584,7 @@ public abstract class BsServiceRank implements Entity, Serializable, Cloneable {
      * サービスランクコード: サービスランクを識別するコード。
      * @param serviceRankCode The value of the column 'SERVICE_RANK_CODE'. (basically NotNull if update: for the constraint)
      */
-    public void setServiceRankCode(String serviceRankCode) {
+    protected void setServiceRankCode(String serviceRankCode) {
         __modifiedProperties.addPropertyName("serviceRankCode");
         _serviceRankCode = serviceRankCode;
     }
@@ -645,7 +645,7 @@ public abstract class BsServiceRank implements Entity, Serializable, Cloneable {
      * 新規受け入れ可能フラグ: このランクへの新規受け入れができるかどうか。
      * @param newAcceptableFlg The value of the column 'NEW_ACCEPTABLE_FLG'. (basically NotNull if update: for the constraint)
      */
-    public void setNewAcceptableFlg(Integer newAcceptableFlg) {
+    protected void setNewAcceptableFlg(Integer newAcceptableFlg) {
         checkImplicitSet("NEW_ACCEPTABLE_FLG", CDef.DefMeta.Flg, newAcceptableFlg);
         __modifiedProperties.addPropertyName("newAcceptableFlg");
         _newAcceptableFlg = newAcceptableFlg;

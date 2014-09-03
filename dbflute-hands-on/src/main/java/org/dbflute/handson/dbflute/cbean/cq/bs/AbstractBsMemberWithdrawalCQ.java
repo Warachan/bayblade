@@ -196,7 +196,7 @@ public abstract class AbstractBsMemberWithdrawalCQ extends AbstractConditionQuer
      * WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason, classification=WithdrawalReason}
      * @param withdrawalReasonCode The value of withdrawalReasonCode as equal. (NullAllowed: if null (or empty), no condition)
      */
-    public void setWithdrawalReasonCode_Equal(String withdrawalReasonCode) {
+    protected void setWithdrawalReasonCode_Equal(String withdrawalReasonCode) {
         doSetWithdrawalReasonCode_Equal(fRES(withdrawalReasonCode));
     }
 
@@ -251,7 +251,7 @@ public abstract class AbstractBsMemberWithdrawalCQ extends AbstractConditionQuer
      * WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason, classification=WithdrawalReason}
      * @param withdrawalReasonCode The value of withdrawalReasonCode as notEqual. (NullAllowed: if null (or empty), no condition)
      */
-    public void setWithdrawalReasonCode_NotEqual(String withdrawalReasonCode) {
+    protected void setWithdrawalReasonCode_NotEqual(String withdrawalReasonCode) {
         doSetWithdrawalReasonCode_NotEqual(fRES(withdrawalReasonCode));
     }
 

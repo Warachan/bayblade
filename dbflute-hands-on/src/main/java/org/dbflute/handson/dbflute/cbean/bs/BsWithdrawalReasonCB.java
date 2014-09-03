@@ -14,6 +14,7 @@ import org.seasar.dbflute.cbean.sqlclause.SqlClause;
 import org.seasar.dbflute.cbean.sqlclause.SqlClauseCreator;
 import org.seasar.dbflute.dbmeta.DBMetaProvider;
 import org.seasar.dbflute.twowaysql.factory.SqlAnalyzerFactory;
+import org.dbflute.handson.dbflute.allcommon.CDef;
 import org.dbflute.handson.dbflute.allcommon.DBFluteConfig;
 import org.dbflute.handson.dbflute.allcommon.DBMetaInstanceHandler;
 import org.dbflute.handson.dbflute.allcommon.ImplementedInvokerAssistant;
@@ -82,10 +83,10 @@ public class BsWithdrawalReasonCB extends AbstractConditionBean {
      * @param withdrawalReasonCode : PK, NotNull, CHAR(3), classification=WithdrawalReason. (NotNull)
      * @return this. (NotNull)
      */
-    public WithdrawalReasonCB acceptPK(String withdrawalReasonCode) {
+    public WithdrawalReasonCB acceptPK(CDef.WithdrawalReason withdrawalReasonCode) {
         assertObjectNotNull("withdrawalReasonCode", withdrawalReasonCode);
         BsWithdrawalReasonCB cb = this;
-        cb.query().setWithdrawalReasonCode_Equal(withdrawalReasonCode);
+        cb.query().setWithdrawalReasonCode_Equal_AsWithdrawalReason(withdrawalReasonCode);
         return (WithdrawalReasonCB)this;
     }
 
@@ -93,10 +94,10 @@ public class BsWithdrawalReasonCB extends AbstractConditionBean {
      * Accept the query condition of primary key as equal. (old style)
      * @param withdrawalReasonCode : PK, NotNull, CHAR(3), classification=WithdrawalReason. (NotNull)
      */
-    public void acceptPrimaryKey(String withdrawalReasonCode) {
+    public void acceptPrimaryKey(CDef.WithdrawalReason withdrawalReasonCode) {
         assertObjectNotNull("withdrawalReasonCode", withdrawalReasonCode);
         BsWithdrawalReasonCB cb = this;
-        cb.query().setWithdrawalReasonCode_Equal(withdrawalReasonCode);
+        cb.query().setWithdrawalReasonCode_Equal_AsWithdrawalReason(withdrawalReasonCode);
     }
 
     /**

@@ -450,11 +450,11 @@ public interface CDef extends Classification {
         /** ハーブ: of 食品 */
         ハーブ("HEB", "ハーブ", EMPTY_SISTERS)
         ,
-        /** 楽器: of 音楽 */
-        楽器("INS", "楽器", EMPTY_SISTERS)
-        ,
         /** 音楽CD: of 音楽 */
         音楽cd("MCD", "音楽CD", EMPTY_SISTERS)
+        ,
+        /** 楽器: of 音楽 */
+        楽器("INS", "楽器", EMPTY_SISTERS)
         ;
         private static final Map<String, ProductCategory> _codeValueMap = new HashMap<String, ProductCategory>();
         static {

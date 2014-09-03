@@ -599,7 +599,7 @@ public abstract class BsProduct implements Entity, Serializable, Cloneable {
      * [set] PRODUCT_STATUS_CODE: {IX, NotNull, CHAR(3), FK to product_status, classification=ProductStatus} <br />
      * @param productStatusCode The value of the column 'PRODUCT_STATUS_CODE'. (basically NotNull if update: for the constraint)
      */
-    public void setProductStatusCode(String productStatusCode) {
+    protected void setProductStatusCode(String productStatusCode) {
         __modifiedProperties.addPropertyName("productStatusCode");
         _productStatusCode = productStatusCode;
     }

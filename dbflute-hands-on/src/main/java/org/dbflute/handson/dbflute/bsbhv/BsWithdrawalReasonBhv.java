@@ -11,6 +11,7 @@ import org.seasar.dbflute.dbmeta.DBMeta;
 import org.seasar.dbflute.exception.*;
 import org.seasar.dbflute.optional.OptionalEntity;
 import org.seasar.dbflute.outsidesql.executor.*;
+import org.dbflute.handson.dbflute.allcommon.CDef;
 import org.dbflute.handson.dbflute.exbhv.*;
 import org.dbflute.handson.dbflute.bsbhv.loader.*;
 import org.dbflute.handson.dbflute.exentity.*;
@@ -198,19 +199,19 @@ public abstract class BsWithdrawalReasonBhv extends AbstractBehaviorWritable {
      * @exception EntityDuplicatedException When the entity has been duplicated.
      * @exception SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
-    public WithdrawalReason selectByPKValue(String withdrawalReasonCode) {
+    public WithdrawalReason selectByPKValue(CDef.WithdrawalReason withdrawalReasonCode) {
         return facadeSelectByPKValue(withdrawalReasonCode);
     }
 
-    protected WithdrawalReason facadeSelectByPKValue(String withdrawalReasonCode) {
+    protected WithdrawalReason facadeSelectByPKValue(CDef.WithdrawalReason withdrawalReasonCode) {
         return doSelectByPK(withdrawalReasonCode, typeOfSelectedEntity());
     }
 
-    protected <ENTITY extends WithdrawalReason> ENTITY doSelectByPK(String withdrawalReasonCode, Class<ENTITY> tp) {
+    protected <ENTITY extends WithdrawalReason> ENTITY doSelectByPK(CDef.WithdrawalReason withdrawalReasonCode, Class<ENTITY> tp) {
         return doSelectEntity(xprepareCBAsPK(withdrawalReasonCode), tp);
     }
 
-    protected <ENTITY extends WithdrawalReason> OptionalEntity<ENTITY> doSelectOptionalByPK(String withdrawalReasonCode, Class<ENTITY> tp) {
+    protected <ENTITY extends WithdrawalReason> OptionalEntity<ENTITY> doSelectOptionalByPK(CDef.WithdrawalReason withdrawalReasonCode, Class<ENTITY> tp) {
         return createOptionalEntity(doSelectByPK(withdrawalReasonCode, tp), withdrawalReasonCode);
     }
 
@@ -222,15 +223,15 @@ public abstract class BsWithdrawalReasonBhv extends AbstractBehaviorWritable {
      * @exception EntityDuplicatedException When the entity has been duplicated.
      * @exception SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
-    public WithdrawalReason selectByPKValueWithDeletedCheck(String withdrawalReasonCode) {
+    public WithdrawalReason selectByPKValueWithDeletedCheck(CDef.WithdrawalReason withdrawalReasonCode) {
         return doSelectByPKWithDeletedCheck(withdrawalReasonCode, typeOfSelectedEntity());
     }
 
-    protected <ENTITY extends WithdrawalReason> ENTITY doSelectByPKWithDeletedCheck(String withdrawalReasonCode, Class<ENTITY> tp) {
+    protected <ENTITY extends WithdrawalReason> ENTITY doSelectByPKWithDeletedCheck(CDef.WithdrawalReason withdrawalReasonCode, Class<ENTITY> tp) {
         return doSelectEntityWithDeletedCheck(xprepareCBAsPK(withdrawalReasonCode), tp);
     }
 
-    protected WithdrawalReasonCB xprepareCBAsPK(String withdrawalReasonCode) {
+    protected WithdrawalReasonCB xprepareCBAsPK(CDef.WithdrawalReason withdrawalReasonCode) {
         assertObjectNotNull("withdrawalReasonCode", withdrawalReasonCode);
         return newConditionBean().acceptPK(withdrawalReasonCode);
     }

@@ -70,9 +70,13 @@ public class MemberAddressDbm extends AbstractDBMeta {
         public Object read(Entity et) { return ((MemberAddress)et).getAddress(); }
         public void write(Entity et, Object vl) { ((MemberAddress)et).setAddress((String)vl); }
     }
-    public static class EpgRegionId implements PropertyGateway {
+    public class EpgRegionId implements PropertyGateway {
         public Object read(Entity et) { return ((MemberAddress)et).getRegionId(); }
-        public void write(Entity et, Object vl) { ((MemberAddress)et).setRegionId(cti(vl)); }
+        public void write(Entity et, Object vl) {
+            ColumnInfo col = columnRegionId();
+            ccls(col, vl);
+            ((MemberAddress)et).setRegionIdAsRegion((CDef.Region)gcls(col, vl));
+        }
     }
     public static class EpgRegisterDatetime implements PropertyGateway {
         public Object read(Entity et) { return ((MemberAddress)et).getRegisterDatetime(); }

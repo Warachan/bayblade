@@ -480,7 +480,7 @@ public abstract class AbstractBsPurchasePaymentCQ extends AbstractConditionQuery
      * PAYMENT_METHOD_CODE: {NotNull, CHAR(3), classification=PaymentMethod}
      * @param paymentMethodCode The value of paymentMethodCode as equal. (NullAllowed: if null (or empty), no condition)
      */
-    public void setPaymentMethodCode_Equal(String paymentMethodCode) {
+    protected void setPaymentMethodCode_Equal(String paymentMethodCode) {
         doSetPaymentMethodCode_Equal(fRES(paymentMethodCode));
     }
 
@@ -527,7 +527,7 @@ public abstract class AbstractBsPurchasePaymentCQ extends AbstractConditionQuery
      * PAYMENT_METHOD_CODE: {NotNull, CHAR(3), classification=PaymentMethod}
      * @param paymentMethodCode The value of paymentMethodCode as notEqual. (NullAllowed: if null (or empty), no condition)
      */
-    public void setPaymentMethodCode_NotEqual(String paymentMethodCode) {
+    protected void setPaymentMethodCode_NotEqual(String paymentMethodCode) {
         doSetPaymentMethodCode_NotEqual(fRES(paymentMethodCode));
     }
 

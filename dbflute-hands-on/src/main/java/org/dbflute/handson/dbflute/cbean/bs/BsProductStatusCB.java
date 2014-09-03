@@ -14,6 +14,7 @@ import org.seasar.dbflute.cbean.sqlclause.SqlClause;
 import org.seasar.dbflute.cbean.sqlclause.SqlClauseCreator;
 import org.seasar.dbflute.dbmeta.DBMetaProvider;
 import org.seasar.dbflute.twowaysql.factory.SqlAnalyzerFactory;
+import org.dbflute.handson.dbflute.allcommon.CDef;
 import org.dbflute.handson.dbflute.allcommon.DBFluteConfig;
 import org.dbflute.handson.dbflute.allcommon.DBMetaInstanceHandler;
 import org.dbflute.handson.dbflute.allcommon.ImplementedInvokerAssistant;
@@ -82,10 +83,10 @@ public class BsProductStatusCB extends AbstractConditionBean {
      * @param productStatusCode : PK, NotNull, CHAR(3), classification=ProductStatus. (NotNull)
      * @return this. (NotNull)
      */
-    public ProductStatusCB acceptPK(String productStatusCode) {
+    public ProductStatusCB acceptPK(CDef.ProductStatus productStatusCode) {
         assertObjectNotNull("productStatusCode", productStatusCode);
         BsProductStatusCB cb = this;
-        cb.query().setProductStatusCode_Equal(productStatusCode);
+        cb.query().setProductStatusCode_Equal_AsProductStatus(productStatusCode);
         return (ProductStatusCB)this;
     }
 
@@ -93,10 +94,10 @@ public class BsProductStatusCB extends AbstractConditionBean {
      * Accept the query condition of primary key as equal. (old style)
      * @param productStatusCode : PK, NotNull, CHAR(3), classification=ProductStatus. (NotNull)
      */
-    public void acceptPrimaryKey(String productStatusCode) {
+    public void acceptPrimaryKey(CDef.ProductStatus productStatusCode) {
         assertObjectNotNull("productStatusCode", productStatusCode);
         BsProductStatusCB cb = this;
-        cb.query().setProductStatusCode_Equal(productStatusCode);
+        cb.query().setProductStatusCode_Equal_AsProductStatus(productStatusCode);
     }
 
     public ConditionBean addOrderBy_PK_Asc() {

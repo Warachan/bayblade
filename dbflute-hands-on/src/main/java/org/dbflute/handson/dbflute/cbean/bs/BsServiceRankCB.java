@@ -14,6 +14,7 @@ import org.seasar.dbflute.cbean.sqlclause.SqlClause;
 import org.seasar.dbflute.cbean.sqlclause.SqlClauseCreator;
 import org.seasar.dbflute.dbmeta.DBMetaProvider;
 import org.seasar.dbflute.twowaysql.factory.SqlAnalyzerFactory;
+import org.dbflute.handson.dbflute.allcommon.CDef;
 import org.dbflute.handson.dbflute.allcommon.DBFluteConfig;
 import org.dbflute.handson.dbflute.allcommon.DBMetaInstanceHandler;
 import org.dbflute.handson.dbflute.allcommon.ImplementedInvokerAssistant;
@@ -82,10 +83,10 @@ public class BsServiceRankCB extends AbstractConditionBean {
      * @param serviceRankCode : PK, NotNull, CHAR(3), classification=ServiceRank. (NotNull)
      * @return this. (NotNull)
      */
-    public ServiceRankCB acceptPK(String serviceRankCode) {
+    public ServiceRankCB acceptPK(CDef.ServiceRank serviceRankCode) {
         assertObjectNotNull("serviceRankCode", serviceRankCode);
         BsServiceRankCB cb = this;
-        cb.query().setServiceRankCode_Equal(serviceRankCode);
+        cb.query().setServiceRankCode_Equal_AsServiceRank(serviceRankCode);
         return (ServiceRankCB)this;
     }
 
@@ -93,10 +94,10 @@ public class BsServiceRankCB extends AbstractConditionBean {
      * Accept the query condition of primary key as equal. (old style)
      * @param serviceRankCode : PK, NotNull, CHAR(3), classification=ServiceRank. (NotNull)
      */
-    public void acceptPrimaryKey(String serviceRankCode) {
+    public void acceptPrimaryKey(CDef.ServiceRank serviceRankCode) {
         assertObjectNotNull("serviceRankCode", serviceRankCode);
         BsServiceRankCB cb = this;
-        cb.query().setServiceRankCode_Equal(serviceRankCode);
+        cb.query().setServiceRankCode_Equal_AsServiceRank(serviceRankCode);
     }
 
     /**

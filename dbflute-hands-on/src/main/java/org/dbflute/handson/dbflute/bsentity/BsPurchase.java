@@ -672,7 +672,7 @@ public abstract class BsPurchase implements Entity, Serializable, Cloneable {
      * 支払完了フラグ: この購入に関しての支払いが完了しているか否か。
      * @param paymentCompleteFlg The value of the column 'PAYMENT_COMPLETE_FLG'. (basically NotNull if update: for the constraint)
      */
-    public void setPaymentCompleteFlg(Integer paymentCompleteFlg) {
+    protected void setPaymentCompleteFlg(Integer paymentCompleteFlg) {
         checkImplicitSet("PAYMENT_COMPLETE_FLG", CDef.DefMeta.Flg, paymentCompleteFlg);
         __modifiedProperties.addPropertyName("paymentCompleteFlg");
         _paymentCompleteFlg = paymentCompleteFlg;

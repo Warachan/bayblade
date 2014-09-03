@@ -41,9 +41,13 @@ public class RegionDbm extends AbstractDBMeta {
         setupEpg(_epgMap, new EpgRegionId(), "regionId");
         setupEpg(_epgMap, new EpgRegionName(), "regionName");
     }
-    public static class EpgRegionId implements PropertyGateway {
+    public class EpgRegionId implements PropertyGateway {
         public Object read(Entity et) { return ((Region)et).getRegionId(); }
-        public void write(Entity et, Object vl) { ((Region)et).setRegionId(cti(vl)); }
+        public void write(Entity et, Object vl) {
+            ColumnInfo col = columnRegionId();
+            ccls(col, vl);
+            ((Region)et).setRegionIdAsRegion((CDef.Region)gcls(col, vl));
+        }
     }
     public static class EpgRegionName implements PropertyGateway {
         public Object read(Entity et) { return ((Region)et).getRegionName(); }

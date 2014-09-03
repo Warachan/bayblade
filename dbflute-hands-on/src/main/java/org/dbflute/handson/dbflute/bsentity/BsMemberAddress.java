@@ -641,7 +641,7 @@ public abstract class BsMemberAddress implements Entity, Serializable, Cloneable
      * ここでは特に住所の内容と連動しているわけではない。
      * @param regionId The value of the column 'REGION_ID'. (basically NotNull if update: for the constraint)
      */
-    public void setRegionId(Integer regionId) {
+    protected void setRegionId(Integer regionId) {
         __modifiedProperties.addPropertyName("regionId");
         _regionId = regionId;
     }

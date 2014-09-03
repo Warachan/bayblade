@@ -420,7 +420,7 @@ public abstract class BsProductStatus implements Entity, Serializable, Cloneable
      * 商品ステータスコード
      * @param productStatusCode The value of the column 'PRODUCT_STATUS_CODE'. (basically NotNull if update: for the constraint)
      */
-    public void setProductStatusCode(String productStatusCode) {
+    protected void setProductStatusCode(String productStatusCode) {
         __modifiedProperties.addPropertyName("productStatusCode");
         _productStatusCode = productStatusCode;
     }

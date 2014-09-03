@@ -11,6 +11,7 @@ import org.seasar.dbflute.dbmeta.DBMeta;
 import org.seasar.dbflute.exception.*;
 import org.seasar.dbflute.optional.OptionalEntity;
 import org.seasar.dbflute.outsidesql.executor.*;
+import org.dbflute.handson.dbflute.allcommon.CDef;
 import org.dbflute.handson.dbflute.exbhv.*;
 import org.dbflute.handson.dbflute.bsbhv.loader.*;
 import org.dbflute.handson.dbflute.exentity.*;
@@ -198,19 +199,19 @@ public abstract class BsProductStatusBhv extends AbstractBehaviorWritable {
      * @exception EntityDuplicatedException When the entity has been duplicated.
      * @exception SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
-    public ProductStatus selectByPKValue(String productStatusCode) {
+    public ProductStatus selectByPKValue(CDef.ProductStatus productStatusCode) {
         return facadeSelectByPKValue(productStatusCode);
     }
 
-    protected ProductStatus facadeSelectByPKValue(String productStatusCode) {
+    protected ProductStatus facadeSelectByPKValue(CDef.ProductStatus productStatusCode) {
         return doSelectByPK(productStatusCode, typeOfSelectedEntity());
     }
 
-    protected <ENTITY extends ProductStatus> ENTITY doSelectByPK(String productStatusCode, Class<ENTITY> tp) {
+    protected <ENTITY extends ProductStatus> ENTITY doSelectByPK(CDef.ProductStatus productStatusCode, Class<ENTITY> tp) {
         return doSelectEntity(xprepareCBAsPK(productStatusCode), tp);
     }
 
-    protected <ENTITY extends ProductStatus> OptionalEntity<ENTITY> doSelectOptionalByPK(String productStatusCode, Class<ENTITY> tp) {
+    protected <ENTITY extends ProductStatus> OptionalEntity<ENTITY> doSelectOptionalByPK(CDef.ProductStatus productStatusCode, Class<ENTITY> tp) {
         return createOptionalEntity(doSelectByPK(productStatusCode, tp), productStatusCode);
     }
 
@@ -222,15 +223,15 @@ public abstract class BsProductStatusBhv extends AbstractBehaviorWritable {
      * @exception EntityDuplicatedException When the entity has been duplicated.
      * @exception SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
-    public ProductStatus selectByPKValueWithDeletedCheck(String productStatusCode) {
+    public ProductStatus selectByPKValueWithDeletedCheck(CDef.ProductStatus productStatusCode) {
         return doSelectByPKWithDeletedCheck(productStatusCode, typeOfSelectedEntity());
     }
 
-    protected <ENTITY extends ProductStatus> ENTITY doSelectByPKWithDeletedCheck(String productStatusCode, Class<ENTITY> tp) {
+    protected <ENTITY extends ProductStatus> ENTITY doSelectByPKWithDeletedCheck(CDef.ProductStatus productStatusCode, Class<ENTITY> tp) {
         return doSelectEntityWithDeletedCheck(xprepareCBAsPK(productStatusCode), tp);
     }
 
-    protected ProductStatusCB xprepareCBAsPK(String productStatusCode) {
+    protected ProductStatusCB xprepareCBAsPK(CDef.ProductStatus productStatusCode) {
         assertObjectNotNull("productStatusCode", productStatusCode);
         return newConditionBean().acceptPK(productStatusCode);
     }

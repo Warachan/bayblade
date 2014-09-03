@@ -440,7 +440,7 @@ public abstract class BsRegion implements Entity, Serializable, Cloneable {
      * 地域ID
      * @param regionId The value of the column 'REGION_ID'. (basically NotNull if update: for the constraint)
      */
-    public void setRegionId(Integer regionId) {
+    protected void setRegionId(Integer regionId) {
         __modifiedProperties.addPropertyName("regionId");
         _regionId = regionId;
     }

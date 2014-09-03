@@ -11,6 +11,7 @@ import org.seasar.dbflute.dbmeta.DBMeta;
 import org.seasar.dbflute.exception.*;
 import org.seasar.dbflute.optional.OptionalEntity;
 import org.seasar.dbflute.outsidesql.executor.*;
+import org.dbflute.handson.dbflute.allcommon.CDef;
 import org.dbflute.handson.dbflute.exbhv.*;
 import org.dbflute.handson.dbflute.bsbhv.loader.*;
 import org.dbflute.handson.dbflute.exentity.*;
@@ -198,19 +199,19 @@ public abstract class BsServiceRankBhv extends AbstractBehaviorWritable {
      * @exception EntityDuplicatedException When the entity has been duplicated.
      * @exception SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
-    public ServiceRank selectByPKValue(String serviceRankCode) {
+    public ServiceRank selectByPKValue(CDef.ServiceRank serviceRankCode) {
         return facadeSelectByPKValue(serviceRankCode);
     }
 
-    protected ServiceRank facadeSelectByPKValue(String serviceRankCode) {
+    protected ServiceRank facadeSelectByPKValue(CDef.ServiceRank serviceRankCode) {
         return doSelectByPK(serviceRankCode, typeOfSelectedEntity());
     }
 
-    protected <ENTITY extends ServiceRank> ENTITY doSelectByPK(String serviceRankCode, Class<ENTITY> tp) {
+    protected <ENTITY extends ServiceRank> ENTITY doSelectByPK(CDef.ServiceRank serviceRankCode, Class<ENTITY> tp) {
         return doSelectEntity(xprepareCBAsPK(serviceRankCode), tp);
     }
 
-    protected <ENTITY extends ServiceRank> OptionalEntity<ENTITY> doSelectOptionalByPK(String serviceRankCode, Class<ENTITY> tp) {
+    protected <ENTITY extends ServiceRank> OptionalEntity<ENTITY> doSelectOptionalByPK(CDef.ServiceRank serviceRankCode, Class<ENTITY> tp) {
         return createOptionalEntity(doSelectByPK(serviceRankCode, tp), serviceRankCode);
     }
 
@@ -222,15 +223,15 @@ public abstract class BsServiceRankBhv extends AbstractBehaviorWritable {
      * @exception EntityDuplicatedException When the entity has been duplicated.
      * @exception SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
-    public ServiceRank selectByPKValueWithDeletedCheck(String serviceRankCode) {
+    public ServiceRank selectByPKValueWithDeletedCheck(CDef.ServiceRank serviceRankCode) {
         return doSelectByPKWithDeletedCheck(serviceRankCode, typeOfSelectedEntity());
     }
 
-    protected <ENTITY extends ServiceRank> ENTITY doSelectByPKWithDeletedCheck(String serviceRankCode, Class<ENTITY> tp) {
+    protected <ENTITY extends ServiceRank> ENTITY doSelectByPKWithDeletedCheck(CDef.ServiceRank serviceRankCode, Class<ENTITY> tp) {
         return doSelectEntityWithDeletedCheck(xprepareCBAsPK(serviceRankCode), tp);
     }
 
-    protected ServiceRankCB xprepareCBAsPK(String serviceRankCode) {
+    protected ServiceRankCB xprepareCBAsPK(CDef.ServiceRank serviceRankCode) {
         assertObjectNotNull("serviceRankCode", serviceRankCode);
         return newConditionBean().acceptPK(serviceRankCode);
     }

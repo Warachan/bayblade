@@ -54,8 +54,9 @@ public class HandsOn04Test extends UnitContainerTestCase {
         cb.setupSelect_Product();
         // 【チェック!】wara まあ、使ってみたかったとのこと。まあ、それにしても、呼び出し位置は、setupSelectの直下 by jflute
         cb.specify().specifyProduct().columnProductName();
-        cb.query().queryMember().setMemberStatusCode_Equal("WDL");
-        cb.query().setPaymentCompleteFlg_Equal(0);
+        // ネイティブメソッドを削除したため、コメントアウトします。
+        // cb.query().queryMember().setMemberStatusCode_Equal("WDL");
+        // cb.query().setPaymentCompleteFlg_Equal(0);
         // 【チェック!】wara orderByは最後にしよう by jflute
         cb.query().addOrderBy_PurchaseDatetime_Desc();
 
@@ -266,7 +267,6 @@ public class HandsOn04Test extends UnitContainerTestCase {
     public void test_07() throws Exception {
         // ## Arrange ##
         MemberCB cb = new MemberCB();
-        cb.query().arrangeExistsBankTransferPayment();
         cb.query().scalar_Equal().max(new SubQuery<MemberCB>() {
             public void query(MemberCB subCB) {
                 subCB.specify().columnBirthdate();
@@ -285,6 +285,7 @@ public class HandsOn04Test extends UnitContainerTestCase {
                 cb.specify().columnMemberStatusCode();
             }
         });
+        cb.query().arrangeExistsBankTransferPayment();
         // mayuko.sakaba 結局全部arrangeExistsBankTransferPaymentに含んでしまったけどこれはCQにメソッドを作った意味を良くわからない
         // mayuko.sakaba これでいいのでしょうか？仕組みがイマイチよくわかっていない。。。
         // TODO 【変更して見ました】wara ひとまず、銀行振込をしたことのない会員でたまたま同じ生年月日の人が同じステータス内にいたら検索されちゃう by jflute
@@ -394,6 +395,7 @@ public class HandsOn04Test extends UnitContainerTestCase {
                 referrerCB.query().setPaymentCompleteFlg_Equal_AsBoolean(false);
             }
         });
+
         // ## Assert ##
         assertHasAnyElement(memberList);
         for (Member member : memberList) {
@@ -403,7 +405,7 @@ public class HandsOn04Test extends UnitContainerTestCase {
             for (Purchase purchase : purchaseList) {
                 assertHasAnyElement(purchaseList);
                 assertTrue(purchase.isPaymentCompleteFlgFalse());
-                // TODO mayuko.sakaba trueなのにfalseだー
+                // mayuko.sakaba trueなのにfalseだー
             }
         }
     }
@@ -429,8 +431,8 @@ public class HandsOn04Test extends UnitContainerTestCase {
 
         // ## Assert ##
         // TODO 【うーーーーー】wara 整理してみよう by jflute
-        int previousOrder = 0;
         assertHasAnyElement(memberList);
+        int previousOrder = 0;
         for (Member member : memberList) {
             assertNull(member.getMemberStatus());
             String displayOrder = CDef.MemberStatus.codeOf(member.getMemberStatusCode()).displayOrder();

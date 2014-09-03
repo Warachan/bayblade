@@ -11,6 +11,7 @@ import org.seasar.dbflute.dbmeta.DBMeta;
 import org.seasar.dbflute.exception.*;
 import org.seasar.dbflute.optional.OptionalEntity;
 import org.seasar.dbflute.outsidesql.executor.*;
+import org.dbflute.handson.dbflute.allcommon.CDef;
 import org.dbflute.handson.dbflute.exbhv.*;
 import org.dbflute.handson.dbflute.bsbhv.loader.*;
 import org.dbflute.handson.dbflute.exentity.*;
@@ -198,19 +199,19 @@ public abstract class BsRegionBhv extends AbstractBehaviorWritable {
      * @exception EntityDuplicatedException When the entity has been duplicated.
      * @exception SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
-    public Region selectByPKValue(Integer regionId) {
+    public Region selectByPKValue(CDef.Region regionId) {
         return facadeSelectByPKValue(regionId);
     }
 
-    protected Region facadeSelectByPKValue(Integer regionId) {
+    protected Region facadeSelectByPKValue(CDef.Region regionId) {
         return doSelectByPK(regionId, typeOfSelectedEntity());
     }
 
-    protected <ENTITY extends Region> ENTITY doSelectByPK(Integer regionId, Class<ENTITY> tp) {
+    protected <ENTITY extends Region> ENTITY doSelectByPK(CDef.Region regionId, Class<ENTITY> tp) {
         return doSelectEntity(xprepareCBAsPK(regionId), tp);
     }
 
-    protected <ENTITY extends Region> OptionalEntity<ENTITY> doSelectOptionalByPK(Integer regionId, Class<ENTITY> tp) {
+    protected <ENTITY extends Region> OptionalEntity<ENTITY> doSelectOptionalByPK(CDef.Region regionId, Class<ENTITY> tp) {
         return createOptionalEntity(doSelectByPK(regionId, tp), regionId);
     }
 
@@ -222,15 +223,15 @@ public abstract class BsRegionBhv extends AbstractBehaviorWritable {
      * @exception EntityDuplicatedException When the entity has been duplicated.
      * @exception SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
-    public Region selectByPKValueWithDeletedCheck(Integer regionId) {
+    public Region selectByPKValueWithDeletedCheck(CDef.Region regionId) {
         return doSelectByPKWithDeletedCheck(regionId, typeOfSelectedEntity());
     }
 
-    protected <ENTITY extends Region> ENTITY doSelectByPKWithDeletedCheck(Integer regionId, Class<ENTITY> tp) {
+    protected <ENTITY extends Region> ENTITY doSelectByPKWithDeletedCheck(CDef.Region regionId, Class<ENTITY> tp) {
         return doSelectEntityWithDeletedCheck(xprepareCBAsPK(regionId), tp);
     }
 
-    protected RegionCB xprepareCBAsPK(Integer regionId) {
+    protected RegionCB xprepareCBAsPK(CDef.Region regionId) {
         assertObjectNotNull("regionId", regionId);
         return newConditionBean().acceptPK(regionId);
     }

@@ -456,7 +456,7 @@ public abstract class BsWithdrawalReason implements Entity, Serializable, Clonea
      * 退会理由コード
      * @param withdrawalReasonCode The value of the column 'WITHDRAWAL_REASON_CODE'. (basically NotNull if update: for the constraint)
      */
-    public void setWithdrawalReasonCode(String withdrawalReasonCode) {
+    protected void setWithdrawalReasonCode(String withdrawalReasonCode) {
         __modifiedProperties.addPropertyName("withdrawalReasonCode");
         _withdrawalReasonCode = withdrawalReasonCode;
     }

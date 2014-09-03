@@ -698,7 +698,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
      * 会員ステータスコード
      * @param memberStatusCode The value of the column 'MEMBER_STATUS_CODE'. (basically NotNull if update: for the constraint)
      */
-    public void setMemberStatusCode(String memberStatusCode) {
+    protected void setMemberStatusCode(String memberStatusCode) {
         __modifiedProperties.addPropertyName("memberStatusCode");
         _memberStatusCode = memberStatusCode;
     }

@@ -103,7 +103,7 @@ map:{
     #   [false]
     #     Non.
     #
-    #; isCheckSelectedClassification = false
+    ; isCheckSelectedClassification = true
     # - - - - - - - - - -/
 
     # /- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -116,7 +116,7 @@ map:{
     #   [false]
     #     Non.
     #
-    #; isForceClassificationSetting = false
+    ; isForceClassificationSetting = true
     # - - - - - - - - - -/
 
     # /- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
