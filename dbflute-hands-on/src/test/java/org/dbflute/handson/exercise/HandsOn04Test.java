@@ -274,7 +274,7 @@ public class HandsOn04Test extends UnitContainerTestCase {
         cb.query().scalar_Equal().max(new SubQuery<MemberCB>() {
             public void query(MemberCB subCB) {
                 subCB.specify().columnBirthdate();
-                // TODO wara こっちも arrange 呼んで、しっかり再利用 by jflute
+                // wara こっちも arrange 呼んで、しっかり再利用 by jflute
                 subCB.query().arrangeExistsBankTransferPayment();
             }
         }).partitionBy(new SpecifyQuery<MemberCB>() {
@@ -282,9 +282,10 @@ public class HandsOn04Test extends UnitContainerTestCase {
                 cb.specify().columnMemberStatusCode();
             }
         });
-        // TODO wara ArrangeQueryにはコメントを。日本語と英語の両方で書いてみよう by jflute
+        // wara ArrangeQueryにはコメントを。日本語と英語の両方で書いてみよう by jflute
         // 人が再利用するメソッドには、気の利いたコメントをつける習慣
-        // TODO wara MemberCQにauthorを追加 by jflute
+        // TODO wara JavaDoc、ここで「検索する」わけじゃないので「...ある会員」で止めちゃっていいかな by jflute
+        // wara MemberCQにauthorを追加 by jflute
         cb.query().arrangeExistsBankTransferPayment();
         // mayuko.sakaba 結局全部arrangeExistsBankTransferPaymentに含んでしまったけどこれはCQにメソッドを作った意味を良くわからない
         // mayuko.sakaba これでいいのでしょうか？仕組みがイマイチよくわかっていない。。。
