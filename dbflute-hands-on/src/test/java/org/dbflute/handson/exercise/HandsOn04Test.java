@@ -11,7 +11,6 @@ import org.dbflute.handson.dbflute.allcommon.CDef;
 import org.dbflute.handson.dbflute.allcommon.CDef.MemberStatus;
 import org.dbflute.handson.dbflute.cbean.MemberCB;
 import org.dbflute.handson.dbflute.cbean.PurchaseCB;
-import org.dbflute.handson.dbflute.cbean.PurchasePaymentCB;
 import org.dbflute.handson.dbflute.exbhv.MemberBhv;
 import org.dbflute.handson.dbflute.exbhv.MemberSecurityBhv;
 import org.dbflute.handson.dbflute.exbhv.PurchaseBhv;
@@ -87,7 +86,7 @@ public class HandsOn04Test extends UnitContainerTestCase {
 
         // ## Assert ##
         assertHasAnyElement(memberList); // 素通り防止
-        // TODO wara プレゼンイベントリターンズやります！ by jflute 
+        // TODO wara プレゼンイベントリターンズやります！ by jflute
         // 今度は、プログラマー相手に話をします。
         // 「退会会員でない会員は、会員退会情報を持っていないことをアサート」
         // なのに、なぜ違うassertもやってるのか？
@@ -275,16 +274,8 @@ public class HandsOn04Test extends UnitContainerTestCase {
         cb.query().scalar_Equal().max(new SubQuery<MemberCB>() {
             public void query(MemberCB subCB) {
                 subCB.specify().columnBirthdate();
-                // TODO wara こっちも arrange 呼んで、しっかり再利用 by jflute 
-                subCB.query().existsPurchaseList(new SubQuery<PurchaseCB>() {
-                    public void query(PurchaseCB subCB) {
-                        subCB.query().existsPurchasePaymentList(new SubQuery<PurchasePaymentCB>() {
-                            public void query(PurchasePaymentCB subCB) {
-                                subCB.query().setPaymentMethodCode_Equal_BankTransfer();
-                            }
-                        });
-                    }
-                });
+                // TODO wara こっちも arrange 呼んで、しっかり再利用 by jflute
+                subCB.query().arrangeExistsBankTransferPayment();
             }
         }).partitionBy(new SpecifyQuery<MemberCB>() {
             public void specify(MemberCB cb) {

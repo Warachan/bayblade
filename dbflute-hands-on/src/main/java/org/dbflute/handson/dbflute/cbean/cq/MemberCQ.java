@@ -14,6 +14,7 @@ import org.seasar.dbflute.cbean.sqlclause.SqlClause;
  * This class remains when re-generating.
  * </p>
  * @author DBFlute(AutoGenerator)
+ * @author sakaba
  */
 public class MemberCQ extends BsMemberCQ {
 
@@ -36,6 +37,10 @@ public class MemberCQ extends BsMemberCQ {
     //                                                                       Arrange Query
     //                                                                       =============
     // You can make your arranged query methods here. e.g. public void arrangeXxx()
+    /**
+     * 銀行振り込みで購入を支払ったことがある会員を検索する。
+     * Members who have used bank transfer for payment.
+     */
     public void arrangeExistsBankTransferPayment() {
         existsPurchaseList(new SubQuery<PurchaseCB>() {
             public void query(PurchaseCB subCB) {
