@@ -87,6 +87,11 @@ public class HandsOn04Test extends UnitContainerTestCase {
 
         // ## Assert ##
         assertHasAnyElement(memberList); // 素通り防止
+        // TODO wara プレゼンイベントリターンズやります！ by jflute 
+        // 今度は、プログラマー相手に話をします。
+        // 「退会会員でない会員は、会員退会情報を持っていないことをアサート」
+        // なのに、なぜ違うassertもやってるのか？
+
         // これで相当堅いテストになった。相当事前条件がぶっ壊れてもちゃんと検知できる
         boolean existsNotWDL = false;
         boolean existsWDL = false;
@@ -116,7 +121,7 @@ public class HandsOn04Test extends UnitContainerTestCase {
         // ## Arrange ##
         MemberCB cb = new MemberCB();
         cb.setupSelect_MemberStatus();
-        // TODO 【仮会員検索に指定しました。】wara これだけだと、「仮会員の中で一番若い」生年月日を持った会員を検索になってる by jflute
+        // 【仮会員検索に指定しました。】wara これだけだと、「仮会員の中で一番若い」生年月日を持った会員を検索になってる by jflute
         // すると、同じ生年月日を持った正式会員も検索されてしまう、ので外側にも絞り込みが必要
         // http://dbflute.seasar.org/ja/manual/function/ormapper/conditionbean/query/scalarcondition.html#outerquery
         cb.query().setMemberStatusCode_Equal_仮会員();
@@ -135,7 +140,7 @@ public class HandsOn04Test extends UnitContainerTestCase {
 
         // ## Act ##
         // 【使います！】wara selectEntityWithDeteledCheck()を使おう by jflute
-        // TODO 【リストに直しましたー】wara 同じ生年月日の人もいるかもしれないので、リスト検索だね by jflute
+        // 【リストに直しましたー】wara 同じ生年月日の人もいるかもしれないので、リスト検索だね by jflute
         ListResultBean<Member> memberList = memberBhv.selectList(cb);
 
         // ## Assert ##
@@ -197,10 +202,10 @@ public class HandsOn04Test extends UnitContainerTestCase {
      */
     public void test_05() throws Exception {
         // ## Arrange ##
-        // TODO 【同じにしてみました】wara いろいろおなじ by jflute
+        // 【同じにしてみました】wara いろいろおなじ by jflute
         PurchaseCB cb = new PurchaseCB();
         cb.setupSelect_Product().withProductStatus();
-        cb.query().queryProduct().getConditionQueryProductStatus().setProductStatusCode_Equal_生産販売可能();
+        cb.query().queryProduct().queryProductStatus().setProductStatusCode_Equal_生産販売可能();
         cb.query().addOrderBy_PurchasePrice_Desc();
 
         // ## Act ##
@@ -270,6 +275,7 @@ public class HandsOn04Test extends UnitContainerTestCase {
         cb.query().scalar_Equal().max(new SubQuery<MemberCB>() {
             public void query(MemberCB subCB) {
                 subCB.specify().columnBirthdate();
+                // TODO wara こっちも arrange 呼んで、しっかり再利用 by jflute 
                 subCB.query().existsPurchaseList(new SubQuery<PurchaseCB>() {
                     public void query(PurchaseCB subCB) {
                         subCB.query().existsPurchasePaymentList(new SubQuery<PurchasePaymentCB>() {
@@ -285,10 +291,13 @@ public class HandsOn04Test extends UnitContainerTestCase {
                 cb.specify().columnMemberStatusCode();
             }
         });
+        // TODO wara ArrangeQueryにはコメントを。日本語と英語の両方で書いてみよう by jflute
+        // 人が再利用するメソッドには、気の利いたコメントをつける習慣
+        // TODO wara MemberCQにauthorを追加 by jflute
         cb.query().arrangeExistsBankTransferPayment();
         // mayuko.sakaba 結局全部arrangeExistsBankTransferPaymentに含んでしまったけどこれはCQにメソッドを作った意味を良くわからない
         // mayuko.sakaba これでいいのでしょうか？仕組みがイマイチよくわかっていない。。。
-        // TODO 【変更して見ました】wara ひとまず、銀行振込をしたことのない会員でたまたま同じ生年月日の人が同じステータス内にいたら検索されちゃう by jflute
+        // 【変更して見ました】wara ひとまず、銀行振込をしたことのない会員でたまたま同じ生年月日の人が同じステータス内にいたら検索されちゃう by jflute
         // http://dbflute.seasar.org/ja/manual/function/ormapper/conditionbean/query/scalarcondition.html#outerqueryagain
         // wara 先に、一番若い仮会員のエクササイズやってからだけど、これ by jflute
         // http://dbflute.seasar.org/ja/manual/function/ormapper/conditionbean/query/scalarcondition.html#outerqueryagain
@@ -298,8 +307,8 @@ public class HandsOn04Test extends UnitContainerTestCase {
 
         // ## Assert ##
         assertHasAnyElement(memberList);
-        // TODO 【おっしゃるとおりございます】wara このcountって、要は memberList.size() じゃない？ by jflute
-        // TODO 【つかってみましたー！ 】wara Setを使うともっと楽かな by jflute
+        // 【おっしゃるとおりございます】wara このcountって、要は memberList.size() じゃない？ by jflute
+        // 【つかってみましたー！ 】wara Setを使うともっと楽かな by jflute
         Set<String> statusSet = new HashSet<String>();
         for (Member member : memberList) {
             String status = member.getMemberStatusCode();
@@ -400,7 +409,7 @@ public class HandsOn04Test extends UnitContainerTestCase {
         assertHasAnyElement(memberList);
         for (Member member : memberList) {
             List<Purchase> purchaseList = member.getPurchaseList();
-            // TODO 【とってみた】mayuko.sakaba purchaseListの中身が空！なぜ！？
+            // 【とってみた】mayuko.sakaba purchaseListの中身が空！なぜ！？
             //  -> 取ってないから by jflute
             for (Purchase purchase : purchaseList) {
                 assertHasAnyElement(purchaseList);
@@ -421,7 +430,7 @@ public class HandsOn04Test extends UnitContainerTestCase {
     public void test_10() throws Exception {
         // ## Arrange ##
         MemberCB cb = new MemberCB();
-        // TODO 【とってみた】mayuko.sakaba これだと独自の属性を指定した意味がよくわからない感じになっちゃってる
+        // 【とってみた】mayuko.sakaba これだと独自の属性を指定した意味がよくわからない感じになっちゃってる
         //  -> まあね。でも、取っちゃいけないからね by jflute
         cb.query().queryMemberStatus().addOrderBy_DisplayOrder_Asc();
         cb.query().addOrderBy_MemberId_Desc();
@@ -430,11 +439,13 @@ public class HandsOn04Test extends UnitContainerTestCase {
         ListResultBean<Member> memberList = memberBhv.selectList(cb);
 
         // ## Assert ##
-        // TODO 【うーーーーー】wara 整理してみよう by jflute
+        // 【うーーーーー】wara 整理してみよう by jflute
         assertHasAnyElement(memberList);
         int previousOrder = 0;
         for (Member member : memberList) {
             assertNull(member.getMemberStatus());
+            // こうできる by jflute
+            // member.getMemberStatusCodeAsMemberStatus().displayOrder()
             String displayOrder = CDef.MemberStatus.codeOf(member.getMemberStatusCode()).displayOrder();
             log("***********************" + displayOrder);
             int currentOrder = Integer.parseInt(displayOrder);
@@ -445,5 +456,6 @@ public class HandsOn04Test extends UnitContainerTestCase {
             assertTrue(currentOrder >= previousOrder);
             assertNull(member.getMemberStatus());
         }
+        assertTrue(previousOrder > 1); // ちょっとは回ったことを保証する by jflute
     }
 }
