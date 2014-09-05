@@ -38,7 +38,7 @@ public class MemberCQ extends BsMemberCQ {
     //                                                                       =============
     // You can make your arranged query methods here. e.g. public void arrangeXxx()
     /**
-     * 銀行振り込みで購入を支払ったことがある会員を検索する。
+     * 銀行振り込みで購入を支払ったことがある会員。
      * Members who have used bank transfer for payment.
      */
     public void arrangeExistsBankTransferPayment() {

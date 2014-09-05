@@ -284,7 +284,7 @@ public class HandsOn04Test extends UnitContainerTestCase {
         });
         // wara ArrangeQueryにはコメントを。日本語と英語の両方で書いてみよう by jflute
         // 人が再利用するメソッドには、気の利いたコメントをつける習慣
-        // TODO wara JavaDoc、ここで「検索する」わけじゃないので「...ある会員」で止めちゃっていいかな by jflute
+        // TODO 【修正しました！】wara JavaDoc、ここで「検索する」わけじゃないので「...ある会員」で止めちゃっていいかな by jflute
         // wara MemberCQにauthorを追加 by jflute
         cb.query().arrangeExistsBankTransferPayment();
         // mayuko.sakaba 結局全部arrangeExistsBankTransferPaymentに含んでしまったけどこれはCQにメソッドを作った意味を良くわからない
