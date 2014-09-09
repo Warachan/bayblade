@@ -47,7 +47,7 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
     
     /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br />
-     * MEMBER_ID: {PK, ID, NotNull, INT(10)}
+     * MEMBER_ID: {PK, ID, NotNull, INT(10), FK to MEMBER_ADDRESS}
      * @param memberId The value of memberId as equal. (NullAllowed: if null, no condition)
      */
     public void setMemberId_Equal(Integer memberId) {
@@ -60,7 +60,7 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * NotEqual(&lt;&gt;). And NullIgnored, OnlyOnceRegistered. <br />
-     * MEMBER_ID: {PK, ID, NotNull, INT(10)}
+     * MEMBER_ID: {PK, ID, NotNull, INT(10), FK to MEMBER_ADDRESS}
      * @param memberId The value of memberId as notEqual. (NullAllowed: if null, no condition)
      */
     public void setMemberId_NotEqual(Integer memberId) {
@@ -73,7 +73,7 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br />
-     * MEMBER_ID: {PK, ID, NotNull, INT(10)}
+     * MEMBER_ID: {PK, ID, NotNull, INT(10), FK to MEMBER_ADDRESS}
      * @param memberId The value of memberId as greaterThan. (NullAllowed: if null, no condition)
      */
     public void setMemberId_GreaterThan(Integer memberId) {
@@ -82,7 +82,7 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br />
-     * MEMBER_ID: {PK, ID, NotNull, INT(10)}
+     * MEMBER_ID: {PK, ID, NotNull, INT(10), FK to MEMBER_ADDRESS}
      * @param memberId The value of memberId as lessThan. (NullAllowed: if null, no condition)
      */
     public void setMemberId_LessThan(Integer memberId) {
@@ -91,7 +91,7 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br />
-     * MEMBER_ID: {PK, ID, NotNull, INT(10)}
+     * MEMBER_ID: {PK, ID, NotNull, INT(10), FK to MEMBER_ADDRESS}
      * @param memberId The value of memberId as greaterEqual. (NullAllowed: if null, no condition)
      */
     public void setMemberId_GreaterEqual(Integer memberId) {
@@ -100,7 +100,7 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br />
-     * MEMBER_ID: {PK, ID, NotNull, INT(10)}
+     * MEMBER_ID: {PK, ID, NotNull, INT(10), FK to MEMBER_ADDRESS}
      * @param memberId The value of memberId as lessEqual. (NullAllowed: if null, no condition)
      */
     public void setMemberId_LessEqual(Integer memberId) {
@@ -111,7 +111,7 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
      * RangeOf with various options. (versatile) <br />
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br />
      * And NullIgnored, OnlyOnceRegistered. <br />
-     * MEMBER_ID: {PK, ID, NotNull, INT(10)}
+     * MEMBER_ID: {PK, ID, NotNull, INT(10), FK to MEMBER_ADDRESS}
      * @param minNumber The min number of memberId. (NullAllowed: if null, no from-condition)
      * @param maxNumber The max number of memberId. (NullAllowed: if null, no to-condition)
      * @param rangeOfOption The option of range-of. (NotNull)
@@ -122,7 +122,7 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * InScope {in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br />
-     * MEMBER_ID: {PK, ID, NotNull, INT(10)}
+     * MEMBER_ID: {PK, ID, NotNull, INT(10), FK to MEMBER_ADDRESS}
      * @param memberIdList The collection of memberId as inScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setMemberId_InScope(Collection<Integer> memberIdList) {
@@ -135,7 +135,7 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * NotInScope {not in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br />
-     * MEMBER_ID: {PK, ID, NotNull, INT(10)}
+     * MEMBER_ID: {PK, ID, NotNull, INT(10), FK to MEMBER_ADDRESS}
      * @param memberIdList The collection of memberId as notInScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setMemberId_NotInScope(Collection<Integer> memberIdList) {
@@ -721,13 +721,13 @@ public abstract class AbstractBsMemberCQ extends AbstractConditionQuery {
 
     /**
      * IsNull {is null}. And OnlyOnceRegistered. <br />
-     * MEMBER_ID: {PK, ID, NotNull, INT(10)}
+     * MEMBER_ID: {PK, ID, NotNull, INT(10), FK to MEMBER_ADDRESS}
      */
     public void setMemberId_IsNull() { regMemberId(CK_ISN, DOBJ); }
 
     /**
      * IsNotNull {is not null}. And OnlyOnceRegistered. <br />
-     * MEMBER_ID: {PK, ID, NotNull, INT(10)}
+     * MEMBER_ID: {PK, ID, NotNull, INT(10), FK to MEMBER_ADDRESS}
      */
     public void setMemberId_IsNotNull() { regMemberId(CK_ISNN, DOBJ); }
 

@@ -36,13 +36,13 @@ import org.dbflute.handson.dbflute.cbean.*;
  *     VERSION_NO
  *
  * [foreign table]
- *     member_status, member_security(AsOne), member_service(AsOne), member_withdrawal(AsOne)
+ *     member_status, MEMBER_ADDRESS(AsValid), member_security(AsOne), member_service(AsOne), member_withdrawal(AsOne)
  *
  * [referrer table]
  *     member_address, member_login, purchase, member_security, member_service, member_withdrawal
  *
  * [foreign property]
- *     memberStatus, memberSecurityAsOne, memberServiceAsOne, memberWithdrawalAsOne
+ *     memberStatus, memberAddressAsValid, memberSecurityAsOne, memberServiceAsOne, memberWithdrawalAsOne
  *
  * [referrer property]
  *     memberAddressList, memberLoginList, purchaseList
@@ -193,7 +193,7 @@ public abstract class BsMemberBhv extends AbstractBehaviorWritable {
 
     /**
      * Select the entity by the primary-key value.
-     * @param memberId : PK, ID, NotNull, INT(10). (NotNull)
+     * @param memberId : PK, ID, NotNull, INT(10), FK to MEMBER_ADDRESS. (NotNull)
      * @return The entity selected by the PK. (NullAllowed: if no data, it returns null)
      * @exception EntityDuplicatedException When the entity has been duplicated.
      * @exception SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
@@ -216,7 +216,7 @@ public abstract class BsMemberBhv extends AbstractBehaviorWritable {
 
     /**
      * Select the entity by the primary-key value with deleted check.
-     * @param memberId : PK, ID, NotNull, INT(10). (NotNull)
+     * @param memberId : PK, ID, NotNull, INT(10), FK to MEMBER_ADDRESS. (NotNull)
      * @return The entity selected by the PK. (NotNull: if no data, throws exception)
      * @exception EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @exception EntityDuplicatedException When the entity has been duplicated.
@@ -767,6 +767,14 @@ public abstract class BsMemberBhv extends AbstractBehaviorWritable {
      */
     public List<MemberStatus> pulloutMemberStatus(List<Member> memberList)
     { return helpPulloutInternally(memberList, "memberStatus"); }
+
+    /**
+     * Pull out the list of foreign table 'MemberAddress'.
+     * @param memberList The list of member. (NotNull, EmptyAllowed)
+     * @return The list of foreign table. (NotNull, EmptyAllowed, NotNullElement)
+     */
+    public List<MemberAddress> pulloutMemberAddressAsValid(List<Member> memberList)
+    { return helpPulloutInternally(memberList, "memberAddressAsValid"); }
 
     /**
      * Pull out the list of referrer-as-one table 'MemberSecurity'.

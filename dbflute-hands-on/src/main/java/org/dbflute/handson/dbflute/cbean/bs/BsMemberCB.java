@@ -80,7 +80,7 @@ public class BsMemberCB extends AbstractConditionBean {
     //                                                                 ===================
     /**
      * Accept the query condition of primary key as equal.
-     * @param memberId : PK, ID, NotNull, INT(10). (NotNull)
+     * @param memberId : PK, ID, NotNull, INT(10), FK to MEMBER_ADDRESS. (NotNull)
      * @return this. (NotNull)
      */
     public MemberCB acceptPK(Integer memberId) {
@@ -92,7 +92,7 @@ public class BsMemberCB extends AbstractConditionBean {
 
     /**
      * Accept the query condition of primary key as equal. (old style)
-     * @param memberId : PK, ID, NotNull, INT(10). (NotNull)
+     * @param memberId : PK, ID, NotNull, INT(10), FK to MEMBER_ADDRESS. (NotNull)
      */
     public void acceptPrimaryKey(Integer memberId) {
         assertObjectNotNull("memberId", memberId);
@@ -292,6 +292,33 @@ public class BsMemberCB extends AbstractConditionBean {
         doSetupSelect(new SsCall() { public ConditionQuery qf() { return query().queryMemberStatus(); } });
     }
 
+    protected MemberAddressNss _nssMemberAddressAsValid;
+    public MemberAddressNss getNssMemberAddressAsValid() {
+        if (_nssMemberAddressAsValid == null) { _nssMemberAddressAsValid = new MemberAddressNss(null); }
+        return _nssMemberAddressAsValid;
+    }
+    /**
+     * Set up relation columns to select clause. <br />
+     * member_address by my MEMBER_ID, named 'memberAddressAsValid'. <br />
+     * 有効な会員住所 (現在日時を入れれば現在住所)
+     * <pre>
+     * MemberCB cb = new MemberCB();
+     * cb.<span style="color: #DD4747">setupSelect_MemberAddressAsValid(targetDate)</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
+     * cb.query().setFoo...(value);
+     * Member member = memberBhv.selectEntityWithDeletedCheck(cb);
+     * ... = member.<span style="color: #DD4747">getMemberAddressAsValid()</span>; <span style="color: #3F7E5E">// you can get by using SetupSelect</span>
+     * </pre>
+     * @param targetDate The bind parameter of fixed condition for targetDate. (NotNull)
+     * @return The set-upper of nested relation. {setupSelect...().with[nested-relation]} (NotNull)
+     */
+    public MemberAddressNss setupSelect_MemberAddressAsValid(final java.util.Date targetDate) {
+        assertSetupSelectPurpose("memberAddressAsValid");
+        doSetupSelect(new SsCall() { public ConditionQuery qf() { return query().queryMemberAddressAsValid(targetDate); } });
+        if (_nssMemberAddressAsValid == null || !_nssMemberAddressAsValid.hasConditionQuery())
+        { _nssMemberAddressAsValid = new MemberAddressNss(query().queryMemberAddressAsValid(targetDate)); }
+        return _nssMemberAddressAsValid;
+    }
+
     protected MemberSecurityNss _nssMemberSecurityAsOne;
     public MemberSecurityNss getNssMemberSecurityAsOne() {
         if (_nssMemberSecurityAsOne == null) { _nssMemberSecurityAsOne = new MemberSecurityNss(null); }
@@ -407,6 +434,7 @@ public class BsMemberCB extends AbstractConditionBean {
 
     public static class HpSpecification extends HpAbstractSpecification<MemberCQ> {
         protected MemberStatusCB.HpSpecification _memberStatus;
+        protected MemberAddressCB.HpSpecification _memberAddressAsValid;
         protected MemberSecurityCB.HpSpecification _memberSecurityAsOne;
         protected MemberServiceCB.HpSpecification _memberServiceAsOne;
         protected MemberWithdrawalCB.HpSpecification _memberWithdrawalAsOne;
@@ -414,7 +442,7 @@ public class BsMemberCB extends AbstractConditionBean {
                              , HpCBPurpose purpose, DBMetaProvider dbmetaProvider)
         { super(baseCB, qyCall, purpose, dbmetaProvider); }
         /**
-         * MEMBER_ID: {PK, ID, NotNull, INT(10)}
+         * MEMBER_ID: {PK, ID, NotNull, INT(10), FK to MEMBER_ADDRESS}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnMemberId() { return doColumn("MEMBER_ID"); }
@@ -500,6 +528,51 @@ public class BsMemberCB extends AbstractConditionBean {
                 }
             }
             return _memberStatus;
+        }
+        /**
+         * Prepare to specify functions about relation table. <br />
+         * member_address by my MEMBER_ID, named 'memberAddressAsValid'. <br />
+         * 有効な会員住所 (現在日時を入れれば現在住所)
+         * @param targetDate The bind parameter of fixed condition for targetDate. (NotNull)
+         * @return The instance for specification for relation table to specify. (NotNull)
+         */
+        public MemberAddressCB.HpSpecification specifyMemberAddressAsValid(final java.util.Date targetDate) {
+            assertRelation("memberAddressAsValid");
+            if (_memberAddressAsValid == null) {
+                _memberAddressAsValid = new MemberAddressCB.HpSpecification(_baseCB, new HpSpQyCall<MemberAddressCQ>() {
+                    public boolean has() { return _qyCall.has() && _qyCall.qy().hasConditionQueryMemberAddressAsValid(); }
+                    public MemberAddressCQ qy() { return _qyCall.qy().queryMemberAddressAsValid(targetDate); } }
+                    , _purpose, _dbmetaProvider);
+                if (xhasSyncQyCall()) { // inherits it
+                    _memberAddressAsValid.xsetSyncQyCall(new HpSpQyCall<MemberAddressCQ>() {
+                        public boolean has() { return xsyncQyCall().has() && xsyncQyCall().qy().hasConditionQueryMemberAddressAsValid(); }
+                        public MemberAddressCQ qy() { return xsyncQyCall().qy().queryMemberAddressAsValid(targetDate); }
+                    });
+                }
+            }
+            return _memberAddressAsValid;
+        }
+        /**
+         * Prepare to specify functions about relation table. <br />
+         * member_address by my MEMBER_ID, named 'memberAddressAsValid'. <br />
+         * 有効な会員住所 (現在日時を入れれば現在住所)
+         * @return The instance for specification for relation table to specify. (NotNull)
+         */
+        public MemberAddressCB.HpSpecification specifyMemberAddressAsValid() {
+            assertRelation("memberAddressAsValid");
+            if (_memberAddressAsValid == null) {
+                _memberAddressAsValid = new MemberAddressCB.HpSpecification(_baseCB, new HpSpQyCall<MemberAddressCQ>() {
+                    public boolean has() { return _qyCall.has() && _qyCall.qy().hasConditionQueryMemberAddressAsValid(); }
+                    public MemberAddressCQ qy() { return _qyCall.qy().getConditionQueryMemberAddressAsValid(); } }
+                    , _purpose, _dbmetaProvider);
+                if (xhasSyncQyCall()) { // inherits it
+                    _memberAddressAsValid.xsetSyncQyCall(new HpSpQyCall<MemberAddressCQ>() {
+                        public boolean has() { return xsyncQyCall().has() && xsyncQyCall().qy().hasConditionQueryMemberAddressAsValid(); }
+                        public MemberAddressCQ qy() { return xsyncQyCall().qy().getConditionQueryMemberAddressAsValid(); }
+                    });
+                }
+            }
+            return _memberAddressAsValid;
         }
         /**
          * Prepare to specify functions about relation table. <br />

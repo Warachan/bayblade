@@ -27,13 +27,13 @@ import org.dbflute.handson.dbflute.cbean.*;
  *     VERSION_NO
  *
  * [foreign table]
- *     member_status, member_security(AsOne), member_service(AsOne), member_withdrawal(AsOne)
+ *     member_status, MEMBER_ADDRESS(AsValid), member_security(AsOne), member_service(AsOne), member_withdrawal(AsOne)
  *
  * [referrer table]
  *     member_address, member_login, purchase, member_security, member_service, member_withdrawal
  *
  * [foreign property]
- *     memberStatus, memberSecurityAsOne, memberServiceAsOne, memberWithdrawalAsOne
+ *     memberStatus, memberAddressAsValid, memberSecurityAsOne, memberServiceAsOne, memberWithdrawalAsOne
  *
  * [referrer property]
  *     memberAddressList, memberLoginList, purchaseList
@@ -106,6 +106,14 @@ public class LoaderOfMember {
         List<MemberStatus> pulledList = myBhv().pulloutMemberStatus(_selectedList);
         _foreignMemberStatusLoader = new LoaderOfMemberStatus().ready(pulledList, _selector);
         return _foreignMemberStatusLoader;
+    }
+
+    protected LoaderOfMemberAddress _foreignMemberAddressAsValidLoader;
+    public LoaderOfMemberAddress pulloutMemberAddressAsValid() {
+        if (_foreignMemberAddressAsValidLoader != null) { return _foreignMemberAddressAsValidLoader; }
+        List<MemberAddress> pulledList = myBhv().pulloutMemberAddressAsValid(_selectedList);
+        _foreignMemberAddressAsValidLoader = new LoaderOfMemberAddress().ready(pulledList, _selector);
+        return _foreignMemberAddressAsValidLoader;
     }
 
     protected LoaderOfMemberSecurity _foreignMemberSecurityAsOneLoader;

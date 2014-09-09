@@ -33,13 +33,13 @@ import org.dbflute.handson.dbflute.exentity.*;
  *     VERSION_NO
  * 
  * [foreign table]
- *     member_status, member_security(AsOne), member_service(AsOne), member_withdrawal(AsOne)
+ *     member_status, MEMBER_ADDRESS(AsValid), member_security(AsOne), member_service(AsOne), member_withdrawal(AsOne)
  * 
  * [referrer table]
  *     member_address, member_login, purchase, member_security, member_service, member_withdrawal
  * 
  * [foreign property]
- *     memberStatus, memberSecurityAsOne, memberServiceAsOne, memberWithdrawalAsOne
+ *     memberStatus, memberAddressAsValid, memberSecurityAsOne, memberServiceAsOne, memberWithdrawalAsOne
  * 
  * [referrer property]
  *     memberAddressList, memberLoginList, purchaseList
@@ -86,7 +86,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     // -----------------------------------------------------
     //                                                Column
     //                                                ------
-    /** MEMBER_ID: {PK, ID, NotNull, INT(10)} */
+    /** MEMBER_ID: {PK, ID, NotNull, INT(10), FK to MEMBER_ADDRESS} */
     protected Integer _memberId;
 
     /** MEMBER_NAME: {IX, NotNull, VARCHAR(200)} */
@@ -308,6 +308,27 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
      */
     public void setMemberStatus(MemberStatus memberStatus) {
         _memberStatus = memberStatus;
+    }
+
+    /** member_address by my MEMBER_ID, named 'memberAddressAsValid'. */
+    protected MemberAddress _memberAddressAsValid;
+
+    /**
+     * [get] member_address by my MEMBER_ID, named 'memberAddressAsValid'. <br />
+     * 有効な会員住所 (現在日時を入れれば現在住所)
+     * @return The entity of foreign property 'memberAddressAsValid'. (NullAllowed: when e.g. null FK column, no setupSelect)
+     */
+    public MemberAddress getMemberAddressAsValid() {
+        return _memberAddressAsValid;
+    }
+
+    /**
+     * [set] member_address by my MEMBER_ID, named 'memberAddressAsValid'. <br />
+     * 有効な会員住所 (現在日時を入れれば現在住所)
+     * @param memberAddressAsValid The entity of foreign property 'memberAddressAsValid'. (NullAllowed)
+     */
+    public void setMemberAddressAsValid(MemberAddress memberAddressAsValid) {
+        _memberAddressAsValid = memberAddressAsValid;
     }
 
     /** member_security by MEMBER_ID, named 'memberSecurityAsOne'. */
@@ -536,6 +557,8 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
         String li = "\n  ";
         if (_memberStatus != null)
         { sb.append(li).append(xbRDS(_memberStatus, "memberStatus")); }
+        if (_memberAddressAsValid != null)
+        { sb.append(li).append(xbRDS(_memberAddressAsValid, "memberAddressAsValid")); }
         if (_memberSecurityAsOne != null)
         { sb.append(li).append(xbRDS(_memberSecurityAsOne, "memberSecurityAsOne")); }
         if (_memberServiceAsOne != null)
@@ -595,6 +618,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
         StringBuilder sb = new StringBuilder();
         String cm = ",";
         if (_memberStatus != null) { sb.append(cm).append("memberStatus"); }
+        if (_memberAddressAsValid != null) { sb.append(cm).append("memberAddressAsValid"); }
         if (_memberSecurityAsOne != null) { sb.append(cm).append("memberSecurityAsOne"); }
         if (_memberServiceAsOne != null) { sb.append(cm).append("memberServiceAsOne"); }
         if (_memberWithdrawalAsOne != null) { sb.append(cm).append("memberWithdrawalAsOne"); }
@@ -626,7 +650,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     //                                                                            Accessor
     //                                                                            ========
     /**
-     * [get] MEMBER_ID: {PK, ID, NotNull, INT(10)} <br />
+     * [get] MEMBER_ID: {PK, ID, NotNull, INT(10), FK to MEMBER_ADDRESS} <br />
      * 会員ID: 会員を識別するID。連番として基本的に自動採番される。<br />
      * （会員IDだけに限らず）採番方法はDBMSによって変わる。
      * @return The value of the column 'MEMBER_ID'. (basically NotNull if selected: for the constraint)
@@ -636,7 +660,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [set] MEMBER_ID: {PK, ID, NotNull, INT(10)} <br />
+     * [set] MEMBER_ID: {PK, ID, NotNull, INT(10), FK to MEMBER_ADDRESS} <br />
      * 会員ID: 会員を識別するID。連番として基本的に自動採番される。<br />
      * （会員IDだけに限らず）採番方法はDBMSによって変わる。
      * @param memberId The value of the column 'MEMBER_ID'. (basically NotNull if update: for the constraint)
