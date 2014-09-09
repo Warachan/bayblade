@@ -15,6 +15,7 @@ import org.dbflute.handson.dbflute.exbhv.MemberBhv;
 import org.dbflute.handson.dbflute.exbhv.MemberSecurityBhv;
 import org.dbflute.handson.dbflute.exbhv.PurchaseBhv;
 import org.dbflute.handson.dbflute.exentity.Member;
+import org.dbflute.handson.dbflute.exentity.MemberWithdrawal;
 import org.dbflute.handson.dbflute.exentity.ProductStatus;
 import org.dbflute.handson.dbflute.exentity.Purchase;
 import org.dbflute.handson.unit.UnitContainerTestCase;
@@ -86,22 +87,24 @@ public class HandsOn04Test extends UnitContainerTestCase {
 
         // ## Assert ##
         assertHasAnyElement(memberList); // 素通り防止
-        // TODO wara プレゼンイベントリターンズやります！ by jflute
+        // wara プレゼンイベントリターンズやります！ by jflute
         // 今度は、プログラマー相手に話をします。
         // 「退会会員でない会員は、会員退会情報を持っていないことをアサート」
         // なのに、なぜ違うassertもやってるのか？
+        // おしまーい by jflute
 
         // これで相当堅いテストになった。相当事前条件がぶっ壊れてもちゃんと検知できる
         boolean existsNotWDL = false;
         boolean existsWDL = false;
         for (Member member : memberList) {
-            if (!member.getMemberStatusCode().equals("WDL")) { // 退会会員でないひと
-                assertNull(member.getMemberWithdrawalAsOne());
+            MemberWithdrawal withdrawal = member.getMemberWithdrawalAsOne();
+            if (!member.isMemberStatusCode退会会員()) { // 退会会員でないひと
+                assertNull(withdrawal);
                 existsNotWDL = true;
             } else {
                 // setupSelectされていることを保証するアサート
                 // でないと、setupSelect忘れのときに、意味のないassertNull()になってしまうため
-                assertNotNull(member.getMemberWithdrawalAsOne());
+                assertNotNull(withdrawal);
                 existsWDL = true; // その保証が動いていることを保証する
             }
         }
