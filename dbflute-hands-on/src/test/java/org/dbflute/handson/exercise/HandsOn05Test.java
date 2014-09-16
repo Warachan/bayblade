@@ -74,6 +74,9 @@ public class HandsOn05Test extends UnitContainerTestCase {
         // ## Assert ##
         assertHasAnyElement(memberList);
         for (Member member : memberList) {
+            // TODO wara ctrl+1 -> enterで抽出 by jflute 
+            // TODO wara elseが意味が無い by jflute
+            // TODO wara このif文に一回でも入ったことをアサートするとよい by jflute 
             if (member.getMemberAddressAsValid() != null) {
                 String address = member.getMemberAddressAsValid().getAddress();
                 String name = member.getMemberName();
@@ -104,10 +107,13 @@ public class HandsOn05Test extends UnitContainerTestCase {
         // ## Assert ##
         assertHasAnyElement(purchaseList);
         for (Purchase purchase : purchaseList) {
+            // TODO wara getMember()を助けてあげて (他も) by jflute 
             String status = purchase.getMember().getMemberStatus().getMemberStatusName();
             String address = purchase.getMember().getMemberAddressAsValid().getAddress();
             String region = purchase.getMember().getMemberAddressAsValid().getRegion().getRegionName();
             log(status, address, region);
+            // TODO wara まあ判定だけなら、MemberAddress自身がRegionIdを持っているので、isメソッド by jflute 
+            // e.g. purchase.getMember().getMemberAddressAsValid().isRegionId千葉()
             assertTrue(region.matches("千葉"));
         }
     }
@@ -120,6 +126,9 @@ public class HandsOn05Test extends UnitContainerTestCase {
      */
     public void test_04() throws Exception {
         // ## Arrange ##
+        // TODO wara SQLが綺麗に並ぶようにしてみて by jflute 
+        // 補足: dfpropは、あくまで自動生成ツールとしてのDBFluteがみるものなので、
+        // dfpropを修正してすぐにテストを動かしても反映されない (自動生成をしてあげないと)
         MemberCB cb = new MemberCB();
         cb.setupSelect_MemberLoginAsLatest().withMemberStatus();
 
