@@ -27,13 +27,13 @@ import org.dbflute.handson.dbflute.cbean.*;
  *     VERSION_NO
  *
  * [foreign table]
- *     member_status, MEMBER_ADDRESS(AsValid), member_security(AsOne), member_service(AsOne), member_withdrawal(AsOne)
+ *     member_status, MEMBER_ADDRESS(AsValid), MEMBER_LOGIN(AsLatest), member_security(AsOne), member_service(AsOne), member_withdrawal(AsOne)
  *
  * [referrer table]
  *     member_address, member_login, purchase, member_security, member_service, member_withdrawal
  *
  * [foreign property]
- *     memberStatus, memberAddressAsValid, memberSecurityAsOne, memberServiceAsOne, memberWithdrawalAsOne
+ *     memberStatus, memberAddressAsValid, memberLoginAsLatest, memberSecurityAsOne, memberServiceAsOne, memberWithdrawalAsOne
  *
  * [referrer property]
  *     memberAddressList, memberLoginList, purchaseList
@@ -114,6 +114,14 @@ public class LoaderOfMember {
         List<MemberAddress> pulledList = myBhv().pulloutMemberAddressAsValid(_selectedList);
         _foreignMemberAddressAsValidLoader = new LoaderOfMemberAddress().ready(pulledList, _selector);
         return _foreignMemberAddressAsValidLoader;
+    }
+
+    protected LoaderOfMemberLogin _foreignMemberLoginAsLatestLoader;
+    public LoaderOfMemberLogin pulloutMemberLoginAsLatest() {
+        if (_foreignMemberLoginAsLatestLoader != null) { return _foreignMemberLoginAsLatestLoader; }
+        List<MemberLogin> pulledList = myBhv().pulloutMemberLoginAsLatest(_selectedList);
+        _foreignMemberLoginAsLatestLoader = new LoaderOfMemberLogin().ready(pulledList, _selector);
+        return _foreignMemberLoginAsLatestLoader;
     }
 
     protected LoaderOfMemberSecurity _foreignMemberSecurityAsOneLoader;

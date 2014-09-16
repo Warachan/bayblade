@@ -33,13 +33,13 @@ import org.dbflute.handson.dbflute.exentity.*;
  *     VERSION_NO
  * 
  * [foreign table]
- *     member_status, MEMBER_ADDRESS(AsValid), member_security(AsOne), member_service(AsOne), member_withdrawal(AsOne)
+ *     member_status, MEMBER_ADDRESS(AsValid), MEMBER_LOGIN(AsLatest), member_security(AsOne), member_service(AsOne), member_withdrawal(AsOne)
  * 
  * [referrer table]
  *     member_address, member_login, purchase, member_security, member_service, member_withdrawal
  * 
  * [foreign property]
- *     memberStatus, memberAddressAsValid, memberSecurityAsOne, memberServiceAsOne, memberWithdrawalAsOne
+ *     memberStatus, memberAddressAsValid, memberLoginAsLatest, memberSecurityAsOne, memberServiceAsOne, memberWithdrawalAsOne
  * 
  * [referrer property]
  *     memberAddressList, memberLoginList, purchaseList
@@ -331,6 +331,27 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
         _memberAddressAsValid = memberAddressAsValid;
     }
 
+    /** member_login by my MEMBER_ID, named 'memberLoginAsLatest'. */
+    protected MemberLogin _memberLoginAsLatest;
+
+    /**
+     * [get] member_login by my MEMBER_ID, named 'memberLoginAsLatest'. <br />
+     * 会員の最終ログイン
+     * @return The entity of foreign property 'memberLoginAsLatest'. (NullAllowed: when e.g. null FK column, no setupSelect)
+     */
+    public MemberLogin getMemberLoginAsLatest() {
+        return _memberLoginAsLatest;
+    }
+
+    /**
+     * [set] member_login by my MEMBER_ID, named 'memberLoginAsLatest'. <br />
+     * 会員の最終ログイン
+     * @param memberLoginAsLatest The entity of foreign property 'memberLoginAsLatest'. (NullAllowed)
+     */
+    public void setMemberLoginAsLatest(MemberLogin memberLoginAsLatest) {
+        _memberLoginAsLatest = memberLoginAsLatest;
+    }
+
     /** member_security by MEMBER_ID, named 'memberSecurityAsOne'. */
     protected MemberSecurity _memberSecurityAsOne;
 
@@ -559,6 +580,8 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
         { sb.append(li).append(xbRDS(_memberStatus, "memberStatus")); }
         if (_memberAddressAsValid != null)
         { sb.append(li).append(xbRDS(_memberAddressAsValid, "memberAddressAsValid")); }
+        if (_memberLoginAsLatest != null)
+        { sb.append(li).append(xbRDS(_memberLoginAsLatest, "memberLoginAsLatest")); }
         if (_memberSecurityAsOne != null)
         { sb.append(li).append(xbRDS(_memberSecurityAsOne, "memberSecurityAsOne")); }
         if (_memberServiceAsOne != null)
@@ -619,6 +642,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
         String cm = ",";
         if (_memberStatus != null) { sb.append(cm).append("memberStatus"); }
         if (_memberAddressAsValid != null) { sb.append(cm).append("memberAddressAsValid"); }
+        if (_memberLoginAsLatest != null) { sb.append(cm).append("memberLoginAsLatest"); }
         if (_memberSecurityAsOne != null) { sb.append(cm).append("memberSecurityAsOne"); }
         if (_memberServiceAsOne != null) { sb.append(cm).append("memberServiceAsOne"); }
         if (_memberWithdrawalAsOne != null) { sb.append(cm).append("memberWithdrawalAsOne"); }

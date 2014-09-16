@@ -108,6 +108,7 @@ public class MemberDbm extends AbstractDBMeta {
     {
         setupEfpg(_efpgMap, new EfpgMemberStatus(), "memberStatus");
         setupEfpg(_efpgMap, new EfpgMemberAddressAsValid(), "memberAddressAsValid");
+        setupEfpg(_efpgMap, new EfpgMemberLoginAsLatest(), "memberLoginAsLatest");
     }
     public class EfpgMemberStatus implements PropertyGateway {
         public Object read(Entity et) { return ((Member)et).getMemberStatus(); }
@@ -116,6 +117,10 @@ public class MemberDbm extends AbstractDBMeta {
     public class EfpgMemberAddressAsValid implements PropertyGateway {
         public Object read(Entity et) { return ((Member)et).getMemberAddressAsValid(); }
         public void write(Entity et, Object vl) { ((Member)et).setMemberAddressAsValid((MemberAddress)vl); }
+    }
+    public class EfpgMemberLoginAsLatest implements PropertyGateway {
+        public Object read(Entity et) { return ((Member)et).getMemberLoginAsLatest(); }
+        public void write(Entity et, Object vl) { ((Member)et).setMemberLoginAsLatest((MemberLogin)vl); }
     }
     {
         setupEfpg(_efpgMap, new EfpgMemberSecurityAsOne(), "memberSecurityAsOne");
@@ -151,7 +156,7 @@ public class MemberDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnMemberId = cci("MEMBER_ID", "MEMBER_ID", null, null, Integer.class, "memberId", null, true, true, true, "INT", 10, 0, null, false, null, null, "memberAddressAsValid,memberSecurityAsOne,memberServiceAsOne,memberWithdrawalAsOne", "memberAddressList,memberLoginList,purchaseList", null);
+    protected final ColumnInfo _columnMemberId = cci("MEMBER_ID", "MEMBER_ID", null, null, Integer.class, "memberId", null, true, true, true, "INT", 10, 0, null, false, null, null, "memberAddressAsValid,memberLoginAsLatest,memberSecurityAsOne,memberServiceAsOne,memberWithdrawalAsOne", "memberAddressList,memberLoginList,purchaseList", null);
     protected final ColumnInfo _columnMemberName = cci("MEMBER_NAME", "MEMBER_NAME", null, null, String.class, "memberName", null, false, false, true, "VARCHAR", 200, 0, null, false, null, null, null, null, null);
     protected final ColumnInfo _columnMemberAccount = cci("MEMBER_ACCOUNT", "MEMBER_ACCOUNT", null, null, String.class, "memberAccount", null, false, false, true, "VARCHAR", 50, 0, null, false, null, null, null, null, null);
     protected final ColumnInfo _columnMemberStatusCode = cci("MEMBER_STATUS_CODE", "MEMBER_STATUS_CODE", null, null, String.class, "memberStatusCode", null, false, false, true, "CHAR", 3, 0, null, false, null, null, "memberStatus", null, CDef.DefMeta.MemberStatus);
@@ -273,12 +278,21 @@ public class MemberDbm extends AbstractDBMeta {
         return cfi("FK_MEMBER_MEMBER_ADDRESS_VALID", "memberAddressAsValid", this, MemberAddressDbm.getInstance(), mp, 1, null, true, true, false, true, "$$foreignAlias$$.VALID_BEGIN_DATE <= /*$$locationBase$$.parameterMapMemberAddressAsValid.targetDate*/null\n     and $$foreignAlias$$.VALID_END_DATE >= /*$$locationBase$$.parameterMapMemberAddressAsValid.targetDate*/null", newArrayList("targetDate"), false, null);
     }
     /**
+     * member_login by my MEMBER_ID, named 'memberLoginAsLatest'. <br />
+     * 会員の最終ログイン
+     * @return The information object of foreign property. (NotNull)
+     */
+    public ForeignInfo foreignMemberLoginAsLatest() {
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnMemberId(), MemberLoginDbm.getInstance().columnMemberId());
+        return cfi("FK_MEMBER_MEMBER_LOGIN_LATEST", "memberLoginAsLatest", this, MemberLoginDbm.getInstance(), mp, 2, null, true, true, false, true, "$$foreignAlias$$.LOGIN_DATETIME = ($$sqbegin$$\n			select max(login.LOGIN_DATETIME)\n  			from MEMBER_LOGIN login\n 			where login.MEMBER_ID = $$foreignAlias$$.MEMBER_ID\n			)$$sqend$$", null, false, null);
+    }
+    /**
      * member_security by MEMBER_ID, named 'memberSecurityAsOne'.
      * @return The information object of foreign property(referrer-as-one). (NotNull)
      */
     public ForeignInfo foreignMemberSecurityAsOne() {
         Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnMemberId(), MemberSecurityDbm.getInstance().columnMemberId());
-        return cfi("FK_MEMBER_SECURITY_MEMBER", "memberSecurityAsOne", this, MemberSecurityDbm.getInstance(), mp, 2, null, true, false, true, false, null, null, false, "member");
+        return cfi("FK_MEMBER_SECURITY_MEMBER", "memberSecurityAsOne", this, MemberSecurityDbm.getInstance(), mp, 3, null, true, false, true, false, null, null, false, "member");
     }
     /**
      * member_service by MEMBER_ID, named 'memberServiceAsOne'.
@@ -286,7 +300,7 @@ public class MemberDbm extends AbstractDBMeta {
      */
     public ForeignInfo foreignMemberServiceAsOne() {
         Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnMemberId(), MemberServiceDbm.getInstance().columnMemberId());
-        return cfi("FK_MEMBER_SERVICE_MEMBER", "memberServiceAsOne", this, MemberServiceDbm.getInstance(), mp, 3, null, true, false, true, false, null, null, false, "member");
+        return cfi("FK_MEMBER_SERVICE_MEMBER", "memberServiceAsOne", this, MemberServiceDbm.getInstance(), mp, 4, null, true, false, true, false, null, null, false, "member");
     }
     /**
      * member_withdrawal by MEMBER_ID, named 'memberWithdrawalAsOne'.
@@ -294,7 +308,7 @@ public class MemberDbm extends AbstractDBMeta {
      */
     public ForeignInfo foreignMemberWithdrawalAsOne() {
         Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnMemberId(), MemberWithdrawalDbm.getInstance().columnMemberId());
-        return cfi("FK_MEMBER_WITHDRAWAL_MEMBER", "memberWithdrawalAsOne", this, MemberWithdrawalDbm.getInstance(), mp, 4, null, true, false, true, false, null, null, false, "member");
+        return cfi("FK_MEMBER_WITHDRAWAL_MEMBER", "memberWithdrawalAsOne", this, MemberWithdrawalDbm.getInstance(), mp, 5, null, true, false, true, false, null, null, false, "member");
     }
 
     // -----------------------------------------------------

@@ -36,13 +36,13 @@ import org.dbflute.handson.dbflute.cbean.*;
  *     VERSION_NO
  *
  * [foreign table]
- *     member_status, MEMBER_ADDRESS(AsValid), member_security(AsOne), member_service(AsOne), member_withdrawal(AsOne)
+ *     member_status, MEMBER_ADDRESS(AsValid), MEMBER_LOGIN(AsLatest), member_security(AsOne), member_service(AsOne), member_withdrawal(AsOne)
  *
  * [referrer table]
  *     member_address, member_login, purchase, member_security, member_service, member_withdrawal
  *
  * [foreign property]
- *     memberStatus, memberAddressAsValid, memberSecurityAsOne, memberServiceAsOne, memberWithdrawalAsOne
+ *     memberStatus, memberAddressAsValid, memberLoginAsLatest, memberSecurityAsOne, memberServiceAsOne, memberWithdrawalAsOne
  *
  * [referrer property]
  *     memberAddressList, memberLoginList, purchaseList
@@ -775,6 +775,14 @@ public abstract class BsMemberBhv extends AbstractBehaviorWritable {
      */
     public List<MemberAddress> pulloutMemberAddressAsValid(List<Member> memberList)
     { return helpPulloutInternally(memberList, "memberAddressAsValid"); }
+
+    /**
+     * Pull out the list of foreign table 'MemberLogin'.
+     * @param memberList The list of member. (NotNull, EmptyAllowed)
+     * @return The list of foreign table. (NotNull, EmptyAllowed, NotNullElement)
+     */
+    public List<MemberLogin> pulloutMemberLoginAsLatest(List<Member> memberList)
+    { return helpPulloutInternally(memberList, "memberLoginAsLatest"); }
 
     /**
      * Pull out the list of referrer-as-one table 'MemberSecurity'.

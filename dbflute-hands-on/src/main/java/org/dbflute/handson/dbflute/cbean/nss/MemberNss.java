@@ -39,6 +39,16 @@ public class MemberNss {
     }
     /**
      * With nested relation columns to select clause. <br />
+     * member_login by my MEMBER_ID, named 'memberLoginAsLatest'. <br />
+     * 会員の最終ログイン
+     * @return The set-upper of more nested relation. {...with[nested-relation].with[more-nested-relation]} (NotNull)
+     */
+    public MemberLoginNss withMemberLoginAsLatest() {
+        _query.doNss(new MemberCQ.NssCall() { public ConditionQuery qf() { return _query.queryMemberLoginAsLatest(); }});
+        return new MemberLoginNss(_query.queryMemberLoginAsLatest());
+    }
+    /**
+     * With nested relation columns to select clause. <br />
      * member_security by MEMBER_ID, named 'memberSecurityAsOne'.
      * @return The set-upper of more nested relation. {...with[nested-relation].with[more-nested-relation]} (NotNull)
      */

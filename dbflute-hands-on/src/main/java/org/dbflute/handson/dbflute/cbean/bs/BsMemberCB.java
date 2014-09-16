@@ -319,6 +319,32 @@ public class BsMemberCB extends AbstractConditionBean {
         return _nssMemberAddressAsValid;
     }
 
+    protected MemberLoginNss _nssMemberLoginAsLatest;
+    public MemberLoginNss getNssMemberLoginAsLatest() {
+        if (_nssMemberLoginAsLatest == null) { _nssMemberLoginAsLatest = new MemberLoginNss(null); }
+        return _nssMemberLoginAsLatest;
+    }
+    /**
+     * Set up relation columns to select clause. <br />
+     * member_login by my MEMBER_ID, named 'memberLoginAsLatest'. <br />
+     * 会員の最終ログイン
+     * <pre>
+     * MemberCB cb = new MemberCB();
+     * cb.<span style="color: #DD4747">setupSelect_MemberLoginAsLatest()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
+     * cb.query().setFoo...(value);
+     * Member member = memberBhv.selectEntityWithDeletedCheck(cb);
+     * ... = member.<span style="color: #DD4747">getMemberLoginAsLatest()</span>; <span style="color: #3F7E5E">// you can get by using SetupSelect</span>
+     * </pre>
+     * @return The set-upper of nested relation. {setupSelect...().with[nested-relation]} (NotNull)
+     */
+    public MemberLoginNss setupSelect_MemberLoginAsLatest() {
+        assertSetupSelectPurpose("memberLoginAsLatest");
+        doSetupSelect(new SsCall() { public ConditionQuery qf() { return query().queryMemberLoginAsLatest(); } });
+        if (_nssMemberLoginAsLatest == null || !_nssMemberLoginAsLatest.hasConditionQuery())
+        { _nssMemberLoginAsLatest = new MemberLoginNss(query().queryMemberLoginAsLatest()); }
+        return _nssMemberLoginAsLatest;
+    }
+
     protected MemberSecurityNss _nssMemberSecurityAsOne;
     public MemberSecurityNss getNssMemberSecurityAsOne() {
         if (_nssMemberSecurityAsOne == null) { _nssMemberSecurityAsOne = new MemberSecurityNss(null); }
@@ -435,6 +461,7 @@ public class BsMemberCB extends AbstractConditionBean {
     public static class HpSpecification extends HpAbstractSpecification<MemberCQ> {
         protected MemberStatusCB.HpSpecification _memberStatus;
         protected MemberAddressCB.HpSpecification _memberAddressAsValid;
+        protected MemberLoginCB.HpSpecification _memberLoginAsLatest;
         protected MemberSecurityCB.HpSpecification _memberSecurityAsOne;
         protected MemberServiceCB.HpSpecification _memberServiceAsOne;
         protected MemberWithdrawalCB.HpSpecification _memberWithdrawalAsOne;
@@ -573,6 +600,28 @@ public class BsMemberCB extends AbstractConditionBean {
                 }
             }
             return _memberAddressAsValid;
+        }
+        /**
+         * Prepare to specify functions about relation table. <br />
+         * member_login by my MEMBER_ID, named 'memberLoginAsLatest'. <br />
+         * 会員の最終ログイン
+         * @return The instance for specification for relation table to specify. (NotNull)
+         */
+        public MemberLoginCB.HpSpecification specifyMemberLoginAsLatest() {
+            assertRelation("memberLoginAsLatest");
+            if (_memberLoginAsLatest == null) {
+                _memberLoginAsLatest = new MemberLoginCB.HpSpecification(_baseCB, new HpSpQyCall<MemberLoginCQ>() {
+                    public boolean has() { return _qyCall.has() && _qyCall.qy().hasConditionQueryMemberLoginAsLatest(); }
+                    public MemberLoginCQ qy() { return _qyCall.qy().queryMemberLoginAsLatest(); } }
+                    , _purpose, _dbmetaProvider);
+                if (xhasSyncQyCall()) { // inherits it
+                    _memberLoginAsLatest.xsetSyncQyCall(new HpSpQyCall<MemberLoginCQ>() {
+                        public boolean has() { return xsyncQyCall().has() && xsyncQyCall().qy().hasConditionQueryMemberLoginAsLatest(); }
+                        public MemberLoginCQ qy() { return xsyncQyCall().qy().queryMemberLoginAsLatest(); }
+                    });
+                }
+            }
+            return _memberLoginAsLatest;
         }
         /**
          * Prepare to specify functions about relation table. <br />
