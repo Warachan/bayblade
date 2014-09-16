@@ -121,10 +121,15 @@ public class HandsOn05Test extends UnitContainerTestCase {
     public void test_04() throws Exception {
         // ## Arrange ##
         MemberCB cb = new MemberCB();
+        cb.setupSelect_MemberLoginAsLatest().withMemberStatus();
 
         // ## Act ##
+        ListResultBean<Member> memberList = memberBhv.selectList(cb);
 
         // ## Assert ##
+        for (Member member : memberList) {
+
+        }
     }
 
     /**
