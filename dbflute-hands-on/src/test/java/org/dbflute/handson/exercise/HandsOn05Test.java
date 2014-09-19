@@ -148,15 +148,22 @@ public class HandsOn05Test extends UnitContainerTestCase {
 
         // ## Assert ##
         assertHasAnyElement(memberList);
+        boolean existLatestLogin = false;
         for (Member member : memberList) {
             String name = member.getMemberName();
             MemberLogin latestLogin = member.getMemberLoginAsLatest();
-            Timestamp loginDatetime = latestLogin.getLoginDatetime();
-            log(latestLogin, loginDatetime);
-            String status = latestLogin.getMemberStatus().getMemberStatusName();
-            log(name, loginDatetime, status);
-            assertNotNull(loginDatetime);
+            if (latestLogin != null) {
+                Timestamp loginDatetime = latestLogin.getLoginDatetime();
+                String status = latestLogin.getMemberStatus().getMemberStatusName();
+                log("Comment: " + latestLogin, loginDatetime);
+                log("Comment2: " + name, loginDatetime, status);
+                existLatestLogin = true;
+            } else {
+                // あまり意味はないけど・・・elseの中がさびしい。。。
+                assertNull(latestLogin);
+            }
         }
+        assertTrue(existLatestLogin);
     }
 
     /**
