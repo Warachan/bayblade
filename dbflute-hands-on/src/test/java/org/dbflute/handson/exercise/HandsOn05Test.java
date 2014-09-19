@@ -1,5 +1,7 @@
 package org.dbflute.handson.exercise;
 
+import java.sql.Timestamp;
+
 import javax.annotation.Resource;
 
 import org.dbflute.handson.dbflute.cbean.MemberAddressCB;
@@ -11,6 +13,7 @@ import org.dbflute.handson.dbflute.exbhv.MemberSecurityBhv;
 import org.dbflute.handson.dbflute.exbhv.PurchaseBhv;
 import org.dbflute.handson.dbflute.exentity.Member;
 import org.dbflute.handson.dbflute.exentity.MemberAddress;
+import org.dbflute.handson.dbflute.exentity.MemberLogin;
 import org.dbflute.handson.dbflute.exentity.Purchase;
 import org.dbflute.handson.unit.UnitContainerTestCase;
 import org.seasar.dbflute.cbean.ListResultBean;
@@ -73,19 +76,23 @@ public class HandsOn05Test extends UnitContainerTestCase {
 
         // ## Assert ##
         assertHasAnyElement(memberList);
+        boolean existAddress = false;
         for (Member member : memberList) {
-            // TODO wara ctrl+1 -> enterで抽出 by jflute 
-            // TODO wara elseが意味が無い by jflute
-            // TODO wara このif文に一回でも入ったことをアサートするとよい by jflute 
-            if (member.getMemberAddressAsValid() != null) {
-                String address = member.getMemberAddressAsValid().getAddress();
+            // TODO 【抽出してみましたー！】wara ctrl+1 -> enterで抽出 by jflute
+            // TODO 【消しましたー！】wara elseが意味が無い by jflute
+            // TODO 【アサートしてみましたー！】wara このif文に一回でも入ったことをアサートするとよい by jflute
+
+            MemberAddress memberAddress = member.getMemberAddressAsValid();
+            if (memberAddress != null) {
+                String address = memberAddress.getAddress();
                 String name = member.getMemberName();
+                existAddress = true;
                 log(name, address);
+                // 一応残しておきます。
                 assertNotNull(address);
-            } else {
-                assertNull(member.getMemberAddressAsValid());
             }
         }
+        assertTrue(existAddress);
     }
 
     /**
@@ -107,14 +114,18 @@ public class HandsOn05Test extends UnitContainerTestCase {
         // ## Assert ##
         assertHasAnyElement(purchaseList);
         for (Purchase purchase : purchaseList) {
-            // TODO wara getMember()を助けてあげて (他も) by jflute 
-            String status = purchase.getMember().getMemberStatus().getMemberStatusName();
-            String address = purchase.getMember().getMemberAddressAsValid().getAddress();
-            String region = purchase.getMember().getMemberAddressAsValid().getRegion().getRegionName();
+            // TODO 【救出！】wara getMember()を助けてあげて (他も) by jflute
+            Member purchaseMember = purchase.getMember();
+            String status = purchaseMember.getMemberStatus().getMemberStatusName();
+
+            MemberAddress memberAddress = purchaseMember.getMemberAddressAsValid();
+            String address = memberAddress.getAddress();
+            String region = memberAddress.getRegion().getRegionName();
+
             log(status, address, region);
-            // TODO wara まあ判定だけなら、MemberAddress自身がRegionIdを持っているので、isメソッド by jflute 
+            // TODO 【isなのです。】wara まあ判定だけなら、MemberAddress自身がRegionIdを持っているので、isメソッド by jflute
             // e.g. purchase.getMember().getMemberAddressAsValid().isRegionId千葉()
-            assertTrue(region.matches("千葉"));
+            assertTrue(memberAddress.isRegionId千葉());
         }
     }
 
@@ -126,7 +137,7 @@ public class HandsOn05Test extends UnitContainerTestCase {
      */
     public void test_04() throws Exception {
         // ## Arrange ##
-        // TODO wara SQLが綺麗に並ぶようにしてみて by jflute 
+        // TODO 【変えてみました】wara SQLが綺麗に並ぶようにしてみて by jflute
         // 補足: dfpropは、あくまで自動生成ツールとしてのDBFluteがみるものなので、
         // dfpropを修正してすぐにテストを動かしても反映されない (自動生成をしてあげないと)
         MemberCB cb = new MemberCB();
@@ -136,8 +147,15 @@ public class HandsOn05Test extends UnitContainerTestCase {
         ListResultBean<Member> memberList = memberBhv.selectList(cb);
 
         // ## Assert ##
+        assertHasAnyElement(memberList);
         for (Member member : memberList) {
-
+            String name = member.getMemberName();
+            MemberLogin latestLogin = member.getMemberLoginAsLatest();
+            Timestamp loginDatetime = latestLogin.getLoginDatetime();
+            log(latestLogin, loginDatetime);
+            String status = latestLogin.getMemberStatus().getMemberStatusName();
+            log(name, loginDatetime, status);
+            assertNotNull(loginDatetime);
         }
     }
 
