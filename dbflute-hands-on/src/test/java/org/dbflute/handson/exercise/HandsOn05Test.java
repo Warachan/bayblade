@@ -76,11 +76,12 @@ public class HandsOn05Test extends UnitContainerTestCase {
 
         // ## Assert ##
         assertHasAnyElement(memberList);
+        // TODO wara こういうbooleanのときは、なぜか三単元の動詞を使うことが多い existsAddress by jflute 
         boolean existAddress = false;
         for (Member member : memberList) {
-            // TODO 【抽出してみましたー！】wara ctrl+1 -> enterで抽出 by jflute
-            // TODO 【消しましたー！】wara elseが意味が無い by jflute
-            // TODO 【アサートしてみましたー！】wara このif文に一回でも入ったことをアサートするとよい by jflute
+            // 【抽出してみましたー！】wara ctrl+1 -> enterで抽出 by jflute
+            // 【消しましたー！】wara elseが意味が無い by jflute
+            // 【アサートしてみましたー！】wara このif文に一回でも入ったことをアサートするとよい by jflute
 
             MemberAddress memberAddress = member.getMemberAddressAsValid();
             if (memberAddress != null) {
@@ -114,7 +115,7 @@ public class HandsOn05Test extends UnitContainerTestCase {
         // ## Assert ##
         assertHasAnyElement(purchaseList);
         for (Purchase purchase : purchaseList) {
-            // TODO 【救出！】wara getMember()を助けてあげて (他も) by jflute
+            // 【救出！】wara getMember()を助けてあげて (他も) by jflute
             Member purchaseMember = purchase.getMember();
             String status = purchaseMember.getMemberStatus().getMemberStatusName();
 
@@ -123,7 +124,7 @@ public class HandsOn05Test extends UnitContainerTestCase {
             String region = memberAddress.getRegion().getRegionName();
 
             log(status, address, region);
-            // TODO 【isなのです。】wara まあ判定だけなら、MemberAddress自身がRegionIdを持っているので、isメソッド by jflute
+            // 【isなのです。】wara まあ判定だけなら、MemberAddress自身がRegionIdを持っているので、isメソッド by jflute
             // e.g. purchase.getMember().getMemberAddressAsValid().isRegionId千葉()
             assertTrue(memberAddress.isRegionId千葉());
         }
@@ -137,7 +138,7 @@ public class HandsOn05Test extends UnitContainerTestCase {
      */
     public void test_04() throws Exception {
         // ## Arrange ##
-        // TODO 【変えてみました】wara SQLが綺麗に並ぶようにしてみて by jflute
+        // 【変えてみました】wara SQLが綺麗に並ぶようにしてみて by jflute
         // 補足: dfpropは、あくまで自動生成ツールとしてのDBFluteがみるものなので、
         // dfpropを修正してすぐにテストを動かしても反映されない (自動生成をしてあげないと)
         MemberCB cb = new MemberCB();
@@ -166,6 +167,8 @@ public class HandsOn05Test extends UnitContainerTestCase {
         assertTrue(existLatestLogin);
     }
 
+    // TODO wara take-finally.sql, SQLはOKだけど、select句のインデントがちょっとだけズレてるー by jflute 
+    // TODO wara おまけチェックも考えてみてね by jflute 
     /**
      * 【5】正式会員日時を持ってる仮会員がいないこと
      * まだ生まれていない会員がいないこと
