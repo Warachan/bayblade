@@ -12,7 +12,7 @@
                  from MEMBER_ADDRESS subadr
                 where subadr.MEMBER_ID = adr.MEMBER_ID
                   and subadr.VALID_BEGIN_DATE > adr.VALID_BEGIN_DATE
-                  and subadr.VALID_BEGIN_DATE < adr.VALID_END_DATE
+                  and subadr.VALID_BEGIN_DATE <= adr.VALID_END_DATE
        )
 ;
 

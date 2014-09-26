@@ -168,17 +168,5 @@ public class HandsOn05Test extends UnitContainerTestCase {
     }
 
     // TODO 【ずれていました><　ちょっと修正してみました。】wara take-finally.sql, SQLはOKだけど、select句のインデントがちょっとだけズレてるー by jflute
-    // TODO wara おまけチェックも考えてみてね by jflute
-    /**
-     * 【5】正式会員日時を持ってる仮会員がいないこと
-     * まだ生まれていない会員がいないこと
-     * 退会会員が退会情報を持っていることをアサート
-     */
-    public void test_05() throws Exception {
-        // ## Arrange ##
-
-        // ## Act ##
-
-        // ## Assert ##
-    }
+    // TODO 【やってみました！】wara おまけチェックも考えてみてね by jflute
 }
