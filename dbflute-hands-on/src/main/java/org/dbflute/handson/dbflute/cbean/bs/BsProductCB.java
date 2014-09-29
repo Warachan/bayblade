@@ -102,7 +102,7 @@ public class BsProductCB extends AbstractConditionBean {
 
     /**
      * Accept the query condition of unique key as equal.
-     * @param productHandleCode : UQ, NotNull, VARCHAR(100). (NotNull)
+     * @param productHandleCode (商品ハンドルコード): UQ, NotNull, VARCHAR(100). (NotNull)
      * @return this. (NotNull)
      */
     public ProductCB acceptUniqueOf(String productHandleCode) {
@@ -280,7 +280,7 @@ public class BsProductCB extends AbstractConditionBean {
     }
     /**
      * Set up relation columns to select clause. <br />
-     * product_category by my PRODUCT_CATEGORY_CODE, named 'productCategory'.
+     * (商品カテゴリ)product_category by my PRODUCT_CATEGORY_CODE, named 'productCategory'.
      * <pre>
      * ProductCB cb = new ProductCB();
      * cb.<span style="color: #DD4747">setupSelect_ProductCategory()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
@@ -303,7 +303,7 @@ public class BsProductCB extends AbstractConditionBean {
 
     /**
      * Set up relation columns to select clause. <br />
-     * product_status by my PRODUCT_STATUS_CODE, named 'productStatus'.
+     * (商品ステータス)product_status by my PRODUCT_STATUS_CODE, named 'productStatus'.
      * <pre>
      * ProductCB cb = new ProductCB();
      * cb.<span style="color: #DD4747">setupSelect_ProductStatus()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
@@ -373,12 +373,12 @@ public class BsProductCB extends AbstractConditionBean {
          */
         public HpSpecifiedColumn columnProductId() { return doColumn("PRODUCT_ID"); }
         /**
-         * PRODUCT_NAME: {IX, NotNull, VARCHAR(50)}
+         * (商品名称)PRODUCT_NAME: {IX, NotNull, VARCHAR(50)}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnProductName() { return doColumn("PRODUCT_NAME"); }
         /**
-         * PRODUCT_HANDLE_CODE: {UQ, NotNull, VARCHAR(100)}
+         * (商品ハンドルコード)PRODUCT_HANDLE_CODE: {UQ, NotNull, VARCHAR(100)}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnProductHandleCode() { return doColumn("PRODUCT_HANDLE_CODE"); }
@@ -393,7 +393,7 @@ public class BsProductCB extends AbstractConditionBean {
          */
         public HpSpecifiedColumn columnProductStatusCode() { return doColumn("PRODUCT_STATUS_CODE"); }
         /**
-         * REGULAR_PRICE: {INT(10)}
+         * (定価)REGULAR_PRICE: {INT(10)}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnRegularPrice() { return doColumn("REGULAR_PRICE"); }
@@ -440,7 +440,7 @@ public class BsProductCB extends AbstractConditionBean {
         protected String getTableDbName() { return "product"; }
         /**
          * Prepare to specify functions about relation table. <br />
-         * product_category by my PRODUCT_CATEGORY_CODE, named 'productCategory'.
+         * (商品カテゴリ)product_category by my PRODUCT_CATEGORY_CODE, named 'productCategory'.
          * @return The instance for specification for relation table to specify. (NotNull)
          */
         public ProductCategoryCB.HpSpecification specifyProductCategory() {
@@ -461,7 +461,7 @@ public class BsProductCB extends AbstractConditionBean {
         }
         /**
          * Prepare to specify functions about relation table. <br />
-         * product_status by my PRODUCT_STATUS_CODE, named 'productStatus'.
+         * (商品ステータス)product_status by my PRODUCT_STATUS_CODE, named 'productStatus'.
          * @return The instance for specification for relation table to specify. (NotNull)
          */
         public ProductStatusCB.HpSpecification specifyProductStatus() {
@@ -483,7 +483,7 @@ public class BsProductCB extends AbstractConditionBean {
         /**
          * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br />
          * {select max(FOO) from purchase where ...) as FOO_MAX} <br />
-         * purchase by PRODUCT_ID, named 'purchaseList'.
+         * (購入)purchase by PRODUCT_ID, named 'purchaseList'.
          * <pre>
          * cb.specify().<span style="color: #DD4747">derivedPurchaseList()</span>.<span style="color: #DD4747">max</span>(new SubQuery&lt;PurchaseCB&gt;() {
          *     public void query(PurchaseCB subCB) {

@@ -19,7 +19,7 @@ import org.dbflute.handson.dbflute.bsentity.dbmeta.*;
 import org.dbflute.handson.dbflute.cbean.*;
 
 /**
- * The behavior of service_rank as TABLE. <br />
+ * The behavior of (サービスランク)service_rank as TABLE. <br />
  * <pre>
  * [primary key]
  *     SERVICE_RANK_CODE
@@ -194,7 +194,7 @@ public abstract class BsServiceRankBhv extends AbstractBehaviorWritable {
 
     /**
      * Select the entity by the primary-key value.
-     * @param serviceRankCode : PK, NotNull, CHAR(3), classification=ServiceRank. (NotNull)
+     * @param serviceRankCode (サービスランクコード): PK, NotNull, CHAR(3), classification=ServiceRank. (NotNull)
      * @return The entity selected by the PK. (NullAllowed: if no data, it returns null)
      * @exception EntityDuplicatedException When the entity has been duplicated.
      * @exception SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
@@ -217,7 +217,7 @@ public abstract class BsServiceRankBhv extends AbstractBehaviorWritable {
 
     /**
      * Select the entity by the primary-key value with deleted check.
-     * @param serviceRankCode : PK, NotNull, CHAR(3), classification=ServiceRank. (NotNull)
+     * @param serviceRankCode (サービスランクコード): PK, NotNull, CHAR(3), classification=ServiceRank. (NotNull)
      * @return The entity selected by the PK. (NotNull: if no data, throws exception)
      * @exception EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @exception EntityDuplicatedException When the entity has been duplicated.
@@ -484,7 +484,7 @@ public abstract class BsServiceRankBhv extends AbstractBehaviorWritable {
 
     /**
      * Load referrer of memberServiceList by the set-upper of referrer. <br />
-     * member_service by SERVICE_RANK_CODE, named 'memberServiceList'.
+     * (会員サービス)member_service by SERVICE_RANK_CODE, named 'memberServiceList'.
      * <pre>
      * serviceRankBhv.<span style="color: #DD4747">loadMemberServiceList</span>(serviceRankList, new ConditionBeanSetupper&lt;MemberServiceCB&gt;() {
      *     public void setup(MemberServiceCB cb) {
@@ -517,7 +517,7 @@ public abstract class BsServiceRankBhv extends AbstractBehaviorWritable {
 
     /**
      * Load referrer of memberServiceList by the set-upper of referrer. <br />
-     * member_service by SERVICE_RANK_CODE, named 'memberServiceList'.
+     * (会員サービス)member_service by SERVICE_RANK_CODE, named 'memberServiceList'.
      * <pre>
      * serviceRankBhv.<span style="color: #DD4747">loadMemberServiceList</span>(serviceRankList, new ConditionBeanSetupper&lt;MemberServiceCB&gt;() {
      *     public void setup(MemberServiceCB cb) {

@@ -9,7 +9,7 @@ import org.dbflute.handson.dbflute.exentity.*;
 import org.dbflute.handson.dbflute.cbean.*;
 
 /**
- * The referrer loader of member as TABLE. <br />
+ * The referrer loader of (会員)member as TABLE. <br />
  * <pre>
  * [primary key]
  *     MEMBER_ID

@@ -268,7 +268,7 @@ public class BsMemberWithdrawalCB extends AbstractConditionBean {
     }
     /**
      * Set up relation columns to select clause. <br />
-     * member by my MEMBER_ID, named 'member'.
+     * (会員)member by my MEMBER_ID, named 'member'.
      * <pre>
      * MemberWithdrawalCB cb = new MemberWithdrawalCB();
      * cb.<span style="color: #DD4747">setupSelect_Member()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
@@ -288,7 +288,7 @@ public class BsMemberWithdrawalCB extends AbstractConditionBean {
 
     /**
      * Set up relation columns to select clause. <br />
-     * withdrawal_reason by my WITHDRAWAL_REASON_CODE, named 'withdrawalReason'.
+     * (退会理由)withdrawal_reason by my WITHDRAWAL_REASON_CODE, named 'withdrawalReason'.
      * <pre>
      * MemberWithdrawalCB cb = new MemberWithdrawalCB();
      * cb.<span style="color: #DD4747">setupSelect_WithdrawalReason()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
@@ -358,17 +358,17 @@ public class BsMemberWithdrawalCB extends AbstractConditionBean {
          */
         public HpSpecifiedColumn columnMemberId() { return doColumn("MEMBER_ID"); }
         /**
-         * WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason, classification=WithdrawalReason}
+         * (退会理由コード)WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason, classification=WithdrawalReason}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnWithdrawalReasonCode() { return doColumn("WITHDRAWAL_REASON_CODE"); }
         /**
-         * WITHDRAWAL_REASON_INPUT_TEXT: {TEXT(65535)}
+         * (退会理由入力テキスト)WITHDRAWAL_REASON_INPUT_TEXT: {TEXT(65535)}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnWithdrawalReasonInputText() { return doColumn("WITHDRAWAL_REASON_INPUT_TEXT"); }
         /**
-         * WITHDRAWAL_DATETIME: {NotNull, DATETIME(19)}
+         * (退会日時)WITHDRAWAL_DATETIME: {NotNull, DATETIME(19)}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnWithdrawalDatetime() { return doColumn("WITHDRAWAL_DATETIME"); }
@@ -406,7 +406,7 @@ public class BsMemberWithdrawalCB extends AbstractConditionBean {
         protected String getTableDbName() { return "member_withdrawal"; }
         /**
          * Prepare to specify functions about relation table. <br />
-         * member by my MEMBER_ID, named 'member'.
+         * (会員)member by my MEMBER_ID, named 'member'.
          * @return The instance for specification for relation table to specify. (NotNull)
          */
         public MemberCB.HpSpecification specifyMember() {
@@ -427,7 +427,7 @@ public class BsMemberWithdrawalCB extends AbstractConditionBean {
         }
         /**
          * Prepare to specify functions about relation table. <br />
-         * withdrawal_reason by my WITHDRAWAL_REASON_CODE, named 'withdrawalReason'.
+         * (退会理由)withdrawal_reason by my WITHDRAWAL_REASON_CODE, named 'withdrawalReason'.
          * @return The instance for specification for relation table to specify. (NotNull)
          */
         public WithdrawalReasonCB.HpSpecification specifyWithdrawalReason() {

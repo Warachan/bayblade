@@ -12,8 +12,8 @@ import org.dbflute.handson.dbflute.allcommon.CDef;
 import org.dbflute.handson.dbflute.exentity.*;
 
 /**
- * The entity of region as TABLE. <br />
- * 地域: 主に会員の住所に対応する地域。<br />
+ * The entity of (地域)region as TABLE. <br />
+ * 主に会員の住所に対応する地域。<br />
  * かなりざっくりした感じではある。
  * <pre>
  * [primary-key]
@@ -67,10 +67,10 @@ public abstract class BsRegion implements Entity, Serializable, Cloneable {
     // -----------------------------------------------------
     //                                                Column
     //                                                ------
-    /** REGION_ID: {PK, NotNull, INT(10), classification=Region} */
+    /** (地域ID)REGION_ID: {PK, NotNull, INT(10), classification=Region} */
     protected Integer _regionId;
 
-    /** REGION_NAME: {NotNull, VARCHAR(50)} */
+    /** (地域名称)REGION_NAME: {NotNull, VARCHAR(50)} */
     protected String _regionName;
 
     // -----------------------------------------------------
@@ -139,7 +139,7 @@ public abstract class BsRegion implements Entity, Serializable, Cloneable {
     //                                                             =======================
     /**
      * Get the value of regionId as the classification of Region. <br />
-     * REGION_ID: {PK, NotNull, INT(10), classification=Region} <br />
+     * (地域ID)REGION_ID: {PK, NotNull, INT(10), classification=Region} <br />
      * 主に会員の住んでいる地域を示す
      * <p>It's treated as case insensitive and if the code value is null, it returns null.</p>
      * @return The instance of classification definition (as ENUM type). (NullAllowed: when the column value is null)
@@ -150,7 +150,7 @@ public abstract class BsRegion implements Entity, Serializable, Cloneable {
 
     /**
      * Set the value of regionId as the classification of Region. <br />
-     * REGION_ID: {PK, NotNull, INT(10), classification=Region} <br />
+     * (地域ID)REGION_ID: {PK, NotNull, INT(10), classification=Region} <br />
      * 主に会員の住んでいる地域を示す
      * @param cdef The instance of classification definition (as ENUM type). (NullAllowed: if null, null value is set to the column)
      */
@@ -246,11 +246,11 @@ public abstract class BsRegion implements Entity, Serializable, Cloneable {
     // ===================================================================================
     //                                                                   Referrer Property
     //                                                                   =================
-    /** member_address by REGION_ID, named 'memberAddressList'. */
+    /** (会員住所情報)member_address by REGION_ID, named 'memberAddressList'. */
     protected List<MemberAddress> _memberAddressList;
 
     /**
-     * [get] member_address by REGION_ID, named 'memberAddressList'.
+     * [get] (会員住所情報)member_address by REGION_ID, named 'memberAddressList'.
      * @return The entity list of referrer property 'memberAddressList'. (NotNull: even if no loading, returns empty list)
      */
     public List<MemberAddress> getMemberAddressList() {
@@ -259,7 +259,7 @@ public abstract class BsRegion implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [set] member_address by REGION_ID, named 'memberAddressList'.
+     * [set] (会員住所情報)member_address by REGION_ID, named 'memberAddressList'.
      * @param memberAddressList The entity list of referrer property 'memberAddressList'. (NullAllowed)
      */
     public void setMemberAddressList(List<MemberAddress> memberAddressList) {
@@ -427,8 +427,7 @@ public abstract class BsRegion implements Entity, Serializable, Cloneable {
     //                                                                            Accessor
     //                                                                            ========
     /**
-     * [get] REGION_ID: {PK, NotNull, INT(10), classification=Region} <br />
-     * 地域ID
+     * [get] (地域ID)REGION_ID: {PK, NotNull, INT(10), classification=Region} <br />
      * @return The value of the column 'REGION_ID'. (basically NotNull if selected: for the constraint)
      */
     public Integer getRegionId() {
@@ -436,8 +435,7 @@ public abstract class BsRegion implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [set] REGION_ID: {PK, NotNull, INT(10), classification=Region} <br />
-     * 地域ID
+     * [set] (地域ID)REGION_ID: {PK, NotNull, INT(10), classification=Region} <br />
      * @param regionId The value of the column 'REGION_ID'. (basically NotNull if update: for the constraint)
      */
     protected void setRegionId(Integer regionId) {
@@ -446,21 +444,23 @@ public abstract class BsRegion implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [get] REGION_NAME: {NotNull, VARCHAR(50)} <br />
-     * 地域名称
+     * [get] (地域名称)REGION_NAME: {NotNull, VARCHAR(50)} <br />
      * @return The value of the column 'REGION_NAME'. (basically NotNull if selected: for the constraint)
      */
     public String getRegionName() {
-        return _regionName;
+        return convertEmptyToNull(_regionName);
     }
 
     /**
-     * [set] REGION_NAME: {NotNull, VARCHAR(50)} <br />
-     * 地域名称
+     * [set] (地域名称)REGION_NAME: {NotNull, VARCHAR(50)} <br />
      * @param regionName The value of the column 'REGION_NAME'. (basically NotNull if update: for the constraint)
      */
     public void setRegionName(String regionName) {
         __modifiedProperties.addPropertyName("regionName");
         _regionName = regionName;
+    }
+
+    protected String convertEmptyToNull(String value) {
+        return FunCustodial.convertEmptyToNull(value);
     }
 }

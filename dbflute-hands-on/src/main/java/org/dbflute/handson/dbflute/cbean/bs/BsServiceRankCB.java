@@ -80,7 +80,7 @@ public class BsServiceRankCB extends AbstractConditionBean {
     //                                                                 ===================
     /**
      * Accept the query condition of primary key as equal.
-     * @param serviceRankCode : PK, NotNull, CHAR(3), classification=ServiceRank. (NotNull)
+     * @param serviceRankCode (サービスランクコード): PK, NotNull, CHAR(3), classification=ServiceRank. (NotNull)
      * @return this. (NotNull)
      */
     public ServiceRankCB acceptPK(CDef.ServiceRank serviceRankCode) {
@@ -92,7 +92,7 @@ public class BsServiceRankCB extends AbstractConditionBean {
 
     /**
      * Accept the query condition of primary key as equal. (old style)
-     * @param serviceRankCode : PK, NotNull, CHAR(3), classification=ServiceRank. (NotNull)
+     * @param serviceRankCode (サービスランクコード): PK, NotNull, CHAR(3), classification=ServiceRank. (NotNull)
      */
     public void acceptPrimaryKey(CDef.ServiceRank serviceRankCode) {
         assertObjectNotNull("serviceRankCode", serviceRankCode);
@@ -319,22 +319,22 @@ public class BsServiceRankCB extends AbstractConditionBean {
                              , HpCBPurpose purpose, DBMetaProvider dbmetaProvider)
         { super(baseCB, qyCall, purpose, dbmetaProvider); }
         /**
-         * SERVICE_RANK_CODE: {PK, NotNull, CHAR(3), classification=ServiceRank}
+         * (サービスランクコード)SERVICE_RANK_CODE: {PK, NotNull, CHAR(3), classification=ServiceRank}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnServiceRankCode() { return doColumn("SERVICE_RANK_CODE"); }
         /**
-         * SERVICE_RANK_NAME: {NotNull, VARCHAR(50)}
+         * (サービスランク名称)SERVICE_RANK_NAME: {NotNull, VARCHAR(50)}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnServiceRankName() { return doColumn("SERVICE_RANK_NAME"); }
         /**
-         * SERVICE_POINT_INCIDENCE: {NotNull, DECIMAL(5, 3)}
+         * (サービスポイント発生率)SERVICE_POINT_INCIDENCE: {NotNull, DECIMAL(5, 3)}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnServicePointIncidence() { return doColumn("SERVICE_POINT_INCIDENCE"); }
         /**
-         * NEW_ACCEPTABLE_FLG: {NotNull, INT(10), classification=Flg}
+         * (新規受け入れ可能フラグ)NEW_ACCEPTABLE_FLG: {NotNull, INT(10), classification=Flg}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnNewAcceptableFlg() { return doColumn("NEW_ACCEPTABLE_FLG"); }
@@ -359,7 +359,7 @@ public class BsServiceRankCB extends AbstractConditionBean {
         /**
          * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br />
          * {select max(FOO) from member_service where ...) as FOO_MAX} <br />
-         * member_service by SERVICE_RANK_CODE, named 'memberServiceList'.
+         * (会員サービス)member_service by SERVICE_RANK_CODE, named 'memberServiceList'.
          * <pre>
          * cb.specify().<span style="color: #DD4747">derivedMemberServiceList()</span>.<span style="color: #DD4747">max</span>(new SubQuery&lt;MemberServiceCB&gt;() {
          *     public void query(MemberServiceCB subCB) {

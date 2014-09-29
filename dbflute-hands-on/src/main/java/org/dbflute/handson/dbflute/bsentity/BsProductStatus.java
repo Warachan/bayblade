@@ -12,8 +12,7 @@ import org.dbflute.handson.dbflute.allcommon.CDef;
 import org.dbflute.handson.dbflute.exentity.*;
 
 /**
- * The entity of product_status as TABLE. <br />
- * 商品ステータス
+ * The entity of (商品ステータス)product_status as TABLE. <br />
  * <pre>
  * [primary-key]
  *     PRODUCT_STATUS_CODE
@@ -66,10 +65,10 @@ public abstract class BsProductStatus implements Entity, Serializable, Cloneable
     // -----------------------------------------------------
     //                                                Column
     //                                                ------
-    /** PRODUCT_STATUS_CODE: {PK, NotNull, CHAR(3), classification=ProductStatus} */
+    /** (商品ステータスコード)PRODUCT_STATUS_CODE: {PK, NotNull, CHAR(3), classification=ProductStatus} */
     protected String _productStatusCode;
 
-    /** PRODUCT_STATUS_NAME: {NotNull, VARCHAR(50)} */
+    /** (商品ステータス名称)PRODUCT_STATUS_NAME: {NotNull, VARCHAR(50)} */
     protected String _productStatusName;
 
     // -----------------------------------------------------
@@ -138,7 +137,7 @@ public abstract class BsProductStatus implements Entity, Serializable, Cloneable
     //                                                             =======================
     /**
      * Get the value of productStatusCode as the classification of ProductStatus. <br />
-     * PRODUCT_STATUS_CODE: {PK, NotNull, CHAR(3), classification=ProductStatus} <br />
+     * (商品ステータスコード)PRODUCT_STATUS_CODE: {PK, NotNull, CHAR(3), classification=ProductStatus} <br />
      * 商品ステータス。あんまり面白みのないステータス
      * <p>It's treated as case insensitive and if the code value is null, it returns null.</p>
      * @return The instance of classification definition (as ENUM type). (NullAllowed: when the column value is null)
@@ -149,7 +148,7 @@ public abstract class BsProductStatus implements Entity, Serializable, Cloneable
 
     /**
      * Set the value of productStatusCode as the classification of ProductStatus. <br />
-     * PRODUCT_STATUS_CODE: {PK, NotNull, CHAR(3), classification=ProductStatus} <br />
+     * (商品ステータスコード)PRODUCT_STATUS_CODE: {PK, NotNull, CHAR(3), classification=ProductStatus} <br />
      * 商品ステータス。あんまり面白みのないステータス
      * @param cdef The instance of classification definition (as ENUM type). (NullAllowed: if null, null value is set to the column)
      */
@@ -226,11 +225,11 @@ public abstract class BsProductStatus implements Entity, Serializable, Cloneable
     // ===================================================================================
     //                                                                   Referrer Property
     //                                                                   =================
-    /** product by PRODUCT_STATUS_CODE, named 'productList'. */
+    /** (商品)product by PRODUCT_STATUS_CODE, named 'productList'. */
     protected List<Product> _productList;
 
     /**
-     * [get] product by PRODUCT_STATUS_CODE, named 'productList'.
+     * [get] (商品)product by PRODUCT_STATUS_CODE, named 'productList'.
      * @return The entity list of referrer property 'productList'. (NotNull: even if no loading, returns empty list)
      */
     public List<Product> getProductList() {
@@ -239,7 +238,7 @@ public abstract class BsProductStatus implements Entity, Serializable, Cloneable
     }
 
     /**
-     * [set] product by PRODUCT_STATUS_CODE, named 'productList'.
+     * [set] (商品)product by PRODUCT_STATUS_CODE, named 'productList'.
      * @param productList The entity list of referrer property 'productList'. (NullAllowed)
      */
     public void setProductList(List<Product> productList) {
@@ -407,17 +406,15 @@ public abstract class BsProductStatus implements Entity, Serializable, Cloneable
     //                                                                            Accessor
     //                                                                            ========
     /**
-     * [get] PRODUCT_STATUS_CODE: {PK, NotNull, CHAR(3), classification=ProductStatus} <br />
-     * 商品ステータスコード
+     * [get] (商品ステータスコード)PRODUCT_STATUS_CODE: {PK, NotNull, CHAR(3), classification=ProductStatus} <br />
      * @return The value of the column 'PRODUCT_STATUS_CODE'. (basically NotNull if selected: for the constraint)
      */
     public String getProductStatusCode() {
-        return _productStatusCode;
+        return convertEmptyToNull(_productStatusCode);
     }
 
     /**
-     * [set] PRODUCT_STATUS_CODE: {PK, NotNull, CHAR(3), classification=ProductStatus} <br />
-     * 商品ステータスコード
+     * [set] (商品ステータスコード)PRODUCT_STATUS_CODE: {PK, NotNull, CHAR(3), classification=ProductStatus} <br />
      * @param productStatusCode The value of the column 'PRODUCT_STATUS_CODE'. (basically NotNull if update: for the constraint)
      */
     protected void setProductStatusCode(String productStatusCode) {
@@ -426,21 +423,23 @@ public abstract class BsProductStatus implements Entity, Serializable, Cloneable
     }
 
     /**
-     * [get] PRODUCT_STATUS_NAME: {NotNull, VARCHAR(50)} <br />
-     * 商品ステータス名称
+     * [get] (商品ステータス名称)PRODUCT_STATUS_NAME: {NotNull, VARCHAR(50)} <br />
      * @return The value of the column 'PRODUCT_STATUS_NAME'. (basically NotNull if selected: for the constraint)
      */
     public String getProductStatusName() {
-        return _productStatusName;
+        return convertEmptyToNull(_productStatusName);
     }
 
     /**
-     * [set] PRODUCT_STATUS_NAME: {NotNull, VARCHAR(50)} <br />
-     * 商品ステータス名称
+     * [set] (商品ステータス名称)PRODUCT_STATUS_NAME: {NotNull, VARCHAR(50)} <br />
      * @param productStatusName The value of the column 'PRODUCT_STATUS_NAME'. (basically NotNull if update: for the constraint)
      */
     public void setProductStatusName(String productStatusName) {
         __modifiedProperties.addPropertyName("productStatusName");
         _productStatusName = productStatusName;
+    }
+
+    protected String convertEmptyToNull(String value) {
+        return FunCustodial.convertEmptyToNull(value);
     }
 }

@@ -12,8 +12,8 @@ import org.dbflute.handson.dbflute.allcommon.CDef;
 import org.dbflute.handson.dbflute.exentity.*;
 
 /**
- * The entity of member_withdrawal as TABLE. <br />
- * 会員退会情報: 退会会員の退会に関する詳細な情報。<br />
+ * The entity of (会員退会情報)member_withdrawal as TABLE. <br />
+ * 退会会員の退会に関する詳細な情報。<br />
  * 退会会員のみデータが存在する。
  * <pre>
  * [primary-key]
@@ -82,13 +82,13 @@ public abstract class BsMemberWithdrawal implements Entity, Serializable, Clonea
     /** MEMBER_ID: {PK, NotNull, INT(10), FK to member} */
     protected Integer _memberId;
 
-    /** WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason, classification=WithdrawalReason} */
+    /** (退会理由コード)WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason, classification=WithdrawalReason} */
     protected String _withdrawalReasonCode;
 
-    /** WITHDRAWAL_REASON_INPUT_TEXT: {TEXT(65535)} */
+    /** (退会理由入力テキスト)WITHDRAWAL_REASON_INPUT_TEXT: {TEXT(65535)} */
     protected String _withdrawalReasonInputText;
 
-    /** WITHDRAWAL_DATETIME: {NotNull, DATETIME(19)} */
+    /** (退会日時)WITHDRAWAL_DATETIME: {NotNull, DATETIME(19)} */
     protected java.sql.Timestamp _withdrawalDatetime;
 
     /** REGISTER_DATETIME: {NotNull, DATETIME(19)} */
@@ -169,7 +169,7 @@ public abstract class BsMemberWithdrawal implements Entity, Serializable, Clonea
     //                                                             =======================
     /**
      * Get the value of withdrawalReasonCode as the classification of WithdrawalReason. <br />
-     * WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason, classification=WithdrawalReason} <br />
+     * (退会理由コード)WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason, classification=WithdrawalReason} <br />
      * 会員の退会理由。なのでちょっとねがてぃぶ
      * <p>It's treated as case insensitive and if the code value is null, it returns null.</p>
      * @return The instance of classification definition (as ENUM type). (NullAllowed: when the column value is null)
@@ -180,7 +180,7 @@ public abstract class BsMemberWithdrawal implements Entity, Serializable, Clonea
 
     /**
      * Set the value of withdrawalReasonCode as the classification of WithdrawalReason. <br />
-     * WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason, classification=WithdrawalReason} <br />
+     * (退会理由コード)WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason, classification=WithdrawalReason} <br />
      * 会員の退会理由。なのでちょっとねがてぃぶ
      * @param cdef The instance of classification definition (as ENUM type). (NullAllowed: if null, null value is set to the column)
      */
@@ -273,11 +273,11 @@ public abstract class BsMemberWithdrawal implements Entity, Serializable, Clonea
     // ===================================================================================
     //                                                                    Foreign Property
     //                                                                    ================
-    /** member by my MEMBER_ID, named 'member'. */
+    /** (会員)member by my MEMBER_ID, named 'member'. */
     protected Member _member;
 
     /**
-     * [get] member by my MEMBER_ID, named 'member'.
+     * [get] (会員)member by my MEMBER_ID, named 'member'.
      * @return The entity of foreign property 'member'. (NullAllowed: when e.g. null FK column, no setupSelect)
      */
     public Member getMember() {
@@ -285,18 +285,18 @@ public abstract class BsMemberWithdrawal implements Entity, Serializable, Clonea
     }
 
     /**
-     * [set] member by my MEMBER_ID, named 'member'.
+     * [set] (会員)member by my MEMBER_ID, named 'member'.
      * @param member The entity of foreign property 'member'. (NullAllowed)
      */
     public void setMember(Member member) {
         _member = member;
     }
 
-    /** withdrawal_reason by my WITHDRAWAL_REASON_CODE, named 'withdrawalReason'. */
+    /** (退会理由)withdrawal_reason by my WITHDRAWAL_REASON_CODE, named 'withdrawalReason'. */
     protected WithdrawalReason _withdrawalReason;
 
     /**
-     * [get] withdrawal_reason by my WITHDRAWAL_REASON_CODE, named 'withdrawalReason'.
+     * [get] (退会理由)withdrawal_reason by my WITHDRAWAL_REASON_CODE, named 'withdrawalReason'.
      * @return The entity of foreign property 'withdrawalReason'. (NullAllowed: when e.g. null FK column, no setupSelect)
      */
     public WithdrawalReason getWithdrawalReason() {
@@ -304,7 +304,7 @@ public abstract class BsMemberWithdrawal implements Entity, Serializable, Clonea
     }
 
     /**
-     * [set] withdrawal_reason by my WITHDRAWAL_REASON_CODE, named 'withdrawalReason'.
+     * [set] (退会理由)withdrawal_reason by my WITHDRAWAL_REASON_CODE, named 'withdrawalReason'.
      * @param withdrawalReason The entity of foreign property 'withdrawalReason'. (NullAllowed)
      */
     public void setWithdrawalReason(WithdrawalReason withdrawalReason) {
@@ -500,18 +500,18 @@ public abstract class BsMemberWithdrawal implements Entity, Serializable, Clonea
     }
 
     /**
-     * [get] WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason, classification=WithdrawalReason} <br />
-     * 退会理由コード: 退会した定型理由を参照するコード。<br />
+     * [get] (退会理由コード)WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason, classification=WithdrawalReason} <br />
+     * 退会した定型理由を参照するコード。<br />
      * 何も言わずに退会する会員もいるので必須項目ではない。
      * @return The value of the column 'WITHDRAWAL_REASON_CODE'. (NullAllowed even if selected: for no constraint)
      */
     public String getWithdrawalReasonCode() {
-        return _withdrawalReasonCode;
+        return convertEmptyToNull(_withdrawalReasonCode);
     }
 
     /**
-     * [set] WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason, classification=WithdrawalReason} <br />
-     * 退会理由コード: 退会した定型理由を参照するコード。<br />
+     * [set] (退会理由コード)WITHDRAWAL_REASON_CODE: {IX, CHAR(3), FK to withdrawal_reason, classification=WithdrawalReason} <br />
+     * 退会した定型理由を参照するコード。<br />
      * 何も言わずに退会する会員もいるので必須項目ではない。
      * @param withdrawalReasonCode The value of the column 'WITHDRAWAL_REASON_CODE'. (NullAllowed: null update allowed for no constraint)
      */
@@ -521,18 +521,18 @@ public abstract class BsMemberWithdrawal implements Entity, Serializable, Clonea
     }
 
     /**
-     * [get] WITHDRAWAL_REASON_INPUT_TEXT: {TEXT(65535)} <br />
-     * 退会理由入力テキスト: 会員がフリーテキストで入力できる退会理由。<br />
+     * [get] (退会理由入力テキスト)WITHDRAWAL_REASON_INPUT_TEXT: {TEXT(65535)} <br />
+     * 会員がフリーテキストで入力できる退会理由。<br />
      * もう言いたいこと言ってもらう感じ。
      * @return The value of the column 'WITHDRAWAL_REASON_INPUT_TEXT'. (NullAllowed even if selected: for no constraint)
      */
     public String getWithdrawalReasonInputText() {
-        return _withdrawalReasonInputText;
+        return convertEmptyToNull(_withdrawalReasonInputText);
     }
 
     /**
-     * [set] WITHDRAWAL_REASON_INPUT_TEXT: {TEXT(65535)} <br />
-     * 退会理由入力テキスト: 会員がフリーテキストで入力できる退会理由。<br />
+     * [set] (退会理由入力テキスト)WITHDRAWAL_REASON_INPUT_TEXT: {TEXT(65535)} <br />
+     * 会員がフリーテキストで入力できる退会理由。<br />
      * もう言いたいこと言ってもらう感じ。
      * @param withdrawalReasonInputText The value of the column 'WITHDRAWAL_REASON_INPUT_TEXT'. (NullAllowed: null update allowed for no constraint)
      */
@@ -542,8 +542,8 @@ public abstract class BsMemberWithdrawal implements Entity, Serializable, Clonea
     }
 
     /**
-     * [get] WITHDRAWAL_DATETIME: {NotNull, DATETIME(19)} <br />
-     * 退会日時: 退会した瞬間の日時。<br />
+     * [get] (退会日時)WITHDRAWAL_DATETIME: {NotNull, DATETIME(19)} <br />
+     * 退会した瞬間の日時。<br />
      * 正式会員日時と違い、こっちはone-to-oneの別テーブルで。
      * @return The value of the column 'WITHDRAWAL_DATETIME'. (basically NotNull if selected: for the constraint)
      */
@@ -552,8 +552,8 @@ public abstract class BsMemberWithdrawal implements Entity, Serializable, Clonea
     }
 
     /**
-     * [set] WITHDRAWAL_DATETIME: {NotNull, DATETIME(19)} <br />
-     * 退会日時: 退会した瞬間の日時。<br />
+     * [set] (退会日時)WITHDRAWAL_DATETIME: {NotNull, DATETIME(19)} <br />
+     * 退会した瞬間の日時。<br />
      * 正式会員日時と違い、こっちはone-to-oneの別テーブルで。
      * @param withdrawalDatetime The value of the column 'WITHDRAWAL_DATETIME'. (basically NotNull if update: for the constraint)
      */
@@ -584,7 +584,7 @@ public abstract class BsMemberWithdrawal implements Entity, Serializable, Clonea
      * @return The value of the column 'REGISTER_USER'. (basically NotNull if selected: for the constraint)
      */
     public String getRegisterUser() {
-        return _registerUser;
+        return convertEmptyToNull(_registerUser);
     }
 
     /**
@@ -618,7 +618,7 @@ public abstract class BsMemberWithdrawal implements Entity, Serializable, Clonea
      * @return The value of the column 'UPDATE_USER'. (basically NotNull if selected: for the constraint)
      */
     public String getUpdateUser() {
-        return _updateUser;
+        return convertEmptyToNull(_updateUser);
     }
 
     /**
@@ -628,5 +628,9 @@ public abstract class BsMemberWithdrawal implements Entity, Serializable, Clonea
     public void setUpdateUser(String updateUser) {
         __modifiedProperties.addPropertyName("updateUser");
         _updateUser = updateUser;
+    }
+
+    protected String convertEmptyToNull(String value) {
+        return FunCustodial.convertEmptyToNull(value);
     }
 }

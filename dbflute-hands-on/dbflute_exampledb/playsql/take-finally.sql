@@ -2,7 +2,7 @@
 -- /- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 -- Member addresses should be only one at any time.
 -- - - - - - - - - - -/
-　select adr.MEMBER_ADDRESS_ID
+ select adr.MEMBER_ADDRESS_ID
 	, adr.MEMBER_ID
 	, adr.VALID_BEGIN_DATE
 	, adr.VALID_END_DATE
@@ -20,7 +20,7 @@
 -- /- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 -- Provisinal members should not have formalized date time.
 -- - - - - - - - - - -/
-　select member.MEMBER_ID
+ select member.MEMBER_ID
 	, member.MEMBER_NAME
 	, member.MEMBER_ACCOUNT
 	, member.MEMBER_STATUS_CODE
@@ -34,7 +34,7 @@
 -- /- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 -- All member's should not be after the current date.
 -- - - - - - - - - - -/
-　select member.MEMBER_ID
+ select member.MEMBER_ID
 	, member.MEMBER_NAME
 	, member.MEMBER_ACCOUNT
 	, member.MEMBER_STATUS_CODE
@@ -47,7 +47,7 @@
 -- /- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 -- Withdrawal members must have withdrawal data.
 -- - - - - - - - - - -/
-　select member.MEMBER_ID
+ select member.MEMBER_ID
 	,member.MEMBER_NAME
   from MEMBER member
  where member.MEMBER_STATUS_CODE = 'WDL'

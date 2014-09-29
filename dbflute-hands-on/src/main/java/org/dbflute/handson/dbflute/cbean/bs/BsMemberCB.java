@@ -80,7 +80,7 @@ public class BsMemberCB extends AbstractConditionBean {
     //                                                                 ===================
     /**
      * Accept the query condition of primary key as equal.
-     * @param memberId : PK, ID, NotNull, INT(10), FK to MEMBER_ADDRESS. (NotNull)
+     * @param memberId (会員ID): PK, ID, NotNull, INT(10), FK to MEMBER_ADDRESS. (NotNull)
      * @return this. (NotNull)
      */
     public MemberCB acceptPK(Integer memberId) {
@@ -92,7 +92,7 @@ public class BsMemberCB extends AbstractConditionBean {
 
     /**
      * Accept the query condition of primary key as equal. (old style)
-     * @param memberId : PK, ID, NotNull, INT(10), FK to MEMBER_ADDRESS. (NotNull)
+     * @param memberId (会員ID): PK, ID, NotNull, INT(10), FK to MEMBER_ADDRESS. (NotNull)
      */
     public void acceptPrimaryKey(Integer memberId) {
         assertObjectNotNull("memberId", memberId);
@@ -102,7 +102,7 @@ public class BsMemberCB extends AbstractConditionBean {
 
     /**
      * Accept the query condition of unique key as equal.
-     * @param memberAccount : UQ, NotNull, VARCHAR(50). (NotNull)
+     * @param memberAccount (会員アカウント): UQ, NotNull, VARCHAR(50). (NotNull)
      * @return this. (NotNull)
      */
     public MemberCB acceptUniqueOf(String memberAccount) {
@@ -275,7 +275,7 @@ public class BsMemberCB extends AbstractConditionBean {
     //                                                                         ===========
     /**
      * Set up relation columns to select clause. <br />
-     * member_status by my MEMBER_STATUS_CODE, named 'memberStatus'.
+     * (会員ステータス)member_status by my MEMBER_STATUS_CODE, named 'memberStatus'.
      * <pre>
      * MemberCB cb = new MemberCB();
      * cb.<span style="color: #DD4747">setupSelect_MemberStatus()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
@@ -299,7 +299,7 @@ public class BsMemberCB extends AbstractConditionBean {
     }
     /**
      * Set up relation columns to select clause. <br />
-     * member_address by my MEMBER_ID, named 'memberAddressAsValid'. <br />
+     * (会員住所情報)member_address by my MEMBER_ID, named 'memberAddressAsValid'. <br />
      * 有効な会員住所 (現在日時を入れれば現在住所)
      * <pre>
      * MemberCB cb = new MemberCB();
@@ -326,7 +326,7 @@ public class BsMemberCB extends AbstractConditionBean {
     }
     /**
      * Set up relation columns to select clause. <br />
-     * member_login by my MEMBER_ID, named 'memberLoginAsLatest'. <br />
+     * (会員ログイン情報)member_login by my MEMBER_ID, named 'memberLoginAsLatest'. <br />
      * 会員の最終ログイン
      * <pre>
      * MemberCB cb = new MemberCB();
@@ -352,7 +352,7 @@ public class BsMemberCB extends AbstractConditionBean {
     }
     /**
      * Set up relation columns to select clause. <br />
-     * member_security by MEMBER_ID, named 'memberSecurityAsOne'.
+     * (会員セキュリティ情報)member_security by MEMBER_ID, named 'memberSecurityAsOne'.
      * <pre>
      * MemberCB cb = new MemberCB();
      * cb.<span style="color: #DD4747">setupSelect_MemberSecurityAsOne()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
@@ -376,7 +376,7 @@ public class BsMemberCB extends AbstractConditionBean {
     }
     /**
      * Set up relation columns to select clause. <br />
-     * member_service by MEMBER_ID, named 'memberServiceAsOne'.
+     * (会員サービス)member_service by MEMBER_ID, named 'memberServiceAsOne'.
      * <pre>
      * MemberCB cb = new MemberCB();
      * cb.<span style="color: #DD4747">setupSelect_MemberServiceAsOne()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
@@ -400,7 +400,7 @@ public class BsMemberCB extends AbstractConditionBean {
     }
     /**
      * Set up relation columns to select clause. <br />
-     * member_withdrawal by MEMBER_ID, named 'memberWithdrawalAsOne'.
+     * (会員退会情報)member_withdrawal by MEMBER_ID, named 'memberWithdrawalAsOne'.
      * <pre>
      * MemberCB cb = new MemberCB();
      * cb.<span style="color: #DD4747">setupSelect_MemberWithdrawalAsOne()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
@@ -469,57 +469,57 @@ public class BsMemberCB extends AbstractConditionBean {
                              , HpCBPurpose purpose, DBMetaProvider dbmetaProvider)
         { super(baseCB, qyCall, purpose, dbmetaProvider); }
         /**
-         * MEMBER_ID: {PK, ID, NotNull, INT(10), FK to MEMBER_ADDRESS}
+         * (会員ID)MEMBER_ID: {PK, ID, NotNull, INT(10), FK to MEMBER_ADDRESS}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnMemberId() { return doColumn("MEMBER_ID"); }
         /**
-         * MEMBER_NAME: {IX, NotNull, VARCHAR(200)}
+         * (会員名称)MEMBER_NAME: {IX, NotNull, VARCHAR(200)}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnMemberName() { return doColumn("MEMBER_NAME"); }
         /**
-         * MEMBER_ACCOUNT: {UQ, NotNull, VARCHAR(50)}
+         * (会員アカウント)MEMBER_ACCOUNT: {UQ, NotNull, VARCHAR(50)}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnMemberAccount() { return doColumn("MEMBER_ACCOUNT"); }
         /**
-         * MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to member_status, classification=MemberStatus}
+         * (会員ステータスコード)MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to member_status, classification=MemberStatus}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnMemberStatusCode() { return doColumn("MEMBER_STATUS_CODE"); }
         /**
-         * FORMALIZED_DATETIME: {IX, DATETIME(19)}
+         * (正式会員日時)FORMALIZED_DATETIME: {IX, DATETIME(19)}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnFormalizedDatetime() { return doColumn("FORMALIZED_DATETIME"); }
         /**
-         * BIRTHDATE: {DATE(10)}
+         * (生年月日)BIRTHDATE: {DATE(10)}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnBirthdate() { return doColumn("BIRTHDATE"); }
         /**
-         * REGISTER_DATETIME: {NotNull, DATETIME(19)}
+         * (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnRegisterDatetime() { return doColumn("REGISTER_DATETIME"); }
         /**
-         * REGISTER_USER: {NotNull, VARCHAR(200)}
+         * (登録ユーザ)REGISTER_USER: {NotNull, VARCHAR(200)}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnRegisterUser() { return doColumn("REGISTER_USER"); }
         /**
-         * UPDATE_DATETIME: {NotNull, DATETIME(19)}
+         * (更新日時)UPDATE_DATETIME: {NotNull, DATETIME(19)}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnUpdateDatetime() { return doColumn("UPDATE_DATETIME"); }
         /**
-         * UPDATE_USER: {NotNull, VARCHAR(200)}
+         * (更新ユーザ)UPDATE_USER: {NotNull, VARCHAR(200)}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnUpdateUser() { return doColumn("UPDATE_USER"); }
         /**
-         * VERSION_NO: {NotNull, BIGINT(19)}
+         * (バージョンNO)VERSION_NO: {NotNull, BIGINT(19)}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnVersionNo() { return doColumn("VERSION_NO"); }
@@ -537,7 +537,7 @@ public class BsMemberCB extends AbstractConditionBean {
         protected String getTableDbName() { return "member"; }
         /**
          * Prepare to specify functions about relation table. <br />
-         * member_status by my MEMBER_STATUS_CODE, named 'memberStatus'.
+         * (会員ステータス)member_status by my MEMBER_STATUS_CODE, named 'memberStatus'.
          * @return The instance for specification for relation table to specify. (NotNull)
          */
         public MemberStatusCB.HpSpecification specifyMemberStatus() {
@@ -558,7 +558,7 @@ public class BsMemberCB extends AbstractConditionBean {
         }
         /**
          * Prepare to specify functions about relation table. <br />
-         * member_address by my MEMBER_ID, named 'memberAddressAsValid'. <br />
+         * (会員住所情報)member_address by my MEMBER_ID, named 'memberAddressAsValid'. <br />
          * 有効な会員住所 (現在日時を入れれば現在住所)
          * @param targetDate The bind parameter of fixed condition for targetDate. (NotNull)
          * @return The instance for specification for relation table to specify. (NotNull)
@@ -581,7 +581,7 @@ public class BsMemberCB extends AbstractConditionBean {
         }
         /**
          * Prepare to specify functions about relation table. <br />
-         * member_address by my MEMBER_ID, named 'memberAddressAsValid'. <br />
+         * (会員住所情報)member_address by my MEMBER_ID, named 'memberAddressAsValid'. <br />
          * 有効な会員住所 (現在日時を入れれば現在住所)
          * @return The instance for specification for relation table to specify. (NotNull)
          */
@@ -603,7 +603,7 @@ public class BsMemberCB extends AbstractConditionBean {
         }
         /**
          * Prepare to specify functions about relation table. <br />
-         * member_login by my MEMBER_ID, named 'memberLoginAsLatest'. <br />
+         * (会員ログイン情報)member_login by my MEMBER_ID, named 'memberLoginAsLatest'. <br />
          * 会員の最終ログイン
          * @return The instance for specification for relation table to specify. (NotNull)
          */
@@ -625,7 +625,7 @@ public class BsMemberCB extends AbstractConditionBean {
         }
         /**
          * Prepare to specify functions about relation table. <br />
-         * member_security by MEMBER_ID, named 'memberSecurityAsOne'.
+         * (会員セキュリティ情報)member_security by MEMBER_ID, named 'memberSecurityAsOne'.
          * @return The instance for specification for relation table to specify. (NotNull)
          */
         public MemberSecurityCB.HpSpecification specifyMemberSecurityAsOne() {
@@ -646,7 +646,7 @@ public class BsMemberCB extends AbstractConditionBean {
         }
         /**
          * Prepare to specify functions about relation table. <br />
-         * member_service by MEMBER_ID, named 'memberServiceAsOne'.
+         * (会員サービス)member_service by MEMBER_ID, named 'memberServiceAsOne'.
          * @return The instance for specification for relation table to specify. (NotNull)
          */
         public MemberServiceCB.HpSpecification specifyMemberServiceAsOne() {
@@ -667,7 +667,7 @@ public class BsMemberCB extends AbstractConditionBean {
         }
         /**
          * Prepare to specify functions about relation table. <br />
-         * member_withdrawal by MEMBER_ID, named 'memberWithdrawalAsOne'.
+         * (会員退会情報)member_withdrawal by MEMBER_ID, named 'memberWithdrawalAsOne'.
          * @return The instance for specification for relation table to specify. (NotNull)
          */
         public MemberWithdrawalCB.HpSpecification specifyMemberWithdrawalAsOne() {
@@ -689,7 +689,7 @@ public class BsMemberCB extends AbstractConditionBean {
         /**
          * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br />
          * {select max(FOO) from member_address where ...) as FOO_MAX} <br />
-         * member_address by MEMBER_ID, named 'memberAddressList'.
+         * (会員住所情報)member_address by MEMBER_ID, named 'memberAddressList'.
          * <pre>
          * cb.specify().<span style="color: #DD4747">derivedMemberAddressList()</span>.<span style="color: #DD4747">max</span>(new SubQuery&lt;MemberAddressCB&gt;() {
          *     public void query(MemberAddressCB subCB) {
@@ -709,7 +709,7 @@ public class BsMemberCB extends AbstractConditionBean {
         /**
          * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br />
          * {select max(FOO) from member_login where ...) as FOO_MAX} <br />
-         * member_login by MEMBER_ID, named 'memberLoginList'.
+         * (会員ログイン情報)member_login by MEMBER_ID, named 'memberLoginList'.
          * <pre>
          * cb.specify().<span style="color: #DD4747">derivedMemberLoginList()</span>.<span style="color: #DD4747">max</span>(new SubQuery&lt;MemberLoginCB&gt;() {
          *     public void query(MemberLoginCB subCB) {
@@ -729,7 +729,7 @@ public class BsMemberCB extends AbstractConditionBean {
         /**
          * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br />
          * {select max(FOO) from purchase where ...) as FOO_MAX} <br />
-         * purchase by MEMBER_ID, named 'purchaseList'.
+         * (購入)purchase by MEMBER_ID, named 'purchaseList'.
          * <pre>
          * cb.specify().<span style="color: #DD4747">derivedPurchaseList()</span>.<span style="color: #DD4747">max</span>(new SubQuery&lt;PurchaseCB&gt;() {
          *     public void query(PurchaseCB subCB) {

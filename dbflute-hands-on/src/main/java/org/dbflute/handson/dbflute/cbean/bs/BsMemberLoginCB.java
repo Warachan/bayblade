@@ -80,7 +80,7 @@ public class BsMemberLoginCB extends AbstractConditionBean {
     //                                                                 ===================
     /**
      * Accept the query condition of primary key as equal.
-     * @param memberLoginId : PK, ID, NotNull, BIGINT(19). (NotNull)
+     * @param memberLoginId (会員ログインID): PK, ID, NotNull, BIGINT(19). (NotNull)
      * @return this. (NotNull)
      */
     public MemberLoginCB acceptPK(Long memberLoginId) {
@@ -92,7 +92,7 @@ public class BsMemberLoginCB extends AbstractConditionBean {
 
     /**
      * Accept the query condition of primary key as equal. (old style)
-     * @param memberLoginId : PK, ID, NotNull, BIGINT(19). (NotNull)
+     * @param memberLoginId (会員ログインID): PK, ID, NotNull, BIGINT(19). (NotNull)
      */
     public void acceptPrimaryKey(Long memberLoginId) {
         assertObjectNotNull("memberLoginId", memberLoginId);
@@ -102,8 +102,8 @@ public class BsMemberLoginCB extends AbstractConditionBean {
 
     /**
      * Accept the query condition of unique key as equal.
-     * @param memberId : UQ+, NotNull, INT(10), FK to member. (NotNull)
-     * @param loginDatetime : +UQ, IX, NotNull, DATETIME(19). (NotNull)
+     * @param memberId (会員ID): UQ+, NotNull, INT(10), FK to member. (NotNull)
+     * @param loginDatetime (ログイン日時): +UQ, IX, NotNull, DATETIME(19). (NotNull)
      * @return this. (NotNull)
      */
     public MemberLoginCB acceptUniqueOf(Integer memberId, java.sql.Timestamp loginDatetime) {
@@ -276,7 +276,7 @@ public class BsMemberLoginCB extends AbstractConditionBean {
     //                                                                         ===========
     /**
      * Set up relation columns to select clause. <br />
-     * member_status by my LOGIN_MEMBER_STATUS_CODE, named 'memberStatus'.
+     * (会員ステータス)member_status by my LOGIN_MEMBER_STATUS_CODE, named 'memberStatus'.
      * <pre>
      * MemberLoginCB cb = new MemberLoginCB();
      * cb.<span style="color: #DD4747">setupSelect_MemberStatus()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
@@ -300,7 +300,7 @@ public class BsMemberLoginCB extends AbstractConditionBean {
     }
     /**
      * Set up relation columns to select clause. <br />
-     * member by my MEMBER_ID, named 'member'.
+     * (会員)member by my MEMBER_ID, named 'member'.
      * <pre>
      * MemberLoginCB cb = new MemberLoginCB();
      * cb.<span style="color: #DD4747">setupSelect_Member()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
@@ -369,27 +369,27 @@ public class BsMemberLoginCB extends AbstractConditionBean {
                              , HpCBPurpose purpose, DBMetaProvider dbmetaProvider)
         { super(baseCB, qyCall, purpose, dbmetaProvider); }
         /**
-         * MEMBER_LOGIN_ID: {PK, ID, NotNull, BIGINT(19)}
+         * (会員ログインID)MEMBER_LOGIN_ID: {PK, ID, NotNull, BIGINT(19)}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnMemberLoginId() { return doColumn("MEMBER_LOGIN_ID"); }
         /**
-         * MEMBER_ID: {UQ+, NotNull, INT(10), FK to member}
+         * (会員ID)MEMBER_ID: {UQ+, NotNull, INT(10), FK to member}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnMemberId() { return doColumn("MEMBER_ID"); }
         /**
-         * LOGIN_DATETIME: {+UQ, IX, NotNull, DATETIME(19)}
+         * (ログイン日時)LOGIN_DATETIME: {+UQ, IX, NotNull, DATETIME(19)}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnLoginDatetime() { return doColumn("LOGIN_DATETIME"); }
         /**
-         * MOBILE_LOGIN_FLG: {NotNull, INT(10), classification=Flg}
+         * (モバイルログインフラグ)MOBILE_LOGIN_FLG: {NotNull, INT(10), classification=Flg}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnMobileLoginFlg() { return doColumn("MOBILE_LOGIN_FLG"); }
         /**
-         * LOGIN_MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to member_status, classification=MemberStatus}
+         * (ログイン会員ステータスコード)LOGIN_MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to member_status, classification=MemberStatus}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnLoginMemberStatusCode() { return doColumn("LOGIN_MEMBER_STATUS_CODE"); }
@@ -411,7 +411,7 @@ public class BsMemberLoginCB extends AbstractConditionBean {
         protected String getTableDbName() { return "member_login"; }
         /**
          * Prepare to specify functions about relation table. <br />
-         * member_status by my LOGIN_MEMBER_STATUS_CODE, named 'memberStatus'.
+         * (会員ステータス)member_status by my LOGIN_MEMBER_STATUS_CODE, named 'memberStatus'.
          * @return The instance for specification for relation table to specify. (NotNull)
          */
         public MemberStatusCB.HpSpecification specifyMemberStatus() {
@@ -432,7 +432,7 @@ public class BsMemberLoginCB extends AbstractConditionBean {
         }
         /**
          * Prepare to specify functions about relation table. <br />
-         * member by my MEMBER_ID, named 'member'.
+         * (会員)member by my MEMBER_ID, named 'member'.
          * @return The instance for specification for relation table to specify. (NotNull)
          */
         public MemberCB.HpSpecification specifyMember() {

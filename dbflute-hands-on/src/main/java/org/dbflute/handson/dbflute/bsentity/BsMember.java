@@ -13,8 +13,8 @@ import org.dbflute.handson.dbflute.allcommon.CDef;
 import org.dbflute.handson.dbflute.exentity.*;
 
 /**
- * The entity of member as TABLE. <br />
- * 会員: 会員登録時にデータが登録される。<br />
+ * The entity of (会員)member as TABLE. <br />
+ * 会員登録時にデータが登録される。<br />
  * 基本的に物理削除はなく、退会したらステータスが退会会員になる。
  * <pre>
  * [primary-key]
@@ -86,37 +86,37 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     // -----------------------------------------------------
     //                                                Column
     //                                                ------
-    /** MEMBER_ID: {PK, ID, NotNull, INT(10), FK to MEMBER_ADDRESS} */
+    /** (会員ID)MEMBER_ID: {PK, ID, NotNull, INT(10), FK to MEMBER_ADDRESS} */
     protected Integer _memberId;
 
-    /** MEMBER_NAME: {IX, NotNull, VARCHAR(200)} */
+    /** (会員名称)MEMBER_NAME: {IX, NotNull, VARCHAR(200)} */
     protected String _memberName;
 
-    /** MEMBER_ACCOUNT: {UQ, NotNull, VARCHAR(50)} */
+    /** (会員アカウント)MEMBER_ACCOUNT: {UQ, NotNull, VARCHAR(50)} */
     protected String _memberAccount;
 
-    /** MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to member_status, classification=MemberStatus} */
+    /** (会員ステータスコード)MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to member_status, classification=MemberStatus} */
     protected String _memberStatusCode;
 
-    /** FORMALIZED_DATETIME: {IX, DATETIME(19)} */
+    /** (正式会員日時)FORMALIZED_DATETIME: {IX, DATETIME(19)} */
     protected java.sql.Timestamp _formalizedDatetime;
 
-    /** BIRTHDATE: {DATE(10)} */
+    /** (生年月日)BIRTHDATE: {DATE(10)} */
     protected java.util.Date _birthdate;
 
-    /** REGISTER_DATETIME: {NotNull, DATETIME(19)} */
+    /** (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)} */
     protected java.sql.Timestamp _registerDatetime;
 
-    /** REGISTER_USER: {NotNull, VARCHAR(200)} */
+    /** (登録ユーザ)REGISTER_USER: {NotNull, VARCHAR(200)} */
     protected String _registerUser;
 
-    /** UPDATE_DATETIME: {NotNull, DATETIME(19)} */
+    /** (更新日時)UPDATE_DATETIME: {NotNull, DATETIME(19)} */
     protected java.sql.Timestamp _updateDatetime;
 
-    /** UPDATE_USER: {NotNull, VARCHAR(200)} */
+    /** (更新ユーザ)UPDATE_USER: {NotNull, VARCHAR(200)} */
     protected String _updateUser;
 
-    /** VERSION_NO: {NotNull, BIGINT(19)} */
+    /** (バージョンNO)VERSION_NO: {NotNull, BIGINT(19)} */
     protected Long _versionNo;
 
     // -----------------------------------------------------
@@ -172,7 +172,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     /**
      * To be unique by the unique column. <br />
      * You can update the entity by the key when entity update (NOT batch update).
-     * @param memberAccount : UQ, NotNull, VARCHAR(50). (NotNull)
+     * @param memberAccount (会員アカウント): UQ, NotNull, VARCHAR(50). (NotNull)
      */
     public void uniqueBy(String memberAccount) {
         __uniqueDrivenProperties.clear();
@@ -196,7 +196,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     //                                                             =======================
     /**
      * Get the value of memberStatusCode as the classification of MemberStatus. <br />
-     * MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to member_status, classification=MemberStatus} <br />
+     * (会員ステータスコード)MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to member_status, classification=MemberStatus} <br />
      * 入会から退会までの会員のステータスを示す
      * <p>It's treated as case insensitive and if the code value is null, it returns null.</p>
      * @return The instance of classification definition (as ENUM type). (NullAllowed: when the column value is null)
@@ -207,7 +207,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
 
     /**
      * Set the value of memberStatusCode as the classification of MemberStatus. <br />
-     * MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to member_status, classification=MemberStatus} <br />
+     * (会員ステータスコード)MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to member_status, classification=MemberStatus} <br />
      * 入会から退会までの会員のステータスを示す
      * @param cdef The instance of classification definition (as ENUM type). (NullAllowed: if null, null value is set to the column)
      */
@@ -291,11 +291,11 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     // ===================================================================================
     //                                                                    Foreign Property
     //                                                                    ================
-    /** member_status by my MEMBER_STATUS_CODE, named 'memberStatus'. */
+    /** (会員ステータス)member_status by my MEMBER_STATUS_CODE, named 'memberStatus'. */
     protected MemberStatus _memberStatus;
 
     /**
-     * [get] member_status by my MEMBER_STATUS_CODE, named 'memberStatus'.
+     * [get] (会員ステータス)member_status by my MEMBER_STATUS_CODE, named 'memberStatus'.
      * @return The entity of foreign property 'memberStatus'. (NullAllowed: when e.g. null FK column, no setupSelect)
      */
     public MemberStatus getMemberStatus() {
@@ -303,18 +303,18 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [set] member_status by my MEMBER_STATUS_CODE, named 'memberStatus'.
+     * [set] (会員ステータス)member_status by my MEMBER_STATUS_CODE, named 'memberStatus'.
      * @param memberStatus The entity of foreign property 'memberStatus'. (NullAllowed)
      */
     public void setMemberStatus(MemberStatus memberStatus) {
         _memberStatus = memberStatus;
     }
 
-    /** member_address by my MEMBER_ID, named 'memberAddressAsValid'. */
+    /** (会員住所情報)member_address by my MEMBER_ID, named 'memberAddressAsValid'. */
     protected MemberAddress _memberAddressAsValid;
 
     /**
-     * [get] member_address by my MEMBER_ID, named 'memberAddressAsValid'. <br />
+     * [get] (会員住所情報)member_address by my MEMBER_ID, named 'memberAddressAsValid'. <br />
      * 有効な会員住所 (現在日時を入れれば現在住所)
      * @return The entity of foreign property 'memberAddressAsValid'. (NullAllowed: when e.g. null FK column, no setupSelect)
      */
@@ -323,7 +323,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [set] member_address by my MEMBER_ID, named 'memberAddressAsValid'. <br />
+     * [set] (会員住所情報)member_address by my MEMBER_ID, named 'memberAddressAsValid'. <br />
      * 有効な会員住所 (現在日時を入れれば現在住所)
      * @param memberAddressAsValid The entity of foreign property 'memberAddressAsValid'. (NullAllowed)
      */
@@ -331,11 +331,11 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
         _memberAddressAsValid = memberAddressAsValid;
     }
 
-    /** member_login by my MEMBER_ID, named 'memberLoginAsLatest'. */
+    /** (会員ログイン情報)member_login by my MEMBER_ID, named 'memberLoginAsLatest'. */
     protected MemberLogin _memberLoginAsLatest;
 
     /**
-     * [get] member_login by my MEMBER_ID, named 'memberLoginAsLatest'. <br />
+     * [get] (会員ログイン情報)member_login by my MEMBER_ID, named 'memberLoginAsLatest'. <br />
      * 会員の最終ログイン
      * @return The entity of foreign property 'memberLoginAsLatest'. (NullAllowed: when e.g. null FK column, no setupSelect)
      */
@@ -344,7 +344,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [set] member_login by my MEMBER_ID, named 'memberLoginAsLatest'. <br />
+     * [set] (会員ログイン情報)member_login by my MEMBER_ID, named 'memberLoginAsLatest'. <br />
      * 会員の最終ログイン
      * @param memberLoginAsLatest The entity of foreign property 'memberLoginAsLatest'. (NullAllowed)
      */
@@ -352,11 +352,11 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
         _memberLoginAsLatest = memberLoginAsLatest;
     }
 
-    /** member_security by MEMBER_ID, named 'memberSecurityAsOne'. */
+    /** (会員セキュリティ情報)member_security by MEMBER_ID, named 'memberSecurityAsOne'. */
     protected MemberSecurity _memberSecurityAsOne;
 
     /**
-     * [get] member_security by MEMBER_ID, named 'memberSecurityAsOne'.
+     * [get] (会員セキュリティ情報)member_security by MEMBER_ID, named 'memberSecurityAsOne'.
      * @return the entity of foreign property(referrer-as-one) 'memberSecurityAsOne'. (NullAllowed: when e.g. no data, no setupSelect)
      */
     public MemberSecurity getMemberSecurityAsOne() {
@@ -364,18 +364,18 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [set] member_security by MEMBER_ID, named 'memberSecurityAsOne'.
+     * [set] (会員セキュリティ情報)member_security by MEMBER_ID, named 'memberSecurityAsOne'.
      * @param memberSecurityAsOne The entity of foreign property(referrer-as-one) 'memberSecurityAsOne'. (NullAllowed)
      */
     public void setMemberSecurityAsOne(MemberSecurity memberSecurityAsOne) {
         _memberSecurityAsOne = memberSecurityAsOne;
     }
 
-    /** member_service by MEMBER_ID, named 'memberServiceAsOne'. */
+    /** (会員サービス)member_service by MEMBER_ID, named 'memberServiceAsOne'. */
     protected MemberService _memberServiceAsOne;
 
     /**
-     * [get] member_service by MEMBER_ID, named 'memberServiceAsOne'.
+     * [get] (会員サービス)member_service by MEMBER_ID, named 'memberServiceAsOne'.
      * @return the entity of foreign property(referrer-as-one) 'memberServiceAsOne'. (NullAllowed: when e.g. no data, no setupSelect)
      */
     public MemberService getMemberServiceAsOne() {
@@ -383,18 +383,18 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [set] member_service by MEMBER_ID, named 'memberServiceAsOne'.
+     * [set] (会員サービス)member_service by MEMBER_ID, named 'memberServiceAsOne'.
      * @param memberServiceAsOne The entity of foreign property(referrer-as-one) 'memberServiceAsOne'. (NullAllowed)
      */
     public void setMemberServiceAsOne(MemberService memberServiceAsOne) {
         _memberServiceAsOne = memberServiceAsOne;
     }
 
-    /** member_withdrawal by MEMBER_ID, named 'memberWithdrawalAsOne'. */
+    /** (会員退会情報)member_withdrawal by MEMBER_ID, named 'memberWithdrawalAsOne'. */
     protected MemberWithdrawal _memberWithdrawalAsOne;
 
     /**
-     * [get] member_withdrawal by MEMBER_ID, named 'memberWithdrawalAsOne'.
+     * [get] (会員退会情報)member_withdrawal by MEMBER_ID, named 'memberWithdrawalAsOne'.
      * @return the entity of foreign property(referrer-as-one) 'memberWithdrawalAsOne'. (NullAllowed: when e.g. no data, no setupSelect)
      */
     public MemberWithdrawal getMemberWithdrawalAsOne() {
@@ -402,7 +402,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [set] member_withdrawal by MEMBER_ID, named 'memberWithdrawalAsOne'.
+     * [set] (会員退会情報)member_withdrawal by MEMBER_ID, named 'memberWithdrawalAsOne'.
      * @param memberWithdrawalAsOne The entity of foreign property(referrer-as-one) 'memberWithdrawalAsOne'. (NullAllowed)
      */
     public void setMemberWithdrawalAsOne(MemberWithdrawal memberWithdrawalAsOne) {
@@ -412,11 +412,11 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     // ===================================================================================
     //                                                                   Referrer Property
     //                                                                   =================
-    /** member_address by MEMBER_ID, named 'memberAddressList'. */
+    /** (会員住所情報)member_address by MEMBER_ID, named 'memberAddressList'. */
     protected List<MemberAddress> _memberAddressList;
 
     /**
-     * [get] member_address by MEMBER_ID, named 'memberAddressList'.
+     * [get] (会員住所情報)member_address by MEMBER_ID, named 'memberAddressList'.
      * @return The entity list of referrer property 'memberAddressList'. (NotNull: even if no loading, returns empty list)
      */
     public List<MemberAddress> getMemberAddressList() {
@@ -425,18 +425,18 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [set] member_address by MEMBER_ID, named 'memberAddressList'.
+     * [set] (会員住所情報)member_address by MEMBER_ID, named 'memberAddressList'.
      * @param memberAddressList The entity list of referrer property 'memberAddressList'. (NullAllowed)
      */
     public void setMemberAddressList(List<MemberAddress> memberAddressList) {
         _memberAddressList = memberAddressList;
     }
 
-    /** member_login by MEMBER_ID, named 'memberLoginList'. */
+    /** (会員ログイン情報)member_login by MEMBER_ID, named 'memberLoginList'. */
     protected List<MemberLogin> _memberLoginList;
 
     /**
-     * [get] member_login by MEMBER_ID, named 'memberLoginList'.
+     * [get] (会員ログイン情報)member_login by MEMBER_ID, named 'memberLoginList'.
      * @return The entity list of referrer property 'memberLoginList'. (NotNull: even if no loading, returns empty list)
      */
     public List<MemberLogin> getMemberLoginList() {
@@ -445,18 +445,18 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [set] member_login by MEMBER_ID, named 'memberLoginList'.
+     * [set] (会員ログイン情報)member_login by MEMBER_ID, named 'memberLoginList'.
      * @param memberLoginList The entity list of referrer property 'memberLoginList'. (NullAllowed)
      */
     public void setMemberLoginList(List<MemberLogin> memberLoginList) {
         _memberLoginList = memberLoginList;
     }
 
-    /** purchase by MEMBER_ID, named 'purchaseList'. */
+    /** (購入)purchase by MEMBER_ID, named 'purchaseList'. */
     protected List<Purchase> _purchaseList;
 
     /**
-     * [get] purchase by MEMBER_ID, named 'purchaseList'.
+     * [get] (購入)purchase by MEMBER_ID, named 'purchaseList'.
      * @return The entity list of referrer property 'purchaseList'. (NotNull: even if no loading, returns empty list)
      */
     public List<Purchase> getPurchaseList() {
@@ -465,7 +465,7 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [set] purchase by MEMBER_ID, named 'purchaseList'.
+     * [set] (購入)purchase by MEMBER_ID, named 'purchaseList'.
      * @param purchaseList The entity list of referrer property 'purchaseList'. (NullAllowed)
      */
     public void setPurchaseList(List<Purchase> purchaseList) {
@@ -674,8 +674,8 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     //                                                                            Accessor
     //                                                                            ========
     /**
-     * [get] MEMBER_ID: {PK, ID, NotNull, INT(10), FK to MEMBER_ADDRESS} <br />
-     * 会員ID: 会員を識別するID。連番として基本的に自動採番される。<br />
+     * [get] (会員ID)MEMBER_ID: {PK, ID, NotNull, INT(10), FK to MEMBER_ADDRESS} <br />
+     * 会員を識別するID。連番として基本的に自動採番される。<br />
      * （会員IDだけに限らず）採番方法はDBMSによって変わる。
      * @return The value of the column 'MEMBER_ID'. (basically NotNull if selected: for the constraint)
      */
@@ -684,8 +684,8 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [set] MEMBER_ID: {PK, ID, NotNull, INT(10), FK to MEMBER_ADDRESS} <br />
-     * 会員ID: 会員を識別するID。連番として基本的に自動採番される。<br />
+     * [set] (会員ID)MEMBER_ID: {PK, ID, NotNull, INT(10), FK to MEMBER_ADDRESS} <br />
+     * 会員を識別するID。連番として基本的に自動採番される。<br />
      * （会員IDだけに限らず）採番方法はDBMSによって変わる。
      * @param memberId The value of the column 'MEMBER_ID'. (basically NotNull if update: for the constraint)
      */
@@ -695,17 +695,17 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [get] MEMBER_NAME: {IX, NotNull, VARCHAR(200)} <br />
-     * 会員名称: 会員のフルネームの名称。
+     * [get] (会員名称)MEMBER_NAME: {IX, NotNull, VARCHAR(200)} <br />
+     * 会員のフルネームの名称。
      * @return The value of the column 'MEMBER_NAME'. (basically NotNull if selected: for the constraint)
      */
     public String getMemberName() {
-        return _memberName;
+        return convertEmptyToNull(_memberName);
     }
 
     /**
-     * [set] MEMBER_NAME: {IX, NotNull, VARCHAR(200)} <br />
-     * 会員名称: 会員のフルネームの名称。
+     * [set] (会員名称)MEMBER_NAME: {IX, NotNull, VARCHAR(200)} <br />
+     * 会員のフルネームの名称。
      * @param memberName The value of the column 'MEMBER_NAME'. (basically NotNull if update: for the constraint)
      */
     public void setMemberName(String memberName) {
@@ -714,17 +714,17 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [get] MEMBER_ACCOUNT: {UQ, NotNull, VARCHAR(50)} <br />
-     * 会員アカウント: 会員がログイン時に利用するアカウントNO。
+     * [get] (会員アカウント)MEMBER_ACCOUNT: {UQ, NotNull, VARCHAR(50)} <br />
+     * 会員がログイン時に利用するアカウントNO。
      * @return The value of the column 'MEMBER_ACCOUNT'. (basically NotNull if selected: for the constraint)
      */
     public String getMemberAccount() {
-        return _memberAccount;
+        return convertEmptyToNull(_memberAccount);
     }
 
     /**
-     * [set] MEMBER_ACCOUNT: {UQ, NotNull, VARCHAR(50)} <br />
-     * 会員アカウント: 会員がログイン時に利用するアカウントNO。
+     * [set] (会員アカウント)MEMBER_ACCOUNT: {UQ, NotNull, VARCHAR(50)} <br />
+     * 会員がログイン時に利用するアカウントNO。
      * @param memberAccount The value of the column 'MEMBER_ACCOUNT'. (basically NotNull if update: for the constraint)
      */
     public void setMemberAccount(String memberAccount) {
@@ -733,17 +733,15 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [get] MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to member_status, classification=MemberStatus} <br />
-     * 会員ステータスコード
+     * [get] (会員ステータスコード)MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to member_status, classification=MemberStatus} <br />
      * @return The value of the column 'MEMBER_STATUS_CODE'. (basically NotNull if selected: for the constraint)
      */
     public String getMemberStatusCode() {
-        return _memberStatusCode;
+        return convertEmptyToNull(_memberStatusCode);
     }
 
     /**
-     * [set] MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to member_status, classification=MemberStatus} <br />
-     * 会員ステータスコード
+     * [set] (会員ステータスコード)MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to member_status, classification=MemberStatus} <br />
      * @param memberStatusCode The value of the column 'MEMBER_STATUS_CODE'. (basically NotNull if update: for the constraint)
      */
     protected void setMemberStatusCode(String memberStatusCode) {
@@ -752,8 +750,8 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [get] FORMALIZED_DATETIME: {IX, DATETIME(19)} <br />
-     * 正式会員日時: 会員が正式に確定した日時。一度確定したら更新されない。<br />
+     * [get] (正式会員日時)FORMALIZED_DATETIME: {IX, DATETIME(19)} <br />
+     * 会員が正式に確定した日時。一度確定したら更新されない。<br />
      * 仮会員のときはnull。
      * @return The value of the column 'FORMALIZED_DATETIME'. (NullAllowed even if selected: for no constraint)
      */
@@ -762,8 +760,8 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [set] FORMALIZED_DATETIME: {IX, DATETIME(19)} <br />
-     * 正式会員日時: 会員が正式に確定した日時。一度確定したら更新されない。<br />
+     * [set] (正式会員日時)FORMALIZED_DATETIME: {IX, DATETIME(19)} <br />
+     * 会員が正式に確定した日時。一度確定したら更新されない。<br />
      * 仮会員のときはnull。
      * @param formalizedDatetime The value of the column 'FORMALIZED_DATETIME'. (NullAllowed: null update allowed for no constraint)
      */
@@ -773,8 +771,8 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [get] BIRTHDATE: {DATE(10)} <br />
-     * 生年月日: 必須項目ではないので、このデータがない会員もいる。
+     * [get] (生年月日)BIRTHDATE: {DATE(10)} <br />
+     * 必須項目ではないので、このデータがない会員もいる。
      * @return The value of the column 'BIRTHDATE'. (NullAllowed even if selected: for no constraint)
      */
     public java.util.Date getBirthdate() {
@@ -782,8 +780,8 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [set] BIRTHDATE: {DATE(10)} <br />
-     * 生年月日: 必須項目ではないので、このデータがない会員もいる。
+     * [set] (生年月日)BIRTHDATE: {DATE(10)} <br />
+     * 必須項目ではないので、このデータがない会員もいる。
      * @param birthdate The value of the column 'BIRTHDATE'. (NullAllowed: null update allowed for no constraint)
      */
     public void setBirthdate(java.util.Date birthdate) {
@@ -792,8 +790,8 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [get] REGISTER_DATETIME: {NotNull, DATETIME(19)} <br />
-     * 登録日時: レコードが登録された日時。共通カラムの一つ。
+     * [get] (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)} <br />
+     * レコードが登録された日時。共通カラムの一つ。
      * @return The value of the column 'REGISTER_DATETIME'. (basically NotNull if selected: for the constraint)
      */
     public java.sql.Timestamp getRegisterDatetime() {
@@ -801,8 +799,8 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [set] REGISTER_DATETIME: {NotNull, DATETIME(19)} <br />
-     * 登録日時: レコードが登録された日時。共通カラムの一つ。
+     * [set] (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)} <br />
+     * レコードが登録された日時。共通カラムの一つ。
      * @param registerDatetime The value of the column 'REGISTER_DATETIME'. (basically NotNull if update: for the constraint)
      */
     public void setRegisterDatetime(java.sql.Timestamp registerDatetime) {
@@ -811,17 +809,17 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [get] REGISTER_USER: {NotNull, VARCHAR(200)} <br />
-     * 登録ユーザ: レコードを登録したユーザ。共通カラムの一つ。
+     * [get] (登録ユーザ)REGISTER_USER: {NotNull, VARCHAR(200)} <br />
+     * レコードを登録したユーザ。共通カラムの一つ。
      * @return The value of the column 'REGISTER_USER'. (basically NotNull if selected: for the constraint)
      */
     public String getRegisterUser() {
-        return _registerUser;
+        return convertEmptyToNull(_registerUser);
     }
 
     /**
-     * [set] REGISTER_USER: {NotNull, VARCHAR(200)} <br />
-     * 登録ユーザ: レコードを登録したユーザ。共通カラムの一つ。
+     * [set] (登録ユーザ)REGISTER_USER: {NotNull, VARCHAR(200)} <br />
+     * レコードを登録したユーザ。共通カラムの一つ。
      * @param registerUser The value of the column 'REGISTER_USER'. (basically NotNull if update: for the constraint)
      */
     public void setRegisterUser(String registerUser) {
@@ -830,8 +828,8 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [get] UPDATE_DATETIME: {NotNull, DATETIME(19)} <br />
-     * 更新日時: レコードが（最後に）更新された日時。共通カラムの一つ。
+     * [get] (更新日時)UPDATE_DATETIME: {NotNull, DATETIME(19)} <br />
+     * レコードが（最後に）更新された日時。共通カラムの一つ。
      * @return The value of the column 'UPDATE_DATETIME'. (basically NotNull if selected: for the constraint)
      */
     public java.sql.Timestamp getUpdateDatetime() {
@@ -839,8 +837,8 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [set] UPDATE_DATETIME: {NotNull, DATETIME(19)} <br />
-     * 更新日時: レコードが（最後に）更新された日時。共通カラムの一つ。
+     * [set] (更新日時)UPDATE_DATETIME: {NotNull, DATETIME(19)} <br />
+     * レコードが（最後に）更新された日時。共通カラムの一つ。
      * @param updateDatetime The value of the column 'UPDATE_DATETIME'. (basically NotNull if update: for the constraint)
      */
     public void setUpdateDatetime(java.sql.Timestamp updateDatetime) {
@@ -849,17 +847,17 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [get] UPDATE_USER: {NotNull, VARCHAR(200)} <br />
-     * 更新ユーザ: レコードを更新したユーザ。
+     * [get] (更新ユーザ)UPDATE_USER: {NotNull, VARCHAR(200)} <br />
+     * レコードを更新したユーザ。
      * @return The value of the column 'UPDATE_USER'. (basically NotNull if selected: for the constraint)
      */
     public String getUpdateUser() {
-        return _updateUser;
+        return convertEmptyToNull(_updateUser);
     }
 
     /**
-     * [set] UPDATE_USER: {NotNull, VARCHAR(200)} <br />
-     * 更新ユーザ: レコードを更新したユーザ。
+     * [set] (更新ユーザ)UPDATE_USER: {NotNull, VARCHAR(200)} <br />
+     * レコードを更新したユーザ。
      * @param updateUser The value of the column 'UPDATE_USER'. (basically NotNull if update: for the constraint)
      */
     public void setUpdateUser(String updateUser) {
@@ -868,8 +866,8 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [get] VERSION_NO: {NotNull, BIGINT(19)} <br />
-     * バージョンNO: レコードのバージョンを示すNO。<br />
+     * [get] (バージョンNO)VERSION_NO: {NotNull, BIGINT(19)} <br />
+     * レコードのバージョンを示すNO。<br />
      * 更新回数と等しく、主に排他制御のために利用される。
      * @return The value of the column 'VERSION_NO'. (basically NotNull if selected: for the constraint)
      */
@@ -878,13 +876,17 @@ public abstract class BsMember implements Entity, Serializable, Cloneable {
     }
 
     /**
-     * [set] VERSION_NO: {NotNull, BIGINT(19)} <br />
-     * バージョンNO: レコードのバージョンを示すNO。<br />
+     * [set] (バージョンNO)VERSION_NO: {NotNull, BIGINT(19)} <br />
+     * レコードのバージョンを示すNO。<br />
      * 更新回数と等しく、主に排他制御のために利用される。
      * @param versionNo The value of the column 'VERSION_NO'. (basically NotNull if update: for the constraint)
      */
     public void setVersionNo(Long versionNo) {
         __modifiedProperties.addPropertyName("versionNo");
         _versionNo = versionNo;
+    }
+
+    protected String convertEmptyToNull(String value) {
+        return FunCustodial.convertEmptyToNull(value);
     }
 }

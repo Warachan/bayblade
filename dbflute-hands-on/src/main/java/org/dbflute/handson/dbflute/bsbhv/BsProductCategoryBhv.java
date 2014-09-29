@@ -18,7 +18,7 @@ import org.dbflute.handson.dbflute.bsentity.dbmeta.*;
 import org.dbflute.handson.dbflute.cbean.*;
 
 /**
- * The behavior of product_category as TABLE. <br />
+ * The behavior of (商品カテゴリ)product_category as TABLE. <br />
  * <pre>
  * [primary key]
  *     PRODUCT_CATEGORY_CODE
@@ -193,7 +193,7 @@ public abstract class BsProductCategoryBhv extends AbstractBehaviorWritable {
 
     /**
      * Select the entity by the primary-key value.
-     * @param productCategoryCode : PK, NotNull, CHAR(3). (NotNull)
+     * @param productCategoryCode (商品カテゴリコード): PK, NotNull, CHAR(3). (NotNull)
      * @return The entity selected by the PK. (NullAllowed: if no data, it returns null)
      * @exception EntityDuplicatedException When the entity has been duplicated.
      * @exception SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
@@ -216,7 +216,7 @@ public abstract class BsProductCategoryBhv extends AbstractBehaviorWritable {
 
     /**
      * Select the entity by the primary-key value with deleted check.
-     * @param productCategoryCode : PK, NotNull, CHAR(3). (NotNull)
+     * @param productCategoryCode (商品カテゴリコード): PK, NotNull, CHAR(3). (NotNull)
      * @return The entity selected by the PK. (NotNull: if no data, throws exception)
      * @exception EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @exception EntityDuplicatedException When the entity has been duplicated.
@@ -458,7 +458,7 @@ public abstract class BsProductCategoryBhv extends AbstractBehaviorWritable {
 
     /**
      * Load referrer of productList by the set-upper of referrer. <br />
-     * product by PRODUCT_CATEGORY_CODE, named 'productList'.
+     * (商品)product by PRODUCT_CATEGORY_CODE, named 'productList'.
      * <pre>
      * productCategoryBhv.<span style="color: #DD4747">loadProductList</span>(productCategoryList, new ConditionBeanSetupper&lt;ProductCB&gt;() {
      *     public void setup(ProductCB cb) {
@@ -491,7 +491,7 @@ public abstract class BsProductCategoryBhv extends AbstractBehaviorWritable {
 
     /**
      * Load referrer of productList by the set-upper of referrer. <br />
-     * product by PRODUCT_CATEGORY_CODE, named 'productList'.
+     * (商品)product by PRODUCT_CATEGORY_CODE, named 'productList'.
      * <pre>
      * productCategoryBhv.<span style="color: #DD4747">loadProductList</span>(productCategoryList, new ConditionBeanSetupper&lt;ProductCB&gt;() {
      *     public void setup(ProductCB cb) {
@@ -550,7 +550,7 @@ public abstract class BsProductCategoryBhv extends AbstractBehaviorWritable {
 
     /**
      * Load referrer of productCategorySelfList by the set-upper of referrer. <br />
-     * product_category by PARENT_CATEGORY_CODE, named 'productCategorySelfList'.
+     * (商品カテゴリ)product_category by PARENT_CATEGORY_CODE, named 'productCategorySelfList'.
      * <pre>
      * productCategoryBhv.<span style="color: #DD4747">loadProductCategorySelfList</span>(productCategoryList, new ConditionBeanSetupper&lt;ProductCategoryCB&gt;() {
      *     public void setup(ProductCategoryCB cb) {
@@ -583,7 +583,7 @@ public abstract class BsProductCategoryBhv extends AbstractBehaviorWritable {
 
     /**
      * Load referrer of productCategorySelfList by the set-upper of referrer. <br />
-     * product_category by PARENT_CATEGORY_CODE, named 'productCategorySelfList'.
+     * (商品カテゴリ)product_category by PARENT_CATEGORY_CODE, named 'productCategorySelfList'.
      * <pre>
      * productCategoryBhv.<span style="color: #DD4747">loadProductCategorySelfList</span>(productCategoryList, new ConditionBeanSetupper&lt;ProductCategoryCB&gt;() {
      *     public void setup(ProductCategoryCB cb) {

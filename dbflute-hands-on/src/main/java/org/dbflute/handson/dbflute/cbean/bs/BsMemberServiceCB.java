@@ -80,7 +80,7 @@ public class BsMemberServiceCB extends AbstractConditionBean {
     //                                                                 ===================
     /**
      * Accept the query condition of primary key as equal.
-     * @param memberId : PK, NotNull, INT(10), FK to member. (NotNull)
+     * @param memberId (会員ID): PK, NotNull, INT(10), FK to member. (NotNull)
      * @return this. (NotNull)
      */
     public MemberServiceCB acceptPK(Integer memberId) {
@@ -92,7 +92,7 @@ public class BsMemberServiceCB extends AbstractConditionBean {
 
     /**
      * Accept the query condition of primary key as equal. (old style)
-     * @param memberId : PK, NotNull, INT(10), FK to member. (NotNull)
+     * @param memberId (会員ID): PK, NotNull, INT(10), FK to member. (NotNull)
      */
     public void acceptPrimaryKey(Integer memberId) {
         assertObjectNotNull("memberId", memberId);
@@ -268,7 +268,7 @@ public class BsMemberServiceCB extends AbstractConditionBean {
     }
     /**
      * Set up relation columns to select clause. <br />
-     * member by my MEMBER_ID, named 'member'.
+     * (会員)member by my MEMBER_ID, named 'member'.
      * <pre>
      * MemberServiceCB cb = new MemberServiceCB();
      * cb.<span style="color: #DD4747">setupSelect_Member()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
@@ -288,7 +288,7 @@ public class BsMemberServiceCB extends AbstractConditionBean {
 
     /**
      * Set up relation columns to select clause. <br />
-     * service_rank by my SERVICE_RANK_CODE, named 'serviceRank'.
+     * (サービスランク)service_rank by my SERVICE_RANK_CODE, named 'serviceRank'.
      * <pre>
      * MemberServiceCB cb = new MemberServiceCB();
      * cb.<span style="color: #DD4747">setupSelect_ServiceRank()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
@@ -353,17 +353,17 @@ public class BsMemberServiceCB extends AbstractConditionBean {
                              , HpCBPurpose purpose, DBMetaProvider dbmetaProvider)
         { super(baseCB, qyCall, purpose, dbmetaProvider); }
         /**
-         * MEMBER_ID: {PK, NotNull, INT(10), FK to member}
+         * (会員ID)MEMBER_ID: {PK, NotNull, INT(10), FK to member}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnMemberId() { return doColumn("MEMBER_ID"); }
         /**
-         * AKIRAKANI_OKASHII_KARAMU_MEI: {IX, NotNull, INT(10)}
+         * (サービスポイント数)AKIRAKANI_OKASHII_KARAMU_MEI: {IX, NotNull, INT(10)}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnAkirakaniOkashiiKaramuMei() { return doColumn("AKIRAKANI_OKASHII_KARAMU_MEI"); }
         /**
-         * SERVICE_RANK_CODE: {IX, NotNull, CHAR(3), FK to service_rank, classification=ServiceRank}
+         * (サービスランクコード)SERVICE_RANK_CODE: {IX, NotNull, CHAR(3), FK to service_rank, classification=ServiceRank}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnServiceRankCode() { return doColumn("SERVICE_RANK_CODE"); }
@@ -406,7 +406,7 @@ public class BsMemberServiceCB extends AbstractConditionBean {
         protected String getTableDbName() { return "member_service"; }
         /**
          * Prepare to specify functions about relation table. <br />
-         * member by my MEMBER_ID, named 'member'.
+         * (会員)member by my MEMBER_ID, named 'member'.
          * @return The instance for specification for relation table to specify. (NotNull)
          */
         public MemberCB.HpSpecification specifyMember() {
@@ -427,7 +427,7 @@ public class BsMemberServiceCB extends AbstractConditionBean {
         }
         /**
          * Prepare to specify functions about relation table. <br />
-         * service_rank by my SERVICE_RANK_CODE, named 'serviceRank'.
+         * (サービスランク)service_rank by my SERVICE_RANK_CODE, named 'serviceRank'.
          * @return The instance for specification for relation table to specify. (NotNull)
          */
         public ServiceRankCB.HpSpecification specifyServiceRank() {

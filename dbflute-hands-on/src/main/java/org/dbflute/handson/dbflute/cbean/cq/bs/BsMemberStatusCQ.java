@@ -121,14 +121,14 @@ public class BsMemberStatusCQ extends AbstractBsMemberStatusCQ {
 
     /** 
      * Add order-by as ascend. <br />
-     * MEMBER_STATUS_CODE: {PK, NotNull, CHAR(3), classification=MemberStatus}
+     * (会員ステータスコード)MEMBER_STATUS_CODE: {PK, NotNull, CHAR(3), classification=MemberStatus}
      * @return this. (NotNull)
      */
     public BsMemberStatusCQ addOrderBy_MemberStatusCode_Asc() { regOBA("MEMBER_STATUS_CODE"); return this; }
 
     /**
      * Add order-by as descend. <br />
-     * MEMBER_STATUS_CODE: {PK, NotNull, CHAR(3), classification=MemberStatus}
+     * (会員ステータスコード)MEMBER_STATUS_CODE: {PK, NotNull, CHAR(3), classification=MemberStatus}
      * @return this. (NotNull)
      */
     public BsMemberStatusCQ addOrderBy_MemberStatusCode_Desc() { regOBD("MEMBER_STATUS_CODE"); return this; }
@@ -141,14 +141,14 @@ public class BsMemberStatusCQ extends AbstractBsMemberStatusCQ {
 
     /** 
      * Add order-by as ascend. <br />
-     * MEMBER_STATUS_NAME: {NotNull, VARCHAR(50)}
+     * (会員ステータス名称)MEMBER_STATUS_NAME: {NotNull, VARCHAR(50)}
      * @return this. (NotNull)
      */
     public BsMemberStatusCQ addOrderBy_MemberStatusName_Asc() { regOBA("MEMBER_STATUS_NAME"); return this; }
 
     /**
      * Add order-by as descend. <br />
-     * MEMBER_STATUS_NAME: {NotNull, VARCHAR(50)}
+     * (会員ステータス名称)MEMBER_STATUS_NAME: {NotNull, VARCHAR(50)}
      * @return this. (NotNull)
      */
     public BsMemberStatusCQ addOrderBy_MemberStatusName_Desc() { regOBD("MEMBER_STATUS_NAME"); return this; }
@@ -161,14 +161,14 @@ public class BsMemberStatusCQ extends AbstractBsMemberStatusCQ {
 
     /** 
      * Add order-by as ascend. <br />
-     * DESCRIPTION: {NotNull, VARCHAR(200)}
+     * (説明)DESCRIPTION: {NotNull, VARCHAR(200)}
      * @return this. (NotNull)
      */
     public BsMemberStatusCQ addOrderBy_Description_Asc() { regOBA("DESCRIPTION"); return this; }
 
     /**
      * Add order-by as descend. <br />
-     * DESCRIPTION: {NotNull, VARCHAR(200)}
+     * (説明)DESCRIPTION: {NotNull, VARCHAR(200)}
      * @return this. (NotNull)
      */
     public BsMemberStatusCQ addOrderBy_Description_Desc() { regOBD("DESCRIPTION"); return this; }
@@ -181,14 +181,14 @@ public class BsMemberStatusCQ extends AbstractBsMemberStatusCQ {
 
     /** 
      * Add order-by as ascend. <br />
-     * DISPLAY_ORDER: {UQ, NotNull, INT(10)}
+     * (表示順)DISPLAY_ORDER: {UQ, NotNull, INT(10)}
      * @return this. (NotNull)
      */
     public BsMemberStatusCQ addOrderBy_DisplayOrder_Asc() { regOBA("DISPLAY_ORDER"); return this; }
 
     /**
      * Add order-by as descend. <br />
-     * DISPLAY_ORDER: {UQ, NotNull, INT(10)}
+     * (表示順)DISPLAY_ORDER: {UQ, NotNull, INT(10)}
      * @return this. (NotNull)
      */
     public BsMemberStatusCQ addOrderBy_DisplayOrder_Desc() { regOBD("DISPLAY_ORDER"); return this; }

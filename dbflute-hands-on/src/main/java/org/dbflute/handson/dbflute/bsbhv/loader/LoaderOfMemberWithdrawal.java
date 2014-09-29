@@ -7,7 +7,7 @@ import org.dbflute.handson.dbflute.exbhv.*;
 import org.dbflute.handson.dbflute.exentity.*;
 
 /**
- * The referrer loader of member_withdrawal as TABLE. <br />
+ * The referrer loader of (会員退会情報)member_withdrawal as TABLE. <br />
  * <pre>
  * [primary key]
  *     MEMBER_ID

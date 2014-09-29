@@ -9,7 +9,7 @@ import org.dbflute.handson.dbflute.exentity.*;
 import org.dbflute.handson.dbflute.cbean.*;
 
 /**
- * The referrer loader of product_category as TABLE. <br />
+ * The referrer loader of (商品カテゴリ)product_category as TABLE. <br />
  * <pre>
  * [primary key]
  *     PRODUCT_CATEGORY_CODE

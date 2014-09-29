@@ -87,14 +87,14 @@ public class BsMemberServiceCQ extends AbstractBsMemberServiceCQ {
 
     /** 
      * Add order-by as ascend. <br />
-     * MEMBER_ID: {PK, NotNull, INT(10), FK to member}
+     * (会員ID)MEMBER_ID: {PK, NotNull, INT(10), FK to member}
      * @return this. (NotNull)
      */
     public BsMemberServiceCQ addOrderBy_MemberId_Asc() { regOBA("MEMBER_ID"); return this; }
 
     /**
      * Add order-by as descend. <br />
-     * MEMBER_ID: {PK, NotNull, INT(10), FK to member}
+     * (会員ID)MEMBER_ID: {PK, NotNull, INT(10), FK to member}
      * @return this. (NotNull)
      */
     public BsMemberServiceCQ addOrderBy_MemberId_Desc() { regOBD("MEMBER_ID"); return this; }
@@ -107,14 +107,14 @@ public class BsMemberServiceCQ extends AbstractBsMemberServiceCQ {
 
     /** 
      * Add order-by as ascend. <br />
-     * AKIRAKANI_OKASHII_KARAMU_MEI: {IX, NotNull, INT(10)}
+     * (サービスポイント数)AKIRAKANI_OKASHII_KARAMU_MEI: {IX, NotNull, INT(10)}
      * @return this. (NotNull)
      */
     public BsMemberServiceCQ addOrderBy_AkirakaniOkashiiKaramuMei_Asc() { regOBA("AKIRAKANI_OKASHII_KARAMU_MEI"); return this; }
 
     /**
      * Add order-by as descend. <br />
-     * AKIRAKANI_OKASHII_KARAMU_MEI: {IX, NotNull, INT(10)}
+     * (サービスポイント数)AKIRAKANI_OKASHII_KARAMU_MEI: {IX, NotNull, INT(10)}
      * @return this. (NotNull)
      */
     public BsMemberServiceCQ addOrderBy_AkirakaniOkashiiKaramuMei_Desc() { regOBD("AKIRAKANI_OKASHII_KARAMU_MEI"); return this; }
@@ -133,14 +133,14 @@ public class BsMemberServiceCQ extends AbstractBsMemberServiceCQ {
 
     /** 
      * Add order-by as ascend. <br />
-     * SERVICE_RANK_CODE: {IX, NotNull, CHAR(3), FK to service_rank, classification=ServiceRank}
+     * (サービスランクコード)SERVICE_RANK_CODE: {IX, NotNull, CHAR(3), FK to service_rank, classification=ServiceRank}
      * @return this. (NotNull)
      */
     public BsMemberServiceCQ addOrderBy_ServiceRankCode_Asc() { regOBA("SERVICE_RANK_CODE"); return this; }
 
     /**
      * Add order-by as descend. <br />
-     * SERVICE_RANK_CODE: {IX, NotNull, CHAR(3), FK to service_rank, classification=ServiceRank}
+     * (サービスランクコード)SERVICE_RANK_CODE: {IX, NotNull, CHAR(3), FK to service_rank, classification=ServiceRank}
      * @return this. (NotNull)
      */
     public BsMemberServiceCQ addOrderBy_ServiceRankCode_Desc() { regOBD("SERVICE_RANK_CODE"); return this; }
@@ -299,7 +299,7 @@ public class BsMemberServiceCQ extends AbstractBsMemberServiceCQ {
     //                                                                       =============
     /**
      * Get the condition-query for relation table. <br />
-     * member by my MEMBER_ID, named 'member'.
+     * (会員)member by my MEMBER_ID, named 'member'.
      * @return The instance of condition-query. (NotNull)
      */
     public MemberCQ queryMember() {
@@ -319,7 +319,7 @@ public class BsMemberServiceCQ extends AbstractBsMemberServiceCQ {
 
     /**
      * Get the condition-query for relation table. <br />
-     * service_rank by my SERVICE_RANK_CODE, named 'serviceRank'.
+     * (サービスランク)service_rank by my SERVICE_RANK_CODE, named 'serviceRank'.
      * @return The instance of condition-query. (NotNull)
      */
     public ServiceRankCQ queryServiceRank() {

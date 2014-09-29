@@ -80,7 +80,7 @@ public class BsPurchasePaymentCB extends AbstractConditionBean {
     //                                                                 ===================
     /**
      * Accept the query condition of primary key as equal.
-     * @param purchasePaymentId : PK, ID, NotNull, BIGINT(19). (NotNull)
+     * @param purchasePaymentId (購入支払ID): PK, ID, NotNull, BIGINT(19). (NotNull)
      * @return this. (NotNull)
      */
     public PurchasePaymentCB acceptPK(Long purchasePaymentId) {
@@ -92,7 +92,7 @@ public class BsPurchasePaymentCB extends AbstractConditionBean {
 
     /**
      * Accept the query condition of primary key as equal. (old style)
-     * @param purchasePaymentId : PK, ID, NotNull, BIGINT(19). (NotNull)
+     * @param purchasePaymentId (購入支払ID): PK, ID, NotNull, BIGINT(19). (NotNull)
      */
     public void acceptPrimaryKey(Long purchasePaymentId) {
         assertObjectNotNull("purchasePaymentId", purchasePaymentId);
@@ -268,7 +268,7 @@ public class BsPurchasePaymentCB extends AbstractConditionBean {
     }
     /**
      * Set up relation columns to select clause. <br />
-     * purchase by my PURCHASE_ID, named 'purchase'.
+     * (購入)purchase by my PURCHASE_ID, named 'purchase'.
      * <pre>
      * PurchasePaymentCB cb = new PurchasePaymentCB();
      * cb.<span style="color: #DD4747">setupSelect_Purchase()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
@@ -336,27 +336,27 @@ public class BsPurchasePaymentCB extends AbstractConditionBean {
                              , HpCBPurpose purpose, DBMetaProvider dbmetaProvider)
         { super(baseCB, qyCall, purpose, dbmetaProvider); }
         /**
-         * PURCHASE_PAYMENT_ID: {PK, ID, NotNull, BIGINT(19)}
+         * (購入支払ID)PURCHASE_PAYMENT_ID: {PK, ID, NotNull, BIGINT(19)}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnPurchasePaymentId() { return doColumn("PURCHASE_PAYMENT_ID"); }
         /**
-         * PURCHASE_ID: {IX, NotNull, BIGINT(19), FK to purchase}
+         * (購入ID)PURCHASE_ID: {IX, NotNull, BIGINT(19), FK to purchase}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnPurchaseId() { return doColumn("PURCHASE_ID"); }
         /**
-         * PAYMENT_AMOUNT: {NotNull, DECIMAL(10, 2)}
+         * (支払金額)PAYMENT_AMOUNT: {NotNull, DECIMAL(10, 2)}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnPaymentAmount() { return doColumn("PAYMENT_AMOUNT"); }
         /**
-         * PAYMENT_DATETIME: {IX+, NotNull, DATETIME(19)}
+         * (支払日時)PAYMENT_DATETIME: {IX+, NotNull, DATETIME(19)}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnPaymentDatetime() { return doColumn("PAYMENT_DATETIME"); }
         /**
-         * PAYMENT_METHOD_CODE: {NotNull, CHAR(3), classification=PaymentMethod}
+         * (支払方法コード)PAYMENT_METHOD_CODE: {NotNull, CHAR(3), classification=PaymentMethod}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnPaymentMethodCode() { return doColumn("PAYMENT_METHOD_CODE"); }
@@ -394,7 +394,7 @@ public class BsPurchasePaymentCB extends AbstractConditionBean {
         protected String getTableDbName() { return "purchase_payment"; }
         /**
          * Prepare to specify functions about relation table. <br />
-         * purchase by my PURCHASE_ID, named 'purchase'.
+         * (購入)purchase by my PURCHASE_ID, named 'purchase'.
          * @return The instance for specification for relation table to specify. (NotNull)
          */
         public PurchaseCB.HpSpecification specifyPurchase() {

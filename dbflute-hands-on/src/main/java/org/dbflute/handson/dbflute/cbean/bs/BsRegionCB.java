@@ -80,7 +80,7 @@ public class BsRegionCB extends AbstractConditionBean {
     //                                                                 ===================
     /**
      * Accept the query condition of primary key as equal.
-     * @param regionId : PK, NotNull, INT(10), classification=Region. (NotNull)
+     * @param regionId (地域ID): PK, NotNull, INT(10), classification=Region. (NotNull)
      * @return this. (NotNull)
      */
     public RegionCB acceptPK(CDef.Region regionId) {
@@ -92,7 +92,7 @@ public class BsRegionCB extends AbstractConditionBean {
 
     /**
      * Accept the query condition of primary key as equal. (old style)
-     * @param regionId : PK, NotNull, INT(10), classification=Region. (NotNull)
+     * @param regionId (地域ID): PK, NotNull, INT(10), classification=Region. (NotNull)
      */
     public void acceptPrimaryKey(CDef.Region regionId) {
         assertObjectNotNull("regionId", regionId);
@@ -307,12 +307,12 @@ public class BsRegionCB extends AbstractConditionBean {
                              , HpCBPurpose purpose, DBMetaProvider dbmetaProvider)
         { super(baseCB, qyCall, purpose, dbmetaProvider); }
         /**
-         * REGION_ID: {PK, NotNull, INT(10), classification=Region}
+         * (地域ID)REGION_ID: {PK, NotNull, INT(10), classification=Region}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnRegionId() { return doColumn("REGION_ID"); }
         /**
-         * REGION_NAME: {NotNull, VARCHAR(50)}
+         * (地域名称)REGION_NAME: {NotNull, VARCHAR(50)}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnRegionName() { return doColumn("REGION_NAME"); }
@@ -327,7 +327,7 @@ public class BsRegionCB extends AbstractConditionBean {
         /**
          * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br />
          * {select max(FOO) from member_address where ...) as FOO_MAX} <br />
-         * member_address by REGION_ID, named 'memberAddressList'.
+         * (会員住所情報)member_address by REGION_ID, named 'memberAddressList'.
          * <pre>
          * cb.specify().<span style="color: #DD4747">derivedMemberAddressList()</span>.<span style="color: #DD4747">max</span>(new SubQuery&lt;MemberAddressCB&gt;() {
          *     public void query(MemberAddressCB subCB) {

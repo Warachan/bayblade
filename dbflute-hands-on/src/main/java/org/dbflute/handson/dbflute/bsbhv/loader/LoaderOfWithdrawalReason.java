@@ -9,7 +9,7 @@ import org.dbflute.handson.dbflute.exentity.*;
 import org.dbflute.handson.dbflute.cbean.*;
 
 /**
- * The referrer loader of withdrawal_reason as TABLE. <br />
+ * The referrer loader of (退会理由)withdrawal_reason as TABLE. <br />
  * <pre>
  * [primary key]
  *     WITHDRAWAL_REASON_CODE

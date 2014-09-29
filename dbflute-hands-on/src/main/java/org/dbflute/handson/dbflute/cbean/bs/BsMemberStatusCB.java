@@ -80,7 +80,7 @@ public class BsMemberStatusCB extends AbstractConditionBean {
     //                                                                 ===================
     /**
      * Accept the query condition of primary key as equal.
-     * @param memberStatusCode : PK, NotNull, CHAR(3), classification=MemberStatus. (NotNull)
+     * @param memberStatusCode (会員ステータスコード): PK, NotNull, CHAR(3), classification=MemberStatus. (NotNull)
      * @return this. (NotNull)
      */
     public MemberStatusCB acceptPK(CDef.MemberStatus memberStatusCode) {
@@ -92,7 +92,7 @@ public class BsMemberStatusCB extends AbstractConditionBean {
 
     /**
      * Accept the query condition of primary key as equal. (old style)
-     * @param memberStatusCode : PK, NotNull, CHAR(3), classification=MemberStatus. (NotNull)
+     * @param memberStatusCode (会員ステータスコード): PK, NotNull, CHAR(3), classification=MemberStatus. (NotNull)
      */
     public void acceptPrimaryKey(CDef.MemberStatus memberStatusCode) {
         assertObjectNotNull("memberStatusCode", memberStatusCode);
@@ -102,7 +102,7 @@ public class BsMemberStatusCB extends AbstractConditionBean {
 
     /**
      * Accept the query condition of unique key as equal.
-     * @param displayOrder : UQ, NotNull, INT(10). (NotNull)
+     * @param displayOrder (表示順): UQ, NotNull, INT(10). (NotNull)
      * @return this. (NotNull)
      */
     public MemberStatusCB acceptUniqueOf(Integer displayOrder) {
@@ -319,22 +319,22 @@ public class BsMemberStatusCB extends AbstractConditionBean {
                              , HpCBPurpose purpose, DBMetaProvider dbmetaProvider)
         { super(baseCB, qyCall, purpose, dbmetaProvider); }
         /**
-         * MEMBER_STATUS_CODE: {PK, NotNull, CHAR(3), classification=MemberStatus}
+         * (会員ステータスコード)MEMBER_STATUS_CODE: {PK, NotNull, CHAR(3), classification=MemberStatus}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnMemberStatusCode() { return doColumn("MEMBER_STATUS_CODE"); }
         /**
-         * MEMBER_STATUS_NAME: {NotNull, VARCHAR(50)}
+         * (会員ステータス名称)MEMBER_STATUS_NAME: {NotNull, VARCHAR(50)}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnMemberStatusName() { return doColumn("MEMBER_STATUS_NAME"); }
         /**
-         * DESCRIPTION: {NotNull, VARCHAR(200)}
+         * (説明)DESCRIPTION: {NotNull, VARCHAR(200)}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnDescription() { return doColumn("DESCRIPTION"); }
         /**
-         * DISPLAY_ORDER: {UQ, NotNull, INT(10)}
+         * (表示順)DISPLAY_ORDER: {UQ, NotNull, INT(10)}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnDisplayOrder() { return doColumn("DISPLAY_ORDER"); }
@@ -349,7 +349,7 @@ public class BsMemberStatusCB extends AbstractConditionBean {
         /**
          * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br />
          * {select max(FOO) from member where ...) as FOO_MAX} <br />
-         * member by MEMBER_STATUS_CODE, named 'memberList'.
+         * (会員)member by MEMBER_STATUS_CODE, named 'memberList'.
          * <pre>
          * cb.specify().<span style="color: #DD4747">derivedMemberList()</span>.<span style="color: #DD4747">max</span>(new SubQuery&lt;MemberCB&gt;() {
          *     public void query(MemberCB subCB) {
@@ -369,7 +369,7 @@ public class BsMemberStatusCB extends AbstractConditionBean {
         /**
          * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br />
          * {select max(FOO) from member_login where ...) as FOO_MAX} <br />
-         * member_login by LOGIN_MEMBER_STATUS_CODE, named 'memberLoginList'.
+         * (会員ログイン情報)member_login by LOGIN_MEMBER_STATUS_CODE, named 'memberLoginList'.
          * <pre>
          * cb.specify().<span style="color: #DD4747">derivedMemberLoginList()</span>.<span style="color: #DD4747">max</span>(new SubQuery&lt;MemberLoginCB&gt;() {
          *     public void query(MemberLoginCB subCB) {

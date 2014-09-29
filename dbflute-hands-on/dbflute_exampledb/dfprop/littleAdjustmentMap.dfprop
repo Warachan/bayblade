@@ -140,7 +140,7 @@ map:{
     #   [false]
     #     Non.
     #
-    #; isEntityConvertEmptyStringToNull = false
+    ; isEntityConvertEmptyStringToNull = true
     # - - - - - - - - - -/
 
     # /- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -211,7 +211,7 @@ map:{
     #   [false]
     #     Non.
     #
-    #; isTableSqlNameUpperCase = false
+    ; isTableSqlNameUpperCase = true
     # - - - - - - - - - -/
 
     # /- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -223,7 +223,7 @@ map:{
     #   [false]
     #     Non.
     #
-    #; isColumnSqlNameUpperCase = false
+    ; isColumnSqlNameUpperCase = true
     # - - - - - - - - - -/
 
     # /- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

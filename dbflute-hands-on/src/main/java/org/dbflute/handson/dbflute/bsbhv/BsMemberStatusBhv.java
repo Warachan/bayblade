@@ -19,7 +19,7 @@ import org.dbflute.handson.dbflute.bsentity.dbmeta.*;
 import org.dbflute.handson.dbflute.cbean.*;
 
 /**
- * The behavior of member_status as TABLE. <br />
+ * The behavior of (会員ステータス)member_status as TABLE. <br />
  * <pre>
  * [primary key]
  *     MEMBER_STATUS_CODE
@@ -194,7 +194,7 @@ public abstract class BsMemberStatusBhv extends AbstractBehaviorWritable {
 
     /**
      * Select the entity by the primary-key value.
-     * @param memberStatusCode : PK, NotNull, CHAR(3), classification=MemberStatus. (NotNull)
+     * @param memberStatusCode (会員ステータスコード): PK, NotNull, CHAR(3), classification=MemberStatus. (NotNull)
      * @return The entity selected by the PK. (NullAllowed: if no data, it returns null)
      * @exception EntityDuplicatedException When the entity has been duplicated.
      * @exception SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
@@ -217,7 +217,7 @@ public abstract class BsMemberStatusBhv extends AbstractBehaviorWritable {
 
     /**
      * Select the entity by the primary-key value with deleted check.
-     * @param memberStatusCode : PK, NotNull, CHAR(3), classification=MemberStatus. (NotNull)
+     * @param memberStatusCode (会員ステータスコード): PK, NotNull, CHAR(3), classification=MemberStatus. (NotNull)
      * @return The entity selected by the PK. (NotNull: if no data, throws exception)
      * @exception EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @exception EntityDuplicatedException When the entity has been duplicated.
@@ -238,7 +238,7 @@ public abstract class BsMemberStatusBhv extends AbstractBehaviorWritable {
 
     /**
      * Select the entity by the unique-key value.
-     * @param displayOrder : UQ, NotNull, INT(10). (NotNull)
+     * @param displayOrder (表示順): UQ, NotNull, INT(10). (NotNull)
      * @return The optional entity selected by the unique key. (NotNull: if no data, empty entity)
      * @exception EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @exception EntityDuplicatedException When the entity has been duplicated.
@@ -484,7 +484,7 @@ public abstract class BsMemberStatusBhv extends AbstractBehaviorWritable {
 
     /**
      * Load referrer of memberList by the set-upper of referrer. <br />
-     * member by MEMBER_STATUS_CODE, named 'memberList'.
+     * (会員)member by MEMBER_STATUS_CODE, named 'memberList'.
      * <pre>
      * memberStatusBhv.<span style="color: #DD4747">loadMemberList</span>(memberStatusList, new ConditionBeanSetupper&lt;MemberCB&gt;() {
      *     public void setup(MemberCB cb) {
@@ -517,7 +517,7 @@ public abstract class BsMemberStatusBhv extends AbstractBehaviorWritable {
 
     /**
      * Load referrer of memberList by the set-upper of referrer. <br />
-     * member by MEMBER_STATUS_CODE, named 'memberList'.
+     * (会員)member by MEMBER_STATUS_CODE, named 'memberList'.
      * <pre>
      * memberStatusBhv.<span style="color: #DD4747">loadMemberList</span>(memberStatusList, new ConditionBeanSetupper&lt;MemberCB&gt;() {
      *     public void setup(MemberCB cb) {
@@ -576,7 +576,7 @@ public abstract class BsMemberStatusBhv extends AbstractBehaviorWritable {
 
     /**
      * Load referrer of memberLoginList by the set-upper of referrer. <br />
-     * member_login by LOGIN_MEMBER_STATUS_CODE, named 'memberLoginList'.
+     * (会員ログイン情報)member_login by LOGIN_MEMBER_STATUS_CODE, named 'memberLoginList'.
      * <pre>
      * memberStatusBhv.<span style="color: #DD4747">loadMemberLoginList</span>(memberStatusList, new ConditionBeanSetupper&lt;MemberLoginCB&gt;() {
      *     public void setup(MemberLoginCB cb) {
@@ -609,7 +609,7 @@ public abstract class BsMemberStatusBhv extends AbstractBehaviorWritable {
 
     /**
      * Load referrer of memberLoginList by the set-upper of referrer. <br />
-     * member_login by LOGIN_MEMBER_STATUS_CODE, named 'memberLoginList'.
+     * (会員ログイン情報)member_login by LOGIN_MEMBER_STATUS_CODE, named 'memberLoginList'.
      * <pre>
      * memberStatusBhv.<span style="color: #DD4747">loadMemberLoginList</span>(memberStatusList, new ConditionBeanSetupper&lt;MemberLoginCB&gt;() {
      *     public void setup(MemberLoginCB cb) {

@@ -12,8 +12,8 @@ import org.dbflute.handson.dbflute.allcommon.CDef;
 import org.dbflute.handson.dbflute.exentity.*;
 
 /**
- * The entity of member_service as TABLE. <br />
- * 会員サービス: 会員のサービス情報（ポイントサービスなど）。
+ * The entity of (会員サービス)member_service as TABLE. <br />
+ * 会員のサービス情報（ポイントサービスなど）。
  * <pre>
  * [primary-key]
  *     MEMBER_ID
@@ -78,13 +78,13 @@ public abstract class BsMemberService implements Entity, Serializable, Cloneable
     // -----------------------------------------------------
     //                                                Column
     //                                                ------
-    /** MEMBER_ID: {PK, NotNull, INT(10), FK to member} */
+    /** (会員ID)MEMBER_ID: {PK, NotNull, INT(10), FK to member} */
     protected Integer _memberId;
 
-    /** AKIRAKANI_OKASHII_KARAMU_MEI: {IX, NotNull, INT(10)} */
+    /** (サービスポイント数)AKIRAKANI_OKASHII_KARAMU_MEI: {IX, NotNull, INT(10)} */
     protected Integer _akirakaniOkashiiKaramuMei;
 
-    /** SERVICE_RANK_CODE: {IX, NotNull, CHAR(3), FK to service_rank, classification=ServiceRank} */
+    /** (サービスランクコード)SERVICE_RANK_CODE: {IX, NotNull, CHAR(3), FK to service_rank, classification=ServiceRank} */
     protected String _serviceRankCode;
 
     /** REGISTER_DATETIME: {NotNull, DATETIME(19)} */
@@ -168,7 +168,7 @@ public abstract class BsMemberService implements Entity, Serializable, Cloneable
     //                                                             =======================
     /**
      * Get the value of serviceRankCode as the classification of ServiceRank. <br />
-     * SERVICE_RANK_CODE: {IX, NotNull, CHAR(3), FK to service_rank, classification=ServiceRank} <br />
+     * (サービスランクコード)SERVICE_RANK_CODE: {IX, NotNull, CHAR(3), FK to service_rank, classification=ServiceRank} <br />
      * 会員が受けられるサービスのランクを示す
      * <p>It's treated as case insensitive and if the code value is null, it returns null.</p>
      * @return The instance of classification definition (as ENUM type). (NullAllowed: when the column value is null)
@@ -179,7 +179,7 @@ public abstract class BsMemberService implements Entity, Serializable, Cloneable
 
     /**
      * Set the value of serviceRankCode as the classification of ServiceRank. <br />
-     * SERVICE_RANK_CODE: {IX, NotNull, CHAR(3), FK to service_rank, classification=ServiceRank} <br />
+     * (サービスランクコード)SERVICE_RANK_CODE: {IX, NotNull, CHAR(3), FK to service_rank, classification=ServiceRank} <br />
      * 会員が受けられるサービスのランクを示す
      * @param cdef The instance of classification definition (as ENUM type). (NullAllowed: if null, null value is set to the column)
      */
@@ -291,11 +291,11 @@ public abstract class BsMemberService implements Entity, Serializable, Cloneable
     // ===================================================================================
     //                                                                    Foreign Property
     //                                                                    ================
-    /** member by my MEMBER_ID, named 'member'. */
+    /** (会員)member by my MEMBER_ID, named 'member'. */
     protected Member _member;
 
     /**
-     * [get] member by my MEMBER_ID, named 'member'.
+     * [get] (会員)member by my MEMBER_ID, named 'member'.
      * @return The entity of foreign property 'member'. (NullAllowed: when e.g. null FK column, no setupSelect)
      */
     public Member getMember() {
@@ -303,18 +303,18 @@ public abstract class BsMemberService implements Entity, Serializable, Cloneable
     }
 
     /**
-     * [set] member by my MEMBER_ID, named 'member'.
+     * [set] (会員)member by my MEMBER_ID, named 'member'.
      * @param member The entity of foreign property 'member'. (NullAllowed)
      */
     public void setMember(Member member) {
         _member = member;
     }
 
-    /** service_rank by my SERVICE_RANK_CODE, named 'serviceRank'. */
+    /** (サービスランク)service_rank by my SERVICE_RANK_CODE, named 'serviceRank'. */
     protected ServiceRank _serviceRank;
 
     /**
-     * [get] service_rank by my SERVICE_RANK_CODE, named 'serviceRank'.
+     * [get] (サービスランク)service_rank by my SERVICE_RANK_CODE, named 'serviceRank'.
      * @return The entity of foreign property 'serviceRank'. (NullAllowed: when e.g. null FK column, no setupSelect)
      */
     public ServiceRank getServiceRank() {
@@ -322,7 +322,7 @@ public abstract class BsMemberService implements Entity, Serializable, Cloneable
     }
 
     /**
-     * [set] service_rank by my SERVICE_RANK_CODE, named 'serviceRank'.
+     * [set] (サービスランク)service_rank by my SERVICE_RANK_CODE, named 'serviceRank'.
      * @param serviceRank The entity of foreign property 'serviceRank'. (NullAllowed)
      */
     public void setServiceRank(ServiceRank serviceRank) {
@@ -501,8 +501,8 @@ public abstract class BsMemberService implements Entity, Serializable, Cloneable
     //                                                                            Accessor
     //                                                                            ========
     /**
-     * [get] MEMBER_ID: {PK, NotNull, INT(10), FK to member} <br />
-     * 会員ID: 会員を参照するID。ユニークなので、会員とは one-to-one の関係に。
+     * [get] (会員ID)MEMBER_ID: {PK, NotNull, INT(10), FK to member} <br />
+     * 会員を参照するID。ユニークなので、会員とは one-to-one の関係に。
      * @return The value of the column 'MEMBER_ID'. (basically NotNull if selected: for the constraint)
      */
     public Integer getMemberId() {
@@ -510,8 +510,8 @@ public abstract class BsMemberService implements Entity, Serializable, Cloneable
     }
 
     /**
-     * [set] MEMBER_ID: {PK, NotNull, INT(10), FK to member} <br />
-     * 会員ID: 会員を参照するID。ユニークなので、会員とは one-to-one の関係に。
+     * [set] (会員ID)MEMBER_ID: {PK, NotNull, INT(10), FK to member} <br />
+     * 会員を参照するID。ユニークなので、会員とは one-to-one の関係に。
      * @param memberId The value of the column 'MEMBER_ID'. (basically NotNull if update: for the constraint)
      */
     public void setMemberId(Integer memberId) {
@@ -520,8 +520,8 @@ public abstract class BsMemberService implements Entity, Serializable, Cloneable
     }
 
     /**
-     * [get] AKIRAKANI_OKASHII_KARAMU_MEI: {IX, NotNull, INT(10)} <br />
-     * サービスポイント数: 会員が現在利用できるサービスポイントの数。<br />
+     * [get] (サービスポイント数)AKIRAKANI_OKASHII_KARAMU_MEI: {IX, NotNull, INT(10)} <br />
+     * 会員が現在利用できるサービスポイントの数。<br />
      * 基本的に、購入時には増えてポイントを使ったら減る。
      * @return The value of the column 'AKIRAKANI_OKASHII_KARAMU_MEI'. (basically NotNull if selected: for the constraint)
      */
@@ -530,8 +530,8 @@ public abstract class BsMemberService implements Entity, Serializable, Cloneable
     }
 
     /**
-     * [set] AKIRAKANI_OKASHII_KARAMU_MEI: {IX, NotNull, INT(10)} <br />
-     * サービスポイント数: 会員が現在利用できるサービスポイントの数。<br />
+     * [set] (サービスポイント数)AKIRAKANI_OKASHII_KARAMU_MEI: {IX, NotNull, INT(10)} <br />
+     * 会員が現在利用できるサービスポイントの数。<br />
      * 基本的に、購入時には増えてポイントを使ったら減る。
      * @param akirakaniOkashiiKaramuMei The value of the column 'AKIRAKANI_OKASHII_KARAMU_MEI'. (basically NotNull if update: for the constraint)
      */
@@ -541,18 +541,18 @@ public abstract class BsMemberService implements Entity, Serializable, Cloneable
     }
 
     /**
-     * [get] SERVICE_RANK_CODE: {IX, NotNull, CHAR(3), FK to service_rank, classification=ServiceRank} <br />
-     * サービスランクコード: サービスランクを参照するコード。<br />
+     * [get] (サービスランクコード)SERVICE_RANK_CODE: {IX, NotNull, CHAR(3), FK to service_rank, classification=ServiceRank} <br />
+     * サービスランクを参照するコード。<br />
      * どんなランクがあるのかドキドキですね。
      * @return The value of the column 'SERVICE_RANK_CODE'. (basically NotNull if selected: for the constraint)
      */
     public String getServiceRankCode() {
-        return _serviceRankCode;
+        return convertEmptyToNull(_serviceRankCode);
     }
 
     /**
-     * [set] SERVICE_RANK_CODE: {IX, NotNull, CHAR(3), FK to service_rank, classification=ServiceRank} <br />
-     * サービスランクコード: サービスランクを参照するコード。<br />
+     * [set] (サービスランクコード)SERVICE_RANK_CODE: {IX, NotNull, CHAR(3), FK to service_rank, classification=ServiceRank} <br />
+     * サービスランクを参照するコード。<br />
      * どんなランクがあるのかドキドキですね。
      * @param serviceRankCode The value of the column 'SERVICE_RANK_CODE'. (basically NotNull if update: for the constraint)
      */
@@ -583,7 +583,7 @@ public abstract class BsMemberService implements Entity, Serializable, Cloneable
      * @return The value of the column 'REGISTER_USER'. (basically NotNull if selected: for the constraint)
      */
     public String getRegisterUser() {
-        return _registerUser;
+        return convertEmptyToNull(_registerUser);
     }
 
     /**
@@ -617,7 +617,7 @@ public abstract class BsMemberService implements Entity, Serializable, Cloneable
      * @return The value of the column 'UPDATE_USER'. (basically NotNull if selected: for the constraint)
      */
     public String getUpdateUser() {
-        return _updateUser;
+        return convertEmptyToNull(_updateUser);
     }
 
     /**
@@ -644,5 +644,9 @@ public abstract class BsMemberService implements Entity, Serializable, Cloneable
     public void setVersionNo(Long versionNo) {
         __modifiedProperties.addPropertyName("versionNo");
         _versionNo = versionNo;
+    }
+
+    protected String convertEmptyToNull(String value) {
+        return FunCustodial.convertEmptyToNull(value);
     }
 }

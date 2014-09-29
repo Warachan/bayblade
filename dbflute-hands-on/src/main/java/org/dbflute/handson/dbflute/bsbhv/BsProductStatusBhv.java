@@ -19,7 +19,7 @@ import org.dbflute.handson.dbflute.bsentity.dbmeta.*;
 import org.dbflute.handson.dbflute.cbean.*;
 
 /**
- * The behavior of product_status as TABLE. <br />
+ * The behavior of (商品ステータス)product_status as TABLE. <br />
  * <pre>
  * [primary key]
  *     PRODUCT_STATUS_CODE
@@ -194,7 +194,7 @@ public abstract class BsProductStatusBhv extends AbstractBehaviorWritable {
 
     /**
      * Select the entity by the primary-key value.
-     * @param productStatusCode : PK, NotNull, CHAR(3), classification=ProductStatus. (NotNull)
+     * @param productStatusCode (商品ステータスコード): PK, NotNull, CHAR(3), classification=ProductStatus. (NotNull)
      * @return The entity selected by the PK. (NullAllowed: if no data, it returns null)
      * @exception EntityDuplicatedException When the entity has been duplicated.
      * @exception SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
@@ -217,7 +217,7 @@ public abstract class BsProductStatusBhv extends AbstractBehaviorWritable {
 
     /**
      * Select the entity by the primary-key value with deleted check.
-     * @param productStatusCode : PK, NotNull, CHAR(3), classification=ProductStatus. (NotNull)
+     * @param productStatusCode (商品ステータスコード): PK, NotNull, CHAR(3), classification=ProductStatus. (NotNull)
      * @return The entity selected by the PK. (NotNull: if no data, throws exception)
      * @exception EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @exception EntityDuplicatedException When the entity has been duplicated.
@@ -459,7 +459,7 @@ public abstract class BsProductStatusBhv extends AbstractBehaviorWritable {
 
     /**
      * Load referrer of productList by the set-upper of referrer. <br />
-     * product by PRODUCT_STATUS_CODE, named 'productList'.
+     * (商品)product by PRODUCT_STATUS_CODE, named 'productList'.
      * <pre>
      * productStatusBhv.<span style="color: #DD4747">loadProductList</span>(productStatusList, new ConditionBeanSetupper&lt;ProductCB&gt;() {
      *     public void setup(ProductCB cb) {
@@ -492,7 +492,7 @@ public abstract class BsProductStatusBhv extends AbstractBehaviorWritable {
 
     /**
      * Load referrer of productList by the set-upper of referrer. <br />
-     * product by PRODUCT_STATUS_CODE, named 'productList'.
+     * (商品)product by PRODUCT_STATUS_CODE, named 'productList'.
      * <pre>
      * productStatusBhv.<span style="color: #DD4747">loadProductList</span>(productStatusList, new ConditionBeanSetupper&lt;ProductCB&gt;() {
      *     public void setup(ProductCB cb) {

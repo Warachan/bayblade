@@ -19,7 +19,7 @@ import org.dbflute.handson.dbflute.bsentity.dbmeta.*;
 import org.dbflute.handson.dbflute.cbean.*;
 
 /**
- * The behavior of region as TABLE. <br />
+ * The behavior of (地域)region as TABLE. <br />
  * <pre>
  * [primary key]
  *     REGION_ID
@@ -194,7 +194,7 @@ public abstract class BsRegionBhv extends AbstractBehaviorWritable {
 
     /**
      * Select the entity by the primary-key value.
-     * @param regionId : PK, NotNull, INT(10), classification=Region. (NotNull)
+     * @param regionId (地域ID): PK, NotNull, INT(10), classification=Region. (NotNull)
      * @return The entity selected by the PK. (NullAllowed: if no data, it returns null)
      * @exception EntityDuplicatedException When the entity has been duplicated.
      * @exception SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
@@ -217,7 +217,7 @@ public abstract class BsRegionBhv extends AbstractBehaviorWritable {
 
     /**
      * Select the entity by the primary-key value with deleted check.
-     * @param regionId : PK, NotNull, INT(10), classification=Region. (NotNull)
+     * @param regionId (地域ID): PK, NotNull, INT(10), classification=Region. (NotNull)
      * @return The entity selected by the PK. (NotNull: if no data, throws exception)
      * @exception EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @exception EntityDuplicatedException When the entity has been duplicated.
@@ -459,7 +459,7 @@ public abstract class BsRegionBhv extends AbstractBehaviorWritable {
 
     /**
      * Load referrer of memberAddressList by the set-upper of referrer. <br />
-     * member_address by REGION_ID, named 'memberAddressList'.
+     * (会員住所情報)member_address by REGION_ID, named 'memberAddressList'.
      * <pre>
      * regionBhv.<span style="color: #DD4747">loadMemberAddressList</span>(regionList, new ConditionBeanSetupper&lt;MemberAddressCB&gt;() {
      *     public void setup(MemberAddressCB cb) {
@@ -492,7 +492,7 @@ public abstract class BsRegionBhv extends AbstractBehaviorWritable {
 
     /**
      * Load referrer of memberAddressList by the set-upper of referrer. <br />
-     * member_address by REGION_ID, named 'memberAddressList'.
+     * (会員住所情報)member_address by REGION_ID, named 'memberAddressList'.
      * <pre>
      * regionBhv.<span style="color: #DD4747">loadMemberAddressList</span>(regionList, new ConditionBeanSetupper&lt;MemberAddressCB&gt;() {
      *     public void setup(MemberAddressCB cb) {

@@ -9,7 +9,7 @@ import org.dbflute.handson.dbflute.exentity.*;
 import org.dbflute.handson.dbflute.cbean.*;
 
 /**
- * The referrer loader of purchase as TABLE. <br />
+ * The referrer loader of (購入)purchase as TABLE. <br />
  * <pre>
  * [primary key]
  *     PURCHASE_ID

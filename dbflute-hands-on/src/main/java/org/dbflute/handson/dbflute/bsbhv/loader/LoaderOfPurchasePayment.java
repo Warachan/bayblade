@@ -7,7 +7,7 @@ import org.dbflute.handson.dbflute.exbhv.*;
 import org.dbflute.handson.dbflute.exentity.*;
 
 /**
- * The referrer loader of purchase_payment as TABLE. <br />
+ * The referrer loader of (購入支払)purchase_payment as TABLE. <br />
  * <pre>
  * [primary key]
  *     PURCHASE_PAYMENT_ID

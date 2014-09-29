@@ -19,7 +19,7 @@ import org.dbflute.handson.dbflute.bsentity.dbmeta.*;
 import org.dbflute.handson.dbflute.cbean.*;
 
 /**
- * The behavior of withdrawal_reason as TABLE. <br />
+ * The behavior of (退会理由)withdrawal_reason as TABLE. <br />
  * <pre>
  * [primary key]
  *     WITHDRAWAL_REASON_CODE
@@ -194,7 +194,7 @@ public abstract class BsWithdrawalReasonBhv extends AbstractBehaviorWritable {
 
     /**
      * Select the entity by the primary-key value.
-     * @param withdrawalReasonCode : PK, NotNull, CHAR(3), classification=WithdrawalReason. (NotNull)
+     * @param withdrawalReasonCode (退会理由コード): PK, NotNull, CHAR(3), classification=WithdrawalReason. (NotNull)
      * @return The entity selected by the PK. (NullAllowed: if no data, it returns null)
      * @exception EntityDuplicatedException When the entity has been duplicated.
      * @exception SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
@@ -217,7 +217,7 @@ public abstract class BsWithdrawalReasonBhv extends AbstractBehaviorWritable {
 
     /**
      * Select the entity by the primary-key value with deleted check.
-     * @param withdrawalReasonCode : PK, NotNull, CHAR(3), classification=WithdrawalReason. (NotNull)
+     * @param withdrawalReasonCode (退会理由コード): PK, NotNull, CHAR(3), classification=WithdrawalReason. (NotNull)
      * @return The entity selected by the PK. (NotNull: if no data, throws exception)
      * @exception EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @exception EntityDuplicatedException When the entity has been duplicated.
@@ -238,7 +238,7 @@ public abstract class BsWithdrawalReasonBhv extends AbstractBehaviorWritable {
 
     /**
      * Select the entity by the unique-key value.
-     * @param displayOrder : UQ, NotNull, INT(10). (NotNull)
+     * @param displayOrder (表示順): UQ, NotNull, INT(10). (NotNull)
      * @return The optional entity selected by the unique key. (NotNull: if no data, empty entity)
      * @exception EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @exception EntityDuplicatedException When the entity has been duplicated.
@@ -484,7 +484,7 @@ public abstract class BsWithdrawalReasonBhv extends AbstractBehaviorWritable {
 
     /**
      * Load referrer of memberWithdrawalList by the set-upper of referrer. <br />
-     * member_withdrawal by WITHDRAWAL_REASON_CODE, named 'memberWithdrawalList'.
+     * (会員退会情報)member_withdrawal by WITHDRAWAL_REASON_CODE, named 'memberWithdrawalList'.
      * <pre>
      * withdrawalReasonBhv.<span style="color: #DD4747">loadMemberWithdrawalList</span>(withdrawalReasonList, new ConditionBeanSetupper&lt;MemberWithdrawalCB&gt;() {
      *     public void setup(MemberWithdrawalCB cb) {
@@ -517,7 +517,7 @@ public abstract class BsWithdrawalReasonBhv extends AbstractBehaviorWritable {
 
     /**
      * Load referrer of memberWithdrawalList by the set-upper of referrer. <br />
-     * member_withdrawal by WITHDRAWAL_REASON_CODE, named 'memberWithdrawalList'.
+     * (会員退会情報)member_withdrawal by WITHDRAWAL_REASON_CODE, named 'memberWithdrawalList'.
      * <pre>
      * withdrawalReasonBhv.<span style="color: #DD4747">loadMemberWithdrawalList</span>(withdrawalReasonList, new ConditionBeanSetupper&lt;MemberWithdrawalCB&gt;() {
      *     public void setup(MemberWithdrawalCB cb) {

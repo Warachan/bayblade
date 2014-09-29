@@ -18,7 +18,7 @@ import org.dbflute.handson.dbflute.bsentity.dbmeta.*;
 import org.dbflute.handson.dbflute.cbean.*;
 
 /**
- * The behavior of product as TABLE. <br />
+ * The behavior of (商品)product as TABLE. <br />
  * <pre>
  * [primary key]
  *     PRODUCT_ID
@@ -237,7 +237,7 @@ public abstract class BsProductBhv extends AbstractBehaviorWritable {
 
     /**
      * Select the entity by the unique-key value.
-     * @param productHandleCode : UQ, NotNull, VARCHAR(100). (NotNull)
+     * @param productHandleCode (商品ハンドルコード): UQ, NotNull, VARCHAR(100). (NotNull)
      * @return The optional entity selected by the unique key. (NotNull: if no data, empty entity)
      * @exception EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @exception EntityDuplicatedException When the entity has been duplicated.
@@ -483,7 +483,7 @@ public abstract class BsProductBhv extends AbstractBehaviorWritable {
 
     /**
      * Load referrer of purchaseList by the set-upper of referrer. <br />
-     * purchase by PRODUCT_ID, named 'purchaseList'.
+     * (購入)purchase by PRODUCT_ID, named 'purchaseList'.
      * <pre>
      * productBhv.<span style="color: #DD4747">loadPurchaseList</span>(productList, new ConditionBeanSetupper&lt;PurchaseCB&gt;() {
      *     public void setup(PurchaseCB cb) {
@@ -516,7 +516,7 @@ public abstract class BsProductBhv extends AbstractBehaviorWritable {
 
     /**
      * Load referrer of purchaseList by the set-upper of referrer. <br />
-     * purchase by PRODUCT_ID, named 'purchaseList'.
+     * (購入)purchase by PRODUCT_ID, named 'purchaseList'.
      * <pre>
      * productBhv.<span style="color: #DD4747">loadPurchaseList</span>(productList, new ConditionBeanSetupper&lt;PurchaseCB&gt;() {
      *     public void setup(PurchaseCB cb) {

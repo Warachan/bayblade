@@ -80,7 +80,7 @@ public class BsProductStatusCB extends AbstractConditionBean {
     //                                                                 ===================
     /**
      * Accept the query condition of primary key as equal.
-     * @param productStatusCode : PK, NotNull, CHAR(3), classification=ProductStatus. (NotNull)
+     * @param productStatusCode (商品ステータスコード): PK, NotNull, CHAR(3), classification=ProductStatus. (NotNull)
      * @return this. (NotNull)
      */
     public ProductStatusCB acceptPK(CDef.ProductStatus productStatusCode) {
@@ -92,7 +92,7 @@ public class BsProductStatusCB extends AbstractConditionBean {
 
     /**
      * Accept the query condition of primary key as equal. (old style)
-     * @param productStatusCode : PK, NotNull, CHAR(3), classification=ProductStatus. (NotNull)
+     * @param productStatusCode (商品ステータスコード): PK, NotNull, CHAR(3), classification=ProductStatus. (NotNull)
      */
     public void acceptPrimaryKey(CDef.ProductStatus productStatusCode) {
         assertObjectNotNull("productStatusCode", productStatusCode);
@@ -307,12 +307,12 @@ public class BsProductStatusCB extends AbstractConditionBean {
                              , HpCBPurpose purpose, DBMetaProvider dbmetaProvider)
         { super(baseCB, qyCall, purpose, dbmetaProvider); }
         /**
-         * PRODUCT_STATUS_CODE: {PK, NotNull, CHAR(3), classification=ProductStatus}
+         * (商品ステータスコード)PRODUCT_STATUS_CODE: {PK, NotNull, CHAR(3), classification=ProductStatus}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnProductStatusCode() { return doColumn("PRODUCT_STATUS_CODE"); }
         /**
-         * PRODUCT_STATUS_NAME: {NotNull, VARCHAR(50)}
+         * (商品ステータス名称)PRODUCT_STATUS_NAME: {NotNull, VARCHAR(50)}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnProductStatusName() { return doColumn("PRODUCT_STATUS_NAME"); }
@@ -327,7 +327,7 @@ public class BsProductStatusCB extends AbstractConditionBean {
         /**
          * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br />
          * {select max(FOO) from product where ...) as FOO_MAX} <br />
-         * product by PRODUCT_STATUS_CODE, named 'productList'.
+         * (商品)product by PRODUCT_STATUS_CODE, named 'productList'.
          * <pre>
          * cb.specify().<span style="color: #DD4747">derivedProductList()</span>.<span style="color: #DD4747">max</span>(new SubQuery&lt;ProductCB&gt;() {
          *     public void query(ProductCB subCB) {

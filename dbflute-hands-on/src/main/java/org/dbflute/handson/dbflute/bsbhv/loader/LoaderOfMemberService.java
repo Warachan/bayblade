@@ -7,7 +7,7 @@ import org.dbflute.handson.dbflute.exbhv.*;
 import org.dbflute.handson.dbflute.exentity.*;
 
 /**
- * The referrer loader of member_service as TABLE. <br />
+ * The referrer loader of (会員サービス)member_service as TABLE. <br />
  * <pre>
  * [primary key]
  *     MEMBER_ID

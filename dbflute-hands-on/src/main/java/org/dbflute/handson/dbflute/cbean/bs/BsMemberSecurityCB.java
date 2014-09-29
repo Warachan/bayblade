@@ -80,7 +80,7 @@ public class BsMemberSecurityCB extends AbstractConditionBean {
     //                                                                 ===================
     /**
      * Accept the query condition of primary key as equal.
-     * @param memberId : PK, NotNull, INT(10), FK to member. (NotNull)
+     * @param memberId (会員ID): PK, NotNull, INT(10), FK to member. (NotNull)
      * @return this. (NotNull)
      */
     public MemberSecurityCB acceptPK(Integer memberId) {
@@ -92,7 +92,7 @@ public class BsMemberSecurityCB extends AbstractConditionBean {
 
     /**
      * Accept the query condition of primary key as equal. (old style)
-     * @param memberId : PK, NotNull, INT(10), FK to member. (NotNull)
+     * @param memberId (会員ID): PK, NotNull, INT(10), FK to member. (NotNull)
      */
     public void acceptPrimaryKey(Integer memberId) {
         assertObjectNotNull("memberId", memberId);
@@ -268,7 +268,7 @@ public class BsMemberSecurityCB extends AbstractConditionBean {
     }
     /**
      * Set up relation columns to select clause. <br />
-     * member by my MEMBER_ID, named 'member'.
+     * (会員)member by my MEMBER_ID, named 'member'.
      * <pre>
      * MemberSecurityCB cb = new MemberSecurityCB();
      * cb.<span style="color: #DD4747">setupSelect_Member()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
@@ -333,22 +333,22 @@ public class BsMemberSecurityCB extends AbstractConditionBean {
                              , HpCBPurpose purpose, DBMetaProvider dbmetaProvider)
         { super(baseCB, qyCall, purpose, dbmetaProvider); }
         /**
-         * MEMBER_ID: {PK, NotNull, INT(10), FK to member}
+         * (会員ID)MEMBER_ID: {PK, NotNull, INT(10), FK to member}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnMemberId() { return doColumn("MEMBER_ID"); }
         /**
-         * LOGIN_PASSWORD: {NotNull, VARCHAR(50)}
+         * (ログインパスワード)LOGIN_PASSWORD: {NotNull, VARCHAR(50)}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnLoginPassword() { return doColumn("LOGIN_PASSWORD"); }
         /**
-         * REMINDER_QUESTION: {NotNull, VARCHAR(50)}
+         * (リマインダ質問)REMINDER_QUESTION: {NotNull, VARCHAR(50)}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnReminderQuestion() { return doColumn("REMINDER_QUESTION"); }
         /**
-         * REMINDER_ANSWER: {NotNull, VARCHAR(50)}
+         * (リマインダ回答)REMINDER_ANSWER: {NotNull, VARCHAR(50)}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnReminderAnswer() { return doColumn("REMINDER_ANSWER"); }
@@ -387,7 +387,7 @@ public class BsMemberSecurityCB extends AbstractConditionBean {
         protected String getTableDbName() { return "member_security"; }
         /**
          * Prepare to specify functions about relation table. <br />
-         * member by my MEMBER_ID, named 'member'.
+         * (会員)member by my MEMBER_ID, named 'member'.
          * @return The instance for specification for relation table to specify. (NotNull)
          */
         public MemberCB.HpSpecification specifyMember() {

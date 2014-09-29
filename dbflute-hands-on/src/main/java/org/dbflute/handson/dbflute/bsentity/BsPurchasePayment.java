@@ -12,8 +12,8 @@ import org.dbflute.handson.dbflute.allcommon.CDef;
 import org.dbflute.handson.dbflute.exentity.*;
 
 /**
- * The entity of purchase_payment as TABLE. <br />
- * 購入支払: 購入に対する支払。<br />
+ * The entity of (購入支払)purchase_payment as TABLE. <br />
+ * 購入に対する支払。<br />
  * 分割払いもできるのでmanyとなり、会員からの孫テーブルのテストができてうれしい。
  * <pre>
  * [primary-key]
@@ -81,19 +81,19 @@ public abstract class BsPurchasePayment implements Entity, Serializable, Cloneab
     // -----------------------------------------------------
     //                                                Column
     //                                                ------
-    /** PURCHASE_PAYMENT_ID: {PK, ID, NotNull, BIGINT(19)} */
+    /** (購入支払ID)PURCHASE_PAYMENT_ID: {PK, ID, NotNull, BIGINT(19)} */
     protected Long _purchasePaymentId;
 
-    /** PURCHASE_ID: {IX, NotNull, BIGINT(19), FK to purchase} */
+    /** (購入ID)PURCHASE_ID: {IX, NotNull, BIGINT(19), FK to purchase} */
     protected Long _purchaseId;
 
-    /** PAYMENT_AMOUNT: {NotNull, DECIMAL(10, 2)} */
+    /** (支払金額)PAYMENT_AMOUNT: {NotNull, DECIMAL(10, 2)} */
     protected java.math.BigDecimal _paymentAmount;
 
-    /** PAYMENT_DATETIME: {IX+, NotNull, DATETIME(19)} */
+    /** (支払日時)PAYMENT_DATETIME: {IX+, NotNull, DATETIME(19)} */
     protected java.sql.Timestamp _paymentDatetime;
 
-    /** PAYMENT_METHOD_CODE: {NotNull, CHAR(3), classification=PaymentMethod} */
+    /** (支払方法コード)PAYMENT_METHOD_CODE: {NotNull, CHAR(3), classification=PaymentMethod} */
     protected String _paymentMethodCode;
 
     /** REGISTER_DATETIME: {NotNull, DATETIME(19)} */
@@ -174,7 +174,7 @@ public abstract class BsPurchasePayment implements Entity, Serializable, Cloneab
     //                                                             =======================
     /**
      * Get the value of paymentMethodCode as the classification of PaymentMethod. <br />
-     * PAYMENT_METHOD_CODE: {NotNull, CHAR(3), classification=PaymentMethod} <br />
+     * (支払方法コード)PAYMENT_METHOD_CODE: {NotNull, CHAR(3), classification=PaymentMethod} <br />
      * 支払方法
      * <p>It's treated as case insensitive and if the code value is null, it returns null.</p>
      * @return The instance of classification definition (as ENUM type). (NullAllowed: when the column value is null)
@@ -185,7 +185,7 @@ public abstract class BsPurchasePayment implements Entity, Serializable, Cloneab
 
     /**
      * Set the value of paymentMethodCode as the classification of PaymentMethod. <br />
-     * PAYMENT_METHOD_CODE: {NotNull, CHAR(3), classification=PaymentMethod} <br />
+     * (支払方法コード)PAYMENT_METHOD_CODE: {NotNull, CHAR(3), classification=PaymentMethod} <br />
      * 支払方法
      * @param cdef The instance of classification definition (as ENUM type). (NullAllowed: if null, null value is set to the column)
      */
@@ -290,11 +290,11 @@ public abstract class BsPurchasePayment implements Entity, Serializable, Cloneab
     // ===================================================================================
     //                                                                    Foreign Property
     //                                                                    ================
-    /** purchase by my PURCHASE_ID, named 'purchase'. */
+    /** (購入)purchase by my PURCHASE_ID, named 'purchase'. */
     protected Purchase _purchase;
 
     /**
-     * [get] purchase by my PURCHASE_ID, named 'purchase'.
+     * [get] (購入)purchase by my PURCHASE_ID, named 'purchase'.
      * @return The entity of foreign property 'purchase'. (NullAllowed: when e.g. null FK column, no setupSelect)
      */
     public Purchase getPurchase() {
@@ -302,7 +302,7 @@ public abstract class BsPurchasePayment implements Entity, Serializable, Cloneab
     }
 
     /**
-     * [set] purchase by my PURCHASE_ID, named 'purchase'.
+     * [set] (購入)purchase by my PURCHASE_ID, named 'purchase'.
      * @param purchase The entity of foreign property 'purchase'. (NullAllowed)
      */
     public void setPurchase(Purchase purchase) {
@@ -479,8 +479,8 @@ public abstract class BsPurchasePayment implements Entity, Serializable, Cloneab
     //                                                                            Accessor
     //                                                                            ========
     /**
-     * [get] PURCHASE_PAYMENT_ID: {PK, ID, NotNull, BIGINT(19)} <br />
-     * 購入支払ID: 連番
+     * [get] (購入支払ID)PURCHASE_PAYMENT_ID: {PK, ID, NotNull, BIGINT(19)} <br />
+     * 連番
      * @return The value of the column 'PURCHASE_PAYMENT_ID'. (basically NotNull if selected: for the constraint)
      */
     public Long getPurchasePaymentId() {
@@ -488,8 +488,8 @@ public abstract class BsPurchasePayment implements Entity, Serializable, Cloneab
     }
 
     /**
-     * [set] PURCHASE_PAYMENT_ID: {PK, ID, NotNull, BIGINT(19)} <br />
-     * 購入支払ID: 連番
+     * [set] (購入支払ID)PURCHASE_PAYMENT_ID: {PK, ID, NotNull, BIGINT(19)} <br />
+     * 連番
      * @param purchasePaymentId The value of the column 'PURCHASE_PAYMENT_ID'. (basically NotNull if update: for the constraint)
      */
     public void setPurchasePaymentId(Long purchasePaymentId) {
@@ -498,8 +498,8 @@ public abstract class BsPurchasePayment implements Entity, Serializable, Cloneab
     }
 
     /**
-     * [get] PURCHASE_ID: {IX, NotNull, BIGINT(19), FK to purchase} <br />
-     * 購入ID: 支払い対象の購入へのID
+     * [get] (購入ID)PURCHASE_ID: {IX, NotNull, BIGINT(19), FK to purchase} <br />
+     * 支払い対象の購入へのID
      * @return The value of the column 'PURCHASE_ID'. (basically NotNull if selected: for the constraint)
      */
     public Long getPurchaseId() {
@@ -507,8 +507,8 @@ public abstract class BsPurchasePayment implements Entity, Serializable, Cloneab
     }
 
     /**
-     * [set] PURCHASE_ID: {IX, NotNull, BIGINT(19), FK to purchase} <br />
-     * 購入ID: 支払い対象の購入へのID
+     * [set] (購入ID)PURCHASE_ID: {IX, NotNull, BIGINT(19), FK to purchase} <br />
+     * 支払い対象の購入へのID
      * @param purchaseId The value of the column 'PURCHASE_ID'. (basically NotNull if update: for the constraint)
      */
     public void setPurchaseId(Long purchaseId) {
@@ -517,8 +517,8 @@ public abstract class BsPurchasePayment implements Entity, Serializable, Cloneab
     }
 
     /**
-     * [get] PAYMENT_AMOUNT: {NotNull, DECIMAL(10, 2)} <br />
-     * 支払金額: 支払った金額。さて、小数点なのはなぜでしょう？
+     * [get] (支払金額)PAYMENT_AMOUNT: {NotNull, DECIMAL(10, 2)} <br />
+     * 支払った金額。さて、小数点なのはなぜでしょう？
      * @return The value of the column 'PAYMENT_AMOUNT'. (basically NotNull if selected: for the constraint)
      */
     public java.math.BigDecimal getPaymentAmount() {
@@ -526,8 +526,8 @@ public abstract class BsPurchasePayment implements Entity, Serializable, Cloneab
     }
 
     /**
-     * [set] PAYMENT_AMOUNT: {NotNull, DECIMAL(10, 2)} <br />
-     * 支払金額: 支払った金額。さて、小数点なのはなぜでしょう？
+     * [set] (支払金額)PAYMENT_AMOUNT: {NotNull, DECIMAL(10, 2)} <br />
+     * 支払った金額。さて、小数点なのはなぜでしょう？
      * @param paymentAmount The value of the column 'PAYMENT_AMOUNT'. (basically NotNull if update: for the constraint)
      */
     public void setPaymentAmount(java.math.BigDecimal paymentAmount) {
@@ -536,8 +536,8 @@ public abstract class BsPurchasePayment implements Entity, Serializable, Cloneab
     }
 
     /**
-     * [get] PAYMENT_DATETIME: {IX+, NotNull, DATETIME(19)} <br />
-     * 支払日時: 支払ったときの日時
+     * [get] (支払日時)PAYMENT_DATETIME: {IX+, NotNull, DATETIME(19)} <br />
+     * 支払ったときの日時
      * @return The value of the column 'PAYMENT_DATETIME'. (basically NotNull if selected: for the constraint)
      */
     public java.sql.Timestamp getPaymentDatetime() {
@@ -545,8 +545,8 @@ public abstract class BsPurchasePayment implements Entity, Serializable, Cloneab
     }
 
     /**
-     * [set] PAYMENT_DATETIME: {IX+, NotNull, DATETIME(19)} <br />
-     * 支払日時: 支払ったときの日時
+     * [set] (支払日時)PAYMENT_DATETIME: {IX+, NotNull, DATETIME(19)} <br />
+     * 支払ったときの日時
      * @param paymentDatetime The value of the column 'PAYMENT_DATETIME'. (basically NotNull if update: for the constraint)
      */
     public void setPaymentDatetime(java.sql.Timestamp paymentDatetime) {
@@ -555,17 +555,17 @@ public abstract class BsPurchasePayment implements Entity, Serializable, Cloneab
     }
 
     /**
-     * [get] PAYMENT_METHOD_CODE: {NotNull, CHAR(3), classification=PaymentMethod} <br />
-     * 支払方法コード: 手渡しや銀行振込など
+     * [get] (支払方法コード)PAYMENT_METHOD_CODE: {NotNull, CHAR(3), classification=PaymentMethod} <br />
+     * 手渡しや銀行振込など
      * @return The value of the column 'PAYMENT_METHOD_CODE'. (basically NotNull if selected: for the constraint)
      */
     public String getPaymentMethodCode() {
-        return _paymentMethodCode;
+        return convertEmptyToNull(_paymentMethodCode);
     }
 
     /**
-     * [set] PAYMENT_METHOD_CODE: {NotNull, CHAR(3), classification=PaymentMethod} <br />
-     * 支払方法コード: 手渡しや銀行振込など
+     * [set] (支払方法コード)PAYMENT_METHOD_CODE: {NotNull, CHAR(3), classification=PaymentMethod} <br />
+     * 手渡しや銀行振込など
      * @param paymentMethodCode The value of the column 'PAYMENT_METHOD_CODE'. (basically NotNull if update: for the constraint)
      */
     protected void setPaymentMethodCode(String paymentMethodCode) {
@@ -596,7 +596,7 @@ public abstract class BsPurchasePayment implements Entity, Serializable, Cloneab
      * @return The value of the column 'REGISTER_USER'. (basically NotNull if selected: for the constraint)
      */
     public String getRegisterUser() {
-        return _registerUser;
+        return convertEmptyToNull(_registerUser);
     }
 
     /**
@@ -630,7 +630,7 @@ public abstract class BsPurchasePayment implements Entity, Serializable, Cloneab
      * @return The value of the column 'UPDATE_USER'. (basically NotNull if selected: for the constraint)
      */
     public String getUpdateUser() {
-        return _updateUser;
+        return convertEmptyToNull(_updateUser);
     }
 
     /**
@@ -640,6 +640,10 @@ public abstract class BsPurchasePayment implements Entity, Serializable, Cloneab
     public void setUpdateUser(String updateUser) {
         __modifiedProperties.addPropertyName("updateUser");
         _updateUser = updateUser;
+    }
+
+    protected String convertEmptyToNull(String value) {
+        return FunCustodial.convertEmptyToNull(value);
     }
 
     protected void checkImplicitSet(String columnDbName, CDef.DefMeta meta, Object value) {
