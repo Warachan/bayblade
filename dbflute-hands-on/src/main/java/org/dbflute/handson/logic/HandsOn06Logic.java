@@ -24,7 +24,9 @@ public class HandsOn06Logic {
      *  会員名称、生年月日、正式会員日時をログに出す (Commons Logging)
      */
     public List<Member> selectSuffixMemberList(String suffix) {
+        // TODO wara suffix.equals("")は不要かな by jflute
         if (suffix == null || suffix.equals("") || suffix.trim().equals("")) {
+            // TODO wara 無効な値の後ろに : くらい欲しい by jflute
             throw new IllegalArgumentException("無効な値" + suffix);
         }
 

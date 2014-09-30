@@ -76,7 +76,7 @@ public class HandsOn05Test extends UnitContainerTestCase {
 
         // ## Assert ##
         assertHasAnyElement(memberList);
-        // TODO 【修正してみました】wara こういうbooleanのときは、なぜか三単元の動詞を使うことが多い existsAddress by jflute
+        // 【修正してみました】wara こういうbooleanのときは、なぜか三単元の動詞を使うことが多い existsAddress by jflute
         boolean existsAddress = false;
         for (Member member : memberList) {
             // 【抽出してみましたー！】wara ctrl+1 -> enterで抽出 by jflute
@@ -167,6 +167,6 @@ public class HandsOn05Test extends UnitContainerTestCase {
         assertTrue(existLatestLogin);
     }
 
-    // TODO 【ずれていました><　ちょっと修正してみました。】wara take-finally.sql, SQLはOKだけど、select句のインデントがちょっとだけズレてるー by jflute
-    // TODO 【やってみました！】wara おまけチェックも考えてみてね by jflute
+    // 【ずれていました><　ちょっと修正してみました。】wara take-finally.sql, SQLはOKだけど、select句のインデントがちょっとだけズレてるー by jflute
+    // 【やってみました！】wara おまけチェックも考えてみてね by jflute
 }
