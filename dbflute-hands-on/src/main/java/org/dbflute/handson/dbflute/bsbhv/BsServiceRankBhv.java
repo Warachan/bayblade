@@ -19,7 +19,7 @@ import org.dbflute.handson.dbflute.bsentity.dbmeta.*;
 import org.dbflute.handson.dbflute.cbean.*;
 
 /**
- * The behavior of (サービスランク)service_rank as TABLE. <br />
+ * The behavior of (サービスランク)SERVICE_RANK as TABLE. <br />
  * <pre>
  * [primary key]
  *     SERVICE_RANK_CODE

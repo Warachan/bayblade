@@ -18,7 +18,7 @@ import org.dbflute.handson.dbflute.bsentity.dbmeta.*;
 import org.dbflute.handson.dbflute.cbean.*;
 
 /**
- * The behavior of (会員住所情報)member_address as TABLE. <br />
+ * The behavior of (会員住所情報)MEMBER_ADDRESS as TABLE. <br />
  * <pre>
  * [primary key]
  *     MEMBER_ADDRESS_ID

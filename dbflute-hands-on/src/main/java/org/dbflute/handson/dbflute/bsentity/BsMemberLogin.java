@@ -12,7 +12,7 @@ import org.dbflute.handson.dbflute.allcommon.CDef;
 import org.dbflute.handson.dbflute.exentity.*;
 
 /**
- * The entity of (会員ログイン情報)member_login as TABLE. <br />
+ * The entity of (会員ログイン情報)MEMBER_LOGIN as TABLE. <br />
  * ログインするたびに登録されるログイン履歴。
  * <pre>
  * [primary-key]

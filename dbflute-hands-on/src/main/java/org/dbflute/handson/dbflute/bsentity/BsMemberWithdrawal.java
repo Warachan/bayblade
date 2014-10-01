@@ -7,12 +7,13 @@ import java.util.Set;
 
 import org.seasar.dbflute.Entity;
 import org.seasar.dbflute.dbmeta.DBMeta;
+import org.dbflute.handson.dbflute.allcommon.EntityDefinedCommonColumn;
 import org.dbflute.handson.dbflute.allcommon.DBMetaInstanceHandler;
 import org.dbflute.handson.dbflute.allcommon.CDef;
 import org.dbflute.handson.dbflute.exentity.*;
 
 /**
- * The entity of (会員退会情報)member_withdrawal as TABLE. <br />
+ * The entity of (会員退会情報)MEMBER_WITHDRAWAL as TABLE. <br />
  * 退会会員の退会に関する詳細な情報。<br />
  * 退会会員のみデータが存在する。
  * <pre>
@@ -65,7 +66,7 @@ import org.dbflute.handson.dbflute.exentity.*;
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
-public abstract class BsMemberWithdrawal implements Entity, Serializable, Cloneable {
+public abstract class BsMemberWithdrawal implements EntityDefinedCommonColumn, Serializable, Cloneable {
 
     // ===================================================================================
     //                                                                          Definition
@@ -111,6 +112,9 @@ public abstract class BsMemberWithdrawal implements Entity, Serializable, Clonea
 
     /** The modified properties for this entity. (NotNull) */
     protected final EntityModifiedProperties __modifiedProperties = newModifiedProperties();
+
+    /** Is common column auto set up effective? */
+    protected boolean __canCommonColumnAutoSetup = true;
 
     /** Is the entity created by DBFlute select process? */
     protected boolean __createdBySelect;
@@ -361,6 +365,30 @@ public abstract class BsMemberWithdrawal implements Entity, Serializable, Clonea
      */
     public boolean createdBySelect() {
         return __createdBySelect;
+    }
+
+    // ===================================================================================
+    //                                                                       Common Column
+    //                                                                       =============
+    /**
+     * {@inheritDoc}
+     */
+    public void enableCommonColumnAutoSetup() {
+        __canCommonColumnAutoSetup = true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void disableCommonColumnAutoSetup() {
+        __canCommonColumnAutoSetup = false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public boolean canCommonColumnAutoSetup() {
+        return __canCommonColumnAutoSetup;
     }
 
     // ===================================================================================

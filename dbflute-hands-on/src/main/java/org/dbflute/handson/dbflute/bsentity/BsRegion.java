@@ -12,7 +12,7 @@ import org.dbflute.handson.dbflute.allcommon.CDef;
 import org.dbflute.handson.dbflute.exentity.*;
 
 /**
- * The entity of (地域)region as TABLE. <br />
+ * The entity of (地域)REGION as TABLE. <br />
  * 主に会員の住所に対応する地域。<br />
  * かなりざっくりした感じではある。
  * <pre>

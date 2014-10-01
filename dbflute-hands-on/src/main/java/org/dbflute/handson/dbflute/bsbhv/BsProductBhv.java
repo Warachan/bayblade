@@ -18,7 +18,7 @@ import org.dbflute.handson.dbflute.bsentity.dbmeta.*;
 import org.dbflute.handson.dbflute.cbean.*;
 
 /**
- * The behavior of (商品)product as TABLE. <br />
+ * The behavior of (商品)PRODUCT as TABLE. <br />
  * <pre>
  * [primary key]
  *     PRODUCT_ID

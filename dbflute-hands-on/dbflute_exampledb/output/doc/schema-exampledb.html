@@ -295,19 +295,19 @@ dl.procedurelist dd.column pre {
 	<tr>
 		<td class="rownumcell">1</td>
 		<td class="aliascell">会員</td>
-		<td><a href="#member" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=6, columnCount=11">member</a></td>
+		<td><a href="#member" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=6, columnCount=11">MEMBER</a></td>
 		<td class="typecell">TABLE</td>
-		<td class="relcell"><a href="#member_status" title="FK_MEMBER_MEMBER_STATUS">member_status</a>, <a href="#member_address" class="additionalfk" title="FK_MEMBER_MEMBER_ADDRESS_VALID: fixedCondition=&quot;$$foreignAlias$$.VALID_BEGIN_DATE &lt;= /*$$locationBase$$.parameterMapMemberAddressAsValid.targetDate*/null\n     and $$foreignAlias$$.VALID_END_DATE &gt;= /*$$locationBase$$.parameterMapMemberAddressAsValid.targetDate*/null&quot;, comment=有効な会員住所 (現在日時を入れれば現在住所)">member_address(AsValid)</a>, <a href="#member_login" class="additionalfk" title="FK_MEMBER_MEMBER_LOGIN_LATEST: fixedCondition=&quot;$$foreignAlias$$.LOGIN_DATETIME = ($$sqbegin$$\nselect max(login.LOGIN_DATETIME)\n  from MEMBER_LOGIN login\n where login.MEMBER_ID = $$foreignAlias$$.MEMBER_ID\n)$$sqend$$&quot;, comment=会員の最終ログイン">member_login(AsLatest)</a></td>
-		<td class="relcell"><a href="#member_address" title="FK_MEMBER_ADDRESS_MEMBER">member_address</a>, <a href="#member_login" title="FK_MEMBER_LOGIN_MEMBER">member_login</a>, <a href="#member_security" title="FK_MEMBER_SECURITY_MEMBER">member_security</a>, <a href="#member_service" title="FK_MEMBER_SERVICE_MEMBER">member_service</a>, <a href="#member_withdrawal" title="FK_MEMBER_WITHDRAWAL_MEMBER">member_withdrawal</a>, <a href="#purchase" title="FK_PURCHASE_MEMBER">purchase</a></td>
+		<td class="relcell"><a href="#member_status" title="FK_MEMBER_MEMBER_STATUS">MEMBER_STATUS</a>, <a href="#member_address" class="additionalfk" title="FK_MEMBER_MEMBER_ADDRESS_VALID: fixedCondition=&quot;$$foreignAlias$$.VALID_BEGIN_DATE &lt;= /*$$locationBase$$.parameterMapMemberAddressAsValid.targetDate*/null\n     and $$foreignAlias$$.VALID_END_DATE &gt;= /*$$locationBase$$.parameterMapMemberAddressAsValid.targetDate*/null&quot;, comment=有効な会員住所 (現在日時を入れれば現在住所)">MEMBER_ADDRESS(AsValid)</a>, <a href="#member_login" class="additionalfk" title="FK_MEMBER_MEMBER_LOGIN_LATEST: fixedCondition=&quot;$$foreignAlias$$.LOGIN_DATETIME = ($$sqbegin$$\nselect max(login.LOGIN_DATETIME)\n  from MEMBER_LOGIN login\n where login.MEMBER_ID = $$foreignAlias$$.MEMBER_ID\n)$$sqend$$&quot;, comment=会員の最終ログイン">MEMBER_LOGIN(AsLatest)</a></td>
+		<td class="relcell"><a href="#member_address" title="FK_MEMBER_ADDRESS_MEMBER">MEMBER_ADDRESS</a>, <a href="#member_login" title="FK_MEMBER_LOGIN_MEMBER">MEMBER_LOGIN</a>, <a href="#member_security" title="FK_MEMBER_SECURITY_MEMBER">MEMBER_SECURITY</a>, <a href="#member_service" title="FK_MEMBER_SERVICE_MEMBER">MEMBER_SERVICE</a>, <a href="#member_withdrawal" title="FK_MEMBER_WITHDRAWAL_MEMBER">MEMBER_WITHDRAWAL</a>, <a href="#purchase" title="FK_PURCHASE_MEMBER">PURCHASE</a></td>
 		<td class="commentcell"> 会員登録時にデータが登録される。<br />基本的に物理削除はなく、退会したらステータスが退会会員になる。</td>
 		<td class="subcell">Member</td>
 	</tr>
 	<tr>
 		<td class="rownumcell">2</td>
 		<td class="aliascell">会員住所情報</td>
-		<td><a href="#member_address" title="type=TABLE, primaryKey={MEMBER_ADDRESS_ID}, nameLength=14, columnCount=11">member_address</a></td>
+		<td><a href="#member_address" title="type=TABLE, primaryKey={MEMBER_ADDRESS_ID}, nameLength=14, columnCount=11">MEMBER_ADDRESS</a></td>
 		<td class="typecell">TABLE</td>
-		<td class="relcell"><a href="#member" title="FK_MEMBER_ADDRESS_MEMBER">member</a>, <a href="#region" title="FK_MEMBER_ADDRESS_REGION">region</a></td>
+		<td class="relcell"><a href="#member" title="FK_MEMBER_ADDRESS_MEMBER">MEMBER</a>, <a href="#region" title="FK_MEMBER_ADDRESS_REGION">REGION</a></td>
 		<td class="relcell">&nbsp;</td>
 		<td class="commentcell"> 会員の住所に関する情報。<br />同時に有効期間ごとに履歴管理されている。</td>
 		<td class="subcell">MemberAddress</td>
@@ -315,9 +315,9 @@ dl.procedurelist dd.column pre {
 	<tr>
 		<td class="rownumcell">3</td>
 		<td class="aliascell">会員ログイン情報</td>
-		<td><a href="#member_login" title="type=TABLE, primaryKey={MEMBER_LOGIN_ID}, nameLength=12, columnCount=5">member_login</a></td>
+		<td><a href="#member_login" title="type=TABLE, primaryKey={MEMBER_LOGIN_ID}, nameLength=12, columnCount=5">MEMBER_LOGIN</a></td>
 		<td class="typecell">TABLE</td>
-		<td class="relcell"><a href="#member_status" title="FK_MEMBER_LOGIN_MEMBER_STATUS">member_status</a>, <a href="#member" title="FK_MEMBER_LOGIN_MEMBER">member</a></td>
+		<td class="relcell"><a href="#member_status" title="FK_MEMBER_LOGIN_MEMBER_STATUS">MEMBER_STATUS</a>, <a href="#member" title="FK_MEMBER_LOGIN_MEMBER">MEMBER</a></td>
 		<td class="relcell">&nbsp;</td>
 		<td class="commentcell"> ログインするたびに登録されるログイン履歴。</td>
 		<td class="subcell">MemberLogin</td>
@@ -325,9 +325,9 @@ dl.procedurelist dd.column pre {
 	<tr>
 		<td class="rownumcell">4</td>
 		<td class="aliascell">会員セキュリティ情報</td>
-		<td><a href="#member_security" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=15, columnCount=9">member_security</a></td>
+		<td><a href="#member_security" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=15, columnCount=9">MEMBER_SECURITY</a></td>
 		<td class="typecell">TABLE</td>
-		<td class="relcell"><a href="#member" title="FK_MEMBER_SECURITY_MEMBER">member</a></td>
+		<td class="relcell"><a href="#member" title="FK_MEMBER_SECURITY_MEMBER">MEMBER</a></td>
 		<td class="relcell">&nbsp;</td>
 		<td class="commentcell"> 会員とは&nbsp;one-to-one&nbsp;で、会員一人につき必ず一つのセキュリティ情報がある</td>
 		<td class="subcell">MemberSecurity</td>
@@ -335,9 +335,9 @@ dl.procedurelist dd.column pre {
 	<tr>
 		<td class="rownumcell">5</td>
 		<td class="aliascell">会員サービス</td>
-		<td><a href="#member_service" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=14, columnCount=8">member_service</a></td>
+		<td><a href="#member_service" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=14, columnCount=8">MEMBER_SERVICE</a></td>
 		<td class="typecell">TABLE</td>
-		<td class="relcell"><a href="#member" title="FK_MEMBER_SERVICE_MEMBER">member</a>, <a href="#service_rank" title="FK_MEMBER_SERVICE_SERVICE_RANK_CODE">service_rank</a></td>
+		<td class="relcell"><a href="#member" title="FK_MEMBER_SERVICE_MEMBER">MEMBER</a>, <a href="#service_rank" title="FK_MEMBER_SERVICE_SERVICE_RANK_CODE">SERVICE_RANK</a></td>
 		<td class="relcell">&nbsp;</td>
 		<td class="commentcell"> 会員のサービス情報（ポイントサービスなど）。</td>
 		<td class="subcell">MemberService</td>
@@ -345,19 +345,19 @@ dl.procedurelist dd.column pre {
 	<tr>
 		<td class="rownumcell">6</td>
 		<td class="aliascell">会員ステータス</td>
-		<td><a href="#member_status" title="type=TABLE, primaryKey={MEMBER_STATUS_CODE}, nameLength=13, columnCount=4">member_status</a></td>
+		<td><a href="#member_status" title="type=TABLE, primaryKey={MEMBER_STATUS_CODE}, nameLength=13, columnCount=4">MEMBER_STATUS</a></td>
 		<td class="typecell">TABLE</td>
 		<td class="relcell">&nbsp;</td>
-		<td class="relcell"><a href="#member" title="FK_MEMBER_MEMBER_STATUS">member</a>, <a href="#member_login" title="FK_MEMBER_LOGIN_MEMBER_STATUS">member_login</a></td>
+		<td class="relcell"><a href="#member" title="FK_MEMBER_MEMBER_STATUS">MEMBER</a>, <a href="#member_login" title="FK_MEMBER_LOGIN_MEMBER_STATUS">MEMBER_LOGIN</a></td>
 		<td class="commentcell"> &nbsp;</td>
 		<td class="subcell">MemberStatus</td>
 	</tr>
 	<tr>
 		<td class="rownumcell">7</td>
 		<td class="aliascell">会員退会情報</td>
-		<td><a href="#member_withdrawal" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=17, columnCount=8">member_withdrawal</a></td>
+		<td><a href="#member_withdrawal" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=17, columnCount=8">MEMBER_WITHDRAWAL</a></td>
 		<td class="typecell">TABLE</td>
-		<td class="relcell"><a href="#member" title="FK_MEMBER_WITHDRAWAL_MEMBER">member</a>, <a href="#withdrawal_reason" title="FK_MEMBER_WITHDRAWAL_WITHDRAWAL_REASON">withdrawal_reason</a></td>
+		<td class="relcell"><a href="#member" title="FK_MEMBER_WITHDRAWAL_MEMBER">MEMBER</a>, <a href="#withdrawal_reason" title="FK_MEMBER_WITHDRAWAL_WITHDRAWAL_REASON">WITHDRAWAL_REASON</a></td>
 		<td class="relcell">&nbsp;</td>
 		<td class="commentcell"> 退会会員の退会に関する詳細な情報。<br />退会会員のみデータが存在する。</td>
 		<td class="subcell">MemberWithdrawal</td>
@@ -365,49 +365,49 @@ dl.procedurelist dd.column pre {
 	<tr>
 		<td class="rownumcell">8</td>
 		<td class="aliascell">商品</td>
-		<td><a href="#product" title="type=TABLE, primaryKey={PRODUCT_ID}, nameLength=7, columnCount=11">product</a></td>
+		<td><a href="#product" title="type=TABLE, primaryKey={PRODUCT_ID}, nameLength=7, columnCount=11">PRODUCT</a></td>
 		<td class="typecell">TABLE</td>
-		<td class="relcell"><a href="#product_category" title="FK_PRODUCT_PRODUCT_CATEGORY">product_category</a>, <a href="#product_status" title="FK_PRODUCT_PRODUCT_STATUS">product_status</a></td>
-		<td class="relcell"><a href="#purchase" title="FK_PURCHASE_PRODUCT">purchase</a></td>
+		<td class="relcell"><a href="#product_category" title="FK_PRODUCT_PRODUCT_CATEGORY">PRODUCT_CATEGORY</a>, <a href="#product_status" title="FK_PRODUCT_PRODUCT_STATUS">PRODUCT_STATUS</a></td>
+		<td class="relcell"><a href="#purchase" title="FK_PURCHASE_PRODUCT">PURCHASE</a></td>
 		<td class="commentcell"> &nbsp;</td>
 		<td class="subcell">Product</td>
 	</tr>
 	<tr>
 		<td class="rownumcell">9</td>
 		<td class="aliascell">商品カテゴリ</td>
-		<td><a href="#product_category" title="type=TABLE, primaryKey={PRODUCT_CATEGORY_CODE}, nameLength=16, columnCount=3">product_category</a></td>
+		<td><a href="#product_category" title="type=TABLE, primaryKey={PRODUCT_CATEGORY_CODE}, nameLength=16, columnCount=3">PRODUCT_CATEGORY</a></td>
 		<td class="typecell">TABLE</td>
-		<td class="relcell"><a href="#product_category" title="FK_PRODUCT_CATEGORY_PARENT">product_category</a></td>
-		<td class="relcell"><a href="#product" title="FK_PRODUCT_PRODUCT_CATEGORY">product</a>, <a href="#product_category" title="FK_PRODUCT_CATEGORY_PARENT">product_category</a></td>
+		<td class="relcell"><a href="#product_category" title="FK_PRODUCT_CATEGORY_PARENT">PRODUCT_CATEGORY</a></td>
+		<td class="relcell"><a href="#product" title="FK_PRODUCT_PRODUCT_CATEGORY">PRODUCT</a>, <a href="#product_category" title="FK_PRODUCT_CATEGORY_PARENT">PRODUCT_CATEGORY</a></td>
 		<td class="commentcell"> 商品のカテゴリを表現するマスタ。<br />自己参照の階層になっている。</td>
 		<td class="subcell">ProductCategory</td>
 	</tr>
 	<tr>
 		<td class="rownumcell">10</td>
 		<td class="aliascell">商品ステータス</td>
-		<td><a href="#product_status" title="type=TABLE, primaryKey={PRODUCT_STATUS_CODE}, nameLength=14, columnCount=2">product_status</a></td>
+		<td><a href="#product_status" title="type=TABLE, primaryKey={PRODUCT_STATUS_CODE}, nameLength=14, columnCount=2">PRODUCT_STATUS</a></td>
 		<td class="typecell">TABLE</td>
 		<td class="relcell">&nbsp;</td>
-		<td class="relcell"><a href="#product" title="FK_PRODUCT_PRODUCT_STATUS">product</a></td>
+		<td class="relcell"><a href="#product" title="FK_PRODUCT_PRODUCT_STATUS">PRODUCT</a></td>
 		<td class="commentcell"> &nbsp;</td>
 		<td class="subcell">ProductStatus</td>
 	</tr>
 	<tr>
 		<td class="rownumcell">11</td>
 		<td class="aliascell">購入</td>
-		<td><a href="#purchase" title="type=TABLE, primaryKey={PURCHASE_ID}, nameLength=8, columnCount=12">purchase</a></td>
+		<td><a href="#purchase" title="type=TABLE, primaryKey={PURCHASE_ID}, nameLength=8, columnCount=12">PURCHASE</a></td>
 		<td class="typecell">TABLE</td>
-		<td class="relcell"><a href="#member" title="FK_PURCHASE_MEMBER">member</a>, <a href="#product" title="FK_PURCHASE_PRODUCT">product</a></td>
-		<td class="relcell"><a href="#purchase_payment" title="FK_PURCHASE_PAYMENT_PURCHASE">purchase_payment</a></td>
+		<td class="relcell"><a href="#member" title="FK_PURCHASE_MEMBER">MEMBER</a>, <a href="#product" title="FK_PURCHASE_PRODUCT">PRODUCT</a></td>
+		<td class="relcell"><a href="#purchase_payment" title="FK_PURCHASE_PAYMENT_PURCHASE">PURCHASE_PAYMENT</a></td>
 		<td class="commentcell"> 一つの商品に対する一回の購入を表現する。<br />一回の購入で一つの商品を複数個買うこともある。</td>
 		<td class="subcell">Purchase</td>
 	</tr>
 	<tr>
 		<td class="rownumcell">12</td>
 		<td class="aliascell">購入支払</td>
-		<td><a href="#purchase_payment" title="type=TABLE, primaryKey={PURCHASE_PAYMENT_ID}, nameLength=16, columnCount=9">purchase_payment</a></td>
+		<td><a href="#purchase_payment" title="type=TABLE, primaryKey={PURCHASE_PAYMENT_ID}, nameLength=16, columnCount=9">PURCHASE_PAYMENT</a></td>
 		<td class="typecell">TABLE</td>
-		<td class="relcell"><a href="#purchase" title="FK_PURCHASE_PAYMENT_PURCHASE">purchase</a></td>
+		<td class="relcell"><a href="#purchase" title="FK_PURCHASE_PAYMENT_PURCHASE">PURCHASE</a></td>
 		<td class="relcell">&nbsp;</td>
 		<td class="commentcell"> 購入に対する支払。<br />分割払いもできるのでmanyとなり、会員からの孫テーブルのテストができてうれしい。</td>
 		<td class="subcell">PurchasePayment</td>
@@ -415,30 +415,30 @@ dl.procedurelist dd.column pre {
 	<tr>
 		<td class="rownumcell">13</td>
 		<td class="aliascell">地域</td>
-		<td><a href="#region" title="type=TABLE, primaryKey={REGION_ID}, nameLength=6, columnCount=2">region</a></td>
+		<td><a href="#region" title="type=TABLE, primaryKey={REGION_ID}, nameLength=6, columnCount=2">REGION</a></td>
 		<td class="typecell">TABLE</td>
 		<td class="relcell">&nbsp;</td>
-		<td class="relcell"><a href="#member_address" title="FK_MEMBER_ADDRESS_REGION">member_address</a></td>
+		<td class="relcell"><a href="#member_address" title="FK_MEMBER_ADDRESS_REGION">MEMBER_ADDRESS</a></td>
 		<td class="commentcell"> 主に会員の住所に対応する地域。<br />かなりざっくりした感じではある。</td>
 		<td class="subcell">Region</td>
 	</tr>
 	<tr>
 		<td class="rownumcell">14</td>
 		<td class="aliascell">サービスランク</td>
-		<td><a href="#service_rank" title="type=TABLE, primaryKey={SERVICE_RANK_CODE}, nameLength=12, columnCount=6">service_rank</a></td>
+		<td><a href="#service_rank" title="type=TABLE, primaryKey={SERVICE_RANK_CODE}, nameLength=12, columnCount=6">SERVICE_RANK</a></td>
 		<td class="typecell">TABLE</td>
 		<td class="relcell">&nbsp;</td>
-		<td class="relcell"><a href="#member_service" title="FK_MEMBER_SERVICE_SERVICE_RANK_CODE">member_service</a></td>
+		<td class="relcell"><a href="#member_service" title="FK_MEMBER_SERVICE_SERVICE_RANK_CODE">MEMBER_SERVICE</a></td>
 		<td class="commentcell"> 会員のサービスレベルを表現するランク。<br />（ゴールドとかプラチナとか）</td>
 		<td class="subcell">ServiceRank</td>
 	</tr>
 	<tr>
 		<td class="rownumcell">15</td>
 		<td class="aliascell">退会理由</td>
-		<td><a href="#withdrawal_reason" title="type=TABLE, primaryKey={WITHDRAWAL_REASON_CODE}, nameLength=17, columnCount=3">withdrawal_reason</a></td>
+		<td><a href="#withdrawal_reason" title="type=TABLE, primaryKey={WITHDRAWAL_REASON_CODE}, nameLength=17, columnCount=3">WITHDRAWAL_REASON</a></td>
 		<td class="typecell">TABLE</td>
 		<td class="relcell">&nbsp;</td>
-		<td class="relcell"><a href="#member_withdrawal" title="FK_MEMBER_WITHDRAWAL_WITHDRAWAL_REASON">member_withdrawal</a></td>
+		<td class="relcell"><a href="#member_withdrawal" title="FK_MEMBER_WITHDRAWAL_WITHDRAWAL_REASON">MEMBER_WITHDRAWAL</a></td>
 		<td class="commentcell"> 会員に選ばせる定型的な退会理由のマスタ。</td>
 		<td class="subcell">WithdrawalReason</td>
 	</tr>
@@ -446,10 +446,10 @@ dl.procedurelist dd.column pre {
 </table>
 
   <h2 id="member" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=6, columnCount=11">
-(会員)member
+(会員)MEMBER
 </h2>
 <p class="tablecomment">会員登録時にデータが登録される。<br />基本的に物理削除はなく、退会したらステータスが退会会員になる。</p>
-<table summary="Columns in member">
+<table summary="Columns in MEMBER">
 	<thead>
 	<tr>
 		<th class="rownumhead">No.</th>
@@ -481,8 +481,8 @@ dl.procedurelist dd.column pre {
 		<td id="member_member_id">MEMBER_ID</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
-		<td class="relcell"><a href="#member_address" class="additionalfk" title="FK_MEMBER_MEMBER_ADDRESS_VALID: fixedCondition=&quot;$$foreignAlias$$.VALID_BEGIN_DATE &lt;= /*$$locationBase$$.parameterMapMemberAddressAsValid.targetDate*/null\n     and $$foreignAlias$$.VALID_END_DATE &gt;= /*$$locationBase$$.parameterMapMemberAddressAsValid.targetDate*/null&quot;, comment=有効な会員住所 (現在日時を入れれば現在住所)">member_address(AsValid)</a>,<br /><a href="#member_login" class="additionalfk" title="FK_MEMBER_MEMBER_LOGIN_LATEST: fixedCondition=&quot;$$foreignAlias$$.LOGIN_DATETIME = ($$sqbegin$$\nselect max(login.LOGIN_DATETIME)\n  from MEMBER_LOGIN login\n where login.MEMBER_ID = $$foreignAlias$$.MEMBER_ID\n)$$sqend$$&quot;, comment=会員の最終ログイン">member_login(AsLatest)</a>&nbsp;</td>
-		<td class="relcell"><a href="#member_address" title="FK_MEMBER_ADDRESS_MEMBER">member_address</a>,<br /><a href="#member_login" title="FK_MEMBER_LOGIN_MEMBER">member_login</a>,<br /><a href="#member_security" title="FK_MEMBER_SECURITY_MEMBER">member_security</a>,<br /><a href="#member_service" title="FK_MEMBER_SERVICE_MEMBER">member_service</a>,<br /><a href="#member_withdrawal" title="FK_MEMBER_WITHDRAWAL_MEMBER">member_withdrawal</a>,<br /><a href="#purchase" title="FK_PURCHASE_MEMBER">purchase</a>&nbsp;</td>
+		<td class="relcell"><a href="#member_address" class="additionalfk" title="FK_MEMBER_MEMBER_ADDRESS_VALID: fixedCondition=&quot;$$foreignAlias$$.VALID_BEGIN_DATE &lt;= /*$$locationBase$$.parameterMapMemberAddressAsValid.targetDate*/null\n     and $$foreignAlias$$.VALID_END_DATE &gt;= /*$$locationBase$$.parameterMapMemberAddressAsValid.targetDate*/null&quot;, comment=有効な会員住所 (現在日時を入れれば現在住所)">MEMBER_ADDRESS(AsValid)</a>,<br /><a href="#member_login" class="additionalfk" title="FK_MEMBER_MEMBER_LOGIN_LATEST: fixedCondition=&quot;$$foreignAlias$$.LOGIN_DATETIME = ($$sqbegin$$\nselect max(login.LOGIN_DATETIME)\n  from MEMBER_LOGIN login\n where login.MEMBER_ID = $$foreignAlias$$.MEMBER_ID\n)$$sqend$$&quot;, comment=会員の最終ログイン">MEMBER_LOGIN(AsLatest)</a>&nbsp;</td>
+		<td class="relcell"><a href="#member_address" title="FK_MEMBER_ADDRESS_MEMBER">MEMBER_ADDRESS</a>,<br /><a href="#member_login" title="FK_MEMBER_LOGIN_MEMBER">MEMBER_LOGIN</a>,<br /><a href="#member_security" title="FK_MEMBER_SECURITY_MEMBER">MEMBER_SECURITY</a>,<br /><a href="#member_service" title="FK_MEMBER_SERVICE_MEMBER">MEMBER_SERVICE</a>,<br /><a href="#member_withdrawal" title="FK_MEMBER_WITHDRAWAL_MEMBER">MEMBER_WITHDRAWAL</a>,<br /><a href="#purchase" title="FK_PURCHASE_MEMBER">PURCHASE</a>&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
 		<td class="commentcell"> 会員を識別するID。連番として基本的に自動採番される。<br />（会員IDだけに限らず）採番方法はDBMSによって変わる。</td>
 		<td class="subcell">memberId</td>
@@ -535,7 +535,7 @@ dl.procedurelist dd.column pre {
 		<td id="member_member_status_code">MEMBER_STATUS_CODE</td>
 		<td class="typecell">CHAR</td>
 		<td class="sizecell"> 3 </td>
-		<td class="relcell"><a href="#member_status" title="FK_MEMBER_MEMBER_STATUS">member_status</a>&nbsp;</td>
+		<td class="relcell"><a href="#member_status" title="FK_MEMBER_MEMBER_STATUS">MEMBER_STATUS</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"><a href="#MemberStatusCls">MemberStatus</a></td>
 		<td class="commentcell"> &nbsp;</td>
@@ -585,8 +585,8 @@ dl.procedurelist dd.column pre {
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td class="aliascell">登録日時</td>
-		<td id="member_register_datetime">REGISTER_DATETIME</td>
+		<td class="aliascell comcolcell">登録日時</td>
+		<td class="comcolcell" id="member_register_datetime">REGISTER_DATETIME</td>
 		<td class="typecell">DATETIME</td>
 		<td class="sizecell"> 19 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
@@ -603,8 +603,8 @@ dl.procedurelist dd.column pre {
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td class="aliascell">登録ユーザ</td>
-		<td id="member_register_user">REGISTER_USER</td>
+		<td class="aliascell comcolcell">登録ユーザ</td>
+		<td class="comcolcell" id="member_register_user">REGISTER_USER</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 200 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
@@ -621,8 +621,8 @@ dl.procedurelist dd.column pre {
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td class="aliascell">更新日時</td>
-		<td id="member_update_datetime">UPDATE_DATETIME</td>
+		<td class="aliascell comcolcell">更新日時</td>
+		<td class="comcolcell" id="member_update_datetime">UPDATE_DATETIME</td>
 		<td class="typecell">DATETIME</td>
 		<td class="sizecell"> 19 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
@@ -639,8 +639,8 @@ dl.procedurelist dd.column pre {
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td class="aliascell">更新ユーザ</td>
-		<td id="member_update_user">UPDATE_USER</td>
+		<td class="aliascell comcolcell">更新ユーザ</td>
+		<td class="comcolcell" id="member_update_user">UPDATE_USER</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 200 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
@@ -670,10 +670,10 @@ dl.procedurelist dd.column pre {
 	</tr>
 </table>
   <h2 id="member_address" title="type=TABLE, primaryKey={MEMBER_ADDRESS_ID}, nameLength=14, columnCount=11">
-(会員住所情報)member_address
+(会員住所情報)MEMBER_ADDRESS
 </h2>
 <p class="tablecomment">会員の住所に関する情報。<br />同時に有効期間ごとに履歴管理されている。</p>
-<table summary="Columns in member_address">
+<table summary="Columns in MEMBER_ADDRESS">
 	<thead>
 	<tr>
 		<th class="rownumhead">No.</th>
@@ -723,7 +723,7 @@ dl.procedurelist dd.column pre {
 		<td id="member_address_member_id">MEMBER_ID</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
-		<td class="relcell"><a href="#member" title="FK_MEMBER_ADDRESS_MEMBER">member</a>&nbsp;</td>
+		<td class="relcell"><a href="#member" title="FK_MEMBER_ADDRESS_MEMBER">MEMBER</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
 		<td class="commentcell"> 会員を参照するID。<br />履歴分を含むため、これだけではユニークにはならない。</td>
@@ -795,7 +795,7 @@ dl.procedurelist dd.column pre {
 		<td id="member_address_region_id">REGION_ID</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
-		<td class="relcell"><a href="#region" title="FK_MEMBER_ADDRESS_REGION">region</a>&nbsp;</td>
+		<td class="relcell"><a href="#region" title="FK_MEMBER_ADDRESS_REGION">REGION</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"><a href="#RegionCls">Region</a></td>
 		<td class="commentcell"> 地域を参照するID。<br />ここでは特に住所の内容と連動しているわけではない。</td>
@@ -809,8 +809,8 @@ dl.procedurelist dd.column pre {
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td class="aliascell"></td>
-		<td id="member_address_register_datetime">REGISTER_DATETIME</td>
+		<td class="aliascell comcolcell"></td>
+		<td class="comcolcell" id="member_address_register_datetime">REGISTER_DATETIME</td>
 		<td class="typecell">DATETIME</td>
 		<td class="sizecell"> 19 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
@@ -827,8 +827,8 @@ dl.procedurelist dd.column pre {
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td class="aliascell"></td>
-		<td id="member_address_register_user">REGISTER_USER</td>
+		<td class="aliascell comcolcell"></td>
+		<td class="comcolcell" id="member_address_register_user">REGISTER_USER</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 200 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
@@ -845,8 +845,8 @@ dl.procedurelist dd.column pre {
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td class="aliascell"></td>
-		<td id="member_address_update_datetime">UPDATE_DATETIME</td>
+		<td class="aliascell comcolcell"></td>
+		<td class="comcolcell" id="member_address_update_datetime">UPDATE_DATETIME</td>
 		<td class="typecell">DATETIME</td>
 		<td class="sizecell"> 19 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
@@ -863,8 +863,8 @@ dl.procedurelist dd.column pre {
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td class="aliascell"></td>
-		<td id="member_address_update_user">UPDATE_USER</td>
+		<td class="aliascell comcolcell"></td>
+		<td class="comcolcell" id="member_address_update_user">UPDATE_USER</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 200 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
@@ -894,10 +894,10 @@ dl.procedurelist dd.column pre {
 	</tr>
 </table>
   <h2 id="member_login" title="type=TABLE, primaryKey={MEMBER_LOGIN_ID}, nameLength=12, columnCount=5">
-(会員ログイン情報)member_login
+(会員ログイン情報)MEMBER_LOGIN
 </h2>
 <p class="tablecomment">ログインするたびに登録されるログイン履歴。</p>
-<table summary="Columns in member_login">
+<table summary="Columns in MEMBER_LOGIN">
 	<thead>
 	<tr>
 		<th class="rownumhead">No.</th>
@@ -947,7 +947,7 @@ dl.procedurelist dd.column pre {
 		<td id="member_login_member_id">MEMBER_ID</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
-		<td class="relcell"><a href="#member" title="FK_MEMBER_LOGIN_MEMBER">member</a>&nbsp;</td>
+		<td class="relcell"><a href="#member" title="FK_MEMBER_LOGIN_MEMBER">MEMBER</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
 		<td class="commentcell"> &nbsp;</td>
@@ -1001,7 +1001,7 @@ dl.procedurelist dd.column pre {
 		<td id="member_login_login_member_status_code">LOGIN_MEMBER_STATUS_CODE</td>
 		<td class="typecell">CHAR</td>
 		<td class="sizecell"> 3 </td>
-		<td class="relcell"><a href="#member_status" title="FK_MEMBER_LOGIN_MEMBER_STATUS">member_status</a>&nbsp;</td>
+		<td class="relcell"><a href="#member_status" title="FK_MEMBER_LOGIN_MEMBER_STATUS">MEMBER_STATUS</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"><a href="#MemberStatusCls">MemberStatus</a></td>
 		<td class="commentcell"> ログイン時の会員ステータス</td>
@@ -1010,10 +1010,10 @@ dl.procedurelist dd.column pre {
 	</tr>
 </table>
   <h2 id="member_security" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=15, columnCount=9">
-(会員セキュリティ情報)member_security
+(会員セキュリティ情報)MEMBER_SECURITY
 </h2>
 <p class="tablecomment">会員とは&nbsp;one-to-one&nbsp;で、会員一人につき必ず一つのセキュリティ情報がある</p>
-<table summary="Columns in member_security">
+<table summary="Columns in MEMBER_SECURITY">
 	<thead>
 	<tr>
 		<th class="rownumhead">No.</th>
@@ -1045,7 +1045,7 @@ dl.procedurelist dd.column pre {
 		<td id="member_security_member_id">MEMBER_ID</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
-		<td class="relcell"><a href="#member" title="FK_MEMBER_SECURITY_MEMBER">member</a>&nbsp;</td>
+		<td class="relcell"><a href="#member" title="FK_MEMBER_SECURITY_MEMBER">MEMBER</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
 		<td class="commentcell"> そのまま&nbsp;one-to-one&nbsp;を構成するためのFKとなる。</td>
@@ -1113,8 +1113,8 @@ dl.procedurelist dd.column pre {
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td class="aliascell"></td>
-		<td id="member_security_register_datetime">REGISTER_DATETIME</td>
+		<td class="aliascell comcolcell"></td>
+		<td class="comcolcell" id="member_security_register_datetime">REGISTER_DATETIME</td>
 		<td class="typecell">DATETIME</td>
 		<td class="sizecell"> 19 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
@@ -1131,8 +1131,8 @@ dl.procedurelist dd.column pre {
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td class="aliascell"></td>
-		<td id="member_security_register_user">REGISTER_USER</td>
+		<td class="aliascell comcolcell"></td>
+		<td class="comcolcell" id="member_security_register_user">REGISTER_USER</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 200 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
@@ -1149,8 +1149,8 @@ dl.procedurelist dd.column pre {
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td class="aliascell"></td>
-		<td id="member_security_update_datetime">UPDATE_DATETIME</td>
+		<td class="aliascell comcolcell"></td>
+		<td class="comcolcell" id="member_security_update_datetime">UPDATE_DATETIME</td>
 		<td class="typecell">DATETIME</td>
 		<td class="sizecell"> 19 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
@@ -1167,8 +1167,8 @@ dl.procedurelist dd.column pre {
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td class="aliascell"></td>
-		<td id="member_security_update_user">UPDATE_USER</td>
+		<td class="aliascell comcolcell"></td>
+		<td class="comcolcell" id="member_security_update_user">UPDATE_USER</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 200 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
@@ -1198,10 +1198,10 @@ dl.procedurelist dd.column pre {
 	</tr>
 </table>
   <h2 id="member_service" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=14, columnCount=8">
-(会員サービス)member_service
+(会員サービス)MEMBER_SERVICE
 </h2>
 <p class="tablecomment">会員のサービス情報（ポイントサービスなど）。</p>
-<table summary="Columns in member_service">
+<table summary="Columns in MEMBER_SERVICE">
 	<thead>
 	<tr>
 		<th class="rownumhead">No.</th>
@@ -1233,7 +1233,7 @@ dl.procedurelist dd.column pre {
 		<td id="member_service_member_id">MEMBER_ID</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
-		<td class="relcell"><a href="#member" title="FK_MEMBER_SERVICE_MEMBER">member</a>&nbsp;</td>
+		<td class="relcell"><a href="#member" title="FK_MEMBER_SERVICE_MEMBER">MEMBER</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
 		<td class="commentcell"> 会員を参照するID。ユニークなので、会員とは&nbsp;one-to-one&nbsp;の関係に。</td>
@@ -1269,7 +1269,7 @@ dl.procedurelist dd.column pre {
 		<td id="member_service_service_rank_code">SERVICE_RANK_CODE</td>
 		<td class="typecell">CHAR</td>
 		<td class="sizecell"> 3 </td>
-		<td class="relcell"><a href="#service_rank" title="FK_MEMBER_SERVICE_SERVICE_RANK_CODE">service_rank</a>&nbsp;</td>
+		<td class="relcell"><a href="#service_rank" title="FK_MEMBER_SERVICE_SERVICE_RANK_CODE">SERVICE_RANK</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"><a href="#ServiceRankCls">ServiceRank</a></td>
 		<td class="commentcell"> サービスランクを参照するコード。<br />どんなランクがあるのかドキドキですね。</td>
@@ -1283,8 +1283,8 @@ dl.procedurelist dd.column pre {
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td class="aliascell"></td>
-		<td id="member_service_register_datetime">REGISTER_DATETIME</td>
+		<td class="aliascell comcolcell"></td>
+		<td class="comcolcell" id="member_service_register_datetime">REGISTER_DATETIME</td>
 		<td class="typecell">DATETIME</td>
 		<td class="sizecell"> 19 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
@@ -1301,8 +1301,8 @@ dl.procedurelist dd.column pre {
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td class="aliascell"></td>
-		<td id="member_service_register_user">REGISTER_USER</td>
+		<td class="aliascell comcolcell"></td>
+		<td class="comcolcell" id="member_service_register_user">REGISTER_USER</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 200 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
@@ -1319,8 +1319,8 @@ dl.procedurelist dd.column pre {
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td class="aliascell"></td>
-		<td id="member_service_update_datetime">UPDATE_DATETIME</td>
+		<td class="aliascell comcolcell"></td>
+		<td class="comcolcell" id="member_service_update_datetime">UPDATE_DATETIME</td>
 		<td class="typecell">DATETIME</td>
 		<td class="sizecell"> 19 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
@@ -1337,8 +1337,8 @@ dl.procedurelist dd.column pre {
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td class="aliascell"></td>
-		<td id="member_service_update_user">UPDATE_USER</td>
+		<td class="aliascell comcolcell"></td>
+		<td class="comcolcell" id="member_service_update_user">UPDATE_USER</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 200 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
@@ -1368,9 +1368,9 @@ dl.procedurelist dd.column pre {
 	</tr>
 </table>
   <h2 id="member_status" title="type=TABLE, primaryKey={MEMBER_STATUS_CODE}, nameLength=13, columnCount=4">
-(会員ステータス)member_status
+(会員ステータス)MEMBER_STATUS
 </h2>
-<table summary="Columns in member_status">
+<table summary="Columns in MEMBER_STATUS">
 	<thead>
 	<tr>
 		<th class="rownumhead">No.</th>
@@ -1403,7 +1403,7 @@ dl.procedurelist dd.column pre {
 		<td class="typecell">CHAR</td>
 		<td class="sizecell"> 3 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
-		<td class="relcell"><a href="#member" title="FK_MEMBER_MEMBER_STATUS">member</a>,<br /><a href="#member_login" title="FK_MEMBER_LOGIN_MEMBER_STATUS">member_login</a>&nbsp;</td>
+		<td class="relcell"><a href="#member" title="FK_MEMBER_MEMBER_STATUS">MEMBER</a>,<br /><a href="#member_login" title="FK_MEMBER_LOGIN_MEMBER_STATUS">MEMBER_LOGIN</a>&nbsp;</td>
 		<td class="relcell"><a href="#MemberStatusCls">MemberStatus</a></td>
 		<td class="commentcell"> 会員ステータスを識別するコード。</td>
 		<td class="subcell">memberStatusCode</td>
@@ -1465,10 +1465,10 @@ dl.procedurelist dd.column pre {
 	</tr>
 </table>
   <h2 id="member_withdrawal" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=17, columnCount=8">
-(会員退会情報)member_withdrawal
+(会員退会情報)MEMBER_WITHDRAWAL
 </h2>
 <p class="tablecomment">退会会員の退会に関する詳細な情報。<br />退会会員のみデータが存在する。</p>
-<table summary="Columns in member_withdrawal">
+<table summary="Columns in MEMBER_WITHDRAWAL">
 	<thead>
 	<tr>
 		<th class="rownumhead">No.</th>
@@ -1500,7 +1500,7 @@ dl.procedurelist dd.column pre {
 		<td id="member_withdrawal_member_id">MEMBER_ID</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
-		<td class="relcell"><a href="#member" title="FK_MEMBER_WITHDRAWAL_MEMBER">member</a>&nbsp;</td>
+		<td class="relcell"><a href="#member" title="FK_MEMBER_WITHDRAWAL_MEMBER">MEMBER</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
 		<td class="commentcell"> &nbsp;</td>
@@ -1518,7 +1518,7 @@ dl.procedurelist dd.column pre {
 		<td id="member_withdrawal_withdrawal_reason_code">WITHDRAWAL_REASON_CODE</td>
 		<td class="typecell">CHAR</td>
 		<td class="sizecell"> 3 </td>
-		<td class="relcell"><a href="#withdrawal_reason" title="FK_MEMBER_WITHDRAWAL_WITHDRAWAL_REASON">withdrawal_reason</a>&nbsp;</td>
+		<td class="relcell"><a href="#withdrawal_reason" title="FK_MEMBER_WITHDRAWAL_WITHDRAWAL_REASON">WITHDRAWAL_REASON</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"><a href="#WithdrawalReasonCls">WithdrawalReason</a></td>
 		<td class="commentcell"> 退会した定型理由を参照するコード。<br />何も言わずに退会する会員もいるので必須項目ではない。</td>
@@ -1568,8 +1568,8 @@ dl.procedurelist dd.column pre {
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td class="aliascell"></td>
-		<td id="member_withdrawal_register_datetime">REGISTER_DATETIME</td>
+		<td class="aliascell comcolcell"></td>
+		<td class="comcolcell" id="member_withdrawal_register_datetime">REGISTER_DATETIME</td>
 		<td class="typecell">DATETIME</td>
 		<td class="sizecell"> 19 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
@@ -1586,8 +1586,8 @@ dl.procedurelist dd.column pre {
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td class="aliascell"></td>
-		<td id="member_withdrawal_register_user">REGISTER_USER</td>
+		<td class="aliascell comcolcell"></td>
+		<td class="comcolcell" id="member_withdrawal_register_user">REGISTER_USER</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 200 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
@@ -1604,8 +1604,8 @@ dl.procedurelist dd.column pre {
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td class="aliascell"></td>
-		<td id="member_withdrawal_update_datetime">UPDATE_DATETIME</td>
+		<td class="aliascell comcolcell"></td>
+		<td class="comcolcell" id="member_withdrawal_update_datetime">UPDATE_DATETIME</td>
 		<td class="typecell">DATETIME</td>
 		<td class="sizecell"> 19 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
@@ -1622,8 +1622,8 @@ dl.procedurelist dd.column pre {
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td class="aliascell"></td>
-		<td id="member_withdrawal_update_user">UPDATE_USER</td>
+		<td class="aliascell comcolcell"></td>
+		<td class="comcolcell" id="member_withdrawal_update_user">UPDATE_USER</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 200 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
@@ -1635,9 +1635,9 @@ dl.procedurelist dd.column pre {
 	</tr>
 </table>
   <h2 id="product" title="type=TABLE, primaryKey={PRODUCT_ID}, nameLength=7, columnCount=11">
-(商品)product
+(商品)PRODUCT
 </h2>
-<table summary="Columns in product">
+<table summary="Columns in PRODUCT">
 	<thead>
 	<tr>
 		<th class="rownumhead">No.</th>
@@ -1670,7 +1670,7 @@ dl.procedurelist dd.column pre {
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
-		<td class="relcell"><a href="#purchase" title="FK_PURCHASE_PRODUCT">purchase</a>&nbsp;</td>
+		<td class="relcell"><a href="#purchase" title="FK_PURCHASE_PRODUCT">PURCHASE</a>&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
 		<td class="commentcell"> &nbsp;</td>
 		<td class="subcell">productId</td>
@@ -1723,7 +1723,7 @@ dl.procedurelist dd.column pre {
 		<td id="product_product_category_code">PRODUCT_CATEGORY_CODE</td>
 		<td class="typecell">CHAR</td>
 		<td class="sizecell"> 3 </td>
-		<td class="relcell"><a href="#product_category" title="FK_PRODUCT_PRODUCT_CATEGORY">product_category</a>&nbsp;</td>
+		<td class="relcell"><a href="#product_category" title="FK_PRODUCT_PRODUCT_CATEGORY">PRODUCT_CATEGORY</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
 		<td class="commentcell"> &nbsp;</td>
@@ -1741,7 +1741,7 @@ dl.procedurelist dd.column pre {
 		<td id="product_product_status_code">PRODUCT_STATUS_CODE</td>
 		<td class="typecell">CHAR</td>
 		<td class="sizecell"> 3 </td>
-		<td class="relcell"><a href="#product_status" title="FK_PRODUCT_PRODUCT_STATUS">product_status</a>&nbsp;</td>
+		<td class="relcell"><a href="#product_status" title="FK_PRODUCT_PRODUCT_STATUS">PRODUCT_STATUS</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"><a href="#ProductStatusCls">ProductStatus</a></td>
 		<td class="commentcell"> &nbsp;</td>
@@ -1773,8 +1773,8 @@ dl.procedurelist dd.column pre {
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td class="aliascell"></td>
-		<td id="product_register_datetime">REGISTER_DATETIME</td>
+		<td class="aliascell comcolcell"></td>
+		<td class="comcolcell" id="product_register_datetime">REGISTER_DATETIME</td>
 		<td class="typecell">DATETIME</td>
 		<td class="sizecell"> 19 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
@@ -1791,8 +1791,8 @@ dl.procedurelist dd.column pre {
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td class="aliascell"></td>
-		<td id="product_register_user">REGISTER_USER</td>
+		<td class="aliascell comcolcell"></td>
+		<td class="comcolcell" id="product_register_user">REGISTER_USER</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 200 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
@@ -1809,8 +1809,8 @@ dl.procedurelist dd.column pre {
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td class="aliascell"></td>
-		<td id="product_update_datetime">UPDATE_DATETIME</td>
+		<td class="aliascell comcolcell"></td>
+		<td class="comcolcell" id="product_update_datetime">UPDATE_DATETIME</td>
 		<td class="typecell">DATETIME</td>
 		<td class="sizecell"> 19 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
@@ -1827,8 +1827,8 @@ dl.procedurelist dd.column pre {
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td class="aliascell"></td>
-		<td id="product_update_user">UPDATE_USER</td>
+		<td class="aliascell comcolcell"></td>
+		<td class="comcolcell" id="product_update_user">UPDATE_USER</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 200 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
@@ -1858,10 +1858,10 @@ dl.procedurelist dd.column pre {
 	</tr>
 </table>
   <h2 id="product_category" title="type=TABLE, primaryKey={PRODUCT_CATEGORY_CODE}, nameLength=16, columnCount=3">
-(商品カテゴリ)product_category
+(商品カテゴリ)PRODUCT_CATEGORY
 </h2>
 <p class="tablecomment">商品のカテゴリを表現するマスタ。<br />自己参照の階層になっている。</p>
-<table summary="Columns in product_category">
+<table summary="Columns in PRODUCT_CATEGORY">
 	<thead>
 	<tr>
 		<th class="rownumhead">No.</th>
@@ -1894,7 +1894,7 @@ dl.procedurelist dd.column pre {
 		<td class="typecell">CHAR</td>
 		<td class="sizecell"> 3 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
-		<td class="relcell"><a href="#product" title="FK_PRODUCT_PRODUCT_CATEGORY">product</a>,<br /><a href="#product_category" title="FK_PRODUCT_CATEGORY_PARENT">product_category</a>&nbsp;</td>
+		<td class="relcell"><a href="#product" title="FK_PRODUCT_PRODUCT_CATEGORY">PRODUCT</a>,<br /><a href="#product_category" title="FK_PRODUCT_CATEGORY_PARENT">PRODUCT_CATEGORY</a>&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
 		<td class="commentcell"> &nbsp;</td>
 		<td class="subcell">productCategoryCode</td>
@@ -1929,7 +1929,7 @@ dl.procedurelist dd.column pre {
 		<td id="product_category_parent_category_code">PARENT_CATEGORY_CODE</td>
 		<td class="typecell">CHAR</td>
 		<td class="sizecell"> 3 </td>
-		<td class="relcell"><a href="#product_category" title="FK_PRODUCT_CATEGORY_PARENT">product_category</a>&nbsp;</td>
+		<td class="relcell"><a href="#product_category" title="FK_PRODUCT_CATEGORY_PARENT">PRODUCT_CATEGORY</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
 		<td class="commentcell"> 最上位の場合はデータなし。</td>
@@ -1938,9 +1938,9 @@ dl.procedurelist dd.column pre {
 	</tr>
 </table>
   <h2 id="product_status" title="type=TABLE, primaryKey={PRODUCT_STATUS_CODE}, nameLength=14, columnCount=2">
-(商品ステータス)product_status
+(商品ステータス)PRODUCT_STATUS
 </h2>
-<table summary="Columns in product_status">
+<table summary="Columns in PRODUCT_STATUS">
 	<thead>
 	<tr>
 		<th class="rownumhead">No.</th>
@@ -1972,7 +1972,7 @@ dl.procedurelist dd.column pre {
 		<td class="typecell">CHAR</td>
 		<td class="sizecell"> 3 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
-		<td class="relcell"><a href="#product" title="FK_PRODUCT_PRODUCT_STATUS">product</a>&nbsp;</td>
+		<td class="relcell"><a href="#product" title="FK_PRODUCT_PRODUCT_STATUS">PRODUCT</a>&nbsp;</td>
 		<td class="relcell"><a href="#ProductStatusCls">ProductStatus</a></td>
 		<td class="subcell">productStatusCode</td>
 		<td class="subcell">String</td>
@@ -1996,10 +1996,10 @@ dl.procedurelist dd.column pre {
 	</tr>
 </table>
   <h2 id="purchase" title="type=TABLE, primaryKey={PURCHASE_ID}, nameLength=8, columnCount=12">
-(購入)purchase
+(購入)PURCHASE
 </h2>
 <p class="tablecomment">一つの商品に対する一回の購入を表現する。<br />一回の購入で一つの商品を複数個買うこともある。</p>
-<table summary="Columns in purchase">
+<table summary="Columns in PURCHASE">
 	<thead>
 	<tr>
 		<th class="rownumhead">No.</th>
@@ -2032,7 +2032,7 @@ dl.procedurelist dd.column pre {
 		<td class="typecell">BIGINT</td>
 		<td class="sizecell"> 19 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
-		<td class="relcell"><a href="#purchase_payment" title="FK_PURCHASE_PAYMENT_PURCHASE">purchase_payment</a>&nbsp;</td>
+		<td class="relcell"><a href="#purchase_payment" title="FK_PURCHASE_PAYMENT_PURCHASE">PURCHASE_PAYMENT</a>&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
 		<td class="commentcell"> 連番</td>
 		<td class="subcell">purchaseId</td>
@@ -2049,7 +2049,7 @@ dl.procedurelist dd.column pre {
 		<td id="purchase_member_id">MEMBER_ID</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
-		<td class="relcell"><a href="#member" title="FK_PURCHASE_MEMBER">member</a>&nbsp;</td>
+		<td class="relcell"><a href="#member" title="FK_PURCHASE_MEMBER">MEMBER</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
 		<td class="commentcell"> 会員を参照するID。<br />購入を識別する自然キー（複合ユニーク制約）の筆頭要素。</td>
@@ -2067,7 +2067,7 @@ dl.procedurelist dd.column pre {
 		<td id="purchase_product_id">PRODUCT_ID</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
-		<td class="relcell"><a href="#product" title="FK_PURCHASE_PRODUCT">product</a>&nbsp;</td>
+		<td class="relcell"><a href="#product" title="FK_PURCHASE_PRODUCT">PRODUCT</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
 		<td class="commentcell"> 商品を参照するID。</td>
@@ -2153,8 +2153,8 @@ dl.procedurelist dd.column pre {
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td class="aliascell"></td>
-		<td id="purchase_register_datetime">REGISTER_DATETIME</td>
+		<td class="aliascell comcolcell"></td>
+		<td class="comcolcell" id="purchase_register_datetime">REGISTER_DATETIME</td>
 		<td class="typecell">DATETIME</td>
 		<td class="sizecell"> 19 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
@@ -2171,8 +2171,8 @@ dl.procedurelist dd.column pre {
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td class="aliascell"></td>
-		<td id="purchase_register_user">REGISTER_USER</td>
+		<td class="aliascell comcolcell"></td>
+		<td class="comcolcell" id="purchase_register_user">REGISTER_USER</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 200 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
@@ -2189,8 +2189,8 @@ dl.procedurelist dd.column pre {
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td class="aliascell"></td>
-		<td id="purchase_update_datetime">UPDATE_DATETIME</td>
+		<td class="aliascell comcolcell"></td>
+		<td class="comcolcell" id="purchase_update_datetime">UPDATE_DATETIME</td>
 		<td class="typecell">DATETIME</td>
 		<td class="sizecell"> 19 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
@@ -2207,8 +2207,8 @@ dl.procedurelist dd.column pre {
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td class="aliascell"></td>
-		<td id="purchase_update_user">UPDATE_USER</td>
+		<td class="aliascell comcolcell"></td>
+		<td class="comcolcell" id="purchase_update_user">UPDATE_USER</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 200 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
@@ -2238,10 +2238,10 @@ dl.procedurelist dd.column pre {
 	</tr>
 </table>
   <h2 id="purchase_payment" title="type=TABLE, primaryKey={PURCHASE_PAYMENT_ID}, nameLength=16, columnCount=9">
-(購入支払)purchase_payment
+(購入支払)PURCHASE_PAYMENT
 </h2>
 <p class="tablecomment">購入に対する支払。<br />分割払いもできるのでmanyとなり、会員からの孫テーブルのテストができてうれしい。</p>
-<table summary="Columns in purchase_payment">
+<table summary="Columns in PURCHASE_PAYMENT">
 	<thead>
 	<tr>
 		<th class="rownumhead">No.</th>
@@ -2291,7 +2291,7 @@ dl.procedurelist dd.column pre {
 		<td id="purchase_payment_purchase_id">PURCHASE_ID</td>
 		<td class="typecell">BIGINT</td>
 		<td class="sizecell"> 19 </td>
-		<td class="relcell"><a href="#purchase" title="FK_PURCHASE_PAYMENT_PURCHASE">purchase</a>&nbsp;</td>
+		<td class="relcell"><a href="#purchase" title="FK_PURCHASE_PAYMENT_PURCHASE">PURCHASE</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
 		<td class="commentcell"> 支払い対象の購入へのID</td>
@@ -2359,8 +2359,8 @@ dl.procedurelist dd.column pre {
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td class="aliascell"></td>
-		<td id="purchase_payment_register_datetime">REGISTER_DATETIME</td>
+		<td class="aliascell comcolcell"></td>
+		<td class="comcolcell" id="purchase_payment_register_datetime">REGISTER_DATETIME</td>
 		<td class="typecell">DATETIME</td>
 		<td class="sizecell"> 19 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
@@ -2377,8 +2377,8 @@ dl.procedurelist dd.column pre {
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td class="aliascell"></td>
-		<td id="purchase_payment_register_user">REGISTER_USER</td>
+		<td class="aliascell comcolcell"></td>
+		<td class="comcolcell" id="purchase_payment_register_user">REGISTER_USER</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 200 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
@@ -2395,8 +2395,8 @@ dl.procedurelist dd.column pre {
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td class="aliascell"></td>
-		<td id="purchase_payment_update_datetime">UPDATE_DATETIME</td>
+		<td class="aliascell comcolcell"></td>
+		<td class="comcolcell" id="purchase_payment_update_datetime">UPDATE_DATETIME</td>
 		<td class="typecell">DATETIME</td>
 		<td class="sizecell"> 19 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
@@ -2413,8 +2413,8 @@ dl.procedurelist dd.column pre {
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td class="aliascell"></td>
-		<td id="purchase_payment_update_user">UPDATE_USER</td>
+		<td class="aliascell comcolcell"></td>
+		<td class="comcolcell" id="purchase_payment_update_user">UPDATE_USER</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 200 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
@@ -2426,10 +2426,10 @@ dl.procedurelist dd.column pre {
 	</tr>
 </table>
   <h2 id="region" title="type=TABLE, primaryKey={REGION_ID}, nameLength=6, columnCount=2">
-(地域)region
+(地域)REGION
 </h2>
 <p class="tablecomment">主に会員の住所に対応する地域。<br />かなりざっくりした感じではある。</p>
-<table summary="Columns in region">
+<table summary="Columns in REGION">
 	<thead>
 	<tr>
 		<th class="rownumhead">No.</th>
@@ -2461,7 +2461,7 @@ dl.procedurelist dd.column pre {
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
-		<td class="relcell"><a href="#member_address" title="FK_MEMBER_ADDRESS_REGION">member_address</a>&nbsp;</td>
+		<td class="relcell"><a href="#member_address" title="FK_MEMBER_ADDRESS_REGION">MEMBER_ADDRESS</a>&nbsp;</td>
 		<td class="relcell"><a href="#RegionCls">Region</a></td>
 		<td class="subcell">regionId</td>
 		<td class="subcell">Integer</td>
@@ -2485,10 +2485,10 @@ dl.procedurelist dd.column pre {
 	</tr>
 </table>
   <h2 id="service_rank" title="type=TABLE, primaryKey={SERVICE_RANK_CODE}, nameLength=12, columnCount=6">
-(サービスランク)service_rank
+(サービスランク)SERVICE_RANK
 </h2>
 <p class="tablecomment">会員のサービスレベルを表現するランク。<br />（ゴールドとかプラチナとか）</p>
-<table summary="Columns in service_rank">
+<table summary="Columns in SERVICE_RANK">
 	<thead>
 	<tr>
 		<th class="rownumhead">No.</th>
@@ -2521,7 +2521,7 @@ dl.procedurelist dd.column pre {
 		<td class="typecell">CHAR</td>
 		<td class="sizecell"> 3 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
-		<td class="relcell"><a href="#member_service" title="FK_MEMBER_SERVICE_SERVICE_RANK_CODE">member_service</a>&nbsp;</td>
+		<td class="relcell"><a href="#member_service" title="FK_MEMBER_SERVICE_SERVICE_RANK_CODE">MEMBER_SERVICE</a>&nbsp;</td>
 		<td class="relcell"><a href="#ServiceRankCls">ServiceRank</a></td>
 		<td class="commentcell"> サービスランクを識別するコード。</td>
 		<td class="subcell">serviceRankCode</td>
@@ -2619,10 +2619,10 @@ dl.procedurelist dd.column pre {
 	</tr>
 </table>
   <h2 id="withdrawal_reason" title="type=TABLE, primaryKey={WITHDRAWAL_REASON_CODE}, nameLength=17, columnCount=3">
-(退会理由)withdrawal_reason
+(退会理由)WITHDRAWAL_REASON
 </h2>
 <p class="tablecomment">会員に選ばせる定型的な退会理由のマスタ。</p>
-<table summary="Columns in withdrawal_reason">
+<table summary="Columns in WITHDRAWAL_REASON">
 	<thead>
 	<tr>
 		<th class="rownumhead">No.</th>
@@ -2655,7 +2655,7 @@ dl.procedurelist dd.column pre {
 		<td class="typecell">CHAR</td>
 		<td class="sizecell"> 3 </td>
 		<td class="relcell">&nbsp;&nbsp;</td>
-		<td class="relcell"><a href="#member_withdrawal" title="FK_MEMBER_WITHDRAWAL_WITHDRAWAL_REASON">member_withdrawal</a>&nbsp;</td>
+		<td class="relcell"><a href="#member_withdrawal" title="FK_MEMBER_WITHDRAWAL_WITHDRAWAL_REASON">MEMBER_WITHDRAWAL</a>&nbsp;</td>
 		<td class="relcell"><a href="#WithdrawalReasonCls">WithdrawalReason</a></td>
 		<td class="commentcell"> &nbsp;</td>
 		<td class="subcell">withdrawalReasonCode</td>

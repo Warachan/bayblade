@@ -199,7 +199,7 @@ map:{
     #   [false]
     #     Non.
     #
-    #; isTableDispNameUpperCase = false
+    ; isTableDispNameUpperCase = true
     # - - - - - - - - - -/
 
     # /- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

@@ -11,7 +11,7 @@ import org.dbflute.handson.dbflute.allcommon.DBMetaInstanceHandler;
 import org.dbflute.handson.dbflute.exentity.*;
 
 /**
- * The entity of (商品カテゴリ)product_category as TABLE. <br />
+ * The entity of (商品カテゴリ)PRODUCT_CATEGORY as TABLE. <br />
  * 商品のカテゴリを表現するマスタ。<br />
  * 自己参照の階層になっている。
  * <pre>

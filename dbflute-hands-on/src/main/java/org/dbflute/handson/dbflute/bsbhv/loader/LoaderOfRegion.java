@@ -9,7 +9,7 @@ import org.dbflute.handson.dbflute.exentity.*;
 import org.dbflute.handson.dbflute.cbean.*;
 
 /**
- * The referrer loader of (地域)region as TABLE. <br />
+ * The referrer loader of (地域)REGION as TABLE. <br />
  * <pre>
  * [primary key]
  *     REGION_ID

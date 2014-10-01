@@ -19,7 +19,7 @@ import org.dbflute.handson.dbflute.bsentity.dbmeta.*;
 import org.dbflute.handson.dbflute.cbean.*;
 
 /**
- * The behavior of (退会理由)withdrawal_reason as TABLE. <br />
+ * The behavior of (退会理由)WITHDRAWAL_REASON as TABLE. <br />
  * <pre>
  * [primary key]
  *     WITHDRAWAL_REASON_CODE

@@ -18,7 +18,7 @@ import org.dbflute.handson.dbflute.bsentity.dbmeta.*;
 import org.dbflute.handson.dbflute.cbean.*;
 
 /**
- * The behavior of (会員退会情報)member_withdrawal as TABLE. <br />
+ * The behavior of (会員退会情報)MEMBER_WITHDRAWAL as TABLE. <br />
  * <pre>
  * [primary key]
  *     MEMBER_ID

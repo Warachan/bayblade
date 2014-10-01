@@ -19,7 +19,7 @@ import org.dbflute.handson.dbflute.bsentity.dbmeta.*;
 import org.dbflute.handson.dbflute.cbean.*;
 
 /**
- * The behavior of (会員ステータス)member_status as TABLE. <br />
+ * The behavior of (会員ステータス)MEMBER_STATUS as TABLE. <br />
  * <pre>
  * [primary key]
  *     MEMBER_STATUS_CODE

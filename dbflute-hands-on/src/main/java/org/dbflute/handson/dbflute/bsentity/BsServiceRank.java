@@ -12,7 +12,7 @@ import org.dbflute.handson.dbflute.allcommon.CDef;
 import org.dbflute.handson.dbflute.exentity.*;
 
 /**
- * The entity of (サービスランク)service_rank as TABLE. <br />
+ * The entity of (サービスランク)SERVICE_RANK as TABLE. <br />
  * 会員のサービスレベルを表現するランク。<br />
  * （ゴールドとかプラチナとか）
  * <pre>

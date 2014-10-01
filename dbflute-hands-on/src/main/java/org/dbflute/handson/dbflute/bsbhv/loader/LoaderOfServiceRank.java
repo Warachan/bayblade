@@ -9,7 +9,7 @@ import org.dbflute.handson.dbflute.exentity.*;
 import org.dbflute.handson.dbflute.cbean.*;
 
 /**
- * The referrer loader of (サービスランク)service_rank as TABLE. <br />
+ * The referrer loader of (サービスランク)SERVICE_RANK as TABLE. <br />
  * <pre>
  * [primary key]
  *     SERVICE_RANK_CODE

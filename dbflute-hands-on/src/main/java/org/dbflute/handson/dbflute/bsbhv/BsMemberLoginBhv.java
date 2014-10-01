@@ -18,7 +18,7 @@ import org.dbflute.handson.dbflute.bsentity.dbmeta.*;
 import org.dbflute.handson.dbflute.cbean.*;
 
 /**
- * The behavior of (会員ログイン情報)member_login as TABLE. <br />
+ * The behavior of (会員ログイン情報)MEMBER_LOGIN as TABLE. <br />
  * <pre>
  * [primary key]
  *     MEMBER_LOGIN_ID

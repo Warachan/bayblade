@@ -18,7 +18,7 @@ import org.dbflute.handson.dbflute.bsentity.dbmeta.*;
 import org.dbflute.handson.dbflute.cbean.*;
 
 /**
- * The behavior of (購入支払)purchase_payment as TABLE. <br />
+ * The behavior of (購入支払)PURCHASE_PAYMENT as TABLE. <br />
  * <pre>
  * [primary key]
  *     PURCHASE_PAYMENT_ID

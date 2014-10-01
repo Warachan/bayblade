@@ -19,7 +19,7 @@ import org.dbflute.handson.dbflute.bsentity.dbmeta.*;
 import org.dbflute.handson.dbflute.cbean.*;
 
 /**
- * The behavior of (地域)region as TABLE. <br />
+ * The behavior of (地域)REGION as TABLE. <br />
  * <pre>
  * [primary key]
  *     REGION_ID

@@ -12,7 +12,7 @@ import org.dbflute.handson.dbflute.allcommon.CDef;
 import org.dbflute.handson.dbflute.exentity.*;
 
 /**
- * The entity of (退会理由)withdrawal_reason as TABLE. <br />
+ * The entity of (退会理由)WITHDRAWAL_REASON as TABLE. <br />
  * 会員に選ばせる定型的な退会理由のマスタ。
  * <pre>
  * [primary-key]

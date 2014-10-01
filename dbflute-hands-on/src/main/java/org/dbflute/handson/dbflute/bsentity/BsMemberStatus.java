@@ -12,7 +12,7 @@ import org.dbflute.handson.dbflute.allcommon.CDef;
 import org.dbflute.handson.dbflute.exentity.*;
 
 /**
- * The entity of (会員ステータス)member_status as TABLE. <br />
+ * The entity of (会員ステータス)MEMBER_STATUS as TABLE. <br />
  * <pre>
  * [primary-key]
  *     MEMBER_STATUS_CODE
