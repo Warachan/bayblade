@@ -6,7 +6,7 @@ import org.dbflute.handson.dbflute.exentity.Member;
 import org.dbflute.handson.unit.UnitContainerTestCase;
 import org.junit.Test;
 
-// TODO 【つけましたー!】wara javadoc by jflute
+// 【つけましたー!】wara javadoc by jflute
 /**
  * @author mayuko.sakaba
  */
@@ -27,7 +27,7 @@ public class HandsOn06LogicTest extends UnitContainerTestCase {
         HandsOn06Logic logic = new HandsOn06Logic();
         inject(logic);
 
-        // TODO 【つけましたー!】wara ここがAct by jflute
+        // 【つけましたー!】wara ここがAct by jflute
         //　## Act ##
         List<Member> memberList = logic.selectSuffixMemberList("vic");
 

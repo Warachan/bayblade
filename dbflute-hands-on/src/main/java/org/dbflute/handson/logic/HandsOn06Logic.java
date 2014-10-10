@@ -31,9 +31,9 @@ public class HandsOn06Logic {
     *  会員名称、生年月日、正式会員日時をログに出す (Commons Logging)
     */
     public List<Member> selectSuffixMemberList(String suffix) {
-        // TODO 【消しましたー!】wara suffix.equals("")は不要かな by jflute
+        // 【消しましたー!】wara suffix.equals("")は不要かな by jflute
         if (suffix == null || suffix.trim().equals("")) {
-            // TODO 【つけましたー！】wara 無効な値の後ろに : くらい欲しい by jflute
+            // 【つけましたー！】wara 無効な値の後ろに : くらい欲しい by jflute
             throw new IllegalArgumentException("無効な値:" + suffix);
         }
 
@@ -43,10 +43,14 @@ public class HandsOn06Logic {
 
         ListResultBean<Member> memberList = memberBhv.selectList(cb);
 
-        for (Member member : memberList) {
-            LOG.debug("###" + member.getBirthdate());
-            LOG.debug(member.getFormalizedDatetime());
-            LOG.debug(member.getMemberName());
+        // 本番では、デバッグログは(普通は)出ないが、文字列連結処理が走らないようにしたい。
+        // なので、LOG.isDebugEnabled()で囲って上げるべし by jflute
+        if (LOG.isDebugEnabled()) {
+            for (Member member : memberList) {
+                LOG.debug("###" + member.getBirthdate());
+                LOG.debug(member.getFormalizedDatetime());
+                LOG.debug(member.getMemberName());
+            }
         }
         return memberList;
     }

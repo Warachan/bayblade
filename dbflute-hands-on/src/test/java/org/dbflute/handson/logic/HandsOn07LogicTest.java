@@ -28,20 +28,28 @@ public class HandsOn07LogicTest extends UnitContainerTestCase {
         // ## Arrange ##
         HandsOn07Logic logic = new HandsOn07Logic();
         inject(logic);
+
+        // TODO wara ここがAct by jflute 
+        // TODO wara こっちが inserted って名前を付けたりする by jflute
         Member member = logic.insertMyselfMember();
+
+        // TODO wara ここからがAssert by jflute 
         Integer id = member.getMemberId();
 
         MemberCB cb = new MemberCB();
         cb.query().setMemberId_Equal(id);
 
         // ## Act ##
+        // TODO wara actualって名前を付けたりする or こっちの方がメインだから、こっちが member とか by jflute
         Member insertedMember = memberBhv.selectEntityWithDeletedCheck(cb);
 
         // ## Assert ##
         log(insertedMember);
+        // TODO wara assertNotNull()の第一引数は、failしたときのエラーメッセージ by jflute
         assertNotNull(insertedMember.getMemberName(), insertedMember.getBirthdate());
     }
 
+    // TODO wara dfpropのインデントちょっとズレてる by jflute
     /**
      * test_insertYourselfMember_会員が登録されていること()
      * 登録されていることを代表的なカラムを利用してアサート
@@ -51,6 +59,7 @@ public class HandsOn07LogicTest extends UnitContainerTestCase {
     @Test
     public void test_insertYourselfMember() {
         // ## Arrange ##
+        // TODO wara 上と同じ by jflute 
         HandsOn07Logic logic = new HandsOn07Logic();
         inject(logic);
         Member member = logic.insertYourselfMember();

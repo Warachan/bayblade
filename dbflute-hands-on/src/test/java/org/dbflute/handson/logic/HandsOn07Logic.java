@@ -29,6 +29,7 @@ public class HandsOn07Logic {
      */
     public Member insertMyselfMember() {
         Date birthdate = new HandyDate("1991/07/14").getDate();
+        // 共通カラムの自動設定をしたため
         //        Timestamp registerDate = new HandyDate("2014/10/01").getTimestamp();
 
         Member member = new Member();
@@ -36,6 +37,7 @@ public class HandsOn07Logic {
         member.setMemberAccount("Annie");
         member.setMemberStatusCode_正式会員();
         member.setBirthdate(birthdate);
+        // 共通カラムの自動設定をしたため
         //        member.setRegisterDatetime(registerDate);
         //        member.setRegisterUser("DBFlute");
         //        member.setUpdateDatetime(registerDate);
@@ -65,6 +67,8 @@ public class HandsOn07Logic {
         security.setReminderQuestion("What's your name?");
         security.setReminderAnswer("Nobody");
         memberSecurityBhv.insert(security);
+
+        // TODO wara Serviceもカージナリティ的には必須 by jflute 
 
         return member;
     }
