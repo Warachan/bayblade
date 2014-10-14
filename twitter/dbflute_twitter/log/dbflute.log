@@ -5500,3 +5500,326 @@ _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
     repsEnvType      = ut
     refreshProject   = twitter
 _/_/_/_/_/_/_/_/_/_/ {Sql2Entity}
+2014-08-21 10:22:27,429 [main] INFO  (TorqueJDBCTransformTask#begin():100) - +------------------------------------------+
+2014-08-21 10:22:27,433 [main] INFO  (TorqueJDBCTransformTask#begin():101) - |                                          |
+2014-08-21 10:22:27,433 [main] INFO  (TorqueJDBCTransformTask#begin():102) - |                   JDBC                   |
+2014-08-21 10:22:27,434 [main] INFO  (TorqueJDBCTransformTask#begin():103) - |                                          |
+2014-08-21 10:22:27,434 [main] INFO  (TorqueJDBCTransformTask#begin():104) - +------------------------------------------+
+2014-08-21 10:22:27,493 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2014-08-21 10:22:27,494 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = com.mysql.jdbc.Driver
+2014-08-21 10:22:27,494 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:mysql://localhost:3306/twitter
+2014-08-21 10:22:27,495 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = twitter
+2014-08-21 10:22:27,566 [main] INFO  (DfSchemaXmlSerializer#serialize():286) - 
+2014-08-21 10:22:27,567 [main] INFO  (DfSchemaXmlSerializer#serialize():287) - ...Starting to process JDBC to SchemaXML
+2014-08-21 10:22:27,567 [main] INFO  (DfSchemaXmlSerializer#doLoadPreviousSchema():1469) - ...Loading previous schema (schema diff process)
+2014-08-21 10:22:27,579 [main] INFO  (DTDResolver#resolveEntity():197) - ...Resolving XML by database.dtd in same package
+2014-08-21 10:22:27,662 [main] INFO  (DfSchemaXmlSerializer#generateXML():361) - ...Getting DB connection
+2014-08-21 10:22:27,670 [main] INFO  (DfDataSourceHandler#createConnection():168) - ...Connecting to database by data source:
+2014-08-21 10:22:27,904 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():235) -   product = MySQL 5.6.17
+2014-08-21 10:22:27,905 [main] INFO  (DfDataSourceHandler#setupConnectionMetaInfo():236) -   driver  = MySQL Connector Java mysql-connector-java-5.1.26 ( Revision: ${bzr.revision-id} ) for JDBC 4.0
+2014-08-21 10:22:27,908 [main] INFO  (DfSchemaXmlSerializer#generateXML():364) - ...Getting DB meta data
+2014-08-21 10:22:27,910 [main] INFO  (DfTableExtractor#doGetTableList():67) - ...Getting tables:
+2014-08-21 10:22:27,911 [main] INFO  (DfTableExtractor#doGetTableList():68) -   schema = {twitter.$$NoNameSchema$$ as main}
+2014-08-21 10:22:27,912 [main] INFO  (DfTableExtractor#doGetTableList():69) -   types  = [TABLE, VIEW]
+2014-08-21 10:22:27,931 [main] INFO  (DfDbCommentExtractorBase#doSelectUserTabComments():121) - select table_type as OBJECT_TYPE, table_name as TABLE_NAME, table_comment as COMMENTS from information_schema.tables where table_schema = 'twitter' order by table_name asc
+2014-08-21 10:22:27,935 [main] INFO  (DfDbCommentExtractorBase#doSelectUserColComments():168) - select table_name as TABLE_NAME, column_name as COLUMN_NAME, column_comment as COMMENTS from information_schema.columns where table_schema = 'twitter' order by table_name asc, column_name asc
+2014-08-21 10:22:27,950 [main] INFO  (DfSchemaXmlSerializer#processTable():421) - 
+2014-08-21 10:22:27,951 [main] INFO  (DfSchemaXmlSerializer#processTable():422) - $ /= = = = = = = = = = = = = = = = = = = = = = = = = =
+2014-08-21 10:22:27,952 [main] INFO  (DfSchemaXmlSerializer#processTable():423) - $ [Table List]
+2014-08-21 10:22:27,953 [main] INFO  (DfSchemaXmlSerializer#doProcessTable():506) - $ twitter.follow(TABLE) // フォロー
+2014-08-21 10:22:28,009 [main] INFO  (DfSchemaXmlSerializer#doProcessTable():506) - $ twitter.login(TABLE) // ログイン
+2014-08-21 10:22:28,029 [main] INFO  (DfSchemaXmlSerializer#doProcessTable():506) - $ twitter.member(TABLE) // 会員
+2014-08-21 10:22:28,050 [main] INFO  (DfSchemaXmlSerializer#doProcessTable():506) - $ twitter.member_security(TABLE) // 会員セキュリティ
+2014-08-21 10:22:28,066 [main] INFO  (DfSchemaXmlSerializer#doProcessTable():506) - $ twitter.member_status(TABLE) // メンバーステータス
+2014-08-21 10:22:28,084 [main] INFO  (DfSchemaXmlSerializer#doProcessTable():506) - $ twitter.message(TABLE) // メッセージテーブル
+2014-08-21 10:22:28,104 [main] INFO  (DfSchemaXmlSerializer#doProcessTable():506) - $ twitter.tweet(TABLE) // TWEET
+2014-08-21 10:22:28,123 [main] INFO  (DfSchemaXmlSerializer#processTable():435) - $ 
+2014-08-21 10:22:28,124 [main] INFO  (DfSchemaXmlSerializer#processTable():436) - $ [Table Count]
+2014-08-21 10:22:28,124 [main] INFO  (DfSchemaXmlSerializer#processTable():437) - $ 7
+2014-08-21 10:22:28,125 [main] INFO  (DfSchemaXmlSerializer#processTable():438) - $ = = = = = = = = = =/
+2014-08-21 10:22:28,125 [main] INFO  (DfSchemaXmlSerializer#processTable():439) - 
+2014-08-21 10:22:28,129 [main] INFO  (DfSchemaXmlSerializer#processSequence():799) - ...Getting sequences
+2014-08-21 10:22:28,134 [main] INFO  (DfSchemaXmlSerializer#serialize():301) - ...Serializing XML:
+2014-08-21 10:22:28,134 [main] INFO  (DfSchemaXmlSerializer#serialize():302) -   filePath = ./schema/project-schema-twitter.xml
+2014-08-21 10:22:28,135 [main] INFO  (DfSchemaXmlSerializer#serialize():303) -   encoding = UTF-8
+2014-08-21 10:22:28,161 [main] INFO  (DfSchemaXmlSerializer#doLoadNextSchema():1487) - ...Loading next schema (schema diff process)
+2014-08-21 10:22:28,164 [main] INFO  (DTDResolver#resolveEntity():197) - ...Resolving XML by database.dtd in same package
+2014-08-21 10:22:28,227 [main] INFO  (DfSchemaXmlSerializer#doLoadNextSchema():1502) -  -> same as previous (schema diff)
+2014-08-21 10:22:28,228 [main] INFO  (DfDataSourceHandler#destroy():121) - ...closeReally()
+2014-08-21 10:22:28,240 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():150) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m00s801ms
+
+  DBFLUTE_CLIENT: {twitter}
+    database  = mysql (MySQL 5.6.17)
+    language  = java
+    container = seasar
+    package   = jp.bizreach.twitter.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = com.mysql.jdbc.Driver
+    url    = jdbc:mysql://localhost:3306/twitter
+    schema = {twitter.$$NoNameSchema$$ as main}
+    user   = twitter
+    props  = {}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = twitter
+_/_/_/_/_/_/_/_/_/_/ {JDBC}
+2014-08-21 10:22:29,250 [main] INFO  (TorqueDocumentationTask#begin():171) - +------------------------------------------+
+2014-08-21 10:22:29,252 [main] INFO  (TorqueDocumentationTask#begin():172) - |                                          |
+2014-08-21 10:22:29,254 [main] INFO  (TorqueDocumentationTask#begin():173) - |                   Doc                    |
+2014-08-21 10:22:29,254 [main] INFO  (TorqueDocumentationTask#begin():181) - |                                          |
+2014-08-21 10:22:29,255 [main] INFO  (TorqueDocumentationTask#begin():182) - +------------------------------------------+
+2014-08-21 10:22:29,297 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2014-08-21 10:22:29,298 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = com.mysql.jdbc.Driver
+2014-08-21 10:22:29,298 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:mysql://localhost:3306/twitter
+2014-08-21 10:22:29,299 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = twitter
+2014-08-21 10:22:29,301 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():242) - 
+2014-08-21 10:22:29,302 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():243) - * * * * * * * * * * *
+2014-08-21 10:22:29,302 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():244) - *                   *
+2014-08-21 10:22:29,303 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():245) - *    Schema HTML    *
+2014-08-21 10:22:29,303 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():246) - *                   *
+2014-08-21 10:22:29,304 [main] INFO  (TorqueDocumentationTask#processSchemaHtml():247) - * * * * * * * * * * *
+2014-08-21 10:22:29,475 [main] INFO  (DTDResolver#resolveEntity():197) - ...Resolving XML by database.dtd in same package
+2014-08-21 10:22:29,537 [main] INFO  (DfAbstractTexenTask#fireVelocityProcess():255) - generator.parse("doc/ControlDocument.vm", c);
+2014-08-21 10:22:29,600 [main] INFO  (Database#doEnableDocumentOutputDirectory():1180) - ...Setting up documentOutputDirectory: ./output/doc
+2014-08-21 10:22:29,611 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():62) - /=======================================
+2014-08-21 10:22:29,612 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():63) - ...Initializing additional primary keys.
+2014-08-21 10:22:29,615 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():88) - ==========/
+2014-08-21 10:22:29,617 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():62) - /=======================================
+2014-08-21 10:22:29,618 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():63) - ...Initializing additional unique keys.
+2014-08-21 10:22:29,621 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():83) - ==========/
+2014-08-21 10:22:29,624 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():67) - /=======================================
+2014-08-21 10:22:29,625 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():68) - ...Initializing additional foreign keys.
+2014-08-21 10:22:29,629 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():85) - ==========/
+2014-08-21 10:22:29,640 [main] INFO  (DfDocumentSelector#doLoadSchemaHistory():150) - ...Loading schema history
+2014-08-21 10:22:29,763 [main] INFO  (DfDocumentSelector#doLoadSchemaHistory():154) -  -> found history: count=35
+2014-08-21 10:22:30,005 [main] INFO  (DfRefreshResourceProcess#refreshResources():63) - ...Refreshing: [twitter]
+2014-08-21 10:22:30,058 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():150) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m00s806ms
+
+  DBFLUTE_CLIENT: {twitter}
+    database  = mysql
+    language  = java
+    container = seasar
+    package   = jp.bizreach.twitter.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = com.mysql.jdbc.Driver
+    url    = jdbc:mysql://localhost:3306/twitter
+    schema = {twitter.$$NoNameSchema$$ as main}
+    user   = twitter
+    props  = {}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = twitter
+_/_/_/_/_/_/_/_/_/_/ {Doc}
+2014-08-21 10:22:33,024 [main] INFO  (TorqueDataModelTask#begin():105) - +------------------------------------------+
+2014-08-21 10:22:33,027 [main] INFO  (TorqueDataModelTask#begin():106) - |                                          |
+2014-08-21 10:22:33,027 [main] INFO  (TorqueDataModelTask#begin():107) - |                 Generate                 |
+2014-08-21 10:22:33,028 [main] INFO  (TorqueDataModelTask#begin():108) - |                                          |
+2014-08-21 10:22:33,029 [main] INFO  (TorqueDataModelTask#begin():109) - +------------------------------------------+
+2014-08-21 10:22:33,071 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2014-08-21 10:22:33,072 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = com.mysql.jdbc.Driver
+2014-08-21 10:22:33,073 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:mysql://localhost:3306/twitter
+2014-08-21 10:22:33,073 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = twitter
+2014-08-21 10:22:33,095 [main] INFO  (TorqueDataModelTask#setupControlTemplate():160) - 
+2014-08-21 10:22:33,096 [main] INFO  (TorqueDataModelTask#setupControlTemplate():161) - ...Using Java control: om/ControlGenerateJava.vm
+2014-08-21 10:22:33,268 [main] INFO  (DTDResolver#resolveEntity():197) - ...Resolving XML by database.dtd in same package
+2014-08-21 10:22:33,315 [main] INFO  (DfAbstractTexenTask#fireVelocityProcess():255) - generator.parse("om/ControlGenerateJava.vm", c);
+2014-08-21 10:22:33,450 [main] INFO  (Database#doEnableGenerateOutputDirectory():1148) - ...Setting up generateOutputDirectory: ../src/main/java
+2014-08-21 10:22:33,457 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():62) - /=======================================
+2014-08-21 10:22:33,458 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():63) - ...Initializing additional primary keys.
+2014-08-21 10:22:33,461 [main] INFO  (DfAdditionalPrimaryKeyInitializer#initializeAdditionalPrimaryKey():88) - ==========/
+2014-08-21 10:22:33,464 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():62) - /=======================================
+2014-08-21 10:22:33,465 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():63) - ...Initializing additional unique keys.
+2014-08-21 10:22:33,468 [main] INFO  (DfAdditionalUniqueKeyInitializer#initializeAdditionalUniqueKey():83) - ==========/
+2014-08-21 10:22:33,471 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():67) - /=======================================
+2014-08-21 10:22:33,472 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():68) - ...Initializing additional foreign keys.
+2014-08-21 10:22:33,476 [main] INFO  (DfAdditionalForeignKeyInitializer#initializeAdditionalForeignKey():85) - ==========/
+2014-08-21 10:22:33,494 [main] INFO  (DfIncludeQueryInitializer#initializeIncludeQuery():59) - /=============================
+2014-08-21 10:22:33,495 [main] INFO  (DfIncludeQueryInitializer#initializeIncludeQuery():60) - ...Initializing include query.
+2014-08-21 10:22:33,497 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():83) - String
+2014-08-21 10:22:33,498 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():83) - Number
+2014-08-21 10:22:33,499 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():83) - Date
+2014-08-21 10:22:33,499 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():88) -   NotEqual -> []
+2014-08-21 10:22:33,500 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():88) -   InScope -> []
+2014-08-21 10:22:33,501 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():88) -   NotInScope -> []
+2014-08-21 10:22:33,502 [main] INFO  (DfIncludeQueryInitializer#checkQueryMap():83) - OrderBy
+2014-08-21 10:22:33,502 [main] INFO  (DfIncludeQueryInitializer#initializeIncludeQuery():62) - ========/
+2014-08-21 10:22:33,525 [main] INFO  (Database#info():2573) - public void parseAllCommon() {
+2014-08-21 10:22:33,529 [main] INFO  (Database#info():2573) -     parse('DBCurrent');
+2014-08-21 10:22:33,541 [main] INFO  (Database#info():2573) -     parse('DBFluteConfig');
+2014-08-21 10:22:33,567 [main] INFO  (Database#info():2573) -     parse('DBFluteInitializer');
+2014-08-21 10:22:33,577 [main] INFO  (Database#info():2573) -     parse('DBMetaInstanceHandler');
+2014-08-21 10:22:33,611 [main] INFO  (Database#info():2573) -     parse('EntityDefinedCommonColumn');
+2014-08-21 10:22:33,619 [main] INFO  (Database#info():2573) -     parse('ImplementedBehaviorSelector');
+2014-08-21 10:22:33,627 [main] INFO  (Database#info():2573) -     parse('ImplementedCommonColumnAutoSetupper');
+2014-08-21 10:22:33,636 [main] INFO  (Database#info():2573) -     parse('ImplementedInvokerAssistant');
+2014-08-21 10:22:33,642 [main] INFO  (Database#info():2573) -     parse('ImplementedSqlClauseCreator');
+2014-08-21 10:22:33,648 [main] INFO  (Database#info():2573) - }
+2014-08-21 10:22:33,649 [main] INFO  (Database#info():2573) - public void parseContainerConfig() {
+2014-08-21 10:22:33,651 [main] INFO  (Database#info():2573) -     parse('../resources/dbflute.dicon')
+2014-08-21 10:22:33,659 [main] INFO  (Database#info():2573) - }
+2014-08-21 10:22:33,665 [main] INFO  (DfOldClassHandler#info():1037) - public void deleteOldTableClass() {
+2014-08-21 10:22:33,689 [main] INFO  (DfOldClassHandler#info():1037) - }
+2014-08-21 10:22:33,690 [main] INFO  (Database#info():2573) - public void parseTableClass() {
+2014-08-21 10:22:33,691 [main] INFO  (Database#info():2573) -     parse('follow');
+2014-08-21 10:22:34,028 [main] INFO  (Database#info():2573) -     parse('login');
+2014-08-21 10:22:34,260 [main] INFO  (Database#info():2573) -     parse('member');
+2014-08-21 10:22:34,668 [main] INFO  (Database#info():2573) -     parse('member_security');
+2014-08-21 10:22:34,789 [main] INFO  (Database#info():2573) -     parse('member_status');
+2014-08-21 10:22:34,922 [main] INFO  (Database#info():2573) -     parse('message');
+2014-08-21 10:22:35,081 [main] INFO  (Database#info():2573) -     parse('tweet');
+2014-08-21 10:22:35,168 [main] INFO  (Database#info():2573) - }
+2014-08-21 10:22:35,169 [main] INFO  (Database#info():2573) -  
+2014-08-21 10:22:35,191 [main] INFO  (DfRefreshResourceProcess#refreshResources():63) - ...Refreshing: [twitter]
+2014-08-21 10:22:35,198 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():150) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m02s170ms
+
+  DBFLUTE_CLIENT: {twitter}
+    database  = mysql
+    language  = java
+    container = seasar
+    package   = jp.bizreach.twitter.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = com.mysql.jdbc.Driver
+    url    = jdbc:mysql://localhost:3306/twitter
+    schema = {twitter.$$NoNameSchema$$ as main}
+    user   = twitter
+    props  = {}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = twitter
+_/_/_/_/_/_/_/_/_/_/ {Generate}
+2014-08-21 10:22:36,106 [main] INFO  (DfSql2EntityTask#begin():100) - +------------------------------------------+
+2014-08-21 10:22:36,109 [main] INFO  (DfSql2EntityTask#begin():101) - |                                          |
+2014-08-21 10:22:36,110 [main] INFO  (DfSql2EntityTask#begin():102) - |                Sql2Entity                |
+2014-08-21 10:22:36,110 [main] INFO  (DfSql2EntityTask#begin():103) - |                                          |
+2014-08-21 10:22:36,111 [main] INFO  (DfSql2EntityTask#begin():104) - +------------------------------------------+
+2014-08-21 10:22:36,150 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2014-08-21 10:22:36,150 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = com.mysql.jdbc.Driver
+2014-08-21 10:22:36,151 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:mysql://localhost:3306/twitter
+2014-08-21 10:22:36,152 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = twitter
+2014-08-21 10:22:36,171 [main] INFO  (DfSql2EntityTask#setupControlTemplate():170) - 
+2014-08-21 10:22:36,171 [main] INFO  (DfSql2EntityTask#setupControlTemplate():171) - ...Using Java control: om/ControlSql2EntityJava.vm
+2014-08-21 10:22:36,179 [main] INFO  (DTDResolver#resolveEntity():197) - ...Resolving XML by database.dtd in same package
+2014-08-21 10:22:36,234 [main] INFO  (DfSqlFileFireMan#fire():90) - {Fired SQL}: success=0 failure=0 (in 0 files)
+2014-08-21 10:22:36,381 [main] INFO  (DfSql2EntityTask#initControlContext():301) - 
+2014-08-21 10:22:36,382 [main] INFO  (DfSql2EntityTask#initControlContext():302) - ...Preparing generation of customize-entities and parameter-beans
+2014-08-21 10:22:36,382 [main] INFO  (DfSql2EntityTask#initControlContext():303) - * * * * * * * * * *
+2014-08-21 10:22:36,383 [main] INFO  (DfSql2EntityTask#initControlContext():304) - * CustomizeEntity *
+2014-08-21 10:22:36,383 [main] INFO  (DfSql2EntityTask#initControlContext():305) - * * * * * * * * * *
+2014-08-21 10:22:36,384 [main] INFO  (DfSql2EntityTask#showParameterBean():879) - * * * * * * * * *
+2014-08-21 10:22:36,385 [main] INFO  (DfSql2EntityTask#showParameterBean():880) - * ParameterBean *
+2014-08-21 10:22:36,386 [main] INFO  (DfSql2EntityTask#showParameterBean():881) - * * * * * * * * *
+2014-08-21 10:22:36,390 [main] INFO  (DfAbstractTexenTask#fireVelocityProcess():255) - generator.parse("om/ControlSql2EntityJava.vm", c);
+2014-08-21 10:22:36,501 [main] INFO  (Database#doEnableSql2EntityOutputDirectory():1164) - ...Setting up sql2EntityOutputDirectory: ../src/main/java
+2014-08-21 10:22:36,505 [main] INFO  (DfOldClassHandler#info():1037) - public void deleteOldCustomizeClass() {
+2014-08-21 10:22:36,522 [main] INFO  (DfOldClassHandler#info():1037) - }
+2014-08-21 10:22:36,524 [main] INFO  (Database#info():2573) - public void parseCustomizeEntity() {
+2014-08-21 10:22:36,529 [main] INFO  (Database#info():2573) - }
+2014-08-21 10:22:36,555 [main] INFO  (DfSql2EntityTask#showTargetSqlFileInformation():293) - 
+/- - - - - - - - - - - - - - - - - - - - - - - -
+Target SQL files: 0
+
+- - - - - - - - - -/
+2014-08-21 10:22:36,561 [main] INFO  (DfRefreshResourceProcess#refreshResources():63) - ...Refreshing: [twitter]
+2014-08-21 10:22:36,568 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():150) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m00s457ms
+
+  DBFLUTE_CLIENT: {twitter}
+    database  = mysql
+    language  = java
+    container = seasar
+    package   = jp.bizreach.twitter.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = com.mysql.jdbc.Driver
+    url    = jdbc:mysql://localhost:3306/twitter
+    schema = {twitter.$$NoNameSchema$$ as main}
+    user   = twitter
+    props  = {}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = twitter
+_/_/_/_/_/_/_/_/_/_/ {Sql2Entity}
+2014-08-21 10:28:38,095 [main] INFO  (TorqueDocumentationTask#begin():171) - +------------------------------------------+
+2014-08-21 10:28:38,099 [main] INFO  (TorqueDocumentationTask#begin():172) - |                                          |
+2014-08-21 10:28:38,100 [main] INFO  (TorqueDocumentationTask#begin():173) - |                   Doc                    |
+2014-08-21 10:28:38,101 [main] INFO  (TorqueDocumentationTask#begin():178) - |            (SchemaSyncCheck)             |
+2014-08-21 10:28:38,101 [main] INFO  (TorqueDocumentationTask#begin():181) - |                                          |
+2014-08-21 10:28:38,102 [main] INFO  (TorqueDocumentationTask#begin():182) - +------------------------------------------+
+2014-08-21 10:28:38,151 [main] INFO  (DfDataSourceHandler#prepare():78) - ...Preparing data source:
+2014-08-21 10:28:38,152 [main] INFO  (DfDataSourceHandler#prepare():79) -   driver = com.mysql.jdbc.Driver
+2014-08-21 10:28:38,153 [main] INFO  (DfDataSourceHandler#prepare():80) -   url    = jdbc:mysql://localhost:3306/twitter
+2014-08-21 10:28:38,154 [main] INFO  (DfDataSourceHandler#prepare():81) -   user   = twitter
+2014-08-21 10:28:38,168 [main] ERROR (DfDBFluteTaskUtil#logException():161) - Look! Read the message below.
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Failed to execute DBFlute Task 'Doc'.
+
+[Advice]
+Check the exception messages and the stack traces.
+* * * * * * * * * */
+org.seasar.dbflute.exception.DfRequiredPropertyNotFoundException: Look! Read the message below.
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Not found the property for SchemaSyncCheck.
+
+[Advice]
+You should set the property like this:
+[documentDefinitionMap.dfprop]
+  ; schemaSyncCheckMap = map:{
+      ; url = jdbc:...
+      ; schema = EXAMPLEDB
+      ; user = exampuser
+      ; password = exampword
+  }
+* * * * * * * * * */
+	at org.apache.torque.task.TorqueDocumentationTask.throwSchemaSyncCheckPropertyNotFoundException(TorqueDocumentationTask.java:346)
+	at org.apache.torque.task.TorqueDocumentationTask.processSubTask(TorqueDocumentationTask.java:230)
+	at org.apache.torque.task.TorqueDocumentationTask.doExecute(TorqueDocumentationTask.java:210)
+	at org.seasar.dbflute.task.bs.DfAbstractTexenTask$1.callActualExecute(DfAbstractTexenTask.java:130)
+	at org.seasar.dbflute.task.bs.assistant.DfTaskBasicController.doExecute(DfTaskBasicController.java:184)
+	at org.seasar.dbflute.task.bs.assistant.DfTaskBasicController.execute(DfTaskBasicController.java:77)
+	at org.seasar.dbflute.task.bs.DfAbstractTexenTask.execute(DfAbstractTexenTask.java:152)
+	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:288)
+	at sun.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.tools.ant.dispatch.DispatchUtils.execute(DispatchUtils.java:105)
+	at org.apache.tools.ant.Task.perform(Task.java:348)
+	at org.apache.tools.ant.Target.execute(Target.java:357)
+	at org.apache.tools.ant.Target.performTasks(Target.java:385)
+	at org.apache.tools.ant.Project.executeSortedTargets(Project.java:1329)
+	at org.apache.tools.ant.Project.executeTarget(Project.java:1298)
+	at org.apache.tools.ant.helper.DefaultExecutor.executeTargets(DefaultExecutor.java:41)
+	at org.apache.tools.ant.Project.executeTargets(Project.java:1181)
+	at org.apache.tools.ant.Main.runBuild(Main.java:698)
+	at org.apache.tools.ant.Main.startAnt(Main.java:199)
+	at org.apache.tools.ant.launch.Launcher.run(Launcher.java:257)
+	at org.apache.tools.ant.launch.Launcher.main(Launcher.java:104)
+2014-08-21 10:28:38,206 [main] INFO  (DfDBFluteTaskUtil#logFinalMessage():150) - 
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+[Final Message]: 00m00s101ms *Abort
+
+  DBFLUTE_CLIENT: {twitter}
+    database  = mysql
+    language  = java
+    container = seasar
+    package   = jp.bizreach.twitter.dbflute
+
+  DBFLUTE_ENVIRONMENT_TYPE: {}
+    driver = com.mysql.jdbc.Driver
+    url    = jdbc:mysql://localhost:3306/twitter
+    schema = {twitter.$$NoNameSchema$$ as main}
+    user   = twitter
+    props  = {}
+    additionalSchema = 
+    repsEnvType      = ut
+    refreshProject   = twitter
+_/_/_/_/_/_/_/_/_/_/ {Doc}

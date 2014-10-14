@@ -7,8 +7,10 @@ import javax.annotation.Resource;
 import org.dbflute.handson.dbflute.exbhv.MemberBhv;
 import org.dbflute.handson.dbflute.exbhv.MemberLoginBhv;
 import org.dbflute.handson.dbflute.exbhv.MemberSecurityBhv;
+import org.dbflute.handson.dbflute.exbhv.MemberServiceBhv;
 import org.dbflute.handson.dbflute.exentity.Member;
 import org.dbflute.handson.dbflute.exentity.MemberSecurity;
+import org.dbflute.handson.dbflute.exentity.MemberService;
 import org.seasar.dbflute.helper.HandyDate;
 
 /**
@@ -22,6 +24,8 @@ public class HandsOn07Logic {
     protected MemberLoginBhv memberLoginBhv;
     @Resource
     protected MemberSecurityBhv memberSecurityBhv;
+    @Resource
+    protected MemberServiceBhv memberServiceBhv;
 
     /**
      * Member insertMyselfMember()
@@ -54,21 +58,29 @@ public class HandsOn07Logic {
      */
     public Member insertYourselfMember() {
         MemberSecurity security = new MemberSecurity();
+        MemberService service = new MemberService();
 
         Member member = new Member();
         member.setMemberName("Cookie Tom");
         member.setMemberAccount("RikiMaru");
         member.setMemberStatusCode_正式会員();
         member.setMemberSecurityAsOne(security);
+        member.setMemberServiceAsOne(service);
         memberBhv.insert(member);
 
+        Integer memberId = member.getMemberId();
         security.setLoginPassword("password");
-        security.setMemberId(member.getMemberId());
+        security.setMemberId(memberId);
         security.setReminderQuestion("What's your name?");
         security.setReminderAnswer("Nobody");
         memberSecurityBhv.insert(security);
 
-        // TODO wara Serviceもカージナリティ的には必須 by jflute 
+        service.setMemberId(memberId);
+        service.setAkirakaniOkashiiKaramuMei(8888);
+        service.setServiceRankCode_Platinum();
+        memberServiceBhv.insert(service);
+
+        // TODO wara Serviceもカージナリティ的には必須 by jflute
 
         return member;
     }

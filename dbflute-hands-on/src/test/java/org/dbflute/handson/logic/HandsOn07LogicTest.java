@@ -6,6 +6,7 @@ import org.dbflute.handson.dbflute.cbean.MemberCB;
 import org.dbflute.handson.dbflute.exbhv.MemberBhv;
 import org.dbflute.handson.dbflute.exentity.Member;
 import org.dbflute.handson.dbflute.exentity.MemberSecurity;
+import org.dbflute.handson.dbflute.exentity.MemberService;
 import org.dbflute.handson.unit.UnitContainerTestCase;
 import org.junit.Test;
 
@@ -29,27 +30,29 @@ public class HandsOn07LogicTest extends UnitContainerTestCase {
         HandsOn07Logic logic = new HandsOn07Logic();
         inject(logic);
 
-        // TODO wara ここがAct by jflute 
-        // TODO wara こっちが inserted って名前を付けたりする by jflute
-        Member member = logic.insertMyselfMember();
+        // TODO 【なおしましたー！】wara ここがAct by jflute
+        // TODO 【なおしましたー!】wara こっちが inserted って名前を付けたりする by jflute
 
-        // TODO wara ここからがAssert by jflute 
-        Integer id = member.getMemberId();
+        // ## Act ##
+        Member insertedMember = logic.insertMyselfMember();
+
+        // TODO 【直しましたー!】wara ここからがAssert by jflute
+        // ## Assert ##
+        Integer id = insertedMember.getMemberId();
 
         MemberCB cb = new MemberCB();
         cb.query().setMemberId_Equal(id);
 
-        // ## Act ##
-        // TODO wara actualって名前を付けたりする or こっちの方がメインだから、こっちが member とか by jflute
-        Member insertedMember = memberBhv.selectEntityWithDeletedCheck(cb);
+        // TODO  【なおしましたー！】wara　actualって名前を付けたりする or こっちの方がメインだから、こっちが member とか by jflute
+        Member actualMember = memberBhv.selectEntityWithDeletedCheck(cb);
 
-        // ## Assert ##
-        log(insertedMember);
-        // TODO wara assertNotNull()の第一引数は、failしたときのエラーメッセージ by jflute
-        assertNotNull(insertedMember.getMemberName(), insertedMember.getBirthdate());
+        log(actualMember);
+        // TODO 【なおしましたー！】wara assertNotNull()の第一引数は、failしたときのエラーメッセージ by jflute
+        assertNotNull(actualMember.getMemberName());
+        assertNotNull(actualMember.getBirthdate());
     }
 
-    // TODO wara dfpropのインデントちょっとズレてる by jflute
+    // TODO 【なおった？】wara dfpropのインデントちょっとズレてる by jflute
     /**
      * test_insertYourselfMember_会員が登録されていること()
      * 登録されていることを代表的なカラムを利用してアサート
@@ -59,25 +62,29 @@ public class HandsOn07LogicTest extends UnitContainerTestCase {
     @Test
     public void test_insertYourselfMember() {
         // ## Arrange ##
-        // TODO wara 上と同じ by jflute 
+        // TODO 【やってみましたー！】wara 上と同じ by jflute
         HandsOn07Logic logic = new HandsOn07Logic();
         inject(logic);
-        Member member = logic.insertYourselfMember();
-
-        MemberCB cb = new MemberCB();
-        cb.setupSelect_MemberSecurityAsOne();
-        cb.query().setMemberId_Equal(member.getMemberId());
 
         // ## Act ##
-        Member insertedMember = memberBhv.selectEntityWithDeletedCheck(cb);
+        Member member = logic.insertYourselfMember();
 
         // ## Assert ##
+        MemberCB cb = new MemberCB();
+        cb.setupSelect_MemberSecurityAsOne();
+        cb.setupSelect_MemberServiceAsOne();
+        cb.query().setMemberId_Equal(member.getMemberId());
+
+        Member insertedMember = memberBhv.selectEntityWithDeletedCheck(cb);
+
         MemberSecurity security = insertedMember.getMemberSecurityAsOne();
-        log("####" + insertedMember, security);
+        MemberService service = insertedMember.getMemberServiceAsOne();
+        log("####" + insertedMember, security, service);
         assertNotNull(security);
+        assertNotNull(service);
         assertNotNull(insertedMember.getMemberId());
         assertNotNull(insertedMember.getMemberStatusCode());
         assertNotNull(insertedMember.getRegisterDatetime());
-        assertNull(insertedMember.getMemberServiceAsOne());
+        assertNull(insertedMember.getMemberWithdrawalAsOne());
     }
 }
