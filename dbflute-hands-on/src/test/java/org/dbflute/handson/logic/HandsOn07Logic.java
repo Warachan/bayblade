@@ -18,6 +18,7 @@ import org.seasar.dbflute.helper.HandyDate;
  */
 public class HandsOn07Logic {
 
+    // TODO wara Logic は src/test/java じゃなくて、src/main/java by jflute 
     @Resource
     protected MemberBhv memberBhv;
     @Resource
@@ -57,6 +58,7 @@ public class HandsOn07Logic {
      * 業務的に必須の関連テーブルも登録
      */
     public Member insertYourselfMember() {
+        // TODO wara 宣言するのは必要になる直前でいいかな by jflute 
         MemberSecurity security = new MemberSecurity();
         MemberService service = new MemberService();
 
@@ -64,6 +66,8 @@ public class HandsOn07Logic {
         member.setMemberName("Cookie Tom");
         member.setMemberAccount("RikiMaru");
         member.setMemberStatusCode_正式会員();
+        // TODO wara ここは、特に会員をinsertする上では全く無関係なので、やらなくていいかな by jflute 
+        // テストの方でも、戻り値のmemberからsecurity取ったりはしてないしね
         member.setMemberSecurityAsOne(security);
         member.setMemberServiceAsOne(service);
         memberBhv.insert(member);
@@ -80,7 +84,7 @@ public class HandsOn07Logic {
         service.setServiceRankCode_Platinum();
         memberServiceBhv.insert(service);
 
-        // TODO wara Serviceもカージナリティ的には必須 by jflute
+        // wara Serviceもカージナリティ的には必須 by jflute
 
         return member;
     }

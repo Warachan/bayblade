@@ -30,24 +30,24 @@ public class HandsOn07LogicTest extends UnitContainerTestCase {
         HandsOn07Logic logic = new HandsOn07Logic();
         inject(logic);
 
-        // TODO 【なおしましたー！】wara ここがAct by jflute
-        // TODO 【なおしましたー!】wara こっちが inserted って名前を付けたりする by jflute
+        // 【なおしましたー！】wara ここがAct by jflute
+        // 【なおしましたー!】wara こっちが inserted って名前を付けたりする by jflute
 
         // ## Act ##
         Member insertedMember = logic.insertMyselfMember();
 
-        // TODO 【直しましたー!】wara ここからがAssert by jflute
+        // 【直しましたー!】wara ここからがAssert by jflute
         // ## Assert ##
         Integer id = insertedMember.getMemberId();
 
         MemberCB cb = new MemberCB();
         cb.query().setMemberId_Equal(id);
 
-        // TODO  【なおしましたー！】wara　actualって名前を付けたりする or こっちの方がメインだから、こっちが member とか by jflute
+        // 【なおしましたー！】wara　actualって名前を付けたりする or こっちの方がメインだから、こっちが member とか by jflute
         Member actualMember = memberBhv.selectEntityWithDeletedCheck(cb);
 
         log(actualMember);
-        // TODO 【なおしましたー！】wara assertNotNull()の第一引数は、failしたときのエラーメッセージ by jflute
+        // 【なおしましたー！】wara assertNotNull()の第一引数は、failしたときのエラーメッセージ by jflute
         assertNotNull(actualMember.getMemberName());
         assertNotNull(actualMember.getBirthdate());
     }
@@ -62,7 +62,7 @@ public class HandsOn07LogicTest extends UnitContainerTestCase {
     @Test
     public void test_insertYourselfMember() {
         // ## Arrange ##
-        // TODO 【やってみましたー！】wara 上と同じ by jflute
+        // 【やってみましたー！】wara 上と同じ by jflute
         HandsOn07Logic logic = new HandsOn07Logic();
         inject(logic);
 
