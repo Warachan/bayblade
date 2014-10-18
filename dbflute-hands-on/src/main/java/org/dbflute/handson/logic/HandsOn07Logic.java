@@ -18,7 +18,7 @@ import org.seasar.dbflute.helper.HandyDate;
  */
 public class HandsOn07Logic {
 
-    // TODO wara Logic は src/test/java じゃなくて、src/main/java by jflute 
+    // TODO　【直しました】 wara Logic は src/test/java じゃなくて、src/main/java by jflute
     @Resource
     protected MemberBhv memberBhv;
     @Resource
@@ -58,20 +58,17 @@ public class HandsOn07Logic {
      * 業務的に必須の関連テーブルも登録
      */
     public Member insertYourselfMember() {
-        // TODO wara 宣言するのは必要になる直前でいいかな by jflute 
-        MemberSecurity security = new MemberSecurity();
-        MemberService service = new MemberService();
+        // TODO 【ずらしました！】wara 宣言するのは必要になる直前でいいかな by jflute
 
         Member member = new Member();
         member.setMemberName("Cookie Tom");
         member.setMemberAccount("RikiMaru");
         member.setMemberStatusCode_正式会員();
-        // TODO wara ここは、特に会員をinsertする上では全く無関係なので、やらなくていいかな by jflute 
+        // TODO 【消しちゃいました！】wara ここは、特に会員をinsertする上では全く無関係なので、やらなくていいかな by jflute
         // テストの方でも、戻り値のmemberからsecurity取ったりはしてないしね
-        member.setMemberSecurityAsOne(security);
-        member.setMemberServiceAsOne(service);
         memberBhv.insert(member);
 
+        MemberSecurity security = new MemberSecurity();
         Integer memberId = member.getMemberId();
         security.setLoginPassword("password");
         security.setMemberId(memberId);
@@ -79,6 +76,7 @@ public class HandsOn07Logic {
         security.setReminderAnswer("Nobody");
         memberSecurityBhv.insert(security);
 
+        MemberService service = new MemberService();
         service.setMemberId(memberId);
         service.setAkirakaniOkashiiKaramuMei(8888);
         service.setServiceRankCode_Platinum();

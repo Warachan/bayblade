@@ -5,6 +5,7 @@ import java.util.*;
 import org.seasar.dbflute.jdbc.Classification;
 import org.seasar.dbflute.jdbc.ClassificationCodeType;
 import org.seasar.dbflute.jdbc.ClassificationMeta;
+import org.seasar.dbflute.jdbc.ClassificationUndefinedHandlingType;
 
 /**
  * The definition of classification.
@@ -709,6 +710,10 @@ public interface CDef extends Classification {
         /** 支払方法 */
         PaymentMethod
         ;
+        public String classificationName() {
+            return name(); // same as definition name
+        }
+
         public Classification codeOf(Object code) {
             if ("Flg".equals(name())) { return CDef.Flg.codeOf(code); }
             if ("MemberStatus".equals(name())) { return CDef.MemberStatus.codeOf(code); }
@@ -772,6 +777,18 @@ public interface CDef extends Classification {
             if ("ProductStatus".equals(name())) { return ClassificationCodeType.String; }
             if ("PaymentMethod".equals(name())) { return ClassificationCodeType.String; }
             return ClassificationCodeType.String; // as default
+        }
+
+        public ClassificationUndefinedHandlingType undefinedHandlingType() {
+            if ("Flg".equals(name())) { return ClassificationUndefinedHandlingType.EXCEPTION; }
+            if ("MemberStatus".equals(name())) { return ClassificationUndefinedHandlingType.EXCEPTION; }
+            if ("ServiceRank".equals(name())) { return ClassificationUndefinedHandlingType.EXCEPTION; }
+            if ("Region".equals(name())) { return ClassificationUndefinedHandlingType.EXCEPTION; }
+            if ("WithdrawalReason".equals(name())) { return ClassificationUndefinedHandlingType.EXCEPTION; }
+            if ("ProductCategory".equals(name())) { return ClassificationUndefinedHandlingType.EXCEPTION; }
+            if ("ProductStatus".equals(name())) { return ClassificationUndefinedHandlingType.EXCEPTION; }
+            if ("PaymentMethod".equals(name())) { return ClassificationUndefinedHandlingType.EXCEPTION; }
+            return ClassificationUndefinedHandlingType.LOGGING; // as default
         }
     }
 }
