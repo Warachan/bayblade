@@ -2,13 +2,17 @@ package org.dbflute.handson.logic;
 
 import javax.annotation.Resource;
 
+import org.dbflute.handson.dbflute.cbean.ProductCB;
 import org.dbflute.handson.dbflute.cbean.PurchaseCB;
+import org.dbflute.handson.dbflute.cbean.PurchasePaymentCB;
 import org.dbflute.handson.dbflute.exbhv.MemberAddressBhv;
 import org.dbflute.handson.dbflute.exbhv.MemberBhv;
 import org.dbflute.handson.dbflute.exbhv.MemberLoginBhv;
 import org.dbflute.handson.dbflute.exbhv.MemberSecurityBhv;
 import org.dbflute.handson.dbflute.exbhv.MemberServiceBhv;
+import org.dbflute.handson.dbflute.exbhv.ProductBhv;
 import org.dbflute.handson.dbflute.exbhv.PurchaseBhv;
+import org.dbflute.handson.dbflute.exbhv.PurchasePaymentBhv;
 import org.dbflute.handson.dbflute.exentity.Member;
 
 /**
@@ -32,6 +36,12 @@ public class HandsOn08Logic {
 
     @Resource
     protected PurchaseBhv purchaseBhv;
+
+    @Resource
+    protected PurchasePaymentBhv purchasePaymentBhv;
+
+    @Resource
+    protected ProductBhv productBhv;
 
     /**
      * void updateMemberChangedToFormalized(Integer memberId, Long versionNo)
@@ -70,6 +80,14 @@ public class HandsOn08Logic {
         PurchaseCB purchaseCB = new PurchaseCB();
         purchaseCB.query().setMemberId_Equal(memberId);
         purchaseBhv.queryDelete(purchaseCB);
+
+        PurchasePaymentCB paymentCB = new PurchasePaymentCB();
+        paymentCB.query().queryPurchase().setMemberId_Equal(memberId);
+        purchasePaymentBhv.queryDelete(paymentCB);
+
+        //　many to 1!
+        ProductCB productCB = new ProductCB();
+
         // 勘違い実装
         //        MemberCB memberCB = new MemberCB();
         //        memberCB.query().setMemberId_Equal(memberId);
