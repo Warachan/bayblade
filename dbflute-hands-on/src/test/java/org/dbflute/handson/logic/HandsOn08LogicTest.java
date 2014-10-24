@@ -3,23 +3,28 @@ package org.dbflute.handson.logic;
 import javax.annotation.Resource;
 
 import org.dbflute.handson.dbflute.cbean.MemberCB;
+import org.dbflute.handson.dbflute.cbean.PurchaseCB;
 import org.dbflute.handson.dbflute.exbhv.MemberBhv;
+import org.dbflute.handson.dbflute.exbhv.PurchaseBhv;
 import org.dbflute.handson.dbflute.exentity.Member;
+import org.dbflute.handson.dbflute.exentity.Purchase;
 import org.dbflute.handson.unit.UnitContainerTestCase;
 import org.junit.Test;
 
 public class HandsOn08LogicTest extends UnitContainerTestCase {
     @Resource
     protected MemberBhv memberBhv;
+    @Resource
+    protected PurchaseBhv purchaseBhv;
 
     /**
      * 対応テストメソッド
-     * test_updateMemberChangedToFormalizedNonstrict_会員が更新されていること()
-     * 任意の仮会員の会員IDを渡して更新すること
+     * test_updateMemberChangedToFormalized_会員が更新されていること()
+     * 任意の仮会員の会員IDとバージョンNOを渡して更新すること
      * 更新処理後、DB上のデータが更新されていることをアサート
      */
     @Test
-    public void test_updateMemberChangedToFormalized() {
+    public void test_updateMemberChangedToFormalized_会員が更新されていること() {
         // ## Arrange ##
         HandsOn08Logic logic = new HandsOn08Logic();
         inject(logic);
@@ -40,7 +45,7 @@ public class HandsOn08LogicTest extends UnitContainerTestCase {
      * 排他制御例外の内容をログに出力して確認すること
      */
     @Test
-    public void test_updateMemberChangedToFormalizedException() {
+    public void test_updateMemberChangedToFormalized_排他制御例外が発生すること() {
         //# Arrange #
         HandsOn08Logic logic = new HandsOn08Logic();
 
@@ -51,4 +56,62 @@ public class HandsOn08LogicTest extends UnitContainerTestCase {
         MemberCB cb = new MemberCB();
     }
 
+    /**
+     * test_updateMemberChangedToFormalizedNonstrict_会員が更新されていること()
+     * 任意の仮会員の会員IDを渡して更新すること
+     * 更新処理後、DB上のデータが更新されていることをアサート
+     */
+    @Test
+    public void test_updateMemberChangedToFormalizedNonstrict_会員が更新されていること() {
+        //# Arrange #
+        HandsOn08Logic logic = new HandsOn08Logic();
+        inject(logic);
+
+        //# Act #
+        logic.updatedMembreChangedToFormailizedNonstrict(7);
+
+        //# Assert #
+        MemberCB cb = new MemberCB();
+        cb.query().setMemberId_Equal(7);
+        Member updatedMember = memberBhv.selectEntityWithDeletedCheck(cb);
+        assertTrue(updatedMember.isMemberStatusCode正式会員());
+    }
+
+    /**
+     * test_updateMemberChangedToFormalizedNonstrict_排他制御例外が発生しないこと()
+     * 通常なら排他制御例外が起きるはずの状況でも排他制御例外が発生しないことをアサート
+     */
+    @Test
+    public void test_updateMemberChangedToFormalizedNonstrict_排他制御例外が発生しないこと() {
+        //# Arrange #
+        HandsOn08Logic logic = new HandsOn08Logic();
+        inject(logic);
+
+        //# Act #
+        logic.updatedMembreChangedToFormailizedNonstrict(7);
+
+        //# Assert #
+    }
+
+    /**
+     * test_deletePurchaseSimply_購入が削除されていること()
+     * 任意の正式会員の会員IDを渡して削除すること
+     * 削除処理後、DB上のデータが削除されていることをアサート
+     */
+    @Test
+    public void test_deletePurchaseSimply_購入が削除されていること() {
+        //# Arrange #
+        HandsOn08Logic logic = new HandsOn08Logic();
+        inject(logic);
+
+        //# Act #
+        logic.deletePurchaseSimply(10);
+
+        //# Assert #
+        PurchaseCB cb = new PurchaseCB();
+        cb.query().setMemberId_Equal(10);
+        Purchase deletedPurchase = purchaseBhv.selectEntity(cb);
+
+        assertNull(deletedPurchase);
+    }
 }
