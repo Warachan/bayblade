@@ -121,7 +121,7 @@ public class HandsOn02Test extends UnitContainerTestCase {
         }
 
         for (Member member : memberList) {
-            // TODO warachan 【直しました】変数名のポリシーがバラバラなので統一しよう by jflute
+            // warachan 【直しました】変数名のポリシーがバラバラなので統一しよう by jflute
             // name -> memberName, timestamp -> formalizedDatetime
             // カラム名を意識した名前にするか、型を意識した名前にするか、ケースバイケースではあるけど、
             // ここではカラム名を意識した方がいいかな

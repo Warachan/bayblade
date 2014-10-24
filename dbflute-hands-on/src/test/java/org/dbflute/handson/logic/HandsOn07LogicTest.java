@@ -52,7 +52,7 @@ public class HandsOn07LogicTest extends UnitContainerTestCase {
         assertNotNull(actualMember.getBirthdate());
     }
 
-    // TODO 【なおった？】wara dfpropのインデントちょっとズレてる by jflute
+    // 【なおった？】wara dfpropのインデントちょっとズレてる by jflute
     /**
      * test_insertYourselfMember_会員が登録されていること()
      * 登録されていることを代表的なカラムを利用してアサート
