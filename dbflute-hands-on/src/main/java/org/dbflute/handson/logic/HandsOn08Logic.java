@@ -2,7 +2,6 @@ package org.dbflute.handson.logic;
 
 import javax.annotation.Resource;
 
-import org.dbflute.handson.dbflute.cbean.ProductCB;
 import org.dbflute.handson.dbflute.cbean.PurchaseCB;
 import org.dbflute.handson.dbflute.cbean.PurchasePaymentCB;
 import org.dbflute.handson.dbflute.exbhv.MemberAddressBhv;
@@ -19,6 +18,7 @@ import org.dbflute.handson.dbflute.exentity.Member;
  * @author mayuko.sakaba
  */
 public class HandsOn08Logic {
+
     @Resource
     protected MemberBhv memberBhv;
 
@@ -85,9 +85,6 @@ public class HandsOn08Logic {
         paymentCB.query().queryPurchase().setMemberId_Equal(memberId);
         purchasePaymentBhv.queryDelete(paymentCB);
 
-        //　many to 1!
-        ProductCB productCB = new ProductCB();
-
         // 勘違い実装
         //        MemberCB memberCB = new MemberCB();
         //        memberCB.query().setMemberId_Equal(memberId);
@@ -108,6 +105,5 @@ public class HandsOn08Logic {
         //        MemberLoginCB loginCB = new MemberLoginCB();
         //        loginCB.query().setMemberId_Equal(memberId);
         //        memberLoginBhv.queryDelete(loginCB);
-
     }
 }

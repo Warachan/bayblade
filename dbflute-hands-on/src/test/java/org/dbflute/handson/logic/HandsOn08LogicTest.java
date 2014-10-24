@@ -7,11 +7,15 @@ import org.dbflute.handson.dbflute.cbean.PurchaseCB;
 import org.dbflute.handson.dbflute.exbhv.MemberBhv;
 import org.dbflute.handson.dbflute.exbhv.PurchaseBhv;
 import org.dbflute.handson.dbflute.exentity.Member;
-import org.dbflute.handson.dbflute.exentity.Purchase;
 import org.dbflute.handson.unit.UnitContainerTestCase;
 import org.junit.Test;
+import org.seasar.dbflute.exception.EntityAlreadyUpdatedException;
 
+/**
+ * @author mayuko.sakaba
+ */
 public class HandsOn08LogicTest extends UnitContainerTestCase {
+
     @Resource
     protected MemberBhv memberBhv;
     @Resource
@@ -51,9 +55,13 @@ public class HandsOn08LogicTest extends UnitContainerTestCase {
 
         //# Act #
         logic.updateMemberChangedToFormalized(5, 0L);
-
-        //# Assert #
-        MemberCB cb = new MemberCB();
+        try {
+            logic.updateMemberChangedToFormalized(5, 0L);
+            //# Assert #
+            fail();
+        } catch (EntityAlreadyUpdatedException e) {
+            log(e.getMessage()); //OK
+        }
     }
 
     /**
@@ -89,6 +97,7 @@ public class HandsOn08LogicTest extends UnitContainerTestCase {
 
         //# Act #
         logic.updatedMembreChangedToFormailizedNonstrict(7);
+        logic.updatedMembreChangedToFormailizedNonstrict(7); // コレで例外が発生しなければいい
 
         //# Assert #
     }
@@ -110,8 +119,8 @@ public class HandsOn08LogicTest extends UnitContainerTestCase {
         //# Assert #
         PurchaseCB cb = new PurchaseCB();
         cb.query().setMemberId_Equal(10);
-        Purchase deletedPurchase = purchaseBhv.selectEntity(cb);
+        int purchaseCount = purchaseBhv.selectCount(cb); // dataを取得する必要がない。（存在するかのみチェック）
 
-        assertNull(deletedPurchase);
+        assertNull(purchaseCount);
     }
 }
