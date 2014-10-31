@@ -10,6 +10,11 @@ import org.dbflute.handson.dbflute.exentity.Member;
 import org.dbflute.handson.unit.UnitContainerTestCase;
 import org.junit.Test;
 import org.seasar.dbflute.exception.EntityAlreadyUpdatedException;
+import org.seasar.dbflute.unit.core.cannonball.CannonballCar;
+import org.seasar.dbflute.unit.core.cannonball.CannonballDragon;
+import org.seasar.dbflute.unit.core.cannonball.CannonballOption;
+import org.seasar.dbflute.unit.core.cannonball.CannonballProjectA;
+import org.seasar.dbflute.unit.core.cannonball.CannonballRun;
 
 /**
  * @author mayuko.sakaba
@@ -122,5 +127,56 @@ public class HandsOn08LogicTest extends UnitContainerTestCase {
         int purchaseCount = purchaseBhv.selectCount(cb); // dataを取得する必要がない。（存在するかのみチェック）
 
         assertNull(purchaseCount);
+    }
+
+    /**
+     * test_IfYouLike_DeadLock()
+     * cannonball()メソッドを使ってデッドロックを発生させてみること
+     * 例外メッセージに "Deadlock" という文字が含まれていることをアサート
+     */
+    @Test
+    public void test_IfYouLike_DeadLock() {
+        cannonball(new CannonballRun() {
+            public void drive(CannonballCar car) {
+                car.projectA(new CannonballProjectA() {
+                    public void plan(CannonballDragon dragon) {
+                        dragon.expectNormallyDone();
+                        updateFoo();
+                    }
+                }, 1);
+                car.projectA(new CannonballProjectA() {
+                    public void plan(CannonballDragon dragon) {
+                        dragon.expectNormallyDone();
+                        updateBar();
+                    }
+                }, 2);
+                car.projectA(new CannonballProjectA() {
+                    public void plan(CannonballDragon dragon) {
+                        dragon.expectOvertime();
+                        updateBar();
+                    }
+                }, 1);
+                car.projectA(new CannonballProjectA() {
+                    public void plan(CannonballDragon dragon) {
+                        updateFoo();
+                    }
+                }, 2);
+            }
+        }, new CannonballOption().threadCount(2).expectExceptionAny("Deadlock"));
+
+    }
+
+    private void updateFoo() {
+        Member member = new Member();
+        member.setMemberId(7);
+        member.setMemberName("I'm annie");
+        memberBhv.updateNonstrict(member);
+    }
+
+    private void updateBar() {
+        Member junior = new Member();
+        junior.setMemberId(9);
+        junior.setMemberName("Junior Annie");
+        memberBhv.updateNonstrict(junior);
     }
 }
