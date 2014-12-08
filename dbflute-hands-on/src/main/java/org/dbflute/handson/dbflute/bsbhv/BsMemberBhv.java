@@ -53,6 +53,8 @@ public abstract class BsMemberBhv extends AbstractBehaviorWritable<Member, Membe
     //                                                                          Definition
     //                                                                          ==========
     /*df:beginQueryPath*/
+    /** OutsideSql for MemberBhv */
+    public static final String PATH_selectOutsideMember = "selectOutsideMember";
     /*df:endQueryPath*/
 
     // ===================================================================================
