@@ -12,13 +12,14 @@
 -- #df:entity#
 
 -- !df:pmb!
+-- !!String memberStatusCode:ref(MEMBER.MEMBER_STATUS_CODE)!!
 -- !!AutoDetect!!
 
 select
-      member.member_id
-     ,member.member_name
-     ,member.birthdate
-     ,member.member_status_code
+      member.MEMBER_ID
+     ,member.MEMBER_NAME
+     ,member.BIRTHDATE
+     ,member.MEMBER_STATUS_CODE
      ,service.AKIRAKANI_OKASHII_KARAMU_MEI
   from member member
   inner join member_service service
@@ -31,7 +32,7 @@ select
    /*IF pmb.memberName != null*/
    and member.MEMBER_NAME like /*pmb.memberName*/'M%'
    /*END*/
-   /*IF pmb.memberName != null*/
+   /*IF pmb.memberStatusCode != null*/
    and member.MEMBER_STATUS_CODE = /*pmb.memberStatusCode*/'FML'
    /*END*/
   /*END*/
