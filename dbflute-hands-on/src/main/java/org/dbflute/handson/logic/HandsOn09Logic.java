@@ -6,6 +6,8 @@ import org.dbflute.handson.dbflute.exbhv.MemberBhv;
 import org.dbflute.handson.dbflute.exbhv.pmbean.OutsideMemberPmb;
 import org.dbflute.handson.dbflute.exentity.customize.OutsideMember;
 
+// TODO wara JavaDoc by jflute
+// TODO wara クラス直下は空行空けましょう by jflute
 public class HandsOn09Logic {
     // ===================================================================================
     //                                                                           Attribute

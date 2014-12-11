@@ -7,8 +7,14 @@ import org.dbflute.handson.dbflute.exentity.customize.OutsideMember;
 import org.dbflute.handson.unit.UnitContainerTestCase;
 import org.junit.Test;
 
+// TODO wara JavaDoc by jflute 
 public class HandsOn09LogicTest extends UnitContainerTestCase {
 
+    // TODO wara 1.0.5Nにアップグレードお願いします by jflute
+    // 1. manage の upgrade (94) を叩く => downloadされる
+    // 2. manage の renewal (1) を叩く => 自動生成される
+    // 3. pom.xml を直して maven-eclipse => おしまい
+    // TODO wara @Testは無しで (Junit3方式でやっているので) by jflute 
     @Test
     /**
      * test_letsOutside_会員が検索されること()
@@ -22,8 +28,20 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
         HandsOn09Logic logic = new HandsOn09Logic();
         inject(logic);
 
+        // TODO wara 外だしSQL: テーブル名、カラム名は大文字で by jflute
+        // TODO wara 外だしSQL: alias名は、mb とか serv by jflute
+        // TODO wara 外だしSQL: ConditionBeanスタイルで書いてみましょう by jflute
+        // |select ...
+        // |     , ...
+        // |  from MEMBER
+        // |    left outer join ...
+        // |    inner join ...
+        // | where ...
+        // |   and ...
+        // | order by ...
         OutsideMemberPmb pmb = new OutsideMemberPmb();
         pmb.setMemberName_PrefixSearch("S");
+        // TODO wara 外だしSQLでも区分値使いたいね「外だしSQL 区分値」でぐぐる by jflute
         pmb.setMemberStatusCode("FML");
 
         // ## Act ##
@@ -34,6 +52,7 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
         for (OutsideMember member : letsOutside) {
             String memberName = member.getMemberName();
             Integer okashiiKaramuMei = member.getAkirakaniOkashiiKaramuMei();
+            // TODO wara ログはアサートより前 by jflute
             assertTrue(memberName.startsWith("S"));
             assertTrue(member.isMemberStatusCode正式会員());
             assertNotNull(okashiiKaramuMei);
@@ -61,6 +80,7 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
 
         // ## Assert ##
         assertHasAnyElement(memberList);
+        // TODO wara size()の検証までしなくていい (要は、全件あるはずってことをアサート) by jflute 
         int count = 0;
         for (OutsideMember outsideMember : memberList) {
             count++;
