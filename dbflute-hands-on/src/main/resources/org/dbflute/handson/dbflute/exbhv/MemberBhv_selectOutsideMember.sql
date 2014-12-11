@@ -12,7 +12,6 @@
 -- #df:entity#
 
 -- !df:pmb!
--- !!String memberStatusCode:ref(MEMBER.MEMBER_STATUS_CODE)!!
 -- !!AutoDetect!!
 
 select

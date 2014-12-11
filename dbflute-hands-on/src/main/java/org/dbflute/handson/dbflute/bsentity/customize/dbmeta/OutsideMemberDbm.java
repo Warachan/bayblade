@@ -90,29 +90,29 @@ public class OutsideMemberDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnMemberId = cci("member_id", "member_id", null, "会員ID", Integer.class, "memberId", null, false, false, false, "INT", 11, 0, null, false, null, null, null, null, null);
-    protected final ColumnInfo _columnMemberName = cci("member_name", "member_name", null, "会員名称", String.class, "memberName", null, false, false, false, "VARCHAR", 200, 0, null, false, null, null, null, null, null);
-    protected final ColumnInfo _columnBirthdate = cci("birthdate", "birthdate", null, "生年月日", java.util.Date.class, "birthdate", null, false, false, false, "DATE", 10, 0, null, false, null, null, null, null, null);
-    protected final ColumnInfo _columnMemberStatusCode = cci("member_status_code", "member_status_code", null, "会員ステータスコード", String.class, "memberStatusCode", null, false, false, false, "CHAR", 3, 0, null, false, null, null, null, null, CDef.DefMeta.MemberStatus);
+    protected final ColumnInfo _columnMemberId = cci("MEMBER_ID", "MEMBER_ID", null, "会員ID", Integer.class, "memberId", null, false, false, false, "INT", 11, 0, null, false, null, null, null, null, null);
+    protected final ColumnInfo _columnMemberName = cci("MEMBER_NAME", "MEMBER_NAME", null, "会員名称", String.class, "memberName", null, false, false, false, "VARCHAR", 200, 0, null, false, null, null, null, null, null);
+    protected final ColumnInfo _columnBirthdate = cci("BIRTHDATE", "BIRTHDATE", null, "生年月日", java.util.Date.class, "birthdate", null, false, false, false, "DATE", 10, 0, null, false, null, null, null, null, null);
+    protected final ColumnInfo _columnMemberStatusCode = cci("MEMBER_STATUS_CODE", "MEMBER_STATUS_CODE", null, "会員ステータスコード", String.class, "memberStatusCode", null, false, false, false, "CHAR", 3, 0, null, false, null, null, null, null, CDef.DefMeta.MemberStatus);
     protected final ColumnInfo _columnAkirakaniOkashiiKaramuMei = cci("AKIRAKANI_OKASHII_KARAMU_MEI", "AKIRAKANI_OKASHII_KARAMU_MEI", null, "サービスポイント数", Integer.class, "akirakaniOkashiiKaramuMei", null, false, false, false, "INT", 11, 0, null, false, null, null, null, null, null);
 
     /**
-     * (会員ID)member_id: {INT(11), refers to member.MEMBER_ID}
+     * (会員ID)MEMBER_ID: {INT(11), refers to member.MEMBER_ID}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnMemberId() { return _columnMemberId; }
     /**
-     * (会員名称)member_name: {VARCHAR(200), refers to member.MEMBER_NAME}
+     * (会員名称)MEMBER_NAME: {VARCHAR(200), refers to member.MEMBER_NAME}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnMemberName() { return _columnMemberName; }
     /**
-     * (生年月日)birthdate: {DATE(10), refers to member.BIRTHDATE}
+     * (生年月日)BIRTHDATE: {DATE(10), refers to member.BIRTHDATE}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnBirthdate() { return _columnBirthdate; }
     /**
-     * (会員ステータスコード)member_status_code: {CHAR(3), refers to member.MEMBER_STATUS_CODE, classification=MemberStatus}
+     * (会員ステータスコード)MEMBER_STATUS_CODE: {CHAR(3), refers to member.MEMBER_STATUS_CODE, classification=MemberStatus}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnMemberStatusCode() { return _columnMemberStatusCode; }

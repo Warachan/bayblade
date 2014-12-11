@@ -18,7 +18,7 @@ import org.dbflute.handson.dbflute.exentity.customize.*;
  *     
  * 
  * [column]
- *     member_id, member_name, birthdate, member_status_code, AKIRAKANI_OKASHII_KARAMU_MEI
+ *     MEMBER_ID, MEMBER_NAME, BIRTHDATE, MEMBER_STATUS_CODE, AKIRAKANI_OKASHII_KARAMU_MEI
  * 
  * [sequence]
  *     
@@ -71,16 +71,16 @@ public abstract class BsOutsideMember implements Entity, Serializable, Cloneable
     // -----------------------------------------------------
     //                                                Column
     //                                                ------
-    /** (会員ID)member_id: {INT(11), refers to member.MEMBER_ID} */
+    /** (会員ID)MEMBER_ID: {INT(11), refers to member.MEMBER_ID} */
     protected Integer _memberId;
 
-    /** (会員名称)member_name: {VARCHAR(200), refers to member.MEMBER_NAME} */
+    /** (会員名称)MEMBER_NAME: {VARCHAR(200), refers to member.MEMBER_NAME} */
     protected String _memberName;
 
-    /** (生年月日)birthdate: {DATE(10), refers to member.BIRTHDATE} */
+    /** (生年月日)BIRTHDATE: {DATE(10), refers to member.BIRTHDATE} */
     protected java.util.Date _birthdate;
 
-    /** (会員ステータスコード)member_status_code: {CHAR(3), refers to member.MEMBER_STATUS_CODE, classification=MemberStatus} */
+    /** (会員ステータスコード)MEMBER_STATUS_CODE: {CHAR(3), refers to member.MEMBER_STATUS_CODE, classification=MemberStatus} */
     protected String _memberStatusCode;
 
     /** (サービスポイント数)AKIRAKANI_OKASHII_KARAMU_MEI: {INT(11), refers to member_service.AKIRAKANI_OKASHII_KARAMU_MEI} */
@@ -151,7 +151,7 @@ public abstract class BsOutsideMember implements Entity, Serializable, Cloneable
     //                                                             =======================
     /**
      * Get the value of memberStatusCode as the classification of MemberStatus. <br />
-     * (会員ステータスコード)member_status_code: {CHAR(3), refers to member.MEMBER_STATUS_CODE, classification=MemberStatus} <br />
+     * (会員ステータスコード)MEMBER_STATUS_CODE: {CHAR(3), refers to member.MEMBER_STATUS_CODE, classification=MemberStatus} <br />
      * 入会から退会までの会員のステータスを示す
      * <p>It's treated as case insensitive and if the code value is null, it returns null.</p>
      * @return The instance of classification definition (as ENUM type). (NullAllowed: when the column value is null)
@@ -162,7 +162,7 @@ public abstract class BsOutsideMember implements Entity, Serializable, Cloneable
 
     /**
      * Set the value of memberStatusCode as the classification of MemberStatus. <br />
-     * (会員ステータスコード)member_status_code: {CHAR(3), refers to member.MEMBER_STATUS_CODE, classification=MemberStatus} <br />
+     * (会員ステータスコード)MEMBER_STATUS_CODE: {CHAR(3), refers to member.MEMBER_STATUS_CODE, classification=MemberStatus} <br />
      * 入会から退会までの会員のステータスを示す
      * @param cdef The instance of classification definition (as ENUM type). (NullAllowed: if null, null value is set to the column)
      */
@@ -414,20 +414,20 @@ public abstract class BsOutsideMember implements Entity, Serializable, Cloneable
     //                                                                            Accessor
     //                                                                            ========
     /**
-     * [get] (会員ID)member_id: {INT(11), refers to member.MEMBER_ID} <br />
+     * [get] (会員ID)MEMBER_ID: {INT(11), refers to member.MEMBER_ID} <br />
      * 会員を識別するID。連番として基本的に自動採番される。<br />
      * （会員IDだけに限らず）採番方法はDBMSによって変わる。
-     * @return The value of the column 'member_id'. (NullAllowed even if selected: for no constraint)
+     * @return The value of the column 'MEMBER_ID'. (NullAllowed even if selected: for no constraint)
      */
     public Integer getMemberId() {
         return _memberId;
     }
 
     /**
-     * [set] (会員ID)member_id: {INT(11), refers to member.MEMBER_ID} <br />
+     * [set] (会員ID)MEMBER_ID: {INT(11), refers to member.MEMBER_ID} <br />
      * 会員を識別するID。連番として基本的に自動採番される。<br />
      * （会員IDだけに限らず）採番方法はDBMSによって変わる。
-     * @param memberId The value of the column 'member_id'. (NullAllowed: null update allowed for no constraint)
+     * @param memberId The value of the column 'MEMBER_ID'. (NullAllowed: null update allowed for no constraint)
      */
     public void setMemberId(Integer memberId) {
         __modifiedProperties.addPropertyName("memberId");
@@ -435,18 +435,18 @@ public abstract class BsOutsideMember implements Entity, Serializable, Cloneable
     }
 
     /**
-     * [get] (会員名称)member_name: {VARCHAR(200), refers to member.MEMBER_NAME} <br />
+     * [get] (会員名称)MEMBER_NAME: {VARCHAR(200), refers to member.MEMBER_NAME} <br />
      * 会員のフルネームの名称。
-     * @return The value of the column 'member_name'. (NullAllowed even if selected: for no constraint)
+     * @return The value of the column 'MEMBER_NAME'. (NullAllowed even if selected: for no constraint)
      */
     public String getMemberName() {
         return convertEmptyToNull(_memberName);
     }
 
     /**
-     * [set] (会員名称)member_name: {VARCHAR(200), refers to member.MEMBER_NAME} <br />
+     * [set] (会員名称)MEMBER_NAME: {VARCHAR(200), refers to member.MEMBER_NAME} <br />
      * 会員のフルネームの名称。
-     * @param memberName The value of the column 'member_name'. (NullAllowed: null update allowed for no constraint)
+     * @param memberName The value of the column 'MEMBER_NAME'. (NullAllowed: null update allowed for no constraint)
      */
     public void setMemberName(String memberName) {
         __modifiedProperties.addPropertyName("memberName");
@@ -454,18 +454,18 @@ public abstract class BsOutsideMember implements Entity, Serializable, Cloneable
     }
 
     /**
-     * [get] (生年月日)birthdate: {DATE(10), refers to member.BIRTHDATE} <br />
+     * [get] (生年月日)BIRTHDATE: {DATE(10), refers to member.BIRTHDATE} <br />
      * 必須項目ではないので、このデータがない会員もいる。
-     * @return The value of the column 'birthdate'. (NullAllowed even if selected: for no constraint)
+     * @return The value of the column 'BIRTHDATE'. (NullAllowed even if selected: for no constraint)
      */
     public java.util.Date getBirthdate() {
         return _birthdate;
     }
 
     /**
-     * [set] (生年月日)birthdate: {DATE(10), refers to member.BIRTHDATE} <br />
+     * [set] (生年月日)BIRTHDATE: {DATE(10), refers to member.BIRTHDATE} <br />
      * 必須項目ではないので、このデータがない会員もいる。
-     * @param birthdate The value of the column 'birthdate'. (NullAllowed: null update allowed for no constraint)
+     * @param birthdate The value of the column 'BIRTHDATE'. (NullAllowed: null update allowed for no constraint)
      */
     public void setBirthdate(java.util.Date birthdate) {
         __modifiedProperties.addPropertyName("birthdate");
@@ -473,16 +473,16 @@ public abstract class BsOutsideMember implements Entity, Serializable, Cloneable
     }
 
     /**
-     * [get] (会員ステータスコード)member_status_code: {CHAR(3), refers to member.MEMBER_STATUS_CODE, classification=MemberStatus} <br />
-     * @return The value of the column 'member_status_code'. (NullAllowed even if selected: for no constraint)
+     * [get] (会員ステータスコード)MEMBER_STATUS_CODE: {CHAR(3), refers to member.MEMBER_STATUS_CODE, classification=MemberStatus} <br />
+     * @return The value of the column 'MEMBER_STATUS_CODE'. (NullAllowed even if selected: for no constraint)
      */
     public String getMemberStatusCode() {
         return convertEmptyToNull(_memberStatusCode);
     }
 
     /**
-     * [set] (会員ステータスコード)member_status_code: {CHAR(3), refers to member.MEMBER_STATUS_CODE, classification=MemberStatus} <br />
-     * @param memberStatusCode The value of the column 'member_status_code'. (NullAllowed: null update allowed for no constraint)
+     * [set] (会員ステータスコード)MEMBER_STATUS_CODE: {CHAR(3), refers to member.MEMBER_STATUS_CODE, classification=MemberStatus} <br />
+     * @param memberStatusCode The value of the column 'MEMBER_STATUS_CODE'. (NullAllowed: null update allowed for no constraint)
      */
     protected void setMemberStatusCode(String memberStatusCode) {
         __modifiedProperties.addPropertyName("memberStatusCode");
@@ -512,7 +512,7 @@ public abstract class BsOutsideMember implements Entity, Serializable, Cloneable
 
     /**
      * For framework so basically DON'T use this method.
-     * @param memberStatusCode The value of the column 'member_status_code'. (NullAllowed: null update allowed for no constraint)
+     * @param memberStatusCode The value of the column 'MEMBER_STATUS_CODE'. (NullAllowed: null update allowed for no constraint)
      */
     public void mynativeMappingMemberStatusCode(String memberStatusCode) {
         setMemberStatusCode(memberStatusCode);

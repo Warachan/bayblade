@@ -24,7 +24,7 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
 
         OutsideMemberPmb pmb = new OutsideMemberPmb();
         pmb.setMemberName_PrefixSearch("S");
-        //        pmb.setMemberStatusCode_正式会員();
+        pmb.setMemberStatusCode("FML");
 
         // ## Act ##
         List<OutsideMember> letsOutside = logic.letsOutside(pmb);
