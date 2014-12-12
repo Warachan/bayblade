@@ -14,24 +14,23 @@
 -- !df:pmb!
 -- !!AutoDetect!!
 
-select
-      member.MEMBER_ID
-     ,member.MEMBER_NAME
-     ,member.BIRTHDATE
-     ,member.MEMBER_STATUS_CODE
-     ,service.AKIRAKANI_OKASHII_KARAMU_MEI
-  from member member
-  inner join member_service service
-  on service.member_id = member.member_id
-  /*BEGIN*/
-  where
+select mb.MEMBER_ID
+     , mb.MEMBER_NAME
+     , mb.BIRTHDATE
+     , mb.MEMBER_STATUS_CODE
+     , serv.AKIRAKANI_OKASHII_KARAMU_MEI
+ from MEMBER mb
+   inner join MEMBER_SERVICE serv
+     on serv.MEMBER_ID = mb.MEMBER_ID
+ /*BEGIN*/
+ where
    /*IF pmb.memberId != null*/
-   member.MEMBER_ID = /*pmb.memberId*/3
+   mb.MEMBER_ID = /*pmb.memberId*/3
    /*END*/
    /*IF pmb.memberName != null*/
-   and member.MEMBER_NAME like /*pmb.memberName*/'M%'
+   and mb.MEMBER_NAME like /*pmb.memberName*/'M%'
    /*END*/
    /*IF pmb.memberStatusCode != null*/
-   and member.MEMBER_STATUS_CODE = /*pmb.memberStatusCode*/'FML'
+   and mb.MEMBER_STATUS_CODE = /*pmb.memberStatusCode*/'FML'
    /*END*/
-  /*END*/
+ /*END*/

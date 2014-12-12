@@ -8,7 +8,8 @@
         <column autoIncrement="true"
             comment="会員ID: 会員を識別するID。連番として基本的に自動採番される。&#xa;（会員IDだけに限らず）採番方法はDBMSによって変わる。"
             dbType="INT" javaType="Integer" name="MEMBER_ID"
-            pkName="PRIMARY" primaryKey="true" required="true" size="10" type="INTEGER"/>
+            pkName="PRIMARY" pkPosition="1" primaryKey="true"
+            required="true" size="10" type="INTEGER"/>
         <column comment="会員名称: 会員のフルネームの名称。" dbType="VARCHAR"
             javaType="String" name="MEMBER_NAME" required="true"
             size="200" type="VARCHAR"/>
@@ -61,7 +62,8 @@
         <column autoIncrement="true"
             comment="会員住所ID: 会員住所を識別するID。&#xa;履歴分も含むテーブルなので、これ自体はFKではない。"
             dbType="INT" javaType="Integer" name="MEMBER_ADDRESS_ID"
-            pkName="PRIMARY" primaryKey="true" required="true" size="10" type="INTEGER"/>
+            pkName="PRIMARY" pkPosition="1" primaryKey="true"
+            required="true" size="10" type="INTEGER"/>
         <column
             comment="会員ID: 会員を参照するID。&#xa;履歴分を含むため、これだけではユニークにはならない。"
             dbType="INT" javaType="Integer" name="MEMBER_ID"
@@ -111,7 +113,7 @@
         schema="exampledb.$$NoNameSchema$$" type="TABLE">
         <column autoIncrement="true" comment="会員ログインID" dbType="BIGINT"
             javaType="Long" name="MEMBER_LOGIN_ID" pkName="PRIMARY"
-            primaryKey="true" required="true" size="19" type="BIGINT"/>
+            pkPosition="1" primaryKey="true" required="true" size="19" type="BIGINT"/>
         <column comment="会員ID" dbType="INT" javaType="Integer"
             name="MEMBER_ID" required="true" size="10" type="INTEGER"/>
         <column comment="ログイン日時: ログインした瞬間の日時。" dbType="DATETIME"
@@ -147,7 +149,8 @@
         name="member_security" schema="exampledb.$$NoNameSchema$$" type="TABLE">
         <column comment="会員ID: そのまま one-to-one を構成するためのFKとなる。"
             dbType="INT" javaType="Integer" name="MEMBER_ID"
-            pkName="PRIMARY" primaryKey="true" required="true" size="10" type="INTEGER"/>
+            pkName="PRIMARY" pkPosition="1" primaryKey="true"
+            required="true" size="10" type="INTEGER"/>
         <column
             comment="ログインパスワード: ログイン時に利用するパスワード。&#xa;本当は良くないが、Exampleなのでひとまず暗号化していない。"
             dbType="VARCHAR" javaType="String" name="LOGIN_PASSWORD"
@@ -179,7 +182,8 @@
         name="member_service" schema="exampledb.$$NoNameSchema$$" type="TABLE">
         <column comment="会員ID: 会員を参照するID。ユニークなので、会員とは one-to-one の関係に。"
             dbType="INT" javaType="Integer" name="MEMBER_ID"
-            pkName="PRIMARY" primaryKey="true" required="true" size="10" type="INTEGER"/>
+            pkName="PRIMARY" pkPosition="1" primaryKey="true"
+            required="true" size="10" type="INTEGER"/>
         <column
             comment="サービスポイント数: 会員が現在利用できるサービスポイントの数。&#xa;基本的に、購入時には増えてポイントを使ったら減る。"
             dbType="INT" javaType="Integer"
@@ -220,7 +224,7 @@
         schema="exampledb.$$NoNameSchema$$" type="TABLE">
         <column comment="会員ステータスコード: 会員ステータスを識別するコード。" dbType="CHAR"
             javaType="String" name="MEMBER_STATUS_CODE" pkName="PRIMARY"
-            primaryKey="true" required="true" size="3" type="CHAR"/>
+            pkPosition="1" primaryKey="true" required="true" size="3" type="CHAR"/>
         <column comment="会員ステータス名称" dbType="VARCHAR" javaType="String"
             name="MEMBER_STATUS_NAME" required="true" size="50" type="VARCHAR"/>
         <column
@@ -238,8 +242,8 @@
     <table comment="会員退会情報: 退会会員の退会に関する詳細な情報。&#xa;退会会員のみデータが存在する。"
         name="member_withdrawal" schema="exampledb.$$NoNameSchema$$" type="TABLE">
         <column comment="" dbType="INT" javaType="Integer"
-            name="MEMBER_ID" pkName="PRIMARY" primaryKey="true"
-            required="true" size="10" type="INTEGER"/>
+            name="MEMBER_ID" pkName="PRIMARY" pkPosition="1"
+            primaryKey="true" required="true" size="10" type="INTEGER"/>
         <column
             comment="退会理由コード: 退会した定型理由を参照するコード。&#xa;何も言わずに退会する会員もいるので必須項目ではない。"
             dbType="CHAR" javaType="String"
@@ -278,7 +282,7 @@
         schema="exampledb.$$NoNameSchema$$" type="TABLE">
         <column autoIncrement="true" comment="" dbType="INT"
             javaType="Integer" name="PRODUCT_ID" pkName="PRIMARY"
-            primaryKey="true" required="true" size="10" type="INTEGER"/>
+            pkPosition="1" primaryKey="true" required="true" size="10" type="INTEGER"/>
         <column comment="商品名称" dbType="VARCHAR" javaType="String"
             name="PRODUCT_NAME" required="true" size="50" type="VARCHAR"/>
         <column comment="商品ハンドルコード: 商品を識別する業務上のコード。" dbType="VARCHAR"
@@ -326,7 +330,7 @@
     <table comment="商品カテゴリ: 商品のカテゴリを表現するマスタ。&#xa;自己参照の階層になっている。"
         name="product_category" schema="exampledb.$$NoNameSchema$$" type="TABLE">
         <column comment="商品カテゴリコード" dbType="CHAR" javaType="String"
-            name="PRODUCT_CATEGORY_CODE" pkName="PRIMARY"
+            name="PRODUCT_CATEGORY_CODE" pkName="PRIMARY" pkPosition="1"
             primaryKey="true" required="true" size="3" type="CHAR"/>
         <column comment="商品カテゴリ名称" dbType="VARCHAR" javaType="String"
             name="PRODUCT_CATEGORY_NAME" required="true" size="50" type="VARCHAR"/>
@@ -343,7 +347,7 @@
     <table comment="商品ステータス" name="product_status"
         schema="exampledb.$$NoNameSchema$$" type="TABLE">
         <column comment="商品ステータスコード" dbType="CHAR" javaType="String"
-            name="PRODUCT_STATUS_CODE" pkName="PRIMARY"
+            name="PRODUCT_STATUS_CODE" pkName="PRIMARY" pkPosition="1"
             primaryKey="true" required="true" size="3" type="CHAR"/>
         <column comment="商品ステータス名称" dbType="VARCHAR" javaType="String"
             name="PRODUCT_STATUS_NAME" required="true" size="50" type="VARCHAR"/>
@@ -353,7 +357,7 @@
         name="purchase" schema="exampledb.$$NoNameSchema$$" type="TABLE">
         <column autoIncrement="true" comment="購入ID: 連番" dbType="BIGINT"
             javaType="Long" name="PURCHASE_ID" pkName="PRIMARY"
-            primaryKey="true" required="true" size="19" type="BIGINT"/>
+            pkPosition="1" primaryKey="true" required="true" size="19" type="BIGINT"/>
         <column
             comment="会員ID: 会員を参照するID。&#xa;購入を識別する自然キー（複合ユニーク制約）の筆頭要素。"
             dbType="INT" javaType="Integer" name="MEMBER_ID"
@@ -422,7 +426,8 @@
         name="purchase_payment" schema="exampledb.$$NoNameSchema$$" type="TABLE">
         <column autoIncrement="true" comment="購入支払ID: 連番"
             dbType="BIGINT" javaType="Long" name="PURCHASE_PAYMENT_ID"
-            pkName="PRIMARY" primaryKey="true" required="true" size="19" type="BIGINT"/>
+            pkName="PRIMARY" pkPosition="1" primaryKey="true"
+            required="true" size="19" type="BIGINT"/>
         <column comment="購入ID: 支払い対象の購入へのID" dbType="BIGINT"
             javaType="Long" name="PURCHASE_ID" required="true" size="19" type="BIGINT"/>
         <column comment="支払金額: 支払った金額。さて、小数点なのはなぜでしょう？" dbType="DECIMAL"
@@ -459,8 +464,8 @@
     <table comment="地域: 主に会員の住所に対応する地域。&#xa;かなりざっくりした感じではある。"
         name="region" schema="exampledb.$$NoNameSchema$$" type="TABLE">
         <column comment="地域ID" dbType="INT" javaType="Integer"
-            name="REGION_ID" pkName="PRIMARY" primaryKey="true"
-            required="true" size="10" type="INTEGER"/>
+            name="REGION_ID" pkName="PRIMARY" pkPosition="1"
+            primaryKey="true" required="true" size="10" type="INTEGER"/>
         <column comment="地域名称" dbType="VARCHAR" javaType="String"
             name="REGION_NAME" required="true" size="50" type="VARCHAR"/>
     </table>
@@ -468,7 +473,7 @@
         name="service_rank" schema="exampledb.$$NoNameSchema$$" type="TABLE">
         <column comment="サービスランクコード: サービスランクを識別するコード。" dbType="CHAR"
             javaType="String" name="SERVICE_RANK_CODE" pkName="PRIMARY"
-            primaryKey="true" required="true" size="3" type="CHAR"/>
+            pkPosition="1" primaryKey="true" required="true" size="3" type="CHAR"/>
         <column
             comment="サービスランク名称: サービスランクの名称。&#xa;（ゴールドとかプラチナとか基本的には威厳のある名前）"
             dbType="VARCHAR" javaType="String" name="SERVICE_RANK_NAME"
@@ -492,7 +497,7 @@
         schema="exampledb.$$NoNameSchema$$" type="TABLE">
         <column comment="退会理由コード" dbType="CHAR" javaType="String"
             name="WITHDRAWAL_REASON_CODE" pkName="PRIMARY"
-            primaryKey="true" required="true" size="3" type="CHAR"/>
+            pkPosition="1" primaryKey="true" required="true" size="3" type="CHAR"/>
         <column
             comment="退会理由テキスト: 退会理由の内容。テキスト形式なので目いっぱい書けるが、&#xa;そうするとUI側できれいに見せるのが大変でしょうね。"
             dbType="TEXT" javaType="String"

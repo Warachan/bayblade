@@ -269,6 +269,7 @@ dl.procedurelist dd.column pre {
 <p class="mainschema">generated from <strong>exampledb</strong></p>
 <div class="navilinkarea">
 <p class="sublink"><a href="#cdef">Classification Definition</a></p>
+<p class="sublink"><a href="#outsidesql">OutsideSql List</a></p>
 <p class="sisterlink"><a href="./history-exampledb.html">to HistoryHTML</a></p>
 </div>
 
@@ -445,8 +446,9 @@ dl.procedurelist dd.column pre {
 	</tbody>
 </table>
 
-  <h2 id="member" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=6, columnCount=11">
+<h2 id="member" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=6, columnCount=11">
 (会員)MEMBER
+&nbsp;<span class="bqpcount"><a href="#member_sql">(outsideSql=2)</a></span>
 </h2>
 <p class="tablecomment">会員登録時にデータが登録される。<br />基本的に物理削除はなく、退会したらステータスが退会会員になる。</p>
 <table summary="Columns in MEMBER">
@@ -669,7 +671,7 @@ dl.procedurelist dd.column pre {
 		<td class="subcell">Long</td>
 	</tr>
 </table>
-  <h2 id="member_address" title="type=TABLE, primaryKey={MEMBER_ADDRESS_ID}, nameLength=14, columnCount=11">
+<h2 id="member_address" title="type=TABLE, primaryKey={MEMBER_ADDRESS_ID}, nameLength=14, columnCount=11">
 (会員住所情報)MEMBER_ADDRESS
 </h2>
 <p class="tablecomment">会員の住所に関する情報。<br />同時に有効期間ごとに履歴管理されている。</p>
@@ -893,7 +895,7 @@ dl.procedurelist dd.column pre {
 		<td class="subcell">Long</td>
 	</tr>
 </table>
-  <h2 id="member_login" title="type=TABLE, primaryKey={MEMBER_LOGIN_ID}, nameLength=12, columnCount=5">
+<h2 id="member_login" title="type=TABLE, primaryKey={MEMBER_LOGIN_ID}, nameLength=12, columnCount=5">
 (会員ログイン情報)MEMBER_LOGIN
 </h2>
 <p class="tablecomment">ログインするたびに登録されるログイン履歴。</p>
@@ -1009,7 +1011,7 @@ dl.procedurelist dd.column pre {
 		<td class="subcell">String</td>
 	</tr>
 </table>
-  <h2 id="member_security" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=15, columnCount=9">
+<h2 id="member_security" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=15, columnCount=9">
 (会員セキュリティ情報)MEMBER_SECURITY
 </h2>
 <p class="tablecomment">会員とは&nbsp;one-to-one&nbsp;で、会員一人につき必ず一つのセキュリティ情報がある</p>
@@ -1197,7 +1199,7 @@ dl.procedurelist dd.column pre {
 		<td class="subcell">Long</td>
 	</tr>
 </table>
-  <h2 id="member_service" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=14, columnCount=8">
+<h2 id="member_service" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=14, columnCount=8">
 (会員サービス)MEMBER_SERVICE
 </h2>
 <p class="tablecomment">会員のサービス情報（ポイントサービスなど）。</p>
@@ -1367,7 +1369,7 @@ dl.procedurelist dd.column pre {
 		<td class="subcell">Long</td>
 	</tr>
 </table>
-  <h2 id="member_status" title="type=TABLE, primaryKey={MEMBER_STATUS_CODE}, nameLength=13, columnCount=4">
+<h2 id="member_status" title="type=TABLE, primaryKey={MEMBER_STATUS_CODE}, nameLength=13, columnCount=4">
 (会員ステータス)MEMBER_STATUS
 </h2>
 <table summary="Columns in MEMBER_STATUS">
@@ -1464,7 +1466,7 @@ dl.procedurelist dd.column pre {
 		<td class="subcell">Integer</td>
 	</tr>
 </table>
-  <h2 id="member_withdrawal" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=17, columnCount=8">
+<h2 id="member_withdrawal" title="type=TABLE, primaryKey={MEMBER_ID}, nameLength=17, columnCount=8">
 (会員退会情報)MEMBER_WITHDRAWAL
 </h2>
 <p class="tablecomment">退会会員の退会に関する詳細な情報。<br />退会会員のみデータが存在する。</p>
@@ -1634,7 +1636,7 @@ dl.procedurelist dd.column pre {
 		<td class="subcell">String</td>
 	</tr>
 </table>
-  <h2 id="product" title="type=TABLE, primaryKey={PRODUCT_ID}, nameLength=7, columnCount=11">
+<h2 id="product" title="type=TABLE, primaryKey={PRODUCT_ID}, nameLength=7, columnCount=11">
 (商品)PRODUCT
 </h2>
 <table summary="Columns in PRODUCT">
@@ -1857,7 +1859,7 @@ dl.procedurelist dd.column pre {
 		<td class="subcell">Long</td>
 	</tr>
 </table>
-  <h2 id="product_category" title="type=TABLE, primaryKey={PRODUCT_CATEGORY_CODE}, nameLength=16, columnCount=3">
+<h2 id="product_category" title="type=TABLE, primaryKey={PRODUCT_CATEGORY_CODE}, nameLength=16, columnCount=3">
 (商品カテゴリ)PRODUCT_CATEGORY
 </h2>
 <p class="tablecomment">商品のカテゴリを表現するマスタ。<br />自己参照の階層になっている。</p>
@@ -1937,7 +1939,7 @@ dl.procedurelist dd.column pre {
 		<td class="subcell">String</td>
 	</tr>
 </table>
-  <h2 id="product_status" title="type=TABLE, primaryKey={PRODUCT_STATUS_CODE}, nameLength=14, columnCount=2">
+<h2 id="product_status" title="type=TABLE, primaryKey={PRODUCT_STATUS_CODE}, nameLength=14, columnCount=2">
 (商品ステータス)PRODUCT_STATUS
 </h2>
 <table summary="Columns in PRODUCT_STATUS">
@@ -1995,7 +1997,7 @@ dl.procedurelist dd.column pre {
 		<td class="subcell">String</td>
 	</tr>
 </table>
-  <h2 id="purchase" title="type=TABLE, primaryKey={PURCHASE_ID}, nameLength=8, columnCount=12">
+<h2 id="purchase" title="type=TABLE, primaryKey={PURCHASE_ID}, nameLength=8, columnCount=12">
 (購入)PURCHASE
 </h2>
 <p class="tablecomment">一つの商品に対する一回の購入を表現する。<br />一回の購入で一つの商品を複数個買うこともある。</p>
@@ -2237,7 +2239,7 @@ dl.procedurelist dd.column pre {
 		<td class="subcell">Long</td>
 	</tr>
 </table>
-  <h2 id="purchase_payment" title="type=TABLE, primaryKey={PURCHASE_PAYMENT_ID}, nameLength=16, columnCount=9">
+<h2 id="purchase_payment" title="type=TABLE, primaryKey={PURCHASE_PAYMENT_ID}, nameLength=16, columnCount=9">
 (購入支払)PURCHASE_PAYMENT
 </h2>
 <p class="tablecomment">購入に対する支払。<br />分割払いもできるのでmanyとなり、会員からの孫テーブルのテストができてうれしい。</p>
@@ -2425,7 +2427,7 @@ dl.procedurelist dd.column pre {
 		<td class="subcell">String</td>
 	</tr>
 </table>
-  <h2 id="region" title="type=TABLE, primaryKey={REGION_ID}, nameLength=6, columnCount=2">
+<h2 id="region" title="type=TABLE, primaryKey={REGION_ID}, nameLength=6, columnCount=2">
 (地域)REGION
 </h2>
 <p class="tablecomment">主に会員の住所に対応する地域。<br />かなりざっくりした感じではある。</p>
@@ -2484,7 +2486,7 @@ dl.procedurelist dd.column pre {
 		<td class="subcell">String</td>
 	</tr>
 </table>
-  <h2 id="service_rank" title="type=TABLE, primaryKey={SERVICE_RANK_CODE}, nameLength=12, columnCount=6">
+<h2 id="service_rank" title="type=TABLE, primaryKey={SERVICE_RANK_CODE}, nameLength=12, columnCount=6">
 (サービスランク)SERVICE_RANK
 </h2>
 <p class="tablecomment">会員のサービスレベルを表現するランク。<br />（ゴールドとかプラチナとか）</p>
@@ -2618,7 +2620,7 @@ dl.procedurelist dd.column pre {
 		<td class="subcell">Integer</td>
 	</tr>
 </table>
-  <h2 id="withdrawal_reason" title="type=TABLE, primaryKey={WITHDRAWAL_REASON_CODE}, nameLength=17, columnCount=3">
+<h2 id="withdrawal_reason" title="type=TABLE, primaryKey={WITHDRAWAL_REASON_CODE}, nameLength=17, columnCount=3">
 (退会理由)WITHDRAWAL_REASON
 </h2>
 <p class="tablecomment">会員に選ばせる定型的な退会理由のマスタ。</p>
@@ -2992,6 +2994,36 @@ dl.procedurelist dd.column pre {
 	</tbody>
 </table>
 
+<h2 id="outsidesql">OutsideSql List</h2>
+<h3 id="member_sql"><a href="#member">MEMBER</a></h3>
+<dl class="bqplist">
+	<dt>(OutsideSql&nbsp;for&nbsp;MemberBhv)selectOutsideMember</dt>
+	<dd>
+		<pre class="commentdesc">    会員ID、会員名称、生年月日、会員ステータス名称、サービスポイント数を取得
+    会員IDの等値、会員名称の前方一致、会員ステータスの等値を and で連結
+    それぞれ条件値がない場合は条件自体が無効になるように
+    全ての条件値がない場合は全件検索になるように</pre>
+	</dd>
+	<dd class="subinfo">
+		<span class="file">MemberBhv_selectOutsideMember.sql</span>
+		<span class="ctet">(df:entity)</span>
+		<span class="pmb">(df:pmb)</span>
+	</dd>
+	<dt>(ページング検索)selectPartOfMember</dt>
+	<dd>
+		<pre class="commentdesc">  SQL Description here.</pre>
+	</dd>
+	<dd class="subinfo">
+		<span class="file">MemberBhv_selectPartOfMember.sql</span>
+		<span class="ctet">(df:entity)</span>
+		<span class="pmb">(df:pmb extends Paging)</span>
+	</dd>
+</dl>
+
+<h2>Thanks</h2>
+<p>
+	Created by <a href="http://dbflute.seasar.org/">DBFlute(AutoGenerator)</a>
+</p>
 <script>
 /**
  * Incremental Search contributed by makotot (Thanks!)

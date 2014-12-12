@@ -1,13 +1,11 @@
 package org.dbflute.handson.dbflute.bsentity.customize;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Set;
-import java.util.Date;
 
-import org.seasar.dbflute.Entity;
 import org.seasar.dbflute.dbmeta.DBMeta;
+import org.seasar.dbflute.dbmeta.AbstractEntity;
+import org.seasar.dbflute.dbmeta.accessory.CustomizeEntity;
 import org.dbflute.handson.dbflute.allcommon.CDef;
 import org.dbflute.handson.dbflute.exentity.customize.*;
 
@@ -57,7 +55,7 @@ import org.dbflute.handson.dbflute.exentity.customize.*;
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
-public abstract class BsOutsideMember implements Entity, Serializable, Cloneable {
+public abstract class BsOutsideMember extends AbstractEntity implements CustomizeEntity {
 
     // ===================================================================================
     //                                                                          Definition
@@ -85,18 +83,6 @@ public abstract class BsOutsideMember implements Entity, Serializable, Cloneable
 
     /** (サービスポイント数)AKIRAKANI_OKASHII_KARAMU_MEI: {INT(11), refers to member_service.AKIRAKANI_OKASHII_KARAMU_MEI} */
     protected Integer _akirakaniOkashiiKaramuMei;
-
-    // -----------------------------------------------------
-    //                                              Internal
-    //                                              --------
-    /** The unique-driven properties for this entity. (NotNull) */
-    protected final EntityUniqueDrivenProperties __uniqueDrivenProperties = newUniqueDrivenProperties();
-
-    /** The modified properties for this entity. (NotNull) */
-    protected final EntityModifiedProperties __modifiedProperties = newModifiedProperties();
-
-    /** Is the entity created by DBFlute select process? */
-    protected boolean __createdBySelect;
 
     // ===================================================================================
     //                                                                          Table Name
@@ -133,17 +119,6 @@ public abstract class BsOutsideMember implements Entity, Serializable, Cloneable
      */
     public boolean hasPrimaryKeyValue() {
         return false;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public Set<String> myuniqueDrivenProperties() {
-        return __uniqueDrivenProperties.getPropertyNames();
-    }
-
-    protected EntityUniqueDrivenProperties newUniqueDrivenProperties() {
-        return new EntityUniqueDrivenProperties();
     }
 
     // ===================================================================================
@@ -254,160 +229,63 @@ public abstract class BsOutsideMember implements Entity, Serializable, Cloneable
     }
 
     // ===================================================================================
-    //                                                                 Modified Properties
-    //                                                                 ===================
-    /**
-     * {@inheritDoc}
-     */
-    public Set<String> modifiedProperties() {
-        return __modifiedProperties.getPropertyNames();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public void clearModifiedInfo() {
-        __modifiedProperties.clear();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public boolean hasModification() {
-        return !__modifiedProperties.isEmpty();
-    }
-
-    protected EntityModifiedProperties newModifiedProperties() {
-        return new EntityModifiedProperties();
-    }
-
-    // ===================================================================================
-    //                                                                     Birthplace Mark
-    //                                                                     ===============
-    /**
-     * {@inheritDoc}
-     */
-    public void markAsSelect() {
-        __createdBySelect = true;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public boolean createdBySelect() {
-        return __createdBySelect;
-    }
-
-    // ===================================================================================
     //                                                                      Basic Override
     //                                                                      ==============
-    /**
-     * Determine the object is equal with this. <br />
-     * If primary-keys or columns of the other are same as this one, returns true.
-     * @param obj The object as other entity. (NullAllowed: if null, returns false fixedly)
-     * @return Comparing result.
-     */
-    public boolean equals(Object obj) {
-        if (obj == null || !(obj instanceof BsOutsideMember)) { return false; }
-        BsOutsideMember other = (BsOutsideMember)obj;
-        if (!xSV(getMemberId(), other.getMemberId())) { return false; }
-        if (!xSV(getMemberName(), other.getMemberName())) { return false; }
-        if (!xSV(getBirthdate(), other.getBirthdate())) { return false; }
-        if (!xSV(getMemberStatusCode(), other.getMemberStatusCode())) { return false; }
-        if (!xSV(getAkirakaniOkashiiKaramuMei(), other.getAkirakaniOkashiiKaramuMei())) { return false; }
-        return true;
-    }
-    protected boolean xSV(Object v1, Object v2) {
-        return FunCustodial.isSameValue(v1, v2);
+    @Override
+    protected boolean doEquals(Object obj) {
+        if (obj instanceof BsOutsideMember) {
+            BsOutsideMember other = (BsOutsideMember)obj;
+            if (!xSV(_memberId, other._memberId)) { return false; }
+            if (!xSV(_memberName, other._memberName)) { return false; }
+            if (!xSV(_birthdate, other._birthdate)) { return false; }
+            if (!xSV(_memberStatusCode, other._memberStatusCode)) { return false; }
+            if (!xSV(_akirakaniOkashiiKaramuMei, other._akirakaniOkashiiKaramuMei)) { return false; }
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    /**
-     * Calculate the hash-code from primary-keys or columns.
-     * @return The hash-code from primary-key or columns.
-     */
-    public int hashCode() {
-        int hs = 17;
+    @Override
+    protected int doHashCode(int initial) {
+        int hs = initial;
         hs = xCH(hs, getTableDbName());
-        hs = xCH(hs, getMemberId());
-        hs = xCH(hs, getMemberName());
-        hs = xCH(hs, getBirthdate());
-        hs = xCH(hs, getMemberStatusCode());
-        hs = xCH(hs, getAkirakaniOkashiiKaramuMei());
+        hs = xCH(hs, _memberId);
+        hs = xCH(hs, _memberName);
+        hs = xCH(hs, _birthdate);
+        hs = xCH(hs, _memberStatusCode);
+        hs = xCH(hs, _akirakaniOkashiiKaramuMei);
         return hs;
     }
-    protected int xCH(int hs, Object vl) {
-        return FunCustodial.calculateHashcode(hs, vl);
+
+    @Override
+    protected String doBuildStringWithRelation(String li) {
+        return "";
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public int instanceHash() {
-        return super.hashCode();
-    }
-
-    /**
-     * Convert to display string of entity's data. (no relation data)
-     * @return The display string of all columns and relation existences. (NotNull)
-     */
-    public String toString() {
-        return buildDisplayString(FunCustodial.toClassTitle(this), true, true);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public String toStringWithRelation() {
+    @Override
+    protected String doBuildColumnString(String dm) {
         StringBuilder sb = new StringBuilder();
-        sb.append(toString());
-        return sb.toString();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public String buildDisplayString(String name, boolean column, boolean relation) {
-        StringBuilder sb = new StringBuilder();
-        if (name != null) { sb.append(name).append(column || relation ? ":" : ""); }
-        if (column) { sb.append(buildColumnString()); }
-        if (relation) { sb.append(buildRelationString()); }
-        sb.append("@").append(Integer.toHexString(hashCode()));
-        return sb.toString();
-    }
-    protected String buildColumnString() {
-        StringBuilder sb = new StringBuilder();
-        String dm = ", ";
-        sb.append(dm).append(getMemberId());
-        sb.append(dm).append(getMemberName());
-        sb.append(dm).append(xfUD(getBirthdate()));
-        sb.append(dm).append(getMemberStatusCode());
-        sb.append(dm).append(getAkirakaniOkashiiKaramuMei());
+        sb.append(dm).append(xfND(_memberId));
+        sb.append(dm).append(xfND(_memberName));
+        sb.append(dm).append(xfUD(_birthdate));
+        sb.append(dm).append(xfND(_memberStatusCode));
+        sb.append(dm).append(xfND(_akirakaniOkashiiKaramuMei));
         if (sb.length() > dm.length()) {
             sb.delete(0, dm.length());
         }
         sb.insert(0, "{").append("}");
         return sb.toString();
     }
-    protected String xfUD(Date date) { // formatUtilDate()
-        return FunCustodial.toString(date, xgDP());
-    }
-    protected String xgDP() { // getDatePattern
-        return "yyyy-MM-dd";
-    }
-    protected String buildRelationString() {
+
+    @Override
+    protected String doBuildRelationString(String dm) {
         return "";
     }
 
-    /**
-     * Clone entity instance using super.clone(). (shallow copy) 
-     * @return The cloned instance of this entity. (NotNull)
-     */
+    @Override
     public OutsideMember clone() {
-        try {
-            return (OutsideMember)super.clone();
-        } catch (CloneNotSupportedException e) {
-            throw new IllegalStateException("Failed to clone the entity: " + toString(), e);
-        }
+        return (OutsideMember)super.clone();
     }
 
     // ===================================================================================
@@ -420,6 +298,7 @@ public abstract class BsOutsideMember implements Entity, Serializable, Cloneable
      * @return The value of the column 'MEMBER_ID'. (NullAllowed even if selected: for no constraint)
      */
     public Integer getMemberId() {
+        checkSpecifiedProperty("memberId");
         return _memberId;
     }
 
@@ -430,7 +309,7 @@ public abstract class BsOutsideMember implements Entity, Serializable, Cloneable
      * @param memberId The value of the column 'MEMBER_ID'. (NullAllowed: null update allowed for no constraint)
      */
     public void setMemberId(Integer memberId) {
-        __modifiedProperties.addPropertyName("memberId");
+        registerModifiedProperty("memberId");
         _memberId = memberId;
     }
 
@@ -440,6 +319,7 @@ public abstract class BsOutsideMember implements Entity, Serializable, Cloneable
      * @return The value of the column 'MEMBER_NAME'. (NullAllowed even if selected: for no constraint)
      */
     public String getMemberName() {
+        checkSpecifiedProperty("memberName");
         return convertEmptyToNull(_memberName);
     }
 
@@ -449,7 +329,7 @@ public abstract class BsOutsideMember implements Entity, Serializable, Cloneable
      * @param memberName The value of the column 'MEMBER_NAME'. (NullAllowed: null update allowed for no constraint)
      */
     public void setMemberName(String memberName) {
-        __modifiedProperties.addPropertyName("memberName");
+        registerModifiedProperty("memberName");
         _memberName = memberName;
     }
 
@@ -459,6 +339,7 @@ public abstract class BsOutsideMember implements Entity, Serializable, Cloneable
      * @return The value of the column 'BIRTHDATE'. (NullAllowed even if selected: for no constraint)
      */
     public java.util.Date getBirthdate() {
+        checkSpecifiedProperty("birthdate");
         return _birthdate;
     }
 
@@ -468,7 +349,7 @@ public abstract class BsOutsideMember implements Entity, Serializable, Cloneable
      * @param birthdate The value of the column 'BIRTHDATE'. (NullAllowed: null update allowed for no constraint)
      */
     public void setBirthdate(java.util.Date birthdate) {
-        __modifiedProperties.addPropertyName("birthdate");
+        registerModifiedProperty("birthdate");
         _birthdate = birthdate;
     }
 
@@ -477,6 +358,7 @@ public abstract class BsOutsideMember implements Entity, Serializable, Cloneable
      * @return The value of the column 'MEMBER_STATUS_CODE'. (NullAllowed even if selected: for no constraint)
      */
     public String getMemberStatusCode() {
+        checkSpecifiedProperty("memberStatusCode");
         return convertEmptyToNull(_memberStatusCode);
     }
 
@@ -485,7 +367,7 @@ public abstract class BsOutsideMember implements Entity, Serializable, Cloneable
      * @param memberStatusCode The value of the column 'MEMBER_STATUS_CODE'. (NullAllowed: null update allowed for no constraint)
      */
     protected void setMemberStatusCode(String memberStatusCode) {
-        __modifiedProperties.addPropertyName("memberStatusCode");
+        registerModifiedProperty("memberStatusCode");
         _memberStatusCode = memberStatusCode;
     }
 
@@ -496,6 +378,7 @@ public abstract class BsOutsideMember implements Entity, Serializable, Cloneable
      * @return The value of the column 'AKIRAKANI_OKASHII_KARAMU_MEI'. (NullAllowed even if selected: for no constraint)
      */
     public Integer getAkirakaniOkashiiKaramuMei() {
+        checkSpecifiedProperty("akirakaniOkashiiKaramuMei");
         return _akirakaniOkashiiKaramuMei;
     }
 
@@ -506,7 +389,7 @@ public abstract class BsOutsideMember implements Entity, Serializable, Cloneable
      * @param akirakaniOkashiiKaramuMei The value of the column 'AKIRAKANI_OKASHII_KARAMU_MEI'. (NullAllowed: null update allowed for no constraint)
      */
     public void setAkirakaniOkashiiKaramuMei(Integer akirakaniOkashiiKaramuMei) {
-        __modifiedProperties.addPropertyName("akirakaniOkashiiKaramuMei");
+        registerModifiedProperty("akirakaniOkashiiKaramuMei");
         _akirakaniOkashiiKaramuMei = akirakaniOkashiiKaramuMei;
     }
 
@@ -516,9 +399,5 @@ public abstract class BsOutsideMember implements Entity, Serializable, Cloneable
      */
     public void mynativeMappingMemberStatusCode(String memberStatusCode) {
         setMemberStatusCode(memberStatusCode);
-    }
-
-    protected String convertEmptyToNull(String value) {
-        return FunCustodial.convertEmptyToNull(value);
     }
 }

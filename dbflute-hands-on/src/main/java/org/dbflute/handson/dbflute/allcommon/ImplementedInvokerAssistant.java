@@ -18,6 +18,7 @@ import org.seasar.dbflute.jdbc.SQLExceptionDigger;
 import org.seasar.dbflute.jdbc.StatementConfig;
 import org.seasar.dbflute.jdbc.StatementFactory;
 import org.seasar.dbflute.optional.RelationOptionalFactory;
+import org.seasar.dbflute.outsidesql.OutsideSqlOption;
 import org.seasar.dbflute.outsidesql.factory.DefaultOutsideSqlExecutorFactory;
 import org.seasar.dbflute.outsidesql.factory.OutsideSqlExecutorFactory;
 import org.seasar.dbflute.resource.ResourceParameter;
@@ -160,10 +161,14 @@ public class ImplementedInvokerAssistant implements InvokerAssistant {
     }
 
     protected StatementFactory createStatementFactory() {
+        final DBFluteConfig config = DBFluteConfig.getInstance();
         final TnStatementFactoryImpl factory = newStatementFactoryImpl();
         factory.setDefaultStatementConfig(assistDefaultStatementConfig());
-        factory.setInternalDebug(DBFluteConfig.getInstance().isInternalDebug());
-        factory.setCursorSelectFetchSize(DBFluteConfig.getInstance().getCursorSelectFetchSize());
+        factory.setInternalDebug(config.isInternalDebug());
+        factory.setCursorSelectFetchSize(config.getCursorSelectFetchSize());
+        factory.setEntitySelectFetchSize(config.getEntitySelectFetchSize());
+        factory.setUsePagingByCursorSkipSynchronizedFetchSize(config.isUsePagingByCursorSkipSynchronizedFetchSize());
+        factory.setFixedPagingByCursorSkipSynchronizedFetchSize(config.getFixedPagingByCursorSkipSynchronizedFetchSize());
         return factory;
     }
 
@@ -251,6 +256,23 @@ public class ImplementedInvokerAssistant implements InvokerAssistant {
 
     protected DefaultSqlAnalyzerFactory newDefaultSqlAnalyzerFactory() {
         return new DefaultSqlAnalyzerFactory();
+    }
+
+    // -----------------------------------------------------
+    //                               First OutsideSql Option
+    //                               -----------------------
+    /** {@inheritDoc} */
+    public OutsideSqlOption assistFirstOutsideSqlOption(String tableDbName) {
+        return prepareFirstOutsideSqlOption(tableDbName);
+    }
+
+    protected OutsideSqlOption prepareFirstOutsideSqlOption(String tableDbName) {
+        if (DBFluteConfig.getInstance().isNonSpecifiedColumnAccessAllowed()) {
+            OutsideSqlOption option = new OutsideSqlOption();
+            option.setTableDbName(tableDbName);
+            return option.enableNonSpecifiedColumnAccess();
+        }
+        return null; // no instance (lazy-loaded) as default
     }
 
     // -----------------------------------------------------

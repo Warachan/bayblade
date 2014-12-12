@@ -55,6 +55,8 @@ public abstract class BsMemberBhv extends AbstractBehaviorWritable<Member, Membe
     /*df:beginQueryPath*/
     /** OutsideSql for MemberBhv */
     public static final String PATH_selectOutsideMember = "selectOutsideMember";
+    /** ページング検索 */
+    public static final String PATH_selectPartOfMember = "selectPartOfMember";
     /*df:endQueryPath*/
 
     // ===================================================================================
@@ -1428,7 +1430,7 @@ public abstract class BsMemberBhv extends AbstractBehaviorWritable<Member, Membe
     /**
      * Delete the several entities by query with varying requests non-strictly. <br />
      * For example, allowNonQueryDelete(). <br />
-     * Other specifications are same as batchUpdateNonstrict(entityList).
+     * Other specifications are same as queryDelete(cb).
      * @param cb The condition-bean of Member. (NotNull)
      * @param option The option of delete for varying requests. (NotNull)
      * @return The deleted count.
@@ -1474,7 +1476,8 @@ public abstract class BsMemberBhv extends AbstractBehaviorWritable<Member, Membe
      * @return The basic executor of outside-SQL. (NotNull)
      */
     public OutsideSqlBasicExecutor<MemberBhv> outsideSql() {
-        return doOutsideSql();
+        OutsideSqlAllFacadeExecutor<MemberBhv> facadeExecutor = doOutsideSql();
+        return facadeExecutor.xbasicExecutor(); // variable to resolve generic type
     }
 
     // ===================================================================================
