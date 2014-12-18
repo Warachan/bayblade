@@ -18,25 +18,25 @@
 /*IF pmb.isPaging()*/
 select mb.MEMBER_ID
      , mb.MEMBER_NAME
- 	 , mb.BIRTHDATE
- 	 , mb.MEMBER_STATUS_CODE
- 	 , serv.AKIRAKANI_OKASHII_KARAMU_MEI
+     , mb.BIRTHDATE
+     , mb.MEMBER_STATUS_CODE
+     , serv.AKIRAKANI_OKASHII_KARAMU_MEI -- // サービスポイントかうんと
 -- ELSE select count(*)
 /*END*/
- from MEMBER mb
-  left outer join MEMBER_SERVICE serv
- 	on mb.MEMBER_ID = serv.MEMBER_ID
+  from MEMBER mb
+    left outer join MEMBER_SERVICE serv
+      on mb.MEMBER_ID = serv.MEMBER_ID
  /*BEGIN*/
  where
-  /*IF pmb.memberId != null*/
-  mb.MEMBER_ID = /*pmb.memberId*/3
-  /*END*/
-  /*IF pmb.memberName != null*/
-  and mb.MEMBER_NAME like /*pmb.memberName*/'%M%'
-  /*END*/
-  /*IF pmb.servicePointCount != null*/
-  and serv.AKIRAKANI_OKASHII_KARAMU_MEI >= /*pmb.akirakaniOkashiiKaramuMei*/80
-  /*END*/
+   /*IF pmb.memberId != null*/
+   mb.MEMBER_ID = /*pmb.memberId*/3
+   /*END*/
+   /*IF pmb.memberName != null*/
+   and mb.MEMBER_NAME like /*pmb.memberName*/'%M%'
+   /*END*/
+   /*IF pmb.akirakaniOkashiiKaramuMei != null*/
+   and serv.AKIRAKANI_OKASHII_KARAMU_MEI >= /*pmb.akirakaniOkashiiKaramuMei*/80
+   /*END*/
  /*END*/
  /*IF pmb.isPaging()*/
  limit /*$pmb.pageStartIndex*/80, /*$pmb.fetchSize*/20

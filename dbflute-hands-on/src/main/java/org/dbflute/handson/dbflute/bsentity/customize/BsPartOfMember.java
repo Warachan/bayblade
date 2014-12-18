@@ -374,7 +374,8 @@ public abstract class BsPartOfMember extends AbstractEntity implements Customize
     /**
      * [get] (サービスポイント数)AKIRAKANI_OKASHII_KARAMU_MEI: {INT(11), refers to member_service.AKIRAKANI_OKASHII_KARAMU_MEI} <br />
      * 会員が現在利用できるサービスポイントの数。<br />
-     * 基本的に、購入時には増えてポイントを使ったら減る。
+     * 基本的に、購入時には増えてポイントを使ったら減る。<br />
+     * // サービスポイントかうんと
      * @return The value of the column 'AKIRAKANI_OKASHII_KARAMU_MEI'. (NullAllowed even if selected: for no constraint)
      */
     public Integer getAkirakaniOkashiiKaramuMei() {
@@ -385,7 +386,8 @@ public abstract class BsPartOfMember extends AbstractEntity implements Customize
     /**
      * [set] (サービスポイント数)AKIRAKANI_OKASHII_KARAMU_MEI: {INT(11), refers to member_service.AKIRAKANI_OKASHII_KARAMU_MEI} <br />
      * 会員が現在利用できるサービスポイントの数。<br />
-     * 基本的に、購入時には増えてポイントを使ったら減る。
+     * 基本的に、購入時には増えてポイントを使ったら減る。<br />
+     * // サービスポイントかうんと
      * @param akirakaniOkashiiKaramuMei The value of the column 'AKIRAKANI_OKASHII_KARAMU_MEI'. (NullAllowed: null update allowed for no constraint)
      */
     public void setAkirakaniOkashiiKaramuMei(Integer akirakaniOkashiiKaramuMei) {

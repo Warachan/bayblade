@@ -61,7 +61,7 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
         // | order by ...
         OutsideMemberPmb pmb = new OutsideMemberPmb();
         pmb.setMemberName_PrefixSearch("S");
-        // TODO wara 外だしSQLでも区分値使いたいね「外だしSQL 区分値」でぐぐる by jflute
+        // done wara 外だしSQLでも区分値使いたいね「外だしSQL 区分値」でぐぐる by jflute
         pmb.setMemberStatusCode_正式会員();
 
         // ## Act ##
@@ -123,6 +123,8 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
 
         PartOfMemberPmb pmb = new PartOfMemberPmb();
         pmb.setMemberName_ContainSearch("vi");
+        // 格言「おかしいと思ったら、できてる他のものと比べる」
+        //pmb.setServicePointCount("aaa"); // おもいで
         pmb.setAkirakaniOkashiiKaramuMei(1000);
         pmb.paging(4, 1);
 

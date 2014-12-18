@@ -33,9 +33,6 @@ public class BsPartOfMemberPmb extends SimplePagingBean implements EntityHandlin
     /** The option of like-search for memberName. */
     protected LikeSearchOption _memberNameInternalLikeSearchOption;
 
-    /** The parameter of servicePointCount. */
-    protected String _servicePointCount;
-
     /** The parameter of akirakaniOkashiiKaramuMei. */
     protected Integer _akirakaniOkashiiKaramuMei;
 
@@ -155,7 +152,6 @@ public class BsPartOfMemberPmb extends SimplePagingBean implements EntityHandlin
         final StringBuilder sb = new StringBuilder();
         sb.append(dm).append(_memberId);
         sb.append(dm).append(_memberName);
-        sb.append(dm).append(_servicePointCount);
         sb.append(dm).append(_akirakaniOkashiiKaramuMei);
         if (sb.length() > 0) { sb.delete(0, dm.length()); }
         sb.insert(0, "{").append("}");
@@ -204,22 +200,6 @@ public class BsPartOfMemberPmb extends SimplePagingBean implements EntityHandlin
      */
     public LikeSearchOption getMemberNameInternalLikeSearchOption() {
         return _memberNameInternalLikeSearchOption;
-    }
-
-    /**
-     * [get] servicePointCount <br />
-     * @return The value of servicePointCount. (NullAllowed, NotEmptyString(when String): if empty string, returns null)
-     */
-    public String getServicePointCount() {
-        return filterStringParameter(_servicePointCount);
-    }
-
-    /**
-     * [set] servicePointCount <br />
-     * @param servicePointCount The value of servicePointCount. (NullAllowed)
-     */
-    public void setServicePointCount(String servicePointCount) {
-        _servicePointCount = servicePointCount;
     }
 
     /**
