@@ -123,6 +123,7 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
 
         PartOfMemberPmb pmb = new PartOfMemberPmb();
         pmb.setMemberName_ContainSearch("vi");
+        pmb.setAkirakaniOkashiiKaramuMei(1000);
         pmb.paging(4, 1);
 
         // ## Act ##
