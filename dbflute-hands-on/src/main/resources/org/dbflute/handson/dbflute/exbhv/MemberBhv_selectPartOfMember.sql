@@ -3,16 +3,41 @@
   ページング検索
 
  [df:description]
-  SQL Description here.
-
+  (Manual)ページング検索すること
+      基本は "初めての外だしSQL" のSQLと同じで...
+      会員ステータスの等値条件は要らない
+      会員サービスのサービスポイント数の大なり条件を追加
+      結合に関して、カウント検索のパフォーマンスを最大限考慮すること
+   IFコメントに記述する条件が複雑にならないように (代理判定メソッドを使う)
 */
-
 -- #df:entity#
 
 -- !df:pmb extends Paging!
--- !!String sample!!
+-- !!AutoDetect!!
 
 /*IF pmb.isPaging()*/
-select 'dummy'
+select mb.MEMBER_ID
+     , mb.MEMBER_NAME
+ 	 , mb.BIRTHDATE
+ 	 , mb.MEMBER_STATUS_CODE
+ 	 , serv.AKIRAKANI_OKASHII_KARAMU_MEI
 -- ELSE select count(*)
 /*END*/
+ from MEMBER mb
+  left outer join MEMBER_SERVICE serv
+ 	on mb.MEMBER_ID = serv.MEMBER_ID
+ /*BEGIN*/
+ where
+  /*IF pmb.memberId != null*/
+  mb.MEMBER_ID = /*pmb.memberId*/3
+  /*END*/
+  /*IF pmb.memberName != null*/
+  and mb.MEMBER_NAME like /*pmb.memberName*/'%M%'
+  /*END*/
+  /*IF pmb.servicePointCount != null*/
+  and serv.AKIRAKANI_OKASHII_KARAMU_MEI >= /*pmb.akirakaniOkashiiKaramuMei*/80
+  /*END*/
+ /*END*/
+ /*IF pmb.isPaging()*/
+ limit /*$pmb.pageStartIndex*/80, /*$pmb.fetchSize*/20
+ /*END*/

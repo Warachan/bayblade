@@ -53,6 +53,8 @@ public abstract class BsPurchaseBhv extends AbstractBehaviorWritable<Purchase, P
     //                                                                          Definition
     //                                                                          ==========
     /*df:beginQueryPath*/
+    /** PurchaseMonthSummary */
+    public static final String PATH_selectPurchaseMonthSummary = "selectPurchaseMonthSummary";
     /*df:endQueryPath*/
 
     // ===================================================================================

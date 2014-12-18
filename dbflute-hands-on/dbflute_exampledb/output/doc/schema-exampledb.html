@@ -3011,7 +3011,12 @@ dl.procedurelist dd.column pre {
 	</dd>
 	<dt>(ページング検索)selectPartOfMember</dt>
 	<dd>
-		<pre class="commentdesc">  SQL Description here.</pre>
+		<pre class="commentdesc">  (Manual)ページング検索すること
+      基本は "初めての外だしSQL" のSQLと同じで...
+      会員ステータスの等値条件は要らない
+      会員サービスのサービスポイント数の大なり条件を追加
+      結合に関して、カウント検索のパフォーマンスを最大限考慮すること
+   IFコメントに記述する条件が複雑にならないように (代理判定メソッドを使う)</pre>
 	</dd>
 	<dd class="subinfo">
 		<span class="file">MemberBhv_selectPartOfMember.sql</span>

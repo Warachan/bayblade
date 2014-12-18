@@ -13,17 +13,17 @@ import org.dbflute.handson.dbflute.allcommon.*;
 import org.dbflute.handson.dbflute.exentity.customize.*;
 
 /**
- * The DB meta of PartOfMember. (Singleton)
+ * The DB meta of SpReturnResultSetNotParamResult2. (Singleton)
  * @author DBFlute(AutoGenerator)
  */
-public class PartOfMemberDbm extends AbstractDBMeta {
+public class SpReturnResultSetNotParamResult2Dbm extends AbstractDBMeta {
 
     // ===================================================================================
     //                                                                           Singleton
     //                                                                           =========
-    private static final PartOfMemberDbm _instance = new PartOfMemberDbm();
-    private PartOfMemberDbm() {}
-    public static PartOfMemberDbm getInstance() { return _instance; }
+    private static final SpReturnResultSetNotParamResult2Dbm _instance = new SpReturnResultSetNotParamResult2Dbm();
+    private SpReturnResultSetNotParamResult2Dbm() {}
+    public static SpReturnResultSetNotParamResult2Dbm getInstance() { return _instance; }
 
     // ===================================================================================
     //                                                                       Current DBDef
@@ -38,40 +38,25 @@ public class PartOfMemberDbm extends AbstractDBMeta {
     //                                       ---------------
     protected final Map<String, PropertyGateway> _epgMap = newHashMap();
     {
-        setupEpg(_epgMap, new EpgMemberId(), "memberId");
-        setupEpg(_epgMap, new EpgMemberName(), "memberName");
-        setupEpg(_epgMap, new EpgBirthdate(), "birthdate");
         setupEpg(_epgMap, new EpgMemberStatusCode(), "memberStatusCode");
-        setupEpg(_epgMap, new EpgAkirakaniOkashiiKaramuMei(), "akirakaniOkashiiKaramuMei");
-    }
-    public static class EpgMemberId implements PropertyGateway {
-        public Object read(Entity et) { return ((PartOfMember)et).getMemberId(); }
-        public void write(Entity et, Object vl) { ((PartOfMember)et).setMemberId(cti(vl)); }
-    }
-    public static class EpgMemberName implements PropertyGateway {
-        public Object read(Entity et) { return ((PartOfMember)et).getMemberName(); }
-        public void write(Entity et, Object vl) { ((PartOfMember)et).setMemberName((String)vl); }
-    }
-    public static class EpgBirthdate implements PropertyGateway {
-        public Object read(Entity et) { return ((PartOfMember)et).getBirthdate(); }
-        public void write(Entity et, Object vl) { ((PartOfMember)et).setBirthdate((java.util.Date)vl); }
+        setupEpg(_epgMap, new EpgMemberStatusName(), "memberStatusName");
     }
     public class EpgMemberStatusCode implements PropertyGateway {
-        public Object read(Entity et) { return ((PartOfMember)et).getMemberStatusCode(); }
+        public Object read(Entity et) { return ((SpReturnResultSetNotParamResult2)et).getMemberStatusCode(); }
         public void write(Entity et, Object vl) {
             ColumnInfo col = columnMemberStatusCode();
             ccls(col, vl);
             CDef.MemberStatus cls = (CDef.MemberStatus)gcls(col, vl);
             if (cls != null) {
-                ((PartOfMember)et).setMemberStatusCodeAsMemberStatus(cls);
+                ((SpReturnResultSetNotParamResult2)et).setMemberStatusCodeAsMemberStatus(cls);
             } else {
-                ((PartOfMember)et).mynativeMappingMemberStatusCode((String)vl);
+                ((SpReturnResultSetNotParamResult2)et).mynativeMappingMemberStatusCode((String)vl);
             }
         }
     }
-    public static class EpgAkirakaniOkashiiKaramuMei implements PropertyGateway {
-        public Object read(Entity et) { return ((PartOfMember)et).getAkirakaniOkashiiKaramuMei(); }
-        public void write(Entity et, Object vl) { ((PartOfMember)et).setAkirakaniOkashiiKaramuMei(cti(vl)); }
+    public static class EpgMemberStatusName implements PropertyGateway {
+        public Object read(Entity et) { return ((SpReturnResultSetNotParamResult2)et).getMemberStatusName(); }
+        public void write(Entity et, Object vl) { ((SpReturnResultSetNotParamResult2)et).setMemberStatusName((String)vl); }
     }
     public PropertyGateway findPropertyGateway(String prop)
     { return doFindEpg(_epgMap, prop); }
@@ -79,9 +64,9 @@ public class PartOfMemberDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                          Table Info
     //                                                                          ==========
-    protected final String _tableDbName = "PartOfMember";
-    protected final String _tablePropertyName = "partOfMember";
-    protected final TableSqlName _tableSqlName = new TableSqlName("PartOfMember", _tableDbName);
+    protected final String _tableDbName = "SpReturnResultSetNotParamResult2";
+    protected final String _tablePropertyName = "spReturnResultSetNotParamResult2";
+    protected final TableSqlName _tableSqlName = new TableSqlName("SpReturnResultSetNotParamResult2", _tableDbName);
     { _tableSqlName.xacceptFilter(DBFluteConfig.getInstance().getTableSqlNameFilter()); }
     public String getTableDbName() { return _tableDbName; }
     public String getTablePropertyName() { return _tablePropertyName; }
@@ -90,45 +75,24 @@ public class PartOfMemberDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnMemberId = cci("MEMBER_ID", "MEMBER_ID", null, "会員ID", Integer.class, "memberId", null, false, false, false, "INT", 11, 0, null, false, null, null, null, null, null);
-    protected final ColumnInfo _columnMemberName = cci("MEMBER_NAME", "MEMBER_NAME", null, "会員名称", String.class, "memberName", null, false, false, false, "VARCHAR", 200, 0, null, false, null, null, null, null, null);
-    protected final ColumnInfo _columnBirthdate = cci("BIRTHDATE", "BIRTHDATE", null, "生年月日", java.util.Date.class, "birthdate", null, false, false, false, "DATE", 10, 0, null, false, null, null, null, null, null);
     protected final ColumnInfo _columnMemberStatusCode = cci("MEMBER_STATUS_CODE", "MEMBER_STATUS_CODE", null, "会員ステータスコード", String.class, "memberStatusCode", null, false, false, false, "CHAR", 3, 0, null, false, null, null, null, null, CDef.DefMeta.MemberStatus);
-    protected final ColumnInfo _columnAkirakaniOkashiiKaramuMei = cci("AKIRAKANI_OKASHII_KARAMU_MEI", "AKIRAKANI_OKASHII_KARAMU_MEI", null, "サービスポイント数", Integer.class, "akirakaniOkashiiKaramuMei", null, false, false, false, "INT", 11, 0, null, false, null, null, null, null, null);
+    protected final ColumnInfo _columnMemberStatusName = cci("MEMBER_STATUS_NAME", "MEMBER_STATUS_NAME", null, "会員ステータス名称", String.class, "memberStatusName", null, false, false, false, "VARCHAR", 50, 0, null, false, null, null, null, null, null);
 
     /**
-     * (会員ID)MEMBER_ID: {INT(11), refers to member.MEMBER_ID}
-     * @return The information object of specified column. (NotNull)
-     */
-    public ColumnInfo columnMemberId() { return _columnMemberId; }
-    /**
-     * (会員名称)MEMBER_NAME: {VARCHAR(200), refers to member.MEMBER_NAME}
-     * @return The information object of specified column. (NotNull)
-     */
-    public ColumnInfo columnMemberName() { return _columnMemberName; }
-    /**
-     * (生年月日)BIRTHDATE: {DATE(10), refers to member.BIRTHDATE}
-     * @return The information object of specified column. (NotNull)
-     */
-    public ColumnInfo columnBirthdate() { return _columnBirthdate; }
-    /**
-     * (会員ステータスコード)MEMBER_STATUS_CODE: {CHAR(3), refers to member.MEMBER_STATUS_CODE, classification=MemberStatus}
+     * (会員ステータスコード)MEMBER_STATUS_CODE: {CHAR(3), refers to member_status.MEMBER_STATUS_CODE, classification=MemberStatus}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnMemberStatusCode() { return _columnMemberStatusCode; }
     /**
-     * (サービスポイント数)AKIRAKANI_OKASHII_KARAMU_MEI: {INT(11), refers to member_service.AKIRAKANI_OKASHII_KARAMU_MEI}
+     * (会員ステータス名称)MEMBER_STATUS_NAME: {VARCHAR(50), refers to member_status.MEMBER_STATUS_NAME}
      * @return The information object of specified column. (NotNull)
      */
-    public ColumnInfo columnAkirakaniOkashiiKaramuMei() { return _columnAkirakaniOkashiiKaramuMei; }
+    public ColumnInfo columnMemberStatusName() { return _columnMemberStatusName; }
 
     protected List<ColumnInfo> ccil() {
         List<ColumnInfo> ls = newArrayList();
-        ls.add(columnMemberId());
-        ls.add(columnMemberName());
-        ls.add(columnBirthdate());
         ls.add(columnMemberStatusCode());
-        ls.add(columnAkirakaniOkashiiKaramuMei());
+        ls.add(columnMemberStatusName());
         return ls;
     }
 
@@ -166,28 +130,28 @@ public class PartOfMemberDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                           Type Name
     //                                                                           =========
-    public String getEntityTypeName() { return "org.dbflute.handson.dbflute.exentity.customize.PartOfMember"; }
+    public String getEntityTypeName() { return "org.dbflute.handson.dbflute.exentity.customize.SpReturnResultSetNotParamResult2"; }
     public String getConditionBeanTypeName() { return null; }
     public String getBehaviorTypeName() { return null; }
 
     // ===================================================================================
     //                                                                         Object Type
     //                                                                         ===========
-    public Class<PartOfMember> getEntityType() { return PartOfMember.class; }
+    public Class<SpReturnResultSetNotParamResult2> getEntityType() { return SpReturnResultSetNotParamResult2.class; }
 
     // ===================================================================================
     //                                                                     Object Instance
     //                                                                     ===============
-    public PartOfMember newEntity() { return new PartOfMember(); }
-    public PartOfMember newMyEntity() { return new PartOfMember(); }
+    public SpReturnResultSetNotParamResult2 newEntity() { return new SpReturnResultSetNotParamResult2(); }
+    public SpReturnResultSetNotParamResult2 newMyEntity() { return new SpReturnResultSetNotParamResult2(); }
 
     // ===================================================================================
     //                                                                   Map Communication
     //                                                                   =================
     public void acceptPrimaryKeyMap(Entity et, Map<String, ? extends Object> mp)
-    { doAcceptPrimaryKeyMap((PartOfMember)et, mp); }
+    { doAcceptPrimaryKeyMap((SpReturnResultSetNotParamResult2)et, mp); }
     public void acceptAllColumnMap(Entity et, Map<String, ? extends Object> mp)
-    { doAcceptAllColumnMap((PartOfMember)et, mp); }
+    { doAcceptAllColumnMap((SpReturnResultSetNotParamResult2)et, mp); }
     public Map<String, Object> extractPrimaryKeyMap(Entity et) { return doExtractPrimaryKeyMap(et); }
     public Map<String, Object> extractAllColumnMap(Entity et) { return doExtractAllColumnMap(et); }
 }

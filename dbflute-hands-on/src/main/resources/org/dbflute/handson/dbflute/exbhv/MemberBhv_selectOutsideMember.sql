@@ -12,7 +12,7 @@
 -- #df:entity#
 
 -- !df:pmb!
--- !!AutoDetect!!
+-- !!AutoDetect!! // 自動判別！
 
 select mb.MEMBER_ID
      , mb.MEMBER_NAME
@@ -31,6 +31,6 @@ select mb.MEMBER_ID
    and mb.MEMBER_NAME like /*pmb.memberName*/'M%'
    /*END*/
    /*IF pmb.memberStatusCode != null*/
-   and mb.MEMBER_STATUS_CODE = /*pmb.memberStatusCode*/'FML'
+   and mb.MEMBER_STATUS_CODE = /*pmb.memberStatusCode:ref(MEMBER):comment(自動判別用に追記)*/'FML'
    /*END*/
  /*END*/

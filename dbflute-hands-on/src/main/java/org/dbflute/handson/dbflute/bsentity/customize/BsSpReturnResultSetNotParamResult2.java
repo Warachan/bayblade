@@ -10,13 +10,13 @@ import org.dbflute.handson.dbflute.allcommon.CDef;
 import org.dbflute.handson.dbflute.exentity.customize.*;
 
 /**
- * The entity of PartOfMember. <br />
+ * The entity of SpReturnResultSetNotParamResult2. <br />
  * <pre>
  * [primary-key]
  *     
  * 
  * [column]
- *     MEMBER_ID, MEMBER_NAME, BIRTHDATE, MEMBER_STATUS_CODE, AKIRAKANI_OKASHII_KARAMU_MEI
+ *     MEMBER_STATUS_CODE, MEMBER_STATUS_NAME
  * 
  * [sequence]
  *     
@@ -41,21 +41,15 @@ import org.dbflute.handson.dbflute.exentity.customize.*;
  * 
  * [get/set template]
  * /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
- * Integer memberId = entity.getMemberId();
- * String memberName = entity.getMemberName();
- * java.util.Date birthdate = entity.getBirthdate();
  * String memberStatusCode = entity.getMemberStatusCode();
- * Integer akirakaniOkashiiKaramuMei = entity.getAkirakaniOkashiiKaramuMei();
- * entity.setMemberId(memberId);
- * entity.setMemberName(memberName);
- * entity.setBirthdate(birthdate);
+ * String memberStatusName = entity.getMemberStatusName();
  * entity.setMemberStatusCode(memberStatusCode);
- * entity.setAkirakaniOkashiiKaramuMei(akirakaniOkashiiKaramuMei);
+ * entity.setMemberStatusName(memberStatusName);
  * = = = = = = = = = =/
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
-public abstract class BsPartOfMember extends AbstractEntity implements CustomizeEntity {
+public abstract class BsSpReturnResultSetNotParamResult2 extends AbstractEntity implements CustomizeEntity {
 
     // ===================================================================================
     //                                                                          Definition
@@ -69,20 +63,11 @@ public abstract class BsPartOfMember extends AbstractEntity implements Customize
     // -----------------------------------------------------
     //                                                Column
     //                                                ------
-    /** (会員ID)MEMBER_ID: {INT(11), refers to member.MEMBER_ID} */
-    protected Integer _memberId;
-
-    /** (会員名称)MEMBER_NAME: {VARCHAR(200), refers to member.MEMBER_NAME} */
-    protected String _memberName;
-
-    /** (生年月日)BIRTHDATE: {DATE(10), refers to member.BIRTHDATE} */
-    protected java.util.Date _birthdate;
-
-    /** (会員ステータスコード)MEMBER_STATUS_CODE: {CHAR(3), refers to member.MEMBER_STATUS_CODE, classification=MemberStatus} */
+    /** (会員ステータスコード)MEMBER_STATUS_CODE: {CHAR(3), refers to member_status.MEMBER_STATUS_CODE, classification=MemberStatus} */
     protected String _memberStatusCode;
 
-    /** (サービスポイント数)AKIRAKANI_OKASHII_KARAMU_MEI: {INT(11), refers to member_service.AKIRAKANI_OKASHII_KARAMU_MEI} */
-    protected Integer _akirakaniOkashiiKaramuMei;
+    /** (会員ステータス名称)MEMBER_STATUS_NAME: {VARCHAR(50), refers to member_status.MEMBER_STATUS_NAME} */
+    protected String _memberStatusName;
 
     // ===================================================================================
     //                                                                          Table Name
@@ -91,14 +76,14 @@ public abstract class BsPartOfMember extends AbstractEntity implements Customize
      * {@inheritDoc}
      */
     public String getTableDbName() {
-        return "PartOfMember";
+        return "SpReturnResultSetNotParamResult2";
     }
 
     /**
      * {@inheritDoc}
      */
     public String getTablePropertyName() { // according to Java Beans rule
-        return "partOfMember";
+        return "spReturnResultSetNotParamResult2";
     }
 
     // ===================================================================================
@@ -108,7 +93,7 @@ public abstract class BsPartOfMember extends AbstractEntity implements Customize
      * {@inheritDoc}
      */
     public DBMeta getDBMeta() {
-        return org.dbflute.handson.dbflute.bsentity.customize.dbmeta.PartOfMemberDbm.getInstance();
+        return org.dbflute.handson.dbflute.bsentity.customize.dbmeta.SpReturnResultSetNotParamResult2Dbm.getInstance();
     }
 
     // ===================================================================================
@@ -126,7 +111,7 @@ public abstract class BsPartOfMember extends AbstractEntity implements Customize
     //                                                             =======================
     /**
      * Get the value of memberStatusCode as the classification of MemberStatus. <br />
-     * (会員ステータスコード)MEMBER_STATUS_CODE: {CHAR(3), refers to member.MEMBER_STATUS_CODE, classification=MemberStatus} <br />
+     * (会員ステータスコード)MEMBER_STATUS_CODE: {CHAR(3), refers to member_status.MEMBER_STATUS_CODE, classification=MemberStatus} <br />
      * 入会から退会までの会員のステータスを示す
      * <p>It's treated as case insensitive and if the code value is null, it returns null.</p>
      * @return The instance of classification definition (as ENUM type). (NullAllowed: when the column value is null)
@@ -137,7 +122,7 @@ public abstract class BsPartOfMember extends AbstractEntity implements Customize
 
     /**
      * Set the value of memberStatusCode as the classification of MemberStatus. <br />
-     * (会員ステータスコード)MEMBER_STATUS_CODE: {CHAR(3), refers to member.MEMBER_STATUS_CODE, classification=MemberStatus} <br />
+     * (会員ステータスコード)MEMBER_STATUS_CODE: {CHAR(3), refers to member_status.MEMBER_STATUS_CODE, classification=MemberStatus} <br />
      * 入会から退会までの会員のステータスを示す
      * @param cdef The instance of classification definition (as ENUM type). (NullAllowed: if null, null value is set to the column)
      */
@@ -233,13 +218,10 @@ public abstract class BsPartOfMember extends AbstractEntity implements Customize
     //                                                                      ==============
     @Override
     protected boolean doEquals(Object obj) {
-        if (obj instanceof BsPartOfMember) {
-            BsPartOfMember other = (BsPartOfMember)obj;
-            if (!xSV(_memberId, other._memberId)) { return false; }
-            if (!xSV(_memberName, other._memberName)) { return false; }
-            if (!xSV(_birthdate, other._birthdate)) { return false; }
+        if (obj instanceof BsSpReturnResultSetNotParamResult2) {
+            BsSpReturnResultSetNotParamResult2 other = (BsSpReturnResultSetNotParamResult2)obj;
             if (!xSV(_memberStatusCode, other._memberStatusCode)) { return false; }
-            if (!xSV(_akirakaniOkashiiKaramuMei, other._akirakaniOkashiiKaramuMei)) { return false; }
+            if (!xSV(_memberStatusName, other._memberStatusName)) { return false; }
             return true;
         } else {
             return false;
@@ -250,11 +232,8 @@ public abstract class BsPartOfMember extends AbstractEntity implements Customize
     protected int doHashCode(int initial) {
         int hs = initial;
         hs = xCH(hs, getTableDbName());
-        hs = xCH(hs, _memberId);
-        hs = xCH(hs, _memberName);
-        hs = xCH(hs, _birthdate);
         hs = xCH(hs, _memberStatusCode);
-        hs = xCH(hs, _akirakaniOkashiiKaramuMei);
+        hs = xCH(hs, _memberStatusName);
         return hs;
     }
 
@@ -266,11 +245,8 @@ public abstract class BsPartOfMember extends AbstractEntity implements Customize
     @Override
     protected String doBuildColumnString(String dm) {
         StringBuilder sb = new StringBuilder();
-        sb.append(dm).append(xfND(_memberId));
-        sb.append(dm).append(xfND(_memberName));
-        sb.append(dm).append(xfUD(_birthdate));
         sb.append(dm).append(xfND(_memberStatusCode));
-        sb.append(dm).append(xfND(_akirakaniOkashiiKaramuMei));
+        sb.append(dm).append(xfND(_memberStatusName));
         if (sb.length() > dm.length()) {
             sb.delete(0, dm.length());
         }
@@ -284,77 +260,16 @@ public abstract class BsPartOfMember extends AbstractEntity implements Customize
     }
 
     @Override
-    public PartOfMember clone() {
-        return (PartOfMember)super.clone();
+    public SpReturnResultSetNotParamResult2 clone() {
+        return (SpReturnResultSetNotParamResult2)super.clone();
     }
 
     // ===================================================================================
     //                                                                            Accessor
     //                                                                            ========
     /**
-     * [get] (会員ID)MEMBER_ID: {INT(11), refers to member.MEMBER_ID} <br />
-     * 会員を識別するID。連番として基本的に自動採番される。<br />
-     * （会員IDだけに限らず）採番方法はDBMSによって変わる。
-     * @return The value of the column 'MEMBER_ID'. (NullAllowed even if selected: for no constraint)
-     */
-    public Integer getMemberId() {
-        checkSpecifiedProperty("memberId");
-        return _memberId;
-    }
-
-    /**
-     * [set] (会員ID)MEMBER_ID: {INT(11), refers to member.MEMBER_ID} <br />
-     * 会員を識別するID。連番として基本的に自動採番される。<br />
-     * （会員IDだけに限らず）採番方法はDBMSによって変わる。
-     * @param memberId The value of the column 'MEMBER_ID'. (NullAllowed: null update allowed for no constraint)
-     */
-    public void setMemberId(Integer memberId) {
-        registerModifiedProperty("memberId");
-        _memberId = memberId;
-    }
-
-    /**
-     * [get] (会員名称)MEMBER_NAME: {VARCHAR(200), refers to member.MEMBER_NAME} <br />
-     * 会員のフルネームの名称。
-     * @return The value of the column 'MEMBER_NAME'. (NullAllowed even if selected: for no constraint)
-     */
-    public String getMemberName() {
-        checkSpecifiedProperty("memberName");
-        return convertEmptyToNull(_memberName);
-    }
-
-    /**
-     * [set] (会員名称)MEMBER_NAME: {VARCHAR(200), refers to member.MEMBER_NAME} <br />
-     * 会員のフルネームの名称。
-     * @param memberName The value of the column 'MEMBER_NAME'. (NullAllowed: null update allowed for no constraint)
-     */
-    public void setMemberName(String memberName) {
-        registerModifiedProperty("memberName");
-        _memberName = memberName;
-    }
-
-    /**
-     * [get] (生年月日)BIRTHDATE: {DATE(10), refers to member.BIRTHDATE} <br />
-     * 必須項目ではないので、このデータがない会員もいる。
-     * @return The value of the column 'BIRTHDATE'. (NullAllowed even if selected: for no constraint)
-     */
-    public java.util.Date getBirthdate() {
-        checkSpecifiedProperty("birthdate");
-        return _birthdate;
-    }
-
-    /**
-     * [set] (生年月日)BIRTHDATE: {DATE(10), refers to member.BIRTHDATE} <br />
-     * 必須項目ではないので、このデータがない会員もいる。
-     * @param birthdate The value of the column 'BIRTHDATE'. (NullAllowed: null update allowed for no constraint)
-     */
-    public void setBirthdate(java.util.Date birthdate) {
-        registerModifiedProperty("birthdate");
-        _birthdate = birthdate;
-    }
-
-    /**
-     * [get] (会員ステータスコード)MEMBER_STATUS_CODE: {CHAR(3), refers to member.MEMBER_STATUS_CODE, classification=MemberStatus} <br />
+     * [get] (会員ステータスコード)MEMBER_STATUS_CODE: {CHAR(3), refers to member_status.MEMBER_STATUS_CODE, classification=MemberStatus} <br />
+     * 会員ステータスを識別するコード。
      * @return The value of the column 'MEMBER_STATUS_CODE'. (NullAllowed even if selected: for no constraint)
      */
     public String getMemberStatusCode() {
@@ -363,7 +278,8 @@ public abstract class BsPartOfMember extends AbstractEntity implements Customize
     }
 
     /**
-     * [set] (会員ステータスコード)MEMBER_STATUS_CODE: {CHAR(3), refers to member.MEMBER_STATUS_CODE, classification=MemberStatus} <br />
+     * [set] (会員ステータスコード)MEMBER_STATUS_CODE: {CHAR(3), refers to member_status.MEMBER_STATUS_CODE, classification=MemberStatus} <br />
+     * 会員ステータスを識別するコード。
      * @param memberStatusCode The value of the column 'MEMBER_STATUS_CODE'. (NullAllowed: null update allowed for no constraint)
      */
     protected void setMemberStatusCode(String memberStatusCode) {
@@ -372,25 +288,21 @@ public abstract class BsPartOfMember extends AbstractEntity implements Customize
     }
 
     /**
-     * [get] (サービスポイント数)AKIRAKANI_OKASHII_KARAMU_MEI: {INT(11), refers to member_service.AKIRAKANI_OKASHII_KARAMU_MEI} <br />
-     * 会員が現在利用できるサービスポイントの数。<br />
-     * 基本的に、購入時には増えてポイントを使ったら減る。
-     * @return The value of the column 'AKIRAKANI_OKASHII_KARAMU_MEI'. (NullAllowed even if selected: for no constraint)
+     * [get] (会員ステータス名称)MEMBER_STATUS_NAME: {VARCHAR(50), refers to member_status.MEMBER_STATUS_NAME} <br />
+     * @return The value of the column 'MEMBER_STATUS_NAME'. (NullAllowed even if selected: for no constraint)
      */
-    public Integer getAkirakaniOkashiiKaramuMei() {
-        checkSpecifiedProperty("akirakaniOkashiiKaramuMei");
-        return _akirakaniOkashiiKaramuMei;
+    public String getMemberStatusName() {
+        checkSpecifiedProperty("memberStatusName");
+        return convertEmptyToNull(_memberStatusName);
     }
 
     /**
-     * [set] (サービスポイント数)AKIRAKANI_OKASHII_KARAMU_MEI: {INT(11), refers to member_service.AKIRAKANI_OKASHII_KARAMU_MEI} <br />
-     * 会員が現在利用できるサービスポイントの数。<br />
-     * 基本的に、購入時には増えてポイントを使ったら減る。
-     * @param akirakaniOkashiiKaramuMei The value of the column 'AKIRAKANI_OKASHII_KARAMU_MEI'. (NullAllowed: null update allowed for no constraint)
+     * [set] (会員ステータス名称)MEMBER_STATUS_NAME: {VARCHAR(50), refers to member_status.MEMBER_STATUS_NAME} <br />
+     * @param memberStatusName The value of the column 'MEMBER_STATUS_NAME'. (NullAllowed: null update allowed for no constraint)
      */
-    public void setAkirakaniOkashiiKaramuMei(Integer akirakaniOkashiiKaramuMei) {
-        registerModifiedProperty("akirakaniOkashiiKaramuMei");
-        _akirakaniOkashiiKaramuMei = akirakaniOkashiiKaramuMei;
+    public void setMemberStatusName(String memberStatusName) {
+        registerModifiedProperty("memberStatusName");
+        _memberStatusName = memberStatusName;
     }
 
     /**

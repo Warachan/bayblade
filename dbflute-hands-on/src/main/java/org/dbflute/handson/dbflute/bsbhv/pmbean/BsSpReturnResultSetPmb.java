@@ -2,38 +2,42 @@ package org.dbflute.handson.dbflute.bsbhv.pmbean;
 
 import java.util.*;
 
-import org.seasar.dbflute.outsidesql.typed.*;
+import org.seasar.dbflute.outsidesql.ProcedurePmb;
 import org.seasar.dbflute.jdbc.*;
 import org.seasar.dbflute.jdbc.ParameterUtil.ShortCharHandlingMode;
-import org.seasar.dbflute.cbean.coption.LikeSearchOption;
 import org.seasar.dbflute.util.DfCollectionUtil;
-import org.seasar.dbflute.exception.*;
 import org.seasar.dbflute.util.DfTypeUtil;
 import org.dbflute.handson.dbflute.allcommon.*;
-import org.dbflute.handson.dbflute.exbhv.*;
 import org.dbflute.handson.dbflute.exentity.customize.*;
 
 /**
- * The base class for typed parameter-bean of OutsideMember. <br />
- * This is related to "<span style="color: #AD4747">selectOutsideMember</span>" on MemberBhv.
+ * The base class for procedure parameter-bean of SpReturnResultSet. <br />
+ * This is related to "<span style="color: #AD4747">SP_RETURN_RESULT_SET</span>".
  * @author DBFlute(AutoGenerator)
  */
-public class BsOutsideMemberPmb implements ListHandlingPmb<MemberBhv, OutsideMember>, EntityHandlingPmb<MemberBhv, OutsideMember>, FetchBean {
+public class BsSpReturnResultSetPmb implements ProcedurePmb, FetchBean {
+
+    // ===================================================================================
+    //                                                                          Definition
+    //                                                                          ==========
+    // -----------------------------------------------------
+    //                                   Procedure Parameter
+    //                                   -------------------
+    public static final String birthdateFrom_PROCEDURE_PARAMETER = "in, 0";
+    public static final String notParamResult1_PROCEDURE_PARAMETER = "notParamResult, 1000";
+    public static final String notParamResult2_PROCEDURE_PARAMETER = "notParamResult, 1001";
 
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    /** The parameter of memberId. */
-    protected Integer _memberId;
+    /** The parameter of birthdateFrom: {DATE(10) as In}. */
+    protected java.util.Date _birthdateFrom;
 
-    /** The parameter of memberName:likePrefix. */
-    protected String _memberName;
+    /** The parameter of notParamResult1. */
+    protected List<SpReturnResultSetNotParamResult1> _notParamResult1;
 
-    /** The option of like-search for memberName. */
-    protected LikeSearchOption _memberNameInternalLikeSearchOption;
-
-    /** The parameter of memberStatusCode:ref(MEMBER): :: refers to (会員ステータスコード)MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to member_status, classification=MemberStatus}. */
-    protected String _memberStatusCode;
+    /** The parameter of notParamResult2. */
+    protected List<SpReturnResultSetNotParamResult2> _notParamResult2;
 
     /** The max size of safety result. */
     protected int _safetyMaxResultSize;
@@ -42,29 +46,35 @@ public class BsOutsideMemberPmb implements ListHandlingPmb<MemberBhv, OutsideMem
     //                                                                         Constructor
     //                                                                         ===========
     /**
-     * Constructor for the typed parameter-bean of OutsideMember. <br />
-     * This is related to "<span style="color: #AD4747">selectOutsideMember</span>" on MemberBhv.
+     * Constructor for the procedure parameter-bean of SpReturnResultSet. <br />
+     * This is related to "<span style="color: #AD4747">SP_RETURN_RESULT_SET</span>".
      */
-    public BsOutsideMemberPmb() {
+    public BsSpReturnResultSetPmb() {
     }
 
     // ===================================================================================
-    //                                                                Typed Implementation
-    //                                                                ====================
+    //                                                            Procedure Implementation
+    //                                                            ========================
     /**
      * {@inheritDoc}
      */
-    public String getOutsideSqlPath() {
-        return "selectOutsideMember";
+    public String getProcedureName() {
+        return "SP_RETURN_RESULT_SET";
     }
 
     /**
-     * Get the type of an entity for result. (implementation)
-     * @return The type instance of an entity, customize entity. (NotNull)
+     * {@inheritDoc}
      */
-    public Class<OutsideMember> getEntityType() {
-        return OutsideMember.class;
-    }
+     public boolean isEscapeStatement() {
+         return true; // as default
+     }
+
+    /**
+     * {@inheritDoc}
+     */
+     public boolean isCalledBySelect() {
+         return false; // resolved by generator
+     }
 
     // ===================================================================================
     //                                                                       Safety Result
@@ -138,18 +148,6 @@ public class BsOutsideMemberPmb implements ListHandlingPmb<MemberBhv, OutsideMem
         return "byte[" + (bytes != null ? String.valueOf(bytes.length) : "null") + "]";
     }
 
-    protected void assertLikeSearchOptionValid(String name, LikeSearchOption option) {
-        if (option == null) {
-            String msg = "The like-search option is required!";
-            throw new RequiredOptionNotFoundException(msg);
-        }
-        if (option.isSplit()) {
-            String msg = "The split of like-search is NOT available on parameter-bean.";
-            msg = msg + " Don't use splitByXxx(): " + option;
-            throw new IllegalOutsideSqlOperationException(msg);
-        }
-    }
-
     // ===================================================================================
     //                                                                      Basic Override
     //                                                                      ==============
@@ -166,9 +164,9 @@ public class BsOutsideMemberPmb implements ListHandlingPmb<MemberBhv, OutsideMem
     protected String xbuildColumnString() {
         final String dm = ", ";
         final StringBuilder sb = new StringBuilder();
-        sb.append(dm).append(_memberId);
-        sb.append(dm).append(_memberName);
-        sb.append(dm).append(_memberStatusCode);
+        sb.append(dm).append(formatUtilDate(_birthdateFrom));
+        sb.append(dm).append(_notParamResult1);
+        sb.append(dm).append(_notParamResult2);
         if (sb.length() > 0) { sb.delete(0, dm.length()); }
         sb.insert(0, "{").append("}");
         return sb.toString();
@@ -178,75 +176,50 @@ public class BsOutsideMemberPmb implements ListHandlingPmb<MemberBhv, OutsideMem
     //                                                                            Accessor
     //                                                                            ========
     /**
-     * [get] memberId <br />
-     * @return The value of memberId. (NullAllowed, NotEmptyString(when String): if empty string, returns null)
+     * [get] birthdateFrom: {DATE(10) as In} <br />
+     * @return The value of birthdateFrom. (NullAllowed, NotEmptyString(when String): if empty string, returns null)
      */
-    public Integer getMemberId() {
-        return _memberId;
+    public java.util.Date getBirthdateFrom() {
+        return toUtilDate(_birthdateFrom);
     }
 
     /**
-     * [set] memberId <br />
-     * @param memberId The value of memberId. (NullAllowed)
+     * [set] birthdateFrom: {DATE(10) as In} <br />
+     * @param birthdateFrom The value of birthdateFrom. (NullAllowed)
      */
-    public void setMemberId(Integer memberId) {
-        _memberId = memberId;
+    public void setBirthdateFrom(java.util.Date birthdateFrom) {
+        _birthdateFrom = birthdateFrom;
     }
 
     /**
-     * [get] memberName:likePrefix <br />
-     * @return The value of memberName. (NullAllowed, NotEmptyString(when String): if empty string, returns null)
+     * [get] notParamResult1 <br />
+     * @return The value of notParamResult1. (NullAllowed, NotEmptyString(when String): if empty string, returns null)
      */
-    public String getMemberName() {
-        return filterStringParameter(_memberName);
+    public List<SpReturnResultSetNotParamResult1> getNotParamResult1() {
+        return _notParamResult1;
     }
 
     /**
-     * [set as prefixSearch] memberName:likePrefix <br />
-     * @param memberName The value of memberName. (NullAllowed)
+     * [set] notParamResult1 <br />
+     * @param notParamResult1 The value of notParamResult1. (NullAllowed)
      */
-    public void setMemberName_PrefixSearch(String memberName) {
-        _memberName = memberName;
-        _memberNameInternalLikeSearchOption = new LikeSearchOption().likePrefix();
+    public void setNotParamResult1(List<SpReturnResultSetNotParamResult1> notParamResult1) {
+        _notParamResult1 = notParamResult1;
     }
 
     /**
-     * Get the internal option of likeSearch for memberName. {Internal Method: Don't invoke this}
-     * @return The internal option of likeSearch for memberName. (NullAllowed)
+     * [get] notParamResult2 <br />
+     * @return The value of notParamResult2. (NullAllowed, NotEmptyString(when String): if empty string, returns null)
      */
-    public LikeSearchOption getMemberNameInternalLikeSearchOption() {
-        return _memberNameInternalLikeSearchOption;
+    public List<SpReturnResultSetNotParamResult2> getNotParamResult2() {
+        return _notParamResult2;
     }
 
     /**
-     * [get] memberStatusCode:ref(MEMBER): :: refers to (会員ステータスコード)MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to member_status, classification=MemberStatus} <br />
-     * @return The value of memberStatusCode. (NullAllowed, NotEmptyString(when String): if empty string, returns null)
+     * [set] notParamResult2 <br />
+     * @param notParamResult2 The value of notParamResult2. (NullAllowed)
      */
-    public String getMemberStatusCode() {
-        return filterStringParameter(_memberStatusCode);
-    }
-
-    /**
-     * [set as 正式会員] memberStatusCode:ref(MEMBER): :: refers to (会員ステータスコード)MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to member_status, classification=MemberStatus} <br />
-     * 正式な会員としてサイトサービスが利用可能
-     */
-    public void setMemberStatusCode_正式会員() {
-        _memberStatusCode = CDef.MemberStatus.正式会員.code();
-    }
-
-    /**
-     * [set as 退会会員] memberStatusCode:ref(MEMBER): :: refers to (会員ステータスコード)MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to member_status, classification=MemberStatus} <br />
-     * 退会が確定した会員でサイトサービスはダメ
-     */
-    public void setMemberStatusCode_退会会員() {
-        _memberStatusCode = CDef.MemberStatus.退会会員.code();
-    }
-
-    /**
-     * [set as 仮会員] memberStatusCode:ref(MEMBER): :: refers to (会員ステータスコード)MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to member_status, classification=MemberStatus} <br />
-     * 入会直後のステータスで一部のサイトサービスが利用可能
-     */
-    public void setMemberStatusCode_仮会員() {
-        _memberStatusCode = CDef.MemberStatus.仮会員.code();
+    public void setNotParamResult2(List<SpReturnResultSetNotParamResult2> notParamResult2) {
+        _notParamResult2 = notParamResult2;
     }
 }

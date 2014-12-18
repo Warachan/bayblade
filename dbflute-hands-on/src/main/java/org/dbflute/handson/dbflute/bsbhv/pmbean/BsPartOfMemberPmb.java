@@ -6,7 +6,9 @@ import org.seasar.dbflute.cbean.SimplePagingBean;
 import org.seasar.dbflute.outsidesql.typed.*;
 import org.seasar.dbflute.jdbc.*;
 import org.seasar.dbflute.jdbc.ParameterUtil.ShortCharHandlingMode;
+import org.seasar.dbflute.cbean.coption.LikeSearchOption;
 import org.seasar.dbflute.util.DfCollectionUtil;
+import org.seasar.dbflute.exception.*;
 import org.seasar.dbflute.util.DfTypeUtil;
 import org.dbflute.handson.dbflute.allcommon.*;
 import org.dbflute.handson.dbflute.exbhv.*;
@@ -17,13 +19,25 @@ import org.dbflute.handson.dbflute.exentity.customize.*;
  * This is related to "<span style="color: #AD4747">selectPartOfMember</span>" on MemberBhv.
  * @author DBFlute(AutoGenerator)
  */
-public class BsPartOfMemberPmb extends SimplePagingBean implements EntityHandlingPmb<MemberBhv, PartOfMember>, AutoPagingHandlingPmb<MemberBhv, PartOfMember>, FetchBean {
+public class BsPartOfMemberPmb extends SimplePagingBean implements EntityHandlingPmb<MemberBhv, PartOfMember>, ManualPagingHandlingPmb<MemberBhv, PartOfMember>, FetchBean {
 
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    /** The parameter of sample. */
-    protected String _sample;
+    /** The parameter of memberId. */
+    protected Integer _memberId;
+
+    /** The parameter of memberName:likeContain. */
+    protected String _memberName;
+
+    /** The option of like-search for memberName. */
+    protected LikeSearchOption _memberNameInternalLikeSearchOption;
+
+    /** The parameter of servicePointCount. */
+    protected String _servicePointCount;
+
+    /** The parameter of akirakaniOkashiiKaramuMei. */
+    protected Integer _akirakaniOkashiiKaramuMei;
 
     // ===================================================================================
     //                                                                         Constructor
@@ -111,6 +125,18 @@ public class BsPartOfMemberPmb extends SimplePagingBean implements EntityHandlin
         return "byte[" + (bytes != null ? String.valueOf(bytes.length) : "null") + "]";
     }
 
+    protected void assertLikeSearchOptionValid(String name, LikeSearchOption option) {
+        if (option == null) {
+            String msg = "The like-search option is required!";
+            throw new RequiredOptionNotFoundException(msg);
+        }
+        if (option.isSplit()) {
+            String msg = "The split of like-search is NOT available on parameter-bean.";
+            msg = msg + " Don't use splitByXxx(): " + option;
+            throw new IllegalOutsideSqlOperationException(msg);
+        }
+    }
+
     // ===================================================================================
     //                                                                      Basic Override
     //                                                                      ==============
@@ -127,7 +153,10 @@ public class BsPartOfMemberPmb extends SimplePagingBean implements EntityHandlin
     protected String xbuildColumnString() {
         final String dm = ", ";
         final StringBuilder sb = new StringBuilder();
-        sb.append(dm).append(_sample);
+        sb.append(dm).append(_memberId);
+        sb.append(dm).append(_memberName);
+        sb.append(dm).append(_servicePointCount);
+        sb.append(dm).append(_akirakaniOkashiiKaramuMei);
         if (sb.length() > 0) { sb.delete(0, dm.length()); }
         sb.insert(0, "{").append("}");
         return sb.toString();
@@ -137,18 +166,75 @@ public class BsPartOfMemberPmb extends SimplePagingBean implements EntityHandlin
     //                                                                            Accessor
     //                                                                            ========
     /**
-     * [get] sample <br />
-     * @return The value of sample. (NullAllowed, NotEmptyString(when String): if empty string, returns null)
+     * [get] memberId <br />
+     * @return The value of memberId. (NullAllowed, NotEmptyString(when String): if empty string, returns null)
      */
-    public String getSample() {
-        return filterStringParameter(_sample);
+    public Integer getMemberId() {
+        return _memberId;
     }
 
     /**
-     * [set] sample <br />
-     * @param sample The value of sample. (NullAllowed)
+     * [set] memberId <br />
+     * @param memberId The value of memberId. (NullAllowed)
      */
-    public void setSample(String sample) {
-        _sample = sample;
+    public void setMemberId(Integer memberId) {
+        _memberId = memberId;
+    }
+
+    /**
+     * [get] memberName:likeContain <br />
+     * @return The value of memberName. (NullAllowed, NotEmptyString(when String): if empty string, returns null)
+     */
+    public String getMemberName() {
+        return filterStringParameter(_memberName);
+    }
+
+    /**
+     * [set as containSearch] memberName:likeContain <br />
+     * @param memberName The value of memberName. (NullAllowed)
+     */
+    public void setMemberName_ContainSearch(String memberName) {
+        _memberName = memberName;
+        _memberNameInternalLikeSearchOption = new LikeSearchOption().likeContain();
+    }
+
+    /**
+     * Get the internal option of likeSearch for memberName. {Internal Method: Don't invoke this}
+     * @return The internal option of likeSearch for memberName. (NullAllowed)
+     */
+    public LikeSearchOption getMemberNameInternalLikeSearchOption() {
+        return _memberNameInternalLikeSearchOption;
+    }
+
+    /**
+     * [get] servicePointCount <br />
+     * @return The value of servicePointCount. (NullAllowed, NotEmptyString(when String): if empty string, returns null)
+     */
+    public String getServicePointCount() {
+        return filterStringParameter(_servicePointCount);
+    }
+
+    /**
+     * [set] servicePointCount <br />
+     * @param servicePointCount The value of servicePointCount. (NullAllowed)
+     */
+    public void setServicePointCount(String servicePointCount) {
+        _servicePointCount = servicePointCount;
+    }
+
+    /**
+     * [get] akirakaniOkashiiKaramuMei <br />
+     * @return The value of akirakaniOkashiiKaramuMei. (NullAllowed, NotEmptyString(when String): if empty string, returns null)
+     */
+    public Integer getAkirakaniOkashiiKaramuMei() {
+        return _akirakaniOkashiiKaramuMei;
+    }
+
+    /**
+     * [set] akirakaniOkashiiKaramuMei <br />
+     * @param akirakaniOkashiiKaramuMei The value of akirakaniOkashiiKaramuMei. (NullAllowed)
+     */
+    public void setAkirakaniOkashiiKaramuMei(Integer akirakaniOkashiiKaramuMei) {
+        _akirakaniOkashiiKaramuMei = akirakaniOkashiiKaramuMei;
     }
 }
