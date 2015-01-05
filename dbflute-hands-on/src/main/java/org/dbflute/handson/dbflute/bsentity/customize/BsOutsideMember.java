@@ -16,7 +16,7 @@ import org.dbflute.handson.dbflute.exentity.customize.*;
  *     
  * 
  * [column]
- *     MEMBER_ID, MEMBER_NAME, BIRTHDATE, MEMBER_STATUS_CODE, AKIRAKANI_OKASHII_KARAMU_MEI
+ *     MEMBER_ID, MEMBER_NAME, BIRTHDATE, MEMBER_STATUS_CODE, SERVICE_POINT_COUNT
  * 
  * [sequence]
  *     
@@ -45,12 +45,12 @@ import org.dbflute.handson.dbflute.exentity.customize.*;
  * String memberName = entity.getMemberName();
  * java.util.Date birthdate = entity.getBirthdate();
  * String memberStatusCode = entity.getMemberStatusCode();
- * Integer akirakaniOkashiiKaramuMei = entity.getAkirakaniOkashiiKaramuMei();
+ * Integer servicePointCount = entity.getServicePointCount();
  * entity.setMemberId(memberId);
  * entity.setMemberName(memberName);
  * entity.setBirthdate(birthdate);
  * entity.setMemberStatusCode(memberStatusCode);
- * entity.setAkirakaniOkashiiKaramuMei(akirakaniOkashiiKaramuMei);
+ * entity.setServicePointCount(servicePointCount);
  * = = = = = = = = = =/
  * </pre>
  * @author DBFlute(AutoGenerator)
@@ -81,8 +81,8 @@ public abstract class BsOutsideMember extends AbstractEntity implements Customiz
     /** (会員ステータスコード)MEMBER_STATUS_CODE: {CHAR(3), refers to member.MEMBER_STATUS_CODE, classification=MemberStatus} */
     protected String _memberStatusCode;
 
-    /** (サービスポイント数)AKIRAKANI_OKASHII_KARAMU_MEI: {INT(11), refers to member_service.AKIRAKANI_OKASHII_KARAMU_MEI} */
-    protected Integer _akirakaniOkashiiKaramuMei;
+    /** (サービスポイント数)SERVICE_POINT_COUNT: {INT(11), refers to member_service.SERVICE_POINT_COUNT} */
+    protected Integer _servicePointCount;
 
     // ===================================================================================
     //                                                                          Table Name
@@ -239,7 +239,7 @@ public abstract class BsOutsideMember extends AbstractEntity implements Customiz
             if (!xSV(_memberName, other._memberName)) { return false; }
             if (!xSV(_birthdate, other._birthdate)) { return false; }
             if (!xSV(_memberStatusCode, other._memberStatusCode)) { return false; }
-            if (!xSV(_akirakaniOkashiiKaramuMei, other._akirakaniOkashiiKaramuMei)) { return false; }
+            if (!xSV(_servicePointCount, other._servicePointCount)) { return false; }
             return true;
         } else {
             return false;
@@ -254,7 +254,7 @@ public abstract class BsOutsideMember extends AbstractEntity implements Customiz
         hs = xCH(hs, _memberName);
         hs = xCH(hs, _birthdate);
         hs = xCH(hs, _memberStatusCode);
-        hs = xCH(hs, _akirakaniOkashiiKaramuMei);
+        hs = xCH(hs, _servicePointCount);
         return hs;
     }
 
@@ -270,7 +270,7 @@ public abstract class BsOutsideMember extends AbstractEntity implements Customiz
         sb.append(dm).append(xfND(_memberName));
         sb.append(dm).append(xfUD(_birthdate));
         sb.append(dm).append(xfND(_memberStatusCode));
-        sb.append(dm).append(xfND(_akirakaniOkashiiKaramuMei));
+        sb.append(dm).append(xfND(_servicePointCount));
         if (sb.length() > dm.length()) {
             sb.delete(0, dm.length());
         }
@@ -372,25 +372,25 @@ public abstract class BsOutsideMember extends AbstractEntity implements Customiz
     }
 
     /**
-     * [get] (サービスポイント数)AKIRAKANI_OKASHII_KARAMU_MEI: {INT(11), refers to member_service.AKIRAKANI_OKASHII_KARAMU_MEI} <br />
+     * [get] (サービスポイント数)SERVICE_POINT_COUNT: {INT(11), refers to member_service.SERVICE_POINT_COUNT} <br />
      * 会員が現在利用できるサービスポイントの数。<br />
      * 基本的に、購入時には増えてポイントを使ったら減る。
-     * @return The value of the column 'AKIRAKANI_OKASHII_KARAMU_MEI'. (NullAllowed even if selected: for no constraint)
+     * @return The value of the column 'SERVICE_POINT_COUNT'. (NullAllowed even if selected: for no constraint)
      */
-    public Integer getAkirakaniOkashiiKaramuMei() {
-        checkSpecifiedProperty("akirakaniOkashiiKaramuMei");
-        return _akirakaniOkashiiKaramuMei;
+    public Integer getServicePointCount() {
+        checkSpecifiedProperty("servicePointCount");
+        return _servicePointCount;
     }
 
     /**
-     * [set] (サービスポイント数)AKIRAKANI_OKASHII_KARAMU_MEI: {INT(11), refers to member_service.AKIRAKANI_OKASHII_KARAMU_MEI} <br />
+     * [set] (サービスポイント数)SERVICE_POINT_COUNT: {INT(11), refers to member_service.SERVICE_POINT_COUNT} <br />
      * 会員が現在利用できるサービスポイントの数。<br />
      * 基本的に、購入時には増えてポイントを使ったら減る。
-     * @param akirakaniOkashiiKaramuMei The value of the column 'AKIRAKANI_OKASHII_KARAMU_MEI'. (NullAllowed: null update allowed for no constraint)
+     * @param servicePointCount The value of the column 'SERVICE_POINT_COUNT'. (NullAllowed: null update allowed for no constraint)
      */
-    public void setAkirakaniOkashiiKaramuMei(Integer akirakaniOkashiiKaramuMei) {
-        registerModifiedProperty("akirakaniOkashiiKaramuMei");
-        _akirakaniOkashiiKaramuMei = akirakaniOkashiiKaramuMei;
+    public void setServicePointCount(Integer servicePointCount) {
+        registerModifiedProperty("servicePointCount");
+        _servicePointCount = servicePointCount;
     }
 
     /**

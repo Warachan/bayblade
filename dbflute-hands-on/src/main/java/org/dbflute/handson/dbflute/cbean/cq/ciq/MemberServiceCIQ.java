@@ -61,12 +61,13 @@ public class MemberServiceCIQ extends AbstractBsMemberServiceCQ {
     // ===================================================================================
     //                                                                Override about Query
     //                                                                ====================
+    protected ConditionValue getCValueMemberServiceId() { return _myCQ.getMemberServiceId(); }
     protected ConditionValue getCValueMemberId() { return _myCQ.getMemberId(); }
     public String keepMemberId_InScopeRelation_Member(MemberCQ sq)
     { return _myCQ.keepMemberId_InScopeRelation_Member(sq); }
     public String keepMemberId_NotInScopeRelation_Member(MemberCQ sq)
     { return _myCQ.keepMemberId_NotInScopeRelation_Member(sq); }
-    protected ConditionValue getCValueAkirakaniOkashiiKaramuMei() { return _myCQ.getAkirakaniOkashiiKaramuMei(); }
+    protected ConditionValue getCValueServicePointCount() { return _myCQ.getServicePointCount(); }
     protected ConditionValue getCValueServiceRankCode() { return _myCQ.getServiceRankCode(); }
     public String keepServiceRankCode_InScopeRelation_ServiceRank(ServiceRankCQ sq)
     { return _myCQ.keepServiceRankCode_InScopeRelation_ServiceRank(sq); }

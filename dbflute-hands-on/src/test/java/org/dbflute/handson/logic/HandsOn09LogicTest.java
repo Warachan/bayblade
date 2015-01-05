@@ -9,13 +9,18 @@ import org.dbflute.handson.dbflute.cbean.MemberCB;
 import org.dbflute.handson.dbflute.exbhv.MemberBhv;
 import org.dbflute.handson.dbflute.exbhv.pmbean.OutsideMemberPmb;
 import org.dbflute.handson.dbflute.exbhv.pmbean.PartOfMemberPmb;
+import org.dbflute.handson.dbflute.exbhv.pmbean.PartOfPurchaseMonthSummaryPmb;
+import org.dbflute.handson.dbflute.exbhv.pmbean.PurchaseMonthSummaryPmb;
 import org.dbflute.handson.dbflute.exbhv.pmbean.SpInOutParameterPmb;
 import org.dbflute.handson.dbflute.exbhv.pmbean.SpReturnResultSetPmb;
 import org.dbflute.handson.dbflute.exentity.customize.OutsideMember;
 import org.dbflute.handson.dbflute.exentity.customize.PartOfMember;
+import org.dbflute.handson.dbflute.exentity.customize.PartOfPurchaseMonthSummary;
+import org.dbflute.handson.dbflute.exentity.customize.PurchaseMonthSummary;
 import org.dbflute.handson.dbflute.exentity.customize.SpReturnResultSetNotParamResult1;
 import org.dbflute.handson.dbflute.exentity.customize.SpReturnResultSetNotParamResult2;
 import org.dbflute.handson.unit.UnitContainerTestCase;
+import org.seasar.dbflute.cbean.ListResultBean;
 import org.seasar.dbflute.cbean.PagingResultBean;
 import org.seasar.dbflute.helper.HandyDate;
 
@@ -71,7 +76,7 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
         assertHasAnyElement(letsOutside);
         for (OutsideMember member : letsOutside) {
             String memberName = member.getMemberName();
-            Integer okashiiKaramuMei = member.getAkirakaniOkashiiKaramuMei();
+            Integer okashiiKaramuMei = member.getServicePointCount();
             log(memberName, member.getMemberStatusCode(), okashiiKaramuMei);
             // done wara ログはアサートより前 by jflute
             assertTrue(memberName.startsWith("S"));
@@ -125,7 +130,7 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
         pmb.setMemberName_ContainSearch("vi");
         // 格言「おかしいと思ったら、できてる他のものと比べる」
         //pmb.setServicePointCount("aaa"); // おもいで
-        pmb.setAkirakaniOkashiiKaramuMei(1000);
+        pmb.setServicePointCount(1000);
         pmb.paging(4, 1);
 
         // ## Act ##
@@ -135,6 +140,53 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
         assertHasAnyElement(memberPage);
         log(memberPage, memberPage.size());
         assertTrue(memberPage.size() <= 4);
+    }
+
+    /**
+     * test_selectLetsSummary_集計が検索されること()
+     * 会員名称に "vi" を含む会員を対象に検索
+     * 会員名称に "vi" が含まれていることをアサート
+     * 期待通りのSQLがログに出力されることを確認する
+     * 検索したカラム全てのデータをログ出力
+     */
+    public void test_selectLetsSummary() throws Exception {
+        // ## Arrange ##
+        HandsOn09Logic logic = new HandsOn09Logic();
+        inject(logic);
+
+        PurchaseMonthSummaryPmb pmb = new PurchaseMonthSummaryPmb();
+        pmb.setMemberName_ContainSearch("vi");
+        pmb.setPaymentCompleteFlg_True();
+
+        // ## Act ##
+        ListResultBean<PurchaseMonthSummary> summaryList = logic.selectLetsSummary(pmb);
+
+        // ## Assert ##
+        assertHasAnyElement(summaryList);
+        for (PurchaseMonthSummary summary : summaryList) {
+            log(summary);
+            String name = summary.getMemberName();
+            log(name);
+            assertContains(name, "vi");
+        }
+    }
+
+    public void test_selectPartOfPurchaseMonthSummary() throws Exception {
+        // ## Arrange ##
+        HandsOn09Logic logic = new HandsOn09Logic();
+        inject(logic);
+
+        PartOfPurchaseMonthSummaryPmb pmb = new PartOfPurchaseMonthSummaryPmb();
+        pmb.setMemberName_ContainSearch("vi");
+        pmb.paging(4, 1);
+
+        // ## Act ##
+        PagingResultBean<PartOfPurchaseMonthSummary> summaryPage = logic.selectPartOfPurchaseMonthSummary(pmb);
+
+        // ## Assert ##
+        assertHasAnyElement(summaryPage);
+        log(summaryPage, summaryPage.size());
+        assertEquals(4, summaryPage.size());
     }
 
     /**

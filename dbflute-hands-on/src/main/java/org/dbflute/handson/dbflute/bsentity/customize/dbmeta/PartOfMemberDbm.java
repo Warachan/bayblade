@@ -42,7 +42,7 @@ public class PartOfMemberDbm extends AbstractDBMeta {
         setupEpg(_epgMap, new EpgMemberName(), "memberName");
         setupEpg(_epgMap, new EpgBirthdate(), "birthdate");
         setupEpg(_epgMap, new EpgMemberStatusCode(), "memberStatusCode");
-        setupEpg(_epgMap, new EpgAkirakaniOkashiiKaramuMei(), "akirakaniOkashiiKaramuMei");
+        setupEpg(_epgMap, new EpgServicePointCount(), "servicePointCount");
     }
     public static class EpgMemberId implements PropertyGateway {
         public Object read(Entity et) { return ((PartOfMember)et).getMemberId(); }
@@ -69,9 +69,9 @@ public class PartOfMemberDbm extends AbstractDBMeta {
             }
         }
     }
-    public static class EpgAkirakaniOkashiiKaramuMei implements PropertyGateway {
-        public Object read(Entity et) { return ((PartOfMember)et).getAkirakaniOkashiiKaramuMei(); }
-        public void write(Entity et, Object vl) { ((PartOfMember)et).setAkirakaniOkashiiKaramuMei(cti(vl)); }
+    public static class EpgServicePointCount implements PropertyGateway {
+        public Object read(Entity et) { return ((PartOfMember)et).getServicePointCount(); }
+        public void write(Entity et, Object vl) { ((PartOfMember)et).setServicePointCount(cti(vl)); }
     }
     public PropertyGateway findPropertyGateway(String prop)
     { return doFindEpg(_epgMap, prop); }
@@ -94,7 +94,7 @@ public class PartOfMemberDbm extends AbstractDBMeta {
     protected final ColumnInfo _columnMemberName = cci("MEMBER_NAME", "MEMBER_NAME", null, "会員名称", String.class, "memberName", null, false, false, false, "VARCHAR", 200, 0, null, false, null, null, null, null, null);
     protected final ColumnInfo _columnBirthdate = cci("BIRTHDATE", "BIRTHDATE", null, "生年月日", java.util.Date.class, "birthdate", null, false, false, false, "DATE", 10, 0, null, false, null, null, null, null, null);
     protected final ColumnInfo _columnMemberStatusCode = cci("MEMBER_STATUS_CODE", "MEMBER_STATUS_CODE", null, "会員ステータスコード", String.class, "memberStatusCode", null, false, false, false, "CHAR", 3, 0, null, false, null, null, null, null, CDef.DefMeta.MemberStatus);
-    protected final ColumnInfo _columnAkirakaniOkashiiKaramuMei = cci("AKIRAKANI_OKASHII_KARAMU_MEI", "AKIRAKANI_OKASHII_KARAMU_MEI", null, "サービスポイント数", Integer.class, "akirakaniOkashiiKaramuMei", null, false, false, false, "INT", 11, 0, null, false, null, null, null, null, null);
+    protected final ColumnInfo _columnServicePointCount = cci("SERVICE_POINT_COUNT", "SERVICE_POINT_COUNT", null, "サービスポイント数", Integer.class, "servicePointCount", null, false, false, false, "INT", 11, 0, null, false, null, null, null, null, null);
 
     /**
      * (会員ID)MEMBER_ID: {INT(11), refers to member.MEMBER_ID}
@@ -117,10 +117,10 @@ public class PartOfMemberDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnMemberStatusCode() { return _columnMemberStatusCode; }
     /**
-     * (サービスポイント数)AKIRAKANI_OKASHII_KARAMU_MEI: {INT(11), refers to member_service.AKIRAKANI_OKASHII_KARAMU_MEI}
+     * (サービスポイント数)SERVICE_POINT_COUNT: {INT(11), refers to member_service.SERVICE_POINT_COUNT}
      * @return The information object of specified column. (NotNull)
      */
-    public ColumnInfo columnAkirakaniOkashiiKaramuMei() { return _columnAkirakaniOkashiiKaramuMei; }
+    public ColumnInfo columnServicePointCount() { return _columnServicePointCount; }
 
     protected List<ColumnInfo> ccil() {
         List<ColumnInfo> ls = newArrayList();
@@ -128,7 +128,7 @@ public class PartOfMemberDbm extends AbstractDBMeta {
         ls.add(columnMemberName());
         ls.add(columnBirthdate());
         ls.add(columnMemberStatusCode());
-        ls.add(columnAkirakaniOkashiiKaramuMei());
+        ls.add(columnServicePointCount());
         return ls;
     }
 

@@ -30,13 +30,13 @@ import org.dbflute.handson.dbflute.cbean.*;
  *     member_status, MEMBER_ADDRESS(AsValid), MEMBER_LOGIN(AsLatest), member_security(AsOne), member_service(AsOne), member_withdrawal(AsOne)
  *
  * [referrer table]
- *     member_address, member_login, purchase, member_security, member_service, member_withdrawal
+ *     member_address, member_following, member_login, purchase, member_security, member_service, member_withdrawal
  *
  * [foreign property]
  *     memberStatus, memberAddressAsValid, memberLoginAsLatest, memberSecurityAsOne, memberServiceAsOne, memberWithdrawalAsOne
  *
  * [referrer property]
- *     memberAddressList, memberLoginList, purchaseList
+ *     memberAddressList, memberFollowingByMyMemberIdList, memberFollowingByYourMemberIdList, memberLoginList, purchaseList
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
@@ -69,6 +69,30 @@ public class LoaderOfMember {
         return new NestedReferrerLoaderGateway<LoaderOfMemberAddress>() {
             public void withNestedReferrer(ReferrerLoaderHandler<LoaderOfMemberAddress> handler) {
                 handler.handle(new LoaderOfMemberAddress().ready(_referrerMemberAddressList, _selector));
+            }
+        };
+    }
+
+    protected List<MemberFollowing> _referrerMemberFollowingByMyMemberIdList;
+    public NestedReferrerLoaderGateway<LoaderOfMemberFollowing> loadMemberFollowingByMyMemberIdList(ConditionBeanSetupper<MemberFollowingCB> setupper) {
+        myBhv().loadMemberFollowingByMyMemberIdList(_selectedList, setupper).withNestedReferrer(new ReferrerListHandler<MemberFollowing>() {
+            public void handle(List<MemberFollowing> referrerList) { _referrerMemberFollowingByMyMemberIdList = referrerList; }
+        });
+        return new NestedReferrerLoaderGateway<LoaderOfMemberFollowing>() {
+            public void withNestedReferrer(ReferrerLoaderHandler<LoaderOfMemberFollowing> handler) {
+                handler.handle(new LoaderOfMemberFollowing().ready(_referrerMemberFollowingByMyMemberIdList, _selector));
+            }
+        };
+    }
+
+    protected List<MemberFollowing> _referrerMemberFollowingByYourMemberIdList;
+    public NestedReferrerLoaderGateway<LoaderOfMemberFollowing> loadMemberFollowingByYourMemberIdList(ConditionBeanSetupper<MemberFollowingCB> setupper) {
+        myBhv().loadMemberFollowingByYourMemberIdList(_selectedList, setupper).withNestedReferrer(new ReferrerListHandler<MemberFollowing>() {
+            public void handle(List<MemberFollowing> referrerList) { _referrerMemberFollowingByYourMemberIdList = referrerList; }
+        });
+        return new NestedReferrerLoaderGateway<LoaderOfMemberFollowing>() {
+            public void withNestedReferrer(ReferrerLoaderHandler<LoaderOfMemberFollowing> handler) {
+                handler.handle(new LoaderOfMemberFollowing().ready(_referrerMemberFollowingByYourMemberIdList, _selector));
             }
         };
     }

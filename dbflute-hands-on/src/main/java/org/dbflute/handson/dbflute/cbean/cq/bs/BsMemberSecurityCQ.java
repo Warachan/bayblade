@@ -159,6 +159,26 @@ public class BsMemberSecurityCQ extends AbstractBsMemberSecurityCQ {
      */
     public BsMemberSecurityCQ addOrderBy_ReminderAnswer_Desc() { regOBD("REMINDER_ANSWER"); return this; }
 
+    protected ConditionValue _reminderUseCount;
+    public ConditionValue getReminderUseCount()
+    { if (_reminderUseCount == null) { _reminderUseCount = nCV(); }
+      return _reminderUseCount; }
+    protected ConditionValue getCValueReminderUseCount() { return getReminderUseCount(); }
+
+    /** 
+     * Add order-by as ascend. <br />
+     * (会員セキュリティ情報にリマインダ回数)REMINDER_USE_COUNT: {NotNull, INT(10)}
+     * @return this. (NotNull)
+     */
+    public BsMemberSecurityCQ addOrderBy_ReminderUseCount_Asc() { regOBA("REMINDER_USE_COUNT"); return this; }
+
+    /**
+     * Add order-by as descend. <br />
+     * (会員セキュリティ情報にリマインダ回数)REMINDER_USE_COUNT: {NotNull, INT(10)}
+     * @return this. (NotNull)
+     */
+    public BsMemberSecurityCQ addOrderBy_ReminderUseCount_Desc() { regOBD("REMINDER_USE_COUNT"); return this; }
+
     protected ConditionValue _registerDatetime;
     public ConditionValue getRegisterDatetime()
     { if (_registerDatetime == null) { _registerDatetime = nCV(); }

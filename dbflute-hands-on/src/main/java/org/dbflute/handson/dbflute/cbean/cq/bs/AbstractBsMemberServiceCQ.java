@@ -46,7 +46,123 @@ public abstract class AbstractBsMemberServiceCQ extends AbstractConditionQuery {
     //                                                                               =====
     /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br />
-     * (会員ID)MEMBER_ID: {PK, NotNull, INT(10), FK to member}
+     * (会員サービスに代理キー)MEMBER_SERVICE_ID: {PK, ID, NotNull, INT(10)}
+     * @param memberServiceId The value of memberServiceId as equal. (NullAllowed: if null, no condition)
+     */
+    public void setMemberServiceId_Equal(Integer memberServiceId) {
+        doSetMemberServiceId_Equal(memberServiceId);
+    }
+
+    protected void doSetMemberServiceId_Equal(Integer memberServiceId) {
+        regMemberServiceId(CK_EQ, memberServiceId);
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). And NullIgnored, OnlyOnceRegistered. <br />
+     * (会員サービスに代理キー)MEMBER_SERVICE_ID: {PK, ID, NotNull, INT(10)}
+     * @param memberServiceId The value of memberServiceId as notEqual. (NullAllowed: if null, no condition)
+     */
+    public void setMemberServiceId_NotEqual(Integer memberServiceId) {
+        doSetMemberServiceId_NotEqual(memberServiceId);
+    }
+
+    protected void doSetMemberServiceId_NotEqual(Integer memberServiceId) {
+        regMemberServiceId(CK_NES, memberServiceId);
+    }
+
+    /**
+     * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br />
+     * (会員サービスに代理キー)MEMBER_SERVICE_ID: {PK, ID, NotNull, INT(10)}
+     * @param memberServiceId The value of memberServiceId as greaterThan. (NullAllowed: if null, no condition)
+     */
+    public void setMemberServiceId_GreaterThan(Integer memberServiceId) {
+        regMemberServiceId(CK_GT, memberServiceId);
+    }
+
+    /**
+     * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br />
+     * (会員サービスに代理キー)MEMBER_SERVICE_ID: {PK, ID, NotNull, INT(10)}
+     * @param memberServiceId The value of memberServiceId as lessThan. (NullAllowed: if null, no condition)
+     */
+    public void setMemberServiceId_LessThan(Integer memberServiceId) {
+        regMemberServiceId(CK_LT, memberServiceId);
+    }
+
+    /**
+     * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br />
+     * (会員サービスに代理キー)MEMBER_SERVICE_ID: {PK, ID, NotNull, INT(10)}
+     * @param memberServiceId The value of memberServiceId as greaterEqual. (NullAllowed: if null, no condition)
+     */
+    public void setMemberServiceId_GreaterEqual(Integer memberServiceId) {
+        regMemberServiceId(CK_GE, memberServiceId);
+    }
+
+    /**
+     * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br />
+     * (会員サービスに代理キー)MEMBER_SERVICE_ID: {PK, ID, NotNull, INT(10)}
+     * @param memberServiceId The value of memberServiceId as lessEqual. (NullAllowed: if null, no condition)
+     */
+    public void setMemberServiceId_LessEqual(Integer memberServiceId) {
+        regMemberServiceId(CK_LE, memberServiceId);
+    }
+
+    /**
+     * RangeOf with various options. (versatile) <br />
+     * {(default) minNumber &lt;= column &lt;= maxNumber} <br />
+     * And NullIgnored, OnlyOnceRegistered. <br />
+     * (会員サービスに代理キー)MEMBER_SERVICE_ID: {PK, ID, NotNull, INT(10)}
+     * @param minNumber The min number of memberServiceId. (NullAllowed: if null, no from-condition)
+     * @param maxNumber The max number of memberServiceId. (NullAllowed: if null, no to-condition)
+     * @param rangeOfOption The option of range-of. (NotNull)
+     */
+    public void setMemberServiceId_RangeOf(Integer minNumber, Integer maxNumber, RangeOfOption rangeOfOption) {
+        regROO(minNumber, maxNumber, getCValueMemberServiceId(), "MEMBER_SERVICE_ID", rangeOfOption);
+    }
+
+    /**
+     * InScope {in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br />
+     * (会員サービスに代理キー)MEMBER_SERVICE_ID: {PK, ID, NotNull, INT(10)}
+     * @param memberServiceIdList The collection of memberServiceId as inScope. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setMemberServiceId_InScope(Collection<Integer> memberServiceIdList) {
+        doSetMemberServiceId_InScope(memberServiceIdList);
+    }
+
+    protected void doSetMemberServiceId_InScope(Collection<Integer> memberServiceIdList) {
+        regINS(CK_INS, cTL(memberServiceIdList), getCValueMemberServiceId(), "MEMBER_SERVICE_ID");
+    }
+
+    /**
+     * NotInScope {not in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br />
+     * (会員サービスに代理キー)MEMBER_SERVICE_ID: {PK, ID, NotNull, INT(10)}
+     * @param memberServiceIdList The collection of memberServiceId as notInScope. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setMemberServiceId_NotInScope(Collection<Integer> memberServiceIdList) {
+        doSetMemberServiceId_NotInScope(memberServiceIdList);
+    }
+
+    protected void doSetMemberServiceId_NotInScope(Collection<Integer> memberServiceIdList) {
+        regINS(CK_NINS, cTL(memberServiceIdList), getCValueMemberServiceId(), "MEMBER_SERVICE_ID");
+    }
+
+    /**
+     * IsNull {is null}. And OnlyOnceRegistered. <br />
+     * (会員サービスに代理キー)MEMBER_SERVICE_ID: {PK, ID, NotNull, INT(10)}
+     */
+    public void setMemberServiceId_IsNull() { regMemberServiceId(CK_ISN, DOBJ); }
+
+    /**
+     * IsNotNull {is not null}. And OnlyOnceRegistered. <br />
+     * (会員サービスに代理キー)MEMBER_SERVICE_ID: {PK, ID, NotNull, INT(10)}
+     */
+    public void setMemberServiceId_IsNotNull() { regMemberServiceId(CK_ISNN, DOBJ); }
+
+    protected void regMemberServiceId(ConditionKey ky, Object vl) { regQ(ky, vl, getCValueMemberServiceId(), "MEMBER_SERVICE_ID"); }
+    protected abstract ConditionValue getCValueMemberServiceId();
+
+    /**
+     * Equal(=). And NullIgnored, OnlyOnceRegistered. <br />
+     * (会員ID)MEMBER_ID: {UQ, NotNull, INT(10), FK to member}
      * @param memberId The value of memberId as equal. (NullAllowed: if null, no condition)
      */
     public void setMemberId_Equal(Integer memberId) {
@@ -59,7 +175,7 @@ public abstract class AbstractBsMemberServiceCQ extends AbstractConditionQuery {
 
     /**
      * NotEqual(&lt;&gt;). And NullIgnored, OnlyOnceRegistered. <br />
-     * (会員ID)MEMBER_ID: {PK, NotNull, INT(10), FK to member}
+     * (会員ID)MEMBER_ID: {UQ, NotNull, INT(10), FK to member}
      * @param memberId The value of memberId as notEqual. (NullAllowed: if null, no condition)
      */
     public void setMemberId_NotEqual(Integer memberId) {
@@ -72,7 +188,7 @@ public abstract class AbstractBsMemberServiceCQ extends AbstractConditionQuery {
 
     /**
      * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br />
-     * (会員ID)MEMBER_ID: {PK, NotNull, INT(10), FK to member}
+     * (会員ID)MEMBER_ID: {UQ, NotNull, INT(10), FK to member}
      * @param memberId The value of memberId as greaterThan. (NullAllowed: if null, no condition)
      */
     public void setMemberId_GreaterThan(Integer memberId) {
@@ -81,7 +197,7 @@ public abstract class AbstractBsMemberServiceCQ extends AbstractConditionQuery {
 
     /**
      * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br />
-     * (会員ID)MEMBER_ID: {PK, NotNull, INT(10), FK to member}
+     * (会員ID)MEMBER_ID: {UQ, NotNull, INT(10), FK to member}
      * @param memberId The value of memberId as lessThan. (NullAllowed: if null, no condition)
      */
     public void setMemberId_LessThan(Integer memberId) {
@@ -90,7 +206,7 @@ public abstract class AbstractBsMemberServiceCQ extends AbstractConditionQuery {
 
     /**
      * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br />
-     * (会員ID)MEMBER_ID: {PK, NotNull, INT(10), FK to member}
+     * (会員ID)MEMBER_ID: {UQ, NotNull, INT(10), FK to member}
      * @param memberId The value of memberId as greaterEqual. (NullAllowed: if null, no condition)
      */
     public void setMemberId_GreaterEqual(Integer memberId) {
@@ -99,7 +215,7 @@ public abstract class AbstractBsMemberServiceCQ extends AbstractConditionQuery {
 
     /**
      * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br />
-     * (会員ID)MEMBER_ID: {PK, NotNull, INT(10), FK to member}
+     * (会員ID)MEMBER_ID: {UQ, NotNull, INT(10), FK to member}
      * @param memberId The value of memberId as lessEqual. (NullAllowed: if null, no condition)
      */
     public void setMemberId_LessEqual(Integer memberId) {
@@ -110,7 +226,7 @@ public abstract class AbstractBsMemberServiceCQ extends AbstractConditionQuery {
      * RangeOf with various options. (versatile) <br />
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br />
      * And NullIgnored, OnlyOnceRegistered. <br />
-     * (会員ID)MEMBER_ID: {PK, NotNull, INT(10), FK to member}
+     * (会員ID)MEMBER_ID: {UQ, NotNull, INT(10), FK to member}
      * @param minNumber The min number of memberId. (NullAllowed: if null, no from-condition)
      * @param maxNumber The max number of memberId. (NullAllowed: if null, no to-condition)
      * @param rangeOfOption The option of range-of. (NotNull)
@@ -121,7 +237,7 @@ public abstract class AbstractBsMemberServiceCQ extends AbstractConditionQuery {
 
     /**
      * InScope {in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br />
-     * (会員ID)MEMBER_ID: {PK, NotNull, INT(10), FK to member}
+     * (会員ID)MEMBER_ID: {UQ, NotNull, INT(10), FK to member}
      * @param memberIdList The collection of memberId as inScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setMemberId_InScope(Collection<Integer> memberIdList) {
@@ -134,7 +250,7 @@ public abstract class AbstractBsMemberServiceCQ extends AbstractConditionQuery {
 
     /**
      * NotInScope {not in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br />
-     * (会員ID)MEMBER_ID: {PK, NotNull, INT(10), FK to member}
+     * (会員ID)MEMBER_ID: {UQ, NotNull, INT(10), FK to member}
      * @param memberIdList The collection of memberId as notInScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setMemberId_NotInScope(Collection<Integer> memberIdList) {
@@ -175,124 +291,112 @@ public abstract class AbstractBsMemberServiceCQ extends AbstractConditionQuery {
     }
     public abstract String keepMemberId_NotInScopeRelation_Member(MemberCQ sq);
 
-    /**
-     * IsNull {is null}. And OnlyOnceRegistered. <br />
-     * (会員ID)MEMBER_ID: {PK, NotNull, INT(10), FK to member}
-     */
-    public void setMemberId_IsNull() { regMemberId(CK_ISN, DOBJ); }
-
-    /**
-     * IsNotNull {is not null}. And OnlyOnceRegistered. <br />
-     * (会員ID)MEMBER_ID: {PK, NotNull, INT(10), FK to member}
-     */
-    public void setMemberId_IsNotNull() { regMemberId(CK_ISNN, DOBJ); }
-
     protected void regMemberId(ConditionKey ky, Object vl) { regQ(ky, vl, getCValueMemberId(), "MEMBER_ID"); }
     protected abstract ConditionValue getCValueMemberId();
 
     /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br />
-     * (サービスポイント数)AKIRAKANI_OKASHII_KARAMU_MEI: {IX, NotNull, INT(10)}
-     * @param akirakaniOkashiiKaramuMei The value of akirakaniOkashiiKaramuMei as equal. (NullAllowed: if null, no condition)
+     * (サービスポイント数)SERVICE_POINT_COUNT: {IX, NotNull, INT(10)}
+     * @param servicePointCount The value of servicePointCount as equal. (NullAllowed: if null, no condition)
      */
-    public void setAkirakaniOkashiiKaramuMei_Equal(Integer akirakaniOkashiiKaramuMei) {
-        doSetAkirakaniOkashiiKaramuMei_Equal(akirakaniOkashiiKaramuMei);
+    public void setServicePointCount_Equal(Integer servicePointCount) {
+        doSetServicePointCount_Equal(servicePointCount);
     }
 
-    protected void doSetAkirakaniOkashiiKaramuMei_Equal(Integer akirakaniOkashiiKaramuMei) {
-        regAkirakaniOkashiiKaramuMei(CK_EQ, akirakaniOkashiiKaramuMei);
+    protected void doSetServicePointCount_Equal(Integer servicePointCount) {
+        regServicePointCount(CK_EQ, servicePointCount);
     }
 
     /**
      * NotEqual(&lt;&gt;). And NullIgnored, OnlyOnceRegistered. <br />
-     * (サービスポイント数)AKIRAKANI_OKASHII_KARAMU_MEI: {IX, NotNull, INT(10)}
-     * @param akirakaniOkashiiKaramuMei The value of akirakaniOkashiiKaramuMei as notEqual. (NullAllowed: if null, no condition)
+     * (サービスポイント数)SERVICE_POINT_COUNT: {IX, NotNull, INT(10)}
+     * @param servicePointCount The value of servicePointCount as notEqual. (NullAllowed: if null, no condition)
      */
-    public void setAkirakaniOkashiiKaramuMei_NotEqual(Integer akirakaniOkashiiKaramuMei) {
-        doSetAkirakaniOkashiiKaramuMei_NotEqual(akirakaniOkashiiKaramuMei);
+    public void setServicePointCount_NotEqual(Integer servicePointCount) {
+        doSetServicePointCount_NotEqual(servicePointCount);
     }
 
-    protected void doSetAkirakaniOkashiiKaramuMei_NotEqual(Integer akirakaniOkashiiKaramuMei) {
-        regAkirakaniOkashiiKaramuMei(CK_NES, akirakaniOkashiiKaramuMei);
+    protected void doSetServicePointCount_NotEqual(Integer servicePointCount) {
+        regServicePointCount(CK_NES, servicePointCount);
     }
 
     /**
      * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br />
-     * (サービスポイント数)AKIRAKANI_OKASHII_KARAMU_MEI: {IX, NotNull, INT(10)}
-     * @param akirakaniOkashiiKaramuMei The value of akirakaniOkashiiKaramuMei as greaterThan. (NullAllowed: if null, no condition)
+     * (サービスポイント数)SERVICE_POINT_COUNT: {IX, NotNull, INT(10)}
+     * @param servicePointCount The value of servicePointCount as greaterThan. (NullAllowed: if null, no condition)
      */
-    public void setAkirakaniOkashiiKaramuMei_GreaterThan(Integer akirakaniOkashiiKaramuMei) {
-        regAkirakaniOkashiiKaramuMei(CK_GT, akirakaniOkashiiKaramuMei);
+    public void setServicePointCount_GreaterThan(Integer servicePointCount) {
+        regServicePointCount(CK_GT, servicePointCount);
     }
 
     /**
      * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br />
-     * (サービスポイント数)AKIRAKANI_OKASHII_KARAMU_MEI: {IX, NotNull, INT(10)}
-     * @param akirakaniOkashiiKaramuMei The value of akirakaniOkashiiKaramuMei as lessThan. (NullAllowed: if null, no condition)
+     * (サービスポイント数)SERVICE_POINT_COUNT: {IX, NotNull, INT(10)}
+     * @param servicePointCount The value of servicePointCount as lessThan. (NullAllowed: if null, no condition)
      */
-    public void setAkirakaniOkashiiKaramuMei_LessThan(Integer akirakaniOkashiiKaramuMei) {
-        regAkirakaniOkashiiKaramuMei(CK_LT, akirakaniOkashiiKaramuMei);
+    public void setServicePointCount_LessThan(Integer servicePointCount) {
+        regServicePointCount(CK_LT, servicePointCount);
     }
 
     /**
      * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br />
-     * (サービスポイント数)AKIRAKANI_OKASHII_KARAMU_MEI: {IX, NotNull, INT(10)}
-     * @param akirakaniOkashiiKaramuMei The value of akirakaniOkashiiKaramuMei as greaterEqual. (NullAllowed: if null, no condition)
+     * (サービスポイント数)SERVICE_POINT_COUNT: {IX, NotNull, INT(10)}
+     * @param servicePointCount The value of servicePointCount as greaterEqual. (NullAllowed: if null, no condition)
      */
-    public void setAkirakaniOkashiiKaramuMei_GreaterEqual(Integer akirakaniOkashiiKaramuMei) {
-        regAkirakaniOkashiiKaramuMei(CK_GE, akirakaniOkashiiKaramuMei);
+    public void setServicePointCount_GreaterEqual(Integer servicePointCount) {
+        regServicePointCount(CK_GE, servicePointCount);
     }
 
     /**
      * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br />
-     * (サービスポイント数)AKIRAKANI_OKASHII_KARAMU_MEI: {IX, NotNull, INT(10)}
-     * @param akirakaniOkashiiKaramuMei The value of akirakaniOkashiiKaramuMei as lessEqual. (NullAllowed: if null, no condition)
+     * (サービスポイント数)SERVICE_POINT_COUNT: {IX, NotNull, INT(10)}
+     * @param servicePointCount The value of servicePointCount as lessEqual. (NullAllowed: if null, no condition)
      */
-    public void setAkirakaniOkashiiKaramuMei_LessEqual(Integer akirakaniOkashiiKaramuMei) {
-        regAkirakaniOkashiiKaramuMei(CK_LE, akirakaniOkashiiKaramuMei);
+    public void setServicePointCount_LessEqual(Integer servicePointCount) {
+        regServicePointCount(CK_LE, servicePointCount);
     }
 
     /**
      * RangeOf with various options. (versatile) <br />
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br />
      * And NullIgnored, OnlyOnceRegistered. <br />
-     * (サービスポイント数)AKIRAKANI_OKASHII_KARAMU_MEI: {IX, NotNull, INT(10)}
-     * @param minNumber The min number of akirakaniOkashiiKaramuMei. (NullAllowed: if null, no from-condition)
-     * @param maxNumber The max number of akirakaniOkashiiKaramuMei. (NullAllowed: if null, no to-condition)
+     * (サービスポイント数)SERVICE_POINT_COUNT: {IX, NotNull, INT(10)}
+     * @param minNumber The min number of servicePointCount. (NullAllowed: if null, no from-condition)
+     * @param maxNumber The max number of servicePointCount. (NullAllowed: if null, no to-condition)
      * @param rangeOfOption The option of range-of. (NotNull)
      */
-    public void setAkirakaniOkashiiKaramuMei_RangeOf(Integer minNumber, Integer maxNumber, RangeOfOption rangeOfOption) {
-        regROO(minNumber, maxNumber, getCValueAkirakaniOkashiiKaramuMei(), "AKIRAKANI_OKASHII_KARAMU_MEI", rangeOfOption);
+    public void setServicePointCount_RangeOf(Integer minNumber, Integer maxNumber, RangeOfOption rangeOfOption) {
+        regROO(minNumber, maxNumber, getCValueServicePointCount(), "SERVICE_POINT_COUNT", rangeOfOption);
     }
 
     /**
      * InScope {in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br />
-     * (サービスポイント数)AKIRAKANI_OKASHII_KARAMU_MEI: {IX, NotNull, INT(10)}
-     * @param akirakaniOkashiiKaramuMeiList The collection of akirakaniOkashiiKaramuMei as inScope. (NullAllowed: if null (or empty), no condition)
+     * (サービスポイント数)SERVICE_POINT_COUNT: {IX, NotNull, INT(10)}
+     * @param servicePointCountList The collection of servicePointCount as inScope. (NullAllowed: if null (or empty), no condition)
      */
-    public void setAkirakaniOkashiiKaramuMei_InScope(Collection<Integer> akirakaniOkashiiKaramuMeiList) {
-        doSetAkirakaniOkashiiKaramuMei_InScope(akirakaniOkashiiKaramuMeiList);
+    public void setServicePointCount_InScope(Collection<Integer> servicePointCountList) {
+        doSetServicePointCount_InScope(servicePointCountList);
     }
 
-    protected void doSetAkirakaniOkashiiKaramuMei_InScope(Collection<Integer> akirakaniOkashiiKaramuMeiList) {
-        regINS(CK_INS, cTL(akirakaniOkashiiKaramuMeiList), getCValueAkirakaniOkashiiKaramuMei(), "AKIRAKANI_OKASHII_KARAMU_MEI");
+    protected void doSetServicePointCount_InScope(Collection<Integer> servicePointCountList) {
+        regINS(CK_INS, cTL(servicePointCountList), getCValueServicePointCount(), "SERVICE_POINT_COUNT");
     }
 
     /**
      * NotInScope {not in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br />
-     * (サービスポイント数)AKIRAKANI_OKASHII_KARAMU_MEI: {IX, NotNull, INT(10)}
-     * @param akirakaniOkashiiKaramuMeiList The collection of akirakaniOkashiiKaramuMei as notInScope. (NullAllowed: if null (or empty), no condition)
+     * (サービスポイント数)SERVICE_POINT_COUNT: {IX, NotNull, INT(10)}
+     * @param servicePointCountList The collection of servicePointCount as notInScope. (NullAllowed: if null (or empty), no condition)
      */
-    public void setAkirakaniOkashiiKaramuMei_NotInScope(Collection<Integer> akirakaniOkashiiKaramuMeiList) {
-        doSetAkirakaniOkashiiKaramuMei_NotInScope(akirakaniOkashiiKaramuMeiList);
+    public void setServicePointCount_NotInScope(Collection<Integer> servicePointCountList) {
+        doSetServicePointCount_NotInScope(servicePointCountList);
     }
 
-    protected void doSetAkirakaniOkashiiKaramuMei_NotInScope(Collection<Integer> akirakaniOkashiiKaramuMeiList) {
-        regINS(CK_NINS, cTL(akirakaniOkashiiKaramuMeiList), getCValueAkirakaniOkashiiKaramuMei(), "AKIRAKANI_OKASHII_KARAMU_MEI");
+    protected void doSetServicePointCount_NotInScope(Collection<Integer> servicePointCountList) {
+        regINS(CK_NINS, cTL(servicePointCountList), getCValueServicePointCount(), "SERVICE_POINT_COUNT");
     }
 
-    protected void regAkirakaniOkashiiKaramuMei(ConditionKey ky, Object vl) { regQ(ky, vl, getCValueAkirakaniOkashiiKaramuMei(), "AKIRAKANI_OKASHII_KARAMU_MEI"); }
-    protected abstract ConditionValue getCValueAkirakaniOkashiiKaramuMei();
+    protected void regServicePointCount(ConditionKey ky, Object vl) { regQ(ky, vl, getCValueServicePointCount(), "SERVICE_POINT_COUNT"); }
+    protected abstract ConditionValue getCValueServicePointCount();
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br />
@@ -1130,7 +1234,7 @@ public abstract class AbstractBsMemberServiceCQ extends AbstractConditionQuery {
         MemberServiceCB cb = new MemberServiceCB(); cb.xsetupForDerivedReferrer(this);
         try { lock(); sq.query(cb); } finally { unlock(); }
         String pp = keepSpecifyMyselfDerived(cb.query());
-        String pk = "MEMBER_ID";
+        String pk = "MEMBER_SERVICE_ID";
         registerSpecifyMyselfDerived(fn, cb.query(), pk, pk, pp, "myselfDerived", al, op);
     }
     public abstract String keepSpecifyMyselfDerived(MemberServiceCQ sq);
@@ -1146,7 +1250,7 @@ public abstract class AbstractBsMemberServiceCQ extends AbstractConditionQuery {
     protected <CB extends ConditionBean> void xqderiveMyselfDerived(String fn, SubQuery<CB> sq, String rd, Object vl, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
         MemberServiceCB cb = new MemberServiceCB(); cb.xsetupForDerivedReferrer(this); sq.query((CB)cb);
-        String pk = "MEMBER_ID";
+        String pk = "MEMBER_SERVICE_ID";
         String sqpp = keepQueryMyselfDerived(cb.query()); // for saving query-value.
         String prpp = keepQueryMyselfDerivedParameter(vl);
         registerQueryMyselfDerived(fn, cb.query(), pk, pk, sqpp, "myselfDerived", rd, vl, prpp, op);

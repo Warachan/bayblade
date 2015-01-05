@@ -19,16 +19,16 @@ import org.dbflute.handson.dbflute.cbean.*;
  * The behavior of (会員サービス)MEMBER_SERVICE as TABLE. <br />
  * <pre>
  * [primary key]
- *     MEMBER_ID
+ *     MEMBER_SERVICE_ID
  *
  * [column]
- *     MEMBER_ID, AKIRAKANI_OKASHII_KARAMU_MEI, SERVICE_RANK_CODE, REGISTER_DATETIME, REGISTER_USER, UPDATE_DATETIME, UPDATE_USER, VERSION_NO
+ *     MEMBER_SERVICE_ID, MEMBER_ID, SERVICE_POINT_COUNT, SERVICE_RANK_CODE, REGISTER_DATETIME, REGISTER_USER, UPDATE_DATETIME, UPDATE_USER, VERSION_NO
  *
  * [sequence]
  *     
  *
  * [identity]
- *     
+ *     MEMBER_SERVICE_ID
  *
  * [version-no]
  *     VERSION_NO
@@ -151,46 +151,71 @@ public abstract class BsMemberServiceBhv extends AbstractBehaviorWritable<Member
 
     /**
      * Select the entity by the primary-key value.
-     * @param memberId (会員ID): PK, NotNull, INT(10), FK to member. (NotNull)
+     * @param memberServiceId (会員サービスに代理キー): PK, ID, NotNull, INT(10). (NotNull)
      * @return The entity selected by the PK. (NullAllowed: if no data, it returns null)
      * @exception EntityDuplicatedException When the entity has been duplicated.
      * @exception SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
-    public MemberService selectByPKValue(Integer memberId) {
-        return facadeSelectByPKValue(memberId);
+    public MemberService selectByPKValue(Integer memberServiceId) {
+        return facadeSelectByPKValue(memberServiceId);
     }
 
-    protected MemberService facadeSelectByPKValue(Integer memberId) {
-        return doSelectByPK(memberId, typeOfSelectedEntity());
+    protected MemberService facadeSelectByPKValue(Integer memberServiceId) {
+        return doSelectByPK(memberServiceId, typeOfSelectedEntity());
     }
 
-    protected <ENTITY extends MemberService> ENTITY doSelectByPK(Integer memberId, Class<? extends ENTITY> tp) {
-        return doSelectEntity(xprepareCBAsPK(memberId), tp);
+    protected <ENTITY extends MemberService> ENTITY doSelectByPK(Integer memberServiceId, Class<? extends ENTITY> tp) {
+        return doSelectEntity(xprepareCBAsPK(memberServiceId), tp);
     }
 
-    protected <ENTITY extends MemberService> OptionalEntity<ENTITY> doSelectOptionalByPK(Integer memberId, Class<? extends ENTITY> tp) {
-        return createOptionalEntity(doSelectByPK(memberId, tp), memberId);
+    protected <ENTITY extends MemberService> OptionalEntity<ENTITY> doSelectOptionalByPK(Integer memberServiceId, Class<? extends ENTITY> tp) {
+        return createOptionalEntity(doSelectByPK(memberServiceId, tp), memberServiceId);
     }
 
     /**
      * Select the entity by the primary-key value with deleted check.
-     * @param memberId (会員ID): PK, NotNull, INT(10), FK to member. (NotNull)
+     * @param memberServiceId (会員サービスに代理キー): PK, ID, NotNull, INT(10). (NotNull)
      * @return The entity selected by the PK. (NotNull: if no data, throws exception)
      * @exception EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @exception EntityDuplicatedException When the entity has been duplicated.
      * @exception SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
-    public MemberService selectByPKValueWithDeletedCheck(Integer memberId) {
-        return doSelectByPKWithDeletedCheck(memberId, typeOfSelectedEntity());
+    public MemberService selectByPKValueWithDeletedCheck(Integer memberServiceId) {
+        return doSelectByPKWithDeletedCheck(memberServiceId, typeOfSelectedEntity());
     }
 
-    protected <ENTITY extends MemberService> ENTITY doSelectByPKWithDeletedCheck(Integer memberId, Class<ENTITY> tp) {
-        return doSelectEntityWithDeletedCheck(xprepareCBAsPK(memberId), tp);
+    protected <ENTITY extends MemberService> ENTITY doSelectByPKWithDeletedCheck(Integer memberServiceId, Class<ENTITY> tp) {
+        return doSelectEntityWithDeletedCheck(xprepareCBAsPK(memberServiceId), tp);
     }
 
-    protected MemberServiceCB xprepareCBAsPK(Integer memberId) {
+    protected MemberServiceCB xprepareCBAsPK(Integer memberServiceId) {
+        assertObjectNotNull("memberServiceId", memberServiceId);
+        return newConditionBean().acceptPK(memberServiceId);
+    }
+
+    /**
+     * Select the entity by the unique-key value.
+     * @param memberId (会員ID): UQ, NotNull, INT(10), FK to member. (NotNull)
+     * @return The optional entity selected by the unique key. (NotNull: if no data, empty entity)
+     * @exception EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
+     * @exception EntityDuplicatedException When the entity has been duplicated.
+     * @exception SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
+     */
+    public OptionalEntity<MemberService> selectByUniqueOf(Integer memberId) {
+        return facadeSelectByUniqueOf(memberId);
+    }
+
+    protected OptionalEntity<MemberService> facadeSelectByUniqueOf(Integer memberId) {
+        return doSelectByUniqueOf(memberId, typeOfSelectedEntity());
+    }
+
+    protected <ENTITY extends MemberService> OptionalEntity<ENTITY> doSelectByUniqueOf(Integer memberId, Class<? extends ENTITY> tp) {
+        return createOptionalEntity(doSelectEntity(xprepareCBAsUniqueOf(memberId), tp), memberId);
+    }
+
+    protected MemberServiceCB xprepareCBAsUniqueOf(Integer memberId) {
         assertObjectNotNull("memberId", memberId);
-        return newConditionBean().acceptPK(memberId);
+        return newConditionBean().acceptUniqueOf(memberId);
     }
 
     // ===================================================================================
@@ -394,7 +419,15 @@ public abstract class BsMemberServiceBhv extends AbstractBehaviorWritable<Member
     //                                                                      Extract Column
     //                                                                      ==============
     /**
-     * Extract the value list of (single) primary key memberId.
+     * Extract the value list of (single) primary key memberServiceId.
+     * @param memberServiceList The list of memberService. (NotNull, EmptyAllowed)
+     * @return The list of the column value. (NotNull, EmptyAllowed, NotNullElement)
+     */
+    public List<Integer> extractMemberServiceIdList(List<MemberService> memberServiceList)
+    { return helpExtractListInternally(memberServiceList, "memberServiceId"); }
+
+    /**
+     * Extract the value list of (single) unique key memberId.
      * @param memberServiceList The list of memberService. (NotNull, EmptyAllowed)
      * @return The list of the column value. (NotNull, EmptyAllowed, NotNullElement)
      */

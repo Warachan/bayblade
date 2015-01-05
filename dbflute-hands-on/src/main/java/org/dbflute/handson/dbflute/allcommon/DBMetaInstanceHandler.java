@@ -33,6 +33,7 @@ public class DBMetaInstanceHandler implements DBMetaProvider {
         final Map<String, String> tmpMap = newHashMap();
         tmpMap.put("member", "org.dbflute.handson.dbflute.bsentity.dbmeta.MemberDbm");
         tmpMap.put("member_address", "org.dbflute.handson.dbflute.bsentity.dbmeta.MemberAddressDbm");
+        tmpMap.put("member_following", "org.dbflute.handson.dbflute.bsentity.dbmeta.MemberFollowingDbm");
         tmpMap.put("member_login", "org.dbflute.handson.dbflute.bsentity.dbmeta.MemberLoginDbm");
         tmpMap.put("member_security", "org.dbflute.handson.dbflute.bsentity.dbmeta.MemberSecurityDbm");
         tmpMap.put("member_service", "org.dbflute.handson.dbflute.bsentity.dbmeta.MemberServiceDbm");

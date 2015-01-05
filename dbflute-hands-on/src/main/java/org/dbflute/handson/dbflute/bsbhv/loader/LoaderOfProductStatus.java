@@ -15,7 +15,7 @@ import org.dbflute.handson.dbflute.cbean.*;
  *     PRODUCT_STATUS_CODE
  *
  * [column]
- *     PRODUCT_STATUS_CODE, PRODUCT_STATUS_NAME
+ *     PRODUCT_STATUS_CODE, PRODUCT_STATUS_NAME, DISPLAY_ORDER
  *
  * [sequence]
  *     

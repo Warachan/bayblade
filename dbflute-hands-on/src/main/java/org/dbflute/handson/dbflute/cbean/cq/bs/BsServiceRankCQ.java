@@ -201,14 +201,14 @@ public class BsServiceRankCQ extends AbstractBsServiceRankCQ {
 
     /** 
      * Add order-by as ascend. <br />
-     * DISPLAY_ORDER: {UQ, NotNull, INT(10)}
+     * (表示順)DISPLAY_ORDER: {UQ, NotNull, INT(10)}
      * @return this. (NotNull)
      */
     public BsServiceRankCQ addOrderBy_DisplayOrder_Asc() { regOBA("DISPLAY_ORDER"); return this; }
 
     /**
      * Add order-by as descend. <br />
-     * DISPLAY_ORDER: {UQ, NotNull, INT(10)}
+     * (表示順)DISPLAY_ORDER: {UQ, NotNull, INT(10)}
      * @return this. (NotNull)
      */
     public BsServiceRankCQ addOrderBy_DisplayOrder_Desc() { regOBD("DISPLAY_ORDER"); return this; }

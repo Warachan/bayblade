@@ -18,7 +18,7 @@ select mb.MEMBER_ID
      , mb.MEMBER_NAME
      , mb.BIRTHDATE
      , mb.MEMBER_STATUS_CODE
-     , serv.AKIRAKANI_OKASHII_KARAMU_MEI
+     , serv.SERVICE_POINT_COUNT
  from MEMBER mb
    inner join MEMBER_SERVICE serv
      on serv.MEMBER_ID = mb.MEMBER_ID

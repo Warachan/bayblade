@@ -78,7 +78,7 @@ public class HandsOn07Logic {
 
         MemberService service = new MemberService();
         service.setMemberId(memberId);
-        service.setAkirakaniOkashiiKaramuMei(8888);
+        service.setServicePointCount(8888);
         service.setServiceRankCode_Platinum();
         memberServiceBhv.insert(service);
 

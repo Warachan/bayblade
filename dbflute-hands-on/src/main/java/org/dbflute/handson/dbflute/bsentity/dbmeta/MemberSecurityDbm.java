@@ -42,6 +42,7 @@ public class MemberSecurityDbm extends AbstractDBMeta {
         setupEpg(_epgMap, new EpgLoginPassword(), "loginPassword");
         setupEpg(_epgMap, new EpgReminderQuestion(), "reminderQuestion");
         setupEpg(_epgMap, new EpgReminderAnswer(), "reminderAnswer");
+        setupEpg(_epgMap, new EpgReminderUseCount(), "reminderUseCount");
         setupEpg(_epgMap, new EpgRegisterDatetime(), "registerDatetime");
         setupEpg(_epgMap, new EpgRegisterUser(), "registerUser");
         setupEpg(_epgMap, new EpgUpdateDatetime(), "updateDatetime");
@@ -63,6 +64,10 @@ public class MemberSecurityDbm extends AbstractDBMeta {
     public static class EpgReminderAnswer implements PropertyGateway {
         public Object read(Entity et) { return ((MemberSecurity)et).getReminderAnswer(); }
         public void write(Entity et, Object vl) { ((MemberSecurity)et).setReminderAnswer((String)vl); }
+    }
+    public static class EpgReminderUseCount implements PropertyGateway {
+        public Object read(Entity et) { return ((MemberSecurity)et).getReminderUseCount(); }
+        public void write(Entity et, Object vl) { ((MemberSecurity)et).setReminderUseCount(cti(vl)); }
     }
     public static class EpgRegisterDatetime implements PropertyGateway {
         public Object read(Entity et) { return ((MemberSecurity)et).getRegisterDatetime(); }
@@ -121,6 +126,7 @@ public class MemberSecurityDbm extends AbstractDBMeta {
     protected final ColumnInfo _columnLoginPassword = cci("LOGIN_PASSWORD", "LOGIN_PASSWORD", null, "ログインパスワード", String.class, "loginPassword", null, false, false, true, "VARCHAR", 50, 0, null, false, null, null, null, null, null);
     protected final ColumnInfo _columnReminderQuestion = cci("REMINDER_QUESTION", "REMINDER_QUESTION", null, "リマインダ質問", String.class, "reminderQuestion", null, false, false, true, "VARCHAR", 50, 0, null, false, null, null, null, null, null);
     protected final ColumnInfo _columnReminderAnswer = cci("REMINDER_ANSWER", "REMINDER_ANSWER", null, "リマインダ回答", String.class, "reminderAnswer", null, false, false, true, "VARCHAR", 50, 0, null, false, null, null, null, null, null);
+    protected final ColumnInfo _columnReminderUseCount = cci("REMINDER_USE_COUNT", "REMINDER_USE_COUNT", null, "会員セキュリティ情報にリマインダ回数", Integer.class, "reminderUseCount", null, false, false, true, "INT", 10, 0, null, false, null, null, null, null, null);
     protected final ColumnInfo _columnRegisterDatetime = cci("REGISTER_DATETIME", "REGISTER_DATETIME", null, null, java.sql.Timestamp.class, "registerDatetime", null, false, false, true, "DATETIME", 19, 0, null, true, null, null, null, null, null);
     protected final ColumnInfo _columnRegisterUser = cci("REGISTER_USER", "REGISTER_USER", null, null, String.class, "registerUser", null, false, false, true, "VARCHAR", 200, 0, null, true, null, null, null, null, null);
     protected final ColumnInfo _columnUpdateDatetime = cci("UPDATE_DATETIME", "UPDATE_DATETIME", null, null, java.sql.Timestamp.class, "updateDatetime", null, false, false, true, "DATETIME", 19, 0, null, true, null, null, null, null, null);
@@ -147,6 +153,11 @@ public class MemberSecurityDbm extends AbstractDBMeta {
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnReminderAnswer() { return _columnReminderAnswer; }
+    /**
+     * (会員セキュリティ情報にリマインダ回数)REMINDER_USE_COUNT: {NotNull, INT(10)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnReminderUseCount() { return _columnReminderUseCount; }
     /**
      * REGISTER_DATETIME: {NotNull, DATETIME(19)}
      * @return The information object of specified column. (NotNull)
@@ -179,6 +190,7 @@ public class MemberSecurityDbm extends AbstractDBMeta {
         ls.add(columnLoginPassword());
         ls.add(columnReminderQuestion());
         ls.add(columnReminderAnswer());
+        ls.add(columnReminderUseCount());
         ls.add(columnRegisterDatetime());
         ls.add(columnRegisterUser());
         ls.add(columnUpdateDatetime());

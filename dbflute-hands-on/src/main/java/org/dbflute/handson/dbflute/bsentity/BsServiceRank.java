@@ -89,7 +89,7 @@ public abstract class BsServiceRank extends AbstractEntity implements DomainEnti
     /** DESCRIPTION: {NotNull, VARCHAR(200)} */
     protected String _description;
 
-    /** DISPLAY_ORDER: {UQ, NotNull, INT(10)} */
+    /** (表示順)DISPLAY_ORDER: {UQ, NotNull, INT(10)} */
     protected Integer _displayOrder;
 
     // ===================================================================================
@@ -133,7 +133,7 @@ public abstract class BsServiceRank extends AbstractEntity implements DomainEnti
     /**
      * To be unique by the unique column. <br />
      * You can update the entity by the key when entity update (NOT batch update).
-     * @param displayOrder : UQ, NotNull, INT(10). (NotNull)
+     * @param displayOrder (表示順): UQ, NotNull, INT(10). (NotNull)
      */
     public void uniqueBy(Integer displayOrder) {
         __uniqueDrivenProperties.clear();
@@ -555,7 +555,7 @@ public abstract class BsServiceRank extends AbstractEntity implements DomainEnti
     }
 
     /**
-     * [get] DISPLAY_ORDER: {UQ, NotNull, INT(10)} <br />
+     * [get] (表示順)DISPLAY_ORDER: {UQ, NotNull, INT(10)} <br />
      * @return The value of the column 'DISPLAY_ORDER'. (basically NotNull if selected: for the constraint)
      */
     public Integer getDisplayOrder() {
@@ -564,7 +564,7 @@ public abstract class BsServiceRank extends AbstractEntity implements DomainEnti
     }
 
     /**
-     * [set] DISPLAY_ORDER: {UQ, NotNull, INT(10)} <br />
+     * [set] (表示順)DISPLAY_ORDER: {UQ, NotNull, INT(10)} <br />
      * @param displayOrder The value of the column 'DISPLAY_ORDER'. (basically NotNull if update: for the constraint)
      */
     public void setDisplayOrder(Integer displayOrder) {

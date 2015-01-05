@@ -835,7 +835,7 @@ public abstract class AbstractBsServiceRankCQ extends AbstractConditionQuery {
 
     /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br />
-     * DISPLAY_ORDER: {UQ, NotNull, INT(10)}
+     * (表示順)DISPLAY_ORDER: {UQ, NotNull, INT(10)}
      * @param displayOrder The value of displayOrder as equal. (NullAllowed: if null, no condition)
      */
     public void setDisplayOrder_Equal(Integer displayOrder) {
@@ -848,7 +848,7 @@ public abstract class AbstractBsServiceRankCQ extends AbstractConditionQuery {
 
     /**
      * NotEqual(&lt;&gt;). And NullIgnored, OnlyOnceRegistered. <br />
-     * DISPLAY_ORDER: {UQ, NotNull, INT(10)}
+     * (表示順)DISPLAY_ORDER: {UQ, NotNull, INT(10)}
      * @param displayOrder The value of displayOrder as notEqual. (NullAllowed: if null, no condition)
      */
     public void setDisplayOrder_NotEqual(Integer displayOrder) {
@@ -861,7 +861,7 @@ public abstract class AbstractBsServiceRankCQ extends AbstractConditionQuery {
 
     /**
      * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br />
-     * DISPLAY_ORDER: {UQ, NotNull, INT(10)}
+     * (表示順)DISPLAY_ORDER: {UQ, NotNull, INT(10)}
      * @param displayOrder The value of displayOrder as greaterThan. (NullAllowed: if null, no condition)
      */
     public void setDisplayOrder_GreaterThan(Integer displayOrder) {
@@ -870,7 +870,7 @@ public abstract class AbstractBsServiceRankCQ extends AbstractConditionQuery {
 
     /**
      * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br />
-     * DISPLAY_ORDER: {UQ, NotNull, INT(10)}
+     * (表示順)DISPLAY_ORDER: {UQ, NotNull, INT(10)}
      * @param displayOrder The value of displayOrder as lessThan. (NullAllowed: if null, no condition)
      */
     public void setDisplayOrder_LessThan(Integer displayOrder) {
@@ -879,7 +879,7 @@ public abstract class AbstractBsServiceRankCQ extends AbstractConditionQuery {
 
     /**
      * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br />
-     * DISPLAY_ORDER: {UQ, NotNull, INT(10)}
+     * (表示順)DISPLAY_ORDER: {UQ, NotNull, INT(10)}
      * @param displayOrder The value of displayOrder as greaterEqual. (NullAllowed: if null, no condition)
      */
     public void setDisplayOrder_GreaterEqual(Integer displayOrder) {
@@ -888,7 +888,7 @@ public abstract class AbstractBsServiceRankCQ extends AbstractConditionQuery {
 
     /**
      * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br />
-     * DISPLAY_ORDER: {UQ, NotNull, INT(10)}
+     * (表示順)DISPLAY_ORDER: {UQ, NotNull, INT(10)}
      * @param displayOrder The value of displayOrder as lessEqual. (NullAllowed: if null, no condition)
      */
     public void setDisplayOrder_LessEqual(Integer displayOrder) {
@@ -899,7 +899,7 @@ public abstract class AbstractBsServiceRankCQ extends AbstractConditionQuery {
      * RangeOf with various options. (versatile) <br />
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br />
      * And NullIgnored, OnlyOnceRegistered. <br />
-     * DISPLAY_ORDER: {UQ, NotNull, INT(10)}
+     * (表示順)DISPLAY_ORDER: {UQ, NotNull, INT(10)}
      * @param minNumber The min number of displayOrder. (NullAllowed: if null, no from-condition)
      * @param maxNumber The max number of displayOrder. (NullAllowed: if null, no to-condition)
      * @param rangeOfOption The option of range-of. (NotNull)
@@ -910,7 +910,7 @@ public abstract class AbstractBsServiceRankCQ extends AbstractConditionQuery {
 
     /**
      * InScope {in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br />
-     * DISPLAY_ORDER: {UQ, NotNull, INT(10)}
+     * (表示順)DISPLAY_ORDER: {UQ, NotNull, INT(10)}
      * @param displayOrderList The collection of displayOrder as inScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setDisplayOrder_InScope(Collection<Integer> displayOrderList) {
@@ -923,7 +923,7 @@ public abstract class AbstractBsServiceRankCQ extends AbstractConditionQuery {
 
     /**
      * NotInScope {not in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br />
-     * DISPLAY_ORDER: {UQ, NotNull, INT(10)}
+     * (表示順)DISPLAY_ORDER: {UQ, NotNull, INT(10)}
      * @param displayOrderList The collection of displayOrder as notInScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setDisplayOrder_NotInScope(Collection<Integer> displayOrderList) {

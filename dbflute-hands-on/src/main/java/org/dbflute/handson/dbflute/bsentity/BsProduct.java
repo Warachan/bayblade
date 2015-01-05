@@ -98,7 +98,7 @@ public abstract class BsProduct extends AbstractEntity implements DomainEntity, 
     /** PRODUCT_STATUS_CODE: {IX, NotNull, CHAR(3), FK to product_status, classification=ProductStatus} */
     protected String _productStatusCode;
 
-    /** (定価)REGULAR_PRICE: {INT(10)} */
+    /** (定価)REGULAR_PRICE: {NotNull, INT(10)} */
     protected Integer _regularPrice;
 
     /** REGISTER_DATETIME: {NotNull, DATETIME(19)} */
@@ -521,8 +521,8 @@ public abstract class BsProduct extends AbstractEntity implements DomainEntity, 
     }
 
     /**
-     * [get] (定価)REGULAR_PRICE: {INT(10)} <br />
-     * @return The value of the column 'REGULAR_PRICE'. (NullAllowed even if selected: for no constraint)
+     * [get] (定価)REGULAR_PRICE: {NotNull, INT(10)} <br />
+     * @return The value of the column 'REGULAR_PRICE'. (basically NotNull if selected: for the constraint)
      */
     public Integer getRegularPrice() {
         checkSpecifiedProperty("regularPrice");
@@ -530,8 +530,8 @@ public abstract class BsProduct extends AbstractEntity implements DomainEntity, 
     }
 
     /**
-     * [set] (定価)REGULAR_PRICE: {INT(10)} <br />
-     * @param regularPrice The value of the column 'REGULAR_PRICE'. (NullAllowed: null update allowed for no constraint)
+     * [set] (定価)REGULAR_PRICE: {NotNull, INT(10)} <br />
+     * @param regularPrice The value of the column 'REGULAR_PRICE'. (basically NotNull if update: for the constraint)
      */
     public void setRegularPrice(Integer regularPrice) {
         registerModifiedProperty("regularPrice");

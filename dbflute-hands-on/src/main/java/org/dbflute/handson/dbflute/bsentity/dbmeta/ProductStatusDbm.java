@@ -40,6 +40,7 @@ public class ProductStatusDbm extends AbstractDBMeta {
     {
         setupEpg(_epgMap, new EpgProductStatusCode(), "productStatusCode");
         setupEpg(_epgMap, new EpgProductStatusName(), "productStatusName");
+        setupEpg(_epgMap, new EpgDisplayOrder(), "displayOrder");
     }
     public class EpgProductStatusCode implements PropertyGateway {
         public Object read(Entity et) { return ((ProductStatus)et).getProductStatusCode(); }
@@ -57,6 +58,10 @@ public class ProductStatusDbm extends AbstractDBMeta {
     public static class EpgProductStatusName implements PropertyGateway {
         public Object read(Entity et) { return ((ProductStatus)et).getProductStatusName(); }
         public void write(Entity et, Object vl) { ((ProductStatus)et).setProductStatusName((String)vl); }
+    }
+    public static class EpgDisplayOrder implements PropertyGateway {
+        public Object read(Entity et) { return ((ProductStatus)et).getDisplayOrder(); }
+        public void write(Entity et, Object vl) { ((ProductStatus)et).setDisplayOrder(cti(vl)); }
     }
     public PropertyGateway findPropertyGateway(String prop)
     { return doFindEpg(_epgMap, prop); }
@@ -79,6 +84,7 @@ public class ProductStatusDbm extends AbstractDBMeta {
     //                                                                         ===========
     protected final ColumnInfo _columnProductStatusCode = cci("PRODUCT_STATUS_CODE", "PRODUCT_STATUS_CODE", null, "商品ステータスコード", String.class, "productStatusCode", null, true, false, true, "CHAR", 3, 0, null, false, null, null, null, "productList", CDef.DefMeta.ProductStatus);
     protected final ColumnInfo _columnProductStatusName = cci("PRODUCT_STATUS_NAME", "PRODUCT_STATUS_NAME", null, "商品ステータス名称", String.class, "productStatusName", null, false, false, true, "VARCHAR", 50, 0, null, false, null, null, null, null, null);
+    protected final ColumnInfo _columnDisplayOrder = cci("DISPLAY_ORDER", "DISPLAY_ORDER", null, "表示順カラム", Integer.class, "displayOrder", null, false, false, true, "INT", 10, 0, null, false, null, null, null, null, null);
 
     /**
      * (商品ステータスコード)PRODUCT_STATUS_CODE: {PK, NotNull, CHAR(3), classification=ProductStatus}
@@ -90,11 +96,17 @@ public class ProductStatusDbm extends AbstractDBMeta {
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnProductStatusName() { return _columnProductStatusName; }
+    /**
+     * (表示順カラム)DISPLAY_ORDER: {UQ, NotNull, INT(10)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnDisplayOrder() { return _columnDisplayOrder; }
 
     protected List<ColumnInfo> ccil() {
         List<ColumnInfo> ls = newArrayList();
         ls.add(columnProductStatusCode());
         ls.add(columnProductStatusName());
+        ls.add(columnDisplayOrder());
         return ls;
     }
 

@@ -17,7 +17,7 @@ import org.dbflute.handson.dbflute.exentity.*;
  *     PRODUCT_STATUS_CODE
  * 
  * [column]
- *     PRODUCT_STATUS_CODE, PRODUCT_STATUS_NAME
+ *     PRODUCT_STATUS_CODE, PRODUCT_STATUS_NAME, DISPLAY_ORDER
  * 
  * [sequence]
  *     
@@ -44,8 +44,10 @@ import org.dbflute.handson.dbflute.exentity.*;
  * /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
  * String productStatusCode = entity.getProductStatusCode();
  * String productStatusName = entity.getProductStatusName();
+ * Integer displayOrder = entity.getDisplayOrder();
  * entity.setProductStatusCode(productStatusCode);
  * entity.setProductStatusName(productStatusName);
+ * entity.setDisplayOrder(displayOrder);
  * = = = = = = = = = =/
  * </pre>
  * @author DBFlute(AutoGenerator)
@@ -69,6 +71,9 @@ public abstract class BsProductStatus extends AbstractEntity implements DomainEn
 
     /** (商品ステータス名称)PRODUCT_STATUS_NAME: {NotNull, VARCHAR(50)} */
     protected String _productStatusName;
+
+    /** (表示順カラム)DISPLAY_ORDER: {UQ, NotNull, INT(10)} */
+    protected Integer _displayOrder;
 
     // ===================================================================================
     //                                                                          Table Name
@@ -106,6 +111,17 @@ public abstract class BsProductStatus extends AbstractEntity implements DomainEn
     public boolean hasPrimaryKeyValue() {
         if (getProductStatusCode() == null) { return false; }
         return true;
+    }
+
+    /**
+     * To be unique by the unique column. <br />
+     * You can update the entity by the key when entity update (NOT batch update).
+     * @param displayOrder (表示順カラム): UQ, NotNull, INT(10). (NotNull)
+     */
+    public void uniqueBy(Integer displayOrder) {
+        __uniqueDrivenProperties.clear();
+        __uniqueDrivenProperties.addPropertyName("displayOrder");
+        setDisplayOrder(displayOrder);
     }
 
     // ===================================================================================
@@ -260,6 +276,7 @@ public abstract class BsProductStatus extends AbstractEntity implements DomainEn
         StringBuilder sb = new StringBuilder();
         sb.append(dm).append(xfND(_productStatusCode));
         sb.append(dm).append(xfND(_productStatusName));
+        sb.append(dm).append(xfND(_displayOrder));
         if (sb.length() > dm.length()) {
             sb.delete(0, dm.length());
         }
@@ -320,6 +337,24 @@ public abstract class BsProductStatus extends AbstractEntity implements DomainEn
     public void setProductStatusName(String productStatusName) {
         registerModifiedProperty("productStatusName");
         _productStatusName = productStatusName;
+    }
+
+    /**
+     * [get] (表示順カラム)DISPLAY_ORDER: {UQ, NotNull, INT(10)} <br />
+     * @return The value of the column 'DISPLAY_ORDER'. (basically NotNull if selected: for the constraint)
+     */
+    public Integer getDisplayOrder() {
+        checkSpecifiedProperty("displayOrder");
+        return _displayOrder;
+    }
+
+    /**
+     * [set] (表示順カラム)DISPLAY_ORDER: {UQ, NotNull, INT(10)} <br />
+     * @param displayOrder The value of the column 'DISPLAY_ORDER'. (basically NotNull if update: for the constraint)
+     */
+    public void setDisplayOrder(Integer displayOrder) {
+        registerModifiedProperty("displayOrder");
+        _displayOrder = displayOrder;
     }
 
     /**

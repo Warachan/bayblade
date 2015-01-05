@@ -20,7 +20,7 @@ select mb.MEMBER_ID
      , mb.MEMBER_NAME
      , mb.BIRTHDATE
      , mb.MEMBER_STATUS_CODE
-     , serv.AKIRAKANI_OKASHII_KARAMU_MEI -- // サービスポイントかうんと
+     , serv.SERVICE_POINT_COUNT -- // サービスポイントかうんと
 -- ELSE select count(*)
 /*END*/
   from MEMBER mb
@@ -34,8 +34,8 @@ select mb.MEMBER_ID
    /*IF pmb.memberName != null*/
    and mb.MEMBER_NAME like /*pmb.memberName*/'%M%'
    /*END*/
-   /*IF pmb.akirakaniOkashiiKaramuMei != null*/
-   and serv.AKIRAKANI_OKASHII_KARAMU_MEI >= /*pmb.akirakaniOkashiiKaramuMei*/80
+   /*IF pmb.servicePointCount != null*/
+   and serv.SERVICE_POINT_COUNT >= /*pmb.servicePointCount*/80
    /*END*/
  /*END*/
  /*IF pmb.isPaging()*/

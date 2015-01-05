@@ -105,7 +105,7 @@ public class BsServiceRankCB extends AbstractConditionBean {
 
     /**
      * Accept the query condition of unique key as equal.
-     * @param displayOrder : UQ, NotNull, INT(10). (NotNull)
+     * @param displayOrder (表示順): UQ, NotNull, INT(10). (NotNull)
      * @return this. (NotNull)
      */
     public ServiceRankCB acceptUniqueOf(Integer displayOrder) {
@@ -347,7 +347,7 @@ public class BsServiceRankCB extends AbstractConditionBean {
          */
         public HpSpecifiedColumn columnDescription() { return doColumn("DESCRIPTION"); }
         /**
-         * DISPLAY_ORDER: {UQ, NotNull, INT(10)}
+         * (表示順)DISPLAY_ORDER: {UQ, NotNull, INT(10)}
          * @return The information object of specified column. (NotNull)
          */
         public HpSpecifiedColumn columnDisplayOrder() { return doColumn("DISPLAY_ORDER"); }

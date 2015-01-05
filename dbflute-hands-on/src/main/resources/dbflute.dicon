@@ -15,6 +15,7 @@
     <!-- The components of Behavior. -->
     <component name="memberBhv" class="org.dbflute.handson.dbflute.exbhv.MemberBhv"/>
     <component name="memberAddressBhv" class="org.dbflute.handson.dbflute.exbhv.MemberAddressBhv"/>
+    <component name="memberFollowingBhv" class="org.dbflute.handson.dbflute.exbhv.MemberFollowingBhv"/>
     <component name="memberLoginBhv" class="org.dbflute.handson.dbflute.exbhv.MemberLoginBhv"/>
     <component name="memberSecurityBhv" class="org.dbflute.handson.dbflute.exbhv.MemberSecurityBhv"/>
     <component name="memberServiceBhv" class="org.dbflute.handson.dbflute.exbhv.MemberServiceBhv"/>

@@ -10,16 +10,16 @@ import org.dbflute.handson.dbflute.exentity.*;
  * The referrer loader of (会員サービス)MEMBER_SERVICE as TABLE. <br />
  * <pre>
  * [primary key]
- *     MEMBER_ID
+ *     MEMBER_SERVICE_ID
  *
  * [column]
- *     MEMBER_ID, AKIRAKANI_OKASHII_KARAMU_MEI, SERVICE_RANK_CODE, REGISTER_DATETIME, REGISTER_USER, UPDATE_DATETIME, UPDATE_USER, VERSION_NO
+ *     MEMBER_SERVICE_ID, MEMBER_ID, SERVICE_POINT_COUNT, SERVICE_RANK_CODE, REGISTER_DATETIME, REGISTER_USER, UPDATE_DATETIME, UPDATE_USER, VERSION_NO
  *
  * [sequence]
  *     
  *
  * [identity]
- *     
+ *     MEMBER_SERVICE_ID
  *
  * [version-no]
  *     VERSION_NO

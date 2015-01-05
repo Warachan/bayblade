@@ -2,36 +2,97 @@ package org.dbflute.handson.dbflute.bsbhv.pmbean;
 
 import java.util.*;
 
-import org.seasar.dbflute.cbean.SimplePagingBean;
-import org.seasar.dbflute.twowaysql.pmbean.ParameterBean;
+import org.seasar.dbflute.outsidesql.typed.*;
 import org.seasar.dbflute.jdbc.*;
 import org.seasar.dbflute.jdbc.ParameterUtil.ShortCharHandlingMode;
+import org.seasar.dbflute.cbean.coption.LikeSearchOption;
 import org.seasar.dbflute.util.DfCollectionUtil;
+import org.seasar.dbflute.exception.*;
 import org.seasar.dbflute.util.DfTypeUtil;
 import org.dbflute.handson.dbflute.allcommon.*;
+import org.dbflute.handson.dbflute.exbhv.*;
+import org.dbflute.handson.dbflute.exentity.customize.*;
 
 /**
- * The base class for parameter-bean of PurchaseMonthSummary.
+ * The base class for typed parameter-bean of PurchaseMonthSummary. <br />
+ * This is related to "<span style="color: #AD4747">selectPurchaseMonthSummary</span>" on PurchaseBhv.
  * @author DBFlute(AutoGenerator)
  */
-public class BsPurchaseMonthSummaryPmb extends SimplePagingBean implements ParameterBean, FetchBean {
+public class BsPurchaseMonthSummaryPmb implements ListHandlingPmb<PurchaseBhv, PurchaseMonthSummary>, EntityHandlingPmb<PurchaseBhv, PurchaseMonthSummary>, FetchBean {
 
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    /** The parameter of sample. */
-    protected String _sample;
+    /** The parameter of memberId. */
+    protected Integer _memberId;
+
+    /** The parameter of memberName:likeContain. */
+    protected String _memberName;
+
+    /** The option of like-search for memberName. */
+    protected LikeSearchOption _memberNameInternalLikeSearchOption;
+
+    /** The parameter of purchasePaymentId. */
+    protected String _purchasePaymentId;
+
+    /** The parameter of purchasPaymentId. */
+    protected Integer _purchasPaymentId;
+
+    /** The parameter of servicePointCount. */
+    protected String _servicePointCount;
+
+    /** The parameter of greaterThanPoint. */
+    protected Integer _greaterThanPoint;
+
+    /** The parameter of paymentCompleteFlg:cls(Flg). */
+    protected String _paymentCompleteFlg;
+
+    /** The max size of safety result. */
+    protected int _safetyMaxResultSize;
 
     // ===================================================================================
     //                                                                         Constructor
     //                                                                         ===========
     /**
-     * Constructor for the parameter-bean of PurchaseMonthSummary.
+     * Constructor for the typed parameter-bean of PurchaseMonthSummary. <br />
+     * This is related to "<span style="color: #AD4747">selectPurchaseMonthSummary</span>" on PurchaseBhv.
      */
     public BsPurchaseMonthSummaryPmb() {
-        if (DBFluteConfig.getInstance().isPagingCountLater()) {
-            enablePagingCountLater();
-        }
+    }
+
+    // ===================================================================================
+    //                                                                Typed Implementation
+    //                                                                ====================
+    /**
+     * {@inheritDoc}
+     */
+    public String getOutsideSqlPath() {
+        return "selectPurchaseMonthSummary";
+    }
+
+    /**
+     * Get the type of an entity for result. (implementation)
+     * @return The type instance of an entity, customize entity. (NotNull)
+     */
+    public Class<PurchaseMonthSummary> getEntityType() {
+        return PurchaseMonthSummary.class;
+    }
+
+    // ===================================================================================
+    //                                                                       Safety Result
+    //                                                                       =============
+    /**
+     * {@inheritDoc}
+     */
+    public void checkSafetyResult(int safetyMaxResultSize) {
+        _safetyMaxResultSize = safetyMaxResultSize;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public int getSafetyMaxResultSize() {
+        return _safetyMaxResultSize;
     }
 
     // ===================================================================================
@@ -89,6 +150,18 @@ public class BsPurchaseMonthSummaryPmb extends SimplePagingBean implements Param
         return "byte[" + (bytes != null ? String.valueOf(bytes.length) : "null") + "]";
     }
 
+    protected void assertLikeSearchOptionValid(String name, LikeSearchOption option) {
+        if (option == null) {
+            String msg = "The like-search option is required!";
+            throw new RequiredOptionNotFoundException(msg);
+        }
+        if (option.isSplit()) {
+            String msg = "The split of like-search is NOT available on parameter-bean.";
+            msg = msg + " Don't use splitByXxx(): " + option;
+            throw new IllegalOutsideSqlOperationException(msg);
+        }
+    }
+
     // ===================================================================================
     //                                                                      Basic Override
     //                                                                      ==============
@@ -105,7 +178,13 @@ public class BsPurchaseMonthSummaryPmb extends SimplePagingBean implements Param
     protected String xbuildColumnString() {
         final String dm = ", ";
         final StringBuilder sb = new StringBuilder();
-        sb.append(dm).append(_sample);
+        sb.append(dm).append(_memberId);
+        sb.append(dm).append(_memberName);
+        sb.append(dm).append(_purchasePaymentId);
+        sb.append(dm).append(_purchasPaymentId);
+        sb.append(dm).append(_servicePointCount);
+        sb.append(dm).append(_greaterThanPoint);
+        sb.append(dm).append(_paymentCompleteFlg);
         if (sb.length() > 0) { sb.delete(0, dm.length()); }
         sb.insert(0, "{").append("}");
         return sb.toString();
@@ -115,18 +194,131 @@ public class BsPurchaseMonthSummaryPmb extends SimplePagingBean implements Param
     //                                                                            Accessor
     //                                                                            ========
     /**
-     * [get] sample <br />
-     * @return The value of sample. (NullAllowed, NotEmptyString(when String): if empty string, returns null)
+     * [get] memberId <br />
+     * @return The value of memberId. (NullAllowed, NotEmptyString(when String): if empty string, returns null)
      */
-    public String getSample() {
-        return filterStringParameter(_sample);
+    public Integer getMemberId() {
+        return _memberId;
     }
 
     /**
-     * [set] sample <br />
-     * @param sample The value of sample. (NullAllowed)
+     * [set] memberId <br />
+     * @param memberId The value of memberId. (NullAllowed)
      */
-    public void setSample(String sample) {
-        _sample = sample;
+    public void setMemberId(Integer memberId) {
+        _memberId = memberId;
+    }
+
+    /**
+     * [get] memberName:likeContain <br />
+     * @return The value of memberName. (NullAllowed, NotEmptyString(when String): if empty string, returns null)
+     */
+    public String getMemberName() {
+        return filterStringParameter(_memberName);
+    }
+
+    /**
+     * [set as containSearch] memberName:likeContain <br />
+     * @param memberName The value of memberName. (NullAllowed)
+     */
+    public void setMemberName_ContainSearch(String memberName) {
+        _memberName = memberName;
+        _memberNameInternalLikeSearchOption = new LikeSearchOption().likeContain();
+    }
+
+    /**
+     * Get the internal option of likeSearch for memberName. {Internal Method: Don't invoke this}
+     * @return The internal option of likeSearch for memberName. (NullAllowed)
+     */
+    public LikeSearchOption getMemberNameInternalLikeSearchOption() {
+        return _memberNameInternalLikeSearchOption;
+    }
+
+    /**
+     * [get] purchasePaymentId <br />
+     * @return The value of purchasePaymentId. (NullAllowed, NotEmptyString(when String): if empty string, returns null)
+     */
+    public String getPurchasePaymentId() {
+        return filterStringParameter(_purchasePaymentId);
+    }
+
+    /**
+     * [set] purchasePaymentId <br />
+     * @param purchasePaymentId The value of purchasePaymentId. (NullAllowed)
+     */
+    public void setPurchasePaymentId(String purchasePaymentId) {
+        _purchasePaymentId = purchasePaymentId;
+    }
+
+    /**
+     * [get] purchasPaymentId <br />
+     * @return The value of purchasPaymentId. (NullAllowed, NotEmptyString(when String): if empty string, returns null)
+     */
+    public Integer getPurchasPaymentId() {
+        return _purchasPaymentId;
+    }
+
+    /**
+     * [set] purchasPaymentId <br />
+     * @param purchasPaymentId The value of purchasPaymentId. (NullAllowed)
+     */
+    public void setPurchasPaymentId(Integer purchasPaymentId) {
+        _purchasPaymentId = purchasPaymentId;
+    }
+
+    /**
+     * [get] servicePointCount <br />
+     * @return The value of servicePointCount. (NullAllowed, NotEmptyString(when String): if empty string, returns null)
+     */
+    public String getServicePointCount() {
+        return filterStringParameter(_servicePointCount);
+    }
+
+    /**
+     * [set] servicePointCount <br />
+     * @param servicePointCount The value of servicePointCount. (NullAllowed)
+     */
+    public void setServicePointCount(String servicePointCount) {
+        _servicePointCount = servicePointCount;
+    }
+
+    /**
+     * [get] greaterThanPoint <br />
+     * @return The value of greaterThanPoint. (NullAllowed, NotEmptyString(when String): if empty string, returns null)
+     */
+    public Integer getGreaterThanPoint() {
+        return _greaterThanPoint;
+    }
+
+    /**
+     * [set] greaterThanPoint <br />
+     * @param greaterThanPoint The value of greaterThanPoint. (NullAllowed)
+     */
+    public void setGreaterThanPoint(Integer greaterThanPoint) {
+        _greaterThanPoint = greaterThanPoint;
+    }
+
+    /**
+     * [get] paymentCompleteFlg:cls(Flg) <br />
+     * @return The value of paymentCompleteFlg. (NullAllowed, NotEmptyString(when String): if empty string, returns null)
+     */
+    public String getPaymentCompleteFlg() {
+        return filterStringParameter(_paymentCompleteFlg);
+    }
+
+    /**
+     * [set as True] paymentCompleteFlg:cls(Flg) <br />
+     * フラグが立っている
+     */
+    public void setPaymentCompleteFlg_True() {
+        _paymentCompleteFlg = CDef.Flg.True.code();
+    }
+
+    /**
+     * [set as False] paymentCompleteFlg:cls(Flg) <br />
+     * フラグが立っていない
+     */
+    public void setPaymentCompleteFlg_False() {
+        _paymentCompleteFlg = CDef.Flg.False.code();
     }
 }

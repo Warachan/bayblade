@@ -33,8 +33,8 @@ public class BsPartOfMemberPmb extends SimplePagingBean implements EntityHandlin
     /** The option of like-search for memberName. */
     protected LikeSearchOption _memberNameInternalLikeSearchOption;
 
-    /** The parameter of akirakaniOkashiiKaramuMei. */
-    protected Integer _akirakaniOkashiiKaramuMei;
+    /** The parameter of servicePointCount. */
+    protected Integer _servicePointCount;
 
     // ===================================================================================
     //                                                                         Constructor
@@ -152,7 +152,7 @@ public class BsPartOfMemberPmb extends SimplePagingBean implements EntityHandlin
         final StringBuilder sb = new StringBuilder();
         sb.append(dm).append(_memberId);
         sb.append(dm).append(_memberName);
-        sb.append(dm).append(_akirakaniOkashiiKaramuMei);
+        sb.append(dm).append(_servicePointCount);
         if (sb.length() > 0) { sb.delete(0, dm.length()); }
         sb.insert(0, "{").append("}");
         return sb.toString();
@@ -203,18 +203,18 @@ public class BsPartOfMemberPmb extends SimplePagingBean implements EntityHandlin
     }
 
     /**
-     * [get] akirakaniOkashiiKaramuMei <br />
-     * @return The value of akirakaniOkashiiKaramuMei. (NullAllowed, NotEmptyString(when String): if empty string, returns null)
+     * [get] servicePointCount <br />
+     * @return The value of servicePointCount. (NullAllowed, NotEmptyString(when String): if empty string, returns null)
      */
-    public Integer getAkirakaniOkashiiKaramuMei() {
-        return _akirakaniOkashiiKaramuMei;
+    public Integer getServicePointCount() {
+        return _servicePointCount;
     }
 
     /**
-     * [set] akirakaniOkashiiKaramuMei <br />
-     * @param akirakaniOkashiiKaramuMei The value of akirakaniOkashiiKaramuMei. (NullAllowed)
+     * [set] servicePointCount <br />
+     * @param servicePointCount The value of servicePointCount. (NullAllowed)
      */
-    public void setAkirakaniOkashiiKaramuMei(Integer akirakaniOkashiiKaramuMei) {
-        _akirakaniOkashiiKaramuMei = akirakaniOkashiiKaramuMei;
+    public void setServicePointCount(Integer servicePointCount) {
+        _servicePointCount = servicePointCount;
     }
 }

@@ -4,8 +4,9 @@ import org.dbflute.handson.dbflute.bsbhv.pmbean.BsPurchaseMonthSummaryPmb;
 
 /**
  * <!-- df:beginClassDescription -->
- * The simple parameter-bean of PurchaseMonthSummary. <br />
- * This is defined at "<span style="color: #AD4747">selectPurchaseMonthSummary</span>" on PurchaseBhv. <br />
+ * The typed parameter-bean of PurchaseMonthSummary. <span style="color: #AD4747">(typed to list, entity)</span><br />
+ * This is related to "<span style="color: #AD4747">selectPurchaseMonthSummary</span>" on PurchaseBhv, <br />
+ * described as "PurchaseMonthSummary". <br />
  * <!-- df:endClassDescription -->
  * <p>
  * You can implement your original methods here.

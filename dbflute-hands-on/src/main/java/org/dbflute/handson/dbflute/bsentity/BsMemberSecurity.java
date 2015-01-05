@@ -18,7 +18,7 @@ import org.dbflute.handson.dbflute.exentity.*;
  *     MEMBER_ID
  * 
  * [column]
- *     MEMBER_ID, LOGIN_PASSWORD, REMINDER_QUESTION, REMINDER_ANSWER, REGISTER_DATETIME, REGISTER_USER, UPDATE_DATETIME, UPDATE_USER, VERSION_NO
+ *     MEMBER_ID, LOGIN_PASSWORD, REMINDER_QUESTION, REMINDER_ANSWER, REMINDER_USE_COUNT, REGISTER_DATETIME, REGISTER_USER, UPDATE_DATETIME, UPDATE_USER, VERSION_NO
  * 
  * [sequence]
  *     
@@ -47,6 +47,7 @@ import org.dbflute.handson.dbflute.exentity.*;
  * String loginPassword = entity.getLoginPassword();
  * String reminderQuestion = entity.getReminderQuestion();
  * String reminderAnswer = entity.getReminderAnswer();
+ * Integer reminderUseCount = entity.getReminderUseCount();
  * java.sql.Timestamp registerDatetime = entity.getRegisterDatetime();
  * String registerUser = entity.getRegisterUser();
  * java.sql.Timestamp updateDatetime = entity.getUpdateDatetime();
@@ -56,6 +57,7 @@ import org.dbflute.handson.dbflute.exentity.*;
  * entity.setLoginPassword(loginPassword);
  * entity.setReminderQuestion(reminderQuestion);
  * entity.setReminderAnswer(reminderAnswer);
+ * entity.setReminderUseCount(reminderUseCount);
  * entity.setRegisterDatetime(registerDatetime);
  * entity.setRegisterUser(registerUser);
  * entity.setUpdateDatetime(updateDatetime);
@@ -90,6 +92,9 @@ public abstract class BsMemberSecurity extends AbstractEntity implements DomainE
 
     /** (リマインダ回答)REMINDER_ANSWER: {NotNull, VARCHAR(50)} */
     protected String _reminderAnswer;
+
+    /** (会員セキュリティ情報にリマインダ回数)REMINDER_USE_COUNT: {NotNull, INT(10)} */
+    protected Integer _reminderUseCount;
 
     /** REGISTER_DATETIME: {NotNull, DATETIME(19)} */
     protected java.sql.Timestamp _registerDatetime;
@@ -240,6 +245,7 @@ public abstract class BsMemberSecurity extends AbstractEntity implements DomainE
         sb.append(dm).append(xfND(_loginPassword));
         sb.append(dm).append(xfND(_reminderQuestion));
         sb.append(dm).append(xfND(_reminderAnswer));
+        sb.append(dm).append(xfND(_reminderUseCount));
         sb.append(dm).append(xfND(_registerDatetime));
         sb.append(dm).append(xfND(_registerUser));
         sb.append(dm).append(xfND(_updateDatetime));
@@ -351,6 +357,24 @@ public abstract class BsMemberSecurity extends AbstractEntity implements DomainE
     public void setReminderAnswer(String reminderAnswer) {
         registerModifiedProperty("reminderAnswer");
         _reminderAnswer = reminderAnswer;
+    }
+
+    /**
+     * [get] (会員セキュリティ情報にリマインダ回数)REMINDER_USE_COUNT: {NotNull, INT(10)} <br />
+     * @return The value of the column 'REMINDER_USE_COUNT'. (basically NotNull if selected: for the constraint)
+     */
+    public Integer getReminderUseCount() {
+        checkSpecifiedProperty("reminderUseCount");
+        return _reminderUseCount;
+    }
+
+    /**
+     * [set] (会員セキュリティ情報にリマインダ回数)REMINDER_USE_COUNT: {NotNull, INT(10)} <br />
+     * @param reminderUseCount The value of the column 'REMINDER_USE_COUNT'. (basically NotNull if update: for the constraint)
+     */
+    public void setReminderUseCount(Integer reminderUseCount) {
+        registerModifiedProperty("reminderUseCount");
+        _reminderUseCount = reminderUseCount;
     }
 
     /**
