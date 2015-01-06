@@ -20,9 +20,10 @@ import org.dbflute.handson.dbflute.exentity.customize.PurchaseMonthSummary;
 import org.seasar.dbflute.cbean.ListResultBean;
 import org.seasar.dbflute.cbean.PagingResultBean;
 
-// wara JavaDoc by jflute
-// wara クラス直下は空行空けましょう by jflute
+// TODO wara JavaDoc by jflute
+// done wara クラス直下は空行空けましょう by jflute
 public class HandsOn09Logic {
+
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
@@ -34,6 +35,11 @@ public class HandsOn09Logic {
     @Resource
     protected PurchaseBhv purchaseBhv;
 
+    // TODO wara せっかくなので、タグコメント綺麗に入れてみよう by jflute 
+    // 初めての外だしSQL, 外だしSQLでページングってみる, ...
+    // ===================================================================================
+    //                                                                     初めての外だしSQL
+    //                                                                     ===============
     /**
      * ロジックのメソッド
      * List<OutsideMember> letsOutside(OutsideMemberPmb pmb)
