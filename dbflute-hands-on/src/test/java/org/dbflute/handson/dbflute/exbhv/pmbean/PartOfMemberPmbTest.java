@@ -1,11 +1,11 @@
 package org.dbflute.handson.dbflute.exbhv.pmbean;
 
-import org.dbflute.handson.unit.UnitContainerTestCase;
+import org.seasar.dbflute.unit.core.PlainTestCase;
 
 /**
  * @author mayuko.sakaba
  */
-public class PartOfMemberPmbTest extends UnitContainerTestCase {
+public class PartOfMemberPmbTest extends PlainTestCase {
 
     public void test_existsServicePointCountFalse() throws Exception {
         PartOfMemberPmb pmb = new PartOfMemberPmb() {
@@ -14,7 +14,7 @@ public class PartOfMemberPmbTest extends UnitContainerTestCase {
                 return false;
             }
         };
-        assertTrue(pmb.isPaging());
+        assertFalse(pmb.isPaging());
         pmb.setServicePointCount(3);
         assertFalse(pmb.isPaging());
     }

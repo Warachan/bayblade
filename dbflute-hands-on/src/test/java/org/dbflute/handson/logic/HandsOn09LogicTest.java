@@ -44,7 +44,7 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
     // 2. manage の renewal (1) を叩く => 自動生成される
     // 3. pom.xml を直して maven-eclipse => おしまい
     // done wara @Testは無しで (Junit3方式でやっているので) by jflute
-    // TODO 【いれましたー】wara せっかくなので、タグコメント綺麗に入れてみよう by jflute
+    // done 【いれましたー】wara せっかくなので、タグコメント綺麗に入れてみよう by jflute
     // 初めての外だしSQL, 外だしSQLでページングってみる, ...
     /**
      * test_letsOutside_会員が検索されること()
@@ -69,7 +69,7 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
         // | where ...
         // |   and ...
         // | order by ...
-        // TODO wara 【あてましたー】新しいパッチを当てると、 -- // 非必須、等値 ができるようになる by jflute
+        // done wara 【あてましたー】新しいパッチを当てると、 -- // 非必須、等値 ができるようになる by jflute
         // パッチの当て方: manageで upgrade (94) を叩いて、renewal (1) しておしまい
         OutsideMemberPmb pmb = new OutsideMemberPmb();
         pmb.setMemberName_PrefixSearch("S");
@@ -133,11 +133,12 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
         HandsOn09Logic logic = new HandsOn09Logic();
         inject(logic);
 
-        // TODO wara 結合に関して、カウント検索のパフォーマンスを最大限考慮すること (会員サービスの結合) by jflute
+        // done wara 結合に関して、カウント検索のパフォーマンスを最大限考慮すること (会員サービスの結合) by jflute
         // /*IF pmb.isPaging() || pmb.servicePointCount != null*/ とやりたいところだが、複雑な条件はあまりコメント上で書きたくない。
         // なので...
-        // TODO 【書いてみましたどきどき】wara そのとき、IFコメントに記述する条件が複雑にならないように (代理判定メソッドを使う) by jflute
-        // TODO 【書いてみましたどきどき】wara 修行++: その代理判定メソッドの UnitTest を書いてみよう by jflute
+        // done 【書いてみましたどきどき】wara そのとき、IFコメントに記述する条件が複雑にならないように (代理判定メソッドを使う) by jflute
+        // done 【書いてみましたどきどき】wara 修行++: その代理判定メソッドの UnitTest を書いてみよう by jflute
+        // TODO wara setServicePointCount()すると、カウント検索のときのselect句がcount(*)じゃなくて一覧になっちゃってる by jflute
         PartOfMemberPmb pmb = new PartOfMemberPmb();
         pmb.setMemberName_ContainSearch("vi");
         // 格言「おかしいと思ったら、できてる他のものと比べる」
@@ -169,14 +170,16 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
         HandsOn09Logic logic = new HandsOn09Logic();
         inject(logic);
 
-        // TODO 【一度消しました】wara what? "having AVG(pur.PURCHASE_PRICE) > 1000" by jflute
+        // done 【一度消しました】wara what? "having AVG(pur.PURCHASE_PRICE) > 1000" by jflute
         // 途中なら途中でtodo入れておこう
-        // TODO 【使ってみました?】wara 固定の区分値を使ってみよう by jflute
+        // done 【使ってみました?】wara 固定の区分値を使ってみよう by jflute
+        // TODO wara まだ by jflute
         // http://dbflute.seasar.org/ja/manual/function/generator/task/sql2entity/pmbpropoption.html#fixedclassification
         PurchaseMonthSummaryPmb pmb = new PurchaseMonthSummaryPmb();
         pmb.setMemberName_ContainSearch("vi");
-        // TODO 【やってみました】wara setPaymentCompleteFlg_True()でもFalse()でも = 1 になっちゃう by jflute
+        // done 【やってみました】wara setPaymentCompleteFlg_True()でもFalse()でも = 1 になっちゃう by jflute
         // COMPLETE_FLGを指定するんじゃなくて、COMPLETE_FLGの条件を有効にするかどうか？っていうパラメータにしたい
+        // TODO wara CompleteOnlyであるということを示す名前にしたい (これだとどんな条件なのかが読み取りにくい) by jflute
         pmb.setEnablePaymentCompleteFlg_True();
 
         // ## Act ##

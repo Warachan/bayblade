@@ -40,7 +40,7 @@ select mb.MEMBER_ID
     and pay.PURCHASE_PAYMENT_ID = /*pmb.purchasPaymentId*/7
     /*END*/
 	/*IF pmb.servicePointCount != null*/
-	and serv.SERVICE_POINT_COUNT> /*pmb.greaterThanPoint*/100
+	and serv.SERVICE_POINT_COUNT > /*pmb.greaterThanPoint*/100
 	/*END*/
   /*END*/
   group by PURCHASE_MONTH
