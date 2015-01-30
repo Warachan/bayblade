@@ -36,12 +36,15 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
     @Resource
     protected MemberBhv memberBhv;
 
+    // ===================================================================================
+    //                                                                       OutsideMember
+    //                                                                            ========
     // done wara 1.0.5Nにアップグレードお願いします by jflute
     // 1. manage の upgrade (94) を叩く => downloadされる
     // 2. manage の renewal (1) を叩く => 自動生成される
     // 3. pom.xml を直して maven-eclipse => おしまい
     // done wara @Testは無しで (Junit3方式でやっているので) by jflute
-    // TODO wara せっかくなので、タグコメント綺麗に入れてみよう by jflute 
+    // TODO 【いれましたー】wara せっかくなので、タグコメント綺麗に入れてみよう by jflute
     // 初めての外だしSQL, 外だしSQLでページングってみる, ...
     /**
      * test_letsOutside_会員が検索されること()
@@ -66,7 +69,7 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
         // | where ...
         // |   and ...
         // | order by ...
-        // TODO wara 新しいパッチを当てると、 -- // 非必須、等値 ができるようになる by jflute 
+        // TODO wara 【あてましたー】新しいパッチを当てると、 -- // 非必須、等値 ができるようになる by jflute
         // パッチの当て方: manageで upgrade (94) を叩いて、renewal (1) しておしまい
         OutsideMemberPmb pmb = new OutsideMemberPmb();
         pmb.setMemberName_PrefixSearch("S");
@@ -133,8 +136,8 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
         // TODO wara 結合に関して、カウント検索のパフォーマンスを最大限考慮すること (会員サービスの結合) by jflute
         // /*IF pmb.isPaging() || pmb.servicePointCount != null*/ とやりたいところだが、複雑な条件はあまりコメント上で書きたくない。
         // なので...
-        // TODO wara そのとき、IFコメントに記述する条件が複雑にならないように (代理判定メソッドを使う) by jflute
-        // TODO wara 修行++: その代理判定メソッドの UnitTest を書いてみよう by jflute
+        // TODO 【書いてみましたどきどき】wara そのとき、IFコメントに記述する条件が複雑にならないように (代理判定メソッドを使う) by jflute
+        // TODO 【書いてみましたどきどき】wara 修行++: その代理判定メソッドの UnitTest を書いてみよう by jflute
         PartOfMemberPmb pmb = new PartOfMemberPmb();
         pmb.setMemberName_ContainSearch("vi");
         // 格言「おかしいと思ったら、できてる他のものと比べる」
@@ -151,6 +154,9 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
         assertTrue(memberPage.size() <= 4);
     }
 
+    // ===================================================================================
+    //                                                                     OutsidePurchase
+    //                                                                            ========
     /**
      * test_selectLetsSummary_集計が検索されること()
      * 会員名称に "vi" を含む会員を対象に検索
@@ -163,15 +169,15 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
         HandsOn09Logic logic = new HandsOn09Logic();
         inject(logic);
 
-        // TODO wara what? "having AVG(pur.PURCHASE_PRICE) > 1000" by jflute 
+        // TODO 【一度消しました】wara what? "having AVG(pur.PURCHASE_PRICE) > 1000" by jflute
         // 途中なら途中でtodo入れておこう
-        // TODO wara 固定の区分値を使ってみよう by jflute 
+        // TODO 【使ってみました?】wara 固定の区分値を使ってみよう by jflute
         // http://dbflute.seasar.org/ja/manual/function/generator/task/sql2entity/pmbpropoption.html#fixedclassification
         PurchaseMonthSummaryPmb pmb = new PurchaseMonthSummaryPmb();
         pmb.setMemberName_ContainSearch("vi");
-        // TODO wara setPaymentCompleteFlg_True()でもFalse()でも = 1 になっちゃう by jflute 
-        // COMPLETE_FLGを指定するんじゃなくて、COMPLETE_FLGの条件を有効にするかどうか？っていうパラメータにしたい 
-        pmb.setPaymentCompleteFlg_True();
+        // TODO 【やってみました】wara setPaymentCompleteFlg_True()でもFalse()でも = 1 になっちゃう by jflute
+        // COMPLETE_FLGを指定するんじゃなくて、COMPLETE_FLGの条件を有効にするかどうか？っていうパラメータにしたい
+        pmb.setEnablePaymentCompleteFlg_True();
 
         // ## Act ##
         ListResultBean<PurchaseMonthSummary> summaryList = logic.selectLetsSummary(pmb);
@@ -191,7 +197,7 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
         HandsOn09Logic logic = new HandsOn09Logic();
         inject(logic);
 
-        // TODO wara カウントの結果を確認してみて。想定通りか？ by jflute 
+        // TODO wara カウントの結果を確認してみて。想定通りか？ by jflute
         PartOfPurchaseMonthSummaryPmb pmb = new PartOfPurchaseMonthSummaryPmb();
         pmb.setMemberName_ContainSearch("vi");
         pmb.paging(4, 1);
@@ -205,6 +211,9 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
         assertEquals(4, summaryPage.size());
     }
 
+    // ===================================================================================
+    //                                                                       ストアドプロシージャ
+    //                                                                            ========
     /**
      * v_in_varchar に "foo" を、v_inout_varchar に "bar" を設定
      * プロシージャを呼び出した後、ParameterBeanの値が入れ替わってること

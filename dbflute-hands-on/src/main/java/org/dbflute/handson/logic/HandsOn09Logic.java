@@ -20,8 +20,11 @@ import org.dbflute.handson.dbflute.exentity.customize.PurchaseMonthSummary;
 import org.seasar.dbflute.cbean.ListResultBean;
 import org.seasar.dbflute.cbean.PagingResultBean;
 
-// TODO wara JavaDoc by jflute
+// done wara JavaDoc by jflute
 // done wara クラス直下は空行空けましょう by jflute
+/**
+ * @author mayuko.sakaba
+ */
 public class HandsOn09Logic {
 
     // ===================================================================================
@@ -35,7 +38,7 @@ public class HandsOn09Logic {
     @Resource
     protected PurchaseBhv purchaseBhv;
 
-    // TODO wara せっかくなので、タグコメント綺麗に入れてみよう by jflute 
+    // TODO wara せっかくなので、タグコメント綺麗に入れてみよう by jflute
     // 初めての外だしSQL, 外だしSQLでページングってみる, ...
     // ===================================================================================
     //                                                                     初めての外だしSQL

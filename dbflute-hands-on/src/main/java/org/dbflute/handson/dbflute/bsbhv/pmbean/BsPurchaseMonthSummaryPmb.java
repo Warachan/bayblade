@@ -44,8 +44,8 @@ public class BsPurchaseMonthSummaryPmb implements ListHandlingPmb<PurchaseBhv, P
     /** The parameter of greaterThanPoint. */
     protected Integer _greaterThanPoint;
 
-    /** The parameter of paymentCompleteFlg:cls(Flg). */
-    protected String _paymentCompleteFlg;
+    /** The parameter of enablePaymentCompleteFlg:cls(Flg). */
+    protected Boolean _enablePaymentCompleteFlg;
 
     /** The max size of safety result. */
     protected int _safetyMaxResultSize;
@@ -184,7 +184,7 @@ public class BsPurchaseMonthSummaryPmb implements ListHandlingPmb<PurchaseBhv, P
         sb.append(dm).append(_purchasPaymentId);
         sb.append(dm).append(_servicePointCount);
         sb.append(dm).append(_greaterThanPoint);
-        sb.append(dm).append(_paymentCompleteFlg);
+        sb.append(dm).append(_enablePaymentCompleteFlg);
         if (sb.length() > 0) { sb.delete(0, dm.length()); }
         sb.insert(0, "{").append("}");
         return sb.toString();
@@ -299,26 +299,26 @@ public class BsPurchaseMonthSummaryPmb implements ListHandlingPmb<PurchaseBhv, P
     }
 
     /**
-     * [get] paymentCompleteFlg:cls(Flg) <br />
-     * @return The value of paymentCompleteFlg. (NullAllowed, NotEmptyString(when String): if empty string, returns null)
+     * [get] enablePaymentCompleteFlg:cls(Flg) <br />
+     * @return The value of enablePaymentCompleteFlg. (NullAllowed, NotEmptyString(when String): if empty string, returns null)
      */
-    public String getPaymentCompleteFlg() {
-        return filterStringParameter(_paymentCompleteFlg);
+    public Boolean getEnablePaymentCompleteFlg() {
+        return _enablePaymentCompleteFlg;
     }
 
     /**
-     * [set as True] paymentCompleteFlg:cls(Flg) <br />
+     * [set as True] enablePaymentCompleteFlg:cls(Flg) <br />
      * フラグが立っている
      */
-    public void setPaymentCompleteFlg_True() {
-        _paymentCompleteFlg = CDef.Flg.True.code();
+    public void setEnablePaymentCompleteFlg_True() {
+        _enablePaymentCompleteFlg = toBoolean(CDef.Flg.True.code());
     }
 
     /**
-     * [set as False] paymentCompleteFlg:cls(Flg) <br />
+     * [set as False] enablePaymentCompleteFlg:cls(Flg) <br />
      * フラグが立っていない
      */
-    public void setPaymentCompleteFlg_False() {
-        _paymentCompleteFlg = CDef.Flg.False.code();
+    public void setEnablePaymentCompleteFlg_False() {
+        _enablePaymentCompleteFlg = toBoolean(CDef.Flg.False.code());
     }
 }

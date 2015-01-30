@@ -15,7 +15,7 @@
 -- !df:pmb extends Paging!
 -- !!AutoDetect!!
 
-/*IF pmb.isPaging()*/
+/*IF pmb.existsServicePointCount()*/
 select mb.MEMBER_ID
      , mb.MEMBER_NAME
      , mb.BIRTHDATE

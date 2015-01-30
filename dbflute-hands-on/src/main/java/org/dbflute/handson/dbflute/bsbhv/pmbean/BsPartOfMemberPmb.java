@@ -19,7 +19,7 @@ import org.dbflute.handson.dbflute.exentity.customize.*;
  * This is related to "<span style="color: #AD4747">selectPartOfMember</span>" on MemberBhv.
  * @author DBFlute(AutoGenerator)
  */
-public class BsPartOfMemberPmb extends SimplePagingBean implements EntityHandlingPmb<MemberBhv, PartOfMember>, ManualPagingHandlingPmb<MemberBhv, PartOfMember>, FetchBean {
+public abstract class BsPartOfMemberPmb extends SimplePagingBean implements EntityHandlingPmb<MemberBhv, PartOfMember>, ManualPagingHandlingPmb<MemberBhv, PartOfMember>, FetchBean {
 
     // ===================================================================================
     //                                                                           Attribute
@@ -66,6 +66,15 @@ public class BsPartOfMemberPmb extends SimplePagingBean implements EntityHandlin
     public Class<PartOfMember> getEntityType() {
         return PartOfMember.class;
     }
+
+    // ===================================================================================
+    //                                                                   Alternate Boolean
+    //                                                                   =================
+    /**
+     * This is an alternate boolean method waiting for your overriding.
+     * @return The determination, true or false for your complex conditions.
+     */
+    public abstract boolean existsServicePointCount();
 
     // ===================================================================================
     //                                                                       Assist Helper

@@ -13,6 +13,11 @@ import org.dbflute.handson.dbflute.bsbhv.pmbean.BsPartOfMemberPmb;
  * This class remains when re-generating.
  * </p>
  * @author DBFlute(AutoGenerator)
+ * @author mayuko.sakaba
  */
 public class PartOfMemberPmb extends BsPartOfMemberPmb {
+    @Override
+    public boolean existsServicePointCount() {
+        return (_paging || _servicePointCount != null);
+    }
 }

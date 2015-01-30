@@ -13,8 +13,8 @@
 -- #df:entity#
 
 -- !df:pmb!
+-- !!Boolean enablePaymentCompleteFlg:cls(Flg)!!
 -- !!AutoDetect!!
--- !!String paymentCompleteFlg:cls(Flg)!!
 
 select mb.MEMBER_ID
      , mb.MEMBER_NAME
@@ -30,11 +30,8 @@ select mb.MEMBER_ID
       on serv.MEMBER_ID = pur.MEMBER_ID
   /*BEGIN*/
   where
-    /*IF pmb.paymentCompleteFlg != null*/
+    /*IF pmb.enablePaymentCompleteFlg == true*/
      pur.PAYMENT_COMPLETE_FLG = 1
-    /*END*/
-    /*IF pmb.memberId != null*/
-    and mb.MEMBER_ID = /*pmb.memberId*/7
     /*END*/
     /*IF pmb.memberName != null*/
     and mb.MEMBER_NAME like /*pmb.memberName*/'%s%'
@@ -49,7 +46,5 @@ select mb.MEMBER_ID
   group by PURCHASE_MONTH
          , mb.MEMBER_ID
          , mb.MEMBER_NAME
-    having AVG(pur.PURCHASE_PRICE) > 1000
-       and SUM(pur.PURCHASE_COUNT) > 1000
   order by mb.MEMBER_ID asc
          , PURCHASE_MONTH desc

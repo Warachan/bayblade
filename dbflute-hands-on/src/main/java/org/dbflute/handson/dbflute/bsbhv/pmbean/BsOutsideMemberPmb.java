@@ -32,7 +32,7 @@ public class BsOutsideMemberPmb implements ListHandlingPmb<MemberBhv, OutsideMem
     /** The option of like-search for memberName. */
     protected LikeSearchOption _memberNameInternalLikeSearchOption;
 
-    /** The parameter of memberStatusCode:ref(MEMBER) :: refers to (会員ステータスコード)MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to member_status, classification=MemberStatus}. */
+    /** The parameter of memberStatusCode:ref(MEMBER)| // 非必須、等値 :: refers to (会員ステータスコード)MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to member_status, classification=MemberStatus}. */
     protected String _memberStatusCode;
 
     /** The max size of safety result. */
@@ -219,8 +219,7 @@ public class BsOutsideMemberPmb implements ListHandlingPmb<MemberBhv, OutsideMem
     }
 
     /**
-     * [get] memberStatusCode:ref(MEMBER) :: refers to (会員ステータスコード)MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to member_status, classification=MemberStatus} <br />
-     * 非必須、等値
+     * [get] memberStatusCode:ref(MEMBER)| // 非必須、等値 :: refers to (会員ステータスコード)MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to member_status, classification=MemberStatus} <br />
      * @return The value of memberStatusCode. (NullAllowed, NotEmptyString(when String): if empty string, returns null)
      */
     public String getMemberStatusCode() {
@@ -228,8 +227,7 @@ public class BsOutsideMemberPmb implements ListHandlingPmb<MemberBhv, OutsideMem
     }
 
     /**
-     * [set as 正式会員] memberStatusCode:ref(MEMBER) :: refers to (会員ステータスコード)MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to member_status, classification=MemberStatus} <br />
-     * 非必須、等値 <br />
+     * [set as 正式会員] memberStatusCode:ref(MEMBER)| // 非必須、等値 :: refers to (会員ステータスコード)MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to member_status, classification=MemberStatus} <br />
      * 正式な会員としてサイトサービスが利用可能
      */
     public void setMemberStatusCode_正式会員() {
@@ -237,8 +235,7 @@ public class BsOutsideMemberPmb implements ListHandlingPmb<MemberBhv, OutsideMem
     }
 
     /**
-     * [set as 退会会員] memberStatusCode:ref(MEMBER) :: refers to (会員ステータスコード)MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to member_status, classification=MemberStatus} <br />
-     * 非必須、等値 <br />
+     * [set as 退会会員] memberStatusCode:ref(MEMBER)| // 非必須、等値 :: refers to (会員ステータスコード)MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to member_status, classification=MemberStatus} <br />
      * 退会が確定した会員でサイトサービスはダメ
      */
     public void setMemberStatusCode_退会会員() {
@@ -246,8 +243,7 @@ public class BsOutsideMemberPmb implements ListHandlingPmb<MemberBhv, OutsideMem
     }
 
     /**
-     * [set as 仮会員] memberStatusCode:ref(MEMBER) :: refers to (会員ステータスコード)MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to member_status, classification=MemberStatus} <br />
-     * 非必須、等値 <br />
+     * [set as 仮会員] memberStatusCode:ref(MEMBER)| // 非必須、等値 :: refers to (会員ステータスコード)MEMBER_STATUS_CODE: {IX, NotNull, CHAR(3), FK to member_status, classification=MemberStatus} <br />
      * 入会直後のステータスで一部のサイトサービスが利用可能
      */
     public void setMemberStatusCode_仮会員() {
