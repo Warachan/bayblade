@@ -142,7 +142,7 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
         // なので...
         // done 【書いてみましたどきどき】wara そのとき、IFコメントに記述する条件が複雑にならないように (代理判定メソッドを使う) by jflute
         // done 【書いてみましたどきどき】wara 修行++: その代理判定メソッドの UnitTest を書いてみよう by jflute
-        // TODO 【if文の位置がおかしかったです】wara setServicePointCount()すると、カウント検索のときのselect句がcount(*)じゃなくて一覧になっちゃってる by jflute
+        // done 【if文の位置がおかしかったです】wara setServicePointCount()すると、カウント検索のときのselect句がcount(*)じゃなくて一覧になっちゃってる by jflute
         PartOfMemberPmb pmb = new PartOfMemberPmb();
         pmb.setMemberName_ContainSearch("vi");
         // 格言「おかしいと思ったら、できてる他のものと比べる」
@@ -177,13 +177,15 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
         // done 【一度消しました】wara what? "having AVG(pur.PURCHASE_PRICE) > 1000" by jflute
         // 途中なら途中でtodo入れておこう
         // done 【使ってみました?】wara 固定の区分値を使ってみよう by jflute
-        // TODO 【えい！】wara まだ by jflute
+        // done 【えい！】wara まだ by jflute
         // http://dbflute.seasar.org/ja/manual/function/generator/task/sql2entity/pmbpropoption.html#fixedclassification
         PurchaseMonthSummaryPmb pmb = new PurchaseMonthSummaryPmb();
         pmb.setMemberName_ContainSearch("vi");
         // done 【やってみました】wara setPaymentCompleteFlg_True()でもFalse()でも = 1 になっちゃう by jflute
         // COMPLETE_FLGを指定するんじゃなくて、COMPLETE_FLGの条件を有効にするかどうか？っていうパラメータにしたい
-        // TODO 【変更してみました】wara CompleteOnlyであるということを示す名前にしたい (これだとどんな条件なのかが読み取りにくい) by jflute
+        // done 【変更してみました】wara CompleteOnlyであるということを示す名前にしたい (これだとどんな条件なのかが読み取りにくい) by jflute
+        // TODO wara (avg(pur.PURCHASE_PRICE)) は外側の括弧はなくてOK by jflute
+        // TODO wara IF pmb.paymentCompleteOnly == true は "== true" なくてOK by jflute
         pmb.setPaymentCompleteOnly_True();
 
         // ## Act ##
@@ -208,7 +210,8 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
         HandsOn09Logic logic = new HandsOn09Logic();
         inject(logic);
 
-        // TODO 【カウントしてもおーばーふろーで落ちる…？全部サブでくくってみた…】wara カウントの結果を確認してみて。想定通りか？ by jflute
+        // done 【カウントしてもおーばーふろーで落ちる…？全部サブでくくってみた…】wara カウントの結果を確認してみて。想定通りか？ by jflute
+        // おおぉ、素晴らしい♥ by jflute
         PartOfPurchaseMonthSummaryPmb pmb = new PartOfPurchaseMonthSummaryPmb();
         pmb.setMemberName_ContainSearch("vi");
         pmb.paging(4, 1);
