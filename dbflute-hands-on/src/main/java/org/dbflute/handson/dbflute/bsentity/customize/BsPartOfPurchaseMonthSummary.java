@@ -42,7 +42,7 @@ import org.dbflute.handson.dbflute.exentity.customize.*;
  * /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
  * Integer memberId = entity.getMemberId();
  * String memberName = entity.getMemberName();
- * Long purchaseMonth = entity.getPurchaseMonth();
+ * Integer purchaseMonth = entity.getPurchaseMonth();
  * java.math.BigDecimal purchasePriceAverageMonth = entity.getPurchasePriceAverageMonth();
  * java.math.BigDecimal purchaseCountSumMonth = entity.getPurchaseCountSumMonth();
  * entity.setMemberId(memberId);
@@ -74,8 +74,8 @@ public abstract class BsPartOfPurchaseMonthSummary extends AbstractEntity implem
     /** (会員名称)MEMBER_NAME: {VARCHAR(200), refers to member.MEMBER_NAME} */
     protected String _memberName;
 
-    /** PURCHASE_MONTH: {BIGINT(2)} */
-    protected Long _purchaseMonth;
+    /** PURCHASE_MONTH: {INT(2)} */
+    protected Integer _purchaseMonth;
 
     /** PURCHASE_PRICE_AVERAGE_MONTH: {DECIMAL(14, 4)} */
     protected java.math.BigDecimal _purchasePriceAverageMonth;
@@ -236,19 +236,19 @@ public abstract class BsPartOfPurchaseMonthSummary extends AbstractEntity implem
     }
 
     /**
-     * [get] PURCHASE_MONTH: {BIGINT(2)} <br />
+     * [get] PURCHASE_MONTH: {INT(2)} <br />
      * @return The value of the column 'PURCHASE_MONTH'. (NullAllowed even if selected: for no constraint)
      */
-    public Long getPurchaseMonth() {
+    public Integer getPurchaseMonth() {
         checkSpecifiedProperty("purchaseMonth");
         return _purchaseMonth;
     }
 
     /**
-     * [set] PURCHASE_MONTH: {BIGINT(2)} <br />
+     * [set] PURCHASE_MONTH: {INT(2)} <br />
      * @param purchaseMonth The value of the column 'PURCHASE_MONTH'. (NullAllowed: null update allowed for no constraint)
      */
-    public void setPurchaseMonth(Long purchaseMonth) {
+    public void setPurchaseMonth(Integer purchaseMonth) {
         registerModifiedProperty("purchaseMonth");
         _purchaseMonth = purchaseMonth;
     }

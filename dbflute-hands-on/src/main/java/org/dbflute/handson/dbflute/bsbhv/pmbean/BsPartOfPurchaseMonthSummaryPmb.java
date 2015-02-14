@@ -24,8 +24,8 @@ public class BsPartOfPurchaseMonthSummaryPmb extends SimplePagingBean implements
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    /** The parameter of memberId. */
-    protected Integer _memberId;
+    /** The parameter of paymentCompleteTrue:cls(Flg.True). */
+    protected Integer _paymentCompleteTrue = toNumber(CDef.Flg.True.code(), Integer.class);
 
     /** The parameter of memberName:likeContain. */
     protected String _memberName;
@@ -45,8 +45,8 @@ public class BsPartOfPurchaseMonthSummaryPmb extends SimplePagingBean implements
     /** The parameter of greaterThanPoint. */
     protected Integer _greaterThanPoint;
 
-    /** The parameter of paymentCompleteFlg:cls(Flg). */
-    protected String _paymentCompleteFlg;
+    /** The parameter of paymentCompleteOnly:cls(Flg). */
+    protected Boolean _paymentCompleteOnly;
 
     // ===================================================================================
     //                                                                         Constructor
@@ -162,13 +162,13 @@ public class BsPartOfPurchaseMonthSummaryPmb extends SimplePagingBean implements
     protected String xbuildColumnString() {
         final String dm = ", ";
         final StringBuilder sb = new StringBuilder();
-        sb.append(dm).append(_memberId);
+        sb.append(dm).append(_paymentCompleteTrue);
         sb.append(dm).append(_memberName);
         sb.append(dm).append(_purchasePaymentId);
         sb.append(dm).append(_purchasPaymentId);
         sb.append(dm).append(_servicePointCount);
         sb.append(dm).append(_greaterThanPoint);
-        sb.append(dm).append(_paymentCompleteFlg);
+        sb.append(dm).append(_paymentCompleteOnly);
         if (sb.length() > 0) { sb.delete(0, dm.length()); }
         sb.insert(0, "{").append("}");
         return sb.toString();
@@ -178,19 +178,11 @@ public class BsPartOfPurchaseMonthSummaryPmb extends SimplePagingBean implements
     //                                                                            Accessor
     //                                                                            ========
     /**
-     * [get] memberId <br />
-     * @return The value of memberId. (NullAllowed, NotEmptyString(when String): if empty string, returns null)
+     * [get] paymentCompleteTrue:cls(Flg.True) <br />
+     * @return The value of paymentCompleteTrue. (NullAllowed, NotEmptyString(when String): if empty string, returns null)
      */
-    public Integer getMemberId() {
-        return _memberId;
-    }
-
-    /**
-     * [set] memberId <br />
-     * @param memberId The value of memberId. (NullAllowed)
-     */
-    public void setMemberId(Integer memberId) {
-        _memberId = memberId;
+    public Integer getPaymentCompleteTrue() {
+        return _paymentCompleteTrue;
     }
 
     /**
@@ -283,26 +275,26 @@ public class BsPartOfPurchaseMonthSummaryPmb extends SimplePagingBean implements
     }
 
     /**
-     * [get] paymentCompleteFlg:cls(Flg) <br />
-     * @return The value of paymentCompleteFlg. (NullAllowed, NotEmptyString(when String): if empty string, returns null)
+     * [get] paymentCompleteOnly:cls(Flg) <br />
+     * @return The value of paymentCompleteOnly. (NullAllowed, NotEmptyString(when String): if empty string, returns null)
      */
-    public String getPaymentCompleteFlg() {
-        return filterStringParameter(_paymentCompleteFlg);
+    public Boolean getPaymentCompleteOnly() {
+        return _paymentCompleteOnly;
     }
 
     /**
-     * [set as True] paymentCompleteFlg:cls(Flg) <br />
+     * [set as True] paymentCompleteOnly:cls(Flg) <br />
      * フラグが立っている
      */
-    public void setPaymentCompleteFlg_True() {
-        _paymentCompleteFlg = CDef.Flg.True.code();
+    public void setPaymentCompleteOnly_True() {
+        _paymentCompleteOnly = toBoolean(CDef.Flg.True.code());
     }
 
     /**
-     * [set as False] paymentCompleteFlg:cls(Flg) <br />
+     * [set as False] paymentCompleteOnly:cls(Flg) <br />
      * フラグが立っていない
      */
-    public void setPaymentCompleteFlg_False() {
-        _paymentCompleteFlg = CDef.Flg.False.code();
+    public void setPaymentCompleteOnly_False() {
+        _paymentCompleteOnly = toBoolean(CDef.Flg.False.code());
     }
 }

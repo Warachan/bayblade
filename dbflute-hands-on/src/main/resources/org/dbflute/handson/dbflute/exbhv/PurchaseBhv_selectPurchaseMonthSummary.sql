@@ -13,7 +13,7 @@
 -- #df:entity#
 
 -- !df:pmb!
--- !!Boolean enablePaymentCompleteFlg:cls(Flg)!!
+-- !!Boolean paymentCompleteOnly:cls(Flg)!!
 -- !!AutoDetect!!
 
 select mb.MEMBER_ID
@@ -30,8 +30,8 @@ select mb.MEMBER_ID
       on serv.MEMBER_ID = pur.MEMBER_ID
   /*BEGIN*/
   where
-    /*IF pmb.enablePaymentCompleteFlg == true*/
-     pur.PAYMENT_COMPLETE_FLG = 1
+    /*IF pmb.paymentCompleteOnly == true*/
+     pur.PAYMENT_COMPLETE_FLG = /*pmb.paymentCompleteTrue:cls(Flg.True)*/1
     /*END*/
     /*IF pmb.memberName != null*/
     and mb.MEMBER_NAME like /*pmb.memberName*/'%s%'

@@ -15,7 +15,7 @@
 -- !df:pmb extends Paging!
 -- !!AutoDetect!!
 
-/*IF pmb.existsServicePointCount()*/
+/*IF pmb.isPaging()*/
 select mb.MEMBER_ID
      , mb.MEMBER_NAME
      , mb.BIRTHDATE
@@ -24,8 +24,10 @@ select mb.MEMBER_ID
 -- ELSE select count(*)
 /*END*/
   from MEMBER mb
+  	/*IF pmb.existsServicePointCount()*/
     left outer join MEMBER_SERVICE serv
       on mb.MEMBER_ID = serv.MEMBER_ID
+    /*END*/
  /*BEGIN*/
  where
    /*IF pmb.memberId != null*/

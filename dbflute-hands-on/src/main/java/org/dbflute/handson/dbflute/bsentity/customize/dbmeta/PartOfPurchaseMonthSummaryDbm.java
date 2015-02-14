@@ -54,7 +54,7 @@ public class PartOfPurchaseMonthSummaryDbm extends AbstractDBMeta {
     }
     public static class EpgPurchaseMonth implements PropertyGateway {
         public Object read(Entity et) { return ((PartOfPurchaseMonthSummary)et).getPurchaseMonth(); }
-        public void write(Entity et, Object vl) { ((PartOfPurchaseMonthSummary)et).setPurchaseMonth(ctl(vl)); }
+        public void write(Entity et, Object vl) { ((PartOfPurchaseMonthSummary)et).setPurchaseMonth(cti(vl)); }
     }
     public static class EpgPurchasePriceAverageMonth implements PropertyGateway {
         public Object read(Entity et) { return ((PartOfPurchaseMonthSummary)et).getPurchasePriceAverageMonth(); }
@@ -83,7 +83,7 @@ public class PartOfPurchaseMonthSummaryDbm extends AbstractDBMeta {
     //                                                                         ===========
     protected final ColumnInfo _columnMemberId = cci("MEMBER_ID", "MEMBER_ID", null, "会員ID", Integer.class, "memberId", null, false, false, false, "INT", 11, 0, null, false, null, null, null, null, null);
     protected final ColumnInfo _columnMemberName = cci("MEMBER_NAME", "MEMBER_NAME", null, "会員名称", String.class, "memberName", null, false, false, false, "VARCHAR", 200, 0, null, false, null, null, null, null, null);
-    protected final ColumnInfo _columnPurchaseMonth = cci("PURCHASE_MONTH", "PURCHASE_MONTH", null, null, Long.class, "purchaseMonth", null, false, false, false, "BIGINT", 2, 0, null, false, null, null, null, null, null);
+    protected final ColumnInfo _columnPurchaseMonth = cci("PURCHASE_MONTH", "PURCHASE_MONTH", null, null, Integer.class, "purchaseMonth", null, false, false, false, "INT", 2, 0, null, false, null, null, null, null, null);
     protected final ColumnInfo _columnPurchasePriceAverageMonth = cci("PURCHASE_PRICE_AVERAGE_MONTH", "PURCHASE_PRICE_AVERAGE_MONTH", null, null, java.math.BigDecimal.class, "purchasePriceAverageMonth", null, false, false, false, "DECIMAL", 14, 4, null, false, null, null, null, null, null);
     protected final ColumnInfo _columnPurchaseCountSumMonth = cci("PURCHASE_COUNT_SUM_MONTH", "PURCHASE_COUNT_SUM_MONTH", null, null, java.math.BigDecimal.class, "purchaseCountSumMonth", null, false, false, false, "DECIMAL", 32, 0, null, false, null, null, null, null, null);
 
@@ -98,7 +98,7 @@ public class PartOfPurchaseMonthSummaryDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnMemberName() { return _columnMemberName; }
     /**
-     * PURCHASE_MONTH: {BIGINT(2)}
+     * PURCHASE_MONTH: {INT(2)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnPurchaseMonth() { return _columnPurchaseMonth; }

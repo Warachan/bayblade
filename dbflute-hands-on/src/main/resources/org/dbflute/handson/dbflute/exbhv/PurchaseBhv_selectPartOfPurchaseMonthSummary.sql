@@ -12,15 +12,21 @@
 */
 -- #df:entity#
 
--- !df:pmb!
--- !!Boolean enablePaymentCompleteFlg:cls(Flg)!!
+-- !df:pmb extends Paging!
+-- !!Boolean paymentCompleteOnly:cls(Flg)!!
 -- !!AutoDetect!!
 
 /*IF pmb.isPaging()*/
-select  *
+select sub.*
 -- ELSE select count(*)
 /*END*/
-  from PURCHASE pur
+ from (
+ select mb.MEMBER_ID
+     , mb.MEMBER_NAME
+     , MONTH(pur.PURCHASE_DATETIME) as PURCHASE_MONTH
+     , (avg(pur.PURCHASE_PRICE)) as PURCHASE_PRICE_AVERAGE_MONTH
+     , (sum(pur.PURCHASE_COUNT)) as PURCHASE_COUNT_SUM_MONTH
+   from PURCHASE pur
     left outer join MEMBER mb
       on mb.MEMBER_ID = pur.MEMBER_ID
     left outer join PURCHASE_PAYMENT pay
@@ -29,8 +35,8 @@ select  *
       on serv.MEMBER_ID = pur.MEMBER_ID
   /*BEGIN*/
   where
-    /*IF pmb.enablePaymentCompleteFlg == true*/
-    pur.PAYMENT_COMPLETE_FLG = 1
+    /*IF pmb.paymentCompleteOnly == true*/
+    pur.PAYMENT_COMPLETE_FLG = /*pmb.paymentCompleteTrue:cls(Flg.True)*/1
     /*END*/
     /*IF pmb.memberName != null*/
     and mb.MEMBER_NAME like /*pmb.memberName*/'%s%'
@@ -41,26 +47,12 @@ select  *
     /*IF pmb.servicePointCount != null*/
     and serv.SERVICE_POINT_COUNT> /*pmb.greaterThanPoint*/100
     /*END*/
-    /*BEGIN*/
-    and in (select mb.MEMBER_ID
-                , mb.MEMBER_NAME
-                , MONTH(pur.PURCHASE_DATETIME) as PURCHASE_MONTH
-                , (avg(pur.PURCHASE_PRICE)) as PURCHASE_PRICE_AVERAGE_MONTH
-                , (sum(pur.PURCHASE_COUNT)) as PURCHASE_COUNT_SUM_MONTH
-            from PURCHASE pur
-              left outer join MEMBER mb
-                on mb.MEMBER_ID = pur.MEMBER_ID
-              left outer join PURCHASE_PAYMENT pay
-                on pay.PURCHASE_ID = pur.PURCHASE_ID
-              left outer join MEMBER_SERVICE serv
-                on serv.MEMBER_ID = pur.MEMBER_ID)
-          /*END*/
-   /*END*/
+  /*END*/
    group by PURCHASE_MONTH
           , mb.MEMBER_ID
           , mb.MEMBER_NAME
    order by mb.MEMBER_ID asc
-            , PURCHASE_MONTH desc
+          , PURCHASE_MONTH desc
   /*IF pmb.isPaging()*/
    limit /*$pmb.pageStartIndex*/1, /*$pmb.fetchSize*/4
-  /*END*/)
+  /*END*/) as sub

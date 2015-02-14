@@ -37,7 +37,7 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
     protected MemberBhv memberBhv;
 
     // ===================================================================================
-    //                                                                       OutsideMember
+    //                                                                      Outside Member
     //                                                                            ========
     // done wara 1.0.5Nにアップグレードお願いします by jflute
     // 1. manage の upgrade (94) を叩く => downloadされる
@@ -119,6 +119,10 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
         assertEquals(countAll, memberList.size());
     }
 
+    // ===================================================================================
+    //                                                               Outside Member Paging
+    //                                                                            ========
+
     /**
      * test_selectPartOfMember_ページング検索されること()
      * 会員名称に "vi" を含む会員を対象に検索
@@ -138,12 +142,12 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
         // なので...
         // done 【書いてみましたどきどき】wara そのとき、IFコメントに記述する条件が複雑にならないように (代理判定メソッドを使う) by jflute
         // done 【書いてみましたどきどき】wara 修行++: その代理判定メソッドの UnitTest を書いてみよう by jflute
-        // TODO wara setServicePointCount()すると、カウント検索のときのselect句がcount(*)じゃなくて一覧になっちゃってる by jflute
+        // TODO 【if文の位置がおかしかったです】wara setServicePointCount()すると、カウント検索のときのselect句がcount(*)じゃなくて一覧になっちゃってる by jflute
         PartOfMemberPmb pmb = new PartOfMemberPmb();
         pmb.setMemberName_ContainSearch("vi");
         // 格言「おかしいと思ったら、できてる他のものと比べる」
         //pmb.setServicePointCount("aaa"); // おもいで
-        //pmb.setServicePointCount(1000);
+        pmb.setServicePointCount(1000);
         pmb.paging(4, 1);
 
         // ## Act ##
@@ -156,7 +160,7 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
     }
 
     // ===================================================================================
-    //                                                                     OutsidePurchase
+    //                                                             Purchase Month Summary
     //                                                                            ========
     /**
      * test_selectLetsSummary_集計が検索されること()
@@ -173,14 +177,14 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
         // done 【一度消しました】wara what? "having AVG(pur.PURCHASE_PRICE) > 1000" by jflute
         // 途中なら途中でtodo入れておこう
         // done 【使ってみました?】wara 固定の区分値を使ってみよう by jflute
-        // TODO wara まだ by jflute
+        // TODO 【えい！】wara まだ by jflute
         // http://dbflute.seasar.org/ja/manual/function/generator/task/sql2entity/pmbpropoption.html#fixedclassification
         PurchaseMonthSummaryPmb pmb = new PurchaseMonthSummaryPmb();
         pmb.setMemberName_ContainSearch("vi");
         // done 【やってみました】wara setPaymentCompleteFlg_True()でもFalse()でも = 1 になっちゃう by jflute
         // COMPLETE_FLGを指定するんじゃなくて、COMPLETE_FLGの条件を有効にするかどうか？っていうパラメータにしたい
-        // TODO wara CompleteOnlyであるということを示す名前にしたい (これだとどんな条件なのかが読み取りにくい) by jflute
-        pmb.setEnablePaymentCompleteFlg_True();
+        // TODO 【変更してみました】wara CompleteOnlyであるということを示す名前にしたい (これだとどんな条件なのかが読み取りにくい) by jflute
+        pmb.setPaymentCompleteOnly_True();
 
         // ## Act ##
         ListResultBean<PurchaseMonthSummary> summaryList = logic.selectLetsSummary(pmb);
@@ -195,12 +199,16 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
         }
     }
 
+    // ===================================================================================
+    //                                                             Outside Purchase Paging
+    //                                                                            ========
+
     public void test_selectPartOfPurchaseMonthSummary() throws Exception {
         // ## Arrange ##
         HandsOn09Logic logic = new HandsOn09Logic();
         inject(logic);
 
-        // TODO wara カウントの結果を確認してみて。想定通りか？ by jflute
+        // TODO 【カウントしてもおーばーふろーで落ちる…？全部サブでくくってみた…】wara カウントの結果を確認してみて。想定通りか？ by jflute
         PartOfPurchaseMonthSummaryPmb pmb = new PartOfPurchaseMonthSummaryPmb();
         pmb.setMemberName_ContainSearch("vi");
         pmb.paging(4, 1);
