@@ -184,8 +184,8 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
         // done 【やってみました】wara setPaymentCompleteFlg_True()でもFalse()でも = 1 になっちゃう by jflute
         // COMPLETE_FLGを指定するんじゃなくて、COMPLETE_FLGの条件を有効にするかどうか？っていうパラメータにしたい
         // done 【変更してみました】wara CompleteOnlyであるということを示す名前にしたい (これだとどんな条件なのかが読み取りにくい) by jflute
-        // TODO wara (avg(pur.PURCHASE_PRICE)) は外側の括弧はなくてOK by jflute
-        // TODO wara IF pmb.paymentCompleteOnly == true は "== true" なくてOK by jflute
+        // TODO 【変更しました】wara (avg(pur.PURCHASE_PRICE)) は外側の括弧はなくてOK by jflute
+        // TODO 【変更しました】wara IF pmb.paymentCompleteOnly == true は "== true" なくてOK by jflute
         pmb.setPaymentCompleteOnly_True();
 
         // ## Act ##

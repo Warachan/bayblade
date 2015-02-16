@@ -19,8 +19,8 @@
 select mb.MEMBER_ID
      , mb.MEMBER_NAME
      , MONTH(pur.PURCHASE_DATETIME) as PURCHASE_MONTH
-     , (avg(pur.PURCHASE_PRICE)) as PURCHASE_PRICE_AVERAGE_MONTH
-     , (sum(pur.PURCHASE_COUNT)) as PURCHASE_COUNT_SUM_MONTH
+     , avg(pur.PURCHASE_PRICE) as PURCHASE_PRICE_AVERAGE_MONTH
+     , sum(pur.PURCHASE_COUNT) as PURCHASE_COUNT_SUM_MONTH
   from PURCHASE pur
     left outer join MEMBER mb
       on mb.MEMBER_ID = pur.MEMBER_ID
@@ -30,7 +30,7 @@ select mb.MEMBER_ID
       on serv.MEMBER_ID = pur.MEMBER_ID
   /*BEGIN*/
   where
-    /*IF pmb.paymentCompleteOnly == true*/
+    /*IF pmb.paymentCompleteOnly*/
      pur.PAYMENT_COMPLETE_FLG = /*pmb.paymentCompleteTrue:cls(Flg.True)*/1
     /*END*/
     /*IF pmb.memberName != null*/
