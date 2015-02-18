@@ -6,10 +6,13 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.dbflute.handson.dbflute.cbean.MemberCB;
+import org.dbflute.handson.dbflute.cbean.MemberServiceCB;
 import org.dbflute.handson.dbflute.exbhv.MemberBhv;
+import org.dbflute.handson.dbflute.exbhv.MemberServiceBhv;
 import org.dbflute.handson.dbflute.exbhv.pmbean.OutsideMemberPmb;
 import org.dbflute.handson.dbflute.exbhv.pmbean.PartOfMemberPmb;
 import org.dbflute.handson.dbflute.exbhv.pmbean.PartOfPurchaseMonthSummaryPmb;
+import org.dbflute.handson.dbflute.exbhv.pmbean.PurchaseMonthCursorPmb;
 import org.dbflute.handson.dbflute.exbhv.pmbean.PurchaseMonthSummaryPmb;
 import org.dbflute.handson.dbflute.exbhv.pmbean.SpInOutParameterPmb;
 import org.dbflute.handson.dbflute.exbhv.pmbean.SpReturnResultSetPmb;
@@ -35,6 +38,8 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
     //                                                                           =========
     @Resource
     protected MemberBhv memberBhv;
+    @Resource
+    protected MemberServiceBhv memberServiceBhv;
 
     // ===================================================================================
     //                                                                      Outside Member
@@ -204,7 +209,9 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
     // ===================================================================================
     //                                                             Outside Purchase Paging
     //                                                                            ========
-
+    /**
+     * お手軽じゃないお手軽チャレンジ
+     */
     public void test_selectPartOfPurchaseMonthSummary() throws Exception {
         // ## Arrange ##
         HandsOn09Logic logic = new HandsOn09Logic();
@@ -223,6 +230,30 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
         assertHasAnyElement(summaryPage);
         log(summaryPage, summaryPage.size());
         assertEquals(4, summaryPage.size());
+    }
+
+    // ===================================================================================
+    //                                                       Outside Purchase Month Cursor
+    //                                                                            ========
+    /**
+     * 会員名称に "vi" を含む会員を対象に検索
+     * 期待通りのSQLがログに出力されることを確認する
+     * 誰か一人でもサービスポイント数が増えていることをアサート
+     */
+    public void test_selectLetsCursor_集計が検索されること() throws Exception {
+        // ## Arrange ##
+        HandsOn09Logic logic = new HandsOn09Logic();
+        inject(logic);
+
+        PurchaseMonthCursorPmb pmb = new PurchaseMonthCursorPmb();
+        pmb.setMemberName_ContainSearch("vi");
+
+        // ## Act ##
+        logic.selectLetsCursor(pmb);
+
+        // ## Assert ##
+        MemberServiceCB cb = new MemberServiceCB();
+        //        cb.query().setServicePointCount_GreaterThan(servicePointCount);
     }
 
     // ===================================================================================

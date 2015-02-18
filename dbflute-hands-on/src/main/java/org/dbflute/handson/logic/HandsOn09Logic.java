@@ -1,11 +1,15 @@
 package org.dbflute.handson.logic;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.dbflute.handson.dbflute.exbhv.MemberBhv;
+import org.dbflute.handson.dbflute.exbhv.MemberServiceBhv;
 import org.dbflute.handson.dbflute.exbhv.PurchaseBhv;
+import org.dbflute.handson.dbflute.exbhv.cursor.PurchaseMonthCursorCursor;
+import org.dbflute.handson.dbflute.exbhv.cursor.PurchaseMonthCursorCursorHandler;
 import org.dbflute.handson.dbflute.exbhv.pmbean.OutsideMemberPmb;
 import org.dbflute.handson.dbflute.exbhv.pmbean.PartOfMemberPmb;
 import org.dbflute.handson.dbflute.exbhv.pmbean.PartOfPurchaseMonthSummaryPmb;
@@ -13,6 +17,7 @@ import org.dbflute.handson.dbflute.exbhv.pmbean.PurchaseMonthCursorPmb;
 import org.dbflute.handson.dbflute.exbhv.pmbean.PurchaseMonthSummaryPmb;
 import org.dbflute.handson.dbflute.exbhv.pmbean.SpInOutParameterPmb;
 import org.dbflute.handson.dbflute.exbhv.pmbean.SpReturnResultSetPmb;
+import org.dbflute.handson.dbflute.exentity.MemberService;
 import org.dbflute.handson.dbflute.exentity.customize.OutsideMember;
 import org.dbflute.handson.dbflute.exentity.customize.PartOfMember;
 import org.dbflute.handson.dbflute.exentity.customize.PartOfPurchaseMonthSummary;
@@ -37,11 +42,13 @@ public class HandsOn09Logic {
     protected MemberBhv memberBhv;
     @Resource
     protected PurchaseBhv purchaseBhv;
+    @Resource
+    protected MemberServiceBhv memberServiceBhv;
 
     // TODO wara せっかくなので、タグコメント綺麗に入れてみよう by jflute
     // 初めての外だしSQL, 外だしSQLでページングってみる, ...
     // ===================================================================================
-    //                                                                     初めての外だしSQL
+    //                                                                     Outside Member
     //                                                                     ===============
     /**
      * ロジックのメソッド
@@ -67,6 +74,10 @@ public class HandsOn09Logic {
         }
         return memberBhv.outsideSql().manualPaging().selectPage(pmb);
     }
+
+    // ===================================================================================
+    //                                                                    Outside Purchase
+    //                                                                            ========
 
     /**
      * ListResultBean<PurchaseMonthSummary> selectLetsSummary(PurchaseMonthSummaryPmb pmb)
@@ -104,12 +115,19 @@ public class HandsOn09Logic {
         if (pmb == null) {
             throw new IllegalArgumentException("Invalid pmb");
         }
-        //        return purchaseBhv.outsideSql().cursorHandling().selectCursor(pmb, new PurchaseMonthCursorCursorHandler() {
-        //            protected Object fetchCursor(PurchaseMonthCursorCursor cursor) throws SQLException {
-        //                // TODO Auto-generated method stub
-        //                return null;
-        //            }
-        //        });
+
+        purchaseBhv.outsideSql().cursorHandling().selectCursor(pmb, new PurchaseMonthCursorCursorHandler() {
+            @Override
+            protected Object fetchCursor(PurchaseMonthCursorCursor cursor) throws SQLException {
+                while (cursor.next()) {
+                    MemberService service = new MemberService();
+                    service.setMemberId(cursor.getMemberId());
+                    service.setServicePointCount(cursor.getPurchasePriceAverageMonth().intValue());
+                    memberServiceBhv.update(service);
+                }
+                return null;
+            }
+        });
     }
 
     /**

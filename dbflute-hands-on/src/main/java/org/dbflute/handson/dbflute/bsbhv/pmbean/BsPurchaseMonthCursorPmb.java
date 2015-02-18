@@ -22,8 +22,8 @@ public class BsPurchaseMonthCursorPmb implements CursorHandlingPmb<PurchaseBhv, 
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    /** The parameter of memberId. */
-    protected Integer _memberId;
+    /** The parameter of paymentCompleteTrue:cls(Flg.True). */
+    protected Integer _paymentCompleteTrue = toNumber(CDef.Flg.True.code(), Integer.class);
 
     /** The parameter of memberName:likeContain. */
     protected String _memberName;
@@ -32,10 +32,19 @@ public class BsPurchaseMonthCursorPmb implements CursorHandlingPmb<PurchaseBhv, 
     protected LikeSearchOption _memberNameInternalLikeSearchOption;
 
     /** The parameter of purchasePaymentId. */
-    protected Integer _purchasePaymentId;
+    protected String _purchasePaymentId;
 
-    /** The parameter of paymentCompleteFlg:cls(Flg). */
-    protected String _paymentCompleteFlg;
+    /** The parameter of purchasPaymentId. */
+    protected Integer _purchasPaymentId;
+
+    /** The parameter of servicePointCount. */
+    protected String _servicePointCount;
+
+    /** The parameter of greaterThanPoint. */
+    protected Integer _greaterThanPoint;
+
+    /** The parameter of paymentCompleteOnly:cls(Flg). */
+    protected Boolean _paymentCompleteOnly;
 
     /** The max size of safety result. */
     protected int _safetyMaxResultSize;
@@ -168,10 +177,13 @@ public class BsPurchaseMonthCursorPmb implements CursorHandlingPmb<PurchaseBhv, 
     protected String xbuildColumnString() {
         final String dm = ", ";
         final StringBuilder sb = new StringBuilder();
-        sb.append(dm).append(_memberId);
+        sb.append(dm).append(_paymentCompleteTrue);
         sb.append(dm).append(_memberName);
         sb.append(dm).append(_purchasePaymentId);
-        sb.append(dm).append(_paymentCompleteFlg);
+        sb.append(dm).append(_purchasPaymentId);
+        sb.append(dm).append(_servicePointCount);
+        sb.append(dm).append(_greaterThanPoint);
+        sb.append(dm).append(_paymentCompleteOnly);
         if (sb.length() > 0) { sb.delete(0, dm.length()); }
         sb.insert(0, "{").append("}");
         return sb.toString();
@@ -181,19 +193,11 @@ public class BsPurchaseMonthCursorPmb implements CursorHandlingPmb<PurchaseBhv, 
     //                                                                            Accessor
     //                                                                            ========
     /**
-     * [get] memberId <br />
-     * @return The value of memberId. (NullAllowed, NotEmptyString(when String): if empty string, returns null)
+     * [get] paymentCompleteTrue:cls(Flg.True) <br />
+     * @return The value of paymentCompleteTrue. (NullAllowed, NotEmptyString(when String): if empty string, returns null)
      */
-    public Integer getMemberId() {
-        return _memberId;
-    }
-
-    /**
-     * [set] memberId <br />
-     * @param memberId The value of memberId. (NullAllowed)
-     */
-    public void setMemberId(Integer memberId) {
-        _memberId = memberId;
+    public Integer getPaymentCompleteTrue() {
+        return _paymentCompleteTrue;
     }
 
     /**
@@ -225,39 +229,87 @@ public class BsPurchaseMonthCursorPmb implements CursorHandlingPmb<PurchaseBhv, 
      * [get] purchasePaymentId <br />
      * @return The value of purchasePaymentId. (NullAllowed, NotEmptyString(when String): if empty string, returns null)
      */
-    public Integer getPurchasePaymentId() {
-        return _purchasePaymentId;
+    public String getPurchasePaymentId() {
+        return filterStringParameter(_purchasePaymentId);
     }
 
     /**
      * [set] purchasePaymentId <br />
      * @param purchasePaymentId The value of purchasePaymentId. (NullAllowed)
      */
-    public void setPurchasePaymentId(Integer purchasePaymentId) {
+    public void setPurchasePaymentId(String purchasePaymentId) {
         _purchasePaymentId = purchasePaymentId;
     }
 
     /**
-     * [get] paymentCompleteFlg:cls(Flg) <br />
-     * @return The value of paymentCompleteFlg. (NullAllowed, NotEmptyString(when String): if empty string, returns null)
+     * [get] purchasPaymentId <br />
+     * @return The value of purchasPaymentId. (NullAllowed, NotEmptyString(when String): if empty string, returns null)
      */
-    public String getPaymentCompleteFlg() {
-        return filterStringParameter(_paymentCompleteFlg);
+    public Integer getPurchasPaymentId() {
+        return _purchasPaymentId;
     }
 
     /**
-     * [set as True] paymentCompleteFlg:cls(Flg) <br />
+     * [set] purchasPaymentId <br />
+     * @param purchasPaymentId The value of purchasPaymentId. (NullAllowed)
+     */
+    public void setPurchasPaymentId(Integer purchasPaymentId) {
+        _purchasPaymentId = purchasPaymentId;
+    }
+
+    /**
+     * [get] servicePointCount <br />
+     * @return The value of servicePointCount. (NullAllowed, NotEmptyString(when String): if empty string, returns null)
+     */
+    public String getServicePointCount() {
+        return filterStringParameter(_servicePointCount);
+    }
+
+    /**
+     * [set] servicePointCount <br />
+     * @param servicePointCount The value of servicePointCount. (NullAllowed)
+     */
+    public void setServicePointCount(String servicePointCount) {
+        _servicePointCount = servicePointCount;
+    }
+
+    /**
+     * [get] greaterThanPoint <br />
+     * @return The value of greaterThanPoint. (NullAllowed, NotEmptyString(when String): if empty string, returns null)
+     */
+    public Integer getGreaterThanPoint() {
+        return _greaterThanPoint;
+    }
+
+    /**
+     * [set] greaterThanPoint <br />
+     * @param greaterThanPoint The value of greaterThanPoint. (NullAllowed)
+     */
+    public void setGreaterThanPoint(Integer greaterThanPoint) {
+        _greaterThanPoint = greaterThanPoint;
+    }
+
+    /**
+     * [get] paymentCompleteOnly:cls(Flg) <br />
+     * @return The value of paymentCompleteOnly. (NullAllowed, NotEmptyString(when String): if empty string, returns null)
+     */
+    public Boolean getPaymentCompleteOnly() {
+        return _paymentCompleteOnly;
+    }
+
+    /**
+     * [set as True] paymentCompleteOnly:cls(Flg) <br />
      * フラグが立っている
      */
-    public void setPaymentCompleteFlg_True() {
-        _paymentCompleteFlg = CDef.Flg.True.code();
+    public void setPaymentCompleteOnly_True() {
+        _paymentCompleteOnly = toBoolean(CDef.Flg.True.code());
     }
 
     /**
-     * [set as False] paymentCompleteFlg:cls(Flg) <br />
+     * [set as False] paymentCompleteOnly:cls(Flg) <br />
      * フラグが立っていない
      */
-    public void setPaymentCompleteFlg_False() {
-        _paymentCompleteFlg = CDef.Flg.False.code();
+    public void setPaymentCompleteOnly_False() {
+        _paymentCompleteOnly = toBoolean(CDef.Flg.False.code());
     }
 }
