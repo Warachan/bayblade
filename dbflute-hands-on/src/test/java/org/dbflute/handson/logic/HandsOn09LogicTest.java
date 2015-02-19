@@ -16,6 +16,7 @@ import org.dbflute.handson.dbflute.exbhv.pmbean.PurchaseMonthCursorPmb;
 import org.dbflute.handson.dbflute.exbhv.pmbean.PurchaseMonthSummaryPmb;
 import org.dbflute.handson.dbflute.exbhv.pmbean.SpInOutParameterPmb;
 import org.dbflute.handson.dbflute.exbhv.pmbean.SpReturnResultSetPmb;
+import org.dbflute.handson.dbflute.exentity.MemberService;
 import org.dbflute.handson.dbflute.exentity.customize.OutsideMember;
 import org.dbflute.handson.dbflute.exentity.customize.PartOfMember;
 import org.dbflute.handson.dbflute.exentity.customize.PartOfPurchaseMonthSummary;
@@ -245,15 +246,32 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
         HandsOn09Logic logic = new HandsOn09Logic();
         inject(logic);
 
-        PurchaseMonthCursorPmb pmb = new PurchaseMonthCursorPmb();
-        pmb.setMemberName_ContainSearch("vi");
+        MemberServiceCB beforeCb = new MemberServiceCB();
+        beforeCb.query().addOrderBy_MemberServiceId_Asc();
 
-        // ## Act ##
-        logic.selectLetsCursor(pmb);
+        boolean pointIncreased = false;
+        ListResultBean<MemberService> serviceBeforeList = memberServiceBhv.selectList(beforeCb);
+        for (MemberService serviceBefore : serviceBeforeList) {
 
-        // ## Assert ##
-        MemberServiceCB cb = new MemberServiceCB();
-        //        cb.query().setServicePointCount_GreaterThan(servicePointCount);
+            PurchaseMonthCursorPmb pmb = new PurchaseMonthCursorPmb();
+            pmb.setMemberName_ContainSearch("vi");
+            pmb.setPaymentCompleteOnly_True();
+
+            // ## Act ##
+            logic.selectLetsCursor(pmb);
+
+            // ## Assert ##
+            MemberServiceCB afterCb = new MemberServiceCB();
+            afterCb.query().setMemberId_Equal(serviceBefore.getMemberId());
+            afterCb.query().setMemberServiceId_Equal(serviceBefore.getMemberServiceId());
+
+            MemberService serviceAfter = memberServiceBhv.selectEntity(afterCb);
+
+            if (serviceAfter.getServicePointCount() > serviceBefore.getServicePointCount()) {
+                pointIncreased = true;
+            }
+        }
+        assertTrue(pointIncreased);
     }
 
     // ===================================================================================

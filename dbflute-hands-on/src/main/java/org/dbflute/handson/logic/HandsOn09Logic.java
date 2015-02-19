@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.dbflute.handson.dbflute.cbean.MemberServiceCB;
 import org.dbflute.handson.dbflute.exbhv.MemberBhv;
 import org.dbflute.handson.dbflute.exbhv.MemberServiceBhv;
 import org.dbflute.handson.dbflute.exbhv.PurchaseBhv;
@@ -120,9 +121,16 @@ public class HandsOn09Logic {
             @Override
             protected Object fetchCursor(PurchaseMonthCursorCursor cursor) throws SQLException {
                 while (cursor.next()) {
+
+                    MemberServiceCB cb = new MemberServiceCB();
+                    cb.query().setMemberId_Equal(cursor.getMemberId());
+                    MemberService memberService = memberServiceBhv.selectEntity(cb);
+
                     MemberService service = new MemberService();
+                    service.setMemberServiceId(memberService.getMemberServiceId());
                     service.setMemberId(cursor.getMemberId());
                     service.setServicePointCount(cursor.getPurchasePriceAverageMonth().intValue());
+                    service.setVersionNo(0L);
                     memberServiceBhv.update(service);
                 }
                 return null;
