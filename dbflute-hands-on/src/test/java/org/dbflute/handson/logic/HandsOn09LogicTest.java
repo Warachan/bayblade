@@ -54,10 +54,12 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
     // 初めての外だしSQL, 外だしSQLでページングってみる, ...
     /**
      * test_letsOutside_会員が検索されること()
+     * <pre>
      * 会員名称が "S" で始まる正式会員 (区分値メソッドを使う) で検索すること
      * 条件値を設定しなかった条件が除去されていることをログで目視確認
      * 会員サービスのサービスポイント数が取得できていることをアサート
      * 検索された会員が "S" で始まっていて、かつ、正式会員であることをアサート
+     * </pre>
      */
     public void test_letsOutside_会員が検索されること() throws Exception {
         // ## Arrange ##
@@ -169,11 +171,13 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
     //                                                             Purchase Month Summary
     //                                                                            ========
     /**
+     * <pre>
      * test_selectLetsSummary_集計が検索されること()
      * 会員名称に "vi" を含む会員を対象に検索
      * 会員名称に "vi" が含まれていることをアサート
      * 期待通りのSQLがログに出力されることを確認する
      * 検索したカラム全てのデータをログ出力
+     * </pre>
      */
     public void test_selectLetsSummary() throws Exception {
         // ## Arrange ##
@@ -237,30 +241,70 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
     //                                                       Outside Purchase Month Cursor
     //                                                                            ========
     /**
+     * <pre>
      * 会員名称に "vi" を含む会員を対象に検索
      * 期待通りのSQLがログに出力されることを確認する
      * 誰か一人でもサービスポイント数が増えていることをアサート
+     * </pre>
      */
     public void test_selectLetsCursor_集計が検索されること() throws Exception {
         // ## Arrange ##
         HandsOn09Logic logic = new HandsOn09Logic();
         inject(logic);
 
+        // ## Act ##
+        // アサートで比べる用のデータを取得
         MemberServiceCB beforeCb = new MemberServiceCB();
-        beforeCb.query().addOrderBy_MemberServiceId_Asc();
-
-        boolean pointIncreased = false;
         ListResultBean<MemberService> serviceBeforeList = memberServiceBhv.selectList(beforeCb);
+
+        PurchaseMonthCursorPmb pmb = new PurchaseMonthCursorPmb();
+        pmb.setMemberName_ContainSearch("vi");
+        logic.selectLetsCursor(pmb);
+
+        // ## Assert ##
+        boolean pointIncreased = false;
         for (MemberService serviceBefore : serviceBeforeList) {
 
-            PurchaseMonthCursorPmb pmb = new PurchaseMonthCursorPmb();
-            pmb.setMemberName_ContainSearch("vi");
-            pmb.setPaymentCompleteOnly_True();
+            MemberServiceCB afterCb = new MemberServiceCB();
+            afterCb.query().setMemberId_Equal(serviceBefore.getMemberId());
+            afterCb.query().setMemberServiceId_Equal(serviceBefore.getMemberServiceId());
 
-            // ## Act ##
-            logic.selectLetsCursor(pmb);
+            MemberService serviceAfter = memberServiceBhv.selectEntity(afterCb);
 
-            // ## Assert ##
+            if (serviceAfter.getServicePointCount() > serviceBefore.getServicePointCount()) {
+                pointIncreased = true;
+            }
+        }
+        assertTrue(pointIncreased);
+    }
+
+    // -----------------------------------------------------
+    //                                          Bonus Stage
+    //                                          ------------
+    /**
+     * <pre>
+     *  outsideSql().configure() メソッドを使って、
+     *  StatementConfig の FetchSize に Integer.MIN_VALUE を設定して再実行してみましょう。
+     * </pre>
+     */
+    public void test_selectLetsCursor_メモリ対策() throws Exception {
+        // ## Arrange ##
+        HandsOn09Logic logic = new HandsOn09Logic();
+        inject(logic);
+
+        // ## Act ##
+        // アサートで比べる用のデータを取得
+        MemberServiceCB beforeCb = new MemberServiceCB();
+        ListResultBean<MemberService> serviceBeforeList = memberServiceBhv.selectList(beforeCb);
+
+        PurchaseMonthCursorPmb pmb = new PurchaseMonthCursorPmb();
+        pmb.setMemberName_ContainSearch("vi");
+        logic.selectLetsCursorBonusStage(pmb);
+
+        // ## Assert ##
+        boolean pointIncreased = false;
+        for (MemberService serviceBefore : serviceBeforeList) {
+
             MemberServiceCB afterCb = new MemberServiceCB();
             afterCb.query().setMemberId_Equal(serviceBefore.getMemberId());
             afterCb.query().setMemberServiceId_Equal(serviceBefore.getMemberServiceId());
@@ -278,8 +322,10 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
     //                                                                       ストアドプロシージャ
     //                                                                            ========
     /**
+     * <pre>
      * v_in_varchar に "foo" を、v_inout_varchar に "bar" を設定
      * プロシージャを呼び出した後、ParameterBeanの値が入れ替わってること
+     * </pre>
      */
     public void test_callInOutProcedure_値がへんてこりんになっていること() throws Exception {
         // ## Arrange ##
@@ -302,9 +348,11 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
     }
 
     /**
+     * <pre>
      * birthdate に1968年1月1日を設定
      * 生年月日が1968年以降であることをアサート
      * 会員名称と会員ステータス名称を一行のログで出力すること
+     * </pre>
      */
     public void test_callResultSetProcedure_検索結果が取得できてること() throws Exception {
         // ## Arrange ##

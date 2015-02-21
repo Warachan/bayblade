@@ -22,14 +22,14 @@ public class BsPurchaseMonthCursorPmb implements CursorHandlingPmb<PurchaseBhv, 
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    /** The parameter of paymentCompleteTrue:cls(Flg.True). */
-    protected Integer _paymentCompleteTrue = toNumber(CDef.Flg.True.code(), Integer.class);
-
     /** The parameter of memberName:likeContain. */
     protected String _memberName;
 
     /** The option of like-search for memberName. */
     protected LikeSearchOption _memberNameInternalLikeSearchOption;
+
+    /** The parameter of paymentCompleteTrue:cls(Flg.True). */
+    protected Integer _paymentCompleteTrue = toNumber(CDef.Flg.True.code(), Integer.class);
 
     /** The parameter of purchasePaymentId. */
     protected String _purchasePaymentId;
@@ -177,8 +177,8 @@ public class BsPurchaseMonthCursorPmb implements CursorHandlingPmb<PurchaseBhv, 
     protected String xbuildColumnString() {
         final String dm = ", ";
         final StringBuilder sb = new StringBuilder();
-        sb.append(dm).append(_paymentCompleteTrue);
         sb.append(dm).append(_memberName);
+        sb.append(dm).append(_paymentCompleteTrue);
         sb.append(dm).append(_purchasePaymentId);
         sb.append(dm).append(_purchasPaymentId);
         sb.append(dm).append(_servicePointCount);
@@ -192,14 +192,6 @@ public class BsPurchaseMonthCursorPmb implements CursorHandlingPmb<PurchaseBhv, 
     // ===================================================================================
     //                                                                            Accessor
     //                                                                            ========
-    /**
-     * [get] paymentCompleteTrue:cls(Flg.True) <br />
-     * @return The value of paymentCompleteTrue. (NullAllowed, NotEmptyString(when String): if empty string, returns null)
-     */
-    public Integer getPaymentCompleteTrue() {
-        return _paymentCompleteTrue;
-    }
-
     /**
      * [get] memberName:likeContain <br />
      * @return The value of memberName. (NullAllowed, NotEmptyString(when String): if empty string, returns null)
@@ -223,6 +215,14 @@ public class BsPurchaseMonthCursorPmb implements CursorHandlingPmb<PurchaseBhv, 
      */
     public LikeSearchOption getMemberNameInternalLikeSearchOption() {
         return _memberNameInternalLikeSearchOption;
+    }
+
+    /**
+     * [get] paymentCompleteTrue:cls(Flg.True) <br />
+     * @return The value of paymentCompleteTrue. (NullAllowed, NotEmptyString(when String): if empty string, returns null)
+     */
+    public Integer getPaymentCompleteTrue() {
+        return _paymentCompleteTrue;
     }
 
     /**

@@ -30,11 +30,11 @@ select mb.MEMBER_ID
       on serv.MEMBER_ID = pur.MEMBER_ID
   /*BEGIN*/
   where
-    /*IF pmb.paymentCompleteOnly*/
-     pur.PAYMENT_COMPLETE_FLG = /*pmb.paymentCompleteTrue:cls(Flg.True)*/1
-    /*END*/
     /*IF pmb.memberName != null*/
-    and mb.MEMBER_NAME like /*pmb.memberName*/'%s%'
+    mb.MEMBER_NAME like /*pmb.memberName*/'%s%'
+    /*END*/
+    /*IF pmb.paymentCompleteOnly != null*/
+    and pur.PAYMENT_COMPLETE_FLG = /*pmb.paymentCompleteTrue:cls(Flg.True)*/0
     /*END*/
     /*IF pmb.purchasePaymentId != null*/
     and pay.PURCHASE_PAYMENT_ID = /*pmb.purchasPaymentId*/7

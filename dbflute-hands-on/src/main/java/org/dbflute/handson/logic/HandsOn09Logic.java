@@ -18,13 +18,17 @@ import org.dbflute.handson.dbflute.exbhv.pmbean.PurchaseMonthCursorPmb;
 import org.dbflute.handson.dbflute.exbhv.pmbean.PurchaseMonthSummaryPmb;
 import org.dbflute.handson.dbflute.exbhv.pmbean.SpInOutParameterPmb;
 import org.dbflute.handson.dbflute.exbhv.pmbean.SpReturnResultSetPmb;
+import org.dbflute.handson.dbflute.exentity.Member;
 import org.dbflute.handson.dbflute.exentity.MemberService;
 import org.dbflute.handson.dbflute.exentity.customize.OutsideMember;
 import org.dbflute.handson.dbflute.exentity.customize.PartOfMember;
 import org.dbflute.handson.dbflute.exentity.customize.PartOfPurchaseMonthSummary;
 import org.dbflute.handson.dbflute.exentity.customize.PurchaseMonthSummary;
+import org.seasar.dbflute.bhv.UpdateOption;
 import org.seasar.dbflute.cbean.ListResultBean;
 import org.seasar.dbflute.cbean.PagingResultBean;
+import org.seasar.dbflute.cbean.SpecifyQuery;
+import org.seasar.dbflute.jdbc.StatementConfig;
 
 // done wara JavaDoc by jflute
 // done wara クラス直下は空行空けましょう by jflute
@@ -116,26 +120,53 @@ public class HandsOn09Logic {
         if (pmb == null) {
             throw new IllegalArgumentException("Invalid pmb");
         }
-
         purchaseBhv.outsideSql().cursorHandling().selectCursor(pmb, new PurchaseMonthCursorCursorHandler() {
-            @Override
             protected Object fetchCursor(PurchaseMonthCursorCursor cursor) throws SQLException {
                 while (cursor.next()) {
-
-                    MemberServiceCB cb = new MemberServiceCB();
-                    cb.query().setMemberId_Equal(cursor.getMemberId());
-                    MemberService memberService = memberServiceBhv.selectEntity(cb);
-
-                    MemberService service = new MemberService();
-                    service.setMemberServiceId(memberService.getMemberServiceId());
-                    service.setMemberId(cursor.getMemberId());
-                    service.setServicePointCount(cursor.getPurchasePriceAverageMonth().intValue());
-                    service.setVersionNo(0L);
-                    memberServiceBhv.update(service);
+                    updateMemberServicePointCount(cursor);
                 }
                 return null;
             }
+
         });
+    }
+
+    /**
+     * メモリ対策
+     */
+    public void selectLetsCursorBonusStage(PurchaseMonthCursorPmb pmb) {
+        if (pmb == null) {
+            throw new IllegalArgumentException("Invalid pmb");
+        }
+        purchaseBhv.outsideSql().cursorHandling().configure(new StatementConfig().fetchSize(Integer.MIN_VALUE))
+                .selectCursor(pmb, new PurchaseMonthCursorCursorHandler() {
+                    protected Object fetchCursor(PurchaseMonthCursorCursor cursor) throws SQLException {
+                        while (cursor.next()) {
+                            updateMemberServicePointCount(cursor);
+                        }
+                        return null;
+                    }
+                });
+    }
+
+    // ===================================================================================
+    //                                                                      Private Method
+    //                                                                            ========
+    private void updateMemberServicePointCount(PurchaseMonthCursorCursor cursor) throws SQLException {
+        // TODO mayuko.sakaba これは事前検索してる。。。
+        Member memberService = memberBhv.selectByPKValueWithDeletedCheck(cursor.getMemberId());
+
+        MemberService service = new MemberService();
+        service.setMemberServiceId(memberService.getMemberId());
+        service.setMemberId(cursor.getMemberId());
+
+        UpdateOption<MemberServiceCB> option = new UpdateOption<MemberServiceCB>();
+        option.self(new SpecifyQuery<MemberServiceCB>() {
+            public void specify(final MemberServiceCB spCB) {
+                spCB.specify().columnServicePointCount();
+            }
+        }).plus(cursor.getPurchasePriceAverageMonth());
+        memberServiceBhv.varyingUpdateNonstrict(service, option);
     }
 
     /**
