@@ -1,10 +1,15 @@
 package org.dbflute.handson.logic;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.dbflute.handson.dbflute.cbean.MemberServiceCB;
 import org.dbflute.handson.dbflute.exbhv.MemberBhv;
 import org.dbflute.handson.dbflute.exbhv.MemberServiceBhv;
@@ -18,7 +23,6 @@ import org.dbflute.handson.dbflute.exbhv.pmbean.PurchaseMonthCursorPmb;
 import org.dbflute.handson.dbflute.exbhv.pmbean.PurchaseMonthSummaryPmb;
 import org.dbflute.handson.dbflute.exbhv.pmbean.SpInOutParameterPmb;
 import org.dbflute.handson.dbflute.exbhv.pmbean.SpReturnResultSetPmb;
-import org.dbflute.handson.dbflute.exentity.Member;
 import org.dbflute.handson.dbflute.exentity.MemberService;
 import org.dbflute.handson.dbflute.exentity.customize.OutsideMember;
 import org.dbflute.handson.dbflute.exentity.customize.PartOfMember;
@@ -28,7 +32,12 @@ import org.seasar.dbflute.bhv.UpdateOption;
 import org.seasar.dbflute.cbean.ListResultBean;
 import org.seasar.dbflute.cbean.PagingResultBean;
 import org.seasar.dbflute.cbean.SpecifyQuery;
+import org.seasar.dbflute.helper.token.file.FileMakingCallback;
+import org.seasar.dbflute.helper.token.file.FileMakingOption;
+import org.seasar.dbflute.helper.token.file.FileMakingRowWriter;
+import org.seasar.dbflute.helper.token.file.FileToken;
 import org.seasar.dbflute.jdbc.StatementConfig;
+import org.seasar.dbflute.util.DfResourceUtil;
 
 // done wara JavaDoc by jflute
 // done wara クラス直下は空行空けましょう by jflute
@@ -36,6 +45,11 @@ import org.seasar.dbflute.jdbc.StatementConfig;
  * @author mayuko.sakaba
  */
 public class HandsOn09Logic {
+
+    // ===================================================================================
+    //                                                                          Definition
+    //                                                                          ==========
+    private static final Log LOG = LogFactory.getLog(HandsOn09Logic.class);
 
     // ===================================================================================
     //                                                                           Attribute
@@ -56,10 +70,12 @@ public class HandsOn09Logic {
     //                                                                     Outside Member
     //                                                                     ===============
     /**
+     * <pre>
      * ロジックのメソッド
      * List<OutsideMember> letsOutside(OutsideMemberPmb pmb)
      * 指定された ParameterBean で会員を検索する
      * 引数の値で null は許されない
+     * </pre>
      */
     public List<OutsideMember> letsOutside(OutsideMemberPmb pmb) {
         if (pmb == null) {
@@ -69,9 +85,11 @@ public class HandsOn09Logic {
     }
 
     /**
+     * <pre>
      * PagingResultBean<PartOfMember> selectPartOfMember(PartOfMemberPmb pmb)
-     *  指定された ParameterBean で検索して、検索結果を戻す
-     *  引数の値で null は許されない
+     * 指定された ParameterBean で検索して、検索結果を戻す
+     * 引数の値で null は許されない
+     * </pre>
      */
     public PagingResultBean<PartOfMember> selectPartOfMember(PartOfMemberPmb pmb) {
         if (pmb == null) {
@@ -85,9 +103,11 @@ public class HandsOn09Logic {
     //                                                                            ========
 
     /**
+     * <pre>
      * ListResultBean<PurchaseMonthSummary> selectLetsSummary(PurchaseMonthSummaryPmb pmb)
      *  指定された ParameterBean で検索して、検索結果を戻す
      *  引数の値で null は許されない
+     * </pre>
      */
     public ListResultBean<PurchaseMonthSummary> selectLetsSummary(PurchaseMonthSummaryPmb pmb) {
         if (pmb == null) {
@@ -96,10 +116,16 @@ public class HandsOn09Logic {
         return purchaseBhv.outsideSql().selectList(pmb);
     }
 
+    // -----------------------------------------------------
+    //                                                Paging
+    //                                          ------------
+
     /**
+     * <pre>
      * PagingResultBean<PartOfPurchaseMonthSummary> selectPartOfPurchaseMonthSummary(PartOfPurchaseMonthSummaryPmb pmb)
-     *  指定された ParameterBean で検索して、検索結果を戻す
-     *  引数の値で null は許されない
+     * 指定された ParameterBean で検索して、検索結果を戻す
+     * 引数の値で null は許されない
+     * </pre>
      */
     public PagingResultBean<PartOfPurchaseMonthSummary> selectPartOfPurchaseMonthSummary(
             PartOfPurchaseMonthSummaryPmb pmb) {
@@ -109,12 +135,18 @@ public class HandsOn09Logic {
         return purchaseBhv.outsideSql().manualPaging().selectPage(pmb);
     }
 
+    // -----------------------------------------------------
+    //                                                Cursor
+    //                                          ------------
+
     /**
+     * <pre>
      * void selectLetsCursor(PurchaseMonthCursorPmb pmb)
      * 指定された ParameterBean でカーソル検索する
      * 引数の値で null は許されない
      * 平均購入価格の分、その会員のサービスポイント数を足す
      * 足す際、パフォーマンス考慮のために事前selectはせず、updateだけで足す
+     * </pre>
      */
     public void selectLetsCursor(PurchaseMonthCursorPmb pmb) {
         if (pmb == null) {
@@ -131,16 +163,24 @@ public class HandsOn09Logic {
         });
     }
 
+    // -----------------------------------------------------
+    //              Save Memory (Efficiently utilize memory)
+    //                                          ------------
+
     /**
+     * <pre>
      * メモリ対策
+     * outsideSql().configure() メソッドを使って、
+     * StatementConfig の FetchSize に Integer.MIN_VALUE を設定して再実行してみましょう。
+     * </pre>
      */
-    public void selectLetsCursorBonusStage(PurchaseMonthCursorPmb pmb) {
+    public void selectLetsCursorSaveMemory(PurchaseMonthCursorPmb pmb) {
         if (pmb == null) {
             throw new IllegalArgumentException("Invalid pmb");
         }
-        purchaseBhv.outsideSql().cursorHandling().configure(new StatementConfig().fetchSize(Integer.MIN_VALUE))
+        purchaseBhv.outsideSql().configure(new StatementConfig().fetchSize(Integer.MIN_VALUE)).cursorHandling()
                 .selectCursor(pmb, new PurchaseMonthCursorCursorHandler() {
-                    protected Object fetchCursor(PurchaseMonthCursorCursor cursor) throws SQLException {
+                    protected Object fetchCursor(final PurchaseMonthCursorCursor cursor) throws SQLException {
                         while (cursor.next()) {
                             updateMemberServicePointCount(cursor);
                         }
@@ -149,12 +189,64 @@ public class HandsOn09Logic {
                 });
     }
 
+    // -----------------------------------------------------
+    //                                             Write CVS
+    //                                          ------------
+
+    /**
+     * <pre>
+     * CSV出力用(Super Bonus)
+     * 出力項目 会員名称、購入月、合計購入数量
+     * デリミタ文字 カンマ
+     * エンコーディング UTF-8
+     * 改行コード LF
+     * カラムヘッダー 一行目にはカラム名のヘッダー
+     * 出力ファイル [PROJECT_ROOT]/target/hands-on-outside-bonus.csv
+     * CSV出力API FileToken @since DBFlute-1.0.4F (それはもう、じっくりソースを読んで...)
+     * </pre>
+     * @throws IOException
+     * @throws FileNotFoundException
+     */
+    public void selectLetsCursorWriteCSV(final PurchaseMonthCursorPmb pmb) throws FileNotFoundException, IOException {
+        if (pmb == null) {
+            throw new IllegalArgumentException("Invalid pmb");
+        }
+        String filePath = DfResourceUtil.getBuildDir(getClass()).getParent() + "/hands-on-outside-bonus.csv";
+        // For header
+        List<String> columnNameList = new ArrayList<String>();
+        columnNameList.add("MEMBER_NAME");
+        columnNameList.add("PURCHASE_MONTH");
+        columnNameList.add("PURCHASE_COUNT_SUM_MONTH");
+
+        FileToken fileToken = new FileToken();
+        fileToken.make(filePath, new FileMakingCallback() {
+            public void write(final FileMakingRowWriter writer) throws IOException, SQLException {
+                purchaseBhv.outsideSql().cursorHandling().selectCursor(pmb, new PurchaseMonthCursorCursorHandler() {
+                    protected Object fetchCursor(PurchaseMonthCursorCursor cursor) throws SQLException {
+                        while (cursor.next()) {
+                            try {
+                                List<String> columnList = new ArrayList<String>();
+                                columnList.add(cursor.getMemberName());
+                                columnList.add(cursor.getPurchaseMonth().toString());
+                                columnList.add(cursor.getPurchasePriceAverageMonth().toString());
+                                writer.writeRow(columnList);
+                            } catch (IOException e) {
+                                LOG.error("Error occured when writing file : MemberId" + cursor.getMemberId(), e);
+                            }
+                        }
+                        return null;
+                    }
+                });
+            }
+        }, new FileMakingOption().delimitateByComma().encodeAsUTF8().separateByLf().headerInfo(columnNameList));
+    }
+
     // ===================================================================================
-    //                                                                      Private Method
+    //                                                                    Assistant Method
     //                                                                            ========
-    private void updateMemberServicePointCount(PurchaseMonthCursorCursor cursor) throws SQLException {
+    public void updateMemberServicePointCount(PurchaseMonthCursorCursor cursor) throws SQLException {
         // TODO mayuko.sakaba これは事前検索してる。。。
-        Member memberService = memberBhv.selectByPKValueWithDeletedCheck(cursor.getMemberId());
+        MemberService memberService = memberServiceBhv.selectByPKValueWithDeletedCheck(cursor.getMemberId());
 
         MemberService service = new MemberService();
         service.setMemberServiceId(memberService.getMemberId());

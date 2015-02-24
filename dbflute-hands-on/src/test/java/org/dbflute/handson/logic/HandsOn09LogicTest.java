@@ -1,14 +1,21 @@
 package org.dbflute.handson.logic;
 
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.dbflute.handson.dbflute.cbean.MemberCB;
 import org.dbflute.handson.dbflute.cbean.MemberServiceCB;
 import org.dbflute.handson.dbflute.exbhv.MemberBhv;
 import org.dbflute.handson.dbflute.exbhv.MemberServiceBhv;
+import org.dbflute.handson.dbflute.exbhv.cursor.PurchaseMonthCursorCursor;
+import org.dbflute.handson.dbflute.exbhv.cursor.PurchaseMonthCursorCursorHandler;
 import org.dbflute.handson.dbflute.exbhv.pmbean.OutsideMemberPmb;
 import org.dbflute.handson.dbflute.exbhv.pmbean.PartOfMemberPmb;
 import org.dbflute.handson.dbflute.exbhv.pmbean.PartOfPurchaseMonthSummaryPmb;
@@ -24,15 +31,29 @@ import org.dbflute.handson.dbflute.exentity.customize.PurchaseMonthSummary;
 import org.dbflute.handson.dbflute.exentity.customize.SpReturnResultSetNotParamResult1;
 import org.dbflute.handson.dbflute.exentity.customize.SpReturnResultSetNotParamResult2;
 import org.dbflute.handson.unit.UnitContainerTestCase;
+import org.seasar.dbflute.bhv.UpdateOption;
 import org.seasar.dbflute.cbean.ListResultBean;
 import org.seasar.dbflute.cbean.PagingResultBean;
+import org.seasar.dbflute.cbean.SpecifyQuery;
 import org.seasar.dbflute.helper.HandyDate;
+import org.seasar.dbflute.helper.token.file.FileToken;
+import org.seasar.dbflute.helper.token.file.FileTokenizingCallback;
+import org.seasar.dbflute.helper.token.file.FileTokenizingOption;
+import org.seasar.dbflute.helper.token.file.FileTokenizingRowResource;
+import org.seasar.dbflute.jdbc.StatementConfig;
+import org.seasar.dbflute.unit.core.transaction.TransactionPerformer;
+import org.seasar.dbflute.util.DfResourceUtil;
 
 // done wara JavaDoc by jflute
 /**
  * @author mayuko.sakaba
  */
 public class HandsOn09LogicTest extends UnitContainerTestCase {
+
+    // ===================================================================================
+    //                                                                          Definition
+    //                                                                          ==========
+    private static final Log LOG = LogFactory.getLog(HandsOn09LogicTest.class);
 
     // ===================================================================================
     //                                                                           Attribute
@@ -53,8 +74,8 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
     // done 【いれましたー】wara せっかくなので、タグコメント綺麗に入れてみよう by jflute
     // 初めての外だしSQL, 外だしSQLでページングってみる, ...
     /**
-     * test_letsOutside_会員が検索されること()
      * <pre>
+     * test_letsOutside_会員が検索されること()
      * 会員名称が "S" で始まる正式会員 (区分値メソッドを使う) で検索すること
      * 条件値を設定しなかった条件が除去されていることをログで目視確認
      * 会員サービスのサービスポイント数が取得できていることをアサート
@@ -101,10 +122,12 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
     }
 
     /**
+     * <pre>
      * test_letsOutside_条件値なしで全件検索されること()
      * 全ての引数を null にして実行
      * where句が存在しないことをログで目視確認
      * 検索結果が全件であることをアサート
+     * </pre>
      */
     public void test_letsOutside_条件値なしで全件検索されること() throws Exception {
         // ## Arrange ##
@@ -132,6 +155,7 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
     //                                                                            ========
 
     /**
+     * <pre>
      * test_selectPartOfMember_ページング検索されること()
      * 会員名称に "vi" を含む会員を対象に検索
      * ページサイズは 4、ページ番号は 1 で検索すること
@@ -139,6 +163,7 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
      * 検索したカラム全てのデータをログ出力
      * 検索結果がページサイズ以下のデータだけであることをアサート
      * ※実装できたら、テスト実行時の条件として、サービスポイント数が1000以上というのを追加してみましょう。実行してみて特に落ちなければOKです。
+     * </pre>
      */
     public void test_selectPartOfMember_ページング検索されること() throws Exception {
         // ## Arrange ##
@@ -211,9 +236,10 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
         }
     }
 
-    // ===================================================================================
-    //                                                             Outside Purchase Paging
-    //                                                                            ========
+    // -----------------------------------------------------
+    //                               Outside Purchase Paging
+    //                                          ------------
+
     /**
      * お手軽じゃないお手軽チャレンジ
      */
@@ -253,29 +279,47 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
         inject(logic);
 
         // ## Act ##
-        // アサートで比べる用のデータを取得
-        MemberServiceCB beforeCb = new MemberServiceCB();
-        ListResultBean<MemberService> serviceBeforeList = memberServiceBhv.selectList(beforeCb);
+        // Before Change
+        MemberServiceCB cb = new MemberServiceCB();
+        ListResultBean<MemberService> serviceBeforeList = memberServiceBhv.selectList(cb);
 
         PurchaseMonthCursorPmb pmb = new PurchaseMonthCursorPmb();
         pmb.setMemberName_ContainSearch("vi");
         logic.selectLetsCursor(pmb);
+        // After Change
+        ListResultBean<MemberService> serviceAfterList = memberServiceBhv.selectList(cb);
 
         // ## Assert ##
+        // TODO mayuko.sakaba 下とどちらのほうが効率が良いアサートか判断
         boolean pointIncreased = false;
         for (MemberService serviceBefore : serviceBeforeList) {
+            for (MemberService before : serviceBeforeList) {
+                for (MemberService after : serviceAfterList) {
+                    if (before.getMemberServiceId().equals(after.getMemberServiceId())) {
+                        if (after.getServicePointCount() > before.getServicePointCount()) {
+                            log("Before " + before.getMemberServiceId() + "," + before.getServicePointCount()
+                                    + ": After " + after.getMemberServiceId() + "," + after.getServicePointCount());
+                            pointIncreased = true;
+                            break;
+                        }
+                    }
+                }
+                // 思い出
+                //            // After Change
+                //            MemberServiceCB afterCb = new MemberServiceCB();
+                //            afterCb.query().setMemberId_Equal(serviceBefore.getMemberId());
+                //            afterCb.query().setMemberServiceId_Equal(serviceBefore.getMemberServiceId());
+                //
+                //            MemberService serviceAfter = memberServiceBhv.selectEntity(afterCb);
+                //
+                //            log("Before" + serviceBefore.getServicePointCount() + ": After" + serviceAfter.getServicePointCount());
+                //            if (serviceAfter.getServicePointCount() > serviceBefore.getServicePointCount()) {
+                //                pointIncreased = true;
+                //            }
 
-            MemberServiceCB afterCb = new MemberServiceCB();
-            afterCb.query().setMemberId_Equal(serviceBefore.getMemberId());
-            afterCb.query().setMemberServiceId_Equal(serviceBefore.getMemberServiceId());
-
-            MemberService serviceAfter = memberServiceBhv.selectEntity(afterCb);
-
-            if (serviceAfter.getServicePointCount() > serviceBefore.getServicePointCount()) {
-                pointIncreased = true;
             }
+            assertTrue(pointIncreased);
         }
-        assertTrue(pointIncreased);
     }
 
     // -----------------------------------------------------
@@ -283,40 +327,147 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
     //                                          ------------
     /**
      * <pre>
+     *  メモリ対策
      *  outsideSql().configure() メソッドを使って、
      *  StatementConfig の FetchSize に Integer.MIN_VALUE を設定して再実行してみましょう。
      * </pre>
      */
     public void test_selectLetsCursor_メモリ対策() throws Exception {
         // ## Arrange ##
-        HandsOn09Logic logic = new HandsOn09Logic();
+        final HandsOn09Logic logic = new HandsOn09Logic() {
+            public void selectLetsCursorSaveMemory(PurchaseMonthCursorPmb pmb) {
+                purchaseBhv.outsideSql().configure(new StatementConfig().fetchSize(Integer.MIN_VALUE)).cursorHandling()
+                        .selectCursor(pmb, new PurchaseMonthCursorCursorHandler() {
+                            protected Object fetchCursor(final PurchaseMonthCursorCursor cursor) throws SQLException {
+                                while (cursor.next()) {
+                                    performNewTransaction(new TransactionPerformer() {
+                                        public boolean perform() throws SQLException {
+                                            // TODO mayuko.sakaba (ちょっと保留）
+                                            // logic.updateMemberServicePointFromSummery(cursor.getMemberId(),
+                                            // priceAverageMonth);
+                                            MemberService memberService = memberServiceBhv
+                                                    .selectByPKValueWithDeletedCheck(cursor.getMemberId());
+
+                                            MemberService service = new MemberService();
+                                            service.setMemberServiceId(memberService.getMemberId());
+                                            service.setMemberId(cursor.getMemberId());
+
+                                            UpdateOption<MemberServiceCB> option = new UpdateOption<MemberServiceCB>();
+                                            option.self(new SpecifyQuery<MemberServiceCB>() {
+                                                public void specify(final MemberServiceCB spCB) {
+                                                    spCB.specify().columnServicePointCount();
+                                                }
+                                            }).plus(cursor.getPurchasePriceAverageMonth());
+                                            memberServiceBhv.varyingUpdateNonstrict(service, option);
+                                            return true;
+                                        }
+                                    });
+                                }
+                                return null;
+                            }
+                        });
+            }
+        };
+
         inject(logic);
+        // ここ？
+        adjustTransactionIsolationLevel_ReadCommitted();
 
         // ## Act ##
-        // アサートで比べる用のデータを取得
-        MemberServiceCB beforeCb = new MemberServiceCB();
-        ListResultBean<MemberService> serviceBeforeList = memberServiceBhv.selectList(beforeCb);
+        // Before Change
+        MemberServiceCB cb = new MemberServiceCB();
+        ListResultBean<MemberService> serviceBeforeList = memberServiceBhv.selectList(cb);
 
         PurchaseMonthCursorPmb pmb = new PurchaseMonthCursorPmb();
         pmb.setMemberName_ContainSearch("vi");
-        logic.selectLetsCursorBonusStage(pmb);
+        logic.selectLetsCursorSaveMemory(pmb);
+        // After Change
+        ListResultBean<MemberService> serviceAfterList = memberServiceBhv.selectList(cb);
 
         // ## Assert ##
         boolean pointIncreased = false;
-        for (MemberService serviceBefore : serviceBeforeList) {
-
-            MemberServiceCB afterCb = new MemberServiceCB();
-            afterCb.query().setMemberId_Equal(serviceBefore.getMemberId());
-            afterCb.query().setMemberServiceId_Equal(serviceBefore.getMemberServiceId());
-
-            MemberService serviceAfter = memberServiceBhv.selectEntity(afterCb);
-
-            if (serviceAfter.getServicePointCount() > serviceBefore.getServicePointCount()) {
-                pointIncreased = true;
+        for (MemberService before : serviceBeforeList) {
+            for (MemberService after : serviceAfterList) {
+                if (before.getMemberServiceId().equals(after.getMemberServiceId())) {
+                    if (after.getServicePointCount() > before.getServicePointCount()) {
+                        log("Before " + before.getMemberServiceId() + "," + before.getServicePointCount() + ": After "
+                                + after.getMemberServiceId() + "," + after.getServicePointCount());
+                        pointIncreased = true;
+                        break;
+                    }
+                }
             }
         }
         assertTrue(pointIncreased);
     }
+
+    // -----------------------------------------------------
+    //                                     Super Bonus Stage
+    //                                          ------------
+    public void test_selectLetsCursor_CSV() throws Exception {
+        // ## Arrange ##
+        final HandsOn09Logic logic = new HandsOn09Logic() {
+            public void selectLetsCursorSaveMemory(PurchaseMonthCursorPmb pmb) {
+                purchaseBhv.outsideSql().configure(new StatementConfig().fetchSize(Integer.MIN_VALUE)).cursorHandling()
+                        .selectCursor(pmb, new PurchaseMonthCursorCursorHandler() {
+                            protected Object fetchCursor(final PurchaseMonthCursorCursor cursor) throws SQLException {
+                                while (cursor.next()) {
+                                    performNewTransaction(new TransactionPerformer() {
+                                        public boolean perform() throws SQLException {
+                                            // TODO mayuko.sakaba (ちょっと保留）
+                                            // logic.updateMemberServicePointFromSummery(cursor.getMemberId(),
+                                            // priceAverageMonth);
+                                            MemberService memberService = memberServiceBhv
+                                                    .selectByPKValueWithDeletedCheck(cursor.getMemberId());
+
+                                            MemberService service = new MemberService();
+                                            service.setMemberServiceId(memberService.getMemberId());
+                                            service.setMemberId(cursor.getMemberId());
+
+                                            UpdateOption<MemberServiceCB> option = new UpdateOption<MemberServiceCB>();
+                                            option.self(new SpecifyQuery<MemberServiceCB>() {
+                                                public void specify(final MemberServiceCB spCB) {
+                                                    spCB.specify().columnServicePointCount();
+                                                }
+                                            }).plus(cursor.getPurchasePriceAverageMonth());
+                                            memberServiceBhv.varyingUpdateNonstrict(service, option);
+                                            return true;
+                                        }
+                                    });
+                                }
+                                return null;
+                            }
+                        });
+            }
+        };
+        inject(logic);
+        adjustTransactionIsolationLevel_ReadCommitted();
+
+        // ## Act ##
+        PurchaseMonthCursorPmb pmb = new PurchaseMonthCursorPmb();
+        pmb.setMemberName_ContainSearch("vi");
+        logic.selectLetsCursorWriteCSV(pmb);
+
+        // ## Assert ##
+        final ArrayList<String> dataList = new ArrayList<String>();
+
+        String filePath = DfResourceUtil.getBuildDir(getClass()).getParent() + "/hands-on-outside-bonus.csv";
+        FileToken fileToken = new FileToken();
+        // 違った。。。
+        //        fileToken.notifyAll();
+        fileToken.tokenize(filePath, new FileTokenizingCallback() {
+            public void handleRow(FileTokenizingRowResource resource) throws IOException, SQLException {
+                String data = resource.getRowString();
+                dataList.add(data);
+                LOG.info(data);
+            }
+        }, new FileTokenizingOption().delimitateByComma().encodeAsUTF8().beginFirstLine());
+        assertHasAnyElement(dataList);
+    }
+
+    // -----------------------------------------------------
+    //                                   Miracle Bonus Stage
+    //                                          ------------
 
     // ===================================================================================
     //                                                                       ストアドプロシージャ
