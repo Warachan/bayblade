@@ -335,56 +335,71 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
     public void test_selectLetsCursor_メモリ対策() throws Exception {
         // ## Arrange ##
         final HandsOn09Logic logic = new HandsOn09Logic() {
-            public void selectLetsCursorSaveMemory(PurchaseMonthCursorPmb pmb) {
-                purchaseBhv.outsideSql().configure(new StatementConfig().fetchSize(Integer.MIN_VALUE)).cursorHandling()
-                        .selectCursor(pmb, new PurchaseMonthCursorCursorHandler() {
-                            protected Object fetchCursor(final PurchaseMonthCursorCursor cursor) throws SQLException {
-                                while (cursor.next()) {
-                                    performNewTransaction(new TransactionPerformer() {
-                                        public boolean perform() throws SQLException {
-                                            // TODO mayuko.sakaba (ちょっと保留）
-                                            // logic.updateMemberServicePointFromSummery(cursor.getMemberId(),
-                                            // priceAverageMonth);
-                                            MemberService memberService = memberServiceBhv
-                                                    .selectByPKValueWithDeletedCheck(cursor.getMemberId());
+            @Override
+            public void updateMemberServicePointCount(final PurchaseMonthCursorCursor cursor) throws SQLException {
+                performNewTransaction(new TransactionPerformer() {
+                    public boolean perform() throws SQLException {
+                        callSuperUpdate(cursor);
+                        return true;
+                    }
+                });
+            }
 
-                                            MemberService service = new MemberService();
-                                            service.setMemberServiceId(memberService.getMemberId());
-                                            service.setMemberId(cursor.getMemberId());
-
-                                            UpdateOption<MemberServiceCB> option = new UpdateOption<MemberServiceCB>();
-                                            option.self(new SpecifyQuery<MemberServiceCB>() {
-                                                public void specify(final MemberServiceCB spCB) {
-                                                    spCB.specify().columnServicePointCount();
-                                                }
-                                            }).plus(cursor.getPurchasePriceAverageMonth());
-                                            memberServiceBhv.varyingUpdateNonstrict(service, option);
-                                            return true;
-                                        }
-                                    });
-                                }
-                                return null;
-                            }
-                        });
+            private void callSuperUpdate(final PurchaseMonthCursorCursor cursor) throws SQLException {
+                super.updateMemberServicePointCount(cursor);
             }
         };
+        // わらおもいで
+        //final HandsOn09Logic logic = new HandsOn09Logic() {
+        //    public void selectLetsCursorSaveMemory(PurchaseMonthCursorPmb pmb) {
+        //        purchaseBhv.outsideSql().configure(new StatementConfig().fetchSize(Integer.MIN_VALUE)).cursorHandling()
+        //                .selectCursor(pmb, new PurchaseMonthCursorCursorHandler() {
+        //                    protected Object fetchCursor(final PurchaseMonthCursorCursor cursor) throws SQLException {
+        //                        while (cursor.next()) {
+        //                            performNewTransaction(new TransactionPerformer() {
+        //                                public boolean perform() throws SQLException {
+        //                                    // TODO mayuko.sakaba (ちょっと保留）
+        //                                    // logic.updateMemberServicePointFromSummery(cursor.getMemberId(),
+        //                                    // priceAverageMonth);
+        //                                    MemberService memberService = memberServiceBhv
+        //                                            .selectByPKValueWithDeletedCheck(cursor.getMemberId());
+        //
+        //                                    MemberService service = new MemberService();
+        //                                    service.setMemberServiceId(memberService.getMemberId());
+        //                                    service.setMemberId(cursor.getMemberId());
+        //
+        //                                    UpdateOption<MemberServiceCB> option = new UpdateOption<MemberServiceCB>();
+        //                                    option.self(new SpecifyQuery<MemberServiceCB>() {
+        //                                        public void specify(final MemberServiceCB spCB) {
+        //                                            spCB.specify().columnServicePointCount();
+        //                                        }
+        //                                    }).plus(cursor.getPurchasePriceAverageMonth());
+        //                                    memberServiceBhv.varyingUpdateNonstrict(service, option);
+        //                                    return true;
+        //                                }
+        //                            });
+        //                        }
+        //                        return null;
+        //                    }
+        //                });
+        //    }
+        //};
 
         inject(logic);
-        // ここ？
+        // ここ？ => うん♥
         adjustTransactionIsolationLevel_ReadCommitted();
-
-        // ## Act ##
         // Before Change
         MemberServiceCB cb = new MemberServiceCB();
         ListResultBean<MemberService> serviceBeforeList = memberServiceBhv.selectList(cb);
 
+        // ## Act ##
         PurchaseMonthCursorPmb pmb = new PurchaseMonthCursorPmb();
         pmb.setMemberName_ContainSearch("vi");
         logic.selectLetsCursorSaveMemory(pmb);
-        // After Change
-        ListResultBean<MemberService> serviceAfterList = memberServiceBhv.selectList(cb);
 
         // ## Assert ##
+        // After Change
+        ListResultBean<MemberService> serviceAfterList = memberServiceBhv.selectList(cb);
         boolean pointIncreased = false;
         for (MemberService before : serviceBeforeList) {
             for (MemberService after : serviceAfterList) {

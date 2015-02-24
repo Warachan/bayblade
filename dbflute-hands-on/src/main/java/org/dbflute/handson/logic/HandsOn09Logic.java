@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -64,7 +66,7 @@ public class HandsOn09Logic {
     @Resource
     protected MemberServiceBhv memberServiceBhv;
 
-    // TODO wara せっかくなので、タグコメント綺麗に入れてみよう by jflute
+    // done wara せっかくなので、タグコメント綺麗に入れてみよう by jflute
     // 初めての外だしSQL, 外だしSQLでページングってみる, ...
     // ===================================================================================
     //                                                                     Outside Member
@@ -244,8 +246,10 @@ public class HandsOn09Logic {
     // ===================================================================================
     //                                                                    Assistant Method
     //                                                                            ========
+    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     public void updateMemberServicePointCount(PurchaseMonthCursorCursor cursor) throws SQLException {
         // TODO mayuko.sakaba これは事前検索してる。。。
+        // wara e.g service.uniqueBy(cursor.getMemberId()); でどうだい？ by jflute
         MemberService memberService = memberServiceBhv.selectByPKValueWithDeletedCheck(cursor.getMemberId());
 
         MemberService service = new MemberService();
@@ -261,6 +265,9 @@ public class HandsOn09Logic {
         memberServiceBhv.varyingUpdateNonstrict(service, option);
     }
 
+    // ===================================================================================
+    //                                                                           Procedure
+    //                                                                           =========
     /**
      * 指定された ParameterBean で SP_IN_OUT_PARAMETER を call
      */
