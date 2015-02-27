@@ -220,6 +220,7 @@ public class HandsOn09Logic {
         columnNameList.add("PURCHASE_MONTH");
         columnNameList.add("PURCHASE_COUNT_SUM_MONTH");
 
+        // TODO wara fetchCursor()だけでメソッド化してみよう (ctrl+1でメソッド抽出) by jflute 
         FileToken fileToken = new FileToken();
         fileToken.make(filePath, new FileMakingCallback() {
             public void write(final FileMakingRowWriter writer) throws IOException, SQLException {
@@ -233,6 +234,8 @@ public class HandsOn09Logic {
                                 columnList.add(cursor.getPurchasePriceAverageMonth().toString());
                                 writer.writeRow(columnList);
                             } catch (IOException e) {
+                                // TODO wara 翻訳してthrowしちゃってOK by jflute
+                                //  e.g. throw new IllegalStateException("Failed to write the row: path=" + filePath, e);
                                 LOG.error("Error occured when writing file : MemberId" + cursor.getMemberId(), e);
                             }
                         }
@@ -248,7 +251,7 @@ public class HandsOn09Logic {
     //                                                                            ========
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     public void updateMemberServicePointCount(PurchaseMonthCursorCursor cursor) throws SQLException {
-        // TODO 【直しました。】mayuko.sakaba これは事前検索してる。。。
+        // 【直しました。】mayuko.sakaba これは事前検索してる。。。
         // wara e.g service.uniqueBy(cursor.getMemberId()); でどうだい？ by jflute
 
         MemberService service = new MemberService();
