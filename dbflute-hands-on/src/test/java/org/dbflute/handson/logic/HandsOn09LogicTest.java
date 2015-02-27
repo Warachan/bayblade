@@ -503,7 +503,7 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
                             assertHasAnyElement(statusList);
                             writeData(writer, entity);
                         } catch (IOException e) {
-                            // TODO wara 翻訳してthrowしちゃってOK by jflute
+                            // TODO 【翻訳下した】wara 翻訳してthrowしちゃってOK by jflute
                             throw new IllegalStateException("Failed to write the row: path=" + filePath, e);
                         }
                     }
@@ -527,7 +527,7 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
                     }
 
                     private void writeData(final FileMakingRowWriter writer, Member entity) throws IOException {
-                        // TODO wara Listで受け取る by jflute
+                        // TODO 【List!】wara Listで受け取る by jflute
                         List<String> columnList = new ArrayList<String>();
                         columnList.add(entity.getMemberName());
                         if (entity.getBirthdate() != null) {
@@ -543,7 +543,7 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
             }
         }, new FileMakingOption().delimitateByTab().encodeAsUTF8().separateByLf());
 
-        // TODO wara Listで受け取る by jflute
+        // TODO wara 【List!】Listで受け取る by jflute
         final List<String> dataList = new ArrayList<String>();
         fileToken.tokenize(filePath, new FileTokenizingCallback() {
             public void handleRow(FileTokenizingRowResource resource) throws IOException, SQLException {
