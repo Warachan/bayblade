@@ -213,37 +213,42 @@ public class HandsOn09Logic {
         if (pmb == null) {
             throw new IllegalArgumentException("Invalid pmb");
         }
-        String filePath = DfResourceUtil.getBuildDir(getClass()).getParent() + "/hands-on-outside-bonus.csv";
+        final String filePath = DfResourceUtil.getBuildDir(getClass()).getParent() + "/hands-on-outside-bonus.csv";
         // For header
         List<String> columnNameList = new ArrayList<String>();
         columnNameList.add("MEMBER_NAME");
         columnNameList.add("PURCHASE_MONTH");
         columnNameList.add("PURCHASE_COUNT_SUM_MONTH");
 
-        // TODO wara fetchCursor()だけでメソッド化してみよう (ctrl+1でメソッド抽出) by jflute 
+        // TODO wara fetchCursor()だけでメソッド化してみよう (ctrl+1でメソッド抽出) by jflute
         FileToken fileToken = new FileToken();
         fileToken.make(filePath, new FileMakingCallback() {
             public void write(final FileMakingRowWriter writer) throws IOException, SQLException {
-                purchaseBhv.outsideSql().cursorHandling().selectCursor(pmb, new PurchaseMonthCursorCursorHandler() {
-                    protected Object fetchCursor(PurchaseMonthCursorCursor cursor) throws SQLException {
-                        while (cursor.next()) {
-                            try {
-                                List<String> columnList = new ArrayList<String>();
-                                columnList.add(cursor.getMemberName());
-                                columnList.add(cursor.getPurchaseMonth().toString());
-                                columnList.add(cursor.getPurchasePriceAverageMonth().toString());
-                                writer.writeRow(columnList);
-                            } catch (IOException e) {
-                                // TODO wara 翻訳してthrowしちゃってOK by jflute
-                                //  e.g. throw new IllegalStateException("Failed to write the row: path=" + filePath, e);
-                                LOG.error("Error occured when writing file : MemberId" + cursor.getMemberId(), e);
-                            }
-                        }
-                        return null;
-                    }
-                });
+                fetchCursor(pmb, filePath, writer);
             }
+
         }, new FileMakingOption().delimitateByComma().encodeAsUTF8().separateByLf().headerInfo(columnNameList));
+    }
+
+    private void fetchCursor(final PurchaseMonthCursorPmb pmb, final String filePath, final FileMakingRowWriter writer) {
+        purchaseBhv.outsideSql().cursorHandling().selectCursor(pmb, new PurchaseMonthCursorCursorHandler() {
+            protected Object fetchCursor(PurchaseMonthCursorCursor cursor) throws SQLException {
+                while (cursor.next()) {
+                    try {
+                        List<String> columnList = new ArrayList<String>();
+                        columnList.add(cursor.getMemberName());
+                        columnList.add(cursor.getPurchaseMonth().toString());
+                        columnList.add(cursor.getPurchasePriceAverageMonth().toString());
+                        writer.writeRow(columnList);
+                    } catch (IOException e) {
+                        // TODO wara 翻訳してthrowしちゃってOK by jflute
+                        //  e.g. throw new IllegalStateException("Failed to write the row: path=" + filePath, e);
+                        throw new IllegalStateException("Failed to write the row: path=" + filePath, e);
+                    }
+                }
+                return null;
+            }
+        });
     }
 
     // ===================================================================================

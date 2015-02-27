@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -45,9 +46,9 @@ import org.seasar.dbflute.helper.token.file.FileTokenizingCallback;
 import org.seasar.dbflute.helper.token.file.FileTokenizingOption;
 import org.seasar.dbflute.helper.token.file.FileTokenizingRowResource;
 import org.seasar.dbflute.infra.dfprop.DfPropFile;
+import org.seasar.dbflute.infra.manage.refresh.DfRefreshResourceRequest;
 import org.seasar.dbflute.unit.core.transaction.TransactionPerformer;
 import org.seasar.dbflute.util.DfResourceUtil;
-import org.seasar.framework.util.InputStreamUtil;
 
 // done wara JavaDoc by jflute
 /**
@@ -449,6 +450,7 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
         final ArrayList<String> dataList = new ArrayList<String>();
 
         String filePath = DfResourceUtil.getBuildDir(getClass()).getParent() + "/hands-on-outside-bonus.csv";
+        LOG.info(filePath);
         FileToken fileToken = new FileToken();
         // 違った。。。
         //        fileToken.notifyAll();
@@ -486,7 +488,7 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
         cb.query().queryMemberStatus().addOrderBy_DisplayOrder_Asc();
         cb.query().addOrderBy_MemberId_Desc();
 
-        String filePath = DfResourceUtil.getBuildDir(getClass()).getParent() + "/hands-on-cb-bonus.tsv";
+        final String filePath = DfResourceUtil.getBuildDir(getClass()).getParent() + "/hands-on-cb-bonus.tsv";
         // アサート用
         final List<String> statusList = new ArrayList<String>();
 
@@ -502,8 +504,7 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
                             writeData(writer, entity);
                         } catch (IOException e) {
                             // TODO wara 翻訳してthrowしちゃってOK by jflute
-                            e.printStackTrace();
-                            LOG.error("Error occured when writing file : MemberId" + entity.getMemberId(), e);
+                            throw new IllegalStateException("Failed to write the row: path=" + filePath, e);
                         }
                     }
 
@@ -527,7 +528,7 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
 
                     private void writeData(final FileMakingRowWriter writer, Member entity) throws IOException {
                         // TODO wara Listで受け取る by jflute
-                        ArrayList<String> columnList = new ArrayList<String>();
+                        List<String> columnList = new ArrayList<String>();
                         columnList.add(entity.getMemberName());
                         if (entity.getBirthdate() != null) {
                             columnList.add(entity.getBirthdate().toString());
@@ -543,7 +544,7 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
         }, new FileMakingOption().delimitateByTab().encodeAsUTF8().separateByLf());
 
         // TODO wara Listで受け取る by jflute
-        final ArrayList<String> dataList = new ArrayList<String>();
+        final List<String> dataList = new ArrayList<String>();
         fileToken.tokenize(filePath, new FileTokenizingCallback() {
             public void handleRow(FileTokenizingRowResource resource) throws IOException, SQLException {
                 String data = resource.getRowString();
@@ -552,11 +553,22 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
             }
         }, new FileTokenizingOption().delimitateByComma().encodeAsUTF8().beginFirstLine());
         assertHasAnyElement(dataList);
+        refreshResources();
+    }
 
-        DfPropFile dfPropFile = new DfPropFile();
-        InputStreamUtil inputStreamUtil = new InputStreamUtil();
-        //        new DfRefreshResourceRequest(projectNameList, requestUrl)
-        // TODO mayuko.sakaba まだミラクルが起こせていない。。。
+    private void refreshResources() throws IOException {
+        String refreshFilePath = DfResourceUtil.getBuildDir(getClass()).getParentFile().getParentFile()
+                + "/dbflute_exampledb/dfprop/refreshDefinitionMap.dfprop";
+        Map<String, String> refreshDefinitionMap = new DfPropFile().readMapAsStringValue(refreshFilePath, null);
+
+        ArrayList<String> projectNameList = new ArrayList<String>();
+        String projectName = refreshDefinitionMap.get("projectName");
+        String requestUrl = refreshDefinitionMap.get("requestUrl");
+        projectNameList.add(projectName);
+        LOG.info(projectName + requestUrl + refreshFilePath);
+
+        DfRefreshResourceRequest refreshRequest = new DfRefreshResourceRequest(projectNameList, requestUrl);
+        refreshRequest.refreshResources();
     }
 
     // ===================================================================================
