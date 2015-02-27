@@ -1,5 +1,6 @@
 package org.dbflute.handson.logic;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -15,7 +16,6 @@ import org.dbflute.handson.dbflute.cbean.MemberServiceCB;
 import org.dbflute.handson.dbflute.exbhv.MemberBhv;
 import org.dbflute.handson.dbflute.exbhv.MemberServiceBhv;
 import org.dbflute.handson.dbflute.exbhv.cursor.PurchaseMonthCursorCursor;
-import org.dbflute.handson.dbflute.exbhv.cursor.PurchaseMonthCursorCursorHandler;
 import org.dbflute.handson.dbflute.exbhv.pmbean.OutsideMemberPmb;
 import org.dbflute.handson.dbflute.exbhv.pmbean.PartOfMemberPmb;
 import org.dbflute.handson.dbflute.exbhv.pmbean.PartOfPurchaseMonthSummaryPmb;
@@ -23,7 +23,9 @@ import org.dbflute.handson.dbflute.exbhv.pmbean.PurchaseMonthCursorPmb;
 import org.dbflute.handson.dbflute.exbhv.pmbean.PurchaseMonthSummaryPmb;
 import org.dbflute.handson.dbflute.exbhv.pmbean.SpInOutParameterPmb;
 import org.dbflute.handson.dbflute.exbhv.pmbean.SpReturnResultSetPmb;
+import org.dbflute.handson.dbflute.exentity.Member;
 import org.dbflute.handson.dbflute.exentity.MemberService;
+import org.dbflute.handson.dbflute.exentity.MemberStatus;
 import org.dbflute.handson.dbflute.exentity.customize.OutsideMember;
 import org.dbflute.handson.dbflute.exentity.customize.PartOfMember;
 import org.dbflute.handson.dbflute.exentity.customize.PartOfPurchaseMonthSummary;
@@ -31,18 +33,21 @@ import org.dbflute.handson.dbflute.exentity.customize.PurchaseMonthSummary;
 import org.dbflute.handson.dbflute.exentity.customize.SpReturnResultSetNotParamResult1;
 import org.dbflute.handson.dbflute.exentity.customize.SpReturnResultSetNotParamResult2;
 import org.dbflute.handson.unit.UnitContainerTestCase;
-import org.seasar.dbflute.bhv.UpdateOption;
+import org.seasar.dbflute.cbean.EntityRowHandler;
 import org.seasar.dbflute.cbean.ListResultBean;
 import org.seasar.dbflute.cbean.PagingResultBean;
-import org.seasar.dbflute.cbean.SpecifyQuery;
 import org.seasar.dbflute.helper.HandyDate;
+import org.seasar.dbflute.helper.token.file.FileMakingCallback;
+import org.seasar.dbflute.helper.token.file.FileMakingOption;
+import org.seasar.dbflute.helper.token.file.FileMakingRowWriter;
 import org.seasar.dbflute.helper.token.file.FileToken;
 import org.seasar.dbflute.helper.token.file.FileTokenizingCallback;
 import org.seasar.dbflute.helper.token.file.FileTokenizingOption;
 import org.seasar.dbflute.helper.token.file.FileTokenizingRowResource;
-import org.seasar.dbflute.jdbc.StatementConfig;
+import org.seasar.dbflute.infra.dfprop.DfPropFile;
 import org.seasar.dbflute.unit.core.transaction.TransactionPerformer;
 import org.seasar.dbflute.util.DfResourceUtil;
+import org.seasar.framework.util.InputStreamUtil;
 
 // done wara JavaDoc by jflute
 /**
@@ -290,36 +295,33 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
         ListResultBean<MemberService> serviceAfterList = memberServiceBhv.selectList(cb);
 
         // ## Assert ##
-        // TODO mayuko.sakaba 下とどちらのほうが効率が良いアサートか判断
         boolean pointIncreased = false;
-        for (MemberService serviceBefore : serviceBeforeList) {
-            for (MemberService before : serviceBeforeList) {
-                for (MemberService after : serviceAfterList) {
-                    if (before.getMemberServiceId().equals(after.getMemberServiceId())) {
-                        if (after.getServicePointCount() > before.getServicePointCount()) {
-                            log("Before " + before.getMemberServiceId() + "," + before.getServicePointCount()
-                                    + ": After " + after.getMemberServiceId() + "," + after.getServicePointCount());
-                            pointIncreased = true;
-                            break;
-                        }
+        for (MemberService before : serviceBeforeList) {
+            for (MemberService after : serviceAfterList) {
+                if (before.getMemberServiceId().equals(after.getMemberServiceId())) {
+                    if (after.getServicePointCount() > before.getServicePointCount()) {
+                        log("Before " + before.getMemberServiceId() + "," + before.getServicePointCount() + ": After "
+                                + after.getMemberServiceId() + "," + after.getServicePointCount());
+                        pointIncreased = true;
+                        break;
                     }
                 }
-                // 思い出
-                //            // After Change
-                //            MemberServiceCB afterCb = new MemberServiceCB();
-                //            afterCb.query().setMemberId_Equal(serviceBefore.getMemberId());
-                //            afterCb.query().setMemberServiceId_Equal(serviceBefore.getMemberServiceId());
-                //
-                //            MemberService serviceAfter = memberServiceBhv.selectEntity(afterCb);
-                //
-                //            log("Before" + serviceBefore.getServicePointCount() + ": After" + serviceAfter.getServicePointCount());
-                //            if (serviceAfter.getServicePointCount() > serviceBefore.getServicePointCount()) {
-                //                pointIncreased = true;
-                //            }
-
             }
-            assertTrue(pointIncreased);
+            // 思い出
+            //            // After Change
+            //            MemberServiceCB afterCb = new MemberServiceCB();
+            //            afterCb.query().setMemberId_Equal(serviceBefore.getMemberId());
+            //            afterCb.query().setMemberServiceId_Equal(serviceBefore.getMemberServiceId());
+            //
+            //            MemberService serviceAfter = memberServiceBhv.selectEntity(afterCb);
+            //
+            //            log("Before" + serviceBefore.getServicePointCount() + ": After" + serviceAfter.getServicePointCount());
+            //            if (serviceAfter.getServicePointCount() > serviceBefore.getServicePointCount()) {
+            //                pointIncreased = true;
+            //            }
+
         }
+        assertTrue(pointIncreased);
     }
 
     // -----------------------------------------------------
@@ -358,7 +360,6 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
         //                        while (cursor.next()) {
         //                            performNewTransaction(new TransactionPerformer() {
         //                                public boolean perform() throws SQLException {
-        //                                    // TODO mayuko.sakaba (ちょっと保留）
         //                                    // logic.updateMemberServicePointFromSummery(cursor.getMemberId(),
         //                                    // priceAverageMonth);
         //                                    MemberService memberService = memberServiceBhv
@@ -422,37 +423,18 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
     public void test_selectLetsCursor_CSV() throws Exception {
         // ## Arrange ##
         final HandsOn09Logic logic = new HandsOn09Logic() {
-            public void selectLetsCursorSaveMemory(PurchaseMonthCursorPmb pmb) {
-                purchaseBhv.outsideSql().configure(new StatementConfig().fetchSize(Integer.MIN_VALUE)).cursorHandling()
-                        .selectCursor(pmb, new PurchaseMonthCursorCursorHandler() {
-                            protected Object fetchCursor(final PurchaseMonthCursorCursor cursor) throws SQLException {
-                                while (cursor.next()) {
-                                    performNewTransaction(new TransactionPerformer() {
-                                        public boolean perform() throws SQLException {
-                                            // TODO mayuko.sakaba (ちょっと保留）
-                                            // logic.updateMemberServicePointFromSummery(cursor.getMemberId(),
-                                            // priceAverageMonth);
-                                            MemberService memberService = memberServiceBhv
-                                                    .selectByPKValueWithDeletedCheck(cursor.getMemberId());
+            @Override
+            public void updateMemberServicePointCount(final PurchaseMonthCursorCursor cursor) throws SQLException {
+                performNewTransaction(new TransactionPerformer() {
+                    public boolean perform() throws SQLException {
+                        callSuperUpdate(cursor);
+                        return true;
+                    }
+                });
+            }
 
-                                            MemberService service = new MemberService();
-                                            service.setMemberServiceId(memberService.getMemberId());
-                                            service.setMemberId(cursor.getMemberId());
-
-                                            UpdateOption<MemberServiceCB> option = new UpdateOption<MemberServiceCB>();
-                                            option.self(new SpecifyQuery<MemberServiceCB>() {
-                                                public void specify(final MemberServiceCB spCB) {
-                                                    spCB.specify().columnServicePointCount();
-                                                }
-                                            }).plus(cursor.getPurchasePriceAverageMonth());
-                                            memberServiceBhv.varyingUpdateNonstrict(service, option);
-                                            return true;
-                                        }
-                                    });
-                                }
-                                return null;
-                            }
-                        });
+            private void callSuperUpdate(final PurchaseMonthCursorCursor cursor) throws SQLException {
+                super.updateMemberServicePointCount(cursor);
             }
         };
         inject(logic);
@@ -483,6 +465,96 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
     // -----------------------------------------------------
     //                                   Miracle Bonus Stage
     //                                          ------------
+    /**
+     * <pre>
+     * 出力項目 会員名称、生年月日(yyyy/MM/dd)、正式会員日時(yyyy/MM/dd HH:mm:ss)
+     * デリミタ文字  タブ
+     * エンコーディング UTF-8
+     * 改行コード LF
+     * カラムヘッダー なし
+     * 出力ファイル [PROJECT_ROOT]/target/hands-on-cb-bonus.tsv
+     * TSV出力API FileToken @since DBFlute-1.0.4F
+     * </pre>
+     * @param cursor
+     * @throws FileNotFoundException
+     * @throws SQLException
+     */
+    public void test_selectLetsCursorWriteSec3() throws FileNotFoundException, IOException {
+        // ## Arrange ##
+        final MemberCB cb = new MemberCB();
+        cb.setupSelect_MemberStatus();
+        cb.query().queryMemberStatus().addOrderBy_DisplayOrder_Asc();
+        cb.query().addOrderBy_MemberId_Desc();
+
+        String filePath = DfResourceUtil.getBuildDir(getClass()).getParent() + "/hands-on-cb-bonus.tsv";
+        // アサート用
+        final List<String> statusList = new ArrayList<String>();
+
+        // ## Act ##
+        FileToken fileToken = new FileToken();
+        fileToken.make(filePath, new FileMakingCallback() {
+            public void write(final FileMakingRowWriter writer) throws IOException, SQLException {
+                memberBhv.selectCursor(cb, new EntityRowHandler<Member>() {
+                    public void handle(Member entity) {
+                        try {
+                            assertionForSec3(statusList, entity);
+                            assertHasAnyElement(statusList);
+                            writeData(writer, entity);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            LOG.error("Error occured when writing file : MemberId" + entity.getMemberId(), e);
+                        }
+                    }
+
+                    private void assertionForSec3(final List<String> statusList, Member entity) throws IOException {
+                        // ## Assert ##
+                        assertNotNull(entity);
+                        MemberStatus status = entity.getMemberStatus();
+                        LOG.info("*********" + status);
+                        assertNotNull(status);
+                        String currentStatus = status.getMemberStatusCode();
+
+                        if (!statusList.isEmpty()) {
+                            log(statusList.size());
+                            String lastStatus = statusList.get(statusList.size() - 1);
+                            if (!lastStatus.equals(currentStatus)) { // 違ったら
+                                assertFalse(statusList.contains(currentStatus));
+                            }
+                        }
+                        statusList.add(currentStatus);
+                    }
+
+                    private void writeData(final FileMakingRowWriter writer, Member entity) throws IOException {
+                        ArrayList<String> columnList = new ArrayList<String>();
+                        columnList.add(entity.getMemberName());
+                        if (entity.getBirthdate() != null) {
+                            columnList.add(entity.getBirthdate().toString());
+                        }
+                        if (entity.getFormalizedDatetime() != null) {
+                            columnList.add(entity.getFormalizedDatetime().toString());
+                        }
+
+                        writer.writeRow(columnList);
+                    }
+                });
+            }
+        }, new FileMakingOption().delimitateByTab().encodeAsUTF8().separateByLf());
+
+        final ArrayList<String> dataList = new ArrayList<String>();
+        fileToken.tokenize(filePath, new FileTokenizingCallback() {
+            public void handleRow(FileTokenizingRowResource resource) throws IOException, SQLException {
+                String data = resource.getRowString();
+                dataList.add(data);
+                LOG.info(data);
+            }
+        }, new FileTokenizingOption().delimitateByComma().encodeAsUTF8().beginFirstLine());
+        assertHasAnyElement(dataList);
+
+        DfPropFile dfPropFile = new DfPropFile();
+        InputStreamUtil inputStreamUtil = new InputStreamUtil();
+        //        new DfRefreshResourceRequest(projectNameList, requestUrl)
+        // TODO mayuko.sakaba まだミラクルが起こせていない。。。
+    }
 
     // ===================================================================================
     //                                                                       ストアドプロシージャ

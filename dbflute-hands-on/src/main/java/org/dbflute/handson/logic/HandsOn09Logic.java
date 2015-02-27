@@ -248,13 +248,11 @@ public class HandsOn09Logic {
     //                                                                            ========
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     public void updateMemberServicePointCount(PurchaseMonthCursorCursor cursor) throws SQLException {
-        // TODO mayuko.sakaba これは事前検索してる。。。
+        // TODO 【直しました。】mayuko.sakaba これは事前検索してる。。。
         // wara e.g service.uniqueBy(cursor.getMemberId()); でどうだい？ by jflute
-        MemberService memberService = memberServiceBhv.selectByPKValueWithDeletedCheck(cursor.getMemberId());
 
         MemberService service = new MemberService();
-        service.setMemberServiceId(memberService.getMemberId());
-        service.setMemberId(cursor.getMemberId());
+        service.uniqueBy(cursor.getMemberId());
 
         UpdateOption<MemberServiceCB> option = new UpdateOption<MemberServiceCB>();
         option.self(new SpecifyQuery<MemberServiceCB>() {

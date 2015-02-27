@@ -35,7 +35,7 @@ select sub.*
       on serv.MEMBER_ID = pur.MEMBER_ID
   /*BEGIN*/
   where
-    /*IF pmb.paymentCompleteOnly*/
+    /*IF pmb.paymentCompleteOnly != null*/
     pur.PAYMENT_COMPLETE_FLG = /*pmb.paymentCompleteTrue:cls(Flg.True)*/1
     /*END*/
     /*IF pmb.memberName != null*/
