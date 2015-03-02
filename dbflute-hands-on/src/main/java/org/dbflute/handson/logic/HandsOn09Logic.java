@@ -230,6 +230,26 @@ public class HandsOn09Logic {
         }, new FileMakingOption().delimitateByComma().encodeAsUTF8().separateByLf().headerInfo(columnNameList));
     }
 
+    // ===================================================================================
+    //                                                                    Assistant Method
+    //                                                                            ========
+    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+    public void updateMemberServicePointCount(PurchaseMonthCursorCursor cursor) throws SQLException {
+        // 【直しました。】mayuko.sakaba これは事前検索してる。。。
+        // wara e.g service.uniqueBy(cursor.getMemberId()); でどうだい？ by jflute
+
+        MemberService service = new MemberService();
+        service.uniqueBy(cursor.getMemberId());
+
+        UpdateOption<MemberServiceCB> option = new UpdateOption<MemberServiceCB>();
+        option.self(new SpecifyQuery<MemberServiceCB>() {
+            public void specify(final MemberServiceCB spCB) {
+                spCB.specify().columnServicePointCount();
+            }
+        }).plus(cursor.getPurchasePriceAverageMonth());
+        memberServiceBhv.varyingUpdateNonstrict(service, option);
+    }
+
     private void writeFile(final PurchaseMonthCursorPmb pmb, final String filePath, final FileMakingRowWriter writer) {
         purchaseBhv.outsideSql().cursorHandling().selectCursor(pmb, new PurchaseMonthCursorCursorHandler() {
             protected Object fetchCursor(PurchaseMonthCursorCursor cursor) throws SQLException {
@@ -249,26 +269,6 @@ public class HandsOn09Logic {
                 return null;
             }
         });
-    }
-
-    // ===================================================================================
-    //                                                                    Assistant Method
-    //                                                                            ========
-    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-    public void updateMemberServicePointCount(PurchaseMonthCursorCursor cursor) throws SQLException {
-        // 【直しました。】mayuko.sakaba これは事前検索してる。。。
-        // wara e.g service.uniqueBy(cursor.getMemberId()); でどうだい？ by jflute
-
-        MemberService service = new MemberService();
-        service.uniqueBy(cursor.getMemberId());
-
-        UpdateOption<MemberServiceCB> option = new UpdateOption<MemberServiceCB>();
-        option.self(new SpecifyQuery<MemberServiceCB>() {
-            public void specify(final MemberServiceCB spCB) {
-                spCB.specify().columnServicePointCount();
-            }
-        }).plus(cursor.getPurchasePriceAverageMonth());
-        memberServiceBhv.varyingUpdateNonstrict(service, option);
     }
 
     // ===================================================================================
