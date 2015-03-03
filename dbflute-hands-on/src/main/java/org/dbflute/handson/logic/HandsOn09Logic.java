@@ -226,8 +226,7 @@ public class HandsOn09Logic {
             public void write(final FileMakingRowWriter writer) throws IOException, SQLException {
                 writeFile(pmb, filePath, writer);
             }
-            // TODO wara 空行が！ by jflute
-
+            // TODO 【消しちゃえー!でやー！】wara 空行が！ by jflute
         }, new FileMakingOption().delimitateByComma().encodeAsUTF8().separateByLf().headerInfo(columnNameList));
     }
 

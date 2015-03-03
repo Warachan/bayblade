@@ -7,6 +7,8 @@ import javax.annotation.Resource;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.dbflute.handson.dbflute.cbean.MemberLoginCB;
+import org.dbflute.handson.dbflute.cbean.PurchaseCB;
 import org.dbflute.handson.dbflute.exbhv.MemberBhv;
 import org.dbflute.handson.dbflute.exbhv.MemberServiceBhv;
 import org.dbflute.handson.dbflute.exbhv.PurchaseBhv;
@@ -14,6 +16,7 @@ import org.dbflute.handson.dbflute.exentity.Member;
 import org.dbflute.handson.dbflute.exentity.MemberLogin;
 import org.dbflute.handson.dbflute.exentity.Purchase;
 import org.dbflute.handson.unit.UnitContainerTestCase;
+import org.seasar.dbflute.bhv.ConditionBeanSetupper;
 
 /**
  * @author mayuko.sakaba
@@ -53,10 +56,14 @@ public class HandsOn11LogicTest extends UnitContainerTestCase {
 
         // ## Act ##
         List<Member> purchaseMemberList = logic.selectPurchaseMemberList("vi");
+        memberBhv.loadPurchaseList(purchaseMemberList, new ConditionBeanSetupper<PurchaseCB>() {
+            public void setup(PurchaseCB refCB) {
+                refCB.query().setPaymentCompleteFlg_Equal_True();
+            }
+        });
 
         // ## Assert ##
         assertHasAnyElement(purchaseMemberList);
-
         for (Member member : purchaseMemberList) {
             List<Purchase> purchaseList = member.getPurchaseList();
             log(purchaseList.size() + ":" + member.getMemberId());
@@ -82,9 +89,16 @@ public class HandsOn11LogicTest extends UnitContainerTestCase {
 
         // ## Act ##
         List<Member> unpaidMemberList = logic.selectUnpaidMemberList("vi");
+        // TODO 【えい！】wara アサートで必要なデータは、テストケース内で取得しよう by jflute
+        memberBhv.loadPurchaseList(unpaidMemberList, new ConditionBeanSetupper<PurchaseCB>() {
+            public void setup(PurchaseCB refCB) {
+                // TODO 【えいえい！】wara 購入IDは絶対にNotNullだから、このIsNotNullは不要かな by jflute
+                refCB.query().setPaymentCompleteFlg_Equal_False();
+            }
+        });
+
         // ## Assert ##
         assertHasAnyElement(unpaidMemberList);
-
         boolean hasIncompletePayment = false;
         for (Member member : unpaidMemberList) {
             List<Purchase> purchaseList = member.getPurchaseList();
@@ -112,6 +126,12 @@ public class HandsOn11LogicTest extends UnitContainerTestCase {
 
         // ## Act ##
         List<Member> memberList = logic.selectLoginedMemberList("vi");
+        memberBhv.loadMemberLoginList(memberList, new ConditionBeanSetupper<MemberLoginCB>() {
+            @Override
+            public void setup(MemberLoginCB refCB) {
+                refCB.specify().columnLoginDatetime();
+            }
+        });
 
         // ## Assert ##
         assertHasAnyElement(memberList);

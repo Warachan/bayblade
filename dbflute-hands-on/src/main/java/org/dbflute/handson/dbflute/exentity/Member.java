@@ -11,6 +11,7 @@ import org.dbflute.handson.dbflute.bsentity.BsMember;
  * This class remains when re-generating.
  * </p>
  * @author DBFlute(AutoGenerator)
+ * @author mayuko.sakaba
  */
 public class Member extends BsMember {
 
