@@ -561,7 +561,7 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
                 + "/dbflute_exampledb/dfprop/refreshDefinitionMap.dfprop";
         Map<String, String> refreshDefinitionMap = new DfPropFile().readMapAsStringValue(refreshFilePath, null);
 
-        // TODO 【きー！！】wara Listで受け取る、まだあった！ by jflute
+        // 【きー！！】wara Listで受け取る、まだあった！ by jflute
         List<String> projectNameList = new ArrayList<String>();
         String projectName = refreshDefinitionMap.get("projectName");
         String requestUrl = refreshDefinitionMap.get("requestUrl");

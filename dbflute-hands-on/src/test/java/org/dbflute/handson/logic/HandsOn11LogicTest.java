@@ -89,10 +89,10 @@ public class HandsOn11LogicTest extends UnitContainerTestCase {
 
         // ## Act ##
         List<Member> unpaidMemberList = logic.selectUnpaidMemberList("vi");
-        // TODO 【えい！】wara アサートで必要なデータは、テストケース内で取得しよう by jflute
+        // 【えい！】wara アサートで必要なデータは、テストケース内で取得しよう by jflute
         memberBhv.loadPurchaseList(unpaidMemberList, new ConditionBeanSetupper<PurchaseCB>() {
             public void setup(PurchaseCB refCB) {
-                // TODO 【えいえい！】wara 購入IDは絶対にNotNullだから、このIsNotNullは不要かな by jflute
+                // 【えいえい！】wara 購入IDは絶対にNotNullだから、このIsNotNullは不要かな by jflute
                 refCB.query().setPaymentCompleteFlg_Equal_False();
             }
         });

@@ -39,7 +39,7 @@ public class HandsOn11Logic {
     @Resource
     protected MemberServiceBhv memberServiceBhv;
 
-    // TODO 【むー。。。 】wara セクション１１は、JavaDocコメントをしっかり整備していこう by jflute
+    // 【むー。。。 】wara セクション１１は、JavaDocコメントをしっかり整備していこう by jflute
     // 例えば、こんな感じ:
     // @param memberName 部分一致検索の会員名称キーワード (NullAllowed: なければ条件なし)
     // @return 購入付き会員リスト (NotNull)
@@ -57,7 +57,7 @@ public class HandsOn11Logic {
      * @param memberName 部分一致検索の会員名称キーワード (NullAllowed: なければ条件なし)
      * @return 購入付き会員リスト (NotNull)
      */
-    // TODO 【失礼しました。。。publicです☆】wara 他から呼ばれる前提なのでpublicメソッドで by jflute
+    // 【失礼しました。。。publicです☆】wara 他から呼ばれる前提なのでpublicメソッドで by jflute
     public List<Member> selectPurchaseMemberList(String memberName) {
         MemberCB cb = new MemberCB();
         cb.query().setMemberName_LikeSearch(memberName, new LikeSearchOption().likeContain());
@@ -94,7 +94,7 @@ public class HandsOn11Logic {
      * @return 最終ログイン日時付会員リスト
      */
     public List<Member> selectLoginedMemberList(String memberName) {
-        // TODO 【追加しましたー】wara 一応、ctrl+1で生成したとはいえ、Memberの方にauthorを by jflute
+        // 【追加しましたー】wara 一応、ctrl+1で生成したとはいえ、Memberの方にauthorを by jflute
         MemberCB cb = new MemberCB();
         cb.setupSelect_MemberLoginAsLatest();
         cb.query().setMemberName_LikeSearch(memberName, new LikeSearchOption().likeContain());
