@@ -220,12 +220,13 @@ public class HandsOn09Logic {
         columnNameList.add("PURCHASE_MONTH");
         columnNameList.add("PURCHASE_COUNT_SUM_MONTH");
 
-        // TODO wara 【メソッドか!】fetchCursor()だけでメソッド化してみよう (ctrl+1でメソッド抽出) by jflute
+        // done wara 【メソッドか!】fetchCursor()だけでメソッド化してみよう (ctrl+1でメソッド抽出) by jflute
         FileToken fileToken = new FileToken();
         fileToken.make(filePath, new FileMakingCallback() {
             public void write(final FileMakingRowWriter writer) throws IOException, SQLException {
                 writeFile(pmb, filePath, writer);
             }
+            // TODO wara 空行が！ by jflute
 
         }, new FileMakingOption().delimitateByComma().encodeAsUTF8().separateByLf().headerInfo(columnNameList));
     }
@@ -261,7 +262,7 @@ public class HandsOn09Logic {
                         columnList.add(cursor.getPurchasePriceAverageMonth().toString());
                         writer.writeRow(columnList);
                     } catch (IOException e) {
-                        // TODO 【翻訳した！】wara 翻訳してthrowしちゃってOK by jflute
+                        // 【翻訳した！】wara 翻訳してthrowしちゃってOK by jflute
                         //  e.g. throw new IllegalStateException("Failed to write the row: path=" + filePath, e);
                         throw new IllegalStateException("Failed to write the row: path=" + filePath, e);
                     }

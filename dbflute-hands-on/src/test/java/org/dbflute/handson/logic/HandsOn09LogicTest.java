@@ -503,7 +503,7 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
                             assertHasAnyElement(statusList);
                             writeData(writer, entity);
                         } catch (IOException e) {
-                            // TODO 【翻訳下した】wara 翻訳してthrowしちゃってOK by jflute
+                            // done 【翻訳下した】wara 翻訳してthrowしちゃってOK by jflute
                             throw new IllegalStateException("Failed to write the row: path=" + filePath, e);
                         }
                     }
@@ -527,7 +527,7 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
                     }
 
                     private void writeData(final FileMakingRowWriter writer, Member entity) throws IOException {
-                        // TODO 【List!】wara Listで受け取る by jflute
+                        // 【List!】wara Listで受け取る by jflute
                         List<String> columnList = new ArrayList<String>();
                         columnList.add(entity.getMemberName());
                         if (entity.getBirthdate() != null) {
@@ -543,7 +543,7 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
             }
         }, new FileMakingOption().delimitateByTab().encodeAsUTF8().separateByLf());
 
-        // TODO wara 【List!】Listで受け取る by jflute
+        // wara 【List!】Listで受け取る by jflute
         final List<String> dataList = new ArrayList<String>();
         fileToken.tokenize(filePath, new FileTokenizingCallback() {
             public void handleRow(FileTokenizingRowResource resource) throws IOException, SQLException {
@@ -561,6 +561,7 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
                 + "/dbflute_exampledb/dfprop/refreshDefinitionMap.dfprop";
         Map<String, String> refreshDefinitionMap = new DfPropFile().readMapAsStringValue(refreshFilePath, null);
 
+        // TODO wara Listで受け取る、まだあった！ by jflute
         ArrayList<String> projectNameList = new ArrayList<String>();
         String projectName = refreshDefinitionMap.get("projectName");
         String requestUrl = refreshDefinitionMap.get("requestUrl");

@@ -40,6 +40,12 @@ public class HandsOn11Logic {
     @Resource
     protected MemberServiceBhv memberServiceBhv;
 
+    // TODO wara セクション１１は、JavaDocコメントをしっかり整備していこう by jflute
+    // 例えば、こんな感じ:
+    // @param memberName 部分一致検索の会員名称キーワード (NullAllowed: なければ条件なし)
+    // @return 購入付き会員リスト (NotNull)
+    // 
+    // ポイントは、丁寧に、でも細かすぎず (書き過ぎるとプログラムの変更のときにJavaDoc修正が大変になっちゃう)
     // ===================================================================================
     //                                                                               Logic
     //                                                                             =======
@@ -50,6 +56,7 @@ public class HandsOn11Logic {
      * その会員に紐づく支払済み購入のデータも取得する
      * </pre>
      */
+    // TODO wara 他から呼ばれる前提なのでpublicメソッドで by jflute
     List<Member> selectPurchaseMemberList(String memberName) {
         MemberCB cb = new MemberCB();
         cb.query().setMemberName_LikeSearch(memberName, new LikeSearchOption().likeContain());
@@ -78,8 +85,11 @@ public class HandsOn11Logic {
         });
         cb.query().setMemberName_LikeSearch(memberName, new LikeSearchOption().likeContain());
         ListResultBean<Member> memberList = memberBhv.selectList(cb);
+
+        // TODO wara アサートで必要なデータは、テストケース内で取得しよう by jflute
         memberBhv.loadPurchaseList(memberList, new ConditionBeanSetupper<PurchaseCB>() {
             public void setup(PurchaseCB refCB) {
+                // TODO wara 購入IDは絶対にNotNullだから、このIsNotNullは不要かな by jflute
                 refCB.query().setPurchaseId_IsNotNull();
                 refCB.query().setPaymentCompleteFlg_Equal_False();
             }
@@ -94,6 +104,7 @@ public class HandsOn11Logic {
      * </pre>
      */
     List<Member> selectLoginedMemberList(String memberName) {
+        // TODO wara 一応、ctrl+1で生成したとはいえ、Memberの方にauthorを by jflute
         MemberCB cb = new MemberCB();
         cb.setupSelect_MemberLoginAsLatest();
         cb.query().setMemberName_LikeSearch(memberName, new LikeSearchOption().likeContain());
