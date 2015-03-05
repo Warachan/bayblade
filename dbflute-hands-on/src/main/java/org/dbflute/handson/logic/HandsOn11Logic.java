@@ -9,6 +9,7 @@ import org.apache.commons.logging.LogFactory;
 import org.dbflute.handson.dbflute.cbean.MemberCB;
 import org.dbflute.handson.dbflute.cbean.MemberLoginCB;
 import org.dbflute.handson.dbflute.cbean.PurchaseCB;
+import org.dbflute.handson.dbflute.cbean.PurchasePaymentCB;
 import org.dbflute.handson.dbflute.exbhv.MemberBhv;
 import org.dbflute.handson.dbflute.exbhv.MemberServiceBhv;
 import org.dbflute.handson.dbflute.exbhv.PurchaseBhv;
@@ -131,7 +132,6 @@ public class HandsOn11Logic {
         cb.specify().derivedMemberLoginList().count(new SubQuery<MemberLoginCB>() {
             @Override
             public void query(MemberLoginCB subCB) {
-                subCB.specify().columnMemberLoginId();
                 subCB.query().setMobileLoginFlg_Equal_True();
             }
         }, Purchase.ALIAS_mobileLoginCount);
@@ -143,6 +143,12 @@ public class HandsOn11Logic {
                     subCB.setupSelect_Product();
                     subCB.query().addOrderBy_PurchasePrice_Desc();
                     subCB.query().queryProduct().addOrderBy_RegularPrice_Desc();
+                    subCB.query().existsPurchasePaymentList(new SubQuery<PurchasePaymentCB>() {
+                        @Override
+                        public void query(PurchasePaymentCB subCB) {
+                            subCB.query().setPaymentMethodCode_Equal_CreditCard();
+                        }
+                    });
                 }
             });
         }
