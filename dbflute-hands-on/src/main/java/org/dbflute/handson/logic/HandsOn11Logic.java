@@ -48,6 +48,7 @@ public class HandsOn11Logic {
     // @return 購入付き会員リスト (NotNull)
     //
     // ポイントは、丁寧に、でも細かすぎず (書き過ぎるとプログラムの変更のときにJavaDoc修正が大変になっちゃう)
+    // TODO wara タグコメント、単元ごとに切っていきましょう by jflute 
     // ===================================================================================
     //                                                                               Logic
     //                                                                             =======
@@ -94,7 +95,7 @@ public class HandsOn11Logic {
      * 指定された memberName で含んでいる会員名称の会員を検索する
      * </pre>
      * @param memberName 部分一致検索の会員名称キーワード (NullAllowed: なければ条件なし)
-     * @return 最終ログイン日時付会員リスト
+     * @return 最終ログイン日時付会員リスト9 (NotNull)
      */
     public List<Member> selectLoginedMemberList(String memberName) {
         // 【追加しましたー】wara 一応、ctrl+1で生成したとはいえ、Memberの方にauthorを by jflute
@@ -113,6 +114,9 @@ public class HandsOn11Logic {
         return memberList;
     }
 
+    // TODO sakaba param に List<Member> ? completeOnlyだよね by jflute 
+    // TODO mayuko なければ条件なしの前が全角空白 by jflute 
+    // TODO annie return に (NotNull) を by jflute 
     /**
      * <pre>
      * 会員ステータス、会員サービス、サービスランク、購入、購入支払、会員ステータス経由の会員ログインも取得
