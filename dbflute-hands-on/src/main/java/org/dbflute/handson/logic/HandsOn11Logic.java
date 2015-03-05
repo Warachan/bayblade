@@ -9,11 +9,12 @@ import org.apache.commons.logging.LogFactory;
 import org.dbflute.handson.dbflute.cbean.MemberCB;
 import org.dbflute.handson.dbflute.cbean.MemberLoginCB;
 import org.dbflute.handson.dbflute.cbean.PurchaseCB;
-import org.dbflute.handson.dbflute.cbean.PurchasePaymentCB;
 import org.dbflute.handson.dbflute.exbhv.MemberBhv;
 import org.dbflute.handson.dbflute.exbhv.MemberServiceBhv;
+import org.dbflute.handson.dbflute.exbhv.MemberStatusBhv;
 import org.dbflute.handson.dbflute.exbhv.PurchaseBhv;
 import org.dbflute.handson.dbflute.exentity.Member;
+import org.dbflute.handson.dbflute.exentity.MemberStatus;
 import org.dbflute.handson.dbflute.exentity.Purchase;
 import org.seasar.dbflute.bhv.ConditionBeanSetupper;
 import org.seasar.dbflute.cbean.ListResultBean;
@@ -38,6 +39,8 @@ public class HandsOn11Logic {
     @Resource
     protected MemberBhv memberBhv;
     @Resource
+    protected MemberStatusBhv memberStatusBhv;
+    @Resource
     protected PurchaseBhv purchaseBhv;
     @Resource
     protected MemberServiceBhv memberServiceBhv;
@@ -48,7 +51,7 @@ public class HandsOn11Logic {
     // @return 購入付き会員リスト (NotNull)
     //
     // ポイントは、丁寧に、でも細かすぎず (書き過ぎるとプログラムの変更のときにJavaDoc修正が大変になっちゃう)
-    // TODO wara タグコメント、単元ごとに切っていきましょう by jflute 
+    // TODO wara タグコメント、単元ごとに切っていきましょう by jflute
     // ===================================================================================
     //                                                                               Logic
     //                                                                             =======
@@ -114,9 +117,13 @@ public class HandsOn11Logic {
         return memberList;
     }
 
-    // TODO sakaba param に List<Member> ? completeOnlyだよね by jflute 
-    // TODO mayuko なければ条件なしの前が全角空白 by jflute 
-    // TODO annie return に (NotNull) を by jflute 
+    // ===================================================================================
+    //                                                                           On parade
+    //                                                                            ========
+
+    // TODO sakaba param に List<Member> ? completeOnlyだよね by jflute
+    // TODO mayuko なければ条件なしの前が全角空白 by jflute
+    // TODO annie return に (NotNull) を by jflute
     /**
      * <pre>
      * 会員ステータス、会員サービス、サービスランク、購入、購入支払、会員ステータス経由の会員ログインも取得
@@ -126,8 +133,8 @@ public class HandsOn11Logic {
      * 会員ごとのログイン回数と購入一覧と購入支払一覧をログに出力する
      * 購入支払は、最も推奨されている方法のみ検索
      *  </pre>
-     *  @param List<Member> 支払い完了フラグ(NullAllowed:　なければ条件なし)
-     *  @return サービス・ステータス・購入付き会員リスト
+     *  @param boolean completeOnly 支払い完了フラグ(NullAllowed:なければ条件なし)
+     *  @return サービス・ステータス・購入付き会員リスト（NotNull)
      */
     public List<Member> selectOnParadeFirstStepMember(boolean completeOnly) {
         MemberCB cb = new MemberCB();
@@ -144,15 +151,7 @@ public class HandsOn11Logic {
             cb.query().notExistsPurchaseList(new SubQuery<PurchaseCB>() {
                 @Override
                 public void query(PurchaseCB subCB) {
-                    subCB.setupSelect_Product();
-                    subCB.query().addOrderBy_PurchasePrice_Desc();
-                    subCB.query().queryProduct().addOrderBy_RegularPrice_Desc();
-                    subCB.query().existsPurchasePaymentList(new SubQuery<PurchasePaymentCB>() {
-                        @Override
-                        public void query(PurchasePaymentCB subCB) {
-                            subCB.query().setPaymentMethodCode_Equal_CreditCard();
-                        }
-                    });
+                    subCB.query().setPaymentCompleteFlg_Equal_False();
                 }
             });
         }
@@ -163,6 +162,11 @@ public class HandsOn11Logic {
                 refCB.setupSelect_Product();
                 refCB.query().addOrderBy_PurchasePrice_Desc();
                 refCB.query().queryProduct().addOrderBy_RegularPrice_Desc();
+            }
+        });
+        List<MemberStatus> statusList = memberBhv.pulloutMemberStatus(memberList);
+        memberStatusBhv.loadMemberLoginList(statusList, new ConditionBeanSetupper<MemberLoginCB>() {
+            public void setup(MemberLoginCB cb) {
             }
         });
         return memberList;
