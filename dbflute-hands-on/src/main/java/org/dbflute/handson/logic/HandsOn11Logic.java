@@ -13,6 +13,8 @@ import org.dbflute.handson.dbflute.exbhv.MemberBhv;
 import org.dbflute.handson.dbflute.exbhv.MemberServiceBhv;
 import org.dbflute.handson.dbflute.exbhv.PurchaseBhv;
 import org.dbflute.handson.dbflute.exentity.Member;
+import org.dbflute.handson.dbflute.exentity.Purchase;
+import org.seasar.dbflute.bhv.ConditionBeanSetupper;
 import org.seasar.dbflute.cbean.ListResultBean;
 import org.seasar.dbflute.cbean.SubQuery;
 import org.seasar.dbflute.cbean.coption.LikeSearchOption;
@@ -107,6 +109,52 @@ public class HandsOn11Logic {
         }, Member.ALIAS_latestLoginDatetime);
         cb.query().queryMemberLoginAsLatest().setMemberLoginId_IsNotNull();
         ListResultBean<Member> memberList = memberBhv.selectList(cb);
+        return memberList;
+    }
+
+    /**
+     * <pre>
+     * 会員ステータス、会員サービス、サービスランク、購入、購入支払、会員ステータス経由の会員ログインも取得
+     * モバイルからのログイン回数も導出して取得する
+     * 指定された判定次第で未払い購入の存在しない会員だけを対象にできるように
+     * 購入は商品の定価の高い順、購入価格の高い順で並べる
+     * 会員ごとのログイン回数と購入一覧と購入支払一覧をログに出力する
+     * 購入支払は、最も推奨されている方法のみ検索
+     *  </pre>
+     *  @param List<Member> 支払い完了フラグ(NullAllowed:　なければ条件なし)
+     *  @return サービス・ステータス・購入付き会員リスト
+     */
+    public List<Member> selectOnParadeFirstStepMember(boolean completeOnly) {
+        MemberCB cb = new MemberCB();
+        cb.setupSelect_MemberStatus();
+        cb.setupSelect_MemberServiceAsOne().withServiceRank();
+        cb.specify().derivedMemberLoginList().count(new SubQuery<MemberLoginCB>() {
+            @Override
+            public void query(MemberLoginCB subCB) {
+                subCB.specify().columnMemberLoginId();
+                subCB.query().setMobileLoginFlg_Equal_True();
+            }
+        }, Purchase.ALIAS_mobileLoginCount);
+
+        if (completeOnly) {
+            cb.query().notExistsPurchaseList(new SubQuery<PurchaseCB>() {
+                @Override
+                public void query(PurchaseCB subCB) {
+                    subCB.setupSelect_Product();
+                    subCB.query().addOrderBy_PurchasePrice_Desc();
+                    subCB.query().queryProduct().addOrderBy_RegularPrice_Desc();
+                }
+            });
+        }
+        ListResultBean<Member> memberList = memberBhv.selectList(cb);
+        memberBhv.loadPurchaseList(memberList, new ConditionBeanSetupper<PurchaseCB>() {
+            @Override
+            public void setup(PurchaseCB refCB) {
+                refCB.setupSelect_Product();
+                refCB.query().addOrderBy_PurchasePrice_Desc();
+                refCB.query().queryProduct().addOrderBy_RegularPrice_Desc();
+            }
+        });
         return memberList;
     }
 }
