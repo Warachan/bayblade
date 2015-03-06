@@ -9,6 +9,7 @@ import org.apache.commons.logging.LogFactory;
 import org.dbflute.handson.dbflute.cbean.MemberCB;
 import org.dbflute.handson.dbflute.cbean.MemberLoginCB;
 import org.dbflute.handson.dbflute.cbean.PurchaseCB;
+import org.dbflute.handson.dbflute.cbean.PurchasePaymentCB;
 import org.dbflute.handson.dbflute.exbhv.MemberBhv;
 import org.dbflute.handson.dbflute.exbhv.MemberServiceBhv;
 import org.dbflute.handson.dbflute.exbhv.MemberStatusBhv;
@@ -16,7 +17,9 @@ import org.dbflute.handson.dbflute.exbhv.PurchaseBhv;
 import org.dbflute.handson.dbflute.exentity.Member;
 import org.dbflute.handson.dbflute.exentity.MemberStatus;
 import org.dbflute.handson.dbflute.exentity.Purchase;
+import org.dbflute.handson.dbflute.exentity.PurchasePayment;
 import org.seasar.dbflute.bhv.ConditionBeanSetupper;
+import org.seasar.dbflute.bhv.ReferrerListHandler;
 import org.seasar.dbflute.cbean.ListResultBean;
 import org.seasar.dbflute.cbean.SubQuery;
 import org.seasar.dbflute.cbean.coption.LikeSearchOption;
@@ -145,7 +148,7 @@ public class HandsOn11Logic {
             public void query(MemberLoginCB subCB) {
                 subCB.query().setMobileLoginFlg_Equal_True();
             }
-        }, Purchase.ALIAS_mobileLoginCount);
+        }, Member.ALIAS_mobileLoginCount);
 
         if (completeOnly) {
             cb.query().notExistsPurchaseList(new SubQuery<PurchaseCB>() {
@@ -159,16 +162,35 @@ public class HandsOn11Logic {
         memberBhv.loadPurchaseList(memberList, new ConditionBeanSetupper<PurchaseCB>() {
             @Override
             public void setup(PurchaseCB refCB) {
-                refCB.setupSelect_Product();
-                refCB.query().addOrderBy_PurchasePrice_Desc();
                 refCB.query().queryProduct().addOrderBy_RegularPrice_Desc();
+                refCB.query().addOrderBy_PurchasePrice_Desc();
+            }
+        }).withNestedReferrer(new ReferrerListHandler<Purchase>() {
+            @Override
+            public void handle(List<Purchase> referrerList) {
+                purchaseBhv.loadPurchasePaymentList(referrerList, new ConditionBeanSetupper<PurchasePaymentCB>() {
+                    @Override
+                    public void setup(PurchasePaymentCB refCB) {
+                        // こっち？検索？
+                        refCB.query().setPaymentMethodCode_InScope_Recommended();
+                    }
+                });
             }
         });
+        // それぞれのメンバーにひもずいている束としてリストを取得しているだけ。
         List<MemberStatus> statusList = memberBhv.pulloutMemberStatus(memberList);
         memberStatusBhv.loadMemberLoginList(statusList, new ConditionBeanSetupper<MemberLoginCB>() {
             public void setup(MemberLoginCB cb) {
             }
         });
+        for (Member member : memberList) {
+            List<Purchase> purchaseList = member.getPurchaseList();
+            for (Purchase purchase : purchaseList) {
+                List<PurchasePayment> paymentList = purchase.getPurchasePaymentList();
+
+                //                log(member.getMobileLoginCount() + purchaseList + paymentList);
+            }
+        }
         return memberList;
     }
 }

@@ -15,6 +15,7 @@ import org.dbflute.handson.dbflute.exbhv.PurchaseBhv;
 import org.dbflute.handson.dbflute.exentity.Member;
 import org.dbflute.handson.dbflute.exentity.MemberLogin;
 import org.dbflute.handson.dbflute.exentity.Purchase;
+import org.dbflute.handson.dbflute.exentity.PurchasePayment;
 import org.dbflute.handson.unit.UnitContainerTestCase;
 import org.seasar.dbflute.bhv.ConditionBeanSetupper;
 
@@ -144,6 +145,41 @@ public class HandsOn11LogicTest extends UnitContainerTestCase {
                 log("**********LIST_LAST_LOGIN_DATE" + lastLoginTm4Compare + ": MEMBER_LAST_LOGIN_DATE"
                         + memberLastLoginTm);
                 assertTrue(lastLoginTm4Compare.equals(memberLastLoginTm));
+            }
+        }
+    }
+
+    // ===================================================================================
+    //                                                                      On parade test
+    //                                                                            ========
+
+    /**
+     * <pre>
+     * 未払い購入の存在しない会員だけを検索
+     * 未払い購入が存在しないことをアサート
+     * 会員ステータス経由の会員ログインが取得できていることをアサート
+     * 購入支払が最も推奨されている方法のみ検索されていることをアサート
+     * その他、ロジックの中で出力したログを見て期待通りであることを確認
+     * </pre>
+     */
+    public void test_selectOnParadeFirstStepMember_未払い購入の存在しない会員() throws Exception {
+        // ## Arrange ##
+        HandsOn11Logic logic = new HandsOn11Logic();
+        inject(logic);
+
+        // ## Act ##
+        List<Member> completPaymentMemberList = logic.selectOnParadeFirstStepMember(true);
+
+        // ## Assert ##
+        assertHasAnyElement(completPaymentMemberList);
+        for (Member member : completPaymentMemberList) {
+            List<Purchase> purchaseList = member.getPurchaseList();
+            for (Purchase purchase : purchaseList) {
+                assertTrue(purchase.isPaymentCompleteFlgTrue());
+                List<PurchasePayment> paymentList = purchase.getPurchasePaymentList();
+                for (PurchasePayment payment : paymentList) {
+                    assertTrue(payment.isPaymentMethodCode_Recommended());
+                }
             }
         }
     }

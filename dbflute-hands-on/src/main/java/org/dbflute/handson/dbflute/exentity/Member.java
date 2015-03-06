@@ -17,10 +17,18 @@ public class Member extends BsMember {
 
     /** Serial version UID. (Default) */
     private static final long serialVersionUID = 1L;
+
     /** LATEST_LOGIN_DATETIME: Derived Referrer Alias. */
     public static final String ALIAS_latestLoginDatetime = "LATEST_LOGIN_DATETIME";
+
     /** LATEST_LOGIN_DATETIME: (Derived Referrer) */
     protected Timestamp _latestLoginDatetime;
+
+    /** MOBILE_LOGIN_COUNT: Derived Referrer Alias. */
+    public static final String ALIAS_mobileLoginCount = "MOBILE_LOGIN_COUNT";
+
+    /** MOBILE_LOGIN_COUNT: (Derived Referrer) */
+    protected Integer _mobileLoginCount;
 
     /**
      * [get] LATEST_LOGIN_DATETIME: (Derived Referrer)
@@ -36,5 +44,21 @@ public class Member extends BsMember {
      */
     public void setLatestLoginDatetime(Timestamp latestLoginDatetime) {
         _latestLoginDatetime = latestLoginDatetime;
+    }
+
+    /**
+     * [get] MOBILE_LOGIN_COUNT: (Derived Referrer)
+     * @return The value of the column 'MOBILE_LOGIN_COUNT'. (NullAllowed)
+     */
+    public Integer getMobileLoginCount() {
+        return _mobileLoginCount;
+    }
+
+    /**
+     * [set] MOBILE_LOGIN_COUNT: (Derived Referrer)
+     * @param mobileLoginCount The value of the column 'MOBILE_LOGIN_COUNT'. (NullAllowed)
+     */
+    public void setMobileLoginCount(Integer mobileLoginCount) {
+        _mobileLoginCount = mobileLoginCount;
     }
 }
