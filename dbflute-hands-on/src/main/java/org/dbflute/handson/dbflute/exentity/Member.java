@@ -30,6 +30,12 @@ public class Member extends BsMember {
     /** MOBILE_LOGIN_COUNT: (Derived Referrer) */
     protected Integer _mobileLoginCount;
 
+    /** PRODUCT_TYPE_COUNT: Derived Referrer Alias. */
+    public static final String ALIAS_productTypeCount = "PRODUCT_TYPE_COUNT";
+
+    /** PRODUCT_TYPE_COUNT: (Derived Referrer) */
+    protected Integer _productTypeCount;
+
     /**
      * [get] LATEST_LOGIN_DATETIME: (Derived Referrer)
      * @return The value of the column 'LATEST_LOGIN_DATETIME'. (NullAllowed)
@@ -60,5 +66,21 @@ public class Member extends BsMember {
      */
     public void setMobileLoginCount(Integer mobileLoginCount) {
         _mobileLoginCount = mobileLoginCount;
+    }
+
+    /**
+     * [get] PRODUCT_TYPE_COUNT: (Derived Referrer)
+     * @return The value of the column 'PRODUCT_TYPE_COUNT'. (NullAllowed)
+     */
+    public Integer getProductTypeCount() {
+        return _productTypeCount;
+    }
+
+    /**
+     * [set] PRODUCT_TYPE_COUNT: (Derived Referrer)
+     * @param productTypeCount The value of the column 'PRODUCT_TYPE_COUNT'. (NullAllowed)
+     */
+    public void setProductTypeCount(Integer productTypeCount) {
+        _productTypeCount = productTypeCount;
     }
 }

@@ -14,6 +14,7 @@ import org.dbflute.handson.dbflute.exbhv.MemberServiceBhv;
 import org.dbflute.handson.dbflute.exbhv.PurchaseBhv;
 import org.dbflute.handson.dbflute.exentity.Member;
 import org.dbflute.handson.dbflute.exentity.MemberLogin;
+import org.dbflute.handson.dbflute.exentity.Product;
 import org.dbflute.handson.dbflute.exentity.Purchase;
 import org.dbflute.handson.dbflute.exentity.PurchasePayment;
 import org.dbflute.handson.unit.UnitContainerTestCase;
@@ -150,7 +151,7 @@ public class HandsOn11LogicTest extends UnitContainerTestCase {
     }
 
     // ===================================================================================
-    //                                                                      On parade test
+    //                                                       On parade just the start test
     //                                                                            ========
 
     /**
@@ -173,14 +174,55 @@ public class HandsOn11LogicTest extends UnitContainerTestCase {
         // ## Assert ##
         assertHasAnyElement(completPaymentMemberList);
         for (Member member : completPaymentMemberList) {
+            List<MemberLogin> loginList = member.getMemberStatus().getMemberLoginList();
+            assertNotNull(loginList);
+
             List<Purchase> purchaseList = member.getPurchaseList();
             for (Purchase purchase : purchaseList) {
                 assertTrue(purchase.isPaymentCompleteFlgTrue());
+
                 List<PurchasePayment> paymentList = purchase.getPurchasePaymentList();
                 for (PurchasePayment payment : paymentList) {
                     assertTrue(payment.isPaymentMethodCode_Recommended());
                 }
             }
         }
+    }
+
+    // ===================================================================================
+    //                                                                  On parade Continue
+    //                                                                            ========
+    /**
+     * <pre>
+     * 商品も取得できることをアサート
+     * 購入商品種類数が妥当であることをアサート
+     * 生産中止の商品を買ったことのある会員が(一人でも)検索されていることをアサート
+     * どんな手段でもいいので、手渡しだけでも...(略)ている会員が(一人でも)検索されていることを目視確認
+     * </pre>
+     */
+    public void test_selectOnParadeSecondStepMember_購入のみならず商品も検索() throws Exception {
+        // ## Arrange ##
+        HandsOn11Logic logic = new HandsOn11Logic();
+        inject(logic);
+
+        // ## Act ##
+        List<Member> memberList = logic.selectOnParadeSecondStepMember();
+
+        // ## Assert ##
+        boolean purchasedCanceledProduct = false;
+        assertHasAnyElement(memberList);
+        for (Member member : memberList) {
+            List<Purchase> purchaseList = member.getPurchaseList();
+            for (Purchase purchase : purchaseList) {
+                Product product = purchase.getProduct();
+                assertNotNull(product);
+                // TODO mayuko.sakaba まだカテゴリーの種類数は検索出来てない。
+                assertTrue(member.getProductTypeCount() <= 5);
+                if (product.isProductStatusCode生産中止()) {
+                    purchasedCanceledProduct = true;
+                }
+            }
+        }
+        assertTrue(purchasedCanceledProduct);
     }
 }
