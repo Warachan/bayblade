@@ -60,11 +60,10 @@ public class HandsOn11Logic {
     // @return 購入付き会員リスト (NotNull)
     //
     // ポイントは、丁寧に、でも細かすぎず (書き過ぎるとプログラムの変更のときにJavaDoc修正が大変になっちゃう)
-    // TODO wara タグコメント、単元ごとに切っていきましょう by jflute
+    // wara タグコメント、単元ごとに切っていきましょう by jflute
     // ===================================================================================
     //                                                                      Basic Practice
     //                                                                             =======
-
     /**
      * <pre>
      * 指定された memberName を含んでいる会員名称の会員を検索する
@@ -129,10 +128,9 @@ public class HandsOn11Logic {
     // ===================================================================================
     //                                                            On parade just the start
     //                                                                            ========
-
-    // TODO sakaba param に List<Member> ? completeOnlyだよね by jflute
-    // TODO mayuko なければ条件なしの前が全角空白 by jflute
-    // TODO annie return に (NotNull) を by jflute
+    // done sakaba param に List<Member> ? completeOnlyだよね by jflute
+    // done mayuko なければ条件なしの前が全角空白 by jflute
+    // done annie return に (NotNull) を by jflute
     /**
      * <pre>
      * 会員ステータス、会員サービス、サービスランク、購入、購入支払、会員ステータス経由の会員ログインも取得
@@ -142,8 +140,8 @@ public class HandsOn11Logic {
      * 会員ごとのログイン回数と購入一覧と購入支払一覧をログに出力する
      * 購入支払は、最も推奨されている方法のみ検索
      *  </pre>
-     *  @param boolean completeOnly 支払い完了フラグ(NullAllowed:なければ条件なし)
-     *  @return サービス・ステータス・購入付き会員リスト（NotNull)
+     *  @param completeOnly 支払い完了フラグ (NullAllowed:なければ条件なし)
+     *  @return サービス・ステータス・購入付き会員リスト (NotNull)
      */
     public List<Member> selectOnParadeFirstStepMember(boolean completeOnly) {
         MemberCB cb = new MemberCB();
@@ -189,10 +187,12 @@ public class HandsOn11Logic {
             public void setup(MemberLoginCB cb) {
             }
         });
+        // TODO wara LOG.isDebugEnabled()で囲う (メインコードなので) by jflute 
         for (Member member : memberList) {
             List<Purchase> purchaseList = member.getPurchaseList();
             for (Purchase purchase : purchaseList) {
                 List<PurchasePayment> paymentList = purchase.getPurchasePaymentList();
+                // TODO wara こういう日常の内容はデバッグ by jflute
                 LOG.info("paymentList:" + paymentList);
                 LOG.info("purchaseList:" + purchaseList);
                 LOG.info("mobileLoginCount:" + member.getMobileLoginCount());
@@ -213,7 +213,7 @@ public class HandsOn11Logic {
      * 会員ごとの購入一覧と商品名称、購入商品種類数をログに出力する
      * *1: 購入商品種類数は、例えば、A, B, C という商品を買ったことがあるなら 3 (種類)
      * </pre>
-     * @return 購入と商品つき会員リスト（NotNull)
+     * @return 購入と商品つき会員リスト (NotNull)
      */
     public List<Member> selectOnParadeSecondStepMember() {
         MemberCB cb = new MemberCB();
@@ -228,12 +228,7 @@ public class HandsOn11Logic {
         cb.orScopeQuery(new OrQuery<MemberCB>() {
             @Override
             public void query(MemberCB orCB) {
-                orCB.query().existsPurchaseList(new SubQuery<PurchaseCB>() {
-                    @Override
-                    public void query(PurchaseCB subCB) {
-                        subCB.query().queryProduct().setProductStatusCode_Equal_生産中止();
-                    }
-                });
+                // TODO wara ...未払いになっている購入を持ってる会員をフォローしている会員になっちゃってる by jflute 
                 orCB.query().existsMemberFollowingByMyMemberIdList(new SubQuery<MemberFollowingCB>() {
                     @Override
                     public void query(MemberFollowingCB subCB) {
@@ -248,6 +243,10 @@ public class HandsOn11Logic {
                         subCB.query().queryMemberByMyMemberId().existsPurchaseList(new SubQuery<PurchaseCB>() {
                             @Override
                             public void query(PurchaseCB subCB) {
+                                // ひんと「購入価格 < 手渡しの支払い金額の合計」かつ未払い by jflute
+                                // これは、カラム対カラムである、という分析を先にやるの！わら！ by jflute
+                                // ConditionBeanの機能を探したいときはどうする？
+                                // http://dbflute.seasar.org/ja/tutorial/developer.html#howtosearch
                                 subCB.query().setPaymentCompleteFlg_Equal_False();
                                 subCB.query().existsPurchasePaymentList(new SubQuery<PurchasePaymentCB>() {
                                     @Override
