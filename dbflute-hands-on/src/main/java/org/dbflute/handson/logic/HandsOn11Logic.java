@@ -315,6 +315,8 @@ public class HandsOn11Logic {
      */
     public List<Member> selectOnParadeXStepMember(int leastLoginCount) {
         MemberCB cb = new MemberCB();
+        cb.setupSelect_MemberStatus();
+        cb.query().queryMemberStatus().setMemberStatusCode_Equal_正式会員();
 
         ListResultBean<Member> memberList = memberBhv.selectList(cb);
         return memberList;
