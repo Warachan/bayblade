@@ -25,6 +25,7 @@ import org.seasar.dbflute.bhv.ConditionBeanSetupper;
 import org.seasar.dbflute.bhv.ReferrerListHandler;
 import org.seasar.dbflute.cbean.ListResultBean;
 import org.seasar.dbflute.cbean.OrQuery;
+import org.seasar.dbflute.cbean.SpecifyQuery;
 import org.seasar.dbflute.cbean.SubQuery;
 import org.seasar.dbflute.cbean.coption.LikeSearchOption;
 
@@ -187,12 +188,13 @@ public class HandsOn11Logic {
             public void setup(MemberLoginCB cb) {
             }
         });
-        // TODO wara LOG.isDebugEnabled()で囲う (メインコードなので) by jflute 
+        // TODO wara LOG.isDebugEnabled()で囲う (メインコードなので) by jflute
         for (Member member : memberList) {
             List<Purchase> purchaseList = member.getPurchaseList();
             for (Purchase purchase : purchaseList) {
                 List<PurchasePayment> paymentList = purchase.getPurchasePaymentList();
                 // TODO wara こういう日常の内容はデバッグ by jflute
+                // ユーザがボタンを押す度の処理とかは日常の処理
                 LOG.info("paymentList:" + paymentList);
                 LOG.info("purchaseList:" + purchaseList);
                 LOG.info("mobileLoginCount:" + member.getMobileLoginCount());
@@ -228,7 +230,7 @@ public class HandsOn11Logic {
         cb.orScopeQuery(new OrQuery<MemberCB>() {
             @Override
             public void query(MemberCB orCB) {
-                // TODO wara ...未払いになっている購入を持ってる会員をフォローしている会員になっちゃってる by jflute 
+                // TODO wara ...未払いになっている購入を持ってる会員をフォローしている会員になっちゃってる by jflute
                 orCB.query().existsMemberFollowingByMyMemberIdList(new SubQuery<MemberFollowingCB>() {
                     @Override
                     public void query(MemberFollowingCB subCB) {
@@ -240,7 +242,7 @@ public class HandsOn11Logic {
                         //                                        subCB.specify().columnPurchasePrice();
                         //                                    }
                         //                                }, PurchasePayment.ALIAS_memberPurchasePriceSummary);
-                        subCB.query().queryMemberByMyMemberId().existsPurchaseList(new SubQuery<PurchaseCB>() {
+                        subCB.query().queryMemberByYourMemberId().existsPurchaseList(new SubQuery<PurchaseCB>() {
                             @Override
                             public void query(PurchaseCB subCB) {
                                 // ひんと「購入価格 < 手渡しの支払い金額の合計」かつ未払い by jflute
@@ -248,19 +250,21 @@ public class HandsOn11Logic {
                                 // ConditionBeanの機能を探したいときはどうする？
                                 // http://dbflute.seasar.org/ja/tutorial/developer.html#howtosearch
                                 subCB.query().setPaymentCompleteFlg_Equal_False();
-                                subCB.query().existsPurchasePaymentList(new SubQuery<PurchasePaymentCB>() {
+                                subCB.columnQuery(new SpecifyQuery<PurchaseCB>() {
                                     @Override
-                                    public void query(PurchasePaymentCB subCB) {
-                                        subCB.query().setPaymentMethodCode_NotEqual_ByHand();
-                                        subCB.specify().specifyPurchase().specifyProduct().derivedPurchaseList()
-                                                .sum(new SubQuery<PurchaseCB>() {
+                                    public void specify(PurchaseCB spCB) {
+                                        spCB.specify().columnPurchasePrice();
+                                    }
+                                }).lessThan(new SpecifyQuery<PurchaseCB>() {
+                                    @Override
+                                    public void specify(PurchaseCB spCB) {
+                                        spCB.specify().derivedPurchasePaymentList()
+                                                .sum(new SubQuery<PurchasePaymentCB>() {
                                                     @Override
-                                                    public void query(PurchaseCB subCB) {
-                                                        subCB.specify().columnPurchasePrice();
+                                                    public void query(PurchasePaymentCB subCB) {
+                                                        subCB.specify().columnPaymentAmount();
                                                     }
-                                                }, PurchasePayment.ALIAS_memberPurchasePriceSummary);
-                                        // TODO mayuko.sakaba まだ検索出来ず　うわああああああああ
-                                        //                                        subCB.query().setPaymentAmount_GreaterThan();
+                                                }, PurchaseCB.ALIAS_sumPaymentAmount);
                                     }
                                 });
                             }
