@@ -195,9 +195,12 @@ public class HandsOn11Logic {
                 List<PurchasePayment> paymentList = purchase.getPurchasePaymentList();
                 // TODO wara こういう日常の内容はデバッグ by jflute
                 // ユーザがボタンを押す度の処理とかは日常の処理
-                LOG.info("paymentList:" + paymentList);
-                LOG.info("purchaseList:" + purchaseList);
-                LOG.info("mobileLoginCount:" + member.getMobileLoginCount());
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("paymentList:" + paymentList);
+                    LOG.debug("purchaseList:" + purchaseList);
+                    LOG.debug("mobileLoginCount:" + member.getMobileLoginCount());
+                }
+                ;
             }
         }
         return memberList;
