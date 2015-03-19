@@ -626,7 +626,7 @@ public class HandsOn09LogicTest extends UnitContainerTestCase {
         List<SpReturnResultSetNotParamResult2> pmbResult2 = pmb.getNotParamResult2();
 
         for (SpReturnResultSetNotParamResult1 result1 : pmbResult1) {
-            assertTrue(result1.getBirthdate().after(setDate));
+            assertTrue(result1.getBirthdate().after(setDate) || result1.getBirthdate().equals(setDate));
             for (SpReturnResultSetNotParamResult2 result2 : pmbResult2) {
                 if (result1.getMemberStatusCode().equals(result2.getMemberStatusCode())) {
                     log(result1.getMemberName() + " " + result2.getMemberStatusName());

@@ -58,6 +58,7 @@ public class HandsOn04Test extends UnitContainerTestCase {
         // cb.query().queryMember().setMemberStatusCode_Equal("WDL");
         // cb.query().setPaymentCompleteFlg_Equal(0);
         // 【チェック!】wara orderByは最後にしよう by jflute
+        cb.query().setPaymentCompleteFlg_Equal_False();
         cb.query().addOrderBy_PurchaseDatetime_Desc();
 
         // ## Act ##

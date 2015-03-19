@@ -57,6 +57,7 @@ public class HandsOn08LogicTest extends UnitContainerTestCase {
     public void test_updateMemberChangedToFormalized_排他制御例外が発生すること() {
         //# Arrange #
         HandsOn08Logic logic = new HandsOn08Logic();
+        inject(logic);
 
         //# Act #
         logic.updateMemberChangedToFormalized(5, 0L);
@@ -126,7 +127,7 @@ public class HandsOn08LogicTest extends UnitContainerTestCase {
         cb.query().setMemberId_Equal(10);
         int purchaseCount = purchaseBhv.selectCount(cb); // dataを取得する必要がない。（存在するかのみチェック）
 
-        assertNull(purchaseCount);
+        assertTrue(purchaseCount == 0);
     }
 
     /**

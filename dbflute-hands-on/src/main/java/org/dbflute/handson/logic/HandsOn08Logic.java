@@ -77,13 +77,13 @@ public class HandsOn08Logic {
      * 引数の値は null も許される (null なら何もしない)
      */
     public void deletePurchaseSimply(Integer memberId) {
-        PurchaseCB purchaseCB = new PurchaseCB();
-        purchaseCB.query().setMemberId_Equal(memberId);
-        purchaseBhv.queryDelete(purchaseCB);
-
         PurchasePaymentCB paymentCB = new PurchasePaymentCB();
         paymentCB.query().queryPurchase().setMemberId_Equal(memberId);
         purchasePaymentBhv.queryDelete(paymentCB);
+
+        PurchaseCB purchaseCB = new PurchaseCB();
+        purchaseCB.query().setMemberId_Equal(memberId);
+        purchaseBhv.queryDelete(purchaseCB);
 
         // 勘違い実装
         //        MemberCB memberCB = new MemberCB();

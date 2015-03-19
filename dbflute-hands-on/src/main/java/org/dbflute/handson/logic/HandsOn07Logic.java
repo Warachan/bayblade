@@ -74,6 +74,7 @@ public class HandsOn07Logic {
         security.setMemberId(memberId);
         security.setReminderQuestion("What's your name?");
         security.setReminderAnswer("Nobody");
+        security.setReminderUseCount(8888);
         memberSecurityBhv.insert(security);
 
         MemberService service = new MemberService();
