@@ -188,19 +188,18 @@ public class HandsOn11Logic {
             public void setup(MemberLoginCB cb) {
             }
         });
-        // TODO wara LOG.isDebugEnabled()で囲う (メインコードなので) by jflute
+        // TODO wara LOG.isDebugEnabled()で囲う (メインコードなので): ループごと囲った方がいい by jflute
         for (Member member : memberList) {
             List<Purchase> purchaseList = member.getPurchaseList();
             for (Purchase purchase : purchaseList) {
                 List<PurchasePayment> paymentList = purchase.getPurchasePaymentList();
-                // TODO wara こういう日常の内容はデバッグ by jflute
+                // done wara こういう日常の内容はデバッグ by jflute
                 // ユーザがボタンを押す度の処理とかは日常の処理
                 if (LOG.isDebugEnabled()) {
                     LOG.debug("paymentList:" + paymentList);
                     LOG.debug("purchaseList:" + purchaseList);
                     LOG.debug("mobileLoginCount:" + member.getMobileLoginCount());
                 }
-                ;
             }
         }
         return memberList;
@@ -223,6 +222,7 @@ public class HandsOn11Logic {
     public List<Member> selectOnParadeSecondStepMember() {
         MemberCB cb = new MemberCB();
         cb.setupSelect_MemberStatus();
+        // TODO wara まあ、名前でも取れそうだけど、PRODUCT_ID で。IDなら Product まで行かなくてOK by jflute 
         cb.specify().derivedPurchaseList().countDistinct(new SubQuery<PurchaseCB>() {
             @Override
             public void query(PurchaseCB subCB) {
@@ -239,7 +239,7 @@ public class HandsOn11Logic {
                         subCB.query().queryProduct().setProductStatusCode_Equal_生産中止();
                     }
                 });
-                // TODO wara ...未払いになっている購入を持ってる会員をフォローしている会員になっちゃってる by jflute
+                // done wara ...未払いになっている購入を持ってる会員をフォローしている会員になっちゃってる by jflute
                 orCB.query().existsMemberFollowingByYourMemberIdList(new SubQuery<MemberFollowingCB>() {
                     @Override
                     public void query(MemberFollowingCB subCB) {
@@ -290,6 +290,7 @@ public class HandsOn11Logic {
                 refCB.query().addOrderBy_PurchaseDatetime_Desc();
             }
         });
+        // TODO wara るーぷごと and debug by jflute 
         for (Member member : memberList) {
             List<Purchase> purchaseList = member.getPurchaseList();
             for (final Purchase purchase : purchaseList) {
@@ -306,7 +307,7 @@ public class HandsOn11Logic {
     // ===================================================================================
     //                                                                     Very On Parade!
     //                                                                            ========
-
+    // wara Good、オンパレード会員リストっていうぼかした感じいいぞ by jflute 
     /**
      * <pre>
      * 正式会員のときにログインした最終ログイン日時とログイン回数を導出して会員を検索
@@ -321,12 +322,13 @@ public class HandsOn11Logic {
      * 会員ログイン情報はログイン日時の降順
      * *1: 商品カテゴリは、二階層になっていることが前提として
      * </pre>
-     * @param int leastLoginCount(NullAllowed　：なければ条件なし)
-     * @return オンパレード会員リスト（NotNull)
+     * @param leastLoginCount (NullAllowed: なければ条件なし)
+     * @return オンパレード会員リスト (NotNull)
      */
     public List<Member> selectOnParadeXStepMember(int leastLoginCount) {
         MemberCB cb = new MemberCB();
         cb.setupSelect_MemberStatus();
+        // TODO wara 日時なので、Dateじゃだめ by jflute 
         // 正式会員のときにログインした最終ログイン日時とログイン回数を導出して会員を検索
         cb.specify().derivedMemberLoginList().max(new SubQuery<MemberLoginCB>() {
             public void query(MemberLoginCB subCB) {
@@ -353,6 +355,7 @@ public class HandsOn11Logic {
         // 自分だけが購入している商品を買ったことのある会員を検索
         //        cb.query().
 
+        // TODO wara ソートは最後 by jflute
         // 最終ログイン日時の降順、会員IDの昇順で並べる
         cb.query().addSpecifiedDerivedOrderBy_Desc(Member.ALIAS_latestLoginDatetime);
         cb.query().addOrderBy_MemberId_Asc();
@@ -380,6 +383,7 @@ public class HandsOn11Logic {
                 refCB.query().addOrderBy_LoginDatetime_Desc();
             }
         });
+        // TODO wara 親カテゴリ名称の昇順がない by jflute 
         // 購入は商品カテゴリ(*1)の親カテゴリ名称の昇順、子カテゴリ名称の昇順、購入日時の降順
         // *1: 商品カテゴリは、二階層になっていることが前提として
         // TODO mayuko.sakaba まだーーー

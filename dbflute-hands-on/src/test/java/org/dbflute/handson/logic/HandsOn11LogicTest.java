@@ -36,7 +36,9 @@ public class HandsOn11LogicTest extends UnitContainerTestCase {
     // ===================================================================================
     //                                                                          Definition
     //                                                                          ==========
+    // TODO wara 不要なので削除 by jflute 
     private static final Log LOG = LogFactory.getLog(HandsOn11Logic.class);
+    // TODO wara ここ空行 by jflute 
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
