@@ -1,14 +1,19 @@
 package org.dbflute.handson.logic;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.dbflute.handson.dbflute.cbean.MemberCB;
+import org.dbflute.handson.dbflute.cbean.MemberFollowingCB;
 import org.dbflute.handson.dbflute.cbean.MemberLoginCB;
 import org.dbflute.handson.dbflute.cbean.PurchaseCB;
+import org.dbflute.handson.dbflute.cbean.PurchasePaymentCB;
 import org.dbflute.handson.dbflute.exbhv.MemberBhv;
 import org.dbflute.handson.dbflute.exbhv.MemberServiceBhv;
 import org.dbflute.handson.dbflute.exbhv.PurchaseBhv;
@@ -19,6 +24,9 @@ import org.dbflute.handson.dbflute.exentity.Purchase;
 import org.dbflute.handson.dbflute.exentity.PurchasePayment;
 import org.dbflute.handson.unit.UnitContainerTestCase;
 import org.seasar.dbflute.bhv.ConditionBeanSetupper;
+import org.seasar.dbflute.cbean.ListResultBean;
+import org.seasar.dbflute.cbean.SpecifyQuery;
+import org.seasar.dbflute.cbean.SubQuery;
 
 /**
  * @author mayuko.sakaba
@@ -209,20 +217,57 @@ public class HandsOn11LogicTest extends UnitContainerTestCase {
         List<Member> memberList = logic.selectOnParadeSecondStepMember();
 
         // ## Assert ##
-        boolean purchasedCanceledProduct = false;
         assertHasAnyElement(memberList);
+        boolean purchasedCanceledProduct = false;
         for (Member member : memberList) {
             List<Purchase> purchaseList = member.getPurchaseList();
+            Set<Integer> productTypeSet = new HashSet<Integer>();
             for (Purchase purchase : purchaseList) {
                 Product product = purchase.getProduct();
                 assertNotNull(product);
-                // TODO mayuko.sakaba まだカテゴリーの種類数は検索出来てない。
-                assertTrue(member.getProductTypeCount() <= 5);
+                productTypeSet.add(product.getProductId());
                 if (product.isProductStatusCode生産中止()) {
                     purchasedCanceledProduct = true;
                 }
             }
+            log(productTypeSet.size());
+            assertEquals(productTypeSet.size(), member.getProductTypeCount());
         }
+        log(purchasedCanceledProduct);
         assertTrue(purchasedCanceledProduct);
+
+        // 目視確認
+        MemberCB cb = new MemberCB();
+        cb.query().existsMemberFollowingByYourMemberIdList(new SubQuery<MemberFollowingCB>() {
+            public void query(MemberFollowingCB followCB) {
+                followCB.query().queryMemberByMyMemberId().existsPurchaseList(new SubQuery<PurchaseCB>() {
+                    @Override
+                    public void query(PurchaseCB subCB) {
+                        subCB.query().setPaymentCompleteFlg_Equal_False();
+                        subCB.columnQuery(new SpecifyQuery<PurchaseCB>() {
+                            @Override
+                            public void specify(PurchaseCB spCB) {
+                                spCB.specify().columnPurchasePrice();
+                            }
+                        }).lessThan(new SpecifyQuery<PurchaseCB>() {
+                            @Override
+                            public void specify(PurchaseCB spCB) {
+                                spCB.specify().derivedPurchasePaymentList().sum(new SubQuery<PurchasePaymentCB>() {
+                                    @Override
+                                    public void query(PurchasePaymentCB subCB) {
+                                        subCB.specify().columnPaymentAmount();
+                                    }
+                                }, null);
+                            }
+                        });
+                    }
+                });
+            }
+        });
+        ListResultBean<Member> confirmList = memberBhv.selectList(cb);
+        assertHasAnyElement(confirmList);
+        for (Member member : confirmList) {
+            log(member.getMemberId() + member.getMemberName());
+        }
     }
 }

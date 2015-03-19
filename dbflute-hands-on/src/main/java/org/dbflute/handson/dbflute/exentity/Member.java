@@ -1,6 +1,7 @@
 package org.dbflute.handson.dbflute.exentity;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 import org.dbflute.handson.dbflute.bsentity.BsMember;
 
@@ -35,6 +36,30 @@ public class Member extends BsMember {
 
     /** PRODUCT_TYPE_COUNT: (Derived Referrer) */
     protected Integer _productTypeCount;
+
+    /** LOGIN_COUNT: Derived Referrer Alias. */
+    public static final String ALIAS_loginCount = "LOGIN_COUNT";
+
+    /** LOGIN_COUNT: (Derived Referrer) */
+    protected Integer _loginCount;
+
+    /** LAST_LOGIN_DATE: Derived Referrer Alias. */
+    public static final String ALIAS_lastLoginDate = "LAST_LOGIN_DATE";
+
+    /** LAST_LOGIN_DATE: (Derived Referrer) */
+    protected Date _lastLoginDate;
+
+    /** MAX_PAID_PURCHASE_PRICE: Derived Referrer Alias. */
+    public static final String ALIAS_maxPaidPurchasePrice = "MAX_PAID_PURCHASE_PRICE";
+
+    /** MAX_PAID_PURCHASE_PRICE: (Derived Referrer) */
+    protected Integer _maxPaidPurchasePrice;
+
+    /** LAST_LOGIN_COUNT: Derived Referrer Alias. */
+    public static final String ALIAS_lastLoginCount = "LAST_LOGIN_COUNT";
+
+    /** LAST_LOGIN_COUNT: (Derived Referrer) */
+    protected Integer _lastLoginCount;
 
     /**
      * [get] LATEST_LOGIN_DATETIME: (Derived Referrer)
@@ -82,5 +107,53 @@ public class Member extends BsMember {
      */
     public void setProductTypeCount(Integer productTypeCount) {
         _productTypeCount = productTypeCount;
+    }
+
+    /**
+     * [get] LOGIN_COUNT: (Derived Referrer)
+     * @return The value of the column 'LOGIN_COUNT'. (NullAllowed)
+     */
+    public Integer getLoginCount() {
+        return _loginCount;
+    }
+
+    /**
+     * [set] LOGIN_COUNT: (Derived Referrer)
+     * @param loginCount The value of the column 'LOGIN_COUNT'. (NullAllowed)
+     */
+    public void setLoginCount(Integer loginCount) {
+        _loginCount = loginCount;
+    }
+
+    /**
+     * [get] LAST_LOGIN_DATE: (Derived Referrer)
+     * @return The value of the column 'LAST_LOGIN_DATE'. (NullAllowed)
+     */
+    public Date getLastLoginDate() {
+        return _lastLoginDate;
+    }
+
+    /**
+     * [set] LAST_LOGIN_DATE: (Derived Referrer)
+     * @param lastLoginDate The value of the column 'LAST_LOGIN_DATE'. (NullAllowed)
+     */
+    public void setLastLoginDate(Date lastLoginDate) {
+        _lastLoginDate = lastLoginDate;
+    }
+
+    /**
+     * [get] MAX_PAID_PURCHASE_PRICE: (Derived Referrer)
+     * @return The value of the column 'MAX_PAID_PURCHASE_PRICE'. (NullAllowed)
+     */
+    public Integer getMaxPaidPurchasePrice() {
+        return _maxPaidPurchasePrice;
+    }
+
+    /**
+    * [set] MAX_PAID_PURCHASE_PRICE: (Derived Referrer)
+    * @param maxPaidPurchasePrice The value of the column 'MAX_PAID_PURCHASE_PRICE'. (NullAllowed)
+    */
+    public void setMaxPaidPurchasePrice(Integer maxPaidPurchasePrice) {
+        _maxPaidPurchasePrice = maxPaidPurchasePrice;
     }
 }

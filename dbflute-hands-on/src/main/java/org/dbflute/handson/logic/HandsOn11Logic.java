@@ -223,21 +223,26 @@ public class HandsOn11Logic {
     public List<Member> selectOnParadeSecondStepMember() {
         MemberCB cb = new MemberCB();
         cb.setupSelect_MemberStatus();
-        cb.specify().derivedPurchaseList().count(new SubQuery<PurchaseCB>() {
+        cb.specify().derivedPurchaseList().countDistinct(new SubQuery<PurchaseCB>() {
             @Override
             public void query(PurchaseCB subCB) {
-                subCB.specify().specifyProduct().columnProductCategoryCode();
+                subCB.specify().specifyProduct().columnProductName();
                 // TODO mayuko.sakaba これだとカラムを数えるだけ。。。
             }
         }, Member.ALIAS_productTypeCount);
         cb.orScopeQuery(new OrQuery<MemberCB>() {
             @Override
             public void query(MemberCB orCB) {
+                orCB.query().existsPurchaseList(new SubQuery<PurchaseCB>() {
+                    @Override
+                    public void query(PurchaseCB subCB) {
+                        subCB.query().queryProduct().setProductStatusCode_Equal_生産中止();
+                    }
+                });
                 // TODO wara ...未払いになっている購入を持ってる会員をフォローしている会員になっちゃってる by jflute
-                orCB.query().existsMemberFollowingByMyMemberIdList(new SubQuery<MemberFollowingCB>() {
+                orCB.query().existsMemberFollowingByYourMemberIdList(new SubQuery<MemberFollowingCB>() {
                     @Override
                     public void query(MemberFollowingCB subCB) {
-                        subCB.setupSelect_MemberByYourMemberId();
                         // 思い出
                         //                        subCB.specify().specifyMemberByYourMemberId().derivedPurchaseList()
                         //                                .sum(new SubQuery<PurchaseCB>() {
@@ -245,7 +250,7 @@ public class HandsOn11Logic {
                         //                                        subCB.specify().columnPurchasePrice();
                         //                                    }
                         //                                }, PurchasePayment.ALIAS_memberPurchasePriceSummary);
-                        subCB.query().queryMemberByYourMemberId().existsPurchaseList(new SubQuery<PurchaseCB>() {
+                        subCB.query().queryMemberByMyMemberId().existsPurchaseList(new SubQuery<PurchaseCB>() {
                             @Override
                             public void query(PurchaseCB subCB) {
                                 // ひんと「購入価格 < 手渡しの支払い金額の合計」かつ未払い by jflute
@@ -267,7 +272,7 @@ public class HandsOn11Logic {
                                                     public void query(PurchasePaymentCB subCB) {
                                                         subCB.specify().columnPaymentAmount();
                                                     }
-                                                }, PurchaseCB.ALIAS_sumPaymentAmount);
+                                                }, null);
                                     }
                                 });
                             }
@@ -322,9 +327,70 @@ public class HandsOn11Logic {
     public List<Member> selectOnParadeXStepMember(int leastLoginCount) {
         MemberCB cb = new MemberCB();
         cb.setupSelect_MemberStatus();
-        cb.query().queryMemberStatus().setMemberStatusCode_Equal_正式会員();
+        // 正式会員のときにログインした最終ログイン日時とログイン回数を導出して会員を検索
+        cb.specify().derivedMemberLoginList().max(new SubQuery<MemberLoginCB>() {
+            public void query(MemberLoginCB subCB) {
+                subCB.specify().columnLoginDatetime();
+                subCB.query().setLoginMemberStatusCode_Equal_正式会員();
+            }
+        }, Member.ALIAS_lastLoginDate);
+        cb.specify().derivedMemberLoginList().count(new SubQuery<MemberLoginCB>() {
+            public void query(MemberLoginCB subCB) {
+                subCB.specify().columnMemberLoginId();
+                subCB.query().setLoginMemberStatusCode_Equal_正式会員();
+            }
+        }, Member.ALIAS_loginCount);
 
+        //さらに、支払済み購入の最大購入価格を導出して取得
+        cb.specify().derivedPurchaseList().max(new SubQuery<PurchaseCB>() {
+            public void query(PurchaseCB subCB) {
+                subCB.specify().columnPurchasePrice();
+                subCB.query().setPaymentCompleteFlg_Equal_True();
+            }
+        }, Member.ALIAS_maxPaidPurchasePrice);
+
+        // TODO mayuko.sakaba まだーーー
+        // 自分だけが購入している商品を買ったことのある会員を検索
+        //        cb.query().
+
+        // 最終ログイン日時の降順、会員IDの昇順で並べる
+        cb.query().addSpecifiedDerivedOrderBy_Desc(Member.ALIAS_latestLoginDatetime);
+        cb.query().addOrderBy_MemberId_Asc();
+
+        // ログイン回数が指定された回数以上で絞り込み
+        if (leastLoginCount > 0) {
+            cb.query().derivedMemberLoginList().count(new SubQuery<MemberLoginCB>() {
+                public void query(MemberLoginCB subCB) {
+                    subCB.specify().columnMemberLoginId();
+                }
+            }).greaterEqual(leastLoginCount);
+        }
+
+        // 仮会員のときにログインをしたことのある会員を検索
+        cb.query().existsMemberLoginList(new SubQuery<MemberLoginCB>() {
+            public void query(MemberLoginCB subCB) {
+                subCB.query().setLoginMemberStatusCode_Equal_仮会員();
+            }
+        });
         ListResultBean<Member> memberList = memberBhv.selectList(cb);
+        // もっともっとさらに、会員ログイン情報も取得
+        // 会員ログイン情報はログイン日時の降順
+        memberBhv.loadMemberLoginList(memberList, new ConditionBeanSetupper<MemberLoginCB>() {
+            public void setup(MemberLoginCB refCB) {
+                refCB.query().addOrderBy_LoginDatetime_Desc();
+            }
+        });
+        // 購入は商品カテゴリ(*1)の親カテゴリ名称の昇順、子カテゴリ名称の昇順、購入日時の降順
+        // *1: 商品カテゴリは、二階層になっていることが前提として
+        // TODO mayuko.sakaba まだーーー
+        memberBhv.loadPurchaseList(memberList, new ConditionBeanSetupper<PurchaseCB>() {
+            public void setup(PurchaseCB refCB) {
+                refCB.setupSelect_Product().withProductCategory();
+                refCB.setupSelect_Product().withProductStatus();
+                refCB.query().queryProduct().queryProductCategory().addOrderBy_ProductCategoryName_Asc();
+                refCB.query().addOrderBy_PurchaseDatetime_Desc();
+            }
+        });
         return memberList;
     }
 }
