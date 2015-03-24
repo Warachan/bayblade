@@ -1,7 +1,6 @@
 package org.dbflute.handson.dbflute.exentity;
 
 import java.sql.Timestamp;
-import java.util.Date;
 
 import org.dbflute.handson.dbflute.bsentity.BsMember;
 
@@ -43,12 +42,6 @@ public class Member extends BsMember {
     /** LOGIN_COUNT: (Derived Referrer) */
     protected Integer _loginCount;
 
-    /** LAST_LOGIN_DATE: Derived Referrer Alias. */
-    public static final String ALIAS_lastLoginDate = "LAST_LOGIN_DATE";
-
-    /** LAST_LOGIN_DATE: (Derived Referrer) */
-    protected Date _lastLoginDate;
-
     /** MAX_PAID_PURCHASE_PRICE: Derived Referrer Alias. */
     public static final String ALIAS_maxPaidPurchasePrice = "MAX_PAID_PURCHASE_PRICE";
 
@@ -60,6 +53,12 @@ public class Member extends BsMember {
 
     /** LAST_LOGIN_COUNT: (Derived Referrer) */
     protected Integer _lastLoginCount;
+
+    /** AVG_PURCHASE_PRICE: Derived Referrer Alias. */
+    public static final String ALIAS_avgPurchasePrice = "AVG_PURCHASE_PRICE";
+
+    /** AVG_PURCHASE_PRICE: (Derived Referrer) */
+    protected Integer _avgPurchasePrice;
 
     /**
      * [get] LATEST_LOGIN_DATETIME: (Derived Referrer)
@@ -126,22 +125,6 @@ public class Member extends BsMember {
     }
 
     /**
-     * [get] LAST_LOGIN_DATE: (Derived Referrer)
-     * @return The value of the column 'LAST_LOGIN_DATE'. (NullAllowed)
-     */
-    public Date getLastLoginDate() {
-        return _lastLoginDate;
-    }
-
-    /**
-     * [set] LAST_LOGIN_DATE: (Derived Referrer)
-     * @param lastLoginDate The value of the column 'LAST_LOGIN_DATE'. (NullAllowed)
-     */
-    public void setLastLoginDate(Date lastLoginDate) {
-        _lastLoginDate = lastLoginDate;
-    }
-
-    /**
      * [get] MAX_PAID_PURCHASE_PRICE: (Derived Referrer)
      * @return The value of the column 'MAX_PAID_PURCHASE_PRICE'. (NullAllowed)
      */
@@ -155,5 +138,21 @@ public class Member extends BsMember {
     */
     public void setMaxPaidPurchasePrice(Integer maxPaidPurchasePrice) {
         _maxPaidPurchasePrice = maxPaidPurchasePrice;
+    }
+
+    /**
+     * [get] AVG_PURCHASE_PRICE: (Derived Referrer)
+     * @return The value of the column 'AVG_PURCHASE_PRICE'. (NullAllowed)
+     */
+    public Integer getAvgPurchasePrice() {
+        return _avgPurchasePrice;
+    }
+
+    /**
+     * [set] AVG_PURCHASE_PRICE: (Derived Referrer)
+     * @param avgPurchasePrice The value of the column 'AVG_PURCHASE_PRICE'. (NullAllowed)
+     */
+    public void setAvgPurchasePrice(Integer avgPurchasePrice) {
+        _avgPurchasePrice = avgPurchasePrice;
     }
 }

@@ -6,27 +6,36 @@ import javax.annotation.Resource;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.dbflute.handson.dbflute.bsbhv.loader.LoaderOfMemberService;
+import org.dbflute.handson.dbflute.bsbhv.loader.LoaderOfServiceRank;
 import org.dbflute.handson.dbflute.cbean.MemberCB;
 import org.dbflute.handson.dbflute.cbean.MemberFollowingCB;
 import org.dbflute.handson.dbflute.cbean.MemberLoginCB;
+import org.dbflute.handson.dbflute.cbean.MemberServiceCB;
 import org.dbflute.handson.dbflute.cbean.PurchaseCB;
 import org.dbflute.handson.dbflute.cbean.PurchasePaymentCB;
+import org.dbflute.handson.dbflute.cbean.ServiceRankCB;
 import org.dbflute.handson.dbflute.exbhv.MemberBhv;
 import org.dbflute.handson.dbflute.exbhv.MemberServiceBhv;
 import org.dbflute.handson.dbflute.exbhv.MemberStatusBhv;
 import org.dbflute.handson.dbflute.exbhv.ProductBhv;
 import org.dbflute.handson.dbflute.exbhv.PurchaseBhv;
+import org.dbflute.handson.dbflute.exbhv.ServiceRankBhv;
 import org.dbflute.handson.dbflute.exentity.Member;
 import org.dbflute.handson.dbflute.exentity.MemberStatus;
 import org.dbflute.handson.dbflute.exentity.Product;
 import org.dbflute.handson.dbflute.exentity.Purchase;
 import org.dbflute.handson.dbflute.exentity.PurchasePayment;
+import org.dbflute.handson.dbflute.exentity.ServiceRank;
 import org.seasar.dbflute.bhv.ConditionBeanSetupper;
 import org.seasar.dbflute.bhv.ReferrerListHandler;
+import org.seasar.dbflute.bhv.ReferrerLoaderHandler;
 import org.seasar.dbflute.cbean.ListResultBean;
 import org.seasar.dbflute.cbean.OrQuery;
+import org.seasar.dbflute.cbean.ScalarQuery;
 import org.seasar.dbflute.cbean.SpecifyQuery;
 import org.seasar.dbflute.cbean.SubQuery;
+import org.seasar.dbflute.cbean.coption.DerivedReferrerOption;
 import org.seasar.dbflute.cbean.coption.LikeSearchOption;
 
 /**
@@ -54,6 +63,8 @@ public class HandsOn11Logic {
     protected MemberServiceBhv memberServiceBhv;
     @Resource
     protected ProductBhv productBhv;
+    @Resource
+    protected ServiceRankBhv serviceRankBhv;
 
     // 【むー。。。 】wara セクション１１は、JavaDocコメントをしっかり整備していこう by jflute
     // 例えば、こんな感じ:
@@ -189,13 +200,13 @@ public class HandsOn11Logic {
             }
         });
         // TODO wara LOG.isDebugEnabled()で囲う (メインコードなので): ループごと囲った方がいい by jflute
-        for (Member member : memberList) {
-            List<Purchase> purchaseList = member.getPurchaseList();
-            for (Purchase purchase : purchaseList) {
-                List<PurchasePayment> paymentList = purchase.getPurchasePaymentList();
-                // done wara こういう日常の内容はデバッグ by jflute
-                // ユーザがボタンを押す度の処理とかは日常の処理
-                if (LOG.isDebugEnabled()) {
+        if (LOG.isDebugEnabled()) {
+            for (Member member : memberList) {
+                List<Purchase> purchaseList = member.getPurchaseList();
+                for (Purchase purchase : purchaseList) {
+                    List<PurchasePayment> paymentList = purchase.getPurchasePaymentList();
+                    // done wara こういう日常の内容はデバッグ by jflute
+                    // ユーザがボタンを押す度の処理とかは日常の処理
                     LOG.debug("paymentList:" + paymentList);
                     LOG.debug("purchaseList:" + purchaseList);
                     LOG.debug("mobileLoginCount:" + member.getMobileLoginCount());
@@ -222,12 +233,11 @@ public class HandsOn11Logic {
     public List<Member> selectOnParadeSecondStepMember() {
         MemberCB cb = new MemberCB();
         cb.setupSelect_MemberStatus();
-        // TODO wara まあ、名前でも取れそうだけど、PRODUCT_ID で。IDなら Product まで行かなくてOK by jflute 
+        // TODO wara まあ、名前でも取れそうだけど、PRODUCT_ID で。IDなら Product まで行かなくてOK by jflute
         cb.specify().derivedPurchaseList().countDistinct(new SubQuery<PurchaseCB>() {
             @Override
             public void query(PurchaseCB subCB) {
-                subCB.specify().specifyProduct().columnProductName();
-                // TODO mayuko.sakaba これだとカラムを数えるだけ。。。
+                subCB.specify().specifyProduct();
             }
         }, Member.ALIAS_productTypeCount);
         cb.orScopeQuery(new OrQuery<MemberCB>() {
@@ -290,15 +300,17 @@ public class HandsOn11Logic {
                 refCB.query().addOrderBy_PurchaseDatetime_Desc();
             }
         });
-        // TODO wara るーぷごと and debug by jflute 
-        for (Member member : memberList) {
-            List<Purchase> purchaseList = member.getPurchaseList();
-            for (final Purchase purchase : purchaseList) {
-                Product product = purchase.getProduct();
-                LOG.info("ProductName : " + product.getProductName() + "ProductCategoryCode : "
-                        + product.getProductCategoryCode());
-                LOG.info("PurchaseList : " + purchaseList);
-                LOG.info("ProductTypeList  : " + member.getProductTypeCount());
+        // TODO wara るーぷごと and debug by jflute
+        if (LOG.isDebugEnabled()) {
+            for (Member member : memberList) {
+                List<Purchase> purchaseList = member.getPurchaseList();
+                for (final Purchase purchase : purchaseList) {
+                    Product product = purchase.getProduct();
+                    LOG.debug("ProductName : " + product.getProductName() + "ProductCategoryCode : "
+                            + product.getProductCategoryCode());
+                    LOG.debug("PurchaseList : " + purchaseList);
+                    LOG.debug("ProductTypeList  : " + member.getProductTypeCount());
+                }
             }
         }
         return memberList;
@@ -307,7 +319,7 @@ public class HandsOn11Logic {
     // ===================================================================================
     //                                                                     Very On Parade!
     //                                                                            ========
-    // wara Good、オンパレード会員リストっていうぼかした感じいいぞ by jflute 
+    // wara Good、オンパレード会員リストっていうぼかした感じいいぞ by jflute
     /**
      * <pre>
      * 正式会員のときにログインした最終ログイン日時とログイン回数を導出して会員を検索
@@ -328,14 +340,14 @@ public class HandsOn11Logic {
     public List<Member> selectOnParadeXStepMember(int leastLoginCount) {
         MemberCB cb = new MemberCB();
         cb.setupSelect_MemberStatus();
-        // TODO wara 日時なので、Dateじゃだめ by jflute 
+        // TODO wara 日時なので、Dateじゃだめ by jflute
         // 正式会員のときにログインした最終ログイン日時とログイン回数を導出して会員を検索
         cb.specify().derivedMemberLoginList().max(new SubQuery<MemberLoginCB>() {
             public void query(MemberLoginCB subCB) {
                 subCB.specify().columnLoginDatetime();
                 subCB.query().setLoginMemberStatusCode_Equal_正式会員();
             }
-        }, Member.ALIAS_lastLoginDate);
+        }, Member.ALIAS_latestLoginDatetime);
         cb.specify().derivedMemberLoginList().count(new SubQuery<MemberLoginCB>() {
             public void query(MemberLoginCB subCB) {
                 subCB.specify().columnMemberLoginId();
@@ -355,11 +367,6 @@ public class HandsOn11Logic {
         // 自分だけが購入している商品を買ったことのある会員を検索
         //        cb.query().
 
-        // TODO wara ソートは最後 by jflute
-        // 最終ログイン日時の降順、会員IDの昇順で並べる
-        cb.query().addSpecifiedDerivedOrderBy_Desc(Member.ALIAS_latestLoginDatetime);
-        cb.query().addOrderBy_MemberId_Asc();
-
         // ログイン回数が指定された回数以上で絞り込み
         if (leastLoginCount > 0) {
             cb.query().derivedMemberLoginList().count(new SubQuery<MemberLoginCB>() {
@@ -375,6 +382,10 @@ public class HandsOn11Logic {
                 subCB.query().setLoginMemberStatusCode_Equal_仮会員();
             }
         });
+        // TODO wara ソートは最後 by jflute
+        // 最終ログイン日時の降順、会員IDの昇順で並べる
+        cb.query().addSpecifiedDerivedOrderBy_Desc(Member.ALIAS_latestLoginDatetime);
+        cb.query().addOrderBy_MemberId_Asc();
         ListResultBean<Member> memberList = memberBhv.selectList(cb);
         // もっともっとさらに、会員ログイン情報も取得
         // 会員ログイン情報はログイン日時の降順
@@ -383,18 +394,122 @@ public class HandsOn11Logic {
                 refCB.query().addOrderBy_LoginDatetime_Desc();
             }
         });
-        // TODO wara 親カテゴリ名称の昇順がない by jflute 
+        // TODO wara 親カテゴリ名称の昇順がない by jflute
         // 購入は商品カテゴリ(*1)の親カテゴリ名称の昇順、子カテゴリ名称の昇順、購入日時の降順
         // *1: 商品カテゴリは、二階層になっていることが前提として
         // TODO mayuko.sakaba まだーーー
         memberBhv.loadPurchaseList(memberList, new ConditionBeanSetupper<PurchaseCB>() {
             public void setup(PurchaseCB refCB) {
                 refCB.setupSelect_Product().withProductCategory();
+                refCB.setupSelect_Product().withProductCategory().withProductCategorySelf();
                 refCB.setupSelect_Product().withProductStatus();
+                refCB.query().queryProduct().queryProductCategory().queryProductCategorySelf()
+                        .addOrderBy_ProductCategoryName_Asc();
                 refCB.query().queryProduct().queryProductCategory().addOrderBy_ProductCategoryName_Asc();
                 refCB.query().addOrderBy_PurchaseDatetime_Desc();
             }
         });
         return memberList;
+    }
+
+    // ===================================================================================
+    //                                                                       Simple Logic
+    //                                                                            ========
+    /**
+     * <pre>
+     * サービスランクごとの会員数、合計購入価格、平均最大購入価格(*1)、ログイン数を検索
+     * 紐付く会員とその会員に紐付く購入と会員ログインも取得する
+     * 会員数の多い順に並べる
+     * *1: 会員ごとの最大購入価格のサービスランクごとの平均 (nullにならないようにすること)
+     * </pre>
+     * @return サービスランクごとの会員リスト (NotNull)
+     */
+    public List<ServiceRank> selectServiceRankSummary() {
+        ServiceRankCB cb = new ServiceRankCB();
+        // サービスランクごとの会員数
+        cb.specify().derivedMemberServiceList().count(new SubQuery<MemberServiceCB>() {
+            public void query(MemberServiceCB subCB) {
+                subCB.specify().columnMemberId();
+            }
+        }, ServiceRank.ALIAS_memberCountPerRank);
+
+        // 合計購入価格
+        cb.specify().derivedMemberServiceList().sum(new SubQuery<MemberServiceCB>() {
+            public void query(MemberServiceCB subCB) {
+                subCB.specify().specifyMember().derivedPurchaseList().sum(new SubQuery<PurchaseCB>() {
+                    public void query(PurchaseCB subCB) {
+                        subCB.specify().columnPurchasePrice();
+                    }
+                }, null);
+            }
+        }, ServiceRank.ALIAS_purchasePriceSum);
+
+        // 平均最大購入価格
+        cb.specify().derivedMemberServiceList().max(new SubQuery<MemberServiceCB>() {
+            public void query(MemberServiceCB subCB) {
+                subCB.specify().specifyMember().derivedPurchaseList().avg(new SubQuery<PurchaseCB>() {
+                    public void query(PurchaseCB subCB) {
+                        subCB.specify().columnPurchasePrice();
+                    }
+                }, null);
+            }
+        }, ServiceRank.ALIAS_avgPurchaseMaxPrice, new DerivedReferrerOption().coalesce(0));
+
+        // ログイン数を検索
+        cb.specify().derivedMemberServiceList().count(new SubQuery<MemberServiceCB>() {
+            public void query(MemberServiceCB subCB) {
+                subCB.specify().specifyMember().specifyMemberLoginAsLatest().columnMemberId();
+            }
+        }, ServiceRank.ALIAS_loginCountPerRank);
+        cb.query().addSpecifiedDerivedOrderBy_Desc(ServiceRank.ALIAS_memberCountPerRank);
+
+        ListResultBean<ServiceRank> rankList = serviceRankBhv.selectList(cb);
+        serviceRankBhv.load(rankList, new ReferrerLoaderHandler<LoaderOfServiceRank>() {
+            public void handle(LoaderOfServiceRank loader) {
+                loader.loadMemberServiceList(new ConditionBeanSetupper<MemberServiceCB>() {
+                    public void setup(MemberServiceCB refCB) {
+                        refCB.setupSelect_Member();
+                    }
+                    // ??
+                }).withNestedReferrer(new ReferrerLoaderHandler<LoaderOfMemberService>() {
+                    public void handle(LoaderOfMemberService loader) {
+                        loader.pulloutMember().loadMemberLoginList(new ConditionBeanSetupper<MemberLoginCB>() {
+                            public void setup(MemberLoginCB refCB) {
+                            }
+                        });
+                        loader.pulloutMember().loadPurchaseList(new ConditionBeanSetupper<PurchaseCB>() {
+                            @Override
+                            public void setup(PurchaseCB refCB) {
+                            }
+                        });
+                    }
+                });
+            }
+        });
+        return rankList;
+    }
+
+    /**
+     * それぞれの会員の平均購入価格の会員全体での最大値を検索
+     * @return 会員全体の中で、最大の平均購入価格値 (NotNull)
+     */
+    public Integer selectMaxAvgPurchasePrice() {
+        // 思い出
+        //        MemberCB cb = new MemberCB();
+        //        cb.specify().derivedPurchaseList().avg(new SubQuery<PurchaseCB>() {
+        //            public void query(PurchaseCB subCB) {
+        //                subCB.specify().columnPurchasePrice();
+        //            }
+        //        }, Member.ALIAS_avgPurchasePrice);
+        Integer maxAvg = memberBhv.scalarSelect(Integer.class).max(new ScalarQuery<MemberCB>() {
+            public void query(MemberCB subCB) {
+                subCB.specify().derivedPurchaseList().avg(new SubQuery<PurchaseCB>() {
+                    public void query(PurchaseCB subCB) {
+                        subCB.specify().columnPurchasePrice();
+                    }
+                }, null);
+            }
+        });
+        return maxAvg;
     }
 }

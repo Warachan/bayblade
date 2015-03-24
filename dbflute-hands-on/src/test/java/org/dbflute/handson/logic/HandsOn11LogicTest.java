@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.dbflute.handson.dbflute.bsbhv.loader.LoaderOfMember;
 import org.dbflute.handson.dbflute.cbean.MemberCB;
 import org.dbflute.handson.dbflute.cbean.MemberFollowingCB;
 import org.dbflute.handson.dbflute.cbean.MemberLoginCB;
@@ -22,8 +23,10 @@ import org.dbflute.handson.dbflute.exentity.MemberLogin;
 import org.dbflute.handson.dbflute.exentity.Product;
 import org.dbflute.handson.dbflute.exentity.Purchase;
 import org.dbflute.handson.dbflute.exentity.PurchasePayment;
+import org.dbflute.handson.dbflute.exentity.ServiceRank;
 import org.dbflute.handson.unit.UnitContainerTestCase;
 import org.seasar.dbflute.bhv.ConditionBeanSetupper;
+import org.seasar.dbflute.bhv.ReferrerLoaderHandler;
 import org.seasar.dbflute.cbean.ListResultBean;
 import org.seasar.dbflute.cbean.SpecifyQuery;
 import org.seasar.dbflute.cbean.SubQuery;
@@ -36,9 +39,9 @@ public class HandsOn11LogicTest extends UnitContainerTestCase {
     // ===================================================================================
     //                                                                          Definition
     //                                                                          ==========
-    // TODO wara 不要なので削除 by jflute 
+    // TODO wara 不要なので削除 by jflute
     private static final Log LOG = LogFactory.getLog(HandsOn11Logic.class);
-    // TODO wara ここ空行 by jflute 
+    // TODO wara ここ空行 by jflute
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
@@ -270,6 +273,129 @@ public class HandsOn11LogicTest extends UnitContainerTestCase {
         assertHasAnyElement(confirmList);
         for (Member member : confirmList) {
             log(member.getMemberId() + member.getMemberName());
+        }
+    }
+
+    // ===================================================================================
+    //                                                                     Very On Parade!
+    //                                                                            ========
+    /**
+     * ログイン回数が 2 回より多い会員を検索し、結果がその通りであることをアサート
+     * 最終ログイン日時の降順と会員IDの昇順で並んでいることをアサート
+     * 支払済み購入の最大購入価格が妥当であることをアサート
+     * 仮会員のときにログインをしたことのある会員であることをアサート
+     * 自分だけが購入している商品を買ったことのある会員であることをアサート
+     * @throws Exception
+     */
+    public void test_selectOnParadeXStepMember_オンパレードであること() throws Exception {
+        // ## Arrange ##
+        HandsOn11Logic logic = new HandsOn11Logic();
+        inject(logic);
+
+        // ## Act ##
+        List<Member> memberList = logic.selectOnParadeXStepMember(2);
+
+        // ## Assert ##
+        memberBhv.load(memberList, new ReferrerLoaderHandler<LoaderOfMember>() {
+            public void handle(LoaderOfMember loader) {
+                loader.loadPurchaseList(new ConditionBeanSetupper<PurchaseCB>() {
+                    public void setup(PurchaseCB refCB) {
+                        refCB.query().setPaymentCompleteFlg_Equal_True();
+                        refCB.query().addOrderBy_PurchasePrice_Desc();
+                    }
+                });
+            }
+        });
+        assertHasAnyElement(memberList);
+        Integer previousId = null;
+        Timestamp previousLatestLoginTime = null;
+        boolean existsPreMemberLogin = false;
+        for (Member member : memberList) {
+            assertTrue(member.getLoginCount() >= 2);
+            List<Purchase> purchaseList = member.getPurchaseList();
+            if (!purchaseList.isEmpty()) {
+                assertEquals(purchaseList.get(0).getPurchasePrice(), member.getMaxPaidPurchasePrice());
+            }
+            List<MemberLogin> loginList = member.getMemberLoginList();
+            for (MemberLogin login : loginList) {
+                if (login.isLoginMemberStatusCode仮会員()) {
+                    existsPreMemberLogin = true;
+                }
+            }
+            Timestamp latestLoginTime = member.getLatestLoginDatetime();
+            Integer memberId = member.getMemberId();
+            if (previousId != null && previousLatestLoginTime != null) {
+                assertTrue(memberId <= previousId);
+                // TODO mayuko.sakaba ここ false
+                log("########"
+                        + (latestLoginTime.after(previousLatestLoginTime) + " Pre: " + latestLoginTime
+                                .equals(previousLatestLoginTime)));
+                assertTrue(latestLoginTime.after(previousLatestLoginTime)
+                        || latestLoginTime.equals(previousLatestLoginTime));
+
+            }
+            previousId = memberId;
+            previousLatestLoginTime = latestLoginTime;
+        }
+        assertTrue(existsPreMemberLogin);
+    }
+
+    // ===================================================================================
+    //                                                                        Simple Logic
+    //                                                                            ========
+    /**
+    * <pre>
+    * 会員数が妥当であることをアサート
+    * 検索した内容をログに綺麗に出して目視で確認すること
+    * </pre>
+    * @throws Exception
+    */
+    public void test_selectServiceRankSummary_集計されていること() throws Exception {
+        // ## Arrange ##
+        HandsOn11Logic logic = new HandsOn11Logic();
+        inject(logic);
+
+        // ## Act ##
+        List<ServiceRank> rankList = logic.selectServiceRankSummary();
+
+        // ## Assert ##
+        MemberCB cb = new MemberCB();
+        int memberCount = memberBhv.selectCount(cb);
+
+        assertHasAnyElement(rankList);
+        int members = 0;
+        for (ServiceRank rank : rankList) {
+            String rankCd = rank.getServiceRankCode();
+            Integer membersPerRank = rank.getMemberCountPerRank();
+            log("Rank Code: " + rankCd + " Member No: " + membersPerRank);
+            members += membersPerRank;
+        }
+        log("Sum of members: " + members);
+        assertEquals(members, memberCount);
+    }
+
+    /**
+     * <pre>
+     * 平均の最大価格に該当する会員が存在することをアサート
+     * </pre>
+     * @throws Exception
+     */
+    public void test_selectMaxAvgPurchasePrice_平均の最大の会員() throws Exception {
+        // ## Arrange ##
+        HandsOn11Logic logic = new HandsOn11Logic();
+        inject(logic);
+
+        // ## Act ##
+        Integer maxAvgPrice = logic.selectMaxAvgPurchasePrice();
+        PurchaseCB cb = new PurchaseCB();
+        cb.query().setPurchasePrice_Equal(maxAvgPrice);
+        ListResultBean<Purchase> purchaseList = purchaseBhv.selectList(cb);
+
+        // ## Assert ##
+        assertNotNull(purchaseList);
+        for (Purchase purchase : purchaseList) {
+            Integer purchasePrice = purchase.getPurchasePrice();
+            log("MaxAvgPrice" + ": " + maxAvgPrice + " Actual: " + purchasePrice);
         }
     }
 }
