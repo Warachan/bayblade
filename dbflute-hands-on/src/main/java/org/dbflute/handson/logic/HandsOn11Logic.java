@@ -126,7 +126,6 @@ public class HandsOn11Logic {
         cb.setupSelect_MemberLoginAsLatest();
         cb.query().setMemberName_LikeSearch(memberName, new LikeSearchOption().likeContain());
         cb.specify().derivedMemberLoginList().max(new SubQuery<MemberLoginCB>() {
-            @Override
             public void query(MemberLoginCB subCB) {
                 subCB.query().setMemberLoginId_IsNotNull();
                 subCB.specify().columnLoginDatetime();
@@ -160,7 +159,6 @@ public class HandsOn11Logic {
         cb.setupSelect_MemberStatus();
         cb.setupSelect_MemberServiceAsOne().withServiceRank();
         cb.specify().derivedMemberLoginList().count(new SubQuery<MemberLoginCB>() {
-            @Override
             public void query(MemberLoginCB subCB) {
                 subCB.specify().columnMobileLoginFlg();
             }
@@ -168,7 +166,6 @@ public class HandsOn11Logic {
 
         if (completeOnly) {
             cb.query().notExistsPurchaseList(new SubQuery<PurchaseCB>() {
-                @Override
                 public void query(PurchaseCB subCB) {
                     subCB.query().setPaymentCompleteFlg_Equal_False();
                 }
@@ -176,16 +173,13 @@ public class HandsOn11Logic {
         }
         ListResultBean<Member> memberList = memberBhv.selectList(cb);
         memberBhv.loadPurchaseList(memberList, new ConditionBeanSetupper<PurchaseCB>() {
-            @Override
             public void setup(PurchaseCB refCB) {
                 refCB.query().queryProduct().addOrderBy_RegularPrice_Desc();
                 refCB.query().addOrderBy_PurchasePrice_Desc();
             }
         }).withNestedReferrer(new ReferrerListHandler<Purchase>() {
-            @Override
             public void handle(List<Purchase> referrerList) {
                 purchaseBhv.loadPurchasePaymentList(referrerList, new ConditionBeanSetupper<PurchasePaymentCB>() {
-                    @Override
                     public void setup(PurchasePaymentCB refCB) {
                         // こっち？検索？
                         refCB.query().setPaymentMethodCode_InScope_Recommended();
@@ -236,23 +230,19 @@ public class HandsOn11Logic {
         // done wara まあ、名前でも取れそうだけど、PRODUCT_ID で。IDなら Product まで行かなくてOK by jflute
         // TODO wara 直したあと実行してない by jflute
         cb.specify().derivedPurchaseList().countDistinct(new SubQuery<PurchaseCB>() {
-            @Override
             public void query(PurchaseCB subCB) {
-                subCB.specify().specifyProduct();
+                subCB.specify().specifyProduct().columnProductId();
             }
         }, Member.ALIAS_productTypeCount);
         cb.orScopeQuery(new OrQuery<MemberCB>() {
-            @Override
             public void query(MemberCB orCB) {
                 orCB.query().existsPurchaseList(new SubQuery<PurchaseCB>() {
-                    @Override
                     public void query(PurchaseCB subCB) {
                         subCB.query().queryProduct().setProductStatusCode_Equal_生産中止();
                     }
                 });
                 // done wara ...未払いになっている購入を持ってる会員をフォローしている会員になっちゃってる by jflute
                 orCB.query().existsMemberFollowingByYourMemberIdList(new SubQuery<MemberFollowingCB>() {
-                    @Override
                     public void query(MemberFollowingCB subCB) {
                         // 思い出
                         //                        subCB.specify().specifyMemberByYourMemberId().derivedPurchaseList()
@@ -262,7 +252,6 @@ public class HandsOn11Logic {
                         //                                    }
                         //                                }, PurchasePayment.ALIAS_memberPurchasePriceSummary);
                         subCB.query().queryMemberByMyMemberId().existsPurchaseList(new SubQuery<PurchaseCB>() {
-                            @Override
                             public void query(PurchaseCB subCB) {
                                 // ひんと「購入価格 < 手渡しの支払い金額の合計」かつ未払い by jflute
                                 // これは、カラム対カラムである、という分析を先にやるの！わら！ by jflute
@@ -270,16 +259,13 @@ public class HandsOn11Logic {
                                 // http://dbflute.seasar.org/ja/tutorial/developer.html#howtosearch
                                 subCB.query().setPaymentCompleteFlg_Equal_False();
                                 subCB.columnQuery(new SpecifyQuery<PurchaseCB>() {
-                                    @Override
                                     public void specify(PurchaseCB spCB) {
                                         spCB.specify().columnPurchasePrice();
                                     }
                                 }).lessThan(new SpecifyQuery<PurchaseCB>() {
-                                    @Override
                                     public void specify(PurchaseCB spCB) {
                                         spCB.specify().derivedPurchasePaymentList()
                                                 .sum(new SubQuery<PurchasePaymentCB>() {
-                                                    @Override
                                                     public void query(PurchasePaymentCB subCB) {
                                                         subCB.specify().columnPaymentAmount();
                                                     }
@@ -294,7 +280,6 @@ public class HandsOn11Logic {
         });
         ListResultBean<Member> memberList = memberBhv.selectList(cb);
         memberBhv.loadPurchaseList(memberList, new ConditionBeanSetupper<PurchaseCB>() {
-            @Override
             public void setup(PurchaseCB refCB) {
                 refCB.setupSelect_Product();
                 refCB.query().queryProduct().addOrderBy_ProductStatusCode_Asc();
@@ -445,11 +430,11 @@ public class HandsOn11Logic {
             }
         }, ServiceRank.ALIAS_purchasePriceSum);
 
-        // TODO wara 最大購入価格の平均と捉えてやってみよう by jflute 
+        // TODO wara 最大購入価格の平均と捉えてやってみよう by jflute
         // 平均最大購入価格
-        cb.specify().derivedMemberServiceList().max(new SubQuery<MemberServiceCB>() {
+        cb.specify().derivedMemberServiceList().avg(new SubQuery<MemberServiceCB>() {
             public void query(MemberServiceCB subCB) {
-                subCB.specify().specifyMember().derivedPurchaseList().avg(new SubQuery<PurchaseCB>() {
+                subCB.specify().specifyMember().derivedPurchaseList().max(new SubQuery<PurchaseCB>() {
                     public void query(PurchaseCB subCB) {
                         subCB.specify().columnPurchasePrice();
                     }
@@ -480,7 +465,6 @@ public class HandsOn11Logic {
                             }
                         });
                         loader.pulloutMember().loadPurchaseList(new ConditionBeanSetupper<PurchaseCB>() {
-                            @Override
                             public void setup(PurchaseCB refCB) {
                             }
                         });
@@ -491,11 +475,11 @@ public class HandsOn11Logic {
         return rankList;
     }
 
-    // TODO wara 厳密にはNotNullじゃないケースがありえる。データが０件だった場合 by jflute 
+    // TODO wara 厳密にはNotNullじゃないケースがありえる。データが０件だった場合 by jflute
     // ただまあ、業務的にはそこにあまり意味がないので、もう絶対にNotNullにしてしまおう。
     /**
      * それぞれの会員の平均購入価格の会員全体での最大値を検索
-     * @return 会員全体の中で、最大の平均購入価格値 (NotNull)
+     * @return 会員全体の中で、最大の平均購入価格値 (Null Allowed)
      */
     public Integer selectMaxAvgPurchasePrice() {
         // 思い出

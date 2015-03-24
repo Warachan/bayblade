@@ -7,8 +7,6 @@ import java.util.Set;
 
 import javax.annotation.Resource;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.dbflute.handson.dbflute.bsbhv.loader.LoaderOfMember;
 import org.dbflute.handson.dbflute.cbean.MemberCB;
 import org.dbflute.handson.dbflute.cbean.MemberFollowingCB;
@@ -36,12 +34,6 @@ import org.seasar.dbflute.cbean.SubQuery;
  */
 public class HandsOn11LogicTest extends UnitContainerTestCase {
 
-    // ===================================================================================
-    //                                                                          Definition
-    //                                                                          ==========
-    // TODO wara 不要なので削除 by jflute
-    private static final Log LOG = LogFactory.getLog(HandsOn11Logic.class);
-    // TODO wara ここ空行 by jflute
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
@@ -311,30 +303,34 @@ public class HandsOn11LogicTest extends UnitContainerTestCase {
         Timestamp previousLatestLoginTime = null;
         boolean existsPreMemberLogin = false;
         for (Member member : memberList) {
-            // TODO wara getLoginCount()は正式会員のときのログイン回数なので正確ではない by jflute 
-            assertTrue(member.getLoginCount() >= 2);
+            // TODO wara getLoginCount()は正式会員のときのログイン回数なので正確ではない by jflute
+            assertTrue(member.getMemberLoginList().size() >= 2);
+
             List<Purchase> purchaseList = member.getPurchaseList();
             if (!purchaseList.isEmpty()) {
                 assertEquals(purchaseList.get(0).getPurchasePrice(), member.getMaxPaidPurchasePrice());
             }
+
             List<MemberLogin> loginList = member.getMemberLoginList();
             for (MemberLogin login : loginList) {
                 if (login.isLoginMemberStatusCode仮会員()) {
                     existsPreMemberLogin = true;
                 }
             }
+
             Timestamp latestLoginTime = member.getLatestLoginDatetime();
             Integer memberId = member.getMemberId();
             if (previousId != null && previousLatestLoginTime != null) {
-                assertTrue(memberId <= previousId);
-                // TODO mayuko.sakaba ここ false
-                log("########"
-                        + (latestLoginTime.after(previousLatestLoginTime) + " Pre: " + latestLoginTime
-                                .equals(previousLatestLoginTime)));
+                // 最終ログイン日時の降順と会員IDの昇順で並んでいることをアサート
+                log((latestLoginTime.before(previousLatestLoginTime) + " Pre: " + latestLoginTime
+                        .equals(previousLatestLoginTime)));
                 assertTrue(latestLoginTime.before(previousLatestLoginTime)
                         || latestLoginTime.equals(previousLatestLoginTime));
+                if (latestLoginTime.equals(previousLatestLoginTime)) {
+                    log("####Assert####" + previousId + " : memberId " + memberId);
+                    assertTrue(memberId > previousId);
+                }
                 // TODO annie 空行削除 by jflute
-
             }
             previousId = memberId;
             previousLatestLoginTime = latestLoginTime;
@@ -394,8 +390,8 @@ public class HandsOn11LogicTest extends UnitContainerTestCase {
         PurchaseCB cb = new PurchaseCB();
         cb.query().setPurchasePrice_Equal(maxAvgPrice);
         ListResultBean<Purchase> purchaseList = purchaseBhv.selectList(cb);
-        // TODO wara NotNullじゃなくてHasAnyElement by jflute 
-        assertNotNull(purchaseList);
+        // TODO wara NotNullじゃなくてHasAnyElement by jflute
+        assertHasAnyElement(purchaseList);
         for (Purchase purchase : purchaseList) {
             Integer purchasePrice = purchase.getPurchasePrice();
             log("MaxAvgPrice" + ": " + maxAvgPrice + " Actual: " + purchasePrice);
