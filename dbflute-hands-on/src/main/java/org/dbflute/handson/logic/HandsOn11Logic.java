@@ -476,7 +476,7 @@ public class HandsOn11Logic {
         return rankList;
     }
 
-    // TODO wara 厳密にはNotNullじゃないケースがありえる。データが０件だった場合 by jflute
+    // done wara 厳密にはNotNullじゃないケースがありえる。データが０件だった場合 by jflute
     // ただまあ、業務的にはそこにあまり意味がないので、もう絶対にNotNullにしてしまおう。
     /**
      * それぞれの会員の平均購入価格の会員全体での最大値を検索
