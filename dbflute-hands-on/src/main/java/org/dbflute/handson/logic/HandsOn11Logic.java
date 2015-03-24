@@ -37,6 +37,7 @@ import org.seasar.dbflute.cbean.SpecifyQuery;
 import org.seasar.dbflute.cbean.SubQuery;
 import org.seasar.dbflute.cbean.coption.DerivedReferrerOption;
 import org.seasar.dbflute.cbean.coption.LikeSearchOption;
+import org.seasar.dbflute.cbean.coption.ScalarSelectOption;
 
 /**
  * @author mayuko.sakaba
@@ -479,7 +480,7 @@ public class HandsOn11Logic {
     // ただまあ、業務的にはそこにあまり意味がないので、もう絶対にNotNullにしてしまおう。
     /**
      * それぞれの会員の平均購入価格の会員全体での最大値を検索
-     * @return 会員全体の中で、最大の平均購入価格値 (Null Allowed)
+     * @return 会員全体の中で、最大の平均購入価格値 (NotNull)
      */
     public Integer selectMaxAvgPurchasePrice() {
         // 思い出
@@ -497,7 +498,7 @@ public class HandsOn11Logic {
                     }
                 }, null);
             }
-        });
+        }, new ScalarSelectOption().coalesce(0));
         return maxAvg;
     }
 }
