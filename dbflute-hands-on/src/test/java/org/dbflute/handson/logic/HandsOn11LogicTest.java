@@ -303,7 +303,7 @@ public class HandsOn11LogicTest extends UnitContainerTestCase {
         Timestamp previousLatestLoginTime = null;
         boolean existsPreMemberLogin = false;
         for (Member member : memberList) {
-            // TODO wara getLoginCount()は正式会員のときのログイン回数なので正確ではない by jflute
+            // done wara getLoginCount()は正式会員のときのログイン回数なので正確ではない by jflute
             assertTrue(member.getMemberLoginList().size() >= 2);
 
             List<Purchase> purchaseList = member.getPurchaseList();
@@ -330,7 +330,7 @@ public class HandsOn11LogicTest extends UnitContainerTestCase {
                     log("####Assert####" + previousId + " : memberId " + memberId);
                     assertTrue(memberId > previousId);
                 }
-                // TODO annie 空行削除 by jflute
+                // done annie 空行削除 by jflute
             }
             previousId = memberId;
             previousLatestLoginTime = latestLoginTime;
@@ -390,7 +390,7 @@ public class HandsOn11LogicTest extends UnitContainerTestCase {
         PurchaseCB cb = new PurchaseCB();
         cb.query().setPurchasePrice_Equal(maxAvgPrice);
         ListResultBean<Purchase> purchaseList = purchaseBhv.selectList(cb);
-        // TODO wara NotNullじゃなくてHasAnyElement by jflute
+        // done wara NotNullじゃなくてHasAnyElement by jflute
         assertHasAnyElement(purchaseList);
         for (Purchase purchase : purchaseList) {
             Integer purchasePrice = purchase.getPurchasePrice();

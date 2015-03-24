@@ -228,7 +228,7 @@ public class HandsOn11Logic {
         MemberCB cb = new MemberCB();
         cb.setupSelect_MemberStatus();
         // done wara まあ、名前でも取れそうだけど、PRODUCT_ID で。IDなら Product まで行かなくてOK by jflute
-        // TODO wara 直したあと実行してない by jflute
+        // done wara 直したあと実行してない by jflute
         cb.specify().derivedPurchaseList().countDistinct(new SubQuery<PurchaseCB>() {
             public void query(PurchaseCB subCB) {
                 subCB.specify().specifyProduct().columnProductId();
@@ -430,7 +430,7 @@ public class HandsOn11Logic {
             }
         }, ServiceRank.ALIAS_purchasePriceSum);
 
-        // TODO wara 最大購入価格の平均と捉えてやってみよう by jflute
+        // done wara 最大購入価格の平均と捉えてやってみよう by jflute
         // 平均最大購入価格
         cb.specify().derivedMemberServiceList().avg(new SubQuery<MemberServiceCB>() {
             public void query(MemberServiceCB subCB) {
