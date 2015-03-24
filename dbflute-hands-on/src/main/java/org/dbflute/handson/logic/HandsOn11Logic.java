@@ -199,7 +199,7 @@ public class HandsOn11Logic {
             public void setup(MemberLoginCB cb) {
             }
         });
-        // TODO wara LOG.isDebugEnabled()で囲う (メインコードなので): ループごと囲った方がいい by jflute
+        // done wara LOG.isDebugEnabled()で囲う (メインコードなので): ループごと囲った方がいい by jflute
         if (LOG.isDebugEnabled()) {
             for (Member member : memberList) {
                 List<Purchase> purchaseList = member.getPurchaseList();
@@ -233,7 +233,8 @@ public class HandsOn11Logic {
     public List<Member> selectOnParadeSecondStepMember() {
         MemberCB cb = new MemberCB();
         cb.setupSelect_MemberStatus();
-        // TODO wara まあ、名前でも取れそうだけど、PRODUCT_ID で。IDなら Product まで行かなくてOK by jflute
+        // done wara まあ、名前でも取れそうだけど、PRODUCT_ID で。IDなら Product まで行かなくてOK by jflute
+        // TODO wara 直したあと実行してない by jflute
         cb.specify().derivedPurchaseList().countDistinct(new SubQuery<PurchaseCB>() {
             @Override
             public void query(PurchaseCB subCB) {
@@ -300,7 +301,7 @@ public class HandsOn11Logic {
                 refCB.query().addOrderBy_PurchaseDatetime_Desc();
             }
         });
-        // TODO wara るーぷごと and debug by jflute
+        // done wara るーぷごと and debug by jflute
         if (LOG.isDebugEnabled()) {
             for (Member member : memberList) {
                 List<Purchase> purchaseList = member.getPurchaseList();
@@ -340,7 +341,7 @@ public class HandsOn11Logic {
     public List<Member> selectOnParadeXStepMember(int leastLoginCount) {
         MemberCB cb = new MemberCB();
         cb.setupSelect_MemberStatus();
-        // TODO wara 日時なので、Dateじゃだめ by jflute
+        // done wara 日時なので、Dateじゃだめ by jflute
         // 正式会員のときにログインした最終ログイン日時とログイン回数を導出して会員を検索
         cb.specify().derivedMemberLoginList().max(new SubQuery<MemberLoginCB>() {
             public void query(MemberLoginCB subCB) {
@@ -382,7 +383,7 @@ public class HandsOn11Logic {
                 subCB.query().setLoginMemberStatusCode_Equal_仮会員();
             }
         });
-        // TODO wara ソートは最後 by jflute
+        // done wara ソートは最後 by jflute
         // 最終ログイン日時の降順、会員IDの昇順で並べる
         cb.query().addSpecifiedDerivedOrderBy_Desc(Member.ALIAS_latestLoginDatetime);
         cb.query().addOrderBy_MemberId_Asc();
@@ -394,10 +395,10 @@ public class HandsOn11Logic {
                 refCB.query().addOrderBy_LoginDatetime_Desc();
             }
         });
-        // TODO wara 親カテゴリ名称の昇順がない by jflute
+        // done wara 親カテゴリ名称の昇順がない by jflute
         // 購入は商品カテゴリ(*1)の親カテゴリ名称の昇順、子カテゴリ名称の昇順、購入日時の降順
         // *1: 商品カテゴリは、二階層になっていることが前提として
-        // TODO mayuko.sakaba まだーーー
+        // done mayuko.sakaba まだーーー
         memberBhv.loadPurchaseList(memberList, new ConditionBeanSetupper<PurchaseCB>() {
             public void setup(PurchaseCB refCB) {
                 refCB.setupSelect_Product().withProductCategory();
@@ -444,6 +445,7 @@ public class HandsOn11Logic {
             }
         }, ServiceRank.ALIAS_purchasePriceSum);
 
+        // TODO wara 最大購入価格の平均と捉えてやってみよう by jflute 
         // 平均最大購入価格
         cb.specify().derivedMemberServiceList().max(new SubQuery<MemberServiceCB>() {
             public void query(MemberServiceCB subCB) {
@@ -464,13 +466,13 @@ public class HandsOn11Logic {
         cb.query().addSpecifiedDerivedOrderBy_Desc(ServiceRank.ALIAS_memberCountPerRank);
 
         ListResultBean<ServiceRank> rankList = serviceRankBhv.selectList(cb);
+
         serviceRankBhv.load(rankList, new ReferrerLoaderHandler<LoaderOfServiceRank>() {
             public void handle(LoaderOfServiceRank loader) {
                 loader.loadMemberServiceList(new ConditionBeanSetupper<MemberServiceCB>() {
                     public void setup(MemberServiceCB refCB) {
                         refCB.setupSelect_Member();
                     }
-                    // ??
                 }).withNestedReferrer(new ReferrerLoaderHandler<LoaderOfMemberService>() {
                     public void handle(LoaderOfMemberService loader) {
                         loader.pulloutMember().loadMemberLoginList(new ConditionBeanSetupper<MemberLoginCB>() {
@@ -489,6 +491,8 @@ public class HandsOn11Logic {
         return rankList;
     }
 
+    // TODO wara 厳密にはNotNullじゃないケースがありえる。データが０件だった場合 by jflute 
+    // ただまあ、業務的にはそこにあまり意味がないので、もう絶対にNotNullにしてしまおう。
     /**
      * それぞれの会員の平均購入価格の会員全体での最大値を検索
      * @return 会員全体の中で、最大の平均購入価格値 (NotNull)

@@ -311,6 +311,7 @@ public class HandsOn11LogicTest extends UnitContainerTestCase {
         Timestamp previousLatestLoginTime = null;
         boolean existsPreMemberLogin = false;
         for (Member member : memberList) {
+            // TODO wara getLoginCount()は正式会員のときのログイン回数なので正確ではない by jflute 
             assertTrue(member.getLoginCount() >= 2);
             List<Purchase> purchaseList = member.getPurchaseList();
             if (!purchaseList.isEmpty()) {
@@ -330,8 +331,9 @@ public class HandsOn11LogicTest extends UnitContainerTestCase {
                 log("########"
                         + (latestLoginTime.after(previousLatestLoginTime) + " Pre: " + latestLoginTime
                                 .equals(previousLatestLoginTime)));
-                assertTrue(latestLoginTime.after(previousLatestLoginTime)
+                assertTrue(latestLoginTime.before(previousLatestLoginTime)
                         || latestLoginTime.equals(previousLatestLoginTime));
+                // TODO annie 空行削除 by jflute
 
             }
             previousId = memberId;
@@ -367,7 +369,7 @@ public class HandsOn11LogicTest extends UnitContainerTestCase {
         for (ServiceRank rank : rankList) {
             String rankCd = rank.getServiceRankCode();
             Integer membersPerRank = rank.getMemberCountPerRank();
-            log("Rank Code: " + rankCd + " Member No: " + membersPerRank);
+            log("RankCode:" + rankCd + " MemberNo:" + membersPerRank);
             members += membersPerRank;
         }
         log("Sum of members: " + members);
@@ -387,11 +389,12 @@ public class HandsOn11LogicTest extends UnitContainerTestCase {
 
         // ## Act ##
         Integer maxAvgPrice = logic.selectMaxAvgPurchasePrice();
+
+        // ## Assert ##
         PurchaseCB cb = new PurchaseCB();
         cb.query().setPurchasePrice_Equal(maxAvgPrice);
         ListResultBean<Purchase> purchaseList = purchaseBhv.selectList(cb);
-
-        // ## Assert ##
+        // TODO wara NotNullじゃなくてHasAnyElement by jflute 
         assertNotNull(purchaseList);
         for (Purchase purchase : purchaseList) {
             Integer purchasePrice = purchase.getPurchasePrice();
