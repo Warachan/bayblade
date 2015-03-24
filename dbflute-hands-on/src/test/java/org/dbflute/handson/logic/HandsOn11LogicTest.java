@@ -302,14 +302,29 @@ public class HandsOn11LogicTest extends UnitContainerTestCase {
         Integer previousId = null;
         Timestamp previousLatestLoginTime = null;
         boolean existsPreMemberLogin = false;
+        boolean existsOnlyPurchase = false;
         for (Member member : memberList) {
             // done wara getLoginCount()は正式会員のときのログイン回数なので正確ではない by jflute
             assertTrue(member.getMemberLoginList().size() >= 2);
+            Integer memberId = member.getMemberId();
 
             List<Purchase> purchaseList = member.getPurchaseList();
             if (!purchaseList.isEmpty()) {
                 assertEquals(purchaseList.get(0).getPurchasePrice(), member.getMaxPaidPurchasePrice());
+                for (Purchase purchase : purchaseList) {
+                    PurchaseCB cb = new PurchaseCB();
+                    cb.query().setProductId_Equal(purchase.getProductId());
+                    cb.query().setMemberId_NotEqual(memberId);
+                    int onlyCount = purchaseBhv.selectCount(cb);
+
+                    if (onlyCount == 0) {
+                        log("#####AssertOnlyCount######" + onlyCount);
+                        existsOnlyPurchase = true;
+                    }
+                }
             }
+            log("#####AssertBoolean####" + existsOnlyPurchase);
+            assertTrue(existsOnlyPurchase);
 
             List<MemberLogin> loginList = member.getMemberLoginList();
             for (MemberLogin login : loginList) {
@@ -319,7 +334,6 @@ public class HandsOn11LogicTest extends UnitContainerTestCase {
             }
 
             Timestamp latestLoginTime = member.getLatestLoginDatetime();
-            Integer memberId = member.getMemberId();
             if (previousId != null && previousLatestLoginTime != null) {
                 // 最終ログイン日時の降順と会員IDの昇順で並んでいることをアサート
                 log((latestLoginTime.before(previousLatestLoginTime) + " Pre: " + latestLoginTime

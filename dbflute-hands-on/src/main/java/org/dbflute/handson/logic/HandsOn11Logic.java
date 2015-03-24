@@ -48,6 +48,7 @@ public class HandsOn11Logic {
     //                                                                          Definition
     //                                                                          ==========
     private static final Log LOG = LogFactory.getLog(HandsOn11Logic.class);
+
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
@@ -342,7 +343,7 @@ public class HandsOn11Logic {
             }
         }, Member.ALIAS_loginCount);
 
-        //さらに、支払済み購入の最大購入価格を導出して取得
+        //　さらに、支払済み購入の最大購入価格を導出して取得
         cb.specify().derivedPurchaseList().max(new SubQuery<PurchaseCB>() {
             public void query(PurchaseCB subCB) {
                 subCB.specify().columnPurchasePrice();
@@ -351,8 +352,19 @@ public class HandsOn11Logic {
         }, Member.ALIAS_maxPaidPurchasePrice);
 
         // TODO mayuko.sakaba まだーーー
+        // DreamCruiseで実現してみて。DreamCruiseの方をおもいでに。
+        // 詳しくは、ぺろったくんに聞いてみて。
         // 自分だけが購入している商品を買ったことのある会員を検索
-        //        cb.query().
+        cb.query().existsPurchaseList(new SubQuery<PurchaseCB>() {
+            public void query(PurchaseCB subCB) {
+                // where 会員の種類数 = 1
+                subCB.query().queryProduct().derivedPurchaseList().countDistinct(new SubQuery<PurchaseCB>() {
+                    public void query(PurchaseCB subCB) {
+                        subCB.specify().columnMemberId();
+                    }
+                }).equal(1);
+            }
+        });
 
         // ログイン回数が指定された回数以上で絞り込み
         if (leastLoginCount > 0) {
