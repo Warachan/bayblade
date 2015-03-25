@@ -351,7 +351,7 @@ public class HandsOn11Logic {
             }
         }, Member.ALIAS_maxPaidPurchasePrice);
 
-        // TODO mayuko.sakaba まだーーー
+        // done mayuko.sakaba まだーーー
         // DreamCruiseで実現してみて。DreamCruiseの方をおもいでに。
         // 詳しくは、ぺろったくんに聞いてみて。
         // DreamCruise
