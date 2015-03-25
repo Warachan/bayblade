@@ -10,8 +10,6 @@ import javax.annotation.Resource;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.dbflute.handson.dbflute.cbean.MemberServiceCB;
 import org.dbflute.handson.dbflute.exbhv.MemberBhv;
 import org.dbflute.handson.dbflute.exbhv.MemberServiceBhv;
@@ -47,11 +45,6 @@ import org.seasar.dbflute.util.DfResourceUtil;
  * @author mayuko.sakaba
  */
 public class HandsOn09Logic {
-
-    // ===================================================================================
-    //                                                                          Definition
-    //                                                                          ==========
-    private static final Log LOG = LogFactory.getLog(HandsOn09Logic.class);
 
     // ===================================================================================
     //                                                                           Attribute
