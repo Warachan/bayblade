@@ -354,6 +354,26 @@ public class HandsOn11Logic {
         // TODO mayuko.sakaba まだーーー
         // DreamCruiseで実現してみて。DreamCruiseの方をおもいでに。
         // 詳しくは、ぺろったくんに聞いてみて。
+        // DreamCruise
+        // 自分だけが購入している商品を買ったことのある会員を検索
+        //        final MemberCB dreamCruiseCB = cb.dreamCruiseCB();
+        //        cb.query().existsPurchaseList(new SubQuery<PurchaseCB>() {
+        //            public void query(PurchaseCB subCB) {
+        //                subCB.query().queryProduct().notExistsPurchaseList(new SubQuery<PurchaseCB>() {
+        //                    public void query(PurchaseCB subCB) {
+        //                        subCB.columnQuery(new SpecifyQuery<PurchaseCB>() {
+        //                            public void specify(PurchaseCB spCB) {
+        //                                spCB.specify().columnMemberId();
+        //                            }
+        //                        }).notEqual(new SpecifyQuery<PurchaseCB>() {
+        //                            public void specify(PurchaseCB spCB) {
+        //                                spCB.overTheWaves(dreamCruiseCB.specify().columnMemberId());
+        //                            }
+        //                        });
+        //                    }
+        //                });
+        //            }
+        //        });
         // 自分だけが購入している商品を買ったことのある会員を検索
         cb.query().existsPurchaseList(new SubQuery<PurchaseCB>() {
             public void query(PurchaseCB subCB) {
