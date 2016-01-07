@@ -16,14 +16,14 @@
 	<div class ="top-main">
 		<p class ="intro">BEYBLADE</p>
 			<div class="player1">
-				<img src="/twitter/img/syuukatu.jpg">
+				<img src="/twitter/img/max.jpg">
 			</div>
-			<span>vs</span>
+			<img src="/twitter/img/vs.jpeg">
 			<c:if test="${fightFLg}" >
 			<div class="player2">
-				<img src="/twitter/img/kigyou.jpg">
+				<img src="/twitter/img/kai.jpg">
 			</div>
-			<a href="${winUrl}">結果</a>
+			<a href="${winUrl}" target="_blank">結果</a>
 			</c:if>
 	</div>
 	</div>

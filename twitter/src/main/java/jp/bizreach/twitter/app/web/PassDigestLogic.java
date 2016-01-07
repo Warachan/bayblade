@@ -21,8 +21,8 @@ public class PassDigestLogic {
     static {
         bList = new ArrayList<String>();
         winnerMap = new HashMap<Long, String>();
-        winnerMap.put(1L, "http://sastruts.seasar.org/tutorial.html");
-        winnerMap.put(2L, "http://s2container.seasar.org/2.4/ja/ejb3.html");
+        winnerMap.put(1L, "https://www.youtube.com/watch?v=TSMIPxBWh0s");
+        winnerMap.put(2L, "https://www.youtube.com/watch?v=aDI0tRMwiFI");
     }
 
     public String build(String password) throws NoSuchAlgorithmException {
@@ -55,8 +55,8 @@ public class PassDigestLogic {
         System.out.println("リストサイズを示す  :" + size);
 
         if (size % 2 == 0) {
-            Long battle1 = Long.valueOf(bList.get(size - 2));
-            Long battle2 = Long.valueOf(bList.get(size - 1));
+            Long battle1 = Long.valueOf(bList.get(size - 1));
+            Long battle2 = Long.valueOf(bList.get(size - 2));
             System.out.println("hirota " + battle1);
             System.out.println("hirota " + battle2);
             webBean.fightFlg = true;
