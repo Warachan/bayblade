@@ -21,7 +21,7 @@
 			<img src="/img/vs.jpeg">
 			<c:if test="${fightFLg}" >
 			<div class="player2">
-				<img src="/twitter/img/kai.jpg">
+				<img src="/img/kai.jpg">
 			</div>
 			<a href="${winUrl}" target="_blank">result</a>
 			</c:if>
