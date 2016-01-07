@@ -45,8 +45,6 @@ public class IndexAction {
     @Resource
     protected IndexForm indexForm;
     @Resource
-    public SessionDto sessionDto;
-    @Resource
     protected PassDigestLogic passDigestLogic;
     //    @Resource
     //    protected MemberBhv memberBhv;
