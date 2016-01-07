@@ -16,9 +16,9 @@
 	<div class ="top-main">
 		<p class ="intro">BEYBLADE</p>
 			<div class="player1">
-				<img src="/twitter/img/max.jpg">
+				<img src="/img/max.jpg">
 			</div>
-			<img src="/twitter/img/vs.jpeg">
+			<img src="/img/vs.jpeg">
 			<c:if test="${fightFLg}" >
 			<div class="player2">
 				<img src="/twitter/img/kai.jpg">
