@@ -23,13 +23,13 @@
 			<div class="player2">
 				<img src="/twitter/img/kai.jpg">
 			</div>
-			<a href="${winUrl}" target="_blank">結果</a>
+			<a href="${winUrl}" target="_blank">result</a>
 			</c:if>
 	</div>
 	</div>
 </body>
 	<div class="footer">
-		<p>Â©201７ AnnieWaraPocket All Rights Reserved</p>
+		<p>201７ AnnieWaraPocket All Rights Reserved</p>
 	</div>
 </div>
 </html>
