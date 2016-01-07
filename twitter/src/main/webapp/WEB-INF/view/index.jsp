@@ -8,42 +8,28 @@
 </head>
 <div class="wrapper">
 	<div class ="header">
-		<p>Pocketer</p>
+		<p>BEYBLADE</p>
+		
 	</div>
 <body>
 	<div class ="top-background">
 	<div class ="top-main">
-		<p class ="intro">就活ツィッターPocketerへようこそ</p>
-			<div class="loginForm">
-				<s:form method="post">
-					<div class = "login">
-						<h3>Login</h3>
-							<div class ="loginId">
-								<h4>Username</h4>
-								<html:text property ="loginKey" styleClass="inputBox"/><br>
-							</div>
-							<div class="loginPass">
-								<h4>Password</h4>
-								<html:password property="loginPassword" styleClass="inputBox"/><br>
-							</div>
-						<s:submit property="gotoLogin" value="Login" styleClass="loginButton"/><br>
-							<div class="loginError">
-								<html:errors />
-							</div>
-					</div>
-				</s:form>
-				<s:form method="post">
-					<div class = "signup">
-						<h3>Signup now!</h3>
-							<s:submit property="gotoSignup" value = "Go!" styleClass="signupButton"/>
-					</div>
-				</s:form>
+		<p class ="intro">BEYBLADE</p>
+			<div class="player1">
+				<img src="/twitter/img/syuukatu.jpg">
 			</div>
+			<span>vs</span>
+			<c:if test="${fightFLg}" >
+			<div class="player2">
+				<img src="/twitter/img/kigyou.jpg">
+			</div>
+			<a href="${winUrl}">結果</a>
+			</c:if>
 	</div>
 	</div>
 </body>
 	<div class="footer">
-		<p>©2014 AnnieWaraPocket All Rights Reserved</p>
+		<p>Â©201７ AnnieWaraPocket All Rights Reserved</p>
 	</div>
 </div>
 </html>

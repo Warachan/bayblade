@@ -5,6 +5,7 @@ package jp.bizreach.twitter.app.web;
  */
 
 public class IndexForm {
+    public String putStr;
     public String loginKey;
     public String loginPassword;
 

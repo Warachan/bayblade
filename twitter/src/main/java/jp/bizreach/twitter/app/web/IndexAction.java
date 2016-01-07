@@ -15,25 +15,14 @@
  */
 package jp.bizreach.twitter.app.web;
 
-import java.security.NoSuchAlgorithmException;
-import java.sql.Timestamp;
-import java.util.Date;
-
 import javax.annotation.Resource;
-
-import jp.bizreach.twitter.dbflute.cbean.MemberCB;
-import jp.bizreach.twitter.dbflute.exbhv.LoginBhv;
-import jp.bizreach.twitter.dbflute.exbhv.MemberBhv;
-import jp.bizreach.twitter.dbflute.exentity.Login;
-import jp.bizreach.twitter.dbflute.exentity.Member;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
 import org.seasar.struts.annotation.ActionForm;
 import org.seasar.struts.annotation.Execute;
-import org.seasar.struts.util.RequestUtil;
+
+import jp.bizreach.twitter.app.web.PassDigestLogic.resultWebBean;
 
 /**
  * @author mayuko.sakaba
@@ -59,10 +48,13 @@ public class IndexAction {
     public SessionDto sessionDto;
     @Resource
     protected PassDigestLogic passDigestLogic;
-    @Resource
-    protected MemberBhv memberBhv;
-    @Resource
-    protected LoginBhv loginBhv;
+    //    @Resource
+    //    protected MemberBhv memberBhv;
+    //    @Resource
+    //    protected LoginBhv loginBhv;
+
+    public Boolean fightFLg;
+    public String winUrl;
 
     //    @Resource
     //    protected HttpServletRequest request;
@@ -70,65 +62,71 @@ public class IndexAction {
     // ===================================================================================
     //                                                                             Execute
     //                                                                             =======
-    // TODO mayuko.sakaba  ユーザ名でログインできるようにする。
     @Execute(validator = false)
     public String index() {
-        // セッション破棄
-        RequestUtil.getRequest().getSession().invalidate();
+        resultWebBean bean = passDigestLogic.battle();
+        fightFLg = bean.fightFlg;
+        winUrl = bean.winnerUrl;
         return "index.jsp";
     }
 
-    @Execute(validate = "validate", input = "index.jsp")
-    public String gotoLogin() {
-        loginWhenMatch();
-        return "/home/?redirect=true";
+    @Execute(validator = false, urlPattern = "put")
+    public String put() {
+        passDigestLogic.put(indexForm.putStr);
+        return "index.jsp";
     }
 
-    @Execute(validator = false)
-    public String gotoSignup() {
-        return "/signup/?redirect=true";
-    }
+    //    @Execute(validate = "validate", input = "index.jsp")
+    //    public String gotoLogin() {
+    //        loginWhenMatch();
+    //        return "/home/?redirect=true";
+    //    }
+    //
+    //    @Execute(validator = false)
+    //    public String gotoSignup() {
+    //        return "/signup/?redirect=true";
+    //    }
 
-    // ===================================================================================
-    //                                                                    Extracted Method
-    //                                                                            ========
-    /* ログインする */
-    private void loginWhenMatch() {
-        Login login = new Login();
-        Date loginDate = new Date();
-        Timestamp loginTime = new Timestamp(loginDate.getTime());
-        login.setMemberId(sessionDto.myId);
-        login.setInsDatetime(loginTime);
-        login.setUpdDatetime(loginTime);
-        login.setInsTrace(indexForm.loginKey);
-        login.setUpdTrace(indexForm.loginKey);
-        loginBhv.insert(login);
-    }
-
-    // ===================================================================================
-    //                                                                          Validation
-    //                                                                            ========
-    /* ログイン validation */
-    public ActionMessages validate() throws NoSuchAlgorithmException {
-        ActionMessages errors = new ActionMessages();
-        String digestedPass = passDigestLogic.build(indexForm.loginPassword);
-        if (indexForm.loginKey == "" || indexForm.loginPassword == "") {
-            errors.add("loginKey", new ActionMessage("ユーザ名もしくはパスワードが未入力です。", false));
-        } else {
-            MemberCB cb = new MemberCB();
-            cb.query().setUserName_Equal(indexForm.loginKey);
-            cb.query().queryMemberSecurityAsOne().setPassword_Equal(digestedPass);
-            Member member = memberBhv.selectEntity(cb);
-            if (member != null) {
-                sessionDto.myId = member.getMemberId();
-                sessionDto.username = member.getUserName();
-                sessionDto.accountName = member.getAccountName();
-                sessionDto.status = member.getMemberStatusCode();
-            } else {
-                errors.add("loginKey", new ActionMessage("ユーザ名もしくはパスワードが間違っています。", false));
-            }
-        }
-        return errors;
-    }
+    //    // ===================================================================================
+    //    //                                                                    Extracted Method
+    //    //                                                                            ========
+    //    /* ログインする */
+    //    private void loginWhenMatch() {
+    //        Login login = new Login();
+    //        Date loginDate = new Date();
+    //        Timestamp loginTime = new Timestamp(loginDate.getTime());
+    //        login.setMemberId(sessionDto.myId);
+    //        login.setInsDatetime(loginTime);
+    //        login.setUpdDatetime(loginTime);
+    //        login.setInsTrace(indexForm.loginKey);
+    //        login.setUpdTrace(indexForm.loginKey);
+    //        loginBhv.insert(login);
+    //    }
+    //
+    //    // ===================================================================================
+    //    //                                                                          Validation
+    //    //                                                                            ========
+    //    /* ログイン validation */
+    //    public ActionMessages validate() throws NoSuchAlgorithmException {
+    //        ActionMessages errors = new ActionMessages();
+    //        String digestedPass = passDigestLogic.build(indexForm.loginPassword);
+    //        if (indexForm.loginKey == "" || indexForm.loginPassword == "") {
+    //            errors.add("loginKey", new ActionMessage("ユーザ名もしくはパスワードが未入力です。", false));
+    //        } else {
+    //            MemberCB cb = new MemberCB();
+    //            cb.query().setUserName_Equal(indexForm.loginKey);
+    //            cb.query().queryMemberSecurityAsOne().setPassword_Equal(digestedPass);
+    //            Member member = memberBhv.selectEntity(cb);
+    //            if (member != null) {
+    //                sessionDto.myId = member.getMemberId();
+    //                sessionDto.username = member.getUserName();
+    //                sessionDto.accountName = member.getAccountName();
+    //                sessionDto.status = member.getMemberStatusCode();
+    //            } else {
+    //                errors.add("loginKey", new ActionMessage("ユーザ名もしくはパスワードが間違っています。", false));
+    //            }
+    //        }
+    //        return errors;
+    //    }
 
 }

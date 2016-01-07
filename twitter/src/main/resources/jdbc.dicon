@@ -6,6 +6,7 @@
 	<include path="jdbc-extension.dicon"/>
 
 	<!-- for MySQL -->
+	<!--
 	<component name="xaDataSource"
 		class="org.seasar.extension.dbcp.impl.XADataSourceImpl">
 		<property name="driverClassName">
@@ -17,7 +18,7 @@
 		<property name="user">"twitter"</property>
 		<property name="password">"twitter"</property>
 	</component>
-
+-->
 	<!-- for PostgreSQL -->
 	<!--
 	<component name="xaDataSource"
