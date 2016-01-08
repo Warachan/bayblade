@@ -59,15 +59,18 @@ public class PassDigestLogic {
             Long battle2 = Long.valueOf(bList.get(size - 2));
             System.out.println("hirota " + battle1);
             System.out.println("hirota " + battle2);
+            webBean.power = battle2;
             webBean.fightFlg = true;
             webBean.winnerUrl = winnerMap.get(battle1.compareTo(battle2) > 0 ? 1L : 2L);
         } else {
+            webBean.power = Long.valueOf(bList.get(size - 1));
             webBean.fightFlg = false;
         }
         return webBean;
     }
 
     public class resultWebBean {
+        Long power = 0L;
         boolean fightFlg = false;
         String winnerUrl;
     }
