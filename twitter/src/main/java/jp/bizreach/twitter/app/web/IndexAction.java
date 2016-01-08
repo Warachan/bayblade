@@ -54,6 +54,8 @@ public class IndexAction {
     public Boolean fightFLg;
     public String winUrl;
     public Long power;
+    public Long power2;
+    public Long winner;// 1 or 2
 
     //    @Resource
     //    protected HttpServletRequest request;
@@ -65,8 +67,9 @@ public class IndexAction {
     public String index() {
         resultWebBean bean = passDigestLogic.battle();
         fightFLg = bean.fightFlg;
-        winUrl = bean.winnerUrl;
-        power = bean.power * 1000;
+        winner = bean.winner;
+        power = bean.power;
+        power2 = bean.power2;
         return "index.jsp";
     }
 

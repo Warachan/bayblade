@@ -7,19 +7,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import sun.misc.BASE64Encoder;
-
 /**
  * @author mayuko.sakaba
  * パスワードを不可逆暗号化
  */
 public class PassDigestLogic {
 
-    public static final List<String> bList;
+    public static final List<Long> bList;
     public static final Map<Long, String> winnerMap;
 
     static {
-        bList = new ArrayList<String>();
+        bList = new ArrayList<Long>();
         winnerMap = new HashMap<Long, String>();
         winnerMap.put(1L, "https://www.youtube.com/watch?v=TSMIPxBWh0s");
         winnerMap.put(2L, "https://www.youtube.com/watch?v=aDI0tRMwiFI");
@@ -32,36 +30,39 @@ public class PassDigestLogic {
             md.update(password.getBytes());
             byte[] digest = md.digest();
 
-            BASE64Encoder encoder = new BASE64Encoder();
-            String b64digest = encoder.encodeBuffer(digest);
-            passDigest = b64digest.trim();
+            //            BASE64Encoder encoder = new BASE64Encoder();
+            //            String b64digest = encoder.encodeBuffer(digest);
+            //            passDigest = b64digest.trim();
         }
         return passDigest;
     }
 
     public void put(String str) {
-        bList.add(str);
+        Long power = (Long.valueOf(str) * 1000) + (long) (Math.random() * 999);
+        bList.add(power);
     }
 
     public resultWebBean battle() {
         int size = bList.size();
-        if (size < 2) {
+        if (size == 0) {
             return new resultWebBean();
         }
         resultWebBean webBean = new resultWebBean();
-        for (String string : bList) {
-            System.out.println("リストサイズを示す  :" + string);
+        for (Long power : bList) {
+            System.out.println("リストサイズを示す  :" + power);
         }
         System.out.println("リストサイズを示す  :" + size);
 
         if (size % 2 == 0) {
-            Long battle1 = Long.valueOf(bList.get(size - 1));
-            Long battle2 = Long.valueOf(bList.get(size - 2));
+            Long battle1 = bList.get(size - 2);
+            Long battle2 = bList.get(size - 1);
             System.out.println("hirota " + battle1);
             System.out.println("hirota " + battle2);
-            webBean.power = battle2;
+            webBean.power = battle1;
+            webBean.power2 = battle2;
             webBean.fightFlg = true;
-            webBean.winnerUrl = winnerMap.get(battle1.compareTo(battle2) > 0 ? 1L : 2L);
+            //            webBean.winnerUrl = winnerMap.get(battle1.compareTo(battle2) > 0 ? 1L : 2L);
+            webBean.winner = battle1.compareTo(battle2) > 0 ? 1L : 2L;
         } else {
             webBean.power = Long.valueOf(bList.get(size - 1));
             webBean.fightFlg = false;
@@ -71,8 +72,9 @@ public class PassDigestLogic {
 
     public class resultWebBean {
         Long power = 0L;
+        Long power2 = 0L;
         boolean fightFlg = false;
-        String winnerUrl;
+        Long winner;
     }
 
     public class Battle {
